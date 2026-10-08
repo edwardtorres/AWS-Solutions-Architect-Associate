@@ -20,7 +20,8 @@
     "check": "npm run typecheck && npm run lint && npm test && npm run check:content && npm run build && npm run check:bundle && npm run check:hygiene",
     "check:all": "npm run check && npm run check:links && npm run test:layout",
     "check:links": "tsx scripts/check-links.ts",
-    "page": "tsx scripts/page.ts"
+    "page": "tsx scripts/page.ts",
+    "q": "tsx scripts/q.ts"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",

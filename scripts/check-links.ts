@@ -26,6 +26,25 @@ async function pool<T, R>(items: T[], size: number, fn: (x: T) => Promise<R>): P
   return out;
 }
 
+/** Nearest sentence on the page by shared words, to make a failing quote easy to repair. */
+function closest(page: PageInfo, quote: string): string {
+  const words = new Set(quote.toLowerCase().match(/[a-z0-9]{4,}/g) ?? []);
+  if (words.size === 0 || !page.display) return '';
+  let best = '';
+  let bestScore = 0;
+  for (const sentence of page.display.split(/(?<=[.!?])\s+/)) {
+    const sw = new Set(sentence.toLowerCase().match(/[a-z0-9]{4,}/g) ?? []);
+    let hit = 0;
+    for (const w of words) if (sw.has(w)) hit += 1;
+    const score = hit / words.size;
+    if (score > bestScore && sentence.length < 600) {
+      bestScore = score;
+      best = sentence;
+    }
+  }
+  return bestScore >= 0.4 ? `\n      closest: "${best.slice(0, 300)}"` : '';
+}
+
 async function main() {
   const bundle = await loadNotesBundle();
   const problems: string[] = [];
@@ -63,7 +82,7 @@ async function main() {
         if (!src) continue;
         const page = pages.get(stripFragment(src.url));
         if (!page || page instanceof Error) continue;
-        if (!hasText(page, q.text)) problems.push(`${where}: quote not found on ${src.id}: "${q.text.slice(0, 80)}"`);
+        if (!hasText(page, q.text)) problems.push(`${where}: quote not found on ${src.id}: "${q.text.slice(0, 90)}"${closest(page, q.text)}`);
       }
     }
   }

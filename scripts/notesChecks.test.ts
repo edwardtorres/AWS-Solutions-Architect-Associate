@@ -6,7 +6,12 @@ import { checkNotes, normalise, numberTokens, REQUIRED_PAIRS, type NotesInput } 
 const src = (id: string, url: string, kind: 'aws' | 'azure' = 'aws'): Source => ({ id, url, title: id, kind });
 const AWS = src('aws1', 'https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html');
 const AZ = src('az1', 'https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview', 'azure');
-const blk = (text: string, extra: Partial<Block> = {}): Block => ({ text, sources: ['aws1'], ...extra });
+const blk = (text: string, extra: Partial<Block> = {}): Block => ({
+  text,
+  sources: ['aws1'],
+  quotes: [{ src: 'aws1', text: 'A sufficiently long verbatim quote from the page.' }],
+  ...extra,
+});
 
 const building = (extra: Partial<Building> = {}): Building => ({
   id: 'gatehouse', name: 'Gatehouse', skill: 's', district: 'citadel', task: '1.2', bullets: ['1.2-K3', '1.2-S1'],
@@ -31,7 +36,7 @@ const base = (n: BuildingNotes = notes(), over: Partial<NotesInput> = {}): Notes
   glossary: [],
   confuse: [],
   renamed: [],
-  scope: new Set(['citadel']),
+  scope: new Set(['citadel', 'square', 'harbor', 'express', 'treasury']),
   requiredPairs: [],
   ...over,
 });
@@ -61,7 +66,7 @@ describe('notes checks', () => {
   });
   it('fails when a block has no source or cites an unknown one', () => {
     const n = notes();
-    n.overview.push({ text: 'Unsourced claim.', sources: [] });
+    n.overview.push({ text: 'Unsourced claim.', sources: [], quotes: [] });
     expect(run(n).join()).toMatch(/no source/);
     const m = notes();
     m.overview.push(blk('Bad id.', { sources: ['nope'] }));
@@ -134,6 +139,11 @@ describe('notes checks', () => {
     };
     const n = notes({ confuse: ['sg-vs-nacl'] });
     expect(run(n, { confuse: [pair], requiredPairs: REQUIRED_PAIRS.filter((r) => r.id === 'sg-vs-nacl') }).join()).toMatch(/missing item "Network ACL"/);
+  });
+  it('requires a verbatim quote on every block', () => {
+    const n = notes();
+    n.overview.push({ text: 'Claim.', sources: ['aws1'] });
+    expect(run(n).join()).toMatch(/no verbatim quote/);
   });
   it('requires renamed services to be written with a rename token', () => {
     const renamed: RenamedService[] = [{ id: 'quick', examGuideName: 'Amazon Quick', otherName: 'Amazon QuickSight', relation: blk('Quick evolved from QuickSight.') }];

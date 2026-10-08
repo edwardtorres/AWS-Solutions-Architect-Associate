@@ -151,6 +151,7 @@ function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-
     if (!kinds.has('azure')) p.push(`${where}: Azure note needs a Microsoft Learn source for the Azure side`);
     if (!kinds.has('aws')) p.push(`${where}: Azure note needs an AWS docs source for the AWS side`);
   }
+  if ((block.quotes ?? []).length === 0) p.push(`${where}: no verbatim quote; every statement must be grounded in a quote from its source`);
   for (const q of block.quotes ?? []) {
     if (!block.sources.includes(q.src)) p.push(`${where}: quote cites "${q.src}", which is not in the block's sources`);
     if (!ctx.sources.has(q.src)) p.push(`${where}: quote cites unknown source "${q.src}"`);
@@ -290,11 +291,15 @@ export function checkNotes(input: NotesInput): string[] {
     p.push(...checkBlock(`renamed ${r.id}`, r.relation, { ...ctx, renamedOld: [], renameIds: ctx.renameIds }, 'aws', used));
   }
 
-  for (const g of input.glossary) {
-    if (!used.terms.has(g.id)) p.push(`glossary: term "${g.id}" is never used in a note`);
-  }
-  for (const s of input.sources) {
-    if (!used.sources.has(s.id)) p.push(`source ${s.id} is never cited`);
+  // Unused entries are only an error once every district is written (while notes are in progress, the
+  // shared files grow ahead of the buildings that use them).
+  if (input.scope.size >= 5) {
+    for (const g of input.glossary) {
+      if (!used.terms.has(g.id)) p.push(`glossary: term "${g.id}" is never used in a note`);
+    }
+    for (const s of input.sources) {
+      if (!used.sources.has(s.id)) p.push(`source ${s.id} is never cited`);
+    }
   }
   return p;
 }

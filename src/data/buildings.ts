@@ -5,7 +5,7 @@ const b = (task: string, picks: string): string[] => picks.split(' ').map((p) =>
 
 const LEARN = 'https://learn.microsoft.com/en-us/azure/architecture/aws-professional/';
 const SRC = {
-  hub: `${LEARN}services`,
+  hub: LEARN,
   compute: `${LEARN}compute`,
   storage: `${LEARN}storage`,
   networking: `${LEARN}networking`,

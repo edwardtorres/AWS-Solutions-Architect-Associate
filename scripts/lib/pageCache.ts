@@ -15,6 +15,8 @@ export interface PageInfo {
   ids: string[];
   /** Normalised visible text. */
   text: string;
+  /** Visible text with the page's own capitalisation (whitespace collapsed). */
+  display?: string;
   /** Normalised text of the raw markup with tags stripped (catches text embedded in page data). */
   rawText: string;
   metaRefresh: string | null;
@@ -54,6 +56,7 @@ export async function fetchPage(url: string, opts: { fresh?: boolean } = {}): Pr
         status: res.status,
         ids: [...ids],
         text: normalise($('body').text()),
+        display: $('body').text().replace(/\s+/g, ' ').trim(),
         rawText: normalise(html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/gi, ' ').replace(/<[^>]+>/g, ' ')),
         metaRefresh: refresh,
         fetchedAt: new Date().toISOString(),
