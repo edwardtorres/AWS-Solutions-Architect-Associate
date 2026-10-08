@@ -16,7 +16,7 @@ function useCites(): Cites {
   return c;
 }
 
-const TOKEN = /(\{\{(?:term|rename):[a-z0-9-]+\}\}|\*\*[^*]+\*\*|`[^`]+`)/g;
+const TOKEN = /(\{\{(?:term|rename):[a-z0-9-]+(?:\|[^}]*)?\}\}|\*\*[^*]+\*\*|`[^`]+`)/g;
 
 /** Renders **bold**, `code`, {{term:id}} and {{rename:id}}. Never injects HTML. */
 export function Inline({ text }: { text: string }): ReactNode {
@@ -24,13 +24,13 @@ export function Inline({ text }: { text: string }): ReactNode {
   return (
     <>
       {text.split(TOKEN).map((part, i) => {
-        const term = /^\{\{term:([a-z0-9-]+)\}\}$/.exec(part);
+        const term = /^\{\{term:([a-z0-9-]+)(?:\|([^}]*))?\}\}$/.exec(part);
         if (term) {
           const id = term[1] as string;
           const g = shared.glossary.find((x) => x.id === id);
           return (
             <a key={i} className="inline-link" href={hrefGlossary(id)}>
-              {g?.term ?? id}
+              {term[2] ?? g?.term ?? id}
             </a>
           );
         }

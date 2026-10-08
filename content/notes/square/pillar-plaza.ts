@@ -9,7 +9,7 @@ const notes: BuildingNotes = {
       ["The exam validates a candidate's ability to design solutions based on the AWS Well-Architected Framework.",
        'Design architectures that are secure, resilient, high-performing, and cost-optimized'],
       { allow: ['four'] }),
-    b('The framework has six {{term:pillar}}s. Four line up with the exam domains: Security (the Citadel), Reliability (Harbor & Levees), Performance efficiency (the Express Quarter) and Cost optimization (the Treasury). Operational excellence and Sustainability are not domains of their own, but they still shape which answer is "best", especially when a question asks for the least operational effort.',
+    b('The framework has six {{term:pillar|pillars}}. Four line up with the exam domains: Security (the Citadel), Reliability (Harbor & Levees), Performance efficiency (the Express Quarter) and Cost optimization (the Treasury). Operational excellence and Sustainability are not domains of their own, but they still shape which answer is "best", especially when a question asks for the least operational effort.',
       ['waf-pillars', 'exam-guide'],
       ['waf-pillars|the six pillars of operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability',
        'exam-guide|Content Domain 4: Design Cost-Optimized Architectures'],

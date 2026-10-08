@@ -7,6 +7,7 @@
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, statSync } from 'node:fs';
 import { BUILDINGS } from '../src/data/buildings.ts';
+import { FAMILIES } from '../src/data/families.ts';
 import { chromium, type Browser, type BrowserContext, type Page } from '@playwright/test';
 
 const PORT = 4173;
@@ -141,7 +142,7 @@ async function phone(browser: Browser): Promise<void> {
   check(dlg.scrollW <= dlg.clientW && dlg.left >= 0 && dlg.right <= dlg.vw, 'panel fits 390px with no sideways scroll', JSON.stringify(dlg));
   check((await page.locator('dialog[open] h2').innerText()) === 'Gatehouse', 'panel shows the themed name');
   check((await page.locator('dialog[open]').innerText()).includes('Designing VPC architectures with security components'), 'panel lists the verbatim bullets');
-  check((await page.locator('dialog[open]').innerText()).includes('Placeholder'), 'panel has placeholder notes');
+  check((await page.locator('dialog[open]').innerText()).includes('Open the study notes'), 'panel links to the study notes');
   check((await smallTargets(page)).length === 0, 'panel targets are at least 44px', (await smallTargets(page)).slice(0, 5).join('; '));
   await shot(page, 'phone-panel');
   // Follow a prerequisite road inside the panel.
@@ -157,7 +158,7 @@ async function phone(browser: Browser): Promise<void> {
   await page.waitForSelector('#family-storage');
   const oa = await overflow(page);
   check(oa.doc <= oa.win && oa.body <= oa.win, '390px atlas has no page-level sideways scroll', JSON.stringify(oa));
-  check((await page.locator('section[id^="family-"]').count()) === 9, 'atlas shows 9 service families');
+  check((await page.locator('section[id^="family-"]').count()) === FAMILIES.length, `atlas shows ${FAMILIES.length} service families`);
   check((await smallTargets(page)).length === 0, 'atlas targets are at least 44px', (await smallTargets(page)).slice(0, 5).join('; '));
   await shot(page, 'phone-atlas');
   await page.locator('#family-storage a', { hasText: 'Cold Cellar' }).first().tap();
@@ -184,6 +185,37 @@ async function phone(browser: Browser): Promise<void> {
   check(exported.app === 'saa-region-builder' && exported.save.version === 1 && Object.keys(exported.save.buildings).length === 3, 'export downloads a valid v1 backup');
 
   check(errors.length === 0, 'no console errors, warnings or CSP violations on phone', errors.slice(0, 3).join(' | '));
+  await ctx.close();
+}
+
+async function notesPages(browser: Browser): Promise<void> {
+  const { page, ctx, errors } = await newPage(browser, { mobile: true });
+  const routes: [string, string][] = [
+    ['#/notes/gatehouse', 'Gatehouse'],
+    ['#/notes/embassy-row', 'Embassy Row'],
+    ['#/notes/surveyors-grid', "Surveyor's Grid"],
+    ['#/glossary', 'Glossary'],
+    ['#/confuse', 'Don’t confuse'],
+  ];
+  for (const [hash, heading] of routes) {
+    await page.goto(`${BASE}${hash}`);
+    await page.waitForFunction((h) => [...document.querySelectorAll('h2')].some((e) => e.textContent?.startsWith(h)), heading);
+    await page.waitForSelector('#sources-h');
+    const o = await overflow(page);
+    check(o.doc <= o.win && o.body <= o.win, `390px ${hash} has no page-level sideways scroll`, JSON.stringify(o));
+    const small = await smallTargets(page);
+    check(small.length === 0, `${hash} targets are at least 44px`, small.slice(0, 5).join('; '));
+    const wide = await page.evaluate(() => [...document.querySelectorAll('pre')].filter((p) => p.scrollWidth > p.clientWidth + 1).length);
+    check(wide === 0, `${hash} code blocks wrap instead of scrolling sideways`, String(wide));
+    const markers = await page.locator('sup').count();
+    check(markers > 0, `${hash} shows citation markers`, String(markers));
+  }
+  await page.goto(`${BASE}#/notes/gatehouse`);
+  await page.waitForSelector('#sources-h');
+  await shot(page, 'phone-notes');
+  const href = await page.locator('#sources-h ~ ol a').first().getAttribute('href');
+  check(!!href && /^https:\/\/(docs\.aws\.amazon\.com|aws\.amazon\.com|learn\.microsoft\.com)\//.test(href), 'source links point at allowed sites', String(href));
+  check(errors.length === 0, 'no console errors on notes pages', errors.slice(0, 3).join(' | '));
   await ctx.close();
 }
 
@@ -280,6 +312,7 @@ async function main(): Promise<void> {
   const browser = await chromium.launch({ executablePath: browserPath() });
   try {
     await phone(browser);
+    await notesPages(browser);
     await keyboard(browser);
     await desktop(browser);
     await saves(browser);

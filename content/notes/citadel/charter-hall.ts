@@ -1,0 +1,103 @@
+import type { BuildingNotes } from '../../../src/content/types.ts';
+import { b, cue } from '../../helpers.ts';
+
+const notes: BuildingNotes = {
+  building: 'charter-hall',
+  overview: [
+    b('Two ideas sit under every other design decision. First, where your workload physically lives: a {{term:region}} and its {{term:availability-zone|Availability Zones}}. Second, who is responsible for what once it is running: the {{term:shared-responsibility-model}}. Get these wrong and both resilience and security answers fall apart.',
+      ['global-infra', 'shared-responsibility'],
+      ['global-infra|AWS has the concept of a Region, which is a physical location around the world where we cluster data centers.',
+       'shared-responsibility|Customer responsibility “Security in the Cloud” Customer responsibility will be determined by the AWS Cloud services that a customer selects.'],
+      { allow: ['two'] }),
+  ],
+  bullets: [
+    {
+      id: '1.1-K3',
+      concepts: [
+        b('A Region is a physical location in the world where AWS clusters data centers, and each group of logical data centers is an Availability Zone. An Availability Zone is one or more discrete data centers with separate and redundant power, networking and connectivity in a Region.',
+          ['global-infra', 'fault-isolation-az'],
+          ['global-infra|AWS has the concept of a Region, which is a physical location around the world where we cluster data centers.',
+           'global-infra|We call each group of logical data centers an Availability Zone.',
+           'fault-isolation-az|An Availability Zone is one or more discrete data centers with separate and redundant power infrastructure, networking, and connectivity in an AWS Region.']),
+        b('Zones in a Region are meaningfully distant from each other, up to 60 miles (~100 km) to prevent correlated failures, yet close enough for synchronous replication with single-digit millisecond latency. Common points of failure such as generators and cooling equipment are not shared across zones.',
+          'fault-isolation-az',
+          ['Availability Zones in a Region are meaningfully distant from each other, up to 60 miles (~100 km) to prevent correlated failures, but close enough to use synchronous replication with single-digit millisecond latency.',
+           'Common points of failure, like generators and cooling equipment, are not shared across Availability Zones']),
+        b('When you choose a Region, consider which one has the services and features you need and, to lower latency, which one is close to most of your users. Your account determines which Regions are available to you.',
+          'regions-and-azs',
+          ['select a Region that has the AWS services and features that you need.',
+           'you can lower network latency when you select a Region that is close to the majority of your users.',
+           'Your account determines the Regions that are available to you.']),
+      ],
+      services: [],
+      design: [
+        b('Spread tiers across more than one Availability Zone to survive the loss of a zone, and choose the Region by service availability and user latency. The AWS global infrastructure page describes three Availability Zones per Region as the design that maximises resilience.',
+          'global-infra-overview', ['With three Availability Zones (AZs) per Region and optimized data centers, AWS global infrastructure maximizes resilience, performance, and innovation.']),
+      ],
+    },
+    {
+      id: '1.1-K5',
+      concepts: [
+        b('AWS is responsible for "Security of the Cloud": protecting the infrastructure that runs all of the services offered in the AWS Cloud. The customer is responsible for "Security in the Cloud", and what that includes is determined by the AWS services the customer selects.',
+          'shared-responsibility',
+          ['AWS responsibility “Security of the Cloud” AWS is responsible for protecting the infrastructure that runs all of the services offered in the AWS Cloud.',
+           'Customer responsibility “Security in the Cloud” Customer responsibility will be determined by the AWS Cloud services that a customer selects.']),
+        b('The model relieves operational burden because AWS operates and controls the components from the host operating system and virtualization layer down to the physical security of the facilities. For an infrastructure service such as EC2, the customer takes on the guest operating system (including updates and security patches), application software and the configuration of the security group firewall.',
+          'shared-responsibility',
+          ['This shared model can help relieve the customer’s operational burden as AWS operates, manages and controls the components from the host operating system and virtualization layer down to the physical security of the facilities in which the service operates.',
+           'The customer assumes responsibility and management of the guest operating system (including updates and security patches), other associated application software as well as the configuration of the AWS provided security group firewall.']),
+      ],
+      services: [],
+      design: [
+        b('Use the model to read "who patches this?" questions. The more managed the service, the more of the stack AWS operates; the customer still owns what they put in it and how access is configured.',
+          'shared-responsibility', ['Customer responsibility will be determined by the AWS Cloud services that a customer selects.']),
+      ],
+    },
+  ],
+  cues: [
+    cue('survive the failure of a data center / one Availability Zone', 'deploy across multiple Availability Zones',
+      b('Availability Zones have separate and redundant power, networking and connectivity within a Region.', 'fault-isolation-az',
+        ['separate and redundant power infrastructure, networking, and connectivity'])),
+    cue('lowest latency for users in a geography', 'choose the Region closest to them',
+      b('Selecting a Region close to the majority of your users lowers network latency.', 'regions-and-azs',
+        ['you can lower network latency when you select a Region that is close to the majority of your users.'])),
+    cue('who is responsible for patching the guest operating system', 'the customer, for infrastructure services such as EC2',
+      b('For EC2-style infrastructure services the customer assumes responsibility for the guest operating system, including updates and security patches.', 'shared-responsibility',
+        ['The customer assumes responsibility and management of the guest operating system (including updates and security patches)'])),
+    cue('physical security of the data centers', 'AWS',
+      b('AWS operates and controls components down to the physical security of the facilities in which the service operates.', 'shared-responsibility',
+        ['down to the physical security of the facilities in which the service operates'])),
+  ],
+  examples: [],
+  confuse: [],
+  azure: [
+    {
+      concept: 'Azure regions and availability zones',
+      aws: 'AWS Regions and Availability Zones',
+      mapping: b('The model is the same. Azure describes an availability zone as a logical grouping of one or more physically separate datacenters within a region; AWS describes an Availability Zone as one or more discrete data centers with separate power, networking and connectivity in a Region.',
+        ['learn-zones', 'fault-isolation-az'],
+        ['learn-zones|An availability zone is a logical grouping of one or more physically separate datacenters within a region.',
+         'fault-isolation-az|An Availability Zone is one or more discrete data centers with separate and redundant power infrastructure, networking, and connectivity in an AWS Region.']),
+      breaks: b('Azure says that many of its regions provide availability zones, which implies some do not. The AWS global infrastructure page describes three Availability Zones per Region. Also remember that AWS Regions available to you depend on your account.',
+        ['learn-zones', 'global-infra-overview', 'regions-and-azs'],
+        ['learn-zones|Many Azure regions provide availability zones, which are separated groups of datacenters within a region.',
+         'global-infra-overview|With three Availability Zones (AZs) per Region and optimized data centers, AWS global infrastructure maximizes resilience, performance, and innovation.',
+         'regions-and-azs|Your account determines the Regions that are available to you.'],
+        { allow: ['three'] }),
+    },
+    {
+      concept: 'Shared responsibility in the cloud',
+      aws: 'AWS shared responsibility model',
+      mapping: b('Both clouds use a shared responsibility model. Azure explains that workload responsibilities vary depending on whether the workload is SaaS, PaaS, IaaS or on-premises; AWS says customer responsibility is determined by the AWS services a customer selects.',
+        ['learn-shared-responsibility', 'shared-responsibility'],
+        ['learn-shared-responsibility|Workload responsibilities vary depending on whether the workload is hosted on software as a service (SaaS), platform as a service (PaaS), infrastructure as a service (IaaS), or in an on-premises datacenter',
+         'shared-responsibility|Customer responsibility will be determined by the AWS Cloud services that a customer selects.']),
+      breaks: b('The vocabulary differs: AWS frames it as security "of" the cloud (AWS) versus "in" the cloud (customer). The service-by-service split also differs, so the SAA habit is to ask, for each AWS service in a question, what the customer still owns.',
+        ['learn-shared-responsibility', 'shared-responsibility'],
+        ['learn-shared-responsibility|IaaS (infrastructure as a service): You manage virtual machines, operating systems, and applications.',
+         'shared-responsibility|AWS responsibility “Security of the Cloud” AWS is responsible for protecting the infrastructure that runs all of the services offered in the AWS Cloud.']),
+    },
+  ],
+};
+
+export default notes;

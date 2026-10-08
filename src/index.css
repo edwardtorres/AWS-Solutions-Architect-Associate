@@ -245,8 +245,8 @@ button, a, summary {
 /* Inline links keep a 44px tap area without changing line layout. */
 .inline-link {
   display: inline-block;
-  padding: 10px 2px;
-  margin: -10px 0;
+  padding: 12px 2px;
+  margin: -12px 0;
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--line);

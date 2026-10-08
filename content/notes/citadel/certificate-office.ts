@@ -1,0 +1,100 @@
+import type { BuildingNotes } from '../../../src/content/types.ts';
+import { b, cue } from '../../helpers.ts';
+
+const notes: BuildingNotes = {
+  building: 'certificate-office',
+  overview: [
+    b('Encryption in transit means traffic is protected while it moves between a client and a service, usually with TLS. TLS needs a certificate, and certificates and keys expire or age out. {{term:acm|ACM}} issues and manages public and private SSL/TLS certificates for integrated AWS services, and AWS KMS can rotate the keys that protect data at rest.',
+      ['acm-overview', 'kms-rotation'],
+      ['acm-overview|AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys that protect your AWS websites and applications.',
+       'kms-rotation|you can rotate the key material associated with an existing KMS key by enabling automatic key rotation or performing on-demand rotation.']),
+  ],
+  beyondProject: [
+    b('If your CloudFront site uses your own domain name over HTTPS, it needs a certificate. AWS documents a specific rule for that: to use an ACM certificate with a CloudFront distribution, request or import it in the US East (N. Virginia) Region. That is a classic exam detail your hosting project may have already forced you to discover.',
+      'cf-https-requirements',
+      ['To use an ACM certificate with a CloudFront distribution, make sure you request (or import) the certificate in the US East (N']),
+  ],
+  bullets: [
+    {
+      id: '1.3-S3',
+      concepts: [
+        b('ACM handles creating, storing and renewing public and private SSL/TLS X.509 certificates and keys that protect your AWS websites and applications. You can issue certificates in ACM or import third-party certificates, and a certificate can secure single names, several names or wildcard domains.',
+          'acm-overview',
+          ['AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys that protect your AWS websites and applications.',
+           'You can provide certificates for your integrated AWS services either by issuing them directly with ACM or by importing third-party certificates into the ACM management system.',
+           'ACM certificates can secure singular domain names, multiple specific domain names, wildcard domains, or combinations of these.']),
+        b('ACM certificates are used directly by integrated services such as Elastic Load Balancing and CloudFront. An HTTPS listener on an Application Load Balancer needs at least one server certificate, which the load balancer uses to terminate the front-end connection and decrypt client requests before sending them on.',
+          ['acm-services', 'alb-https-listener'],
+          ['acm-services|ACM certificates are supported by the following services: Elastic Load Balancing',
+           'alb-https-listener|To create an HTTPS listener, you must deploy at least one SSL server certificate on your load balancer.',
+           'alb-https-listener|The load balancer uses a server certificate to terminate the front-end connection and then decrypt requests from clients before sending them to the targets.']),
+        b('With a TCP listener the load balancer instead passes encrypted traffic through to the targets without decrypting it, which matters when a requirement says traffic must stay encrypted end to end.',
+          'alb-https-listener', ['With a TCP listener, the load balancer passes encrypted traffic through to the targets without decrypting it.']),
+      ],
+      services: ['AWS Certificate Manager (ACM)'],
+      design: [
+        b('To protect a public website: request a public certificate in ACM, attach it to the load balancer or CloudFront distribution, and use an HTTPS listener or viewer protocol policy. For CloudFront the certificate must be in the US East (N. Virginia) Region.',
+          ['acm-services', 'cf-https-requirements'],
+          ['acm-services|ACM certificates are supported by the following services: Elastic Load Balancing',
+           'cf-https-requirements|To use an ACM certificate with a CloudFront distribution, make sure you request (or import) the certificate in the US East (N']),
+      ],
+    },
+    {
+      id: '1.3-S7',
+      concepts: [
+        b('ACM provides managed renewal for Amazon-issued certificates. ACM renews them automatically if you use DNS validation, or sends email notices as expiration approaches. A certificate is eligible for automatic renewal if it is associated with another AWS service such as Elastic Load Balancing or CloudFront.',
+          'acm-renewal',
+          ['ACM provides managed renewal for your Amazon-issued SSL/TLS certificates.',
+           'ACM will either renew your certificates automatically (if you are using DNS validation), or it will send you email notices when expiration is approaching.',
+           'ELIGIBLE if associated with another AWS service, such as Elastic Load Balancing or CloudFront.']),
+        b('For keys, AWS KMS can rotate key material. By default, enabling automatic key rotation on a KMS key makes AWS KMS generate new cryptographic material for it every year; you can also set a custom rotation period or rotate on demand.',
+          'kms-rotation',
+          ['By default, when you enable automatic key rotation for a KMS key, AWS KMS generates new cryptographic material for the KMS key every year.',
+           'You can also specify a custom rotation-period to define the number of days after you enable automatic key rotation that AWS KMS will rotate your key material']),
+        b('Secrets Manager does the same for credentials, using a configured schedule; see Warden\'s Lodge.',
+          'secrets-rotation', ['In Secrets Manager, you can set up automatic rotation for your secrets.']),
+      ],
+      services: ['AWS Certificate Manager (ACM)', 'AWS KMS'],
+      design: [
+        b('To avoid outages from expired certificates, use ACM-issued certificates with DNS validation on integrated services so renewal is automatic. To meet a key-rotation requirement for encrypted data, enable automatic rotation on the customer managed KMS key rather than building your own process.',
+          ['acm-renewal', 'kms-rotation'],
+          ['acm-renewal|ACM will either renew your certificates automatically (if you are using DNS validation), or it will send you email notices when expiration is approaching.',
+           'kms-rotation|Or, you can rotate the key material associated with an existing KMS key by enabling automatic key rotation or performing on-demand rotation.']),
+      ],
+    },
+  ],
+  cues: [
+    cue('HTTPS for a website / manage SSL/TLS certificates with minimal effort', 'AWS Certificate Manager',
+      b('ACM handles creating, storing and renewing SSL/TLS certificates and keys.', 'acm-overview',
+        ['AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys'])),
+    cue('certificates must renew automatically', 'ACM-issued certificate with DNS validation on an integrated service',
+      b('ACM renews certificates automatically when DNS validation is used.', 'acm-renewal',
+        ['ACM will either renew your certificates automatically (if you are using DNS validation)'])),
+    cue('CloudFront with a custom domain over HTTPS', 'ACM certificate in US East (N. Virginia)',
+      b('For CloudFront, request or import the ACM certificate in US East (N. Virginia).', 'cf-https-requirements',
+        ['make sure you request (or import) the certificate in the US East (N'])),
+    cue('rotate encryption keys annually', 'enable automatic key rotation on the KMS key',
+      b('Enabling automatic key rotation makes KMS generate new key material every year by default.', 'kms-rotation',
+        ['AWS KMS generates new cryptographic material for the KMS key every year.'])),
+    cue('traffic must remain encrypted all the way to the instance', 'TCP/TLS pass-through, not termination at the load balancer',
+      b('A TCP listener passes encrypted traffic through to targets without decrypting it.', 'alb-https-listener',
+        ['the load balancer passes encrypted traffic through to the targets without decrypting it'])),
+  ],
+  examples: [],
+  confuse: [],
+  azure: [
+    {
+      concept: 'Key Vault certificates',
+      aws: 'AWS Certificate Manager',
+      mapping: b('The Learn comparison pairs ACM with Key Vault certificates and Microsoft Cloud PKI as the services to create and manage certificates and their keys.',
+        ['learn-hub', 'acm-overview'],
+        ['learn-hub|Use these services to create and manage certificates and their keys.', 'acm-overview|AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys']),
+      breaks: b('ACM certificates are for use with integrated AWS services such as Elastic Load Balancing and CloudFront. They are managed for those services, and a CloudFront certificate has to be in US East (N. Virginia).',
+        ['acm-services', 'cf-https-requirements', 'learn-hub'],
+        ['acm-services|ACM certificates are supported by the following services: Elastic Load Balancing',
+         'cf-https-requirements|make sure you request (or import) the certificate in the US East (N', 'learn-hub|Key Vault certificates Microsoft Cloud PKI']),
+    },
+  ],
+};
+
+export default notes;

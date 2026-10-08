@@ -109,6 +109,9 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     bullets: b('1.1', 'K4 S1 S2'),
     families: ['security-identity'],
     services: ['IAM'],
+    portfolio: [
+      { tech: 'lambda', note: 'Your counter runs as a Lambda function with an execution role; the SAA question is scoping that role to least privilege and understanding trust versus permissions policies.' },
+    ],
     azure: [
       az('hub', 'Azure role-based access control (Azure RBAC)', 'AWS Identity and Access Management (IAM)'),
       az('hub', 'Microsoft Entra ID (multi-factor authentication)', 'Multi-Factor Authentication (MFA) for IAM'),
@@ -137,6 +140,9 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     bullets: b('1.1', 'K1 S3 S4 S5'),
     families: ['security-identity', 'management-governance'],
     services: ['AWS Organizations', 'AWS Control Tower', 'IAM', 'AWS Resource Access Manager (AWS RAM)'],
+    portfolio: [
+      { tech: 's3-static-hosting', note: 'Your private S3 origin is read through a resource policy; the SAA question is choosing between resource policies, roles and SCP guardrails for a multi-account design.' },
+    ],
     azure: [
       az('hub', 'Azure management groups', 'AWS Organizations'),
       az('hub', 'Azure Lighthouse / Azure landing zone', 'AWS Control Tower'),
@@ -254,6 +260,9 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     bullets: b('1.3', 'S3 S7'),
     families: ['security-identity'],
     services: ['AWS Certificate Manager (ACM)', 'AWS KMS'],
+    portfolio: [
+      { tech: 'cloudfront', note: 'A custom HTTPS domain on your CloudFront site needs a certificate; the SAA question is where it must live and how it renews.' },
+    ],
     azure: [az('hub', 'Key Vault certificates / Microsoft Cloud PKI', 'AWS Certificate Manager')],
   },
   {

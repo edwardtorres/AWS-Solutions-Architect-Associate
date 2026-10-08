@@ -51,10 +51,10 @@ export const REQUIRED_PAIRS: { id: string; home: string; members: string[] }[] =
 
 const NUMBER_WORDS = /\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|hundred|thousand|million|billion)\b/gi;
 // Digits inside identifiers are not claims: EC2, S3, gp3, m5, Route 53, IPv4, SSE-S3, "1.1-K4", Layer 4/7, CIDR examples in code.
-const IDENT_WITH_DIGITS = /\b[A-Za-z]+\d+[A-Za-z0-9.-]*\b|\b\d+\.\d+-[KS]\d+\b|\bRoute 53\b|\bLayer \d(?:\/\d)?\b|\bIPv[46]\b|\bSAA-C03\b/g;
+const IDENT_WITH_DIGITS = /\b[A-Za-z]+\d+[A-Za-z0-9.-]*\b|\b\d+\.\d+-[KS]\d+\b|\bRoute 53\b|\bLayer \d(?:\/\d)?\b|\bIPv[46]\b|\bSAA-C03\b|\bSAML 2\.0\b|\bOAuth 2\.0\b|\bHTTP\/[123](?:\.\d)?\b/g;
 const PRICE = /[$€£]\s?\d|\b\d+(?:\.\d+)?\s?(?:cents?|USD|dollars?)\b|\bUS\$/i;
 const STATUS_WORDS = /\b(preview|deprecated|deprecation|retired|end[- ]of[- ](?:life|support)|sunset|discontinued)\b/i;
-const TERM_REF = /\{\{term:([a-z0-9-]+)\}\}/g;
+const TERM_REF = /\{\{term:([a-z0-9-]+)(?:\|[^}]*)?\}\}/g;
 const RENAME_REF = /\{\{rename:([a-z0-9-]+)\}\}/g;
 
 export function normalise(s: string): string {
@@ -71,7 +71,7 @@ export function normalise(s: string): string {
 /** Numeric tokens (digits and number words) in prose that are not part of an identifier. */
 export function numberTokens(text: string): string[] {
   const cleaned = text.replace(TERM_REF, ' ').replace(RENAME_REF, ' ').replace(/`[^`]*`/g, ' ').replace(IDENT_WITH_DIGITS, ' ');
-  const digits = cleaned.match(/\d[\d,]*(?:\.\d+)?/g) ?? [];
+  const digits = cleaned.match(/\d+(?:,\d{3})*(?:\.\d+)?/g) ?? [];
   const words = cleaned.match(NUMBER_WORDS) ?? [];
   return [...digits, ...words.map((w) => w.toLowerCase())];
 }

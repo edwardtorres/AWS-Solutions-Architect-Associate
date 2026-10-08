@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { BUILDING_BY_ID, BULLET_BY_ID, DISTRICT_BY_ID, FAMILY_NAME, TASK_BY_ID } from '../../data';
 import { loadBuildingNotes, loadShared, type Shared } from '../../content/store';
 import type { BuildingNotes } from '../../content/types';
-import { hrefFor, hrefNotes } from '../../lib/route';
+import { hrefFor } from '../../lib/route';
 import { BlockView, CitesContext } from './Inline';
 import { ConfuseCard } from './ConfuseCard';
 import { SourceList } from './SourceList';
@@ -195,11 +195,6 @@ function NotesBody({ building: id, notes, shared }: { building: string; notes: B
         )}
 
         <SourceList list={cites.list} />
-        <p className="mt-6 text-sm">
-          <a className="inline-link" href={hrefNotes(building.id)} aria-current="page">
-            Study notes for {building.name}
-          </a>
-        </p>
       </article>
     </CitesContext.Provider>
   );
