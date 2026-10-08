@@ -12,12 +12,12 @@ import {
 } from '../data';
 import { deriveAll, STATE_LABEL } from '../save/state';
 import { useSnapshot } from '../save/context';
-import { hrefFor, type View } from '../lib/route';
+import { hrefFor, type PanelView } from '../lib/route';
 import { StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
 
-export default function Atlas({ view, activeId }: { view: View; activeId: string | null }) {
+export default function Atlas({ view, activeId }: { view: PanelView; activeId: string | null }) {
   const snapshot = useSnapshot();
   const states = useMemo(
     () =>

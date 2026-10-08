@@ -247,3 +247,12 @@ export function diffServices(stored: ServicesDoc, live: ServicesDoc): string[] {
     ...diffLists('short names note', [...stored.shortServiceNames.paragraphs, ...stored.shortServiceNames.bullets], [...live.shortServiceNames.paragraphs, ...live.shortServiceNames.bullets]),
   ];
 }
+
+export interface ShortNamesDoc {
+  items: { short: string; full: string }[];
+}
+
+export function diffShortNames(stored: ShortNamesDoc, live: ShortNamesDoc): string[] {
+  const f = (d: ShortNamesDoc) => d.items.map((i) => `${i.short} = ${i.full}`);
+  return diffLists('short names', f(stored), f(live));
+}

@@ -15,7 +15,7 @@ import {
 } from '../data';
 import { deriveAll, STATE_HELP, STATE_LABEL } from '../save/state';
 import { useSnapshot } from '../save/context';
-import { hrefFor, type View } from '../lib/route';
+import { hrefFor, hrefNotes, type PanelView } from '../lib/route';
 import { CloseIcon, RoadIcon, StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -25,7 +25,7 @@ const DevBuildingControls = import.meta.env.DEV ? lazy(() => import('../dev/DevB
 
 interface Props {
   buildingId: string;
-  view: View;
+  view: PanelView;
   onClose: () => void;
 }
 
@@ -301,13 +301,13 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
           </section>
         )}
 
-        <section className="mt-4 rounded-xl border border-dashed border-[var(--line)] p-3" aria-labelledby="p-notes">
+        <section className="mt-4" aria-labelledby="p-notes">
           <h3 id="p-notes" className="text-lg font-semibold">
             Study notes
           </h3>
-          <p className="text-sm text-[var(--fg-muted)]">
-            Placeholder. AWS-documentation-sourced notes, "don't confuse" pairs and scenario keyword cues arrive in Step 2.
-          </p>
+          <a className="btn mt-1" href={hrefNotes(building.id)}>
+            Open the study notes
+          </a>
         </section>
 
         {DevBuildingControls && (

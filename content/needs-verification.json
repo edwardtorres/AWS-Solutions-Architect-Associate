@@ -4,24 +4,27 @@
     "building": "charter-hall",
     "claim": "Azure regions and availability zones are the equivalent of AWS Regions and Availability Zones (AZ-900 crosswalk).",
     "reason": "The Microsoft Learn AWS-to-Azure comparison pages do not list regions or availability zones. Source it from Microsoft Learn and AWS global infrastructure docs in Step 2, including where the analogy breaks.",
-    "status": "open",
-    "added": "2026-10-08"
+    "status": "resolved",
+    "added": "2026-10-08",
+    "resolution": "Azure side confirmed on its dedicated Microsoft Learn page (2026-10-08); the AWS side is cited in the Step 2 notes."
   },
   {
     "id": "nv-azure-shared-responsibility",
     "building": "charter-hall",
     "claim": "The Azure shared responsibility model corresponds to the AWS shared responsibility model (AZ-900 crosswalk).",
     "reason": "Not covered by the Learn comparison pages. Source it from Microsoft Learn and AWS docs in Step 2.",
-    "status": "open",
-    "added": "2026-10-08"
+    "status": "resolved",
+    "added": "2026-10-08",
+    "resolution": "Azure side confirmed on its dedicated Microsoft Learn page (2026-10-08); the AWS side is cited in the Step 2 notes."
   },
   {
     "id": "nv-azure-storage-redundancy",
     "building": "durable-dock",
     "claim": "Azure storage redundancy options (LRS, ZRS, GRS) correspond to S3 and EBS durability and replication choices (AZ-900 crosswalk).",
     "reason": "The Learn storage comparison page covers services and tiers, not redundancy options. Source it from Microsoft Learn and AWS docs in Step 2.",
-    "status": "open",
-    "added": "2026-10-08"
+    "status": "resolved",
+    "added": "2026-10-08",
+    "resolution": "Azure side confirmed on its dedicated Microsoft Learn page (2026-10-08); the AWS side is cited in the Step 2 notes."
   },
   {
     "id": "nv-quick-naming",

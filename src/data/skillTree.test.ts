@@ -198,11 +198,11 @@ describe('carryover tags', () => {
   it('keeps portfolio tags off foundations', () => {
     for (const f of foundations) expect(f.portfolio).toBeUndefined();
   });
-  it('sources every Azure tag from Microsoft Learn or queues it for verification', () => {
+  it('sources every Azure tag from Microsoft Learn (or leaves it unsourced and queued)', () => {
     for (const b of BUILDINGS) {
       for (const a of b.azure ?? []) {
         if (a.status === 'sourced') {
-          expect(a.sourceUrl?.startsWith('https://learn.microsoft.com/en-us/azure/architecture/aws-professional/'), `${b.id}: ${a.concept}`).toBe(true);
+          expect(a.sourceUrl?.startsWith('https://learn.microsoft.com/en-us/azure/'), `${b.id}: ${a.concept}`).toBe(true);
         } else {
           expect(a.sourceUrl).toBeNull();
         }

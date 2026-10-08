@@ -13,6 +13,8 @@ import {
   parseDomain,
   parseIndex,
   parseMentions,
+  parseShortNames,
+  SHORT_NAMES_PAGE,
   parseServiceCategories,
   parseTechnologies,
   sha256,
@@ -25,13 +27,15 @@ const out = (name: string) => fileURLToPath(new URL(`./${name}`, import.meta.url
 export interface Fetched {
   html: Record<GuidePageKey, string>;
   cert: string;
+  policies: string;
 }
 
 export async function fetchAll(): Promise<Fetched> {
   const keys = Object.keys(GUIDE_PAGES) as GuidePageKey[];
   const htmls = await Promise.all(keys.map((k) => fetchText(GUIDE_PAGES[k])));
   const html = Object.fromEntries(keys.map((k, i) => [k, htmls[i]])) as Record<GuidePageKey, string>;
-  return { html, cert: await fetchText(CERT_PAGE) };
+  const [cert, policies] = await Promise.all([fetchText(CERT_PAGE), fetchText(SHORT_NAMES_PAGE)]);
+  return { html, cert, policies };
 }
 
 /** Builds both data documents from fetched HTML (no timestamps, so it is diffable). */
@@ -89,7 +93,8 @@ export function buildDocuments(f: Fetched) {
       mentions: sha256(JSON.stringify(mentions)),
     },
   };
-  return { outline, services };
+  const shortNames = { examCode: index.examCode, sourceUrl: SHORT_NAMES_PAGE, ...parseShortNames(f.policies) };
+  return { outline, services, shortNames };
 }
 
 /** Structural stop conditions from the brief. Returns human-readable problems. */
@@ -110,7 +115,7 @@ export function structuralProblems(outline: ReturnType<typeof buildDocuments>['o
 
 async function main() {
   const fetched = await fetchAll();
-  const { outline, services } = buildDocuments(fetched);
+  const { outline, services, shortNames } = buildDocuments(fetched);
   const problems = structuralProblems(outline);
   if (problems.length > 0) {
     console.error('STOP: the live exam guide differs from the structure this app was designed for:');
@@ -120,6 +125,7 @@ async function main() {
   const retrievedAt = new Date().toISOString().slice(0, 10);
   writeFileSync(out('official-outline.json'), `${JSON.stringify({ retrievedAt, ...outline }, null, 2)}\n`);
   writeFileSync(out('official-services.json'), `${JSON.stringify({ retrievedAt, ...services }, null, 2)}\n`);
+  writeFileSync(out('official-short-names.json'), `${JSON.stringify({ retrievedAt, ...shortNames }, null, 2)}\n`);
   const bullets = outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets));
   console.log(`Wrote official-outline.json (${outline.domains.length} domains, ${outline.domains.reduce((n, d) => n + d.tasks.length, 0)} tasks, ${bullets.length} bullets)`);
   console.log(`Wrote official-services.json (${services.inScope.categories.reduce((n, c) => n + c.services.length, 0)} in-scope, ${services.outOfScope.categories.reduce((n, c) => n + c.services.length, 0)} out-of-scope entries)`);

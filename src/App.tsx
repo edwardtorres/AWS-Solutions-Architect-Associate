@@ -7,6 +7,9 @@ import { useSaveStore, useSnapshot } from './save/context';
 const DetailPanel = lazy(() => import('./ui/DetailPanel'));
 const Atlas = lazy(() => import('./ui/Atlas'));
 const SaveMenu = lazy(() => import('./ui/SaveMenu'));
+const NotesPage = lazy(() => import('./ui/notes/NotesPage'));
+const GlossaryPage = lazy(() => import('./ui/notes/GlossaryPage'));
+const ConfusePage = lazy(() => import('./ui/notes/ConfusePage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
 const NOTICE: Record<string, string | undefined> = {
@@ -24,7 +27,7 @@ export default function App() {
   const notice = NOTICE[snapshot.status];
 
   const closePanel = () => {
-    navigate({ view: route.view, building: null });
+    navigate({ view: route.view, building: null, param: null });
   };
 
   return (
@@ -38,7 +41,7 @@ export default function App() {
             <h1 className="text-2xl font-semibold leading-tight sm:text-3xl">Region Builder</h1>
             <p className="text-sm text-[var(--fg-muted)]">AWS Certified Solutions Architect – Associate (SAA-C03)</p>
           </div>
-          <nav aria-label="Views" className="flex gap-2 sm:ml-auto">
+          <nav aria-label="Views" className="flex flex-wrap gap-2 sm:ml-auto">
             <a
               href="#/map"
               className="btn"
@@ -55,6 +58,12 @@ export default function App() {
             >
               Service Atlas
             </a>
+            <a href="#/glossary" className="btn" aria-current={route.view === 'glossary' ? 'page' : undefined}>
+              Glossary
+            </a>
+            <a href="#/confuse" className="btn" aria-current={route.view === 'confuse' ? 'page' : undefined}>
+              Don&rsquo;t confuse
+            </a>
           </nav>
         </div>
       </header>
@@ -65,14 +74,16 @@ export default function App() {
             {notice}
           </p>
         )}
-        <h2 className="visually-hidden">{route.view === 'map' ? 'City map' : 'Service Atlas'}</h2>
-        {route.view === 'map' ? (
-          <CityMap view={route.view} activeId={route.building} />
-        ) : (
-          <Suspense fallback={<p>Loading the atlas…</p>}>
-            <Atlas view={route.view} activeId={route.building} />
-          </Suspense>
+        {(route.view === 'map' || route.view === 'atlas') && (
+          <h2 className="visually-hidden">{route.view === 'map' ? 'City map' : 'Service Atlas'}</h2>
         )}
+        {route.view === 'map' && <CityMap view="map" activeId={route.building} />}
+        <Suspense fallback={<p role="status">Loading…</p>}>
+          {route.view === 'atlas' && <Atlas view="atlas" activeId={route.building} />}
+          {route.view === 'notes' && <NotesPage buildingId={route.param ?? null} />}
+          {route.view === 'glossary' && <GlossaryPage termId={route.param ?? null} />}
+          {route.view === 'confuse' && <ConfusePage pairId={route.param ?? null} />}
+        </Suspense>
         <Suspense fallback={null}>
           <SaveMenu />
         </Suspense>
@@ -81,7 +92,7 @@ export default function App() {
         </footer>
       </main>
 
-      {route.building && (
+      {route.building && (route.view === 'map' || route.view === 'atlas') && (
         <Suspense fallback={null}>
           <DetailPanel buildingId={route.building} view={route.view} onClose={closePanel} />
         </Suspense>

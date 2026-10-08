@@ -124,6 +124,11 @@ describe('check:content (offline)', () => {
 
   it('requires a queue entry for unverified Azure tags', () => {
     const i = base();
+    const b = (i.buildings as unknown as { azure?: { sourceUrl: string | null; status: string }[] }[]).find((x) => x.azure?.length);
+    if (b?.azure?.[0]) {
+      b.azure[0].sourceUrl = null;
+      b.azure[0].status = 'needs-verification';
+    }
     i.queue = [];
     expect(runOfflineChecks(i).join('\n')).toMatch(/unverified Azure tags/);
   });

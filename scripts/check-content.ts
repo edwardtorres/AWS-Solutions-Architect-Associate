@@ -8,9 +8,12 @@ import { BUILDINGS } from '../src/data/buildings.ts';
 import { ROADS } from '../src/data/roads.ts';
 import { BANNED_TERMS } from './banned-terms.ts';
 import { buildDocuments, fetchAll, structuralProblems } from './fetch-official.ts';
+import { loadNotesBundle } from './lib/loadNotes.ts';
+import { checkNotes } from './lib/notesChecks.ts';
 import {
   diffOutline,
   diffServices,
+  diffShortNames,
   runOfflineChecks,
   type ContentInput,
   type OutlineDoc,
@@ -29,6 +32,12 @@ async function main() {
 
   const problems = runOfflineChecks({ outline, services, buildings: BUILDINGS, roads: ROADS, queue, banned: BANNED_TERMS } satisfies ContentInput);
 
+  const bundle = await loadNotesBundle();
+  const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
+  problems.push(
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle }).map((x) => `notes: ${x}`),
+  );
+
   let liveNote = '';
   if (live) {
     const fetched = await fetchAll();
@@ -41,6 +50,7 @@ async function main() {
     }
     problems.push(...diffOutline(outline, docs.outline as unknown as OutlineDoc).map((x) => `live: ${x}`));
     problems.push(...diffServices(services, docs.services as unknown as ServicesDoc).map((x) => `live: ${x}`));
+    problems.push(...diffShortNames(readJson('./official-short-names.json'), docs.shortNames).map((x) => `live: ${x}`));
     // Exam facts the app's CLAUDE.md relies on.
     const f = docs.outline.examFacts;
     const factChecks: [string, boolean][] = [

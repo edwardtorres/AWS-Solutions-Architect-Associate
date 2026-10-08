@@ -12,7 +12,7 @@ import {
 } from '../data';
 import { deriveAll } from '../save/state';
 import { useSaveStore, useSnapshot } from '../save/context';
-import { navigate, type View } from '../lib/route';
+import { navigate, type PanelView } from '../lib/route';
 import { BuildingCard } from './BuildingCard';
 import { RoadsOverlay, useIsDesktop } from './RoadsOverlay';
 
@@ -20,7 +20,7 @@ const STARTS = new Set(START_IDS);
 const ISLANDS: IslandId[] = ['A', 'B', 'C'];
 
 interface Props {
-  view: View;
+  view: PanelView;
   activeId: string | null;
 }
 
@@ -57,7 +57,7 @@ export function CityMap({ view, activeId }: Props) {
   const onOpen = useCallback(
     (id: string) => {
       store.setUi({ lastBuilding: id });
-      navigate({ view, building: id });
+      navigate({ view, building: id, param: id });
     },
     [store, view],
   );

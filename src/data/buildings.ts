@@ -11,6 +11,10 @@ const SRC = {
   networking: `${LEARN}networking`,
   databases: `${LEARN}databases`,
   analytics: `${LEARN}analytics`,
+  // Dedicated Microsoft Learn pages (Step 2): used where the comparison pages do not cover a concept.
+  azureZones: 'https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview',
+  azureSharedResponsibility: 'https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility',
+  azureStorageRedundancy: 'https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy',
 } as const;
 
 /** An Azure crosswalk tag taken from a row of a Microsoft Learn comparison page. */
@@ -20,15 +24,6 @@ const az = (
   aws: string,
   background: AzureTag['background'] = 'AZ-900',
 ): AzureTag => ({ concept, aws, sourceUrl: SRC[src], status: 'sourced', background });
-
-/** A crosswalk tag the comparison pages do not cover: queued in content/needs-verification.json. */
-const azUnverified = (concept: string, aws: string): AzureTag => ({
-  concept,
-  aws,
-  sourceUrl: null,
-  status: 'needs-verification',
-  background: 'AZ-900',
-});
 
 export const BUILDING_DEFS: readonly BuildingDef[] = [
   // ───────────────────────── Founders' Square (Foundations) ─────────────────────────
@@ -157,8 +152,8 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     families: ['security-identity'],
     services: [],
     azure: [
-      azUnverified('Azure regions and availability zones', 'AWS Regions and Availability Zones'),
-      azUnverified('Shared responsibility in the cloud', 'AWS shared responsibility model'),
+      az('azureZones', 'Azure regions and availability zones', 'AWS Regions and Availability Zones'),
+      az('azureSharedResponsibility', 'Shared responsibility in the cloud', 'AWS shared responsibility model'),
     ],
   },
   {
@@ -473,7 +468,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     bullets: b('2.2', 'K11 S5'),
     families: ['storage'],
     services: ['Amazon S3', 'Amazon EBS', 'Amazon EFS', 'AWS Backup'],
-    azure: [azUnverified('Azure storage redundancy (LRS, ZRS, GRS)', 'Amazon S3 durability and replication')],
+    azure: [az('azureStorageRedundancy', 'Azure storage redundancy (LRS, ZRS, GRS)', 'Amazon S3 durability and replication')],
   },
   {
     id: 'legacy-wharf',

@@ -1,0 +1,104 @@
+{
+  "retrievedAt": "2026-10-08",
+  "examCode": "SAA-C03",
+  "sourceUrl": "https://aws.amazon.com/certification/policies/general-information/",
+  "intro": "AWS Certification is reducing the reading load in some exams by using official short names of well-known AWS service names that contain initials or parenthetical information. Each of the following AWS services might appear as its short name in your exam questions.",
+  "items": [
+    {
+      "short": "AWS CDK",
+      "full": "AWS Cloud Development Kit"
+    },
+    {
+      "short": "AWS CLI",
+      "full": "AWS Command Line Interface"
+    },
+    {
+      "short": "AWS DMS",
+      "full": "AWS Database Migration Service"
+    },
+    {
+      "short": "Amazon DocumentDB",
+      "full": "Amazon DocumentDB (with MongoDB compatibility)"
+    },
+    {
+      "short": "Amazon EBS",
+      "full": "Amazon Elastic Block Store"
+    },
+    {
+      "short": "Amazon EC2",
+      "full": "Amazon Elastic Compute Cloud"
+    },
+    {
+      "short": "Amazon ECR",
+      "full": "Amazon Elastic Container Registry"
+    },
+    {
+      "short": "Amazon ECS",
+      "full": "Amazon Elastic Container Service"
+    },
+    {
+      "short": "Amazon EFS",
+      "full": "Amazon Elastic File System"
+    },
+    {
+      "short": "Amazon EKS",
+      "full": "Amazon Elastic Kubernetes Service"
+    },
+    {
+      "short": "IAM",
+      "full": "AWS Identity and Access Management"
+    },
+    {
+      "short": "Amazon Keyspaces",
+      "full": "Amazon Keyspaces (for Apache Cassandra)"
+    },
+    {
+      "short": "AWS KMS",
+      "full": "AWS Key Management Service"
+    },
+    {
+      "short": "AWS Managed Microsoft AD",
+      "full": "AWS Directory Service for Microsoft Active Directory"
+    },
+    {
+      "short": "AWS Private CA",
+      "full": "AWS Private Certificate Authority"
+    },
+    {
+      "short": "Amazon RDS",
+      "full": "Amazon Relational Database Service"
+    },
+    {
+      "short": "Amazon S3",
+      "full": "Amazon Simple Storage Service"
+    },
+    {
+      "short": "AWS SAM",
+      "full": "AWS Serverless Application Model"
+    },
+    {
+      "short": "AWS SCT",
+      "full": "AWS Schema Conversion Tool"
+    },
+    {
+      "short": "Amazon SES",
+      "full": "Amazon Simple Email Service"
+    },
+    {
+      "short": "Amazon SNS",
+      "full": "Amazon Simple Notification Service"
+    },
+    {
+      "short": "Amazon SQS",
+      "full": "Amazon Simple Queue Service"
+    },
+    {
+      "short": "AWS STS",
+      "full": "AWS Security Token Service"
+    },
+    {
+      "short": "Amazon VPC",
+      "full": "Amazon Virtual Private Cloud"
+    }
+  ]
+}

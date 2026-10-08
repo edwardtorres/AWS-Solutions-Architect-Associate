@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import * as cheerio from 'cheerio';
 
 export const GUIDE_BASE = 'https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/';
+export const SHORT_NAMES_PAGE = 'https://aws.amazon.com/certification/policies/general-information/';
 export const CERT_PAGE = 'https://aws.amazon.com/certification/certified-solutions-architect-associate/';
 
 export const GUIDE_PAGES = {
@@ -192,4 +193,23 @@ export async function fetchText(url: string): Promise<string> {
   const res = await fetch(url, { headers: { 'user-agent': 'saa-region-builder-content-check' } });
   if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`);
   return res.text();
+}
+
+/** The official short-name list ("AWS Service Names") embedded in the certification policies page. */
+export function parseShortNames(html: string): { intro: string; items: { short: string; full: string }[] } {
+  const re = /"itemHeading":"AWS Service Names","itemLongLoc":"((?:[^"\\]|\\.)*)"/;
+  const m = re.exec(html);
+  if (!m) throw new Error('AWS Service Names block not found on the certification policies page');
+  const fragment = JSON.parse(`"${m[1] as string}"`) as string;
+  const $ = cheerio.load(fragment);
+  const intro = clean($('p').first().text());
+  const items = $('li')
+    .map((_, li) => {
+      const text = clean($(li).text());
+      const idx = text.indexOf(': ');
+      return idx === -1 ? null : { short: text.slice(0, idx), full: text.slice(idx + 2) };
+    })
+    .get()
+    .filter((x): x is { short: string; full: string } => x !== null);
+  return { intro, items };
 }
