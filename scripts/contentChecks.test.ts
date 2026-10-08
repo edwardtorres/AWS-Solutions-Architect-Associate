@@ -47,14 +47,14 @@ describe('check:content (offline)', () => {
 
   it('fails when a bullet is unmapped', () => {
     const i = base();
-    const b = (i.buildings as { bullets: string[] }[]).find((x) => x.bullets.length > 2);
+    const b = (i.buildings as unknown as { bullets: string[] }[]).find((x) => x.bullets.length > 2);
     b?.bullets.pop();
     expect(runOfflineChecks(i).join('\n')).toMatch(/not mapped to any building/);
   });
 
   it('fails when a bullet is mapped twice', () => {
     const i = base();
-    const mutable = i.buildings as { bullets: string[]; task: string | null }[];
+    const mutable = i.buildings as unknown as { bullets: string[]; task: string | null }[];
     const first = mutable.find((x) => x.task === '1.1');
     const second = mutable.filter((x) => x.task === '1.1')[1];
     if (first && second) second.bullets.push(first.bullets[0] as string);
@@ -63,38 +63,38 @@ describe('check:content (offline)', () => {
 
   it('fails on a building with only one bullet', () => {
     const i = base();
-    const b = (i.buildings as { bullets: string[] }[]).find((x) => x.bullets.length === 2);
+    const b = (i.buildings as unknown as { bullets: string[] }[]).find((x) => x.bullets.length === 2);
     b?.bullets.pop();
     expect(runOfflineChecks(i).join('\n')).toMatch(/must be 2-5/);
   });
 
   it('fails on an out-of-scope service', () => {
     const i = base();
-    (i.buildings as { services: string[] }[])[10]?.services.push('AWS CloudShell');
+    (i.buildings as unknown as { services: string[] }[])[10]?.services.push('AWS CloudShell');
     expect(runOfflineChecks(i).join('\n')).toMatch(/out-of-scope service "AWS CloudShell"/);
   });
 
   it('fails on a service missing from the in-scope list', () => {
     const i = base();
-    (i.buildings as { services: string[] }[])[10]?.services.push('AWS STS');
+    (i.buildings as unknown as { services: string[] }[])[10]?.services.push('AWS STS');
     expect(runOfflineChecks(i).join('\n')).toMatch(/not in the in-scope list/);
   });
 
   it('fails on a cyclic road', () => {
     const i = base();
-    (i.roads as { from: string; to: string; reason: string }[]).push({ from: 'cold-cellar', to: 'freight-depot', reason: 'x'.repeat(30) });
+    (i.roads as unknown as { from: string; to: string; reason: string }[]).push({ from: 'cold-cellar', to: 'freight-depot', reason: 'x'.repeat(30) });
     expect(runOfflineChecks(i).join('\n')).toMatch(/cycle/);
   });
 
   it('fails on an implied road', () => {
     const i = base();
-    (i.roads as { from: string; to: string; reason: string }[]).push({ from: 'pillar-plaza', to: 'message-quay', reason: 'x'.repeat(30) });
+    (i.roads as unknown as { from: string; to: string; reason: string }[]).push({ from: 'pillar-plaza', to: 'message-quay', reason: 'x'.repeat(30) });
     expect(runOfflineChecks(i).join('\n')).toMatch(/already implied/);
   });
 
   it('fails when a building is unreachable', () => {
     const i = base();
-    (i.buildings as { id: string; name: string; district: string; task: string | null; bullets: string[]; families: string[]; services: string[] }[]).push({
+    (i.buildings as unknown as { id: string; name: string; district: string; task: string | null; bullets: string[]; families: string[]; services: string[] }[]).push({
       id: 'island-of-misfit-toys', name: 'Misfit', district: 'harbor', task: '2.1', bullets: [], families: ['compute'], services: [],
     });
     expect(runOfflineChecks(i).join('\n')).toMatch(/not reachable/);
@@ -115,7 +115,7 @@ describe('check:content (offline)', () => {
 
   it('fails when a source is outside the allowed list', () => {
     const i = base();
-    const b = (i.buildings as { azure?: { sourceUrl: string | null }[] }[]).find((x) => x.azure?.some((a) => a.sourceUrl));
+    const b = (i.buildings as unknown as { azure?: { sourceUrl: string | null }[] }[]).find((x) => x.azure?.some((a) => a.sourceUrl));
     const tag = b?.azure?.find((a) => a.sourceUrl);
     if (tag) tag.sourceUrl = 'https://example.com/aws-vs-azure';
     expect(runOfflineChecks(i).join('\n')).toMatch(/only learn\.microsoft\.com is allowed/);

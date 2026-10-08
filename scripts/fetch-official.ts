@@ -67,7 +67,7 @@ export function buildDocuments(f: Fetched) {
         compensatory: index.sentences.compensatory,
         responseTypes: index.responseTypes,
       },
-      certificationPage: { sourceUrl: CERT_PAGE, ...cert },
+      certificationPage: { sourceUrl: CERT_PAGE, ...cert } as Record<string, string>,
     },
     domains,
   };
