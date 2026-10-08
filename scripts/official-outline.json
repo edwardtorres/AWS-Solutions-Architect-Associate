@@ -1,0 +1,1108 @@
+{
+  "retrievedAt": "2026-10-08",
+  "examCode": "SAA-C03",
+  "guideTitle": "AWS Certified Solutions Architect - Associate (SAA-C03)",
+  "sources": {
+    "index": {
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+      "sha256": "86b0278cacbd19288f93dea0174270fedb089cd432d38cdbb723c0cb4d210d25"
+    },
+    "domain1": {
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain1.html",
+      "sha256": "cc820fa9dffc8f8b46a3f3a99620ef5442d600172f6c6817449d0368100c9a06"
+    },
+    "domain2": {
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain2.html",
+      "sha256": "2aa260bb8069cbd997732d50a77c80cef41b4e4f7559419245501d2234f7fb16"
+    },
+    "domain3": {
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain3.html",
+      "sha256": "6b8f75b14bbfca8823a0092f5050d6488eed6cd007add3c0b7d9b2d4d2f38327"
+    },
+    "domain4": {
+      "url": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain4.html",
+      "sha256": "957a6f5f89562ec5e252fa0b3308496cf95f5138bf04dcd59f9ad91d568d734e"
+    }
+  },
+  "examFacts": {
+    "guide": {
+      "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html",
+      "scored": "Unanswered questions are scored as incorrect; there is no penalty for guessing. The exam includes 50 questions that affect your score.",
+      "unscored": "The exam includes 15 unscored questions that do not affect your score. AWS collects information about performance on these unscored questions to evaluate these questions for future use as scored questions. These unscored questions are not identified on the exam.",
+      "scale": "Your results for the exam are reported as a scaled score of 100–1,000. The minimum passing score is 720. Your score shows how you performed on the exam as a whole and whether you passed. Scaled scoring models help equate scores across multiple exam forms that might have slightly different difficulty levels.",
+      "compensatory": "Your score report could contain a table of classifications of your performance at each section level. The exam uses a compensatory scoring model, which means that you do not need to achieve a passing score in each section. You need to pass only the overall exam.",
+      "responseTypes": [
+        "Multiple choice: Has one correct response and three incorrect responses (distractors)",
+        "Multiple response: Has two or more correct responses out of five or more response options"
+      ]
+    },
+    "certificationPage": {
+      "sourceUrl": "https://aws.amazon.com/certification/certified-solutions-architect-associate/",
+      "Exam duration": "130 minutes",
+      "Exam format": "65 questions; either multiple choice or multiple response"
+    }
+  },
+  "domains": [
+    {
+      "id": 1,
+      "name": "Design Secure Architectures",
+      "weightPercent": 30,
+      "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain1.html",
+      "tasks": [
+        {
+          "id": "1.1",
+          "title": "Design secure access to AWS resources",
+          "bullets": [
+            {
+              "id": "1.1-K1",
+              "type": "knowledge",
+              "text": "Access controls and management across multiple accounts"
+            },
+            {
+              "id": "1.1-K2",
+              "type": "knowledge",
+              "text": "AWS federated access and identity services (for example, IAM, AWS IAM Identity Center)"
+            },
+            {
+              "id": "1.1-K3",
+              "type": "knowledge",
+              "text": "AWS global infrastructure (for example, Availability Zones, AWS Regions)"
+            },
+            {
+              "id": "1.1-K4",
+              "type": "knowledge",
+              "text": "AWS security best practices (for example, the principle of least privilege)"
+            },
+            {
+              "id": "1.1-K5",
+              "type": "knowledge",
+              "text": "The AWS shared responsibility model"
+            },
+            {
+              "id": "1.1-S1",
+              "type": "skill",
+              "text": "Applying AWS security best practices to IAM users and root users (for example, multi-factor authentication [MFA])"
+            },
+            {
+              "id": "1.1-S2",
+              "type": "skill",
+              "text": "Designing a flexible authorization model that includes IAM users, groups, roles, and policies"
+            },
+            {
+              "id": "1.1-S3",
+              "type": "skill",
+              "text": "Designing a role-based access control strategy (for example, AWS STS, role switching, cross-account access)"
+            },
+            {
+              "id": "1.1-S4",
+              "type": "skill",
+              "text": "Designing a security strategy for multiple AWS accounts (for example, AWS Control Tower, service control policies [SCPs])"
+            },
+            {
+              "id": "1.1-S5",
+              "type": "skill",
+              "text": "Determining the appropriate use of resource policies for AWS services"
+            },
+            {
+              "id": "1.1-S6",
+              "type": "skill",
+              "text": "Determining when to federate a directory service with IAM roles"
+            }
+          ]
+        },
+        {
+          "id": "1.2",
+          "title": "Design secure workloads and applications",
+          "bullets": [
+            {
+              "id": "1.2-K1",
+              "type": "knowledge",
+              "text": "Application configuration and credentials security"
+            },
+            {
+              "id": "1.2-K2",
+              "type": "knowledge",
+              "text": "AWS service endpoints"
+            },
+            {
+              "id": "1.2-K3",
+              "type": "knowledge",
+              "text": "Control ports, protocols, and network traffic on AWS"
+            },
+            {
+              "id": "1.2-K4",
+              "type": "knowledge",
+              "text": "Secure application access"
+            },
+            {
+              "id": "1.2-K5",
+              "type": "knowledge",
+              "text": "Security services with appropriate use cases (for example, Amazon Cognito, Amazon GuardDuty, Amazon Macie)"
+            },
+            {
+              "id": "1.2-K6",
+              "type": "knowledge",
+              "text": "Threat vectors external to AWS (for example, DDoS, SQL injection)"
+            },
+            {
+              "id": "1.2-S1",
+              "type": "skill",
+              "text": "Designing VPC architectures with security components (for example, security groups, route tables, network ACLs, NAT gateways)"
+            },
+            {
+              "id": "1.2-S2",
+              "type": "skill",
+              "text": "Determining network segmentation strategies (for example, using public subnets and private subnets)"
+            },
+            {
+              "id": "1.2-S3",
+              "type": "skill",
+              "text": "Integrating AWS services to secure applications (for example, AWS Shield, AWS WAF, IAM Identity Center, AWS Secrets Manager)"
+            },
+            {
+              "id": "1.2-S4",
+              "type": "skill",
+              "text": "Securing external network connections to and from the AWS Cloud (for example, VPN, AWS Direct Connect)"
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "title": "Determine appropriate data security controls",
+          "bullets": [
+            {
+              "id": "1.3-K1",
+              "type": "knowledge",
+              "text": "Data access and governance"
+            },
+            {
+              "id": "1.3-K2",
+              "type": "knowledge",
+              "text": "Data recovery"
+            },
+            {
+              "id": "1.3-K3",
+              "type": "knowledge",
+              "text": "Data retention and classification"
+            },
+            {
+              "id": "1.3-K4",
+              "type": "knowledge",
+              "text": "Encryption and appropriate key management"
+            },
+            {
+              "id": "1.3-S1",
+              "type": "skill",
+              "text": "Aligning AWS technologies to meet compliance requirements"
+            },
+            {
+              "id": "1.3-S2",
+              "type": "skill",
+              "text": "Encrypting data at rest (for example, AWS KMS)"
+            },
+            {
+              "id": "1.3-S3",
+              "type": "skill",
+              "text": "Encrypting data in transit (for example, AWS Certificate Manager [ACM] using TLS)"
+            },
+            {
+              "id": "1.3-S4",
+              "type": "skill",
+              "text": "Implementing access policies for encryption keys"
+            },
+            {
+              "id": "1.3-S5",
+              "type": "skill",
+              "text": "Implementing data backups and replications"
+            },
+            {
+              "id": "1.3-S6",
+              "type": "skill",
+              "text": "Implementing policies for data access, lifecycle, and protection"
+            },
+            {
+              "id": "1.3-S7",
+              "type": "skill",
+              "text": "Rotating encryption keys and renewing certificates"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Design Resilient Architectures",
+      "weightPercent": 26,
+      "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain2.html",
+      "tasks": [
+        {
+          "id": "2.1",
+          "title": "Design scalable and loosely coupled architectures",
+          "bullets": [
+            {
+              "id": "2.1-K1",
+              "type": "knowledge",
+              "text": "API creation and management (for example, Amazon API Gateway, REST API)"
+            },
+            {
+              "id": "2.1-K2",
+              "type": "knowledge",
+              "text": "AWS managed services with appropriate use cases (for example, AWS Transfer Family, Amazon SQS, AWS Secrets Manager)"
+            },
+            {
+              "id": "2.1-K3",
+              "type": "knowledge",
+              "text": "Caching strategies"
+            },
+            {
+              "id": "2.1-K4",
+              "type": "knowledge",
+              "text": "Design principles for microservices (for example, stateless workloads compared with stateful workloads)"
+            },
+            {
+              "id": "2.1-K5",
+              "type": "knowledge",
+              "text": "Event-driven architectures"
+            },
+            {
+              "id": "2.1-K6",
+              "type": "knowledge",
+              "text": "Horizontal scaling and vertical scaling"
+            },
+            {
+              "id": "2.1-K7",
+              "type": "knowledge",
+              "text": "How to appropriately use edge accelerators (for example, content delivery network [CDN])"
+            },
+            {
+              "id": "2.1-K8",
+              "type": "knowledge",
+              "text": "How to migrate applications into containers"
+            },
+            {
+              "id": "2.1-K9",
+              "type": "knowledge",
+              "text": "Load balancing concepts (for example, Application Load Balancer [ALB])"
+            },
+            {
+              "id": "2.1-K10",
+              "type": "knowledge",
+              "text": "Multi-tier architectures"
+            },
+            {
+              "id": "2.1-K11",
+              "type": "knowledge",
+              "text": "Queuing and messaging concepts (for example, publish/subscribe)"
+            },
+            {
+              "id": "2.1-K12",
+              "type": "knowledge",
+              "text": "Serverless technologies and patterns (for example, AWS Fargate, AWS Lambda)"
+            },
+            {
+              "id": "2.1-K13",
+              "type": "knowledge",
+              "text": "Storage types with associated characteristics (for example, object, file, block)"
+            },
+            {
+              "id": "2.1-K14",
+              "type": "knowledge",
+              "text": "The orchestration of containers (for example, Amazon ECS, Amazon EKS)"
+            },
+            {
+              "id": "2.1-K15",
+              "type": "knowledge",
+              "text": "When to use read replicas"
+            },
+            {
+              "id": "2.1-K16",
+              "type": "knowledge",
+              "text": "Workflow orchestration (for example, AWS Step Functions)"
+            },
+            {
+              "id": "2.1-S1",
+              "type": "skill",
+              "text": "Designing event-driven, microservice, and/or multi-tier architectures based on requirements"
+            },
+            {
+              "id": "2.1-S2",
+              "type": "skill",
+              "text": "Determining scaling strategies for components used in an architecture design"
+            },
+            {
+              "id": "2.1-S3",
+              "type": "skill",
+              "text": "Determining the AWS services required to achieve loose coupling based on requirements"
+            },
+            {
+              "id": "2.1-S4",
+              "type": "skill",
+              "text": "Determining when to use containers"
+            },
+            {
+              "id": "2.1-S5",
+              "type": "skill",
+              "text": "Determining when to use serverless technologies and patterns"
+            },
+            {
+              "id": "2.1-S6",
+              "type": "skill",
+              "text": "Recommending appropriate compute, storage, networking, and database technologies based on requirements"
+            },
+            {
+              "id": "2.1-S7",
+              "type": "skill",
+              "text": "Using purpose-built AWS services for workloads"
+            }
+          ]
+        },
+        {
+          "id": "2.2",
+          "title": "Design highly available and/or fault-tolerant architectures",
+          "bullets": [
+            {
+              "id": "2.2-K1",
+              "type": "knowledge",
+              "text": "AWS global infrastructure (for example, Availability Zones, AWS Regions, Amazon Route 53)"
+            },
+            {
+              "id": "2.2-K2",
+              "type": "knowledge",
+              "text": "AWS Managed Services (AMS) with appropriate use cases (for example, Amazon Comprehend, Amazon Polly)"
+            },
+            {
+              "id": "2.2-K3",
+              "type": "knowledge",
+              "text": "Basic networking concepts (for example, route tables)"
+            },
+            {
+              "id": "2.2-K4",
+              "type": "knowledge",
+              "text": "Disaster recovery (DR) strategies (for example, backup and restore, pilot light, warm standby, active-active failover, recovery point objective [RPO], recovery time objective [RTO])"
+            },
+            {
+              "id": "2.2-K5",
+              "type": "knowledge",
+              "text": "Distributed design patterns"
+            },
+            {
+              "id": "2.2-K6",
+              "type": "knowledge",
+              "text": "Failover strategies"
+            },
+            {
+              "id": "2.2-K7",
+              "type": "knowledge",
+              "text": "Immutable infrastructure"
+            },
+            {
+              "id": "2.2-K8",
+              "type": "knowledge",
+              "text": "Load balancing concepts (for example, ALB)"
+            },
+            {
+              "id": "2.2-K9",
+              "type": "knowledge",
+              "text": "Proxy concepts (for example, Amazon RDS Proxy)"
+            },
+            {
+              "id": "2.2-K10",
+              "type": "knowledge",
+              "text": "Service quotas and throttling (for example, how to configure the service quotas for a workload in a standby environment)"
+            },
+            {
+              "id": "2.2-K11",
+              "type": "knowledge",
+              "text": "Storage options and characteristics (for example, durability, replication)"
+            },
+            {
+              "id": "2.2-K12",
+              "type": "knowledge",
+              "text": "Workload visibility (for example, AWS X-Ray)"
+            },
+            {
+              "id": "2.2-S1",
+              "type": "skill",
+              "text": "Determining automation strategies to ensure infrastructure integrity"
+            },
+            {
+              "id": "2.2-S2",
+              "type": "skill",
+              "text": "Determining the AWS services required to provide a highly available and/or fault-tolerant architecture across AWS Regions or Availability Zones"
+            },
+            {
+              "id": "2.2-S3",
+              "type": "skill",
+              "text": "Identifying metrics based on business requirements to deliver a highly available solution"
+            },
+            {
+              "id": "2.2-S4",
+              "type": "skill",
+              "text": "Implementing designs to mitigate single points of failure"
+            },
+            {
+              "id": "2.2-S5",
+              "type": "skill",
+              "text": "Implementing strategies to ensure the durability and availability of data (for example, backups)"
+            },
+            {
+              "id": "2.2-S6",
+              "type": "skill",
+              "text": "Selecting an appropriate DR strategy to meet business requirements"
+            },
+            {
+              "id": "2.2-S7",
+              "type": "skill",
+              "text": "Using AWS services that improve the reliability of legacy applications and applications not built for the cloud (for example, when application changes are not possible)"
+            },
+            {
+              "id": "2.2-S8",
+              "type": "skill",
+              "text": "Using purpose-built AWS services for workloads"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Design High-Performing Architectures",
+      "weightPercent": 24,
+      "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain3.html",
+      "tasks": [
+        {
+          "id": "3.1",
+          "title": "Determine high-performing and/or scalable storage solutions",
+          "bullets": [
+            {
+              "id": "3.1-K1",
+              "type": "knowledge",
+              "text": "Hybrid storage solutions to meet business requirements"
+            },
+            {
+              "id": "3.1-K2",
+              "type": "knowledge",
+              "text": "Storage services with appropriate use cases (for example, Amazon S3, Amazon EFS, Amazon EBS)"
+            },
+            {
+              "id": "3.1-K3",
+              "type": "knowledge",
+              "text": "Storage types with associated characteristics (for example, object, file, block)"
+            },
+            {
+              "id": "3.1-S1",
+              "type": "skill",
+              "text": "Determining storage services and configurations that meet performance demands"
+            },
+            {
+              "id": "3.1-S2",
+              "type": "skill",
+              "text": "Determining storage services that can scale to accommodate future needs"
+            }
+          ]
+        },
+        {
+          "id": "3.2",
+          "title": "Design high-performing and elastic compute solutions",
+          "bullets": [
+            {
+              "id": "3.2-K1",
+              "type": "knowledge",
+              "text": "AWS compute services with appropriate use cases (for example, AWS Batch, Amazon EMR, AWS Fargate)"
+            },
+            {
+              "id": "3.2-K2",
+              "type": "knowledge",
+              "text": "Distributed computing concepts supported by AWS global infrastructure and edge services"
+            },
+            {
+              "id": "3.2-K3",
+              "type": "knowledge",
+              "text": "Queuing and messaging concepts (for example, publish/subscribe)"
+            },
+            {
+              "id": "3.2-K4",
+              "type": "knowledge",
+              "text": "Scalability capabilities with appropriate use cases (for example, Amazon EC2 Auto Scaling, AWS Auto Scaling)"
+            },
+            {
+              "id": "3.2-K5",
+              "type": "knowledge",
+              "text": "Serverless technologies and patterns (for example, AWS Lambda, Fargate)"
+            },
+            {
+              "id": "3.2-K6",
+              "type": "knowledge",
+              "text": "The orchestration of containers (for example, Amazon ECS, Amazon EKS)"
+            },
+            {
+              "id": "3.2-S1",
+              "type": "skill",
+              "text": "Decoupling workloads so that components can scale independently"
+            },
+            {
+              "id": "3.2-S2",
+              "type": "skill",
+              "text": "Identifying metrics and conditions to perform scaling actions"
+            },
+            {
+              "id": "3.2-S3",
+              "type": "skill",
+              "text": "Selecting the appropriate compute options and features (for example, EC2 instance types) to meet business requirements"
+            },
+            {
+              "id": "3.2-S4",
+              "type": "skill",
+              "text": "Selecting the appropriate resource type and size (for example, the amount of Lambda memory) to meet business requirements"
+            }
+          ]
+        },
+        {
+          "id": "3.3",
+          "title": "Determine high-performing database solutions",
+          "bullets": [
+            {
+              "id": "3.3-K1",
+              "type": "knowledge",
+              "text": "AWS global infrastructure (for example, Availability Zones, AWS Regions)"
+            },
+            {
+              "id": "3.3-K2",
+              "type": "knowledge",
+              "text": "Caching strategies and services (for example, Amazon ElastiCache)"
+            },
+            {
+              "id": "3.3-K3",
+              "type": "knowledge",
+              "text": "Data access patterns (for example, read-intensive compared with write-intensive)"
+            },
+            {
+              "id": "3.3-K4",
+              "type": "knowledge",
+              "text": "Database capacity planning (for example, capacity units, instance types, Provisioned IOPS)"
+            },
+            {
+              "id": "3.3-K5",
+              "type": "knowledge",
+              "text": "Database connections and proxies"
+            },
+            {
+              "id": "3.3-K6",
+              "type": "knowledge",
+              "text": "Database engines with appropriate use cases (for example, heterogeneous migrations, homogeneous migrations)"
+            },
+            {
+              "id": "3.3-K7",
+              "type": "knowledge",
+              "text": "Database replication (for example, read replicas)"
+            },
+            {
+              "id": "3.3-K8",
+              "type": "knowledge",
+              "text": "Database types and services (for example, serverless, relational compared with non-relational, in-memory)"
+            },
+            {
+              "id": "3.3-S1",
+              "type": "skill",
+              "text": "Configuring read replicas to meet business requirements"
+            },
+            {
+              "id": "3.3-S2",
+              "type": "skill",
+              "text": "Designing database architectures"
+            },
+            {
+              "id": "3.3-S3",
+              "type": "skill",
+              "text": "Determining an appropriate database engine (for example, MySQL compared with PostgreSQL)"
+            },
+            {
+              "id": "3.3-S4",
+              "type": "skill",
+              "text": "Determining an appropriate database type (for example, Amazon Aurora, Amazon DynamoDB)"
+            },
+            {
+              "id": "3.3-S5",
+              "type": "skill",
+              "text": "Integrating caching to meet business requirements"
+            }
+          ]
+        },
+        {
+          "id": "3.4",
+          "title": "Determine high-performing and/or scalable network architectures",
+          "bullets": [
+            {
+              "id": "3.4-K1",
+              "type": "knowledge",
+              "text": "Edge networking services with appropriate use cases (for example, Amazon CloudFront, AWS Global Accelerator)"
+            },
+            {
+              "id": "3.4-K2",
+              "type": "knowledge",
+              "text": "How to design network architecture (for example, subnet tiers, routing, IP addressing)"
+            },
+            {
+              "id": "3.4-K3",
+              "type": "knowledge",
+              "text": "Load balancing concepts (for example, Application Load Balancer [ALB])"
+            },
+            {
+              "id": "3.4-K4",
+              "type": "knowledge",
+              "text": "Network connection options (for example, AWS VPN, AWS Direct Connect, AWS PrivateLink)"
+            },
+            {
+              "id": "3.4-S1",
+              "type": "skill",
+              "text": "Creating a network topology for various architectures (for example, global, hybrid, multi-tier)"
+            },
+            {
+              "id": "3.4-S2",
+              "type": "skill",
+              "text": "Determining network configurations that can scale to accommodate future needs"
+            },
+            {
+              "id": "3.4-S3",
+              "type": "skill",
+              "text": "Determining the appropriate placement of resources to meet business requirements"
+            },
+            {
+              "id": "3.4-S4",
+              "type": "skill",
+              "text": "Selecting the appropriate load balancing strategy"
+            }
+          ]
+        },
+        {
+          "id": "3.5",
+          "title": "Determine high-performing data ingestion and transformation solutions",
+          "bullets": [
+            {
+              "id": "3.5-K1",
+              "type": "knowledge",
+              "text": "Data analytics and visualization services with appropriate use cases (for example, Amazon Athena, AWS Lake Formation, Amazon Quick)"
+            },
+            {
+              "id": "3.5-K2",
+              "type": "knowledge",
+              "text": "Data ingestion patterns (for example, frequency)"
+            },
+            {
+              "id": "3.5-K3",
+              "type": "knowledge",
+              "text": "Data transfer services with appropriate use cases (for example, AWS DataSync, AWS Storage Gateway)"
+            },
+            {
+              "id": "3.5-K4",
+              "type": "knowledge",
+              "text": "Data transformation services with appropriate use cases (for example, AWS Glue)"
+            },
+            {
+              "id": "3.5-K5",
+              "type": "knowledge",
+              "text": "Secure access to ingestion access points"
+            },
+            {
+              "id": "3.5-K6",
+              "type": "knowledge",
+              "text": "Sizes and speeds needed to meet business requirements"
+            },
+            {
+              "id": "3.5-K7",
+              "type": "knowledge",
+              "text": "Streaming data services with appropriate use cases (for example, Amazon Kinesis)"
+            },
+            {
+              "id": "3.5-S1",
+              "type": "skill",
+              "text": "Building and securing data lakes"
+            },
+            {
+              "id": "3.5-S2",
+              "type": "skill",
+              "text": "Designing data streaming architectures"
+            },
+            {
+              "id": "3.5-S3",
+              "type": "skill",
+              "text": "Designing data transfer solutions"
+            },
+            {
+              "id": "3.5-S4",
+              "type": "skill",
+              "text": "Implementing visualization strategies"
+            },
+            {
+              "id": "3.5-S5",
+              "type": "skill",
+              "text": "Selecting appropriate compute options for data processing (for example, Amazon EMR)"
+            },
+            {
+              "id": "3.5-S6",
+              "type": "skill",
+              "text": "Selecting appropriate configurations for ingestion"
+            },
+            {
+              "id": "3.5-S7",
+              "type": "skill",
+              "text": "Transforming data between formats (for example, .csv to .parquet)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Design Cost-Optimized Architectures",
+      "weightPercent": 20,
+      "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03-domain4.html",
+      "tasks": [
+        {
+          "id": "4.1",
+          "title": "Design cost-optimized storage solutions",
+          "bullets": [
+            {
+              "id": "4.1-K1",
+              "type": "knowledge",
+              "text": "Access options (for example, an S3 bucket with Requester Pays object storage)"
+            },
+            {
+              "id": "4.1-K2",
+              "type": "knowledge",
+              "text": "AWS cost management service features (for example, cost allocation tags, multi-account billing)"
+            },
+            {
+              "id": "4.1-K3",
+              "type": "knowledge",
+              "text": "AWS cost management tools with appropriate use cases (for example, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            },
+            {
+              "id": "4.1-K4",
+              "type": "knowledge",
+              "text": "AWS storage services with appropriate use cases (for example, Amazon FSx, Amazon EFS, Amazon S3, Amazon EBS)"
+            },
+            {
+              "id": "4.1-K5",
+              "type": "knowledge",
+              "text": "Backup strategies"
+            },
+            {
+              "id": "4.1-K6",
+              "type": "knowledge",
+              "text": "Block storage options (for example, hard disk drive [HDD] volume types, solid state drive [SSD] volume types)"
+            },
+            {
+              "id": "4.1-K7",
+              "type": "knowledge",
+              "text": "Data lifecycles"
+            },
+            {
+              "id": "4.1-K8",
+              "type": "knowledge",
+              "text": "Hybrid storage options (for example, AWS DataSync, AWS Transfer Family, AWS Storage Gateway)"
+            },
+            {
+              "id": "4.1-K9",
+              "type": "knowledge",
+              "text": "Storage access patterns"
+            },
+            {
+              "id": "4.1-K10",
+              "type": "knowledge",
+              "text": "Storage tiering (for example, cold tiering for object storage)"
+            },
+            {
+              "id": "4.1-K11",
+              "type": "knowledge",
+              "text": "Storage types with associated characteristics (for example, object, file, block)"
+            },
+            {
+              "id": "4.1-S1",
+              "type": "skill",
+              "text": "Designing appropriate storage strategies (for example, batch uploads to Amazon S3 compared with individual uploads)"
+            },
+            {
+              "id": "4.1-S2",
+              "type": "skill",
+              "text": "Determining the correct storage size for a workload"
+            },
+            {
+              "id": "4.1-S3",
+              "type": "skill",
+              "text": "Determining the lowest cost method of transferring data for a workload to AWS storage"
+            },
+            {
+              "id": "4.1-S4",
+              "type": "skill",
+              "text": "Determining when storage auto scaling is required"
+            },
+            {
+              "id": "4.1-S5",
+              "type": "skill",
+              "text": "Managing S3 object lifecycles"
+            },
+            {
+              "id": "4.1-S6",
+              "type": "skill",
+              "text": "Selecting the appropriate backup and/or archival solution"
+            },
+            {
+              "id": "4.1-S7",
+              "type": "skill",
+              "text": "Selecting the appropriate service for data migration to storage services"
+            },
+            {
+              "id": "4.1-S8",
+              "type": "skill",
+              "text": "Selecting the appropriate storage tier"
+            },
+            {
+              "id": "4.1-S9",
+              "type": "skill",
+              "text": "Selecting the correct data lifecycle for storage"
+            },
+            {
+              "id": "4.1-S10",
+              "type": "skill",
+              "text": "Selecting the most cost-effective storage service for a workload"
+            }
+          ]
+        },
+        {
+          "id": "4.2",
+          "title": "Design cost-optimized compute solutions",
+          "bullets": [
+            {
+              "id": "4.2-K1",
+              "type": "knowledge",
+              "text": "AWS cost management service features (for example, cost allocation tags, multi-account billing)"
+            },
+            {
+              "id": "4.2-K2",
+              "type": "knowledge",
+              "text": "AWS cost management tools with appropriate use cases (for example, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            },
+            {
+              "id": "4.2-K3",
+              "type": "knowledge",
+              "text": "AWS global infrastructure (for example, Availability Zones, AWS Regions)"
+            },
+            {
+              "id": "4.2-K4",
+              "type": "knowledge",
+              "text": "AWS purchasing options (for example, Spot Instances, Reserved Instances, Savings Plans)"
+            },
+            {
+              "id": "4.2-K5",
+              "type": "knowledge",
+              "text": "Distributed compute strategies (for example, edge processing)"
+            },
+            {
+              "id": "4.2-K6",
+              "type": "knowledge",
+              "text": "Hybrid compute options (for example, AWS Outposts)"
+            },
+            {
+              "id": "4.2-K7",
+              "type": "knowledge",
+              "text": "Instance types, families, and sizes (for example, memory optimized, compute optimized, virtualization)"
+            },
+            {
+              "id": "4.2-K8",
+              "type": "knowledge",
+              "text": "Optimization of compute utilization (for example, containers, serverless computing, microservices)"
+            },
+            {
+              "id": "4.2-K9",
+              "type": "knowledge",
+              "text": "Scaling strategies (for example, auto scaling, hibernation)"
+            },
+            {
+              "id": "4.2-S1",
+              "type": "skill",
+              "text": "Determining an appropriate load balancing strategy (for example, Application Load Balancer [Layer 7] compared with Network Load Balancer [Layer 4] compared with Gateway Load Balancer)"
+            },
+            {
+              "id": "4.2-S2",
+              "type": "skill",
+              "text": "Determining appropriate scaling methods and strategies for elastic workloads (for example, horizontal compared with vertical, EC2 hibernation)"
+            },
+            {
+              "id": "4.2-S3",
+              "type": "skill",
+              "text": "Determining cost-effective AWS compute services with appropriate use cases (for example, AWS Lambda, Amazon EC2, AWS Fargate)"
+            },
+            {
+              "id": "4.2-S4",
+              "type": "skill",
+              "text": "Determining the required availability for different classes of workloads (for example, production workloads, non-production workloads)"
+            },
+            {
+              "id": "4.2-S5",
+              "type": "skill",
+              "text": "Selecting the appropriate instance family for a workload"
+            },
+            {
+              "id": "4.2-S6",
+              "type": "skill",
+              "text": "Selecting the appropriate instance size for a workload"
+            }
+          ]
+        },
+        {
+          "id": "4.3",
+          "title": "Design cost-optimized database solutions",
+          "bullets": [
+            {
+              "id": "4.3-K1",
+              "type": "knowledge",
+              "text": "AWS cost management service features (for example, cost allocation tags, multi-account billing)"
+            },
+            {
+              "id": "4.3-K2",
+              "type": "knowledge",
+              "text": "AWS cost management tools with appropriate use cases (for example, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            },
+            {
+              "id": "4.3-K3",
+              "type": "knowledge",
+              "text": "Caching strategies"
+            },
+            {
+              "id": "4.3-K4",
+              "type": "knowledge",
+              "text": "Data retention policies"
+            },
+            {
+              "id": "4.3-K5",
+              "type": "knowledge",
+              "text": "Database capacity planning (for example, capacity units)"
+            },
+            {
+              "id": "4.3-K6",
+              "type": "knowledge",
+              "text": "Database connections and proxies"
+            },
+            {
+              "id": "4.3-K7",
+              "type": "knowledge",
+              "text": "Database engines with appropriate use cases (for example, heterogeneous migrations, homogeneous migrations)"
+            },
+            {
+              "id": "4.3-K8",
+              "type": "knowledge",
+              "text": "Database replication (for example, read replicas)"
+            },
+            {
+              "id": "4.3-K9",
+              "type": "knowledge",
+              "text": "Database types and services (for example, relational compared with non-relational, Amazon Aurora, Amazon DynamoDB)"
+            },
+            {
+              "id": "4.3-S1",
+              "type": "skill",
+              "text": "Designing appropriate backup and retention policies (for example, snapshot frequency)"
+            },
+            {
+              "id": "4.3-S2",
+              "type": "skill",
+              "text": "Determining an appropriate database engine (for example, MySQL compared with PostgreSQL)"
+            },
+            {
+              "id": "4.3-S3",
+              "type": "skill",
+              "text": "Determining cost-effective AWS database services with appropriate use cases (for example, DynamoDB compared with Amazon RDS, serverless)"
+            },
+            {
+              "id": "4.3-S4",
+              "type": "skill",
+              "text": "Determining cost-effective AWS database types (for example, time series format, columnar format)"
+            },
+            {
+              "id": "4.3-S5",
+              "type": "skill",
+              "text": "Migrating database schemas and data to different locations and/or different database engines"
+            }
+          ]
+        },
+        {
+          "id": "4.4",
+          "title": "Design cost-optimized network architectures",
+          "bullets": [
+            {
+              "id": "4.4-K1",
+              "type": "knowledge",
+              "text": "AWS cost management service features (for example, cost allocation tags, multi-account billing)"
+            },
+            {
+              "id": "4.4-K2",
+              "type": "knowledge",
+              "text": "AWS cost management tools with appropriate use cases (for example, AWS Cost Explorer, AWS Budgets, AWS Cost and Usage Report)"
+            },
+            {
+              "id": "4.4-K3",
+              "type": "knowledge",
+              "text": "Load balancing concepts (for example, Application Load Balancer [ALB])"
+            },
+            {
+              "id": "4.4-K4",
+              "type": "knowledge",
+              "text": "NAT gateways (for example, NAT instance costs compared with NAT gateway costs)"
+            },
+            {
+              "id": "4.4-K5",
+              "type": "knowledge",
+              "text": "Network connectivity (for example, private lines, dedicated lines, VPNs)"
+            },
+            {
+              "id": "4.4-K6",
+              "type": "knowledge",
+              "text": "Network routing, topology, and peering (for example, AWS Transit Gateway, VPC peering)"
+            },
+            {
+              "id": "4.4-K7",
+              "type": "knowledge",
+              "text": "Network services with appropriate use cases (for example, DNS)"
+            },
+            {
+              "id": "4.4-S1",
+              "type": "skill",
+              "text": "Configuring appropriate NAT gateway types for a network (for example, a single shared NAT gateway compared with NAT gateways for each Availability Zone)"
+            },
+            {
+              "id": "4.4-S2",
+              "type": "skill",
+              "text": "Configuring appropriate network connections (for example, AWS Direct Connect compared with VPN compared with internet)"
+            },
+            {
+              "id": "4.4-S3",
+              "type": "skill",
+              "text": "Configuring appropriate network routes to minimize network transfer costs (for example, Region to Region, Availability Zone to Availability Zone, private to public, AWS Global Accelerator, VPC endpoints)"
+            },
+            {
+              "id": "4.4-S4",
+              "type": "skill",
+              "text": "Determining strategic needs for content delivery networks (CDNs) and edge caching"
+            },
+            {
+              "id": "4.4-S5",
+              "type": "skill",
+              "text": "Reviewing existing workloads for network optimizations"
+            },
+            {
+              "id": "4.4-S6",
+              "type": "skill",
+              "text": "Selecting an appropriate throttling strategy"
+            },
+            {
+              "id": "4.4-S7",
+              "type": "skill",
+              "text": "Selecting the appropriate bandwidth allocation for a network device (for example, a single VPN compared with multiple VPNs, Direct Connect speed)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

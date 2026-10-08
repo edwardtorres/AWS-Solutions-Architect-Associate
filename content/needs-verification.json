@@ -1,0 +1,34 @@
+[
+  {
+    "id": "nv-azure-regions-azs",
+    "building": "charter-hall",
+    "claim": "Azure regions and availability zones are the equivalent of AWS Regions and Availability Zones (AZ-900 crosswalk).",
+    "reason": "The Microsoft Learn AWS-to-Azure comparison pages do not list regions or availability zones. Source it from Microsoft Learn and AWS global infrastructure docs in Step 2, including where the analogy breaks.",
+    "status": "open",
+    "added": "2026-10-08"
+  },
+  {
+    "id": "nv-azure-shared-responsibility",
+    "building": "charter-hall",
+    "claim": "The Azure shared responsibility model corresponds to the AWS shared responsibility model (AZ-900 crosswalk).",
+    "reason": "Not covered by the Learn comparison pages. Source it from Microsoft Learn and AWS docs in Step 2.",
+    "status": "open",
+    "added": "2026-10-08"
+  },
+  {
+    "id": "nv-azure-storage-redundancy",
+    "building": "durable-dock",
+    "claim": "Azure storage redundancy options (LRS, ZRS, GRS) correspond to S3 and EBS durability and replication choices (AZ-900 crosswalk).",
+    "reason": "The Learn storage comparison page covers services and tiers, not redundancy options. Source it from Microsoft Learn and AWS docs in Step 2.",
+    "status": "open",
+    "added": "2026-10-08"
+  },
+  {
+    "id": "nv-quick-naming",
+    "building": "data-lake-reservoir",
+    "claim": "Amazon Quick (named in the exam guide, task 3.5) is the product the Learn comparison page calls Amazon QuickSight.",
+    "reason": "The two allowed sources use different names. Confirm the current product name in AWS docs before writing Step 2 notes; keep the guide's wording in questions.",
+    "status": "open",
+    "added": "2026-10-08"
+  }
+]

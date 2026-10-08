@@ -1,0 +1,372 @@
+{
+  "retrievedAt": "2026-10-08",
+  "examCode": "SAA-C03",
+  "inScope": {
+    "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-03-in-scope-services.html",
+    "intro": "The following list contains AWS services and features that are in scope for the exam. This list is non-exhaustive and is subject to change. AWS offerings appear in categories that align with the offerings' primary functions:",
+    "categories": [
+      {
+        "name": "Analytics",
+        "services": [
+          "Amazon Athena",
+          "AWS Data Exchange",
+          "Amazon Data Firehose",
+          "Amazon EMR",
+          "AWS Glue",
+          "Amazon Kinesis",
+          "AWS Lake Formation",
+          "Amazon Managed Streaming for Apache Kafka (Amazon MSK)",
+          "Amazon OpenSearch Service",
+          "Amazon Quick",
+          "Amazon Redshift"
+        ]
+      },
+      {
+        "name": "Application Integration",
+        "services": [
+          "Amazon AppFlow",
+          "Amazon EventBridge",
+          "Amazon MQ",
+          "Amazon SNS",
+          "Amazon SQS",
+          "AWS Step Functions"
+        ]
+      },
+      {
+        "name": "AWS Cost Management",
+        "services": [
+          "AWS Budgets",
+          "AWS Cost and Usage Report",
+          "AWS Cost Explorer",
+          "Savings Plans"
+        ]
+      },
+      {
+        "name": "Compute",
+        "services": [
+          "AWS Batch",
+          "Amazon EC2",
+          "Amazon EC2 Auto Scaling",
+          "AWS Elastic Beanstalk",
+          "AWS Outposts",
+          "AWS Serverless Application Repository",
+          "VMware Cloud on AWS",
+          "AWS Wavelength"
+        ]
+      },
+      {
+        "name": "Containers",
+        "services": [
+          "Amazon ECR",
+          "Amazon ECS",
+          "Amazon ECS Anywhere",
+          "Amazon EKS",
+          "Amazon EKS Anywhere",
+          "Amazon EKS Distro"
+        ]
+      },
+      {
+        "name": "Database",
+        "services": [
+          "Amazon Aurora",
+          "Amazon Aurora Serverless",
+          "Amazon DocumentDB",
+          "Amazon DynamoDB",
+          "Amazon ElastiCache",
+          "Amazon Keyspaces",
+          "Amazon Neptune",
+          "Amazon RDS",
+          "Amazon Redshift"
+        ]
+      },
+      {
+        "name": "Developer Tools",
+        "services": [
+          "AWS X-Ray"
+        ]
+      },
+      {
+        "name": "Front-End Web and Mobile",
+        "services": [
+          "AWS Amplify",
+          "Amazon API Gateway",
+          "AWS Device Farm"
+        ]
+      },
+      {
+        "name": "Machine Learning",
+        "services": [
+          "Amazon Comprehend",
+          "Amazon Lex",
+          "Amazon Polly",
+          "Amazon Rekognition",
+          "Amazon SageMaker AI",
+          "Amazon Textract",
+          "Amazon Transcribe",
+          "Amazon Translate"
+        ]
+      },
+      {
+        "name": "Management and Governance",
+        "services": [
+          "AWS Auto Scaling",
+          "AWS CLI",
+          "AWS CloudFormation",
+          "AWS CloudTrail",
+          "Amazon CloudWatch",
+          "AWS Compute Optimizer",
+          "AWS Config",
+          "AWS Control Tower",
+          "AWS Health Dashboard",
+          "AWS License Manager",
+          "Amazon Managed Grafana",
+          "Amazon Managed Service for Prometheus",
+          "AWS Management Console",
+          "AWS Organizations",
+          "AWS Service Catalog",
+          "AWS Systems Manager",
+          "AWS Trusted Advisor",
+          "AWS Well-Architected Tool"
+        ]
+      },
+      {
+        "name": "Media Services",
+        "services": [
+          "Amazon Elastic Transcoder",
+          "Amazon Kinesis Video Streams"
+        ]
+      },
+      {
+        "name": "Migration and Transfer",
+        "services": [
+          "AWS Application Migration Service",
+          "AWS DataSync",
+          "AWS DMS",
+          "AWS Snow Family",
+          "AWS Transfer Family"
+        ]
+      },
+      {
+        "name": "Networking and Content Delivery",
+        "services": [
+          "AWS Client VPN",
+          "Amazon CloudFront",
+          "AWS Direct Connect",
+          "Elastic Load Balancing (ELB)",
+          "AWS Global Accelerator",
+          "AWS PrivateLink",
+          "Amazon Route 53",
+          "AWS Site-to-Site VPN",
+          "AWS Transit Gateway",
+          "Amazon VPC"
+        ]
+      },
+      {
+        "name": "Security, Identity, and Compliance",
+        "services": [
+          "AWS Artifact",
+          "AWS Certificate Manager (ACM)",
+          "AWS CloudHSM",
+          "Amazon Cognito",
+          "Amazon Detective",
+          "AWS Directory Service",
+          "AWS Firewall Manager",
+          "Amazon GuardDuty",
+          "AWS IAM Identity Center",
+          "Amazon Inspector",
+          "AWS KMS",
+          "Amazon Macie",
+          "AWS Network Firewall",
+          "AWS Resource Access Manager (AWS RAM)",
+          "AWS Secrets Manager",
+          "AWS Security Hub",
+          "AWS Shield",
+          "AWS WAF",
+          "IAM"
+        ]
+      },
+      {
+        "name": "Serverless",
+        "services": [
+          "AWS Fargate",
+          "AWS Lambda"
+        ]
+      },
+      {
+        "name": "Storage",
+        "services": [
+          "AWS Backup",
+          "Amazon EBS",
+          "Amazon EFS",
+          "Amazon FSx (for all types)",
+          "Amazon S3",
+          "Amazon S3 Glacier",
+          "AWS Storage Gateway"
+        ]
+      }
+    ]
+  },
+  "outOfScope": {
+    "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-03-out-of-scope-services.html",
+    "intro": "The following list contains AWS services and features that are out of scope for the exam. This list is non-exhaustive and is subject to change. AWS offerings that are entirely unrelated to the target job roles for the exam are excluded from this list:",
+    "categories": [
+      {
+        "name": "Application Integration",
+        "services": [
+          "Amazon Managed Workflows for Apache Airflow (Amazon MWAA)"
+        ]
+      },
+      {
+        "name": "AR and VR",
+        "services": [
+          "Amazon Sumerian"
+        ]
+      },
+      {
+        "name": "Blockchain",
+        "services": [
+          "Amazon Managed Blockchain"
+        ]
+      },
+      {
+        "name": "Compute",
+        "services": [
+          "Amazon Lightsail"
+        ]
+      },
+      {
+        "name": "Database",
+        "services": [
+          "Amazon RDS on VMware"
+        ]
+      },
+      {
+        "name": "Developer Tools",
+        "services": [
+          "AWS CDK",
+          "AWS CloudShell",
+          "AWS CodeArtifact",
+          "AWS CodeBuild",
+          "AWS CodeCommit",
+          "AWS CodeDeploy",
+          "Amazon Corretto",
+          "AWS Fault Injection Simulator (AWS FIS)",
+          "AWS Tools and SDKs"
+        ]
+      },
+      {
+        "name": "Front-End Web and Mobile",
+        "services": [
+          "Amazon Location Service"
+        ]
+      },
+      {
+        "name": "Game Tech",
+        "services": [
+          "Amazon GameLift"
+        ]
+      },
+      {
+        "name": "Internet of Things",
+        "services": [
+          "All services"
+        ]
+      },
+      {
+        "name": "Machine Learning",
+        "services": [
+          "Apache MXNet on AWS",
+          "AWS DeepComposer",
+          "AWS Deep Learning AMIs (DLAMI)",
+          "AWS Deep Learning Containers",
+          "Amazon DevOps Guru",
+          "Amazon Elastic Inference",
+          "Amazon HealthLake",
+          "AWS Inferentia",
+          "Amazon Personalize",
+          "PyTorch on AWS",
+          "TensorFlow on AWS"
+        ]
+      },
+      {
+        "name": "Management and Governance",
+        "services": [
+          "AWS Console Mobile Application",
+          "AWS Distro for OpenTelemetry"
+        ]
+      },
+      {
+        "name": "Media Services",
+        "services": [
+          "AWS Elemental Appliances and Software",
+          "AWS Elemental MediaConnect",
+          "AWS Elemental MediaConvert",
+          "AWS Elemental MediaLive",
+          "AWS Elemental MediaPackage",
+          "AWS Elemental MediaTailor",
+          "Amazon Interactive Video Service (Amazon IVS)"
+        ]
+      },
+      {
+        "name": "Migration and Transfer",
+        "services": [
+          "Migration Evaluator"
+        ]
+      },
+      {
+        "name": "Networking and Content Delivery",
+        "services": [
+          "AWS Cloud Map"
+        ]
+      },
+      {
+        "name": "Quantum Technologies",
+        "services": [
+          "Amazon Braket"
+        ]
+      },
+      {
+        "name": "Satellite",
+        "services": [
+          "AWS Ground Station"
+        ]
+      }
+    ]
+  },
+  "technologiesAndConcepts": {
+    "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-technologies-concepts.html",
+    "intro": "The following list contains technologies and concepts that might appear on the exam. This list is non-exhaustive and is subject to change. The order and placement of the items in this list is no indication of their relative weight or importance on the exam:",
+    "items": [
+      "Compute",
+      "Cost management",
+      "Database",
+      "Disaster recovery",
+      "High performance",
+      "Management and governance",
+      "Microservices and component delivery",
+      "Migration and data transfer",
+      "Networking, connectivity, and content delivery",
+      "Resiliency",
+      "Security",
+      "Serverless and event-driven design principles",
+      "Storage"
+    ]
+  },
+  "shortServiceNames": {
+    "sourceUrl": "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-service-mentions.html",
+    "paragraphs": [
+      "AWS Certification is reducing the reading load on this exam by using official short names for well-known AWS service names that contain abbreviations or parenthetical information. For example, Amazon Simple Notification Service (Amazon SNS) appears on the exam as Amazon SNS.",
+      "Note: Not every abbreviation is fully spelled out on the exam or available in the Help feature. The official full name for some AWS services includes an abbreviation that is never expanded (for example, Amazon API Gateway, Amazon EMR). The exam also might contain other abbreviations that the target audience is expected to know."
+    ],
+    "bullets": [
+      "The Help feature in the exam (available for every question) contains the list of the short AWS service names and their corresponding full names.",
+      "You can consult AWS Service Names on the AWS Certification website for the list of services that appear as their short names on the exam. Any services that are on the list but that are out of scope for the exam will not appear on the exam."
+    ]
+  },
+  "sha256": {
+    "inScope": "ab70d8bb0340cf47dd5fcd79864d86eb28058ba118bbb74702991559981bf19c",
+    "outOfScope": "5adbef5c11259c01188083563d39ccd9d557bae3ba195c2e9d15ccad5e15aa02",
+    "technologies": "beac16921210fbc0c115ba105f82e6157139e3b2418df040385b7a4c40e67dfd",
+    "mentions": "b49e71a3a77568a6fdaf1f2de542d451913b169d742edc20e72842a85b90c943"
+  }
+}
