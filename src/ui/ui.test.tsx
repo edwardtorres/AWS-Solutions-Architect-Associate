@@ -59,9 +59,10 @@ describe('CityMap', () => {
     );
     act(() => {
       store.setBuildingState('safe-harbor-account', 'commissioned');
+      store.setBuildingState('pillar-plaza', 'commissioned');
     });
-    expect(document.querySelector('[data-building="identity-keep"]')).toHaveAttribute('data-state', 'surveyed');
-    expect(document.body.textContent).toMatch(/1\s*of 66 buildings commissioned/);
+    expect(document.querySelector('[data-building="ledger-office"]')).toHaveAttribute('data-state', 'surveyed');
+    expect(document.body.textContent).toMatch(/2\s*of 66 buildings commissioned/);
   });
 
   it('opens a building by keyboard (Enter) through the hash route', async () => {

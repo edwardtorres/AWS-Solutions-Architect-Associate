@@ -123,7 +123,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '1.1',
     bullets: b('1.1', 'K1 S3 S4 S5'),
     families: ['security-identity', 'management-governance'],
-    services: ['AWS Organizations', 'AWS Control Tower', 'IAM'],
+    services: ['AWS Organizations', 'AWS Control Tower', 'IAM', 'AWS Resource Access Manager (AWS RAM)'],
     azure: [
       az('hub', 'Azure management groups', 'AWS Organizations'),
       az('hub', 'Azure Lighthouse / Azure landing zone', 'AWS Control Tower'),
@@ -227,7 +227,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '1.3',
     bullets: b('1.3', 'K2 K3 S5'),
     families: ['security-identity', 'storage'],
-    services: ['AWS Backup', 'Amazon S3'],
+    services: ['AWS Backup', 'Amazon S3', 'Amazon Macie'],
     azure: [az('storage', 'Azure Backup', 'Backup')],
   },
   {
@@ -393,8 +393,8 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     district: 'harbor',
     task: '2.2',
     bullets: b('2.2', 'K10 K12 S3'),
-    families: ['management-governance'],
-    services: ['AWS X-Ray', 'Amazon CloudWatch'],
+    families: ['management-governance', 'application-integration'],
+    services: ['AWS X-Ray', 'Amazon CloudWatch', 'AWS Trusted Advisor', 'Amazon API Gateway'],
     azure: [az('hub', 'Azure Monitor', 'Amazon CloudWatch and AWS X-Ray')],
   },
   {
@@ -409,6 +409,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     azure: [
       az('hub', 'Azure Resource Manager / Bicep', 'AWS CloudFormation'),
       az('hub', 'Azure Automation / Azure Update Manager', 'AWS Systems Manager'),
+      az('compute', 'Azure Arc', 'AWS Systems Manager for non-AWS resources'),
     ],
   },
   {
@@ -429,8 +430,8 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     district: 'harbor',
     task: '2.2',
     bullets: b('2.2', 'K2 S7 S8'),
-    families: ['networking-content-delivery'],
-    services: ['Amazon Comprehend', 'Amazon Polly', 'Elastic Load Balancing (ELB)'],
+    families: ['networking-content-delivery', 'database'],
+    services: ['Amazon Comprehend', 'Amazon Polly', 'Elastic Load Balancing (ELB)', 'Amazon Route 53', 'Amazon RDS'],
   },
 
   // ───────────────────────── Express Quarter (Domain 3: High-Performing) ─────────────────────────
@@ -476,8 +477,8 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     district: 'express',
     task: '3.2',
     bullets: b('3.2', 'K2 K4 S2'),
-    families: ['compute', 'management-governance'],
-    services: ['Amazon EC2 Auto Scaling', 'AWS Auto Scaling', 'Amazon CloudWatch'],
+    families: ['compute', 'management-governance', 'networking-content-delivery'],
+    services: ['Amazon EC2 Auto Scaling', 'AWS Auto Scaling', 'Amazon CloudWatch', 'Amazon CloudFront'],
     azure: [
       az('compute', 'Azure Virtual Machine Scale Sets / App Service autoscaling', 'AWS Auto Scaling'),
       az('hub', 'Azure Monitor', 'Amazon CloudWatch and AWS X-Ray'),
@@ -518,7 +519,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '3.3',
     bullets: b('3.3', 'K6 K8 S3 S4'),
     families: ['database', 'migration'],
-    services: ['Amazon Aurora', 'Amazon DynamoDB', 'Amazon RDS', 'AWS DMS'],
+    services: ['Amazon Aurora', 'Amazon DynamoDB', 'Amazon RDS', 'AWS DMS', 'Amazon DocumentDB', 'Amazon Neptune', 'Amazon Keyspaces'],
     portfolio: [
       { tech: 'dynamodb', note: 'Your counter uses DynamoDB; the SAA question is DynamoDB vs Aurora vs RDS for an access pattern.' },
     ],
@@ -674,8 +675,8 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     district: 'express',
     task: '3.5',
     bullets: b('3.5', 'K5 S6'),
-    families: ['analytics', 'migration', 'security-identity'],
-    services: ['Amazon Kinesis', 'AWS Transfer Family'],
+    families: ['analytics', 'migration', 'security-identity', 'networking-content-delivery'],
+    services: ['Amazon Kinesis', 'Amazon Data Firehose', 'Amazon Managed Streaming for Apache Kafka (Amazon MSK)', 'AWS Transfer Family', 'AWS PrivateLink'],
   },
 
   // ───────────────────────── The Treasury (Domain 4: Cost-Optimized) ─────────────────────────
@@ -687,7 +688,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '4.1',
     bullets: b('4.1', 'K1 K2 K3'),
     families: ['management-governance', 'storage'],
-    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report', 'Amazon S3'],
+    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report', 'Amazon S3', 'AWS Organizations'],
     azure: [
       az('hub', 'Microsoft Cost Management', 'AWS Billing and Cost Management / AWS Cost Explorer'),
       az('hub', 'Cost details APIs / Cost Management + Billing', 'Cost and Usage Reports'),
@@ -747,7 +748,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     families: ['storage'],
     services: ['Amazon S3', 'Amazon S3 Glacier'],
     portfolio: [
-      { tech: 's3-static-hosting', note: 'Your site bucket is S3; the SAA question is which storage class and lifecycle rule fit a given access pattern.' },
+      { tech: 's3-static-hosting', note: 'Your site bucket is S3; the SAA question is which storage class and lifecycle rule fit a given access pattern, such as access logs or old object versions.' },
     ],
     azure: [
       az('storage', 'Storage cool tier', 'S3 Infrequent Access (IA)'),
@@ -776,7 +777,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '4.2',
     bullets: b('4.2', 'K1 K2 K4'),
     families: ['compute', 'management-governance'],
-    services: ['Savings Plans', 'Amazon EC2', 'AWS Cost Explorer', 'AWS Budgets'],
+    services: ['Savings Plans', 'Amazon EC2', 'AWS Cost Explorer', 'AWS Budgets', 'AWS Organizations'],
     azure: [az('hub', 'Microsoft Cost Management', 'AWS Cost Explorer')],
   },
   {
@@ -817,12 +818,9 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     district: 'treasury',
     task: '4.2',
     bullets: b('4.2', 'K3 K5 K6 S4'),
-    families: ['compute'],
-    services: ['AWS Outposts', 'Amazon EC2'],
-    azure: [
-      az('compute', 'Azure Local (formerly Azure Stack HCI)', 'AWS Outposts (rack and servers)'),
-      az('compute', 'Azure Arc', 'AWS Systems Manager for non-AWS resources'),
-    ],
+    families: ['compute', 'networking-content-delivery'],
+    services: ['AWS Outposts', 'AWS Wavelength', 'Amazon EC2', 'Amazon CloudFront'],
+    azure: [az('compute', 'Azure Local (formerly Azure Stack HCI)', 'AWS Outposts (rack and servers)')],
   },
   {
     id: 'db-cost-desk',
@@ -832,7 +830,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '4.3',
     bullets: b('4.3', 'K1 K2'),
     families: ['management-governance'],
-    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report'],
+    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report', 'AWS Organizations'],
     azure: [az('hub', 'Microsoft Cost Management', 'AWS Cost Explorer')],
   },
   {
@@ -855,7 +853,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
   {
     id: 'engine-exchange',
     name: 'Engine Exchange',
-    skill: 'Database engine choice and migrating schemas and data across engines',
+    skill: 'Database engine choice and migrating schemas and data across engines (DMS and schema conversion)',
     district: 'treasury',
     task: '4.3',
     bullets: b('4.3', 'K7 S2 S5'),
@@ -896,7 +894,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     task: '4.4',
     bullets: b('4.4', 'K1 K2 S5'),
     families: ['management-governance', 'networking-content-delivery'],
-    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report', 'AWS Trusted Advisor'],
+    services: ['AWS Cost Explorer', 'AWS Budgets', 'AWS Cost and Usage Report', 'AWS Trusted Advisor', 'AWS Organizations'],
     azure: [
       az('hub', 'Microsoft Cost Management', 'AWS Cost Explorer'),
       az('hub', 'Azure Advisor', 'AWS Trusted Advisor'),
@@ -912,7 +910,7 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     families: ['networking-content-delivery', 'application-integration'],
     services: ['Elastic Load Balancing (ELB)', 'Amazon API Gateway'],
     portfolio: [
-      { tech: 'api-gateway', note: 'Your counter sits behind API Gateway; the SAA question is how throttling and usage plans protect cost.' },
+      { tech: 'api-gateway', note: 'Your counter sits behind API Gateway; the SAA question is how throttling (and REST API usage plans) protect a backend, and what else limits spend.' },
     ],
     azure: [
       az('networking', 'Application Gateway', 'Application Load Balancer'),

@@ -202,7 +202,7 @@ describe('derived building state', () => {
 
   it('surveys a building once all its prerequisites are commissioned', () => {
     const save = freshSave(clock);
-    save.buildings['safe-harbor-account'] = { state: 'commissioned', changedAt: clock() };
+    for (const id of ['safe-harbor-account', 'pillar-plaza', 'charter-hall']) save.buildings[id] = { state: 'commissioned', changedAt: clock() };
     expect(state('identity-keep', save)).toBe('surveyed');
     expect(state('watchtower', save)).toBe('planned');
   });
@@ -224,6 +224,7 @@ describe('derived building state', () => {
   it('does not count under-construction prerequisites as done', () => {
     const save = freshSave(clock);
     save.buildings['safe-harbor-account'] = { state: 'under_construction', changedAt: clock() };
-    expect(state('identity-keep', save)).toBe('planned');
+    save.buildings['pillar-plaza'] = { state: 'commissioned', changedAt: clock() };
+    expect(state('ledger-office', save)).toBe('planned');
   });
 });
