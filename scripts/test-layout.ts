@@ -6,6 +6,7 @@
  */
 import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, statSync } from 'node:fs';
+import { BUILDINGS } from '../src/data/buildings.ts';
 import { chromium, type Browser, type BrowserContext, type Page } from '@playwright/test';
 
 const PORT = 4173;
@@ -117,7 +118,7 @@ async function phone(browser: Browser): Promise<void> {
 
   const o = await overflow(page);
   check(o.doc <= o.win && o.body <= o.win, '390px map has no page-level sideways scroll', JSON.stringify(o));
-  check((await page.locator('.building').count()) === 66, '66 buildings render');
+  check((await page.locator('.building').count()) === BUILDINGS.length, `${BUILDINGS.length} buildings render`);
   check((await page.locator('section[data-district]').count()) === 5, '5 district sections (square + 4)');
   const states = await page.$$eval('.building', (els) => new Set(els.map((e) => e.getAttribute('data-state'))).size);
   check(states === 4, 'all four building states are visible', `saw ${states}`);

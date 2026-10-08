@@ -100,11 +100,12 @@ describe('check:content (offline)', () => {
     expect(runOfflineChecks(i).join('\n')).toMatch(/not reachable/);
   });
 
-  it('fails on a fifth Foundation', () => {
+  it('fails on a sixth Foundation', () => {
     const i = base();
     const f = i.buildings.find((b) => b.task === null);
     (i.buildings as unknown[]).push({ ...f, id: 'extra-foundation', name: 'Extra' });
-    expect(runOfflineChecks(i).join('\n')).toMatch(/limit is 4/);
+    (i.buildings as unknown[]).push({ ...f, id: 'extra-foundation-2', name: 'Extra 2' });
+    expect(runOfflineChecks(i).join('\n')).toMatch(/limit is 5/);
   });
 
   it('fails on a banned term', () => {

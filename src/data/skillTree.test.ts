@@ -54,9 +54,9 @@ describe('bullet mapping', () => {
 });
 
 describe('foundations', () => {
-  it('has at most 4 foundations, with no bullets, all start buildings, each explained', () => {
+  it('has at most 5 foundations, with no bullets, all start buildings, each explained', () => {
     expect(foundations.length).toBeGreaterThan(0);
-    expect(foundations.length).toBeLessThanOrEqual(4);
+    expect(foundations.length).toBeLessThanOrEqual(5);
     for (const f of foundations) {
       expect(f.bullets).toEqual([]);
       expect(f.start).toBe(true);
@@ -172,10 +172,12 @@ describe('services and families', () => {
       }
     }
   });
-  it('has buildings under every family and each family in at least two districts', () => {
+  it('has buildings under every family; most families span at least two districts', () => {
     for (const f of FAMILIES) {
       const ds = new Set(BUILDINGS.filter((b) => b.families.includes(f.id) && b.district !== 'square').map((b) => b.district));
-      expect(ds.size, f.name).toBeGreaterThanOrEqual(2);
+      expect(ds.size, f.name).toBeGreaterThanOrEqual(1);
+      // Machine Learning appears in one outline bullet (2.2-K2), so it is the only single-district family.
+      if (f.id !== 'machine-learning') expect(ds.size, f.name).toBeGreaterThanOrEqual(2);
     }
   });
   it('computes Atlas links across districts for repeated services', () => {

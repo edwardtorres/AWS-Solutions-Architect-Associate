@@ -7,7 +7,8 @@ export type FamilyId =
   | 'application-integration'
   | 'analytics'
   | 'management-governance'
-  | 'migration';
+  | 'migration'
+  | 'machine-learning';
 
 /** The four exam domains are districts; foundations live in the Founders' Square. */
 export type DistrictId = 'citadel' | 'harbor' | 'express' | 'treasury' | 'square';

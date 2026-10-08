@@ -114,7 +114,7 @@ export function checkStructure(input: ContentInput): string[] {
 
   const taskIds = new Set(outline.domains.flatMap((d) => d.tasks.map((t) => t.id)));
   const foundations = buildings.filter((b) => b.task === null);
-  if (foundations.length > 4) p.push(`${foundations.length} Foundation buildings; the limit is 4`);
+  if (foundations.length > EXPECTED.maxFoundations) p.push(`${foundations.length} Foundation buildings; the limit is ${EXPECTED.maxFoundations}`);
   for (const b of buildings) {
     if (b.task === null) {
       if (b.bullets.length > 0) p.push(`Foundation ${b.id} must not map bullets`);

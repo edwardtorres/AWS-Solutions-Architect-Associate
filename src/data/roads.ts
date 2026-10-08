@@ -9,6 +9,9 @@ const r = (from: string, to: string, reason: string): Road => ({ from, to, reaso
  */
 export const ROADS: readonly Road[] = [
   // Foundations
+  r('lookout-tower', 'tide-gauges', 'Quotas, tracing and availability metrics assume you already know metrics, logs and alarms.'),
+  r('lookout-tower', 'compliance-registry', 'Compliance evidence relies on CloudTrail audit logs and Config configuration history.'),
+  r('lookout-tower', 'watchtower', 'GuardDuty and similar services analyze the CloudTrail and network logs that the primer introduces.'),
   r('pillar-plaza', 'charter-hall', 'Shared responsibility and global infrastructure frame every pillar you will design against.'),
   r('pillar-plaza', 'blueprint-hall', 'Architecture design principles are the Well-Architected pillars applied to a system.'),
   r('town-charter', 'blueprint-hall', 'Designing from requirements means spotting the scenario keywords that pick between valid designs.'),
@@ -24,7 +27,7 @@ export const ROADS: readonly Road[] = [
   r('identity-keep', 'federation-bridge', 'Federated users still land in IAM roles, so roles and policies come first.'),
   r('identity-keep', 'embassy-row', 'Cross-account roles, SCPs and resource policies are extensions of IAM policy evaluation.'),
   r('identity-keep', 'key-vault', 'Key policies work with IAM policies and decide who can use a KMS key.'),
-  r('federation-bridge', 'watchtower', 'Cognito and IAM Identity Center are the identity pieces that application defense builds on.'),
+  r('federation-bridge', 'wardens-lodge', 'Application sign-in and secrets build on federated identity, IAM Identity Center and roles.'),
   r('key-vault', 'compliance-registry', 'Encryption and key policies are core evidence for compliance requirements.'),
   r('key-vault', 'certificate-office', 'Key rotation and certificate renewal both sit on the key-management concepts covered first.'),
   r('grid-planning-office', 'gatehouse', 'Security groups, NACLs and NAT gateways only make sense inside a designed VPC with subnets and routes.'),
@@ -35,12 +38,13 @@ export const ROADS: readonly Road[] = [
   r('freight-depot', 'archive-annex', 'Backup, replication and retention policies are applied to the storage services you must already know.'),
 
   // Harbor & Levees
-  r('blueprint-hall', 'message-quay', 'Loose coupling is how event-driven and multi-tier designs avoid tight dependencies.'),
+  r('purpose-built-workshop', 'message-quay', 'Queues, topics and event buses are the managed integration services surveyed there.'),
   r('blueprint-hall', 'serverless-mill', 'Knowing stateless design explains when API Gateway plus Lambda fits.'),
   r('blueprint-hall', 'container-dock', 'Microservice design principles motivate moving applications into containers.'),
   r('blueprint-hall', 'scaling-floodgate', 'Scaling and load balancing decisions depend on the tiers and statelessness of the design.'),
   r('blueprint-hall', 'cache-edge-breakwater', 'Cache placement depends on where the tiers and hot data are in the architecture.'),
   r('blueprint-hall', 'purpose-built-workshop', 'Choosing purpose-built services starts from the requirements of each tier.'),
+  r('blueprint-hall', 'cargo-hall', 'Choosing a storage type starts from the access needs of each tier.'),
   r('grid-planning-office', 'island-charts', 'Multi-AZ design needs subnets per AZ and route tables to reason about failover.'),
   r('island-charts', 'single-point-watch', 'Finding single points of failure starts with spreading components across AZs and Regions.'),
   r('database-registry', 'single-point-watch', 'RDS Proxy and Multi-AZ failover are database features used to remove single points of failure.'),
@@ -52,7 +56,7 @@ export const ROADS: readonly Road[] = [
   r('single-point-watch', 'tide-gauges', 'Availability metrics and tracing are chosen once you know which failures you are guarding against.'),
   r('scaling-floodgate', 'rebuild-yard', 'Immutable infrastructure is replaced through Auto Scaling groups and load balancers.'),
   r('single-point-watch', 'legacy-wharf', 'Legacy apps gain reliability from load balancers and proxies placed in front of them.'),
-  r('purpose-built-workshop', 'freight-depot', 'Performance-driven storage choice builds on the object, file and block distinctions.'),
+  r('cargo-hall', 'freight-depot', 'Performance-driven storage choice builds on the object, file and block distinctions.'),
 
   // Express Quarter
   r('serverless-mill', 'engine-works', 'Compute selection compares serverless against the other compute options.'),

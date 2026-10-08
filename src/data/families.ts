@@ -15,6 +15,7 @@ export const FAMILIES: readonly FamilyInfo[] = [
   { id: 'analytics', name: 'Analytics' },
   { id: 'management-governance', name: 'Management & Governance' },
   { id: 'migration', name: 'Migration' },
+  { id: 'machine-learning', name: 'Machine Learning' },
 ];
 
 export const FAMILY_NAME: Record<FamilyId, string> = Object.fromEntries(FAMILIES.map((f) => [f.id, f.name])) as Record<
@@ -24,9 +25,9 @@ export const FAMILY_NAME: Record<FamilyId, string> = Object.fromEntries(FAMILIES
 
 /**
  * Maps the exam guide's in-scope service categories onto the nine study families.
- * `null` = no family (Machine Learning, Media Services). Documented deviation: the
- * nine families have no home for Cost Management, Containers, Serverless or
- * Developer Tools, so they fold into the closest family.
+ * `null` = no family (Media Services). Documented deviation: the study families have
+ * no home for Cost Management, Containers, Serverless or Developer Tools, so they fold
+ * into the closest family. Machine Learning became its own family in Step 2.
  */
 export const CATEGORY_TO_FAMILY: Record<string, FamilyId | null> = {
   Analytics: 'analytics',
@@ -37,7 +38,7 @@ export const CATEGORY_TO_FAMILY: Record<string, FamilyId | null> = {
   Database: 'database',
   'Developer Tools': 'management-governance',
   'Front-End Web and Mobile': 'application-integration',
-  'Machine Learning': null,
+  'Machine Learning': 'machine-learning',
   'Management and Governance': 'management-governance',
   'Media Services': null,
   'Migration and Transfer': 'migration',

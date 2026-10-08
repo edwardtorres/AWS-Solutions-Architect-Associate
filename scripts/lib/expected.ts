@@ -4,4 +4,6 @@ export const EXPECTED = {
   domains: 4,
   tasksPerDomain: [3, 2, 5, 4],
   weights: [30, 26, 24, 20],
+  /** Foundation buildings (background no bullet covers). Raised from 4 to 5 in Step 2. */
+  maxFoundations: 5,
 } as const;

@@ -32,9 +32,9 @@ describe('CityMap', () => {
         <CityMap view="map" activeId={null} />
       </SaveContext.Provider>,
     );
-    expect(document.querySelectorAll('button.building')).toHaveLength(66);
+    expect(document.querySelectorAll('button.building')).toHaveLength(BUILDINGS.length);
     expect(screen.getAllByRole('region')).toHaveLength(5);
-    expect(document.body.textContent).toMatch(/0\s*of 66 buildings commissioned/);
+    expect(document.body.textContent).toMatch(new RegExp(`0\\s*of ${BUILDINGS.length} buildings commissioned`));
   });
 
   it('shows foundations as surveyed and locked buildings as planned, with what they need', () => {
@@ -62,7 +62,7 @@ describe('CityMap', () => {
       store.setBuildingState('pillar-plaza', 'commissioned');
     });
     expect(document.querySelector('[data-building="ledger-office"]')).toHaveAttribute('data-state', 'surveyed');
-    expect(document.body.textContent).toMatch(/2\s*of 66 buildings commissioned/);
+    expect(document.body.textContent).toMatch(new RegExp(`2\\s*of ${BUILDINGS.length} buildings commissioned`));
   });
 
   it('opens a building by keyboard (Enter) through the hash route', async () => {
