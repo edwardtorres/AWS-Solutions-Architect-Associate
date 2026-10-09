@@ -123,6 +123,9 @@ function NotesBody({ building: id, notes, shared }: { building: string; notes: B
                 </p>
               )}
               <h4 className="mt-1 font-semibold">In a design</h4>
+              <p className="text-sm text-[var(--fg-muted)]" data-kind="guidance">
+                Study guidance built on the facts above: a way to apply them, not a statement from AWS.
+              </p>
               {bn.design.map((b, i) => (
                 <BlockView key={i} block={b} />
               ))}
@@ -132,6 +135,9 @@ function NotesBody({ building: id, notes, shared }: { building: string; notes: B
 
         {notes.cues.length > 0 && (
           <Section id="cues" title="Scenario cues">
+            <p className="text-sm text-[var(--fg-muted)]" data-kind="guidance">
+              Exam heuristics. The quoted fact explains why the service fits; matching a phrase to a service is study guidance, not a statement from AWS.
+            </p>
             <ul className="grid gap-2">
               {notes.cues.map((c, i) => (
                 <li key={i} className="rounded-xl border border-[var(--line)] p-2.5">

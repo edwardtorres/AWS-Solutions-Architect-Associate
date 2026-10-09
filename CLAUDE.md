@@ -11,11 +11,14 @@ Vite + React 19 + TypeScript (`strict`, `noUncheckedIndexedAccess`) + Tailwind v
 | `npm run build` / `npm run preview` | Typecheck and production build / serve it |
 | `npm run typecheck` · `npm run lint` · `npm test` | Types, lint, Vitest |
 | `npm run check:content` (`-- --live`) | App structure vs `scripts/official-outline.json`; `--live` also diffs the live exam guide |
+| `npm run check:links` | Network: every cited URL returns 200, every `#anchor` exists, every quote appears verbatim on its page (page text cached in `.cache/`, git-ignored). Also in `check:all` |
 | `npm run check:bundle` | Proves dev hooks are absent from `dist/`, no external origins, strict CSP, local fonts, split chunks |
 | `npm run check:hygiene` | No private links, session links, tokens, account IDs or local paths in files or commits |
 | `npm run test:layout` | Playwright at 390 px (touch) and 1280 px (keyboard): no sideways scroll, targets ≥ 44 px, panels, saves |
 | `npm run check` / `npm run check:all` | Everything offline / plus the layout test |
-| `npm run fetch:official` | Regenerates the two official data files from the live guide |
+| `npm run fetch:official` | Regenerates the official data files (outline, services, short names) from the live guide |
+| `npx tsx scripts/add-source.ts <id> <url> "<title>" [azure]` | Adds one entry to `content/sources.ts` (locks the file, refuses a duplicate id or URL) |
+| `npx tsx scripts/q.ts <url> "<regex>"` · `npx tsx scripts/ctx.ts <url> "<regex>" <chars>` | Research helpers: matching sentences / text around a match |
 
 ## Git rules
 - Commit as the GitHub noreply address `12915571+edwardtorres@users.noreply.github.com`.
@@ -51,18 +54,24 @@ The owner studies on an iPhone and on Windows/Mac desktop browsers. Every intera
 
 ## The game
 - **Districts = exam domains:** Citadel (Secure), Harbor & Levees (Resilient), Express Quarter (High-Performing), Treasury (Cost-Optimized). Founders' Square holds the Foundations. Islands A/B/C are the three AZs; placement is cosmetic.
-- **Buildings** group 2–5 outline bullets from one task statement; every bullet belongs to exactly one building. At most 4 **Foundations** cover background the outline assumes but no bullet teaches.
+- **Buildings** group 2–5 outline bullets from one task statement; every bullet belongs to exactly one building. At most 5 **Foundations** cover background the outline assumes but no bullet teaches.
 - **States:** planned (locked) · surveyed (idle) · under construction (running) · commissioned (certified). Only the last two are stored; planned/surveyed are derived from prerequisite roads.
 - **Roads** are prerequisites with a one-line reason. Rules (tested): acyclic, every building reachable from a start building, no road implied by other roads.
 - **Service families:** Security & Identity, Networking & Content Delivery, Compute, Storage, Database, Application Integration, Analytics, Management & Governance, Migration. The Service Atlas groups buildings by family; links across districts are computed from shared families. Deviation: Cost Management, Containers, Serverless and Developer Tools fold into the closest family (`src/data/families.ts`); Machine Learning has no family.
 - **Carryover tags:** *portfolio* (S3 static hosting, CloudFront, Lambda, API Gateway, DynamoDB; later steps add a placement check on SAA-level design decisions, never definitions) and *Azure crosswalk* (concept pairs from the Microsoft Learn comparison pages; Step 2 adds the short note, including where the analogy breaks).
 
+## Naming rule (renamed services)
+Questions use the service names from the exam guide's in-scope list and the short-names list (`scripts/official-short-names.json`, diffed by `check:content -- --live`). Notes show the current name beside any rename, written `{{rename:id}}`, with sources for both names. `content/renamed-services.ts` holds each verified rename (IAM Identity Center, SageMaker AI, Amazon Quick, Amazon Data Firehose). A note that uses an old or other name outside that list fails `check:content`.
+
+## Notes model (Step 2)
+Notes for every building live in `content/notes/<district>/<building>.ts` (lazy chunk per district through `src/content/district-*.ts`). A note is built from blocks `b(text, sourceIds, quotes, opts)`: every block cites pages from `content/sources.ts` and carries verbatim quotes that `check:links` verifies against the live page. Checks (`check:content`): a number or number-word in prose must appear in a quote of the same block; no prices; deprecated/retired/preview words need a `status` label and a quote that says so; old service names need `{{rename:id}}`; Microsoft Learn sources only inside "Coming from Azure" blocks (each needs an AWS source too); each glossary term is defined once (`content/glossary.ts`) and used; no unused source; the required "don't confuse" pairs exist (`content/dont-confuse.ts`, list in `scripts/lib/notesChecks.ts`); `scripts/banned-terms.ts` blocks disputed claims. Where two pages disagree, both readings go in `content/contradictions.json`; what cannot be confirmed goes in `content/needs-verification.json` and is kept out of the notes. In the UI, "In a design" blocks and scenario cues are labelled study guidance, not AWS statements.
+
 ## Layout
-`scripts/` official data + content/bundle/hygiene/layout checks · `content/` needs-verification queue and contradictions · `src/data/` buildings, roads, districts, families, outline · `src/save/` save schema v1, migrations, store · `src/ui/` map, panel, atlas, save menu · `src/dev/` dev-only hooks · `src/lib/` graph, rng, routing.
+`scripts/` official data + content/bundle/hygiene/layout checks · `content/` sources, glossary, don't-confuse pairs, renamed services, needs-verification queue, contradictions, notes per district · `src/data/` buildings, roads, districts, families, outline · `src/save/` save schema v1, migrations, store · `src/ui/` map, panel, atlas, save menu, `src/ui/notes/` notes, glossary and don't-confuse pages · `src/dev/` dev-only hooks · `src/lib/` graph, rng, routing.
 
 ## Roadmap (build one step at a time, audit after each)
-1. **Done (awaiting approval):** scaffold, official outline + content check, skill tree, city map + Service Atlas, save v1.
-2. Notes for every building, sourced from AWS docs, with "don't confuse" pairs (security groups vs network ACLs, gateway vs interface endpoints, ALB vs NLB vs GWLB, S3 storage classes, RDS Multi-AZ vs read replicas, SQS vs SNS vs EventBridge vs Kinesis, Savings Plans vs Reserved Instances vs Spot, EBS vs EFS vs FSx, KMS vs CloudHSM, Shield vs WAF, Direct Connect vs Site-to-Site VPN, CloudFront vs Global Accelerator), scenario keyword cues, and Azure crosswalk notes.
+1. **Done (approved):** scaffold, official outline + content check, skill tree, city map + Service Atlas, save v1.
+2. **Done (awaiting approval):** Step 1 fixes (69 buildings, Machine Learning family, Foundation cap 5), notes for every building (audit in `docs/step-2-audit.md`). Scope: notes for every building, sourced from AWS docs, with "don't confuse" pairs (security groups vs network ACLs, gateway vs interface endpoints, ALB vs NLB vs GWLB, S3 storage classes, RDS Multi-AZ vs read replicas, SQS vs SNS vs EventBridge vs Kinesis, Savings Plans vs Reserved Instances vs Spot, EBS vs EFS vs FSx, KMS vs CloudHSM, Shield vs WAF, Direct Connect vs Site-to-Site VPN, CloudFront vs Global Accelerator), scenario keyword cues, and Azure crosswalk notes.
 3. Question bank: multiple choice (1 of 4) and multiple response only, AWS scenario style, weighted 30/26/24/20, in-scope services only, independent review.
 4. Core game loop: lifecycle, inspections with a same-day retry lock, placement checks, XP, ranks, streaks, badges, readiness weighted by domain (excluding start-up checks), save migrations.
 5. Puzzles with computed answers: IAM policy evaluator (explicit deny, SCPs, permission boundaries, resource policies), VPC traffic tracer (security groups, NACLs, route tables), DR strategy picker by RTO/RPO, S3 lifecycle planner, architecture builder, cost-choice scenarios with no hardcoded prices.
