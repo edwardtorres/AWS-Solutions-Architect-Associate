@@ -1,0 +1,7 @@
+{"building":"counting-house","blocks":[
+{"where":"bullets.2.concepts.3 (EC2 Instance and Database Savings Plans)","verdict":"OK","issue":"Instance family + Region commitment and 'regardless of instance size, OS, tenancy' quoted; page says Compute Savings Plans 'provide the most flexibility' (basis for 'less flexible'); Database Savings Plans list (Aurora, RDS, DynamoDB, ElastiCache...) is on the page though the block quote omits the list.","suggestedFix":"Optional: quote 'Database Savings Plans provide flexibility to use AWS database services while reducing costs by up to ... on Aurora, RDS, DynamoDB, ElastiCache' (without the percentage) and 'Compute Savings Plans provide the most flexibility' for the comparison."},
+{"where":"bullets.2.concepts.4 (Reserved Instances)","verdict":"OK","issue":"All three sentences verbatim.","suggestedFix":""},
+{"where":"bullets.2.concepts.6 (Spot)","verdict":"OK","issue":"Verbatim quotes; 'might interrupt' matches 'might be interrupted'.","suggestedFix":""},
+{"where":"bullets.2.concepts.8 (Dedicated Hosts)","verdict":"OK","issue":"Verbatim.","suggestedFix":""},
+{"where":"azure.0.breaks (Cost Management / purchasing options)","verdict":"OK","issue":"Learn row 'AWS Billing and Cost Management | Microsoft Cost Management' verbatim; Learn hub page has no Savings Plans/Reserved/Spot/Capacity Reservation rows. 'the AWS billing tools' is plural where Learn names one row.","suggestedFix":"Optional: 'Learn pairs AWS Billing and Cost Management with Microsoft Cost Management.'"}
+]}

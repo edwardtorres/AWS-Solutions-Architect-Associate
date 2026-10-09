@@ -8,7 +8,10 @@ import { BUILDINGS } from '../src/data/buildings.ts';
 import { ROADS } from '../src/data/roads.ts';
 import { BANNED_TERMS } from './banned-terms.ts';
 import { buildDocuments, fetchAll, structuralProblems } from './fetch-official.ts';
-import { loadNotesBundle } from './lib/loadNotes.ts';
+import { readdirSync, statSync } from 'node:fs';
+import { join, relative } from 'node:path';
+import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
+import { checkQuestions } from './lib/questionChecks.ts';
 import { checkNotes } from './lib/notesChecks.ts';
 import {
   diffOutline,
@@ -36,6 +39,31 @@ async function main() {
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
     ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle }).map((x) => `notes: ${x}`),
+  );
+
+  const qb = await loadQuestionsBundle();
+  const repoRoot = here('../');
+  const walk = (dir: string): string[] =>
+    readdirSync(dir).flatMap((n) => {
+      const full = join(dir, n);
+      return statSync(full).isDirectory() ? walk(full) : [full];
+    });
+  const appFiles = walk(join(repoRoot, 'src')).map((f) => ({ path: relative(repoRoot, f).replaceAll('\\', '/'), content: readFileSync(f, 'utf8') }));
+  problems.push(
+    ...checkQuestions({
+      questions: qb.questions,
+      buildings: BUILDINGS,
+      bulletIds,
+      sources: bundle.sources,
+      confuse: bundle.confuse,
+      queue,
+      banned: BANNED_TERMS,
+      services,
+      shortNames: readJson<{ items: { short: string; full: string }[] }>('./official-short-names.json').items,
+      era: qb.era,
+      scope: qb.scope,
+      appFiles,
+    }).map((x) => `questions: ${x}`),
   );
 
   let liveNote = '';
@@ -72,7 +100,7 @@ async function main() {
     process.exit(1);
   }
   console.log(
-    `check:content OK${liveNote}: ${outline.domains.length} domains, ${outline.domains.reduce((n, d) => n + d.tasks.length, 0)} tasks, ${bullets} bullets, ${BUILDINGS.length} buildings, ${ROADS.length} roads`,
+    `check:content OK${liveNote}: ${outline.domains.length} domains, ${outline.domains.reduce((n, d) => n + d.tasks.length, 0)} tasks, ${bullets} bullets, ${BUILDINGS.length} buildings, ${ROADS.length} roads, ${qb.questions.length} questions`,
   );
 }
 

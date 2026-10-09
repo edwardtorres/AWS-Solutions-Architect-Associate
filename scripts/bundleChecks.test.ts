@@ -24,6 +24,14 @@ describe('check:bundle', () => {
     f[1] = { path: 'assets/a.js', content: 'window.__saaDev = {}' };
     expect(checkBundle(f).join()).toMatch(/__saaDev/);
   });
+  it('fails when question data or the mock-reserve tag is in the entry chunk', () => {
+    const f = good();
+    f[1] = { path: 'assets/a.js', content: 'const t = "mock-reserve"' };
+    expect(checkBundle(f).join()).toMatch(/entry chunk assets\/a.js contains question data/);
+    const lazy = good();
+    lazy[2] = { path: 'assets/b.js', content: 'const t = "mock-reserve"' };
+    expect(checkBundle(lazy)).toEqual([]);
+  });
   it('fails on an external origin', () => {
     const f = good();
     f[1] = { path: 'assets/a.js', content: 'fetch("https://cdn.example.com/x.js")' };

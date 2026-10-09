@@ -1,0 +1,3 @@
+{"building":"db-cost-desk","blocks":[
+{"where":"azure.0.breaks (reserved DB instances vs Savings Plan)","verdict":"OVERSTATED","issue":"'a Savings Plan applies regardless of engine, instance family, size, Availability Zone or Region' - the quote describes Database Savings Plans only; Compute and EC2 Instance Savings Plans differ (EC2 Instance Savings Plans are tied to an instance family in a Region). Reserved-DB-instance quote is verbatim; Learn hub page has no pairing for either.","suggestedFix":"'... whereas a Database Savings Plan applies regardless of engine, instance family, size, Availability Zone or Region.'"}
+]}

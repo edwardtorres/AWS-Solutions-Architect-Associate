@@ -115,3 +115,37 @@ export interface RenamedService {
   /** Which name is current on AWS pages, or how the two relate. */
   relation: Block;
 }
+
+export type QuestionFormat = 'mc' | 'mr';
+export type Difficulty = 1 | 2 | 3;
+
+export interface QuestionOption {
+  text: string;
+  correct: boolean;
+  /** Why this option is right, or exactly which requirement it fails. */
+  why: string;
+}
+
+/**
+ * One exam-style question. Options are stored in an authored order that the checks keep balanced;
+ * the UI shuffles them at render time (src/lib/rng.ts).
+ * Tags: `placement-eligible`, `mock-reserve`, `trap:<dont-confuse-pair-id>`.
+ */
+export interface Question {
+  id: string;
+  /** Building id (a Foundation id for Founders' Square questions). */
+  building: string;
+  /** Official outline bullet ids; empty for Foundations. */
+  bullets: string[];
+  format: QuestionFormat;
+  /** How many options are correct: 1 for multiple choice, 2 or 3 for multiple response. */
+  select: number;
+  difficulty: Difficulty;
+  stem: string;
+  options: QuestionOption[];
+  tags: string[];
+  /** Verbatim AWS page excerpts that confirm the key; verified by check:links. */
+  evidence: Quote[];
+  /** Set when the question involves an in-scope service whose availability status changed (content/exam-era.json). */
+  era?: string;
+}

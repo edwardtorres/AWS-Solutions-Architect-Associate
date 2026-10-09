@@ -37,6 +37,17 @@ export default tseslint.config(
     },
   },
   {
+    // The mock reserve stays behind src/questions/pool.ts: nothing else may import question data.
+    files: ['src/**/*.{ts,tsx}'],
+    ignores: ['src/questions/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        { patterns: [{ group: ['**/content/questions/**'], message: 'Question data is reachable only through src/questions/pool.ts.' }] },
+      ],
+    },
+  },
+  {
     files: ['eslint.config.js'],
     languageOptions: { globals: globals.node },
   },

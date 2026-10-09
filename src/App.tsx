@@ -7,6 +7,7 @@ import { useSaveStore, useSnapshot } from './save/context';
 const DetailPanel = lazy(() => import('./ui/DetailPanel'));
 const Atlas = lazy(() => import('./ui/Atlas'));
 const SaveMenu = lazy(() => import('./ui/SaveMenu'));
+const Settings = lazy(() => import('./ui/Settings'));
 const NotesPage = lazy(() => import('./ui/notes/NotesPage'));
 const GlossaryPage = lazy(() => import('./ui/notes/GlossaryPage'));
 const ConfusePage = lazy(() => import('./ui/notes/ConfusePage'));
@@ -86,6 +87,7 @@ export default function App() {
         </Suspense>
         <Suspense fallback={null}>
           <SaveMenu />
+          <Settings />
         </Suspense>
         <footer className="mt-8 pb-8 text-xs text-[var(--fg-muted)]">
           Outline source: the official AWS exam guide for SAA-C03 (docs.aws.amazon.com). Study notes, questions and labs arrive in later steps.

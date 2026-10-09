@@ -16,6 +16,9 @@ export const ALLOWED_URL_HOSTS = new Set([
 /** Strings that only exist in dev-only modules. Production bundles must not contain any of them. */
 export const DEV_MARKERS = ['SAA_DEV_HOOKS_SENTINEL', '__saaDev', '__SAA_SEED__', 'DEV ONLY', 'Developer toolbar', 'Developer controls'];
 
+/** Strings that identify question data and the pool; the entry chunk must not contain them. */
+export const QUESTION_MARKERS = ['mock-reserve', 'placement-eligible'];
+
 const isText = (p: string) => /\.(html|js|css|json|svg|webmanifest|txt)$/.test(p);
 
 export function checkBundle(files: readonly BundleFile[]): string[] {
@@ -66,6 +69,15 @@ export function checkBundle(files: readonly BundleFile[]): string[] {
     for (const m of f.content.matchAll(/url\(([^)]+)\)/g)) {
       const url = (m[1] as string).replace(/['"]/g, '');
       if (/^(https?:)?\/\//.test(url)) problems.push(`${f.path} loads ${url}`);
+    }
+  }
+
+  // 4b. Question data and the mock-reserve tag live only in lazy chunks, never in the entry chunk.
+  if (index) {
+    const entries = [...index.content.matchAll(/<script[^>]+src="([^"]+)"/g)].map((m) => (m[1] as string).replace(/^\//, ''));
+    for (const e of entries) {
+      const file = files.find((f) => f.path === e);
+      if (file && QUESTION_MARKERS.some((m) => file.content.includes(m))) problems.push(`entry chunk ${e} contains question data or the mock-reserve tag; it must stay in a lazy chunk`);
     }
   }
 

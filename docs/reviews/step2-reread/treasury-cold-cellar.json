@@ -1,0 +1,8 @@
+{"building":"cold-cellar","blocks":[
+{"where":"bullets.0.concepts.1 (waterfall transitions)","verdict":"OK","issue":"Waterfall model, Standard and Standard-IA transition paths and request costs are quoted; 'smaller than 128 KB ... transition cost can outweigh the storage savings' is on the page ('the transition costs can outweigh the storage savings'). 'objects move toward colder classes, not back' is an interpretation of the waterfall model (not a page sentence).","suggestedFix":"Optional: quote the 'transition costs can outweigh the storage savings' sentence; reword 'not back' to 'the waterfall model only lists transitions to the classes shown'."},
+{"where":"bullets.2.concepts.1 (noncurrent versions, delete markers, multipart abort)","verdict":"OK","issue":"All four actions are quoted; page says ExpiredObjectDeleteMarker directs S3 to 'remove expired object delete markers'; abort best-practice quote verbatim. 'control hidden cost' is the note's framing; only AbortIncompleteMultipartUpload is tied to cost by AWS.","suggestedFix":"Optional: 'Four more lifecycle actions to know.'"},
+{"where":"azure.0.mapping (S3 IA - Cool tier)","verdict":"OK","issue":"Learn sentences verbatim; S3 retrieval-fee quote present.","suggestedFix":""},
+{"where":"azure.0.breaks (One Zone-IA)","verdict":"OK","issue":"One Zone-IA sentence verbatim.","suggestedFix":""},
+{"where":"azure.1.mapping (Archive Blob - Glacier)","verdict":"OK","issue":"Learn: 'Azure Archive Blob Storage is comparable to AWS Glacier storage service' and the 180 days / several hours sentence verbatim.","suggestedFix":""},
+{"where":"azure.1.breaks","verdict":"OK","issue":"Retrieval times match the AWS table; Learn quotes verbatim.","suggestedFix":""}
+]}

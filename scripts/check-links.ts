@@ -4,7 +4,7 @@
  * every #anchor exists, and every verbatim quote appears on the page it cites.
  * Page text is cached in .cache/ (git-ignored); --fresh refetches.
  */
-import { loadNotesBundle } from './lib/loadNotes.ts';
+import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
 import { everyBlock } from './lib/notesChecks.ts';
 import { fetchPage, hasText, stripFragment, type PageInfo } from './lib/pageCache.ts';
 
@@ -83,6 +83,21 @@ async function main() {
         const page = pages.get(stripFragment(src.url));
         if (!page || page instanceof Error) continue;
         if (!hasText(page, q.text)) problems.push(`${where}: quote not found on ${src.id}: "${q.text.slice(0, 90)}"${closest(page, q.text)}`);
+      }
+    }
+  }
+
+  if (quotesOn) {
+    const byId = new Map(bundle.sources.map((s) => [s.id, s]));
+    const qb = await loadQuestionsBundle();
+    for (const q of qb.questions) {
+      for (const e of q.evidence) {
+        quoteCount += 1;
+        const src = byId.get(e.src);
+        if (!src) continue;
+        const page = pages.get(stripFragment(src.url));
+        if (!page || page instanceof Error) continue;
+        if (!hasText(page, e.text)) problems.push(`question ${q.id}: evidence not found on ${src.id}: "${e.text.slice(0, 90)}"${closest(page, e.text)}`);
       }
     }
   }
