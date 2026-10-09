@@ -505,6 +505,7 @@ const sources: Source[] = [
   aws('dx-hosted', `${D}/directconnect/latest/UserGuide/hosted_connection.html`, 'Hosted Direct Connect connections'),
   aws('datasync-pricing', 'https://aws.amazon.com/datasync/pricing/', 'AWS DataSync pricing'),
   aws('transfer-pricing', 'https://aws.amazon.com/aws-transfer-family/pricing/', 'AWS Transfer Family pricing'),
+  aws('waf-region-cost', `${D}/wellarchitected/latest/framework/cost_pricing_model_region_cost.html`, 'COST07-BP02 Choose Regions based on cost'),
 ];
 
 export default sources;
