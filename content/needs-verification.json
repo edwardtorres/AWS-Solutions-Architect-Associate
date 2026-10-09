@@ -57,5 +57,21 @@
     "reason": "The exam guide lists AWS Snow Family, but the Snowball Edge documentation states AWS Snowball Edge is no longer available to new customers and points new customers to AWS DataSync, AWS Data Transfer Terminal or partner solutions. No allowed page tells which Snow devices (such as Snowcone) remain available. The notes label Snowball Edge accordingly and teach the transfer-method choice; the exam may still use Snow Family wording.",
     "status": "open",
     "added": "2026-10-09"
+  },
+  {
+    "id": "nv-s3-ia-minimum-duration",
+    "building": "cold-cellar",
+    "claim": "S3 Standard-IA and S3 One Zone-IA have a 30-day minimum storage duration.",
+    "reason": "The S3 storage classes page states a 30-day minimum and a 128 KB minimum charge. The AWS storage decision guide, updated 5 October 2026, says S3 no longer applies a 30-day minimum storage duration for transitions to these two classes. The two statements are recorded as c-s3-ia-minimum-duration. Re-check both pages before any question uses the figure.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-timestream-liveanalytics",
+    "building": "service-selection-bureau",
+    "claim": "Whether Amazon Timestream for LiveAnalytics is open to new customers.",
+    "reason": "The Timestream for LiveAnalytics page says: for similar capabilities, consider Amazon Timestream for InfluxDB. No allowed page checked states clearly whether LiveAnalytics accepts new customers. The notes quote the page's wording and teach the time series data type, and do not claim a retirement. Re-check before any question names Timestream for LiveAnalytics.",
+    "status": "open",
+    "added": "2026-10-09"
   }
 ]
