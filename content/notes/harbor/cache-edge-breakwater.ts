@@ -142,7 +142,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Managed Redis',
       aws: 'Amazon ElastiCache',
-      mapping: b('The Learn databases page pairs Amazon ElastiCache with Azure Managed Redis as the in-memory cache and temporary data store, for caching, sessions and other low-latency temporary-data patterns.',
+      mapping: b('Microsoft Learn pairs Amazon ElastiCache with Azure Managed Redis as the in-memory cache and temporary data store, for caching, sessions and other low-latency temporary-data patterns.',
         ['learn-databases', 'elasticache-what-is'],
         ['learn-databases|In-memory cache and temporary data store Amazon ElastiCache Azure Managed Redis Use Azure Managed Redis for caching, sessions, messaging, and other low-latency temporary-data patterns.',
          'elasticache-what-is|Amazon ElastiCache is a web service that makes it easy to set up, manage, and scale a distributed in-memory data store or cache environment in the cloud.']),

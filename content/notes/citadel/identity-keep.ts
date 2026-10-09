@@ -176,7 +176,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure role-based access control (Azure RBAC)',
       aws: 'AWS Identity and Access Management (IAM)',
-      mapping: b('Azure RBAC is how you already decide who can do what to Azure resources. The Learn comparison pairs it with IAM, and describes the IAM and Entra ID row as creating and managing users and groups and using permissions to allow and deny access to resources.',
+      mapping: b('Azure RBAC is how you already decide who can do what to Azure resources. The Learn comparison pairs it with IAM, and describes the IAM and Entra ID entry as creating and managing users and groups and using permissions to allow and deny access to resources.',
         ['learn-hub', 'iam-intro'],
         ['learn-hub|Azure RBAC helps you manage who can access Azure resources, which resources they can access, and what they can do with those resources.',
          'learn-hub|Create and manage users and groups, and use permissions to allow and deny access to resources.',

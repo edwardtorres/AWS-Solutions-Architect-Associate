@@ -155,7 +155,7 @@ const notes: BuildingNotes = {
         ['learn-networking', 'alb-intro'],
         ['learn-networking|Application Gateway provides application-level rule-based routing comparable to that of the AWS Application Load Balancer.',
          'alb-intro|An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model.']),
-      breaks: b('The Microsoft Learn comparison compares the routing function only. The availability behaviour in this building is described separately on the AWS side: the load balancer sends traffic only to healthy targets, and an Auto Scaling group replaces terminated or impaired instances.',
+      breaks: b('The Microsoft Learn comparison compares the routing function only. The availability behaviour in this building comes from other AWS features: the load balancer sends traffic only to healthy targets, and an Auto Scaling group replaces terminated or impaired instances.',
         ['elb-what-is', 'asg-what-is', 'learn-networking'],
         ['elb-what-is|It monitors the health of its registered targets, and routes traffic only to the healthy targets.',
          'asg-what-is|Amazon EC2 Auto Scaling automatically monitors the health and availability of your instances using EC2 health checks and replaces terminated or impaired instances to maintain your desired capacity.',

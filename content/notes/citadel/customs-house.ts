@@ -94,7 +94,7 @@ const notes: BuildingNotes = {
     {
       concept: 'VPN Gateway',
       aws: 'AWS Site-to-Site VPN',
-      mapping: b('The Learn networking page lists VPN Gateway as the Azure counterpart to Site-to-Site VPN, and describes both as robust solutions for connecting on-premises networks to the cloud.',
+      mapping: b('Microsoft Learn lists VPN Gateway as the Azure counterpart to Site-to-Site VPN, and describes both as robust solutions for connecting on-premises networks to the cloud.',
         ['learn-networking', 's2s-vpn'],
         ['learn-networking|Site-to-Site VPN VPN Gateway', 'learn-networking|are robust solutions for connecting on-premises networks to the cloud.', 's2s-vpn|You can enable access to your remote devices from your VPC by creating an AWS Site-to-Site VPN (Site-to-Site VPN) connection']),
       breaks: b('Learn says the two services provide similar features but with a notable difference in performance, and lists route-based and policy-based VPNs as a feature difference on the Azure side. On the AWS side a Site-to-Site VPN connection consists of a virtual private gateway or a transit gateway, a customer gateway device and a customer gateway, and each connection includes two tunnels.',
@@ -108,11 +108,11 @@ const notes: BuildingNotes = {
     {
       concept: 'ExpressRoute',
       aws: 'AWS Direct Connect',
-      mapping: b('ExpressRoute and Direct Connect are the dedicated private-connection services; the Learn networking page pairs them.',
+      mapping: b('ExpressRoute and Direct Connect are the dedicated private-connection services; Microsoft Learn pairs them.',
         ['learn-networking', 'dx-what-is'],
         ['learn-networking|AWS Direct Connect can link a network directly to AWS.', 'learn-networking|Azure provides similar site-to-site dedicated connections through ExpressRoute.',
          'dx-what-is|Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable.']),
-      breaks: b('With Direct Connect you create virtual interfaces to public AWS services or to a VPC, bypassing internet service providers in your network path, and AWS states that Direct Connect does not encrypt traffic in transit by default. Learn describes ExpressRoute as a dedicated private network connection and says nothing about encryption in that row.',
+      breaks: b('With Direct Connect you create virtual interfaces to public AWS services or to a VPC, bypassing internet service providers in your network path, and AWS states that Direct Connect does not encrypt traffic in transit by default. Learn describes ExpressRoute as a dedicated private network connection and the comparison does not mention encryption for it.',
         ['dx-what-is', 'dx-encryption', 'learn-networking'],
         ['dx-what-is|you can create virtual interfaces directly to public AWS services (for example, to Amazon S3) or to Amazon VPC, bypassing internet service providers in your network path.',
          'dx-encryption|AWS Direct Connect does not encrypt your traffic that is in transit by default.',

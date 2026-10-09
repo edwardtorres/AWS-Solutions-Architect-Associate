@@ -199,7 +199,7 @@ Inbound rules
     {
       concept: 'Network security groups (NSGs)',
       aws: 'Security groups and network ACLs',
-      mapping: b('The Learn networking page pairs security groups with Azure network security groups: Azure NSGs are stateful and can be applied at the subnet or network-interface level.',
+      mapping: b('Microsoft Learn pairs security groups with Azure network security groups: Azure NSGs are stateful and can be applied at the subnet or network-interface level.',
         ['learn-networking', 'vpc-security-groups'],
         ['learn-networking|Azure uses stateful network security groups (NSGs), which can be applied at the subnet or NIC level',
          'vpc-security-groups|Security groups are stateful.']),
@@ -229,7 +229,7 @@ Inbound rules
         ['learn-networking', 'vpc-route-tables'],
         ['learn-networking|AWS route tables contain routes that direct traffic from a subnet or gateway subnet to the destination. In Azure, the corresponding feature is called user-defined routes.',
          'vpc-route-tables|Each route specifies a destination (CIDR block or prefix list) and a target (such as an internet gateway, NAT gateway, VPC peering connection, or VPN connection).']),
-      breaks: b('Learn describes user-defined routes as custom or static routes that override the default Azure system routes. The AWS route priority page describes how AWS chooses between routes: in general it directs traffic using the most specific route that matches the traffic.',
+      breaks: b('Learn describes user-defined routes as custom or static routes that override the default Azure system routes. AWS says that in general it directs traffic using the most specific route that matches the traffic.',
         ['vpc-route-priority', 'learn-networking'],
         ['learn-networking|These routes override the default Azure system routes.',
          'vpc-route-priority|In general, we direct traffic using the most specific route that matches the traffic.']),

@@ -113,7 +113,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Backup',
       aws: 'AWS Backup',
-      mapping: b('Both are centralised backup services. The Learn storage page lists Azure Backup, which backs up and recovers files, databases, disks and virtual machines, against AWS Backup.',
+      mapping: b('Both are centralised backup services. Microsoft Learn lists Azure Backup, which backs up and recovers files, databases, disks and virtual machines, against AWS Backup.',
         ['learn-storage', 'backup-what-is'],
         ['learn-storage|This option is used to back up and recover files, databases, disks, and virtual machines.',
          'backup-what-is|AWS Backup is a fully-managed service that makes it easy to centralize and automate data protection across AWS services, in the cloud, and on premises.']),

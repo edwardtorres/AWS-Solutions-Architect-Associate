@@ -56,7 +56,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon Route 53', 'Elastic Load Balancing (ELB)'],
       design: [
-        b('Choose the routing policy from the requirement: the Region with the best latency → latency; the location of your users → geolocation; the location of your resources, with optional shifting → geoproximity; primary and standby → failover; proportions that you specify → weighted; a top-of-domain name that points at an AWS resource → an alias record.',
+        b('Choose the routing policy from the requirement: the Region with the best latency → latency; the location of your users → geolocation; the location of your resources, with optional shifting → geoproximity; primary and standby → failover; proportions that you specify → weighted; and for a name at the zone apex that points at an AWS resource, use an alias record, which is a record type and not a routing policy.',
           ['route53-routing', 'route53-alias'],
           ['route53-routing|Latency routing policy – Use when you have resources in multiple AWS Regions and you want to route traffic to the Region that provides the best latency.',
            'route53-routing|Geolocation routing policy – Use when you want to route traffic based on the location of your users.',

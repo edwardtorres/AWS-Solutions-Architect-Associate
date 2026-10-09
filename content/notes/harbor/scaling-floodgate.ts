@@ -32,7 +32,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon EC2 Auto Scaling', 'Amazon RDS', 'Amazon EC2'],
       design: [
-        b('Horizontal scaling is the usual fit for the stateless application tier (add instances behind a load balancer across Availability Zones). Vertical scaling is the option for a single database instance, where you modify the DB instance size; for read-heavy load, read replicas add horizontal capacity.',
+        b('Horizontal scaling is the usual fit for the stateless application tier (add instances behind a load balancer across Availability Zones). A single database instance can be scaled vertically by modifying its size; for read-heavy load, read replicas add horizontal capacity.',
           ['asg-what-is', 'rds-scaling-ha'],
           ['asg-what-is|You can specify multiple Availability Zones for your Auto Scaling group, and Amazon EC2 Auto Scaling balances your instances evenly across the Availability Zones as the group scales.',
            'rds-scaling-ha|With Amazon RDS, you can scale vertically by modifying your DB instance size to meet your performance and capacity requirements.',
@@ -189,7 +189,7 @@ const notes: BuildingNotes = {
          'learn-networking|Application Gateway provides application-level rule-based routing comparable to that of the AWS Application Load Balancer.',
          'alb-intro|An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model.'],
         { allow: ['two'] }),
-      breaks: b('The Learn load balancer comparison lists only Azure Load Balancer and Application Gateway, but Azure also has an analogue of the AWS Gateway Load Balancer, which deploys virtual appliances such as firewalls: Gateway Load Balancer is a SKU of the Azure Load Balancer portfolio for third-party network virtual appliances. It is covered in Express Interchange.',
+      breaks: b('The Learn load balancer comparison lists only Azure Load Balancer and Application Gateway, but Azure has its own Gateway Load Balancer SKU for third-party network virtual appliances, while AWS Gateway Load Balancer deploys virtual appliances such as firewalls. It is covered in Express Interchange.',
         ['gwlb-intro', 'learn-azure-gwlb'],
         ['gwlb-intro|Gateway Load Balancers enable you to deploy, scale, and manage virtual appliances, such as firewalls, intrusion detection and prevention systems, and deep packet inspection systems.',
          'learn-azure-gwlb|Gateway Load Balancer is a SKU of the Azure Load Balancer portfolio designed for high performance and high availability scenarios with third-party Network Virtual Appliances (NVAs).']),
