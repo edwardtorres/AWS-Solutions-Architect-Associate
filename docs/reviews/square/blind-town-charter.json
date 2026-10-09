@@ -1,0 +1,12 @@
+[
+ {"id":"town-charter-001","picks":["D"],"ambiguous":false},
+ {"id":"town-charter-002","picks":["A"],"ambiguous":false},
+ {"id":"town-charter-003","picks":["A"],"ambiguous":false},
+ {"id":"town-charter-004","picks":["B"],"ambiguous":false},
+ {"id":"town-charter-005","picks":["D"],"ambiguous":false},
+ {"id":"town-charter-006","picks":["A"],"ambiguous":false,"note":"Standard-IA assumed cheapest for once-a-month millisecond access; borderline vs Standard if access were more frequent."},
+ {"id":"town-charter-007","picks":["A","C"],"ambiguous":false},
+ {"id":"town-charter-008","picks":["B"],"ambiguous":false},
+ {"id":"town-charter-009","picks":["C"],"ambiguous":false,"note":"Assumes the site can tolerate asynchronous processing (SQS decoupling)."},
+ {"id":"town-charter-010","picks":["A","E"],"ambiguous":false}
+]

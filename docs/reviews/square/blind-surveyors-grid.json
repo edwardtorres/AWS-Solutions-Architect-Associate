@@ -1,0 +1,12 @@
+[
+ {"id":"surveyors-grid-001","picks":["B"],"ambiguous":false,"note":"VPC largest allowed IPv4 CIDR is /16; /8 is not allowed."},
+ {"id":"surveyors-grid-002","picks":["C"],"ambiguous":false},
+ {"id":"surveyors-grid-003","picks":["A","C"],"ambiguous":false,"note":"Reserved: .0, .1, .2, .3 and .255; of the options .2 and .255."},
+ {"id":"surveyors-grid-004","picks":["B"],"ambiguous":false,"note":"/27 gives 27 usable after 5 reserved, fewer than 30; /26 gives 59."},
+ {"id":"surveyors-grid-005","picks":["D"],"ambiguous":false},
+ {"id":"surveyors-grid-006","picks":["D"],"ambiguous":false},
+ {"id":"surveyors-grid-007","picks":["D"],"ambiguous":false},
+ {"id":"surveyors-grid-008","picks":["B"],"ambiguous":false},
+ {"id":"surveyors-grid-009","picks":["C"],"ambiguous":false},
+ {"id":"surveyors-grid-010","picks":["A","E"],"ambiguous":false,"note":"/23 gives 507 usable; 10.1.0.0/23 is outside the VPC CIDR; /24 gives only 251."}
+]

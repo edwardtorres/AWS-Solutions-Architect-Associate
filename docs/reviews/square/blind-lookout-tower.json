@@ -1,0 +1,12 @@
+[
+ {"id":"lookout-tower-001","picks":["C"],"ambiguous":false},
+ {"id":"lookout-tower-002","picks":["D"],"ambiguous":false},
+ {"id":"lookout-tower-003","picks":["D"],"ambiguous":false},
+ {"id":"lookout-tower-004","picks":["B"],"ambiguous":false},
+ {"id":"lookout-tower-005","picks":["C"],"ambiguous":false,"note":"Event history covers only 90 days; a trail to S3 keeps records longer."},
+ {"id":"lookout-tower-006","picks":["D"],"ambiguous":false},
+ {"id":"lookout-tower-007","picks":["A"],"ambiguous":false},
+ {"id":"lookout-tower-008","picks":["B","C"],"ambiguous":false},
+ {"id":"lookout-tower-009","picks":["C"],"ambiguous":false},
+ {"id":"lookout-tower-010","picks":["C","D"],"ambiguous":false}
+]

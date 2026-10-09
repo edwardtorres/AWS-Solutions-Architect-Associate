@@ -1,0 +1,12 @@
+[
+ {"id":"pillar-plaza-001","picks":["C"],"ambiguous":false},
+ {"id":"pillar-plaza-002","picks":["A"],"ambiguous":false},
+ {"id":"pillar-plaza-003","picks":["C"],"ambiguous":false},
+ {"id":"pillar-plaza-004","picks":["C","F"],"ambiguous":false},
+ {"id":"pillar-plaza-005","picks":["C"],"ambiguous":false},
+ {"id":"pillar-plaza-006","picks":["A"],"ambiguous":false},
+ {"id":"pillar-plaza-007","picks":["A"],"ambiguous":false},
+ {"id":"pillar-plaza-008","picks":["C"],"ambiguous":false},
+ {"id":"pillar-plaza-009","picks":["A","B"],"ambiguous":false},
+ {"id":"pillar-plaza-010","picks":["D"],"ambiguous":false}
+]

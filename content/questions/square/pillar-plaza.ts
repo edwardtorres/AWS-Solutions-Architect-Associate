@@ -41,7 +41,7 @@ const questions: Question[] = [
     building: 'pillar-plaza',
     d: 2,
     stem: 'A company runs a fleet of Amazon EC2 instances that average low CPU utilization all day. A new sustainability goal asks the team to reduce the energy the workload needs. Which action BEST follows the Sustainability design principles?',
-    correct: ['Right-size the instances and use EC2 Auto Scaling so fewer, busier instances match demand', 'Right-sizing and raising utilization reduces idle resources and the total energy needed to power the workload.'],
+    correct: ['Right-size the instances and use Auto Scaling so fewer, busier instances run', 'Right-sizing and raising utilization reduces idle resources and the total energy needed to power the workload.'],
     wrong: [
       ['Keep the current fleet and add the same number of idle instances as spare capacity', 'More idle resources increase the energy needed, which works against maximizing utilization.'],
       ['Provision the fleet for the highest yearly peak and leave it fixed in size', 'A fixed peak-sized fleet keeps utilization low, so it does not reduce idle capacity.'],
@@ -81,11 +81,11 @@ const questions: Question[] = [
     building: 'pillar-plaza',
     d: 2,
     stem: 'A company serves its web application from one very large Amazon EC2 instance. Every failure or reboot takes the whole site down. The reviewers want a design change that follows the Reliability design principles. Which solution is the BEST fit?',
-    correct: ['Replace the instance with several smaller instances in an Auto Scaling group behind a load balancer', 'Spreading requests across multiple smaller resources reduces the impact of a single failure on the overall workload.'],
+    correct: ['Use several smaller instances in an Auto Scaling group behind a load balancer', 'Spreading requests across multiple smaller resources reduces the impact of a single failure on the overall workload.'],
     wrong: [
-      ['Move the application to the largest available instance size', 'One bigger instance is still a single point of failure, so a failure still takes the site down.'],
-      ['Attach additional EBS volumes to the existing instance', 'More volumes add storage, not a second compute resource, so the instance remains a single point of failure.'],
-      ['Take a manual snapshot of the instance every week', 'Snapshots help recovery, but the site still goes down on every failure and recovery is manual.'],
+      ['Move the application to the largest available instance size in its current zone', 'One bigger instance is still a single point of failure, so a failure still takes the site down.'],
+      ['Attach additional EBS volumes to the existing instance to add more storage', 'More volumes add storage, not a second compute resource, so the instance remains a single point of failure.'],
+      ['Take a manual snapshot of the instance every week and keep it in Amazon S3', 'Snapshots help recovery, but the site still goes down on every failure and recovery is manual.'],
     ],
     slot: 3,
     evidence: [
@@ -98,10 +98,10 @@ const questions: Question[] = [
     building: 'pillar-plaza',
     d: 3,
     stem: 'A team ships one large manual release every month. When a release fails, reversing it takes hours and affects many components. Management wants to reduce the blast radius of changes and speed up recovery, in line with the Operational excellence design principles. Which approach BEST meets these requirements?',
-    correct: ['Define the workload as code and deploy small, incremental changes through automation', 'Smaller incremental changes with automated deployment reduce the blast radius and allow faster reversal when a failure occurs.'],
+    correct: ['Define the workload as code and deploy small changes through automation', 'Smaller incremental changes with automated deployment reduce the blast radius and allow faster reversal when a failure occurs.'],
     wrong: [
       ['Combine several months of changes into one larger quarterly release', 'Larger batches widen the blast radius and make reversal harder, which fails both requirements.'],
-      ['Add a second manual approval step before each monthly release', 'An extra approval adds delay but the release stays large and manual, so a failure still affects many components.'],
+      ['Add a second manual approval step before each monthly release goes out', 'An extra approval adds delay but the release stays large and manual, so a failure still affects many components.'],
       ['Deploy the monthly release to a second Availability Zone as well', 'A second zone adds capacity for failure of a zone, but a faulty release is still large and slow to reverse.'],
     ],
     slot: 0,
@@ -117,9 +117,9 @@ const questions: Question[] = [
     stem: 'A company wants to evaluate its workload architecture against the pillars of the Well-Architected Framework from the AWS Management Console, then save milestones and track improvements over time, with the LEAST custom tooling. Which AWS service should the company use?',
     correct: ['AWS Well-Architected Tool', 'The tool provides a framework for evaluating a cloud architecture in the console and lets you save point-in-time milestones and track changes to measure progress.'],
     wrong: [
-      ['AWS Config', 'AWS Config records and evaluates resource configurations against rules, but it does not run a pillar-based architecture review.'],
-      ['Amazon Inspector', 'Amazon Inspector scans workloads for vulnerabilities, which is not an architecture review against the pillars.'],
-      ['AWS CloudTrail', 'AWS CloudTrail records account activity and API calls, so it does not evaluate an architecture or track improvement milestones.'],
+      ['AWS Config with managed rules', 'AWS Config records and evaluates resource configurations against rules, but it does not run a pillar-based architecture review.'],
+      ['Amazon Inspector vulnerability scans', 'Amazon Inspector scans workloads for vulnerabilities, which is not an architecture review against the pillars.'],
+      ['AWS CloudTrail event history', 'AWS CloudTrail records account activity and API calls, so it does not evaluate an architecture or track improvement milestones.'],
     ],
     slot: 1,
     evidence: [

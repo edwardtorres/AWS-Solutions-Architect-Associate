@@ -94,7 +94,8 @@ async function smallTargets(page: Page): Promise<string[]> {
     const out: string[] = [];
     const els = document.querySelectorAll<HTMLElement>('button, a[href], input:not([type=file]), select, textarea, summary');
     els.forEach((el) => {
-      const r = el.getBoundingClientRect();
+      // A radio or checkbox inside a label is tapped through the label, so the label is the target.
+      const r = (el.tagName === 'INPUT' ? el.closest('label') ?? el : el).getBoundingClientRect();
       if (r.width === 0 || r.height === 0) return;
       if (el.closest('[inert]') || el.classList.contains('skip-link')) return;
       const tooShort = r.height < 43.5;
