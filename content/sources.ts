@@ -16,7 +16,6 @@ const sources: Source[] = [
   aws('waf-performance', `${D}/wellarchitected/latest/framework/performance-efficiency.html`, 'AWS Well-Architected Framework: Performance efficiency'),
   aws('waf-cost', `${D}/wellarchitected/latest/framework/cost-optimization.html`, 'AWS Well-Architected Framework: Cost optimization'),
   aws('waf-opex', `${D}/wellarchitected/latest/framework/operational-excellence.html`, 'AWS Well-Architected Framework: Operational excellence'),
-  aws('waf-sustainability', `${D}/wellarchitected/latest/framework/sustainability.html`, 'AWS Well-Architected Framework: Sustainability'),
   aws('waf-tool', 'https://aws.amazon.com/well-architected-tool/', 'AWS Well-Architected Tool'),
   aws('lambda-welcome', `${D}/lambda/latest/dg/welcome.html`, 'What is AWS Lambda?'),
 
@@ -74,7 +73,6 @@ const sources: Source[] = [
   aws('sso-what-is', `${D}/singlesignon/latest/userguide/what-is.html`, 'What is IAM Identity Center?'),
   aws('sso-ad', `${D}/singlesignon/latest/userguide/manage-your-identity-source-ad.html`, 'IAM Identity Center: Microsoft AD directory'),
   aws('ds-what-is', `${D}/directoryservice/latest/admin-guide/what_is.html`, 'What is AWS Directory Service?'),
-  aws('s3-bucket-policy-examples', `${D}/AmazonS3/latest/userguide/example-bucket-policies.html`, 'Bucket policy examples'),
   aws('cf-oac', `${D}/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html`, 'Restrict access to an Amazon S3 origin (CloudFront)'),
   aws('fault-isolation-az', `${D}/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html`, 'AWS Fault Isolation Boundaries: Availability Zones'),
   aws('regions-and-azs', `${D}/global-infrastructure/latest/regions/aws-regions.html`, 'AWS Regions'),
@@ -236,7 +234,6 @@ const sources: Source[] = [
   aws('servicequotas', `${D}/servicequotas/latest/userguide/intro.html`, 'What is Service Quotas?'),
   aws('servicequotas-cw', `${D}/servicequotas/latest/userguide/configure-cloudwatch.html`, 'Service Quotas and Amazon CloudWatch alarms'),
   aws('waf-quotas-regions', `${D}/wellarchitected/latest/reliability-pillar/rel_manage_service_limits_limits_considered.html`, 'REL01-BP02 Manage service quotas across accounts and regions'),
-  aws('waf-quotas-aware', `${D}/wellarchitected/latest/reliability-pillar/rel_manage_service_limits_aware_quotas_and_constraints.html`, 'REL01-BP01 Aware of service quotas and constraints'),
   aws('xray', `${D}/xray/latest/devguide/aws-xray.html`, 'What is AWS X-Ray?'),
   aws('trusted-advisor', `${D}/awssupport/latest/user/trusted-advisor.html`, 'AWS Trusted Advisor'),
   aws('waf-availability', `${D}/wellarchitected/latest/reliability-pillar/availability.html`, 'Availability (Reliability Pillar)'),
@@ -507,6 +504,8 @@ const sources: Source[] = [
   aws('transfer-pricing', 'https://aws.amazon.com/aws-transfer-family/pricing/', 'AWS Transfer Family pricing'),
   aws('waf-region-cost', `${D}/wellarchitected/latest/framework/cost_pricing_model_region_cost.html`, 'COST07-BP02 Choose Regions based on cost'),
   aws('rds-stop', `${D}/AmazonRDS/latest/UserGuide/USER_StopInstance.html`, 'Stopping an Amazon RDS DB instance temporarily'),
+  aws('cloudfront-settings', `${D}/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesGeneral.html`, 'CloudFront distribution settings'),
+  aws('ec2-t-unlimited', `${D}/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html`, 'Unlimited mode for burstable performance instances'),
 ];
 
 export default sources;
