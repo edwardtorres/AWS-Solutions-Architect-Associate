@@ -496,6 +496,15 @@ const sources: Source[] = [
   aws('ebs-archive-considerations', `${D}/ebs/latest/userguide/snapshot-archive-considerations.html`, 'Considerations and limitations for archiving Amazon EBS snapshots'),
   aws('ebs-archive-pricing', `${D}/ebs/latest/userguide/snapshot-archive-pricing.html`, 'Pricing and billing for archiving Amazon EBS snapshots'),
   aws('aurora-backups', `${D}/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html`, 'Overview of backing up and restoring an Aurora DB cluster'),
+  aws('vpc-pricing', 'https://aws.amazon.com/vpc/pricing/', 'Amazon VPC pricing'),
+  aws('privatelink-pricing', 'https://aws.amazon.com/privatelink/pricing/', 'AWS PrivateLink pricing'),
+  aws('vpc-flow-logs', `${D}/vpc/latest/userguide/flow-logs.html`, 'Logging IP traffic using VPC Flow Logs'),
+  aws('vpc-nat-metrics', `${D}/vpc/latest/userguide/metrics-dimensions-nat-gateway.html`, 'NAT gateway metrics and dimensions'),
+  aws('cost-anomaly', `${D}/cost-management/latest/userguide/manage-ad.html`, 'Detecting unusual spend with AWS Cost Anomaly Detection'),
+  aws('secrets-access', `${D}/secretsmanager/latest/userguide/auth-and-access.html`, 'Authentication and access control for AWS Secrets Manager'),
+  aws('dx-hosted', `${D}/directconnect/latest/UserGuide/hosted_connection.html`, 'Hosted Direct Connect connections'),
+  aws('datasync-pricing', 'https://aws.amazon.com/datasync/pricing/', 'AWS DataSync pricing'),
+  aws('transfer-pricing', 'https://aws.amazon.com/aws-transfer-family/pricing/', 'AWS Transfer Family pricing'),
 ];
 
 export default sources;

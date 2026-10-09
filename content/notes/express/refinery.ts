@@ -63,7 +63,7 @@ const notes: BuildingNotes = {
     {
       id: '3.5-S7',
       concepts: [
-        b('CSV is a row-based text format; Parquet is a performance-oriented, column-based data format. Converting CSV to Parquet (or ORC) lets queries read only the columns and blocks they need, with compression by column and predicate pushdown, which reduces the data scanned and speeds up analytics.',
+        b('Parquet is a performance-oriented, column-based data format. Converting data such as CSV files to Parquet (or ORC) brings compression by column and predicate pushdown, so Athena queries fetch only the blocks they need, which improves query performance.',
           ['glue-parquet', 'athena-columnar'],
           ['glue-parquet|This format is a performance-oriented, column-based data format.',
            'athena-columnar|Compression by column, with compression algorithm selected for the column data type to save storage space in Amazon S3 and reduce disk space and I/O during query processing.',
@@ -116,7 +116,7 @@ SELECT * FROM sales_csv;
       [
         b('CREATE TABLE ... AS SELECT (CTAS) builds a new table from the result of a query, so the data is rewritten in the new table\'s format.', 'athena-ctas',
           ['With CTAS, you can use a source table in one storage format to create another table in a different storage format.']),
-        b('The format property sets the storage format of the new table, and write_compression sets the compression format. Here the new table is stored as Parquet with Snappy compression; the page notes that the default compression for Parquet is GZIP.', 'athena-ctas',
+        b('The format property sets the storage format of the new table, and write_compression sets the compression format. Here the new table is stored as Parquet with Snappy compression; the Athena documentation notes that the default compression for Parquet is GZIP.', 'athena-ctas',
           ['Use the format property to specify ORC, PARQUET, AVRO, JSON, or TEXTFILE as the storage format for the new table.',
            'The following example specifies that data in the table new_table be stored in Parquet format and use Snappy compression.',
            'The default compression for Parquet is GZIP.']),
@@ -145,9 +145,10 @@ SELECT * FROM sales_csv;
         ['learn-analytics', 'emr-what-is'],
         ['learn-analytics|Amazon EMR Azure Databricks Both support managed Apache Spark and other data engineering workloads.',
          'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.']),
-      breaks: b('Learn says to compare runtime compatibility, cluster control, autoscaling, governance, notebooks, jobs and ecosystem integrations. On AWS the exam question is usually the choice between EMR (frameworks you control) and Glue (serverless ETL).',
-        ['learn-analytics', 'glue-what-is'],
+      breaks: b('Learn says to compare runtime compatibility, cluster control, autoscaling, governance, notebooks, jobs and ecosystem integrations. On the AWS side, EMR is a managed cluster platform for big data frameworks, EMR Serverless removes the need to operate clusters, and Glue is a separate serverless data integration service.',
+        ['learn-analytics', 'emr-serverless', 'glue-what-is'],
         ['learn-analytics|Compare runtime compatibility, cluster control, autoscaling, governance, notebooks, jobs, and ecosystem integrations.',
+         'emr-serverless|With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.',
          'glue-what-is|It\'s also serverless, which means there\'s no infrastructure to manage.']),
     },
   ],

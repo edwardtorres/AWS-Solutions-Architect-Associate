@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'read-replica-annex',
   overview: [
-    b('Database replication copies changes from one database to another. On AWS it serves different purposes: high availability inside a Region (the Multi-AZ standby) and read scaling or distance (read replicas, which can sit in another Region). Choosing between them is one of the most frequent database questions on the exam.',
+    b('Database replication copies changes from one database to another. On AWS it serves different purposes: high availability inside a Region (the Multi-AZ standby) and read scaling or distance (read replicas, which can sit in another Region). Telling these apart is the point of this building.',
       ['rds-multi-az-instance', 'rds-read-replicas'],
       ['rds-multi-az-instance|Amazon RDS provides high availability and failover support for DB instances using Multi-AZ deployments with a single standby DB instance.',
        'rds-read-replicas|A read replica is a read-only copy of a DB instance.']),
@@ -49,10 +49,11 @@ const notes: BuildingNotes = {
           ['Each Aurora DB cluster has built-in replication between multiple DB instances in the same cluster.',
            'Aurora Replicas also help to increase availability.',
            'If the writer instance in a cluster becomes unavailable, Aurora automatically promotes one of the reader instances to take its place as the new writer.']),
-        b('Aurora Replicas are reached through the cluster\'s reader endpoint, which spreads read-only connections across the replicas. An Aurora cluster can contain up to 15 Aurora Replicas (a documented limit that can change).',
-          'aurora-replication',
-          ['You typically do so by connecting to the reader endpoint of the cluster.',
-           'An Aurora DB cluster can contain up to 15 Aurora Replicas.']),
+        b('An endpoint is the address an application connects to. Aurora Replicas are reached through the cluster\'s reader endpoint, a single address for queries, and Aurora automatically performs connection-balancing among all the Aurora Replicas behind it. An Aurora cluster can contain up to 15 Aurora Replicas.',
+          ['aurora-replication', 'aurora-endpoints'],
+          ['aurora-replication|You typically do so by connecting to the reader endpoint of the cluster.',
+           'aurora-replication|An Aurora DB cluster can contain up to 15 Aurora Replicas.',
+           'aurora-endpoints|To perform queries, you can connect to the reader endpoint, with Aurora automatically performing connection-balancing among all the Aurora Replicas.']),
       ],
       services: ['Amazon RDS', 'Amazon Aurora'],
       design: [
@@ -65,7 +66,7 @@ const notes: BuildingNotes = {
     {
       id: '3.3-S1',
       concepts: [
-        b('To configure read replicas: create one from an existing source DB instance (RDS takes a snapshot of the source and creates a read-only instance from it), then direct read-only queries from your applications to the replica endpoint while writes continue to go to the primary.',
+        b('To configure read replicas: create one from an existing source DB instance (RDS takes a snapshot of the source and creates a read-only instance from it), then direct read-only queries from your applications to the replica. Because the replica allows only read-only connections, updates are made on the primary.',
           'rds-read-replicas',
           ['When you create a read replica, you specify an existing DB instance as the source.',
            'Then Amazon RDS takes a snapshot of the source instance and creates a read-only instance from the snapshot.',
@@ -74,10 +75,12 @@ const notes: BuildingNotes = {
           'rds-read-replicas',
           ['You can configure a read replica for a DB instance that also has a standby replica configured for high availability in a Multi-AZ deployment.',
            'In some cases, a read replica resides in a different AWS Region from its primary DB instance.']),
-        b('Remember limits: RDS does not autoscale read replicas, and writes always go to the primary, so read replicas do not help a write-bound workload. For Aurora, add Aurora Replicas and use the reader endpoint.',
-          ['rds-read-replicas', 'aurora-replication'],
+        b('Remember limits: RDS does not autoscale read replicas, and because a replica allows only read-only connections it does not take writes, so read replicas do not help a write-bound workload. For Aurora, add Aurora Replicas and use the reader endpoint; Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas.',
+          ['rds-read-replicas', 'aurora-replication', 'aurora-autoscaling'],
           ['rds-read-replicas|RDS doesn\'t support autoscaling of read replicas, which is the automatic add or removing of read replicas as read demand changes.',
-           'aurora-replication|You typically do so by connecting to the reader endpoint of the cluster.']),
+           'rds-read-replicas|The read replica operates as a DB instance that allows only read-only connections.',
+           'aurora-replication|You typically do so by connecting to the reader endpoint of the cluster.',
+           'aurora-autoscaling|To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas (reader DB instances) provisioned for an Aurora DB cluster.']),
       ],
       services: ['Amazon RDS', 'Amazon Aurora'],
       design: [

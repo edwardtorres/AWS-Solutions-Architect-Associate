@@ -73,5 +73,29 @@
     "reason": "The Timestream for LiveAnalytics page says: for similar capabilities, consider Amazon Timestream for InfluxDB. No allowed page checked states clearly whether LiveAnalytics accepts new customers. The notes quote the page's wording and teach the time series data type, and do not claim a retirement. Re-check before any question names Timestream for LiveAnalytics.",
     "status": "open",
     "added": "2026-10-09"
+  },
+  {
+    "id": "nv-ga-no-cache",
+    "building": "edge-link-terminal",
+    "claim": "AWS Global Accelerator does not cache content.",
+    "reason": "No allowed AWS page checked states this directly. The Global Accelerator FAQ contrasts it with CloudFront (CloudFront improves cacheable and dynamic content; Global Accelerator proxies TCP or UDP packets at the edge and suits non-HTTP, static IP and fast regional failover use cases). The Express notes now quote that contrast and no longer say 'does not cache'; wording in other districts or Don't confuse pairs should do the same unless an AWS page states it.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-firehose-eventhubs-capture",
+    "building": "streaming-canal",
+    "claim": "Amazon Data Firehose delivery corresponds to Azure Event Hubs Capture.",
+    "reason": "The Microsoft Learn analytics comparison has no Firehose row and does not mention Event Hubs Capture, so the notes say only that Learn lists no Firehose counterpart. No allowed page confirms the mapping.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-multiaz-failover-endpoint",
+    "building": "read-replica-annex",
+    "claim": "RDS Multi-AZ failover is automatic and keeps the same endpoint, while promoting a read replica is a manual step that gives the replica its own endpoint.",
+    "reason": "The Multi-AZ and read replica pages checked do not state the endpoint behaviour in a quotable sentence (the replica page says only that you can promote a replica to a standalone instance). Left out of the Express notes until a quotable AWS sentence is found.",
+    "status": "open",
+    "added": "2026-10-09"
   }
 ]
