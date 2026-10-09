@@ -1,0 +1,156 @@
+import type { BuildingNotes } from '../../../src/content/types.ts';
+import { b, cue, example } from '../../helpers.ts';
+
+const notes: BuildingNotes = {
+  building: 'refinery',
+  overview: [
+    b('Raw data is rarely ready to analyse. Transformation services clean, enrich and convert it, and the format you convert to decides how cheaply and quickly it can be queried afterwards. The services the exam names are AWS Glue (serverless data integration and ETL) and Amazon EMR (managed clusters for big data frameworks).',
+      ['glue-what-is', 'emr-what-is'],
+      ['glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.',
+       'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.']),
+  ],
+  bullets: [
+    {
+      id: '3.5-K4',
+      concepts: [
+        b('AWS Glue consolidates data integration capabilities in a single serverless service: data discovery, modern ETL, cleansing, transforming and centralised cataloguing, with no infrastructure to manage. You can visually create, run and monitor extract, transform and load (ETL) pipelines to load data into your data lakes.',
+          'glue-what-is',
+          ['AWS Glue consolidates major data integration capabilities into a single service.',
+           'These include data discovery, modern ETL, cleansing, transforming, and centralized cataloging.',
+           'It\'s also serverless, which means there\'s no infrastructure to manage.',
+           'You can visually create, run, and monitor extract, transform, and load (ETL) pipelines to load data into your data lakes.']),
+        b('The AWS Glue Data Catalog stores metadata about data sources, transforms and targets. A crawler automatically scans your data sources and extracts metadata into the catalog, and you can also create catalog tables manually. Athena, EMR and Redshift Spectrum can then query the cataloged data.',
+          ['glue-components', 'glue-catalog', 'glue-what-is'],
+          ['glue-components|AWS Glue uses the AWS Glue Data Catalog to store metadata about data sources, transforms, and targets.',
+           'glue-catalog|crawler, which automatically scans your data sources and extracts metadata.',
+           'glue-what-is|Also, you can immediately search and query cataloged data using Amazon Athena, Amazon EMR, and Amazon Redshift Spectrum.']),
+        b('Amazon EMR simplifies running big data frameworks such as Apache Hadoop and Apache Spark to process and analyse vast amounts of data, and to transform and move large amounts of data into and out of stores such as S3 and DynamoDB. Amazon EMR Serverless is a deployment option that provides a serverless runtime environment so you do not configure, optimise, secure or operate clusters.',
+          ['emr-what-is', 'emr-serverless'],
+          ['emr-what-is|Amazon EMR also lets you transform and move large amounts of data into and out of other AWS data stores and databases, such as Amazon Simple Storage Service (Amazon S3) and Amazon DynamoDB.',
+           'emr-serverless|Amazon EMR Serverless is a deployment option for Amazon EMR that provides a serverless runtime environment.',
+           'emr-serverless|With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.']),
+      ],
+      services: ['AWS Glue', 'Amazon EMR'],
+      design: [
+        b('Cue: serverless ETL and catalog with minimal operations → Glue; existing Spark or Hadoop jobs and framework control → EMR (or EMR Serverless for no cluster management).',
+          ['glue-what-is', 'emr-serverless'],
+          ['glue-what-is|It\'s also serverless, which means there\'s no infrastructure to manage.',
+           'emr-serverless|With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.']),
+      ],
+    },
+    {
+      id: '3.5-S5',
+      concepts: [
+        b('For data processing compute, Glue is serverless and so suits ETL where you do not want to manage infrastructure. EMR is a managed cluster platform for frameworks like Hadoop and Spark, and EMR Serverless avoids over- or under-provisioning of resources for processing.',
+          ['glue-what-is', 'emr-what-is', 'emr-serverless'],
+          ['glue-what-is|It\'s also serverless, which means there\'s no infrastructure to manage.',
+           'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.',
+           'emr-serverless|EMR Serverless helps you avoid over- or under-provisioning resources for your data processing jobs.']),
+        b('Other compute options for processing: AWS Batch for queued batch jobs, Lambda for small event-driven transformations (subject to its time limit), and Athena for SQL transformations over S3 data.',
+          ['batch-what-is', 'lambda-quotas', 'athena-what-is'],
+          ['batch-what-is|AWS Batch helps you to run batch computing workloads on the AWS Cloud.',
+           'lambda-quotas|Code can run for up to 15 minutes in a single invocation',
+           'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.']),
+      ],
+      services: ['Amazon EMR', 'AWS Glue'],
+      design: [
+        b('Cue: "existing on-premises Hadoop/Spark jobs" → EMR; "serverless ETL with a data catalog" → Glue; "run the same code without managing clusters" → EMR Serverless.',
+          ['emr-serverless', 'glue-what-is'],
+          ['emr-serverless|With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.',
+           'glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.']),
+      ],
+    },
+    {
+      id: '3.5-S7',
+      concepts: [
+        b('CSV is a row-based text format; Parquet is a performance-oriented, column-based data format. Converting CSV to Parquet (or ORC) lets queries read only the columns and blocks they need, with compression by column and predicate pushdown, which reduces the data scanned and speeds up analytics.',
+          ['glue-parquet', 'athena-columnar'],
+          ['glue-parquet|This format is a performance-oriented, column-based data format.',
+           'athena-columnar|Compression by column, with compression algorithm selected for the column data type to save storage space in Amazon S3 and reduce disk space and I/O during query processing.',
+           'athena-columnar|Predicate pushdown in Parquet and ORC enables Athena queries to fetch only the blocks it needs, improving query performance.']),
+        b('Two common ways to convert on AWS: a Glue ETL job reads files from S3 and writes Parquet to S3 (Glue supports reading Parquet from S3 and streaming sources and writing Parquet to S3), or an Athena CTAS query creates a new table in a different storage format from a source table.',
+          ['glue-parquet', 'athena-ctas'],
+          ['glue-parquet|You can use AWS Glue to read Parquet files from Amazon S3 and from streaming sources as well as write Parquet files to Amazon S3.',
+           'athena-ctas|With CTAS, you can use a source table in one storage format to create another table in a different storage format.'],
+          { allow: ['two'] }),
+        b('Partition the converted data too: partitioning restricts the amount of data scanned by each query, improving performance and reducing cost.',
+          'athena-partitions',
+          ['By partitioning your data, you can restrict the amount of data scanned by each query, thus improving performance and reducing cost.']),
+      ],
+      services: ['AWS Glue', 'Amazon Athena'],
+      design: [
+        b('Cue: "reduce Athena query cost and time on large CSV files" → convert to a columnar format (Parquet or ORC) and partition; "transform data between formats on a schedule with no servers" → Glue job.',
+          ['athena-columnar', 'athena-partitions'],
+          ['athena-columnar|Apache Parquet and ORC are columnar storage formats that are optimized for fast retrieval of data and used in AWS analytical applications.',
+           'athena-partitions|By partitioning your data, you can restrict the amount of data scanned by each query, thus improving performance and reducing cost.']),
+      ],
+    },
+  ],
+  cues: [
+    cue('serverless ETL jobs and a central metadata catalog', 'AWS Glue',
+      b('Glue provides serverless ETL and cataloguing.', 'glue-what-is',
+        ['It\'s also serverless, which means there\'s no infrastructure to manage.'])),
+    cue('automatically discover schemas of data in S3', 'AWS Glue crawler (Data Catalog)',
+      b('A crawler scans data sources and extracts metadata.', 'glue-catalog',
+        ['crawler, which automatically scans your data sources and extracts metadata.'])),
+    cue('run Hadoop or Spark at scale on managed clusters', 'Amazon EMR',
+      b('EMR runs big data frameworks such as Hadoop and Spark.', 'emr-what-is',
+        ['Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.'])),
+    cue('Spark applications without configuring or operating clusters', 'Amazon EMR Serverless',
+      b('EMR Serverless avoids cluster configuration and operation.', 'emr-serverless',
+        ['With EMR Serverless, you don’t have to configure, optimize, secure, or operate clusters to run applications with these frameworks.'])),
+    cue('convert CSV to Parquet to speed up and cheapen queries', 'Glue job or Athena CTAS to a columnar format',
+      b('CTAS can create a table in a different storage format from a source table.', 'athena-ctas',
+        ['With CTAS, you can use a source table in one storage format to create another table in a different storage format.'])),
+  ],
+  examples: [
+    example('Athena CTAS: store a table as Parquet', 'other',
+      `
+CREATE TABLE sales_parquet
+WITH (
+  format = 'Parquet',
+  write_compression = 'SNAPPY'
+) AS
+SELECT * FROM sales_csv;
+`,
+      [
+        b('CREATE TABLE ... AS SELECT (CTAS) builds a new table from the result of a query, so the data is rewritten in the new table\'s format.', 'athena-ctas',
+          ['With CTAS, you can use a source table in one storage format to create another table in a different storage format.']),
+        b('The format property sets the storage format of the new table, and write_compression sets the compression format. Here the new table is stored as Parquet with Snappy compression; the page notes that the default compression for Parquet is GZIP.', 'athena-ctas',
+          ['Use the format property to specify ORC, PARQUET, AVRO, JSON, or TEXTFILE as the storage format for the new table.',
+           'The following example specifies that data in the table new_table be stored in Parquet format and use Snappy compression.',
+           'The default compression for Parquet is GZIP.']),
+        b('The names sales_parquet and sales_csv are placeholders: sales_csv stands for an existing Athena table over CSV files in S3. This is an illustration of the pattern, not configuration to copy.', 'athena-ctas',
+          ['CREATE TABLE new_table WITH ( format = \'Parquet\', write_compression = \'SNAPPY\') AS SELECT * FROM old_table;']),
+      ]),
+  ],
+  confuse: [],
+  azure: [
+    {
+      concept: 'Data Factory in Microsoft Fabric / Azure Data Factory',
+      aws: 'AWS Glue',
+      mapping: b('Learn pairs AWS Glue with Data Factory in Microsoft Fabric or Azure Data Factory; all provide managed data integration.',
+        ['learn-analytics', 'glue-what-is'],
+        ['learn-analytics|AWS Glue Data Factory in Microsoft Fabric or Azure Data Factory All three provide managed data integration.',
+         'glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.']),
+      breaks: b('Learn says to compare connectors, transformation engines, private networking, runtime placement, orchestration features and integration with the target analytics platform. A Glue-specific point is the built-in Data Catalog and crawlers that Athena and EMR also use.',
+        ['learn-analytics', 'glue-catalog'],
+        ['learn-analytics|Compare connectors, transformation engines, private networking, runtime placement, orchestration features, and integration with the target analytics platform.',
+         'glue-catalog|The Data Catalog integrates with other AWS analytics services, providing a unified view of data sources making it easier to manage and analyze data.']),
+    },
+    {
+      concept: 'Azure Databricks',
+      aws: 'Amazon EMR',
+      mapping: b('Learn pairs Amazon EMR with Azure Databricks: both support managed Apache Spark and other data engineering workloads.',
+        ['learn-analytics', 'emr-what-is'],
+        ['learn-analytics|Amazon EMR Azure Databricks Both support managed Apache Spark and other data engineering workloads.',
+         'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.']),
+      breaks: b('Learn says to compare runtime compatibility, cluster control, autoscaling, governance, notebooks, jobs and ecosystem integrations. On AWS the exam question is usually the choice between EMR (frameworks you control) and Glue (serverless ETL).',
+        ['learn-analytics', 'glue-what-is'],
+        ['learn-analytics|Compare runtime compatibility, cluster control, autoscaling, governance, notebooks, jobs, and ecosystem integrations.',
+         'glue-what-is|It\'s also serverless, which means there\'s no infrastructure to manage.']),
+    },
+  ],
+};
+
+export default notes;

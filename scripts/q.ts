@@ -3,6 +3,7 @@
  * Prints the sentences of the page that match each pattern, in the page's own capitalisation,
  * ready to paste into a quote. Pages are cached in .cache/.
  */
+process.stdout.on('error', () => process.exit(0));
 import { fetchPage } from './lib/pageCache.ts';
 
 const [url, ...patterns] = process.argv.slice(2);

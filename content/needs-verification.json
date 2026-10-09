@@ -41,5 +41,21 @@
     "reason": "Comprehend and Polly are pre-built AI services, while AWS Managed Services (AMS) is a separate operations offering that is not on the guide's in-scope list. The notes treat the bullet as 'managed AWS services with appropriate use cases' and teach Comprehend and Polly; no AWS page confirms the intended meaning of 'AMS' here.",
     "status": "open",
     "added": "2026-10-09"
+  },
+  {
+    "id": "nv-aws-auto-scaling-plans",
+    "building": "turbine-hall",
+    "claim": "AWS Auto Scaling (scaling plans) is current and recommended alongside Amazon EC2 Auto Scaling.",
+    "reason": "The exam guide lists 'AWS Auto Scaling' but its documentation page now leads to a guide for migrating a scaling plan to EC2 Auto Scaling and Application Auto Scaling scaling policies. No allowed page states whether scaling plans are retired. The notes teach EC2 Auto Scaling and Application Auto Scaling policies and report only what the migration page says.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-snow-family-availability",
+    "building": "transfer-dock",
+    "claim": "AWS Snow Family devices are available for new transfer designs.",
+    "reason": "The exam guide lists AWS Snow Family, but the Snowball Edge documentation states AWS Snowball Edge is no longer available to new customers and points new customers to AWS DataSync, AWS Data Transfer Terminal or partner solutions. No allowed page tells which Snow devices (such as Snowcone) remain available. The notes label Snowball Edge accordingly and teach the transfer-method choice; the exam may still use Snow Family wording.",
+    "status": "open",
+    "added": "2026-10-09"
   }
 ]

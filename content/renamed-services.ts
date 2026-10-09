@@ -34,6 +34,15 @@ const renamed: RenamedService[] = [
       ['Amazon Quick evolved from Amazon QuickSight.',
        'QuickSight continues as Amazon Quick Sight, a feature within Quick.']),
   },
+  {
+    id: 'data-firehose',
+    examGuideName: 'Amazon Data Firehose',
+    otherName: 'Amazon Kinesis Data Firehose',
+    relation: b('Amazon Kinesis Data Firehose was renamed Amazon Data Firehose in February 2024. The change was a name change only: service endpoints, APIs, the CLI, IAM access policies and CloudWatch metrics did not change. Older articles and some practice material still use the previous name.',
+      'firehose-rename',
+      ['Posted on: Feb 9, 2024 AWS is renaming Amazon Kinesis Data Firehose to Amazon Data Firehose.',
+       'There are no other changes, including service endpoints, APIs, the AWS Command Line Interface (AWS CLI), the AWS Identity and Access Management (IAM) access policies, and Amazon CloudWatch metrics.']),
+  },
 ];
 
 export default renamed;
