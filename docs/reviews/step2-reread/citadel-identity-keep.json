@@ -1,0 +1,12 @@
+{
+  "building": "identity-keep",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "azure[Azure RBAC].mapping (IAM and Entra ID entry)",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    }
+  ]
+}

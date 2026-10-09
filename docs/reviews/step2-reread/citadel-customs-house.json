@@ -1,0 +1,24 @@
+{
+  "building": "customs-house",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "azure[VPN Gateway].mapping",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[ExpressRoute].mapping",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[ExpressRoute].breaks",
+      "verdict": "OK",
+      "issue": "Checked: the cached Learn networking page contains no \"encrypt\" text, so \"the comparison does not mention encryption for it\" is true. dx-encryption quote verified.",
+      "suggestedFix": ""
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{"building":"streaming-canal","blocks":[
+{"where":"overview.0","verdict":"OVERSTATED","issue":"'AWS has three streaming ingestion services to tell apart' implies AWS has exactly three streaming services (Kinesis also has other services); no quote says three. '(you build the consumers)' is supported by kinesis-concepts, which is not cited in this block.","suggestedFix":"'Three streaming services are easy to confuse: Kinesis Data Streams (producers push records and consumers process them), {{rename:data-firehose}} (fully managed delivery to destinations) and Amazon MSK (managed Apache Kafka).' and add the kinesis-concepts source/quote 'the consumers process the data in real time'."},
+{"where":"azure.0.breaks (Kinesis vs Event Hubs)","verdict":"OK","issue":"Learn sentence verbatim; shard quote verbatim; Learn analytics page does not mention Firehose, so 'no Learn pairing' holds.","suggestedFix":""},
+{"where":"azure.1.breaks (MSK vs Event Hubs)","verdict":"OK","issue":"Both Learn sentences verbatim; MSK runs open-source Kafka quoted.","suggestedFix":""}
+]}

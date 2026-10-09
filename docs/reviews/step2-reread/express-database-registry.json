@@ -1,0 +1,3 @@
+{"building":"database-registry","blocks":[
+{"where":"azure.2.mapping (DMS)","verdict":"OK","issue":"Learn row: AWS DMS - Azure Database Migration Service, 'Support varies by source, target, and online or offline migration mode' verbatim.","suggestedFix":""}
+]}

@@ -1,0 +1,12 @@
+{
+  "building": "cache-edge-breakwater",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "azure[Azure Managed Redis].mapping",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    }
+  ]
+}

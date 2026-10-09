@@ -1,0 +1,12 @@
+{
+  "building": "archive-annex",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "azure[Azure Backup].mapping",
+      "verdict": "OVERSTATED",
+      "issue": "\"Both are centralised backup services.\" The Learn storage page only says \"This option is used to back up and recover files, databases, disks, and virtual machines. Azure Backup also supports backing up compatible on-premises Windows systems.\"; it never calls Azure Backup centralised. Only the AWS quote says \"centralize and automate\". The new \"Microsoft Learn lists Azure Backup ... against AWS Backup\" wording is supported.",
+      "suggestedFix": "Both are backup services. Microsoft Learn lists Azure Backup, which backs up and recovers files, databases, disks and virtual machines, against AWS Backup, which AWS describes as centralizing and automating data protection."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "building": "single-point-watch",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "azure[Application Gateway].breaks",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    }
+  ]
+}

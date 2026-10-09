@@ -1,0 +1,18 @@
+{
+  "building": "gatehouse",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "azure[NSGs].mapping (Microsoft Learn pairs ... stateful, subnet or NIC)",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[User Defined Routes].breaks",
+      "verdict": "OK",
+      "issue": "Learn: \"you can create custom or user-defined (static) routes. These routes override the default Azure system routes.\" AWS: \"In general, we direct traffic using the most specific route that matches the traffic.\" Both verified. (Unchanged but noted: the NSG breaks block says a network ACL \"can deny\"; no quote in that block states that NACLs can deny - not part of this commit.)",
+      "suggestedFix": ""
+    }
+  ]
+}

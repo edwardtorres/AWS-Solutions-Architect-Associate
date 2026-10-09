@@ -1,0 +1,5 @@
+{"building":"engine-works","blocks":[
+{"where":"azure.0.mapping (EC2 instance types - Azure VMs)","verdict":"OK","issue":"Learn row 'Amazon EC2 instance types | Azure Virtual Machines' with the quoted sentence; AWS quote matches.","suggestedFix":""},
+{"where":"azure.0.breaks (instance families)","verdict":"OK","issue":"Learn sentence verbatim; 'General purpose instances provide a balance of compute, memory, and networking resources' is on the ec2-gp page.","suggestedFix":""},
+{"where":"azure.1.breaks (AWS Batch/EMR)","verdict":"OK","issue":"Learn pairs AWS Batch with Azure Batch; EMR does not appear on the Learn compute page, so 'no Learn pairing' holds. EMR sentence matches AWS page.","suggestedFix":""}
+]}

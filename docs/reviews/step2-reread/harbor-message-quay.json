@@ -1,0 +1,30 @@
+{
+  "building": "message-quay",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "EventBridge rules block (Custom Event Bus / classic)",
+      "verdict": "OK",
+      "issue": "New quote \"Custom Event Bus - Classic remains available, and this guide describes both.\" verified; \"start new applications with the Custom Event Bus\" verified.",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[Azure Event Grid].mapping",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[Azure Service Bus].mapping",
+      "verdict": "UNSUPPORTED",
+      "issue": "\"together they are the closest match, not a one-to-one equivalent\" - no cited page says SQS+SNS is the closest match to Service Bus; the Learn comparison pages do not list Service Bus (verified), and the rewrite also deleted the sentence in breaks that disclosed this.",
+      "suggestedFix": "Service Bus combines queues and topics; on AWS, Amazon SQS is a queue service and Amazon SNS delivers messages from publishers to subscribers, so the two together cover the same roles. The Microsoft Learn comparison pages do not list Service Bus, so this pairing is the app's own."
+    },
+    {
+      "where": "azure[Azure Service Bus].breaks",
+      "verdict": "OK",
+      "issue": "Claims are quoted (Amazon MQ for ActiveMQ and RabbitMQ). Consider restoring the disclosure that the Learn comparison pages do not list Service Bus.",
+      "suggestedFix": ""
+    }
+  ]
+}

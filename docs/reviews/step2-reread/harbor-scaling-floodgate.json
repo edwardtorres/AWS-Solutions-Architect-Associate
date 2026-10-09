@@ -1,0 +1,18 @@
+{
+  "building": "scaling-floodgate",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "design: horizontal vs vertical scaling block",
+      "verdict": "OK",
+      "issue": "DB vertical/read-replica claims match rds-scaling-ha. Advisory: \"stateless application tier ... behind a load balancer\" is study guidance not covered by a quote (ASG quote covers multi-AZ balancing only).",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[Load Balancer and Application Gateway].breaks",
+      "verdict": "OK",
+      "issue": "Learn networking page contains no Gateway Load Balancer text (verified), so \"lists only Azure Load Balancer and Application Gateway\" is true; both gwlb quotes support the rest.",
+      "suggestedFix": ""
+    }
+  ]
+}

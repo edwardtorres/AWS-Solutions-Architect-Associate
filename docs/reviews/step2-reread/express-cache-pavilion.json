@@ -1,0 +1,6 @@
+{"building":"cache-pavilion","blocks":[
+{"where":"bullets.3.3-K2 DAX concept (dax, dax-concepts)","verdict":"OK","issue":"Eventually-consistent latency quote, pass-through of strongly consistent reads and the 'not cached in DAX' sentence on the page support 'does not speed those up'; overprovision quote present.","suggestedFix":""},
+{"where":"MemoryDB concept (memorydb)","verdict":"OK","issue":"'compatible with Valkey and Redis OSS' is on the page (not in a quote but on the cited page); primary-database sentence now quoted verbatim.","suggestedFix":""},
+{"where":"3.3-S5 lazy loading / write-through concept (elasticache-strategies)","verdict":"OK","issue":"Node failures not fatal, stale data and three trips are all quoted. 'caches data that may never be read' is on the page ('Most data is never read') though not in the block's quotes.","suggestedFix":"Optional: add the quote 'Most data is never read, which is a waste of resources.' so the write-through clause is quoted in-block."},
+{"where":"azure.0.breaks (learn-databases, memorydb, dax)","verdict":"OK","issue":"Learn sentence 'Don't use it as the authoritative persistent database' and 'No direct equivalent' for MemoryDB match the page; AWS sentences match.","suggestedFix":""}
+]}

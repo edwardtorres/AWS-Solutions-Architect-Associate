@@ -99,7 +99,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon Comprehend', 'Amazon Polly', 'Amazon RDS'],
       design: [
-        b('Rule of thumb for scenario questions: when a purpose-built AWS service exists for the task, such as a purpose-built NoSQL database like Amazon DynamoDB, consider it before running the software yourself on EC2.',
+        b('Rule of thumb for scenario questions: when a purpose-built AWS service exists for the task, such as a purpose-built NoSQL database like Amazon DynamoDB, consider it for the design.',
           'database-decision',
           ['For example, you could use Amazon Aurora or purpose-built NoSQL databases such as Amazon DynamoDB, Amazon Neptune, or Amazon DocumentDB (with MongoDB compatibility).']),
       ],

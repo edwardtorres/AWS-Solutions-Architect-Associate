@@ -1,0 +1,18 @@
+{
+  "building": "embassy-row",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "bullet 1.1-S5, concept 2 (cross-account vs same-account evaluation)",
+      "verdict": "WRONG",
+      "issue": "\"...the request is still allowed, provided no explicit deny or other limit (an SCP or permissions boundary) applies.\" The IAM boundaries page says: \"Within the same account, resource-based policies that grant permissions to an IAM user ARN ... are not limited by an implicit deny in an identity-based policy or permissions boundary.\" (Role ARN grants ARE limited by a boundary; role-session ARN grants are not.) So the blanket \"permissions boundary limits the same-account resource-policy allow\" is incorrect for IAM users, and the added boundary quote (\"maximum permissions that an identity-based policy can grant\") does not support it. The SCP part is supported by orgs-scps (\"effective permissions are the logical intersection between what is allowed by the SCP ... and what is allowed by the identity-based and resource-based policies\"), but that quote is not in the block (the quoted sentence is only \"central control over the maximum available permissions\"). The explicit-deny part is supported.",
+      "suggestedFix": "Inside a single account the rule is looser: if either the identity-based policy or the resource-based policy allows the request and the other does not, the request is still allowed, provided no explicit deny applies. An SCP still limits member-account principals. Drop the permissions boundary from this sentence (or state it exactly: a resource-based policy that names an IAM user ARN is not limited by that user's permissions boundary, but one that names a role ARN is) and replace the boundary quote with iam-boundaries|Within the same account, resource-based policies that grant permissions to an IAM user ARN (that is not an AWS STS federated user principal session) are not limited by an implicit deny in an identity-based policy or permissions boundary."
+    },
+    {
+      "where": "azure[Azure management groups].breaks",
+      "verdict": "OK",
+      "issue": "Learn hub row \"AWS Organizations | Azure management groups | These services provide security policy and role management when you work with multiple accounts\" verified; orgs-scps quotes verified.",
+      "suggestedFix": ""
+    }
+  ]
+}

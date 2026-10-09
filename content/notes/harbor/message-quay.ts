@@ -203,7 +203,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Service Bus',
       aws: 'Amazon SQS and Amazon SNS',
-      mapping: b('Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe topics. On AWS, Amazon SQS is a queue service and Amazon SNS delivers messages from publishers to subscribers; together they are the closest match, not a one-to-one equivalent.',
+      mapping: b('Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe topics. On AWS, Amazon SQS is a queue service and Amazon SNS delivers messages from publishers to subscribers; together they cover the same roles. The Microsoft Learn comparison pages do not list Service Bus, so this pairing is this app\'s own, drawn from the product pages.',
         ['learn-azure-servicebus', 'sqs-what-is', 'sns-what-is'],
         ['learn-azure-servicebus|Azure Service Bus is a fully managed enterprise message broker with message queues and publish-subscribe topics.',
          'sqs-what-is|Amazon SQS decouples and scales distributed software systems and components as a queue service.',

@@ -1,0 +1,24 @@
+{
+  "building": "durable-dock",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "bullet 2.2-K11 concept 1 (S3 durability)",
+      "verdict": "OK",
+      "issue": "New prose has no figures; \"multi-AZ classes are designed to sustain data through the loss of an entire Availability Zone\" matches s3-durability. Mild: \"very high durability\" is vague but not unsupported.",
+      "suggestedFix": ""
+    },
+    {
+      "where": "bullet 2.2-K11 EBS block",
+      "verdict": "OK",
+      "issue": "\"io2 Block Express volumes have the highest durability, other volume types are less durable\" is supported by ebs-what-is (99.999% vs 99.8% to 99.9%).",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[storage redundancy].breaks",
+      "verdict": "OK",
+      "issue": "Parenthetical about differing wording removed; remaining claims have quotes (async copy to secondary region; cross-region replication; destination buckets in different Regions). \"cross-Region backup copies\" has no quote in this block (unchanged text).",
+      "suggestedFix": ""
+    }
+  ]
+}

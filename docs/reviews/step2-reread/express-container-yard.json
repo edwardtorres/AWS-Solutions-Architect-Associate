@@ -1,0 +1,3 @@
+{"building":"container-yard","blocks":[
+{"where":"azure.0.breaks (eks-autoscaling, learn-compute)","verdict":"OK","issue":"'EKS Auto Mode builds upon Karpenter' and the 'automatically scales cluster compute resources' sentence are on the EKS page; Learn compute page pairs EKS-AKS and Auto Scaling with VM scale sets/App Service autoscaling and does not mention Karpenter, so 'no Learn pairing' is accurate.","suggestedFix":""}
+]}

@@ -1,0 +1,12 @@
+{
+  "building": "island-charts",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "design: routing policy block (alias record clause)",
+      "verdict": "UNSUPPORTED",
+      "issue": "\"an alias record, which is a record type and not a routing policy\" - the only alias quote is about the zone apex. The page does show alias records are used across routing policies (\"Values that are common for alias records for all routing policies\") and that the routing-policy list (route53-routing) does not include alias, but no quote in the block states it.",
+      "suggestedFix": "Add the quote route53-alias|Values that are common for alias records for all routing policies (or the alias-record \"type ... such as A or AAAA\" sentence), or reword to \"...use an alias record (alias records work with the routing policies; they are not one of them)\"."
+    }
+  ]
+}

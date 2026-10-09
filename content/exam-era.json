@@ -5,19 +5,30 @@
       "service": "AWS Snow Family (Snowball Edge)",
       "status": "closed",
       "sentence": "AWS Snowball Edge is no longer available to new customers.",
-      "source": "snowball-edge"
+      "source": "snowball-edge",
+      "patterns": [
+        "Snowball",
+        "Snow Family",
+        "Snowcone"
+      ]
     },
     {
       "service": "Amazon FSx File Gateway (AWS Storage Gateway)",
       "status": "closed",
       "sentence": "Amazon FSx File Gateway is no longer available to new customers.",
-      "source": "sgw-fsx-file"
+      "source": "sgw-fsx-file",
+      "patterns": [
+        "FSx File Gateway"
+      ]
     },
     {
       "service": "Amazon Aurora Serverless v1 (Amazon Aurora Serverless)",
       "status": "deprecated",
       "sentence": "Platform versions should not be confused with Aurora Serverless v1, which is a deprecated product with a different architecture.",
-      "source": "aurora-serverless-how"
+      "source": "aurora-serverless-how",
+      "patterns": [
+        "Serverless v1"
+      ]
     }
   ],
   "outOfScopeContextOnly": [

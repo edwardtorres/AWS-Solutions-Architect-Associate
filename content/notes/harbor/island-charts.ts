@@ -56,14 +56,15 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon Route 53', 'Elastic Load Balancing (ELB)'],
       design: [
-        b('Choose the routing policy from the requirement: the Region with the best latency → latency; the location of your users → geolocation; the location of your resources, with optional shifting → geoproximity; primary and standby → failover; proportions that you specify → weighted; and for a name at the zone apex that points at an AWS resource, use an alias record, which is a record type and not a routing policy.',
+        b('Choose the routing policy from the requirement: the Region with the best latency → latency; the location of your users → geolocation; the location of your resources, with optional shifting → geoproximity; primary and standby → failover; proportions that you specify → weighted; and for a name at the zone apex that points at an AWS resource, use an alias record, which routes traffic to selected AWS resources and is chosen separately from the routing policy.',
           ['route53-routing', 'route53-alias'],
           ['route53-routing|Latency routing policy – Use when you have resources in multiple AWS Regions and you want to route traffic to the Region that provides the best latency.',
            'route53-routing|Geolocation routing policy – Use when you want to route traffic based on the location of your users.',
            'route53-routing|Geoproximity routing policy – Use when you want to route traffic based on the location of your resources and, optionally, shift traffic from resources in one location to resources in another location.',
            'route53-routing|Failover routing policy – Use when you want to configure active-passive failover.',
            'route53-routing|Weighted routing policy – Use to route traffic to multiple resources in proportions that you specify.',
-           'route53-alias|Unlike a CNAME record, you can create an alias record at the top node of a DNS namespace, also known as the zone apex.']),
+           'route53-alias|Unlike a CNAME record, you can create an alias record at the top node of a DNS namespace, also known as the zone apex.',
+           'route53-alias|Alias records let you route traffic to selected AWS resources, such as CloudFront distributions and Amazon S3 buckets.']),
       ],
     },
     {

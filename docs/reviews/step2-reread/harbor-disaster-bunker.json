@@ -1,0 +1,24 @@
+{
+  "building": "disaster-bunker",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "azure[Azure Backup].breaks",
+      "verdict": "OVERSTATED",
+      "issue": "\"The Azure Backup entry in the comparison covers only backing up and recovering files, databases, disks and virtual machines.\" The Learn storage page continues: \"Azure Backup also supports backing up compatible on-premises Windows systems.\" \"covers only\" is wrong. (The \"four approaches\" DR claim is verified.)",
+      "suggestedFix": "The Azure Backup entry in the comparison describes backing up and recovering files, databases, disks and virtual machines, and also backing up compatible on-premises Windows systems. (Add that Learn sentence as a quote.)"
+    },
+    {
+      "where": "azure[Azure Site Recovery].mapping",
+      "verdict": "UNSUPPORTED",
+      "issue": "\"AWS Elastic Disaster Recovery is the closest AWS match in purpose\" - no cited page makes this comparison. The Learn comparison pages (hub, compute, storage, networking, databases) contain no Site Recovery or Elastic Disaster Recovery text, so the pairing is the app's own; the rewrite removed the sentence that said so.",
+      "suggestedFix": "AWS Elastic Disaster Recovery has a comparable purpose: it replicates on-premises or cloud-based applications so that you can recover them. The Microsoft Learn comparison pages do not list this pairing, so it is drawn from the two products' own pages."
+    },
+    {
+      "where": "azure[Azure Site Recovery].breaks",
+      "verdict": "OVERSTATED",
+      "issue": "\"The two products differ in scope as each describes itself\" - the two quotes do not show a scope difference (ASR: VMs, zonal to regional; DRS: on-premises or cloud-based applications on supported operating systems); the difference is an inference, and the block no longer says the Learn pages do not list the pair.",
+      "suggestedFix": "Each product describes itself differently: Site Recovery protects virtual machines against disruptions ranging from zonal failures to regional outages, and Elastic Disaster Recovery replicates on-premises or cloud-based applications on supported operating systems. The Learn comparison pages do not list either product, so this pairing comes from their own pages."
+    }
+  ]
+}

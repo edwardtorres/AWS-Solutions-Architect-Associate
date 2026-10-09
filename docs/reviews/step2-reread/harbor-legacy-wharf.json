@@ -1,0 +1,12 @@
+{
+  "building": "legacy-wharf",
+  "district": "harbor",
+  "blocks": [
+    {
+      "where": "design: rule of thumb for purpose-built services (2.2-S8)",
+      "verdict": "UNSUPPORTED",
+      "issue": "\"consider it before running the software yourself on EC2\" - the single quote only lists purpose-built NoSQL databases; the contrast with self-managed EC2 is not quoted. The same page does say: \"Install your database engine software on Amazon Elastic Compute Cloud (Amazon EC2)... While rehosting is a fast path to the cloud, you're still left with the operational tasks such as upgrades, patches, backups, capacity planning and management\". It is study guidance (not an AWS statement), which is acceptable if labelled, but add the quote.",
+      "suggestedFix": "Add quote database-decision|While rehosting is a fast path to the cloud, you're still left with the operational tasks such as upgrades, patches, backups, capacity planning and management (use the exact page sentence), or drop the EC2 clause."
+    }
+  ]
+}

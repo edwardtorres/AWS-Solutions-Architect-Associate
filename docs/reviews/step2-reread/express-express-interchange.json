@@ -1,0 +1,5 @@
+{"building":"express-interchange","blocks":[
+{"where":"bullets.1.concepts.3 (NLB / GA static IP / PrivateLink)","verdict":"OK","issue":"All three statements are verbatim in quotes (elb-features recommendation, GA static anycast IPs, PrivateLink endpoint services require NLB or GWLB).","suggestedFix":""},
+{"where":"azure.0.breaks (Azure LB/App Gateway/GWLB)","verdict":"OK","issue":"Learn networking page pairs Load Balancer with NLB and Application Gateway with ALB and never mentions Gateway Load Balancer; the Azure GWLB SKU sentence is from the separate Learn GWLB page; AWS GWLB quote matches.","suggestedFix":""},
+{"where":"azure.1.breaks (ALB vs Application Gateway)","verdict":"OK","issue":"Layer-7 and host-field listener rules are quoted from the ALB page; Learn 'comparable to that of the AWS Application Load Balancer' is verbatim.","suggestedFix":""}
+]}

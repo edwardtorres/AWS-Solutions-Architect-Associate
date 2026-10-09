@@ -1,0 +1,36 @@
+{
+  "building": "watchtower",
+  "district": "citadel",
+  "blocks": [
+    {
+      "where": "bullet 1.2-K6 concept 1 (DDoS, rate-based rules, Shield Advanced automatic mitigation)",
+      "verdict": "OK",
+      "issue": "\"can be configured to respond automatically\" now matches shield-capabilities: \"You can configure Shield Advanced to respond automatically to mitigate application layer (layer 7) attacks against your protected resources.\" Rule-group sentence matches.",
+      "suggestedFix": ""
+    },
+    {
+      "where": "design: Shield Standard vs Advanced block",
+      "verdict": "OVERSTATED",
+      "issue": "\"...and it gives access to the AWS Shield Response Team.\" The same page says \"To use the services of the SRT, you must also be subscribed to the Business Support plan or the Enterprise Support plan.\" Only \"standard accelerators\" changed in this commit and that is verified, but the SRT clause omits the support-plan condition.",
+      "suggestedFix": "...and, if you also have the Business Support or Enterprise Support plan, it gives access to the AWS Shield Response Team. (Add the quote \"To use the services of the SRT, you must also be subscribed to the Business Support plan or the Enterprise Support plan.\")"
+    },
+    {
+      "where": "cue: flood of HTTP requests (rate-based rule / Shield Advanced automatic mitigation)",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[Microsoft Sentinel].breaks",
+      "verdict": "OK",
+      "issue": "Learn: \"Detect and investigate advanced attacks on-premises and in the cloud.\" verified.",
+      "suggestedFix": ""
+    },
+    {
+      "where": "azure[Azure Firewall].mapping",
+      "verdict": "OK",
+      "issue": "",
+      "suggestedFix": ""
+    }
+  ]
+}
