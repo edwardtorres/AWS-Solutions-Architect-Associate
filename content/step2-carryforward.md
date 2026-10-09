@@ -10,7 +10,7 @@ Not displayed in the app. This file records what the Step 1 reviewer passes aske
 ## Content and portfolio additions
 - Portfolio notes added (ACM in us-east-1 for CloudFront, OAC bucket policy, Lambda execution role, WAF on CloudFront or API Gateway, REST-only usage plans and keys, DynamoDB capacity, CloudFront cost).
 - Service coverage: CloudTrail, Network Firewall, Inspector, Security Hub (named Security Hub CSPM on AWS pages; queued as `nv-security-hub-cspm-naming`), Firewall Manager, Amazon MQ, Elastic Beanstalk and OpenSearch Service now appear in notes.
-- `nv-quick-naming` resolved: Amazon Quick contains Quick Sight (renamed-services list).
+- `nv-quick-naming`: the renamed-services list now records that Amazon Quick contains Quick Sight (AWS page quoted); the queue entry stays open until you confirm the exam wording.
 - The AMS label in 2.2 stays as the guide writes it.
 - Block Warehouse: the st1/sc1 pairing is not added to the Azure row because the Learn storage page has no HDD row; the Learn table is quoted for what it does list.
 
