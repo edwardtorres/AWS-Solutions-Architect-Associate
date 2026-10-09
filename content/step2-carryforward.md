@@ -16,7 +16,8 @@ Not displayed in the app. This file records what the Step 1 reviewer passes aske
 
 ## Structural suggestions
 - Applied in Part A: Watchtower split (Edge Defense & Threat Detection, Credential Vault & App Access), Purpose-Built Workshop split (Cargo Hall), Foundation cap raised to 5 with Lookout Tower (monitoring primer), Machine Learning family.
-- Still open: infrastructure as code (CloudFormation) and TLS / symmetric vs asymmetric crypto Foundation primers; Legacy Wharf is still one building (now with the vision, document, speech and language services added to its notes).
+- Closed in Step 3: the infrastructure as code (CloudFormation) primer is covered by Rebuild Yard (immutable infrastructure, CloudFormation templates and stacks) and the TLS primer by Certificate Office (encryption in transit, TLS certificates, ACM); no new Foundation is needed.
+- Still open: Legacy Wharf is still one building (now with the vision, document, speech and language services added to its notes).
 - Bullets cannot move between task statements, so 2.1-K15 (read replicas) stays in Scaling Floodgate.
 
 ## New open items found during Step 2
