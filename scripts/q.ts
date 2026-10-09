@@ -22,5 +22,5 @@ for (const pat of patterns) {
   const re = new RegExp(pat, 'i');
   const hits = sentences.filter((s) => re.test(s)).slice(0, 4);
   console.log(`- /${pat}/ -> ${hits.length} hit(s)`);
-  for (const h of hits) console.log(`    "${h.length > 420 ? `${h.slice(0, 420)}…` : h}"`);
+  for (const h of hits) console.log(`    "${h.length > 800 ? `${h.slice(0, 800)}…` : h}"`);
 }

@@ -1,1 +1,36 @@
-[]
+[
+  {
+    "id": "c-azure-grs-sync-async",
+    "building": "durable-dock",
+    "topic": "Whether Azure GRS/GZRS copy data to the secondary region synchronously or asynchronously",
+    "readings": [
+      {
+        "source": "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/storage",
+        "says": "GRS and GZRS synchronously replicate data to a secondary region without requiring a replication configuration."
+      },
+      {
+        "source": "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy",
+        "says": "It then copies your data asynchronously to the secondary region."
+      }
+    ],
+    "handling": "Notes cite the dedicated Azure Storage redundancy page (asynchronous) and do not repeat the comparison page's wording. Kept out of questions.",
+    "added": "2026-10-08"
+  },
+  {
+    "id": "c-s3-express-request-cost",
+    "building": "cold-cellar",
+    "topic": "How much lower S3 Express One Zone request costs are than S3 Standard",
+    "readings": [
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html",
+        "says": "S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speeds up to 10x faster and with request costs 80 percent lower than S3 Standard."
+      },
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+        "says": "S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speed up to 10x faster and with request costs 50 percent lower than S3 Standard."
+      }
+    ],
+    "handling": "Notes state no percentage for S3 Express One Zone request costs; the class is described only by the shared facts (single Availability Zone, lowest latency). Kept out of questions.",
+    "added": "2026-10-08"
+  }
+]

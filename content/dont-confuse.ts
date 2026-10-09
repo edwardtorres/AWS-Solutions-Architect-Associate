@@ -7,6 +7,105 @@ import { b } from './helpers.ts';
  */
 const pairs: ConfusePair[] = [
   {
+    id: 'sqs-sns-eventbridge-kinesis',
+    title: 'SQS vs SNS vs EventBridge vs Kinesis Data Streams',
+    required: true,
+    home: 'message-quay',
+    items: [
+      {
+        name: 'Amazon SQS',
+        points: [
+          b('A secure, durable, available hosted queue that lets you integrate and decouple distributed software systems and components; consumers take messages from the queue.', 'sqs-what-is',
+            ['Amazon Simple Queue Service (Amazon SQS) offers a secure, durable, and available hosted queue that lets you integrate and de',
+             'Amazon SQS decouples and scales distributed software systems and components as a queue service.']),
+          b('Offers dead-letter queues, and message contents can be protected with server-side encryption.', 'sqs-what-is',
+            ['Amazon SQS offers common constructs such as dead-letter queues and cost allocation tags.',
+             'You can choose to transmit sensitive data by protecting the contents of messages in queues by using default Amazon SQS managed server-side encryption (SSE)']),
+        ],
+      },
+      {
+        name: 'Amazon SNS',
+        points: [
+          b('A fully managed service that delivers messages from publishers to subscribers: publishers send to a topic, and the topic delivers to multiple subscribers.', 'sns-what-is',
+            ['Amazon Simple Notification Service (Amazon SNS) is a fully managed service that provides message delivery from publishers (producers) to subscribers (consumers).',
+             'The topic acts as a logical access point, ensuring messages are delivered to multiple subscribers across different platforms.']),
+          b('Fanout: a message published to a topic is replicated and pushed to multiple endpoints such as SQS queues, HTTP(S) endpoints and Lambda functions.', 'sns-what-is',
+            ['The Fanout scenario is when a message published to an SNS topic is replicated and pushed to multiple endpoints, such as Firehose delivery streams, Amazon SQS queues, HTTP(S) endpoints, and Lambda functions.']),
+        ],
+      },
+      {
+        name: 'Amazon EventBridge',
+        points: [
+          b('A serverless service that uses events to connect application components, making it easier to build scalable event-driven applications.', 'eventbridge-what-is',
+            ['EventBridge is a serverless service that uses events to connect application components together, making it easier for you to build scalable event-driven applications.']),
+          b('Ingests, filters, transforms and delivers events; the Custom Event Bus routes events to subscribers, retains events for a period you set, and supports ordered delivery and replay.', 'eventbridge-what-is',
+            ['EventBridge provides simple and consistent ways to ingest, filter, transform, and deliver events so you can build applications quickly.',
+             'The Custom Event Bus routes events to subscribers that consumers create themselves, retains events for a period that you set, and supports ordered delivery, replay, and non-JSON payloads.']),
+        ],
+      },
+      {
+        name: 'Amazon Kinesis Data Streams',
+        points: [
+          b('Collects and processes large streams of data records in real time; consumers are applications that read the data records from the stream.', 'kinesis-streams',
+            ['You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time.',
+             'A typical Kinesis Data Streams application reads data from a data stream as data records.']),
+          b('A stream is a set of shards, and a consumer using enhanced fan-out gets its own read-throughput allotment so several consumers can read the same stream in parallel.', ['kinesis-consumers'],
+            ['A consumer is an application that processes all data from a Kinesis data stream.',
+             'allowing multiple consumers to read data from the same stream in parallel, without contending for read throughput with other consumers.']),
+        ],
+      },
+    ],
+    choose: [
+      b('Buffer work between a producer and a consumer so each can scale and fail independently: SQS.', 'waf-loose-coupling',
+        ['The two components do not integrate through direct point-to-point interaction but usually through an intermediate durable storage layer, such as an Amazon SQS queue, a streaming data platform such as Amazon Kinesis, or AWS Step Functions.']),
+      b('Send one message to many subscribers at once (fanout), including email, mobile push and SMS endpoints: SNS.', 'sns-what-is',
+        ['Subscribers to an SNS topic can receive messages through different endpoints, depending on their use case, such as: Amazon SQS Lambda HTTP(S) endpoints Email Mobile push notifications Mobile text messages (SMS)']),
+      b('Route events from AWS services, your applications or SaaS partners to targets using rules, with filtering and transformation: EventBridge.', 'eventbridge-what-is',
+        ['Event-driven architecture is a style of building loosely-coupled software systems that work together by emitting and responding to events.']),
+      b('Continuous high-volume data records processed in real time by one or more consumers: Kinesis Data Streams.', 'kinesis-streams',
+        ['You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time.']),
+    ],
+    trap: b('SQS and SNS are often used together: SNS replicates a message to several SQS queues (fanout) so each consumer has its own queue. A question that needs "multiple independent consumers of the same message, each with its own buffer" is asking for that combination.', ['sqs-what-is', 'sns-what-is'],
+      ['sqs-what-is|For wider distribution, integrating Amazon SQS with Amazon SNS enables a fanout messaging pattern, effectively pushing messages to multiple subscribers at once.',
+       'sns-what-is|The Fanout scenario is when a message published to an SNS topic is replicated and pushed to multiple endpoints']),
+  },
+  {
+    id: 'kds-vs-firehose',
+    title: 'Kinesis Data Streams vs Amazon Data Firehose',
+    required: true,
+    home: 'streaming-canal',
+    items: [
+      {
+        name: 'Kinesis Data Streams',
+        points: [
+          b('You build the processing: data-processing applications (consumers) read the data records from the stream.', 'kinesis-streams',
+            ['You can create data-processing applications, known as Kinesis Data Streams applications.', 'A typical Kinesis Data Streams application reads data from a data stream as data records.']),
+          b('Consumers can be your own applications or AWS services such as Lambda, Managed Service for Apache Flink and Amazon Data Firehose.', 'kinesis-consumers',
+            ['You can also develop consumers using other AWS services such as AWS Lambda, Amazon Managed Service for Apache Flink, and Amazon Data Firehose.']),
+        ],
+      },
+      {
+        name: 'Amazon Data Firehose',
+        points: [
+          b('A fully managed service for delivering real-time streaming data to destinations such as Amazon S3, Amazon Redshift and Amazon OpenSearch Service.', 'firehose',
+            ['Amazon Data Firehose is a fully managed service for delivering real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Ser']),
+          b('You do not need to write applications or manage resources; it delivers automatically to the destination you configure and can transform data before delivery.', 'firehose',
+            ["With Amazon Data Firehose, you don't need to write applications or manage resources.",
+             'You can also configure Amazon Data Firehose to transform your data before delivering it.']),
+        ],
+      },
+    ],
+    choose: [
+      b('Need custom, low-latency processing logic or several independent consumers reading the same data? Kinesis Data Streams.', 'kinesis-consumers',
+        ['allowing multiple consumers to read data from the same stream in parallel, without contending for read throughput with other consumers.']),
+      b('Just need to land streaming data in S3, Redshift or OpenSearch with no code to manage? Amazon Data Firehose.', 'firehose',
+        ['You configure your data producers to send data to Amazon Data Firehose, and it automatically delivers the data to the destination that you specified.']),
+    ],
+    trap: b('Both are part of the Kinesis streaming data platform, and Firehose can even be a consumer of a data stream. "Deliver to S3 with the least operational overhead" is Firehose; "custom processing of each record" is Data Streams.', ['kinesis-streams', 'firehose'],
+      ['kinesis-streams|Kinesis Data Streams is part of the Kinesis streaming data platform, along with Firehose, Kinesis Video Streams, and Managed Service for Apache Flink.',
+       'firehose|With Amazon Data Firehose, you don\'t need to write applications or manage resources.']),
+  },
+  {
     id: 'kms-vs-cloudhsm',
     title: 'AWS KMS vs AWS CloudHSM',
     required: true,
@@ -378,6 +477,72 @@ const pairs: ConfusePair[] = [
       ['orgs-scps', 'iam-boundaries'],
       ['orgs-scps|SCPs do not grant permissions to the IAM users and IAM roles in your organization.',
        'iam-boundaries|set the maximum permissions that an identity-based policy can grant to an IAM entity.']),
+  },
+  {
+    id: 'dr-strategies',
+    title: 'The four disaster recovery strategies',
+    required: true,
+    home: 'disaster-bunker',
+    items: [
+      {
+        name: 'Backup and restore',
+        points: [
+          b('The lowest-cost, lowest-complexity approach: take backups and restore them after a disaster. It is a suitable approach for mitigating against data loss or corruption.', 'dr-options',
+            ['Disaster recovery strategies available to you within AWS can be broadly categorized into four approaches, ranging from the low cost and low complexity of making backups to more complex strategies using multiple active Regions.',
+             'Backup and restore is a suitable approach for mitigating against data loss or corruption.'],
+            { allow: ['four'] }),
+          b('Data stored in the disaster recovery Region as backups must be restored at the time of failover, and how often you run the backup determines the recovery point you can achieve.', 'dr-options',
+            ['Any data stored in the disaster recovery Region as backups must be restored at time of failover.',
+             'How often you run your backup will determine your achievable recovery point (which should align to meet your RPO).']),
+        ],
+      },
+      {
+        name: 'Pilot light',
+        points: [
+          b('Replicate data from one Region to another and provision a copy of the core workload infrastructure. It minimises the ongoing cost by keeping few resources active.', 'dr-options',
+            ['With the pilot light approach, you replicate your data from one Region to another and provision a copy of your core workload infrastructure.',
+             'A pilot light approach minimizes the ongoing cost of disaster recovery by minimizing the active resources, and simplifies recovery at the time of a disaster because the core infrastructure requirements are all in place.']),
+          b('Application servers are loaded with code and configuration but switched off until testing or failover; pilot light cannot process requests without additional action first.', 'dr-options',
+            ['Other elements, such as application servers, are loaded with application code and configurations, but are "switched off" and are only used during testing or when disaster recovery failover is invoked.',
+             'The distinction is that pilot light cannot process requests without additional action taken first, whereas warm standby can handle traffic (at reduced capacity levels) immediately.']),
+        ],
+      },
+      {
+        name: 'Warm standby',
+        points: [
+          b('A scaled-down but fully functional copy of the production environment in another Region.', 'dr-options',
+            ['The warm standby approach involves ensuring that there is a scaled down, but fully functional, copy of your production environment in another Region.']),
+          b('It can handle traffic at reduced capacity immediately, and you can provision enough capacity for the full production load or fewer resources that depend on Auto Scaling.', 'dr-options',
+            ['The distinction is that pilot light cannot process requests without additional action taken first, whereas warm standby can handle traffic (at reduced capacity levels) immediately.',
+             'You can choose to provision sufficient capacity such that the recovery Region can handle the full production load as deployed.',
+             'Or you may choose to provision fewer resources which will cost less, but take a dependency on Auto Scaling.']),
+        ],
+      },
+      {
+        name: 'Multi-site active/active',
+        points: [
+          b('Run the workload simultaneously in multiple Regions, serving traffic from all of them; hot standby by contrast serves traffic only from one Region.', 'dr-options',
+            ['You can run your workload simultaneously in multiple Regions as part of a multi-site active/active or hot standby active/passive strategy.',
+             'Multi-site active/active serves traffic from all regions to which it is deployed, whereas hot standby serves traffic only from a single region, and the other Region(s) are only used for disaster recovery.']),
+          b('The most complex and costly approach, but it can reduce recovery time to near zero for most disasters; data corruption may need to rely on backups, which usually results in a non-zero recovery point.', 'dr-options',
+            ['This approach is the most complex and costly approach to disaster recovery, but it can reduce your recovery time to near zero for most disasters with the correct technology choices and implementation (however data corruption may need to rely on backups, which usually results in a non-zero recovery point).']),
+        ],
+      },
+    ],
+    choose: [
+      b('Use the RTO and RPO to choose: the strategies range from low cost and low complexity (backup and restore) to more complex multi-Region active approaches.', 'dr-options',
+        ['Use your RTO and RPO needs to help you choose between these approaches.',
+         'Disaster recovery strategies available to you within AWS can be broadly categorized into four approaches, ranging from the low cost and low complexity of making backups to more complex strategies using multiple active Regions.'],
+        { allow: ['four'] }),
+      b('If the disaster is the loss of one data centre in a well-architected, highly available workload, backup and restore may be enough. If a disaster includes loss of a Region, or regulation requires it, consider pilot light, warm standby or multi-site active/active.', 'dr-options',
+        ['For a disaster event based on disruption or loss of one physical data center for a well-architected, highly available workload, you may only require a backup and restore approach to disaster recovery.',
+         'If your definition of a disaster goes beyond the disruption or loss of a physical data center to that of a Region or if you are subject to regulatory requirements that require it, then you should consider Pilot Light, Warm Standby, or Multi-Site Active/Active.']),
+      b('Need the DR site able to take traffic immediately, even at reduced capacity? Warm standby, not pilot light.', 'dr-options',
+        ['The distinction is that pilot light cannot process requests without additional action taken first, whereas warm standby can handle traffic (at reduced capacity levels) immediately.']),
+    ],
+    trap: b('Pilot light and warm standby both keep a copy in another Region; the difference is whether the copy can serve requests right away. Pilot light keeps core infrastructure with application servers switched off, warm standby keeps a scaled-down but fully functional copy running. Replication also does not protect against corruption: continuous replication is near zero for data loss but may not protect against data corruption or unauthorized deletion as well as point-in-time backups do.', ['dr-options'],
+      ['dr-options|The distinction is that pilot light cannot process requests without additional action taken first, whereas warm standby can handle traffic (at reduced capacity levels) immediately.',
+       'dr-options|Continuous replication of data has the advantage of being the shortest time (near zero) to back up your data, but may not protect against disaster events such as data corruption or malicious attack (such as unauthorized data deletion) as well as point-in-time backups.']),
   },
 ];
 

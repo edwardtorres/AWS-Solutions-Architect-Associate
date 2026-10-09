@@ -33,5 +33,13 @@
     "reason": "The two allowed sources use different names. Confirm the current product name in AWS docs before writing Step 2 notes; keep the guide's wording in questions.",
     "status": "open",
     "added": "2026-10-08"
+  },
+  {
+    "id": "nv-ams-label",
+    "building": "legacy-wharf",
+    "claim": "The exam guide labels 2.2-K2 'AWS Managed Services (AMS)' but gives Amazon Comprehend and Amazon Polly as examples.",
+    "reason": "Comprehend and Polly are pre-built AI services, while AWS Managed Services (AMS) is a separate operations offering that is not on the guide's in-scope list. The notes treat the bullet as 'managed AWS services with appropriate use cases' and teach Comprehend and Polly; no AWS page confirms the intended meaning of 'AMS' here.",
+    "status": "open",
+    "added": "2026-10-09"
   }
 ]

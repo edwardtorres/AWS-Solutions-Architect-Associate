@@ -465,7 +465,6 @@ export const BUILDING_DEFS: readonly BuildingDef[] = [
     azure: [
       az('hub', 'Azure Resource Manager / Bicep', 'AWS CloudFormation'),
       az('hub', 'Azure Automation / Azure Update Manager', 'AWS Systems Manager'),
-      az('compute', 'Azure Arc', 'AWS Systems Manager for non-AWS resources'),
     ],
   },
   {
