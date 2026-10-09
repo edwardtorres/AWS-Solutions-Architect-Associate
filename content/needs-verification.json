@@ -32,7 +32,10 @@
     "claim": "Amazon Quick (named in the exam guide, task 3.5) is the product the Learn comparison page calls Amazon QuickSight.",
     "reason": "The two allowed sources use different names. Confirm the current product name in AWS docs before writing Step 2 notes; keep the guide's wording in questions.",
     "status": "open",
-    "added": "2026-10-08"
+    "added": "2026-10-08",
+    "keywords": [
+      "QuickSight"
+    ]
   },
   {
     "id": "nv-ams-label",
@@ -40,31 +43,46 @@
     "claim": "The exam guide labels 2.2-K2 'AWS Managed Services (AMS)' but gives Amazon Comprehend and Amazon Polly as examples.",
     "reason": "Comprehend and Polly are pre-built AI services, while AWS Managed Services (AMS) is a separate operations offering that is not on the guide's in-scope list. The notes treat the bullet as 'managed AWS services with appropriate use cases' and teach Comprehend and Polly; no AWS page confirms the intended meaning of 'AMS' here.",
     "status": "open",
-    "added": "2026-10-09"
+    "added": "2026-10-09",
+    "keywords": [
+      "AWS Managed Services"
+    ]
   },
   {
     "id": "nv-aws-auto-scaling-plans",
     "building": "turbine-hall",
     "claim": "AWS Auto Scaling (scaling plans) is current and recommended alongside Amazon EC2 Auto Scaling.",
     "reason": "The exam guide lists 'AWS Auto Scaling' but its documentation page now leads to a guide for migrating a scaling plan to EC2 Auto Scaling and Application Auto Scaling scaling policies. No allowed page states whether scaling plans are retired. The notes teach EC2 Auto Scaling and Application Auto Scaling policies and report only what the migration page says.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "dropped",
+    "resolution": "No allowed page says scaling plans are current or recommended. The documentation only says: \"You can migrate from a scaling plan to Amazon EC2 Auto Scaling and Application Auto Scaling scaling policies.\" The notes state only that migration path.",
+    "resolutionSource": "https://docs.aws.amazon.com/autoscaling/plans/userguide/migrate-scaling-plan.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-snow-family-availability",
     "building": "transfer-dock",
     "claim": "AWS Snow Family devices are available for new transfer designs.",
     "reason": "The exam guide lists AWS Snow Family, but the Snowball Edge documentation states AWS Snowball Edge is no longer available to new customers and points new customers to AWS DataSync, AWS Data Transfer Terminal or partner solutions. No allowed page tells which Snow devices (such as Snowcone) remain available. The notes label Snowball Edge accordingly and teach the transfer-method choice; the exam may still use Snow Family wording.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "confirmed",
+    "resolution": "\"AWS Snowball Edge is no longer available to new customers.\" and \"New customers should explore AWS DataSync for online transfers, AWS Data Transfer Terminal for secure physical transfers, or AWS Partner solutions.\" AWS Snow Family is on the exam guide in-scope list, so it follows the exam-era rule. The availability of other Snow devices is not stated on an allowed page and is not claimed.",
+    "resolutionSource": "https://docs.aws.amazon.com/snowball/latest/developer-guide/whatisedge.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-s3-ia-minimum-duration",
     "building": "cold-cellar",
     "claim": "S3 Standard-IA and S3 One Zone-IA have a 30-day minimum storage duration.",
     "reason": "The S3 storage classes page states a 30-day minimum and a 128 KB minimum charge. The AWS storage decision guide, updated 5 October 2026, says S3 no longer applies a 30-day minimum storage duration for transitions to these two classes. The two statements are recorded as c-s3-ia-minimum-duration. Re-check both pages before any question uses the figure.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "confirmed",
+    "resolution": "The comparison table on the S3 storage classes page lists a 30-day minimum storage duration and a 128 KB minimum billable object size for S3 Standard-IA and S3 One Zone-IA, 90 days for S3 Glacier Instant Retrieval and Flexible Retrieval (128 KB minimum size for Instant Retrieval), and 180 days for Deep Archive. The storage decision guide sentence \"Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access\" is about transitions into those classes, not the charge for leaving them early. It was never a contradiction.",
+    "resolutionSource": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-timestream-liveanalytics",
@@ -80,8 +98,12 @@
     "building": "edge-link-terminal",
     "claim": "AWS Global Accelerator does not cache content.",
     "reason": "No allowed AWS page checked states this directly. The Global Accelerator FAQ contrasts it with CloudFront (CloudFront improves cacheable and dynamic content; Global Accelerator proxies TCP or UDP packets at the edge and suits non-HTTP, static IP and fast regional failover use cases). The Express notes now quote that contrast and no longer say 'does not cache'; wording in other districts or Don't confuse pairs should do the same unless an AWS page states it.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "dropped",
+    "resolution": "No AWS page says Global Accelerator does not cache. The FAQ says: \"Global Accelerator improves performance for a wide range of applications over TCP or UDP by proxying packets at the edge to applications running in one or more AWS Regions\" and \"CloudFront improves performance for both cacheable content (such as images and videos) and dynamic content\". The notes state only those contrasts.",
+    "resolutionSource": "https://aws.amazon.com/global-accelerator/faqs/",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-firehose-eventhubs-capture",
@@ -89,78 +111,117 @@
     "claim": "Amazon Data Firehose delivery corresponds to Azure Event Hubs Capture.",
     "reason": "The Microsoft Learn analytics comparison has no Firehose row and does not mention Event Hubs Capture, so the notes say only that Learn lists no Firehose counterpart. No allowed page confirms the mapping.",
     "status": "open",
-    "added": "2026-10-09"
+    "added": "2026-10-09",
+    "keywords": [
+      "Event Hubs"
+    ]
   },
   {
     "id": "nv-multiaz-failover-endpoint",
     "building": "read-replica-annex",
     "claim": "RDS Multi-AZ failover is automatic and keeps the same endpoint, while promoting a read replica is a manual step that gives the replica its own endpoint.",
     "reason": "The Multi-AZ and read replica pages checked do not state the endpoint behaviour in a quotable sentence (the replica page says only that you can promote a replica to a standalone instance). Left out of the Express notes until a quotable AWS sentence is found.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "corrected",
+    "resolution": "Failover: \"Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention.\" and \"The failover mechanism automatically changes the Domain Name System (DNS) record of the DB instance to point to the standby DB instance.\" Promotion is a step you take: \"You can use read replica promotion as a data recovery scheme if the primary DB instance fails.\" No sentence found that a read replica has its own endpoint, so that part is dropped.",
+    "resolutionSource": "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.Failover.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-security-hub-cspm-naming",
     "building": "watchtower",
     "claim": "AWS Security Hub (named in the exam guide, task 1.2) is the product the current AWS documentation calls AWS Security Hub CSPM.",
     "reason": "The Security Hub User Guide page is titled 'Introduction to AWS Security Hub CSPM' and describes AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM); no allowed page checked states that this is a rename of the service the exam guide lists as AWS Security Hub, or whether the exam guide name now covers a wider offering. The notes use the page's own name 'AWS Security Hub CSPM' for the checks-and-findings behaviour that its quotes describe and do not claim a rename. Re-check before any question names Security Hub.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "corrected",
+    "resolution": "It is not a plain rename. AWS now has two products: the unified AWS Security Hub (generally available with near-real-time analytics and risk prioritization), which \"automatically aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM), and Amazon Macie\", and AWS Security Hub CSPM, which \"provides automated security best practice checks to help you understand your overall security posture across your AWS accounts\". The exam guide name AWS Security Hub stands; the notes say CSPM for the posture checks.",
+    "resolutionSource": "https://aws.amazon.com/blogs/aws/aws-security-hub-now-generally-available-with-near-real-time-analytics-and-risk-prioritization/",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-shield-advanced-cost-protection",
     "building": "watchtower",
     "claim": "Shield Advanced offers DDoS cost protection (credits for scaling charges caused by a DDoS attack).",
     "reason": "The Shield Advanced pages read (ddos-advanced-summary and its capabilities page) state that the subscription covers the costs of standard AWS WAF capabilities for protected resources, but the pages checked do not use the words 'cost protection' for usage-spike credits. The notes state only the WAF-cost coverage that the page quotes.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "confirmed",
+    "resolution": "\"AWS Shield Advanced comes with DDoS cost protection to safeguard against scaling charges resulting from DDoS-related usage spikes on protected EC2, ELB, CloudFront, Global Accelerator, and Route 53 resources.\" and \"If any of these protected resources scale up in response to a DDoS attack, you can request Shield Advanced service credits through your regular AWS Support channel.\"",
+    "resolutionSource": "https://aws.amazon.com/shield/features/",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-apigw-edge-acm-region",
     "building": "certificate-office",
     "claim": "Certificates for edge-optimized API Gateway custom domain names must also be requested or imported in US East (N. Virginia).",
     "reason": "The ACM and CloudFront pages state the US East (N. Virginia) rule for CloudFront only. The ACM integrated-services page mentions custom domain names for API Gateway without giving the Region rule. The notes state the rule for CloudFront only.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "confirmed",
+    "resolution": "\"To use an ACM certificate with an edge-optimized custom domain name, you must request or import the certificate in the US East (N. Virginia) – us-east-1 Region.\"",
+    "resolutionSource": "https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-specify-certificate-for-custom-domain-name.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-dx-lead-time-macsec",
     "building": "customs-house",
     "claim": "Direct Connect takes weeks to provision, and MACsec offers Layer 2 encryption on dedicated connections.",
     "reason": "Not confirmed on the Direct Connect pages checked for this pass (Welcome and Encryption in AWS Direct Connect). The notes state only that Direct Connect does not encrypt traffic in transit by default and that combining it with Site-to-Site VPN gives an IPsec-encrypted private connection.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "corrected",
+    "resolution": "MACsec is confirmed: \"For dedicated connections of 10 or 100 Gbps, you can use MAC security (MACsec) as an encryption option.\" and \"AWS Direct Connect is not encrypted by default.\" Lead time: no page says \"weeks\"; the classic connection procedure says \"It can take up to 72 business hours for AWS to review your request and provision a port for your connection.\" The weeks claim is dropped.",
+    "resolutionSource": "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-aurora-serverless-v1-eol-date",
     "building": "service-selection-bureau",
     "claim": "Aurora Serverless v1 reached end of life on a specific date (reviewer recalled 31 March 2025) and was replaced by Aurora Serverless v2.",
     "reason": "The live Aurora pages checked (2026-10-09) no longer carry the v1 end-of-life notice; the only live statement found is on the Aurora serverless how-it-works page: Aurora Serverless v1 is a deprecated product with a different architecture. The notes quote that wording, label it deprecated and give no date. Current pages name the product just 'Aurora serverless'. Re-check for an AWS page stating the date before any question uses it.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "dropped",
+    "resolution": "No current AWS page that could be fetched states an end-of-life date for Aurora Serverless v1 (the v1 and upgrade pages redirect to a directory page). The date is not used. The notes keep only the sentence about the deprecated product.",
+    "resolutionSource": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-database-savings-plans-terms",
     "building": "counting-house",
     "claim": "Database Savings Plans offer the same one- and three-year terms and All/Partial/No upfront payment options as Compute and EC2 Instance Savings Plans.",
     "reason": "The Savings Plans comparison page states one or three year terms for the Compute and EC2 Instance plans; the plan types page lists Database Savings Plans and what they cover but no allowed page checked states their term or payment options. The notes state the generic one-or-three-year term and payment options only from the Savings Plans overview and do not claim them per plan type. Re-check before any question depends on a Database Savings Plan term.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "corrected",
+    "resolution": "The Database Savings Plans pricing page says the plans apply \"regardless of engine, instance family, size, deployment option, or AWS Region with no upfront payment\", so the All/Partial/No upfront options on the general Savings Plans page do not apply to them. A term length specific to Database Savings Plans is not stated on an allowed page, so the notes give none.",
+    "resolutionSource": "https://aws.amazon.com/savingsplans/database-pricing/",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-cost-allocation-tags-retroactive",
     "building": "ledger-office",
     "claim": "Activating a cost allocation tag is not retroactive: costs incurred before activation are not attributed to the tag.",
     "reason": "The cost allocation tags page says only that activated tags organise costs on the report and that tags can take up to 24 hours to appear; it does not state the retroactivity rule. Not added to the notes. Re-check on the Billing and Cost Management user guide.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "corrected",
+    "resolution": "Activation applies going forward by default, but AWS lets you backfill: \"Management account users can request a backfill of cost allocation tags for up to twelve months.\" and \"the Project tag is retroactively activated for the prior months\". AWS-generated tags: \"After the tag is activated, AWS starts applying the tag to resources that are created after the AWS-generated tag is activated.\" Tag keys can take up to 24 hours to appear and activate.",
+    "resolutionSource": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-allocation-backfill.html",
+    "resolved": "2026-10-09"
   },
   {
     "id": "nv-s3-ia-min-time-in-standard",
     "building": "cold-cellar",
     "claim": "Objects must stay a minimum time in S3 Standard before a lifecycle rule can transition them to Standard-IA or One Zone-IA.",
     "reason": "The lifecycle transition page checked states the minimum-duration rule only for leaving a class (a single rule cannot move objects out of a class before its minimum storage duration) and the storage decision guide says S3 no longer applies a 30-day minimum for transitions to the two IA classes. The reviewer's claim is not stated on an allowed page and conflicts with the decision guide, so it is not in the notes; see c-s3-ia-minimum-duration.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "verdict": "dropped",
+    "resolution": "No allowed page states a minimum time in S3 Standard before a lifecycle rule can transition objects into Standard-IA or One Zone-IA, and the storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to those classes. The claim is not used.",
+    "resolutionSource": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
+    "resolved": "2026-10-09"
   }
 ]

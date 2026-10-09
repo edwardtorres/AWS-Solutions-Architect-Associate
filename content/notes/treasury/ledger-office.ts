@@ -50,6 +50,12 @@ const notes: BuildingNotes = {
            'Combined usage – You can combine the usage across all accounts in the organization.',
            'This shares the volume pricing discounts, Reserved Instance discounts, and Savings Plans.',
            'No extra fee – Consolidated billing is offered at no additional cost.']),
+        b('Cost allocation tags apply going forward once activated, but AWS lets the management account backfill them: it can request a backfill of cost allocation tags for up to twelve months, and the tag is then retroactively activated for those earlier months. Tag keys can take up to 24 hours to appear and to activate.',
+          ['tags-backfill', 'cost-alloc-tags'],
+          ['tags-backfill|Management account users can request a backfill of cost allocation tags for up to twelve months.',
+           'tags-backfill|As a result, the Project tag is retroactively activated for the prior months from January to December 2023.',
+           'cost-alloc-tags|All tags can take up to 24 hours to appear in the Billing and Cost Management console.'],
+          { allow: ['twelve', '24'] }),
       ],
       services: ['AWS Organizations'],
       design: [

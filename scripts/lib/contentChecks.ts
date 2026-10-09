@@ -27,6 +27,12 @@ export interface QueueEntry {
   reason: string;
   status: 'open' | 'resolved';
   added: string;
+  /** Phrases that keep a question off an open item (checked in question text). */
+  keywords?: string[];
+  verdict?: 'confirmed' | 'corrected' | 'dropped';
+  resolution?: string;
+  resolutionSource?: string;
+  resolved?: string;
 }
 export interface ContentInput {
   outline: OutlineDoc;

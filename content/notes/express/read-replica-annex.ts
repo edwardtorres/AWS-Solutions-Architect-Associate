@@ -81,6 +81,11 @@ const notes: BuildingNotes = {
            'rds-read-replicas|The read replica operates as a DB instance that allows only read-only connections.',
            'aurora-replication|You typically do so by connecting to the reader endpoint of the cluster.',
            'aurora-autoscaling|To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas (reader DB instances) provisioned for an Aurora DB cluster.']),
+        b('Failover and promotion differ in who acts. For a Multi-AZ DB instance, Amazon RDS handles failovers automatically without administrative intervention, and the failover mechanism changes the DNS record of the DB instance to point to the standby. A read replica is not switched in for you: promoting one to a standalone DB instance is a step you take, and AWS lists it as a data recovery scheme if the primary DB instance fails.',
+          ['rds-failover', 'rds-promote'],
+          ['rds-failover|Amazon RDS handles failovers automatically so you can resume database operations as quickly as possible without administrative intervention.',
+           'rds-failover|The failover mechanism automatically changes the Domain Name System (DNS) record of the DB instance to point to the standby DB instance.',
+           'rds-promote|Implementing failure recovery – You can use read replica promotion as a data recovery scheme if the primary DB instance fails.']),
       ],
       services: ['Amazon RDS', 'Amazon Aurora'],
       design: [

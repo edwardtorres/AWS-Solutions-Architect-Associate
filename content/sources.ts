@@ -510,6 +510,14 @@ const sources: Source[] = [
   aws('cloudfront-versioning', `${D}/AmazonCloudFront/latest/DeveloperGuide/UpdatingExistingObjects.html`, 'Use file versioning to update or remove content with a CloudFront distribution'),
   aws('vpc-nat-instances', `${D}/vpc/latest/userguide/work-with-nat-instances.html`, 'Work with NAT instances'),
   aws('s3-pricing', 'https://aws.amazon.com/s3/pricing/', 'Amazon S3 pricing'),
+  aws('shield-features', 'https://aws.amazon.com/shield/features/', 'AWS Shield features'),
+  aws('savings-plans-database', 'https://aws.amazon.com/savingsplans/database-pricing/', 'Database Savings Plans pricing'),
+  aws('tags-backfill', `${D}/awsaccountbilling/latest/aboutv2/cost-allocation-backfill.html`, 'Backfill cost allocation tags'),
+  aws('dx-classic-connection', `${D}/directconnect/latest/UserGuide/toolkit-classic.html`, 'Create a connection using the classic wizard'),
+  aws('securityhub-ga', 'https://aws.amazon.com/blogs/aws/aws-security-hub-now-generally-available-with-near-real-time-analytics-and-risk-prioritization/', 'AWS Security Hub now generally available'),
+  aws('securityhub-faq', 'https://aws.amazon.com/security-hub/faqs/', 'AWS Security Hub FAQs'),
+  aws('apigw-edge-cert', `${D}/apigateway/latest/developerguide/how-to-specify-certificate-for-custom-domain-name.html`, 'Choose a certificate for a custom domain name'),
+  aws('rds-failover', `${D}/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.Failover.html`, 'Failing over a Multi-AZ DB instance for Amazon RDS'),
 ];
 
 export default sources;

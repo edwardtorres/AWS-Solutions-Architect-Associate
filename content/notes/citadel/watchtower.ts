@@ -41,6 +41,10 @@ const notes: BuildingNotes = {
            'detective|Amazon Detective automatically collects log data from your AWS resources and uses machine learning (ML), statistical analysis, and graph theory to build a dataset that you can use to conduct more efficient security investigations.']),
         b('Amazon Cognito handles user sign-in and access for applications; user pools and identity pools are covered in Warden\'s Lodge.',
           'cognito-what-is', ['With Amazon Cognito, you can authenticate and authorize users from the built-in user directory, from your enterprise directory, and from consumer identity providers like Google and Facebook.']),
+        b('AWS now describes separate Security Hub products. AWS Security Hub CSPM provides automated security best practice checks to help you understand your security posture across accounts. The newer AWS Security Hub aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub CSPM and Amazon Macie, organising them by threats, exposures, resources and security coverage.',
+          ['securityhub-faq', 'securityhub-ga'],
+          ['securityhub-faq|Security Hub CSPM (Cloud Security Posture Management) provides automated security best practice checks to help you understand your overall security posture across your AWS accounts.',
+           'securityhub-ga|Available for individual accounts or entire AWS Organizations accounts, Security Hub automatically aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM), and Amazon Macie, organizing them by threats, exposures, resources, and security coverage.']),
       ],
       services: ['Amazon GuardDuty', 'Amazon Macie', 'Amazon Inspector', 'AWS Security Hub', 'Amazon Detective', 'Amazon Cognito'],
       design: [
@@ -65,6 +69,10 @@ const notes: BuildingNotes = {
            'shield-capabilities|You can configure Shield Advanced to respond automatically to mitigate application layer (layer 7) attacks against your protected resources.']),
         b('SQL injection is an attack where malicious SQL code is inserted into web requests to modify or extract data from a database. AWS WAF has a rule statement that inspects requests for malicious SQL code.',
           'waf-sqli', ['Attackers insert malicious SQL code into web requests in order to do things like modify your database or extract data from it.', 'An SQL injection rule statement inspects for malicious SQL code.']),
+        b('Shield Advanced comes with DDoS cost protection: it safeguards against scaling charges resulting from DDoS-related usage spikes on protected EC2, ELB, CloudFront, Global Accelerator and Route 53 resources, and if a protected resource scales up in response to an attack you can request Shield Advanced service credits through the regular AWS Support channel.',
+          'shield-features',
+          ['DDoS cost protection AWS Shield Advanced comes with DDoS cost protection to safeguard against scaling charges resulting from DDoS-related usage spikes on protected EC2, ELB, CloudFront, Global Accelerator, and Route 53 resources.',
+           'If any of these protected resources scale up in response to a DDoS attack, you can request Shield Advanced service credits through your regular AWS Support channel.']),
       ],
       services: ['AWS Shield', 'AWS WAF'],
       design: [

@@ -36,6 +36,10 @@ const notes: BuildingNotes = {
         b('An Application Load Balancer target group can also use the HTTPS protocol, so the connection between the load balancer and its targets can be HTTPS as well as the client connection.',
           'alb-target-groups',
           ['Protocols: HTTP, HTTPS']),
+        b('Edge-optimized API Gateway custom domain names follow the same Region rule as CloudFront: API Gateway leverages CloudFront to support certificates for edge-optimized custom domain names, so an ACM certificate for one must be requested or imported in the US East (N. Virginia) us-east-1 Region.',
+          'apigw-edge-cert',
+          ['If you create an edge-optimized custom domain name, API Gateway leverages CloudFront to support certificates for custom domain names.',
+           'Virginia) – us-east-1 Region.']),
       ],
       services: ['AWS Certificate Manager (ACM)'],
       design: [

@@ -71,6 +71,10 @@ const notes: BuildingNotes = {
           ['dx-resiliency|You can achieve maximum resiliency for critical workloads by using separate connections that terminate on separate devices in more than one location',
            'dx-resiliency|This model provides resiliency against device, connectivity, and complete location failures.',
            'connectivity-vpn|Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet']),
+        b('Setup time is part of the choice. For a Direct Connect connection created with the classic wizard, AWS says it can take up to 72 business hours to review your request and provision a port, and the physical cross-connect is separate. A Site-to-Site VPN is software configuration over an existing internet connection and needs no physical port.',
+          ['dx-classic-connection', 'connectivity-vpn'],
+          ['dx-classic-connection|It can take up to 72 business hours for AWS to review your request and provision a port for your connection.',
+           'connectivity-vpn|Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet']),
       ],
       services: ['AWS Direct Connect', 'AWS Site-to-Site VPN'],
       design: [

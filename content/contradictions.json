@@ -34,23 +34,6 @@
     "added": "2026-10-08"
   },
   {
-    "id": "c-s3-ia-minimum-duration",
-    "building": "cold-cellar",
-    "topic": "Whether S3 Standard-IA and S3 One Zone-IA have a 30-day minimum storage duration",
-    "readings": [
-      {
-        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
-        "says": "If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days."
-      },
-      {
-        "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
-        "says": "Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access."
-      }
-    ],
-    "handling": "Both readings are shown in the S3 storage classes comparison with their sources. They may describe different situations (deleting early versus transitioning), but no allowed page reconciles them, so the minimum-duration figure for the two infrequent-access classes is kept out of questions.",
-    "added": "2026-10-09"
-  },
-  {
     "id": "c-azure-nat-single-ip",
     "building": "nat-toll",
     "topic": "How many public IP addresses an AWS NAT gateway can use",
