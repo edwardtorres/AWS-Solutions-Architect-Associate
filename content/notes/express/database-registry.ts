@@ -175,7 +175,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Database Migration Service',
       aws: 'AWS Database Migration Service (AWS DMS)',
-      mapping: b('Learn pairs AWS DMS with Azure Database Migration Service, and says support varies by source, target and online or offline migration mode, so verify the current supported scenarios before selecting a tool.',
+      mapping: b('Learn pairs AWS DMS with Azure Database Migration Service, and says support varies by source, target and online or offline migration mode.',
         ['learn-databases', 'dms-what-is'],
         ['learn-databases|Support varies by source, target, and online or offline migration mode.',
          'dms-what-is|AWS DMS supports fully heterogeneous data migrations between the supported engines.']),

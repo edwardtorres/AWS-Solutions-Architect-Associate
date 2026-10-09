@@ -108,10 +108,10 @@ const notes: BuildingNotes = {
         ['learn-compute|Azure Kubernetes Service (AKS) provides two modes: AKS Standard for full control and customization and AKS Automatic for simplified, production-ready deployments with built-in best practices.',
          'eks-what-is|Choose between standard EKS or fully automated EKS Auto Mode'],
         { allow: ['two'] }),
-      breaks: b('On the AWS side, EKS Auto Mode builds on Karpenter to scale cluster compute resources. Learn\'s AKS and EKS row describes orchestrating containerized deployments with Kubernetes, and the autoscaling section of that comparison lists only virtual machine scale sets and App Service autoscaling, so it says nothing about how either service scales its nodes.',
+      breaks: b('On the AWS side, EKS Auto Mode builds on Karpenter to scale cluster compute resources. Learn pairs Amazon EKS with AKS for orchestrating containerized deployments with Kubernetes, and pairs AWS Auto Scaling with Azure virtual machine scale sets and App Service autoscaling; Karpenter has no Learn pairing.',
         ['eks-autoscaling', 'learn-compute'],
         ['eks-autoscaling|EKS Auto Mode builds upon Karpenter.',
-         'learn-compute|Autoscaling You can use autoscaling to automatically change the number of compute instances or resources based on defined metrics and thresholds.',
+         'learn-compute|AWS service Azure service Description AWS Auto Scaling Azure Virtual Machine Scale Sets, Azure App Service autoscaling',
          'learn-compute|Amazon Elastic Kubernetes Service (Amazon EKS) Azure Kubernetes Service (AKS) You can use Amazon EKS and Azure Kubernetes Service (AKS) to orchestrate Docker containerized application deployments with Kubernetes.']),
     },
     {

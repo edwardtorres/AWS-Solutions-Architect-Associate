@@ -14,7 +14,7 @@ const notes: BuildingNotes = {
     {
       id: '4.3-K4',
       concepts: [
-        b('A data retention policy states how long data and its backups must be kept, and when they may be deleted. For an RDS DB instance the retention period applies to automated backups: you set it when you create or restore a DB instance, and the console default is seven days while the API and CLI default is one day if you do not set it. The documented range is between 0 and 35 days (a limit that can change), and setting it to 0 disables automated backups. Aurora is documented separately: you specify a retention period from 1 to 35 days for a DB cluster.',
+        b('A data retention policy states how long data and its backups must be kept, and when they may be deleted. For an RDS DB instance the retention period applies to automated backups: you set it when you create or restore a DB instance, and the console default is seven days while the API and CLI default is one day if you do not set it. The retention period of a DB instance is between 0 and 35 days, and setting it to 0 disables automated backups. For Aurora, you specify a retention period from 1 to 35 days for a DB cluster.',
           ['rds-backup-retention', 'aurora-backups'],
           ['You can set the backup retention period when you create or restore a DB instance or Multi-AZ DB cluster.',
            'If you create a DB instance using the Amazon RDS API or the AWS CLI and if you don\'t set the backup retention period, the default backup retention period is one day.',
@@ -101,7 +101,7 @@ const notes: BuildingNotes = {
         ['learn-storage', 'backup-what-is'],
         ['learn-storage|Backup Backup This option is used to back up and recover files, databases, disks, and virtual machines.',
          'backup-what-is|AWS Backup is a fully-managed service that makes it easy to centralize and automate data protection across AWS services, in the cloud, and on premises.']),
-      breaks: b('For databases the AWS exam point is that RDS has its own retention controls separate from AWS Backup: an automated-backup retention period that you set per DB instance, and manual snapshots that are not subject to it. The Learn pairing describes only the AWS Backup-style service.',
+      breaks: b('On AWS, RDS has its own retention control: the backup retention period that you set on a DB instance, which manual snapshots are not subject to. Learn pairs AWS Backup with Azure Backup and has no pairing for the RDS backup retention period.',
         ['rds-backup-retention', 'rds-snapshot-create', 'learn-storage'],
         ['rds-backup-retention|You can set the backup retention period of a DB instance to between 0 and 35 days.',
          'rds-snapshot-create|Unlike automated backups, manual snapshots aren\'t subject to the backup retention period.',

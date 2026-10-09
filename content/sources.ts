@@ -509,6 +509,7 @@ const sources: Source[] = [
   aws('s3-analytics', `${D}/AmazonS3/latest/userguide/analytics-storage-class.html`, 'Amazon S3 analytics – Storage Class Analysis'),
   aws('cloudfront-versioning', `${D}/AmazonCloudFront/latest/DeveloperGuide/UpdatingExistingObjects.html`, 'Use file versioning to update or remove content with a CloudFront distribution'),
   aws('vpc-nat-instances', `${D}/vpc/latest/userguide/work-with-nat-instances.html`, 'Work with NAT instances'),
+  aws('s3-pricing', 'https://aws.amazon.com/s3/pricing/', 'Amazon S3 pricing'),
 ];
 
 export default sources;

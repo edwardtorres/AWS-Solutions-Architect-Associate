@@ -96,7 +96,7 @@ const notes: BuildingNotes = {
         ['learn-hub|It also helps you manage your billing account and subscriptions, monitor and control Azure spending, and optimize resource use.',
          'ce-what-is|You can view data for up to the last 13 months, forecast how much you\'re likely to spend for the next 18 months, and get recommendations for what Reserved Instances to purchase.'],
         { allow: ['13', '18'] }),
-      breaks: b('The Learn row maps the billing tools only. For databases on AWS the exam also asks you to choose how to commit: a reserved DB instance is tied to instance type and Region, whereas a Database Savings Plan applies across engines and sizes. The Learn pairing does not cover either.',
+      breaks: b('On AWS, the discount for a reserved DB instance is tied to instance type and Region, whereas a Savings Plan applies regardless of engine, instance family, size, Availability Zone or Region. Learn has no pairing for either.',
         ['rds-reserved', 'savings-plans-types', 'learn-hub'],
         ['rds-reserved|Discounts for reserved DB instances are tied to instance type and AWS Region.',
          'savings-plans-types|These plans automatically apply to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone (AZ), or Region, and also apply to serverless usage.',

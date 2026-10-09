@@ -4,7 +4,7 @@ import { b, cue, example } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'refinery',
   overview: [
-    b('Raw data is rarely ready to analyse. Transformation services clean, enrich and convert it, and the format you convert to decides how cheaply and quickly it can be queried afterwards. The services the exam names are AWS Glue (serverless data integration and ETL) and Amazon EMR (managed clusters for big data frameworks).',
+    b('Raw data is rarely ready to analyse. Transformation services clean, enrich and convert it, and the format you convert to decides how cheaply and quickly it can be queried afterwards. The services covered here are AWS Glue (serverless data integration and ETL) and Amazon EMR (managed clusters for big data frameworks).',
       ['glue-what-is', 'emr-what-is'],
       ['glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.',
        'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.']),
@@ -133,7 +133,7 @@ SELECT * FROM sales_csv;
         ['learn-analytics', 'glue-what-is'],
         ['learn-analytics|AWS Glue Data Factory in Microsoft Fabric or Azure Data Factory All three provide managed data integration.',
          'glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.']),
-      breaks: b('Learn says to compare connectors, transformation engines, private networking, runtime placement, orchestration features and integration with the target analytics platform. A Glue-specific point is the built-in Data Catalog and crawlers that Athena and EMR also use.',
+      breaks: b('Learn says to compare connectors, transformation engines, private networking, runtime placement, orchestration features and integration with the target analytics platform. A Glue-specific point is the Data Catalog, which integrates with other AWS analytics services.',
         ['learn-analytics', 'glue-catalog'],
         ['learn-analytics|Compare connectors, transformation engines, private networking, runtime placement, orchestration features, and integration with the target analytics platform.',
          'glue-catalog|The Data Catalog integrates with other AWS analytics services, providing a unified view of data sources making it easier to manage and analyze data.']),

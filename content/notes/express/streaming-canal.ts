@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'streaming-canal',
   overview: [
-    b('Streaming data is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing. AWS has three streaming ingestion services the exam expects you to separate: Kinesis Data Streams (you build the consumers), {{rename:data-firehose}} (managed delivery to a destination) and Amazon MSK (managed Apache Kafka).',
+    b('Streaming data is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing. AWS has three streaming ingestion services to tell apart: Kinesis Data Streams (you build the consumers), {{rename:data-firehose}} (managed delivery to a destination) and Amazon MSK (managed Apache Kafka).',
       ['what-is-streaming-data', 'kinesis-streams', 'firehose', 'msk-what-is'],
       ['what-is-streaming-data|Streaming data is data that is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing.',
        'kinesis-streams|You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time.',
@@ -134,7 +134,7 @@ const notes: BuildingNotes = {
         ['learn-analytics', 'kinesis-streams'],
         ['learn-analytics|Amazon Kinesis Data Streams Azure Event Hubs Both ingest and retain high-throughput event streams for independent consumers.',
          'kinesis-streams|You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time.']),
-      breaks: b('Learn tells you to compare partitioning, retention, replay, throughput, protocols and scaling rather than treating them as identical. On the AWS side a stream is made of shards, each a fixed unit of capacity. The Learn analytics comparison has no row for Amazon Data Firehose, so it does not tell you what Azure service matches Firehose delivery.',
+      breaks: b('Learn lists partitioning, retention, replay, throughput, protocols and scaling as the points to compare. On the AWS side a stream is made of shards, each a fixed unit of capacity. Amazon Data Firehose has no Learn pairing.',
         ['learn-analytics', 'kinesis-concepts'],
         ['learn-analytics|Compare partitioning, retention, replay, throughput, protocols, and scaling.',
          'kinesis-concepts|A stream is composed of one or more shards, each of which provides a fixed unit of capacity.']),
@@ -146,7 +146,7 @@ const notes: BuildingNotes = {
         ['learn-analytics', 'msk-what-is'],
         ['learn-analytics|Amazon Managed Streaming for Apache Kafka Event Hubs for Apache Kafka',
          'msk-what-is|It runs open-source versions of Apache Kafka.']),
-      breaks: b('Learn states that Amazon MSK runs open-source Apache Kafka whereas Event Hubs provides a Kafka-compatible endpoint and is not an Apache Kafka cluster; a Kafka-compatible endpoint does not provide every Apache Kafka broker feature, so validate protocol features before treating them as equal.',
+      breaks: b('Learn states that Amazon MSK runs open-source Apache Kafka whereas Event Hubs provides a Kafka-compatible endpoint and is not an Apache Kafka cluster; a Kafka-compatible endpoint does not provide every Apache Kafka broker feature.',
         ['learn-analytics', 'msk-what-is'],
         ['learn-analytics|Amazon MSK runs open-source Apache Kafka. Event Hubs provides a Kafka-compatible endpoint and isn\'t an Apache Kafka cluster.',
          'learn-analytics|A Kafka-compatible endpoint doesn\'t provide every Apache Kafka broker feature.',
