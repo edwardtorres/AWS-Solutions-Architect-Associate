@@ -91,7 +91,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon S3', 'Amazon EFS', 'Amazon EBS'],
       design: [
-        b('The type dictates the cost model: object storage does not need you to provision capacity ahead of time, EFS is billed on what you store with elastic growth, and block volumes are provisioned by size and type (Block Warehouse).',
+        b('The type dictates the cost model: object storage does not need you to provision capacity ahead of time, EFS is fully elastic, so you do not provision capacity, and block volumes are provisioned by size and type (Block Warehouse).',
           'efs-what-is',
           ['Amazon Elastic File System (Amazon EFS) provides serverless, fully elastic file storage so that you can share file data without provisioning or managing storage capacity and performance.']),
       ],

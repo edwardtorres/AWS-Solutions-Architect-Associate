@@ -71,8 +71,9 @@
     "building": "service-selection-bureau",
     "claim": "Whether Amazon Timestream for LiveAnalytics is open to new customers.",
     "reason": "The Timestream for LiveAnalytics page says: for similar capabilities, consider Amazon Timestream for InfluxDB. No allowed page checked states clearly whether LiveAnalytics accepts new customers. The notes quote the page's wording and teach the time series data type, and do not claim a retirement. Re-check before any question names Timestream for LiveAnalytics.",
-    "status": "open",
-    "added": "2026-10-09"
+    "status": "resolved",
+    "added": "2026-10-09",
+    "resolution": "The Timestream for LiveAnalytics availability change page (2026-10-09) states AWS closed new customer access, that existing workloads are not affected, and recommends Timestream for InfluxDB for new customers. The notes quote it (source timestream-availability)."
   },
   {
     "id": "nv-ga-no-cache",
@@ -127,6 +128,38 @@
     "building": "customs-house",
     "claim": "Direct Connect takes weeks to provision, and MACsec offers Layer 2 encryption on dedicated connections.",
     "reason": "Not confirmed on the Direct Connect pages checked for this pass (Welcome and Encryption in AWS Direct Connect). The notes state only that Direct Connect does not encrypt traffic in transit by default and that combining it with Site-to-Site VPN gives an IPsec-encrypted private connection.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-aurora-serverless-v1-eol-date",
+    "building": "service-selection-bureau",
+    "claim": "Aurora Serverless v1 reached end of life on a specific date (reviewer recalled 31 March 2025) and was replaced by Aurora Serverless v2.",
+    "reason": "The live Aurora pages checked (2026-10-09) no longer carry the v1 end-of-life notice; the only live statement found is on the Aurora serverless how-it-works page: Aurora Serverless v1 is a deprecated product with a different architecture. The notes quote that wording, label it deprecated and give no date. Current pages name the product just 'Aurora serverless'. Re-check for an AWS page stating the date before any question uses it.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-database-savings-plans-terms",
+    "building": "counting-house",
+    "claim": "Database Savings Plans offer the same one- and three-year terms and All/Partial/No upfront payment options as Compute and EC2 Instance Savings Plans.",
+    "reason": "The Savings Plans comparison page states one or three year terms for the Compute and EC2 Instance plans; the plan types page lists Database Savings Plans and what they cover but no allowed page checked states their term or payment options. The notes state the generic one-or-three-year term and payment options only from the Savings Plans overview and do not claim them per plan type. Re-check before any question depends on a Database Savings Plan term.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-cost-allocation-tags-retroactive",
+    "building": "ledger-office",
+    "claim": "Activating a cost allocation tag is not retroactive: costs incurred before activation are not attributed to the tag.",
+    "reason": "The cost allocation tags page says only that activated tags organise costs on the report and that tags can take up to 24 hours to appear; it does not state the retroactivity rule. Not added to the notes. Re-check on the Billing and Cost Management user guide.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-s3-ia-min-time-in-standard",
+    "building": "cold-cellar",
+    "claim": "Objects must stay a minimum time in S3 Standard before a lifecycle rule can transition them to Standard-IA or One Zone-IA.",
+    "reason": "The lifecycle transition page checked states the minimum-duration rule only for leaving a class (a single rule cannot move objects out of a class before its minimum storage duration) and the storage decision guide says S3 no longer applies a 30-day minimum for transitions to the two IA classes. The reviewer's claim is not stated on an allowed page and conflicts with the decision guide, so it is not in the notes; see c-s3-ia-minimum-duration.",
     "status": "open",
     "added": "2026-10-09"
   }

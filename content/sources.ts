@@ -508,6 +508,7 @@ const sources: Source[] = [
   aws('ec2-t-unlimited', `${D}/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html`, 'Unlimited mode for burstable performance instances'),
   aws('s3-analytics', `${D}/AmazonS3/latest/userguide/analytics-storage-class.html`, 'Amazon S3 analytics – Storage Class Analysis'),
   aws('cloudfront-versioning', `${D}/AmazonCloudFront/latest/DeveloperGuide/UpdatingExistingObjects.html`, 'Use file versioning to update or remove content with a CloudFront distribution'),
+  aws('vpc-nat-instances', `${D}/vpc/latest/userguide/work-with-nat-instances.html`, 'Work with NAT instances'),
 ];
 
 export default sources;
