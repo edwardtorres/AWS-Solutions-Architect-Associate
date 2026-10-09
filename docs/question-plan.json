@@ -1,0 +1,394 @@
+{
+ "citadel": {
+  "identity-keep": {
+   "live": 23,
+   "reserve": 4,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "federation-bridge": {
+   "live": 16,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "embassy-row": {
+   "live": 31,
+   "reserve": 4,
+   "placementEligible": 8,
+   "bullets": 4
+  },
+  "charter-hall": {
+   "live": 15,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "gatehouse": {
+   "live": 23,
+   "reserve": 4,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "watchtower": {
+   "live": 23,
+   "reserve": 3,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "wardens-lodge": {
+   "live": 15,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "customs-house": {
+   "live": 15,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "key-vault": {
+   "live": 23,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "certificate-office": {
+   "live": 15,
+   "reserve": 3,
+   "placementEligible": 8,
+   "bullets": 2
+  },
+  "archive-annex": {
+   "live": 23,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "compliance-registry": {
+   "live": 23,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 3
+  }
+ },
+ "harbor": {
+  "blueprint-hall": {
+   "live": 14,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "message-quay": {
+   "live": 19,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 4
+  },
+  "serverless-mill": {
+   "live": 14,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "container-dock": {
+   "live": 14,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "scaling-floodgate": {
+   "live": 19,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 4
+  },
+  "cache-edge-breakwater": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 2
+  },
+  "cargo-hall": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "purpose-built-workshop": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "island-charts": {
+   "live": 15,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "single-point-watch": {
+   "live": 20,
+   "reserve": 3,
+   "placementEligible": 0,
+   "bullets": 4
+  },
+  "disaster-bunker": {
+   "live": 15,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "tide-gauges": {
+   "live": 15,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "rebuild-yard": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "durable-dock": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "legacy-wharf": {
+   "live": 15,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  }
+ },
+ "express": {
+  "freight-depot": {
+   "live": 19,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 5
+  },
+  "engine-works": {
+   "live": 11,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "turbine-hall": {
+   "live": 11,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "express-rail-hub": {
+   "live": 8,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "container-yard": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 2
+  },
+  "database-registry": {
+   "live": 15,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 4
+  },
+  "read-replica-annex": {
+   "live": 11,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "cache-pavilion": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "tuning-bay": {
+   "live": 15,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 4
+  },
+  "grid-planning-office": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "express-interchange": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "edge-link-terminal": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "data-lake-reservoir": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "streaming-canal": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "transfer-dock": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "refinery": {
+   "live": 12,
+   "reserve": 2,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "ingestion-gate": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  }
+ },
+ "treasury": {
+  "ledger-office": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "block-warehouse": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "storage-market": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 4
+  },
+  "haul-hybrid-customs": {
+   "live": 9,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 4
+  },
+  "cold-cellar": {
+   "live": 11,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 5
+  },
+  "backup-archive": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "counting-house": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "instance-foundry": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "elastic-mint": {
+   "live": 11,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 5
+  },
+  "distribution-office": {
+   "live": 9,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 4
+  },
+  "db-cost-desk": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "service-selection-bureau": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 3
+  },
+  "engine-exchange": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "capacity-meter": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 4
+  },
+  "retention-records": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "network-cost-audit": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "throttle-lb-gate": {
+   "live": 10,
+   "reserve": 2,
+   "placementEligible": 8,
+   "bullets": 2
+  },
+  "nat-toll": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 2
+  },
+  "transit-tariff": {
+   "live": 8,
+   "reserve": 1,
+   "placementEligible": 0,
+   "bullets": 3
+  },
+  "route-tariff": {
+   "live": 10,
+   "reserve": 1,
+   "placementEligible": 8,
+   "bullets": 4
+  }
+ }
+}

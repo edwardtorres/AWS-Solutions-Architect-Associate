@@ -1,0 +1,4 @@
+{"building":"retention-records","blocks":[
+{"where":"bullets.0.concepts.0 (backup retention periods)","verdict":"OK","issue":"RDS defaults (console seven days, API/CLI one day), range 0 to 35 days, 0 disables, Aurora 1-35 days all verbatim. The opening definition of a data retention policy is a framing sentence without a quote.","suggestedFix":"Optional: label the first sentence as the note's definition or cite a source."},
+{"where":"azure.0.breaks (RDS retention vs Azure Backup)","verdict":"OK","issue":"'Unlike automated backups, manual snapshots aren't subject to the backup retention period' verbatim; Learn row 'Backup | Backup' verbatim; Learn has no RDS retention-period row.","suggestedFix":""}
+]}

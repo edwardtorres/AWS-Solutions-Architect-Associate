@@ -1,0 +1,5 @@
+{"building":"ledger-office","blocks":[
+{"where":"bullets.2.concepts.2 (Cost and Usage Report)","verdict":"OK","issue":"All statements quoted or on the cited pages ('AWS updates your report at least once a day until your charges are finalized' is on cur-what-is; the block's quote from cur-create has only 'at least once a day'); CUR 2.0 'new and recommended way' verbatim.","suggestedFix":"Optional: quote the 'until your charges are finalized' sentence."},
+{"where":"azure.0.breaks (split AWS tools vs Cost Management)","verdict":"UNSUPPORTED","issue":"'Cost Explorer to view and analyse costs and usage' has no quote and Cost Explorer is not among the block's sources (budgets-managing, cur-what-is, learn-hub). Budgets, CUR and Learn pairing are quoted.","suggestedFix":"Add a Cost Explorer source (e.g. ce-filtering) with a verbatim quote such as 'You can use Cost Explorer to see which service you use the most...', or drop the Cost Explorer clause."},
+{"where":"azure.1.breaks (CUR vs cost details APIs)","verdict":"OK","issue":"Learn row 'Cost and Usage Reports | Cost details APIs | Cost Management + Billing' verbatim; AWS CUR sentence verbatim.","suggestedFix":""}
+]}

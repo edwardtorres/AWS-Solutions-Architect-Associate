@@ -1,0 +1,5 @@
+{"building":"engine-exchange","blocks":[
+{"where":"bullets.1.concepts.2 (Aurora I/O-Optimized vs Standard)","verdict":"OK","issue":"All four statements quoted verbatim.","suggestedFix":""},
+{"where":"cues.4.fact (DMS Serverless)","verdict":"OK","issue":"Shortened paraphrase of the quote; omits built-in high availability, nothing added.","suggestedFix":""},
+{"where":"azure.0.breaks (DMS Serverless / RDS Oracle licensing)","verdict":"OK","issue":"DMS Serverless and RDS for Oracle licensing quotes verbatim. 'chosen for the database rather than for the migration tool' is the note's own framing but consistent with the quoted page.","suggestedFix":"Optional: add the quote 'Support varies by source, target, and online or offline migration mode' to the prose or drop that quote, since it is not used."}
+]}

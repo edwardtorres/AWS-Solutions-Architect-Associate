@@ -21,6 +21,8 @@ export interface NotesInput {
   scope: ReadonlySet<string>;
   /** Defaults to REQUIRED_PAIRS; tests override it. */
   requiredPairs?: typeof REQUIRED_PAIRS;
+  /** Source ids cited by question evidence; they count as used. */
+  citedElsewhere?: ReadonlySet<string>;
 }
 
 /** Pairs the brief requires. `members` must each be named by an item of the pair. */
@@ -298,7 +300,7 @@ export function checkNotes(input: NotesInput): string[] {
       if (!used.terms.has(g.id)) p.push(`glossary: term "${g.id}" is never used in a note`);
     }
     for (const s of input.sources) {
-      if (!used.sources.has(s.id)) p.push(`source ${s.id} is never cited`);
+      if (!used.sources.has(s.id) && !input.citedElsewhere?.has(s.id)) p.push(`source ${s.id} is never cited`);
     }
   }
   return p;

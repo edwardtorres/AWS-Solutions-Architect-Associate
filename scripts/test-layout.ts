@@ -307,6 +307,34 @@ async function saves(browser: Browser): Promise<void> {
   await b.ctx.close();
 }
 
+async function questionBrowser(browser: Browser, mobile: boolean): Promise<void> {
+  const tag = mobile ? '390px' : '1280px';
+  const { page, ctx, errors } = await newPage(browser, { mobile });
+  await page.goto(BASE);
+  await page.waitForSelector('.building');
+  check((await page.locator('a[href*="question"], a[href*="answer"]').count()) === 0, `${tag}: no link or route to the answer key`);
+  const tap = async (loc: ReturnType<Page['locator']>) => (mobile ? loc.tap() : loc.click());
+  await tap(page.locator('summary', { hasText: 'Settings' }));
+  await tap(page.getByRole('button', { name: 'Browse questions' }));
+  await page.waitForSelector('[role=alertdialog]');
+  check((await page.locator('[role=alertdialog]').innerText()).includes('less meaningful'), `${tag}: warning shown before the answers`);
+  await tap(page.getByRole('button', { name: 'I understand, open the browser' }));
+  await page.waitForSelector('#qb-building');
+  await page.selectOption('#qb-building', 'pillar-plaza');
+  await page.waitForSelector('ol li input');
+  const o = await overflow(page);
+  check(o.doc <= o.win && o.body <= o.win, `${tag}: question browser has no page-level sideways scroll`, JSON.stringify(o));
+  const small = await smallTargets(page);
+  check(small.length === 0, `${tag}: question browser targets are at least 44px`, small.slice(0, 5).join('; '));
+  await tap(page.getByRole('button', { name: 'Show answer' }).first());
+  await page.waitForSelector('ol li [role=status]');
+  const o2 = await overflow(page);
+  check(o2.doc <= o2.win && o2.body <= o2.win, `${tag}: answers shown without sideways scroll`, JSON.stringify(o2));
+  check(!page.url().includes('question'), `${tag}: browser has no URL of its own`, page.url());
+  check(errors.length === 0, `${tag}: no console errors in the question browser`, errors.slice(0, 3).join(' | '));
+  await ctx.close();
+}
+
 async function main(): Promise<void> {
   const stop = await startServer();
   const browser = await chromium.launch({ executablePath: browserPath() });
@@ -316,6 +344,8 @@ async function main(): Promise<void> {
     await keyboard(browser);
     await desktop(browser);
     await saves(browser);
+    await questionBrowser(browser, true);
+    await questionBrowser(browser, false);
   } finally {
     await browser.close();
     stop();

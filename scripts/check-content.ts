@@ -36,12 +36,12 @@ async function main() {
   const problems = runOfflineChecks({ outline, services, buildings: BUILDINGS, roads: ROADS, queue, banned: BANNED_TERMS } satisfies ContentInput);
 
   const bundle = await loadNotesBundle();
+  const qb = await loadQuestionsBundle();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set(qb.questions.flatMap((q) => q.evidence.map((e) => e.src))) }).map((x) => `notes: ${x}`),
   );
 
-  const qb = await loadQuestionsBundle();
   const repoRoot = here('../');
   const walk = (dir: string): string[] =>
     readdirSync(dir).flatMap((n) => {

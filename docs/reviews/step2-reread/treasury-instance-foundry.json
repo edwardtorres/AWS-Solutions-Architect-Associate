@@ -1,0 +1,5 @@
+{"building":"instance-foundry","blocks":[
+{"where":"azure.0.mapping (VMs and servers)","verdict":"OK","issue":"Learn: 'Virtual machines (VMs) and servers help you deploy... You pay only for what you use and can change sizes as needed.' and the instance-type sentence verbatim; EC2 instance-types quote verbatim.","suggestedFix":""},
+{"where":"azure.0.breaks (Compute Optimizer vs Azure Advisor)","verdict":"OK","issue":"Learn row 'AWS Compute Optimizer | Azure Advisor (Cost category)'; AWS Compute Optimizer sentence verbatim.","suggestedFix":""},
+{"where":"azure.1.breaks (Azure Advisor vs Compute Optimizer / Trusted Advisor)","verdict":"OK","issue":"Azure Advisor and Trusted Advisor category sentences are verbatim from Learn; Compute Optimizer quote verbatim. The Trusted Advisor category list is given by Learn, not an AWS page, but it is quoted and attributed implicitly.","suggestedFix":"Optional: prefix with 'Learn describes AWS Trusted Advisor as providing checks across ...' to make the source of the category list explicit."}
+]}
