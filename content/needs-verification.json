@@ -97,5 +97,37 @@
     "reason": "The Multi-AZ and read replica pages checked do not state the endpoint behaviour in a quotable sentence (the replica page says only that you can promote a replica to a standalone instance). Left out of the Express notes until a quotable AWS sentence is found.",
     "status": "open",
     "added": "2026-10-09"
+  },
+  {
+    "id": "nv-security-hub-cspm-naming",
+    "building": "watchtower",
+    "claim": "AWS Security Hub (named in the exam guide, task 1.2) is the product the current AWS documentation calls AWS Security Hub CSPM.",
+    "reason": "The Security Hub User Guide page is titled 'Introduction to AWS Security Hub CSPM' and describes AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM); no allowed page checked states that this is a rename of the service the exam guide lists as AWS Security Hub, or whether the exam guide name now covers a wider offering. The notes use the page's own name 'AWS Security Hub CSPM' for the checks-and-findings behaviour that its quotes describe and do not claim a rename. Re-check before any question names Security Hub.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-shield-advanced-cost-protection",
+    "building": "watchtower",
+    "claim": "Shield Advanced offers DDoS cost protection (credits for scaling charges caused by a DDoS attack).",
+    "reason": "The Shield Advanced pages read (ddos-advanced-summary and its capabilities page) state that the subscription covers the costs of standard AWS WAF capabilities for protected resources, but the pages checked do not use the words 'cost protection' for usage-spike credits. The notes state only the WAF-cost coverage that the page quotes.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-apigw-edge-acm-region",
+    "building": "certificate-office",
+    "claim": "Certificates for edge-optimized API Gateway custom domain names must also be requested or imported in US East (N. Virginia).",
+    "reason": "The ACM and CloudFront pages state the US East (N. Virginia) rule for CloudFront only. The ACM integrated-services page mentions custom domain names for API Gateway without giving the Region rule. The notes state the rule for CloudFront only.",
+    "status": "open",
+    "added": "2026-10-09"
+  },
+  {
+    "id": "nv-dx-lead-time-macsec",
+    "building": "customs-house",
+    "claim": "Direct Connect takes weeks to provision, and MACsec offers Layer 2 encryption on dedicated connections.",
+    "reason": "Not confirmed on the Direct Connect pages checked for this pass (Welcome and Encryption in AWS Direct Connect). The notes state only that Direct Connect does not encrypt traffic in transit by default and that combining it with Site-to-Site VPN gives an IPsec-encrypted private connection.",
+    "status": "open",
+    "added": "2026-10-09"
   }
 ]

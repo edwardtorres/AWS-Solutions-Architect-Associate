@@ -506,6 +506,7 @@ const sources: Source[] = [
   aws('datasync-pricing', 'https://aws.amazon.com/datasync/pricing/', 'AWS DataSync pricing'),
   aws('transfer-pricing', 'https://aws.amazon.com/aws-transfer-family/pricing/', 'AWS Transfer Family pricing'),
   aws('waf-region-cost', `${D}/wellarchitected/latest/framework/cost_pricing_model_region_cost.html`, 'COST07-BP02 Choose Regions based on cost'),
+  aws('rds-stop', `${D}/AmazonRDS/latest/UserGuide/USER_StopInstance.html`, 'Stopping an Amazon RDS DB instance temporarily'),
 ];
 
 export default sources;

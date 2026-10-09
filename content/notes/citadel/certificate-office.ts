@@ -106,7 +106,7 @@ const notes: BuildingNotes = {
       mapping: b('The Learn comparison pairs ACM with Key Vault certificates and Microsoft Cloud PKI as the services to create and manage certificates and their keys.',
         ['learn-hub', 'acm-overview'],
         ['learn-hub|Use these services to create and manage certificates and their keys.', 'acm-overview|AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys']),
-      breaks: b('ACM certificates can be used directly by integrated AWS services such as Elastic Load Balancing and CloudFront, and a CloudFront certificate has to be in US East (N. Virginia). The ACM documentation also describes automating public certificate issuance and renewal outside integrated services with the ACME protocol, and exportable certificates; the Learn row lists Key Vault certificates and Microsoft Cloud PKI against ACM without describing either.',
+      breaks: b('ACM certificates can be used directly by integrated AWS services such as Elastic Load Balancing and CloudFront, and a CloudFront certificate has to be in US East (N. Virginia). The ACM documentation also describes automating public certificate issuance and renewal outside integrated services with the ACME protocol, and exportable certificates; the Learn comparison lists Key Vault certificates and Microsoft Cloud PKI against ACM without describing either.',
         ['acm-services', 'cf-https-requirements', 'learn-hub'],
         ['acm-services|ACM certificates are supported by the following services: Elastic Load Balancing',
          'acm-services|To automate public certificate issuance and renewal outside integrated services such as on Amazon EC2 instances, use the ACME protocol.',

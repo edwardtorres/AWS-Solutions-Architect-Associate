@@ -102,7 +102,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'cognito-user-pools'],
         ['learn-hub|External ID is a highly available global identity management service for consumer-facing',
          'cognito-user-pools|An Amazon Cognito user pool is a user directory for web and mobile app authentication and authorization.']),
-      breaks: b('Cognito is two things. A user pool authenticates users, and an identity pool exchanges identities for temporary AWS credentials; the Learn row for External ID describes a global identity management service for consumer-facing applications and does not mention temporary AWS credentials.',
+      breaks: b('Cognito is two things. A user pool authenticates users, and an identity pool exchanges identities for temporary AWS credentials; the Learn comparison for External ID describes a global identity management service for consumer-facing applications and does not mention temporary AWS credentials.',
         ['cognito-what-is', 'cognito-identity-pools', 'learn-hub'],
         ['cognito-what-is|Amazon Cognito answers two different questions.',
          'cognito-identity-pools|Identity pools generate temporary AWS credentials for the users of your app',

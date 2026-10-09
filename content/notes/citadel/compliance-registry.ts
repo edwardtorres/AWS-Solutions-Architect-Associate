@@ -110,7 +110,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'artifact'],
         ['learn-hub|Use these services to access audit reports, compliance guides, and trust documents from across cloud services.',
          'artifact|AWS Artifact provides on-demand downloads of AWS security and compliance documents.']),
-      breaks: b('AWS Artifact also lets you review, accept and track the status of your agreements with AWS for one account or many accounts in your organization. The Learn row describes the pair only as services to access audit reports, compliance guides and trust documents; it does not mention agreements.',
+      breaks: b('AWS Artifact also lets you review, accept and track the status of your agreements with AWS for one account or many accounts in your organization. The Learn comparison describes the pair only as services to access audit reports, compliance guides and trust documents; it does not mention agreements.',
         ['artifact', 'learn-hub'],
         ['artifact|you can use AWS Artifact to review, accept, and track the status of your agreements with AWS for your AWS account and for multiple AWS accounts in your organization.',
          'learn-hub|Use these services to access audit reports, compliance guides, and trust documents from across cloud services.']),

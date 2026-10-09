@@ -46,7 +46,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'waf-tool'],
         ['learn-hub|Examine your workload through the lenses of reliability, security, cost management, operational excellence, and performance efficiency.',
          'waf-tool|the AWS Well-Architected Tool provides a trusted framework for you to evaluate your cloud architecture']),
-      breaks: b('The lists of pillars differ. The Learn row names five lenses (reliability, security, cost management, operational excellence and performance efficiency), while the AWS framework names six and adds sustainability. Learn writes "cost management" where the AWS framework writes "cost optimization".',
+      breaks: b('The lists of pillars differ. The Learn comparison names five lenses (reliability, security, cost management, operational excellence and performance efficiency), while the AWS framework names six and adds sustainability. Learn writes "cost management" where the AWS framework writes "cost optimization".',
         ['learn-hub', 'waf-pillars'],
         ['learn-hub|reliability, security, cost management, operational excellence, and performance efficiency',
          'waf-pillars|the six pillars of operational excellence, security, reliability, performance efficiency, cost optimization, and sustainability'],

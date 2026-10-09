@@ -54,7 +54,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'cw-what-is'],
         ['learn-hub|Azure Monitor is a comprehensive solution that you can use to collect, analyze, and act on telemetry from your cloud and on-premises environments.',
          'cw-what-is|Operational visibility with metrics, alarms, and dashboards']),
-      breaks: b('The Learn row pairs Azure Monitor with two AWS services, and Learn says: "In AWS, you typically use both X-Ray and CloudWatch." In AWS, CloudWatch provides metrics, alarms and logs, whereas AWS X-Ray collects data about the requests your application serves. X-Ray is covered in Tide Gauges.',
+      breaks: b('The Learn comparison pairs Azure Monitor with two AWS services, and Learn says: "In AWS, you typically use both X-Ray and CloudWatch." In AWS, CloudWatch provides metrics, alarms and logs, whereas AWS X-Ray collects data about the requests your application serves. X-Ray is covered in Tide Gauges.',
         ['learn-hub', 'cw-what-is', 'xray'],
         ['learn-hub|In AWS, you typically use both X-Ray and CloudWatch.', 'cw-what-is|Operational visibility with metrics, alarms, and dashboards',
          'xray|AWS X-Ray is a service that collects data about requests that your application serves'],

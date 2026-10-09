@@ -172,7 +172,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'shield-overview'],
         ['learn-hub|These services help you protect your cloud services from distributed denial of service attacks.',
          'shield-overview|A DDoS attack is an attack in which multiple compromised systems try to flood a target with traffic.']),
-      breaks: b('AWS has two named tiers. Shield Standard protects every AWS customer automatically at no additional charge, and Shield Advanced is a subscription for expanded protection. The Learn row describes Azure DDoS Protection only as helping protect cloud services from distributed denial of service attacks; it does not describe tiers.',
+      breaks: b('AWS has two named tiers. Shield Standard protects every AWS customer automatically at no additional charge, and Shield Advanced is a subscription for expanded protection. The Learn comparison describes Azure DDoS Protection only as helping protect cloud services from distributed denial of service attacks; it does not describe tiers.',
         ['shield-standard', 'shield-advanced', 'learn-hub'],
         ['shield-standard|All AWS customers benefit from the automatic protection of Shield Standard, at no additional charge.',
          'shield-advanced|For higher levels of protection against attacks, you can subscribe to AWS Shield Advanced.',

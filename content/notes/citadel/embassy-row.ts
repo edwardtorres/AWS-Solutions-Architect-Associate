@@ -251,7 +251,7 @@ const notes: BuildingNotes = {
         ['learn-hub', 'control-tower'],
         ['learn-hub|Set up and govern multiple-account or multiple-subscription environments.',
          'control-tower|AWS Control Tower offers a straightforward way to set up and govern an AWS multi-account environment, following prescriptive best practices.']),
-      breaks: b('Control Tower is a single AWS service that builds a landing zone and applies controls on top of Organizations, Service Catalog and IAM Identity Center, whereas the Learn row lists two separate Azure offerings against it.',
+      breaks: b('Control Tower is a single AWS service that builds a landing zone and applies controls on top of Organizations, Service Catalog and IAM Identity Center, whereas the Learn comparison lists two separate Azure offerings against it.',
         ['learn-hub', 'control-tower'],
         ['learn-hub|AWS Control Tower Azure LighthouseAzure landing zone', 'control-tower|AWS Control Tower orchestrates the capabilities of several other AWS services, including AWS Organizations, AWS Service Catalog, and AWS IAM Identity Center, to build a landing zone'],
         { allow: ['two'] }),
