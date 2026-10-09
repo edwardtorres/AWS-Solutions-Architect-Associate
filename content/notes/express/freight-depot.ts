@@ -40,7 +40,7 @@ const notes: BuildingNotes = {
           'sgw-fsx-file',
           ['Amazon FSx File Gateway is no longer available to new customers.',
            'Existing customers of FSx File Gateway can continue to use the service normally.'],
-          { status: 'deprecated' }),
+          { status: 'closed' }),
       ],
       services: ['AWS Storage Gateway'],
       design: [

@@ -167,7 +167,7 @@ function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-
   }
   if (PRICE.test(block.text)) p.push(`${where}: states a price; compare costs only in relative terms`);
   if (STATUS_WORDS.test(block.text) && !block.status) p.push(`${where}: mentions preview/deprecated/retired but has no status label`);
-  if (block.status && !(block.quotes ?? []).some((q) => /preview|deprecat|retire|end of (life|support)|no longer|sunset|discontinu|not available to new/i.test(q.text))) {
+  if (block.status && !(block.quotes ?? []).some((q) => /preview|deprecat|retire|end of (life|support)|no longer|sunset|discontinu|not available to new|close new customer|closed to new/i.test(q.text))) {
     p.push(`${where}: status "${block.status}" needs a quote showing AWS says so`);
   }
   for (const m of block.text.matchAll(TERM_REF)) {

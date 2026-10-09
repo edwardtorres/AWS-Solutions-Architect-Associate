@@ -53,7 +53,7 @@ export function Inline({ text }: { text: string }): ReactNode {
   );
 }
 
-const STATUS_LABEL = { preview: 'Preview', deprecated: 'Deprecated', retired: 'Retired' } as const;
+const STATUS_LABEL = { preview: 'Preview', deprecated: 'Deprecated', retired: 'Retired', closed: 'Closed to new customers' } as const;
 
 export function Markers({ ids }: { ids: readonly string[] }) {
   const { number, shared } = useCites();

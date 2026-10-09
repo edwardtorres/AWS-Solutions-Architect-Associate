@@ -1,6 +1,6 @@
 /** Shared by the app and by scripts/. Pure types, no runtime code. */
 
-export type Status = 'preview' | 'deprecated' | 'retired';
+export type Status = 'preview' | 'deprecated' | 'retired' | 'closed';
 
 export interface Quote {
   /** Source id from content/sources.json. */

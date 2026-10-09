@@ -1,0 +1,40 @@
+{
+  "rule": "A service on the exam guide's in-scope list whose capability AWS docs still describe may be a correct answer. The explanation must state its current availability with a source. Never write a question whose answer depends on the availability status itself. Services not on the in-scope list are never answers and never appear in a stem or option.",
+  "inScopeWithChangedStatus": [
+    {
+      "service": "AWS Snow Family (Snowball Edge)",
+      "status": "closed",
+      "sentence": "AWS Snowball Edge is no longer available to new customers.",
+      "source": "snowball-edge"
+    },
+    {
+      "service": "Amazon FSx File Gateway (AWS Storage Gateway)",
+      "status": "closed",
+      "sentence": "Amazon FSx File Gateway is no longer available to new customers.",
+      "source": "sgw-fsx-file"
+    },
+    {
+      "service": "Amazon Aurora Serverless v1 (Amazon Aurora Serverless)",
+      "status": "deprecated",
+      "sentence": "Platform versions should not be confused with Aurora Serverless v1, which is a deprecated product with a different architecture.",
+      "source": "aurora-serverless-how"
+    }
+  ],
+  "outOfScopeContextOnly": [
+    {
+      "service": "AWS App Runner",
+      "sentence": "AWS App Runner is no longer open to new customers.",
+      "source": "apprunner-what-is"
+    },
+    {
+      "service": "Amazon Timestream for LiveAnalytics",
+      "sentence": "After careful consideration, we have made the decision to close new customer access to Amazon Timestream for LiveAnalytics",
+      "source": "timestream-availability"
+    },
+    {
+      "service": "AWS Elastic Disaster Recovery",
+      "sentence": "Not on the exam guide's in-scope list.",
+      "source": null
+    }
+  ]
+}
