@@ -970,7 +970,7 @@ const pairs: ConfusePair[] = [
             ['S3 Standard-IA and S3 One Zone-IA objects are available for millisecond access (similar to the S3 Standard storage class).',
              'Amazon S3 charges a retrieval fee for these objects, so they are most suitable for infrequently accessed data.',
              'S3 Standard-IA (STANDARD_IA) – Use for your primary or only copy of data that can\'t be re-created.']),
-          b('Different readings of the minimum-duration rule appear on AWS pages: the S3 storage classes page says deleting an object before a 30-day minimum storage duration is charged for 30 days, and that objects smaller than 128 KB are charged as 128 KB; the storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to Standard-IA and One Zone-IA. The disagreement is recorded; check both pages before relying on the figure.', ['s3-storage-classes', 'storage-decision'],
+          b('Different readings of the minimum-duration rule appear on AWS pages: the S3 storage classes page says deleting an object before a 30-day minimum storage duration is charged for 30 days, and that objects smaller than 128 KB are charged as 128 KB; the storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to Standard-IA and One Zone-IA. AWS pages differ on this point, so the figure is not stated here as fact.', ['s3-storage-classes', 'storage-decision'],
             ['s3-storage-classes|If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days.',
              's3-storage-classes|If an object is less than 128 KB, Amazon S3 charges you for 128 KB.',
              'storage-decision|Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access.']),
@@ -1038,7 +1038,7 @@ const pairs: ConfusePair[] = [
           b('Compute Savings Plans apply to EC2 usage regardless of instance family, size, Region, operating system or tenancy, and also to Fargate and Lambda usage. EC2 Instance Savings Plans are less flexible: they commit to a specific instance family in a chosen Region and apply regardless of size, operating system and tenancy within it. A Savings Plan cannot be cancelled during the term. You can pay with All upfront, Partial upfront or No upfront options.', ['savings-plans-types', 'savings-plans', 'savings-plans-vs-ri'],
             ['savings-plans-types|These plans automatically apply to your EC2 instance usage, regardless of instance family (for example, m5, c5, etc.), instance size (for example, c5.large, c5.xlarge, etc.), Region (for example, us-east-1, us-east-2, etc.), operating system (for example, Windows, Linux, etc.), or tenancy (for example, Dedicated, default, Dedicated Host).',
              'savings-plans-types|They also apply to your Fargate and Lambda usage.',
-             'savings-plans-types|EC2 Instance Savings Plans provide savings up to 72% off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, m5 in Virginia).',
+             'savings-plans-types|in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, m5 in Virginia).',
              'savings-plans-types|These plans automatically apply to usage regardless of instance size (for example, m5.xlarge, m5.2xlarge, etc.), OS (for example, Windows, Linux, etc.), and tenancy (Host, Dedicated, Default) within the specified family in a Region.',
              'savings-plans-vs-ri|Savings Plans offer lower prices compared to On-Demand pricing in exchange for a commitment, and can\'t be cancelled during the term.',
              'savings-plans|You can pay for your commitment using All upfront, Partial upfront, or No upfront payment options.']),
@@ -1047,7 +1047,7 @@ const pairs: ConfusePair[] = [
       {
         name: 'Reserved Instances',
         points: [
-          b('A commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years. AWS recommends Savings Plans over Reserved Instances, but questions can still name Reserved Instances, so know how they differ.', ['ec2-purchasing', 'ec2-reserved-instances'],
+          b('A commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years. AWS recommends Savings Plans over Reserved Instances, but they remain an available option, so know how they differ.', ['ec2-purchasing', 'ec2-reserved-instances'],
             ['ec2-purchasing|Reserved Instances – Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.',
              'ec2-reserved-instances|We recommend Savings Plans over Reserved Instances.']),
           b('A Standard Reserved Instance provides a more significant discount than a Convertible one but cannot be exchanged; a Convertible one can be exchanged during the term. Scope is regional or zonal at the same price: a regional Reserved Instance does not reserve capacity but applies in any Availability Zone in the Region and gives instance size flexibility within the family (Amazon Linux/Unix with default tenancy only); a zonal Reserved Instance reserves capacity in one Availability Zone and has no Availability Zone or size flexibility.', ['ec2-ri-classes', 'ec2-ri-scope'],
@@ -1064,7 +1064,7 @@ const pairs: ConfusePair[] = [
       {
         name: 'Spot Instances',
         points: [
-          b('Instances that use spare EC2 capacity that is available for less than the On-Demand price, with no commitment term. A Spot Instance runs whenever capacity is available.', ['ec2-spot'],
+          b('Instances that use spare EC2 capacity that is available for less than the On-Demand price. A Spot Instance runs whenever capacity is available.', ['ec2-spot'],
             ['ec2-spot|A Spot Instance is an instance that uses spare EC2 capacity that is available for less than the On-Demand price.',
              'ec2-spot|Your Spot Instance runs whenever capacity is available.']),
           b('Amazon EC2 can take the capacity back, called an interruption, and when it does it terminates, stops or hibernates the instance depending on the interruption behaviour you set on the request. Spot suits applications that can be flexible about when they run and that can be interrupted.', ['ec2-spot-interruptions', 'ec2-spot'],
@@ -1076,7 +1076,7 @@ const pairs: ConfusePair[] = [
     ],
     choose: [
       b('Steady usage you can commit to, but the instance types or Regions may change? Savings Plans (Compute Savings Plans are the most flexible).', 'savings-plans-types',
-        ['Compute Savings Plans provide the most flexibility and prices that are up to 66% off of On-Demand rates.']),
+        ['Compute Savings Plans provide the most flexibility']),
       b('Steady usage on one fixed configuration? A Reserved Instance. A specific Availability Zone must have capacity reserved? A zonal Reserved Instance or an On-Demand Capacity Reservation. A Capacity Reservation has no term commitment for immediate use, can be cancelled at any time, and is charged at the equivalent On-Demand rate whether or not you run instances in it, with no billing discount by itself.', ['ec2-purchasing', 'ec2-capacity-reservations', 'ec2-capacity-reservation-billing'],
         ['ec2-purchasing|Capacity Reservations – Reserve capacity for your EC2 instances in a specific Availability Zone.',
          'ec2-capacity-reservations|If you request a Capacity Reservation for immediate use, the Capacity Reservation becomes available for use immediately and there is no term commitment.',
@@ -1086,7 +1086,7 @@ const pairs: ConfusePair[] = [
       b('Flexible, interruptible work such as batch processing that can restart? Spot Instances. Short or unpredictable use with no commitment? On-Demand, which is billed by the second.', 'ec2-purchasing',
         ['On-Demand Instances – Pay, by the second, for the instances that you launch.']),
     ],
-    trap: b('All of these lower the cost of EC2, so a question about "the cheapest option" is really about commitment and interruption. Savings Plans and Reserved Instances are commitments for a term; Spot has no commitment but it is always possible that a Spot Instance is interrupted, so it is wrong for work that must not stop. Reserved Instances commit to an instance configuration, while Savings Plans commit to a usage amount, which is why Savings Plans fit a workload whose instance types will change. A regional Reserved Instance does not reserve capacity, while a zonal one does.', ['ec2-reserved-instances', 'ec2-spot-interruptions', 'ec2-ri-scope'],
+    trap: b('All of these lower the cost of EC2, so a question about "the cheapest option" is really about commitment and interruption. Savings Plans and Reserved Instances are commitments for a term; Spot has no commitment but it is always possible that a Spot Instance is interrupted, so weigh that against work that must not stop. Reserved Instances commit to an instance configuration, while Savings Plans commit to a usage amount, which is why Savings Plans fit a workload whose instance types will change. A regional Reserved Instance does not reserve capacity, while a zonal one does.', ['ec2-reserved-instances', 'ec2-spot-interruptions', 'ec2-ri-scope'],
       ['ec2-reserved-instances|With Reserved Instances, you make a commitment to a specific instance configuration, whereas with Savings Plans , you have the flexibility to use the instance configurations that best meet your needs.',
        'ec2-spot-interruptions|It is always possible that your Spot Instance might be interrupted.',
        'ec2-ri-scope|A regional Reserved Instance does not reserve capacity.',
@@ -1103,7 +1103,8 @@ const pairs: ConfusePair[] = [
         points: [
           b('Managed by AWS, so you do not perform maintenance, and the software is optimised for handling NAT traffic. AWS recommends NAT gateways because they provide better availability and bandwidth and require less effort to administer.', 'vpc-nat-comparison',
             ['We recommend that you use NAT gateways because they provide better availability and bandwidth and require less effort on your part to administer.',
-             'Managed by AWS. You do not need to perform any maintenance.']),
+             'Managed by AWS. You do not need to perform any maintenance.',
+             'Software is optimized for handling NAT traffic.']),
           b('Charged depending on the number of NAT gateways you use, the duration of usage and the amount of data you send through them; you do not choose a type or size. You cannot associate security groups with a NAT gateway, and you cannot use it as a bastion server or for port forwarding.', 'vpc-nat-comparison',
             ['Charged depending on the number of NAT gateways you use, duration of usage, and amount of data that you send through the NAT gateways.',
              'Uniform offering; you don\'t need to decide on the type or size.',
@@ -1134,7 +1135,7 @@ const pairs: ConfusePair[] = [
         ['We recommend that you use NAT gateways because they provide better availability and bandwidth and require less effort on your part to administer.']),
       b('Need port forwarding, a bastion server, or security groups on the NAT device itself? A NAT instance is the option that supports these.', 'vpc-nat-comparison',
         ['Bastion servers Not supported.']),
-      b('Want zone-level high availability without managing a gateway in each zone, and no private NAT? A regional NAT gateway.', 'vpc-nat-regional',
+      b('Want high availability across Availability Zones without managing a gateway in each zone, and no private NAT? A regional NAT gateway.', 'vpc-nat-regional',
         ['A regional NAT gateway automatically expands across Availability Zones based on your workload presence.',
          'Regional NAT Gateways do not offer private connectivity and we recommend using your NAT Gateways in zonal availability mode for private NAT use cases.']),
     ],
