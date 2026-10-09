@@ -113,6 +113,7 @@ describe('question checks', () => {
     const known = knownNames(base().services, base().shortNames);
     expect(unknownServiceMentions('Use Amazon EFS or AWS IAM Identity', known)).toEqual([]);
     expect(unknownServiceMentions('Use AWS Frobnicator now', known)).toEqual(['AWS Frobnicator now']);
+    expect(unknownServiceMentions('AWS allows this and Amazon recommends that', known)).toEqual([]);
   });
 
   it('applies the exam-era rule', () => {

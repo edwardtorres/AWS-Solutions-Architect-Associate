@@ -118,7 +118,7 @@ export function knownNames(services: ServicesDoc, shortNames: readonly { short: 
 /** Returns the unknown "Amazon X"/"AWS X" candidates in a text. */
 export function unknownServiceMentions(text: string, known: readonly string[]): string[] {
   const out: string[] = [];
-  for (const m of text.matchAll(/\b(?:Amazon|AWS)\s+[A-Za-z0-9@][\w@-]*(?:\s+[A-Za-z0-9][\w-]*){0,2}/g)) {
+  for (const m of text.matchAll(/\b(?:Amazon|AWS)\s+[A-Z0-9@][\w@-]*(?:\s+[A-Za-z0-9][\w-]*){0,2}/g)) {
     const words = m[0].split(/\s+/);
     let ok = false;
     for (let n = words.length; n >= 2 && !ok; n -= 1) {
