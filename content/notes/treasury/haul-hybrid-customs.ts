@@ -68,7 +68,7 @@ const notes: BuildingNotes = {
     {
       id: '4.1-S3',
       concepts: [
-        b('Lowest cost means the cheapest method that still meets the deadline: if the existing network can move the data in time, an online service (DataSync, or a plain upload with multipart) avoids buying extra hardware or connections; if it cannot, a physical transfer or a faster dedicated connection is considered.',
+        b('AWS Data Transfer Terminal is a network-ready, physical location you can bring your data storage devices to for fast data transfer to and from your AWS Cloud service. As study guidance, lowest cost means choosing the cheapest method that still meets the deadline.',
           ['dtt'],
           ['dtt|AWS Data Transfer Terminal is a network-ready, physical location you can bring your data storage devices for fast data transfer to and from your AWS Cloud service.']),
         b('Snowball Edge, the classic offline option, is no longer available to new customers; AWS points new customers to DataSync for online transfers, Data Transfer Terminal for secure physical transfers, or partner solutions. For a current design, base the offline option on what AWS now points to.',
@@ -76,10 +76,11 @@ const notes: BuildingNotes = {
           ['snowball-edge|AWS Snowball Edge is no longer available to new customers.',
            'snowball-edge|New customers should explore AWS DataSync for online transfers, AWS Data Transfer Terminal for secure physical transfers, or AWS Partner solutions.'],
           { status: 'closed' }),
-        b('Cost factors to weigh: the connectivity option, Direct Connect or Site-to-Site VPN (Transit Tariff), and the storage class you land the data in (Cold Cellar).',
+        b('Two connectivity options: Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable, and Site-to-Site VPN supports IPsec VPN connections. Compare their costs in Transit Tariff, and the landing storage class in Cold Cellar.',
           ['dx-what-is', 's2s-vpn'],
           ['dx-what-is|Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable.',
-           's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.']),
+           's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.'],
+          { allow: ['two'] }),
       ],
       services: ['AWS DataSync', 'AWS Snow Family', 'AWS Direct Connect'],
       design: [
@@ -149,7 +150,7 @@ const notes: BuildingNotes = {
         ['learn-storage|DataSync File Sync Azure Files can be deployed in two main ways: by directly mounting the serverless Azure file shares or by caching Azure file shares on-premises using Azure File Sync.',
          'datasync-what-is|AWS DataSync is a secure, reliable, high‐speed file transfer service that helps you quickly and easily transfer your file or object data to, from, and between AWS storage services.'],
         { allow: ['two'] }),
-      breaks: b('Learn lists Azure File Sync against both DataSync and S3 File Gateway. S3 File Gateway provides locally cached file shares that are cloud-backed, whereas DataSync is a managed transfer service that moves data between storage systems.',
+      breaks: b('Learn lists Azure File Sync against both DataSync and S3 File Gateway, and describes S3 File Gateway as providing on-premises, locally cached NFS and SMB file shares that are cloud-backed. AWS describes S3 File Gateway as a file system mount on Amazon S3, whereas DataSync is a file transfer service for moving file or object data to, from and between AWS storage services.',
         ['sgw-file-s3', 'datasync-what-is', 'learn-storage'],
         ['sgw-file-s3|You can think of a S3 File Gateway as a file system mount on Amazon S3.',
          'datasync-what-is|AWS DataSync is a secure, reliable, high‐speed file transfer service that helps you quickly and easily transfer your file or object data to, from, and between AWS storage services.',

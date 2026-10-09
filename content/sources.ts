@@ -518,6 +518,17 @@ const sources: Source[] = [
   aws('securityhub-faq', 'https://aws.amazon.com/security-hub/faqs/', 'AWS Security Hub FAQs'),
   aws('apigw-edge-cert', `${D}/apigateway/latest/developerguide/how-to-specify-certificate-for-custom-domain-name.html`, 'Choose a certificate for a custom domain name'),
   aws('rds-failover', `${D}/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.Failover.html`, 'Failing over a Multi-AZ DB instance for Amazon RDS'),
+  aws('waf-general-dp', `${D}/wellarchitected/latest/framework/general-design-principles.html`, 'AWS Well-Architected Framework: General design principles'),
+  aws('waf-sec-dp', `${D}/wellarchitected/latest/framework/sec-design.html`, 'AWS Well-Architected Framework: Security design principles'),
+  aws('waf-rel-dp', `${D}/wellarchitected/latest/framework/rel-dp.html`, 'AWS Well-Architected Framework: Reliability design principles'),
+  aws('waf-perf-dp', `${D}/wellarchitected/latest/framework/perf-dp.html`, 'AWS Well-Architected Framework: Performance efficiency design principles'),
+  aws('waf-cost-dp', `${D}/wellarchitected/latest/framework/cost-dp.html`, 'AWS Well-Architected Framework: Cost optimization design principles'),
+  aws('waf-oe-dp', `${D}/wellarchitected/latest/framework/oe-design-principles.html`, 'AWS Well-Architected Framework: Operational excellence design principles'),
+  aws('waf-sus-dp', `${D}/wellarchitected/latest/framework/sus-design-principles.html`, 'AWS Well-Architected Framework: Sustainability design principles'),
+  aws('waf-sustainability', `${D}/wellarchitected/latest/framework/sustainability.html`, 'AWS Well-Architected Framework: Sustainability'),
+  aws('exam-in-scope', `${D}/aws-certification/latest/solutions-architect-associate-03/saa-03-in-scope-services.html`, 'In-Scope AWS Services (SAA-C03 exam guide)'),
+  aws('ec2-iam-roles', `${D}/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html`, 'IAM roles for Amazon EC2'),
+  aws('asg-benefits', `${D}/autoscaling/ec2/userguide/auto-scaling-benefits.html`, 'Auto Scaling benefits for application architecture'),
 ];
 
 export default sources;

@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'route-tariff',
   overview: [
-    b('Data moving through the network is billed by where it goes. Traffic that stays inside one Availability Zone is the cheapest to move; crossing Availability Zones or Regions, passing through a NAT gateway or a transit hub, or leaving to the internet adds charges. Route design, DNS, endpoints and caching decide how much of your traffic takes the expensive paths. This building covers direction rather than figures: which choice keeps traffic on the cheaper path.',
+    b('Over a VPC peering connection, data transfer that stays within an Availability Zone is free, while charges apply for transfer that crosses Availability Zones and Regions. A transit gateway charges hourly for each attachment and for the traffic processed, and gateway endpoints have no additional charge. This building covers direction rather than figures: which choice keeps traffic on the cheaper path.',
       ['peering-what-is', 'tgw-what-is', 'vpce-gateway'],
       ['peering-what-is|All data transfer over a VPC peering connection that stays within an Availability Zone is free, even if it\'s between different accounts.',
        'peering-what-is|Charges apply for data transfer over VPC peering connections that cross Availability Zones and Regions.',
@@ -95,7 +95,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon VPC', 'AWS Global Accelerator', 'AWS PrivateLink'],
       design: [
-        b('Cue: "private subnets download from S3 through a NAT gateway and the bill is high" → gateway endpoint for S3; "chatty tiers in different Availability Zones" → co-locate or accept the cost for availability; "need static IPs and fast regional failover" → Global Accelerator, knowing it adds a premium charge.',
+        b('Cue: "private subnets download from S3 through a NAT gateway and the bill is high" → gateway endpoint for S3; "VPC peering connection across Availability Zones" → charges apply, so co-locate or accept the cost for availability; "need static IPs and fast regional failover" → Global Accelerator, knowing it adds a premium charge.',
           ['vpce-gateway', 'peering-what-is', 'ga-pricing'],
           ['vpce-gateway|There is no additional charge for using gateway endpoints.',
            'peering-what-is|Charges apply for data transfer over VPC peering connections that cross Availability Zones and Regions.',

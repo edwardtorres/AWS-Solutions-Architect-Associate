@@ -162,7 +162,7 @@ const notes: BuildingNotes = {
         ['learn-networking', 'vpn-tunnels'],
         ['learn-networking|Both AWS Site-to-Site VPN and Azure VPN Gateway are robust solutions for connecting on-premises networks to the cloud.',
          'vpn-tunnels|Each Site-to-Site VPN connection has two tunnels, with each tunnel using a unique public IP address.']),
-      breaks: b('Learn gives VPN Gateway as higher throughput than Site-to-Site VPN. The AWS limits are per tunnel, for a standard tunnel and for a Large Bandwidth Tunnel, and using ECMP requires dynamic routing.',
+      breaks: b('Learn says VPN Gateway offers higher throughput for certain configurations than Site-to-Site VPN. The AWS limits are per tunnel, for a standard tunnel and for a Large Bandwidth Tunnel, and using ECMP requires dynamic routing.',
         ['learn-networking', 'vpn-tunnels', 'vpn-quotas'],
         ['learn-networking|VPN Gateway offers higher throughput for certain configurations',
          'vpn-tunnels|Standard bandwidth: Up to 1.25 Gbps per tunnel (default)',

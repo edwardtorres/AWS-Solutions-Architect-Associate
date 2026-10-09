@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'elastic-mint',
   overview: [
-    b('Compute is cheapest when you pay only for the capacity you use. Lambda runs code without provisioning or managing servers, Fargate runs containers without managing servers or clusters of EC2 instances, and EC2 gives you the instance itself, with Auto Scaling to add and remove instances as demand changes. A load balancer spreads the traffic across the targets. This building is about choosing among them and scaling them so you do not pay for idle capacity.',
+    b('Lambda runs code without provisioning or managing servers, Fargate runs containers without managing servers or clusters of EC2 instances, and EC2 gives you the instance itself, with Auto Scaling to add and remove instances as demand changes. A load balancer spreads the traffic across the targets. This building is about choosing among them and scaling them.',
       ['lambda-welcome', 'fargate-ecs', 'asg-what-is', 'elb-what-is'],
       ['lambda-welcome|With Lambda, you can run code without provisioning or managing servers.',
        'fargate-ecs|AWS Fargate is a technology that you can use with Amazon ECS to run containers without having to manage servers or clusters of Amazon EC2 instances.',
@@ -152,7 +152,7 @@ const notes: BuildingNotes = {
     {
       id: '4.2-S3',
       concepts: [
-        b('Match the service to the workload shape. Lambda for short, event-driven work (a single invocation can run for up to 15 minutes), priced by requests and duration. Fargate for containers when you do not want to manage servers or clusters. EC2 when you need control of the instance, long-running processes, or a specific instance type, and then the purchasing options from Counting House apply.',
+        b('Match the service to the workload shape. Lambda: a single invocation can run for up to 15 minutes, and it is priced per request and execution duration. Fargate runs containers without managing servers or clusters of EC2 instances. EC2 offers purchasing options to optimize cost (Counting House).',
           ['lambda-quotas', 'lambda-pricing', 'fargate-ecs', 'ec2-purchasing'],
           ['lambda-quotas|Code can run for up to 15 minutes in a single invocation',
            'lambda-pricing|Lambda Functions are priced per request and execution duration.',

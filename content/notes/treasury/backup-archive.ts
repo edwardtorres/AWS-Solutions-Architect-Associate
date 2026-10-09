@@ -65,7 +65,7 @@ const notes: BuildingNotes = {
            'To use cold storage, you must have a total retention period of 90 days or greater.',
            'AWS Backup recommends that you set your lifecycle settings to not move your backup to cold storage until after at least 8 days.',
            'If the full backup is transitioned to cold storage too soon (for example, a transition to cold storage after 1 day), AWS Backup will create another warm full backup.']),
-        b('For file and object backups in S3, archive classes provide the cold tier: S3 Glacier Flexible Retrieval and Deep Archive for long-term archives (Cold Cellar), and Tape Gateway lets you cost-effectively and durably archive backup data in those classes.',
+        b('Tape Gateway lets you cost-effectively and durably archive backup data in S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive (see Cold Cellar for the classes).',
           'sgw-tape',
           ['With Tape Gateway, you can cost-effectively and durably archive backup data in S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive.']),
         b('Choosing between backup and archive: backup protects against loss or corruption and is restored to resume operations (retention measured by the recovery need); archive keeps data for long-term retention that is rarely retrieved. AWS Backup handles the first across services, and the Glacier classes serve the second.',

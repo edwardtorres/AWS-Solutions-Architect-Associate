@@ -4,10 +4,11 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'streaming-canal',
   overview: [
-    b('Streaming data is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing. AWS has three streaming ingestion services to tell apart: Kinesis Data Streams (you build the consumers), {{rename:data-firehose}} (managed delivery to a destination) and Amazon MSK (managed Apache Kafka).',
-      ['what-is-streaming-data', 'kinesis-streams', 'firehose', 'msk-what-is'],
+    b('Streaming data is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing. Three streaming services are easy to confuse: Kinesis Data Streams (producers push records and consumers process them), {{rename:data-firehose}} (fully managed delivery to destinations) and Amazon MSK (managed Apache Kafka).',
+      ['what-is-streaming-data', 'kinesis-streams', 'kinesis-concepts', 'firehose', 'msk-what-is'],
       ['what-is-streaming-data|Streaming data is data that is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing.',
        'kinesis-streams|You can use Amazon Kinesis Data Streams to collect and process large streams of data records in real time.',
+       'kinesis-concepts|The producers continually push data to Kinesis Data Streams, and the consumers process the data in real time.',
        'firehose|Amazon Data Firehose is a fully managed service for delivering real-time streaming data to destinations such as Amazon Simple Storage Service (Amazon S3), Amazon Redshift, Amazon OpenSearch Service',
        'msk-what-is|fully managed service that enables you to build and run applications that use Apache Kafka to process streaming data.'],
       { allow: ['three'] }),

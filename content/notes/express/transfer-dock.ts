@@ -59,7 +59,7 @@ const notes: BuildingNotes = {
         b('DataSync is described as a high-speed transfer service that handles the movement for you; use it when the network is fast enough to finish within the required window, and add Transfer Family or Storage Gateway when the protocol or continuing access dictates.',
           'datasync-what-is',
           ['AWS DataSync is a secure, reliable, high‐speed file transfer service that helps you quickly and easily transfer your file or object data to, from, and between AWS storage services.']),
-        b('A dedicated private connection is a network option for a large transfer: Direct Connect links your network to AWS over a fiber-optic cable and bypasses internet service providers (see Edge & Link Terminal and Transit Tariff).',
+        b('Direct Connect is a network option rather than a shipped device: it links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable, and its virtual interfaces bypass internet service providers in your network path (see Edge & Link Terminal and Transit Tariff).',
           'dx-what-is',
           ['Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable.',
            'With this connection, you can create virtual interfaces directly to public AWS services (for example, to Amazon S3) or to Amazon VPC, bypassing internet service providers in your network path.']),

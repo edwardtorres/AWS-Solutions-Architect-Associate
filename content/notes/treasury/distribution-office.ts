@@ -81,11 +81,11 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Outposts'],
       design: [
-        b('Cue: "run AWS services on premises for low-latency local processing, with the same APIs" → Outposts; contrast with Wavelength (carrier edge) and Local Zones (AWS-operated locations near large population centers).',
+        b('Cue: "run AWS services on premises for low-latency local processing, with the same APIs" → Outposts; contrast with Wavelength (AWS compute and storage at the edge of communications service providers\' networks) and Local Zones (resources placed close to large population and industry centers).',
           ['outposts-what-is', 'wavelength-what-is', 'local-zones'],
           ['outposts-what-is|By providing local access to AWS managed infrastructure, AWS Outposts enables customers to build and run applications on premises using the same programming interfaces as in AWS Regions, while using local compute and storage resources for lower latency and local data processing needs.',
            'wavelength-what-is|Wavelength deploys standard AWS compute and storage services to the edge of communications service providers\' (CSP) networks.',
-           'local-zones|You can use Local Zones to provide your users with low-latency access to your applications.']),
+           'local-zones|AWS Local Zones places compute, storage, database, and other select AWS resources close to large population and industry centers.']),
       ],
     },
     {

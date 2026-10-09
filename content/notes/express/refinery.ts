@@ -4,7 +4,7 @@ import { b, cue, example } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'refinery',
   overview: [
-    b('Raw data is rarely ready to analyse. Transformation services clean, enrich and convert it, and the format you convert to decides how cheaply and quickly it can be queried afterwards. The services covered here are AWS Glue (serverless data integration and ETL) and Amazon EMR (managed clusters for big data frameworks).',
+    b('Raw data is rarely ready to analyse. AWS Glue is a serverless data integration service for discovering, preparing, moving and integrating data, and Amazon EMR is a managed cluster platform for big data frameworks such as Apache Hadoop and Apache Spark.',
       ['glue-what-is', 'emr-what-is'],
       ['glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.',
        'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.']),

@@ -72,7 +72,7 @@ const notes: BuildingNotes = {
     {
       id: '3.4-S2',
       concepts: [
-        b('Room to scale: start from a block large enough for growth (up to /16), use additional IPv4 CIDR blocks if needed later, and choose a topology that does not need re-wiring as networks are added. A transit gateway scales elastically based on traffic, while peering needs one connection per pair of VPCs because it is not transitive.',
+        b('Room to scale: an IPv4 CIDR block can be between a /16 and a /28 netmask, and you can associate additional IPv4 CIDR blocks with a VPC after creating it. A transit gateway scales elastically based on traffic, while peering is not transitive, so enabling traffic between VPC B and VPC C requires its own peering connection.',
           ['vpc-cidr-blocks', 'tgw-how', 'peering-basics'],
           ['vpc-cidr-blocks|After you\'ve created your VPC, you can associate additional IPv4 CIDR blocks with the VPC.',
            'tgw-how|A transit gateway scales elastically based on the volume of network traffic.',
