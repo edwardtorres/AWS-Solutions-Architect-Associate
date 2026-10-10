@@ -540,6 +540,18 @@ const sources: Source[] = [
   aws('waf-cloudfront', `${D}/waf/latest/developerguide/cloudfront-features.html`, 'Using AWS WAF with Amazon CloudFront'),
   aws('waf-ipset', `${D}/waf/latest/developerguide/waf-rule-statement-type-ipset-match.html`, 'IP set match rule statement'),
   aws('apigw-waf', `${D}/apigateway/latest/developerguide/apigateway-control-access-aws-waf.html`, 'Use AWS WAF to protect your REST APIs in API Gateway'),
+  aws('alb-authenticate', `${D}/elasticloadbalancing/latest/application/listener-authenticate-users.html`, 'Authenticate users using an Application Load Balancer'),
+  aws('apigw-cognito-authorizer', `${D}/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html`, 'Control access to REST APIs using Amazon Cognito user pools as an authorizer'),
+  aws('apigw-lambda-authorizer', `${D}/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html`, 'Use API Gateway Lambda authorizers'),
+  aws('secrets-replicate', `${D}/secretsmanager/latest/userguide/replicate-secrets.html`, 'Replicate AWS Secrets Manager secrets across Regions'),
+  aws('secrets-cross-account', `${D}/secretsmanager/latest/userguide/auth-and-access_examples_cross.html`, 'Access AWS Secrets Manager secrets from a different account'),
+  aws('ecs-sensitive-data', `${D}/AmazonECS/latest/developerguide/specifying-sensitive-data.html`, 'Pass sensitive data to an Amazon ECS container'),
+  aws('secrets-vpc-endpoint', `${D}/secretsmanager/latest/userguide/vpc-endpoint-overview.html`, 'Using an AWS Secrets Manager VPC endpoint'),
+  aws('lambda-envvars', `${D}/lambda/latest/dg/configuration-envvars.html`, 'Working with Lambda environment variables'),
+  aws('vpce-policies', `${D}/vpc/latest/privatelink/vpc-endpoints-access.html`, 'Control access to VPC endpoints using endpoint policies'),
+  aws('dx-gateways', `${D}/directconnect/latest/UserGuide/direct-connect-gateways-intro.html`, 'AWS Direct Connect gateways'),
+  aws('vpn-redundant', `${D}/vpn/latest/s2svpn/vpn-redundant-connection.html`, 'Redundant AWS Site-to-Site VPN connections for failover'),
+  aws('ssm-parameter-policies', `${D}/systems-manager/latest/userguide/parameter-store-policies.html`, 'Assigning parameter policies in Parameter Store'),
 ];
 
 export default sources;
