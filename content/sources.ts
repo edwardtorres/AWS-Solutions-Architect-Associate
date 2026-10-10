@@ -549,9 +549,21 @@ const sources: Source[] = [
   aws('secrets-vpc-endpoint', `${D}/secretsmanager/latest/userguide/vpc-endpoint-overview.html`, 'Using an AWS Secrets Manager VPC endpoint'),
   aws('lambda-envvars', `${D}/lambda/latest/dg/configuration-envvars.html`, 'Working with Lambda environment variables'),
   aws('vpce-policies', `${D}/vpc/latest/privatelink/vpc-endpoints-access.html`, 'Control access to VPC endpoints using endpoint policies'),
-  aws('dx-gateways', `${D}/directconnect/latest/UserGuide/direct-connect-gateways-intro.html`, 'AWS Direct Connect gateways'),
   aws('vpn-redundant', `${D}/vpn/latest/s2svpn/vpn-redundant-connection.html`, 'Redundant AWS Site-to-Site VPN connections for failover'),
   aws('ssm-parameter-policies', `${D}/systems-manager/latest/userguide/parameter-store-policies.html`, 'Assigning parameter policies in Parameter Store'),
+  aws('kms-delete-key', `${D}/kms/latest/developerguide/deleting-keys.html`, 'Delete an AWS KMS key'),
+  aws('kms-cross-account', `${D}/kms/latest/developerguide/key-policy-modifying-external-accounts.html`, 'Allowing users in other accounts to use a KMS key'),
+  aws('cloudhsm-clusters', `${D}/cloudhsm/latest/userguide/clusters.html`, 'AWS CloudHSM clusters'),
+  aws('s3-bucket-keys', `${D}/AmazonS3/latest/userguide/bucket-key.html`, 'Reducing the cost of SSE-KMS with Amazon S3 Bucket Keys'),
+  aws('ebs-encryption', `${D}/ebs/latest/userguide/ebs-encryption.html`, 'Amazon EBS encryption'),
+  aws('acm-dns-validation', `${D}/acm/latest/userguide/dns-validation.html`, 'AWS Certificate Manager DNS validation'),
+  aws('acm-email-validation', `${D}/acm/latest/userguide/email-validation.html`, 'AWS Certificate Manager email validation'),
+  aws('acm-import', `${D}/acm/latest/userguide/import-certificate.html`, 'Import certificates into AWS Certificate Manager'),
+  aws('acm-public-request', `${D}/acm/latest/userguide/acm-public-certificates.html`, 'Request a public certificate in AWS Certificate Manager'),
+  aws('acm-renewal-status', `${D}/acm/latest/userguide/check-certificate-renewal-status.html`, 'Check a certificate\'s renewal status'),
+  aws('acm-best-practices', `${D}/acm/latest/userguide/acm-bestpractices.html`, 'Best practices (AWS Certificate Manager)'),
+  aws('cf-viewer-https', `${D}/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html`, 'Require HTTPS for communication between viewers and CloudFront'),
+  aws('cf-origin-https', `${D}/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html`, 'Require HTTPS for communication between CloudFront and your custom origin'),
 ];
 
 export default sources;
