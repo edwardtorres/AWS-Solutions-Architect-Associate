@@ -213,16 +213,15 @@ const questions: Question[] = [
     stem: 'A company\'s Amazon CloudFront distribution uses an ACM public certificate that was validated with DNS. After a DNS cleanup, the renewal status of the certificate shows Pending validation. Which action BEST resolves this and keeps renewal automatic?',
     correct: ['Re-create the CNAME validation record that ACM provided in the public DNS zone', 'ACM renews automatically while the certificate is in use and its CNAME record remains in place.'],
     wrong: [
-      ['Delete the certificate from the distribution and associate it again to restart the renewal', 'Removing the certificate from the service stops automatic renewal rather than restarting it.'],
+      ['Delete the certificate from the distribution and associate it again to restart the renewal', 'The certificate stays in Pending validation until the CNAME record exists again; removing and re-adding it does not recreate the record.'],
       ['Import the same certificate into eu-west-1 so that ACM can renew it there', 'Imported certificates are not eligible for managed renewal, and CloudFront needs its certificate in us-east-1.'],
-      ['Switch the validation of the certificate from DNS to email without creating a new certificate', 'The validation method of an existing certificate cannot be switched between DNS and email.'],
+      ['Switch the validation of the certificate from DNS to email without creating a new certificate', 'Email validation would need someone to act on emails and does not restore the missing DNS record; ACM renews a DNS-validated certificate automatically when the CNAME record is in place.'],
     ],
     slot: 1,
     evidence: [
       'acm-renewal-status|If you used DNS validation, check to make sure your DNS record exists and that your certificate remains in use.',
       'acm-dns-validation|ACM automatically renews your certificate as long as the certificate is in use and your CNAME record remains in place.',
       'acm-dns-validation|You can stop automatic renewal either by removing the certificate from the AWS service with which it is associated or by deleting the CNAME record.',
-      'acm-email-validation|After you create a certificate with email validation, you cannot switch to validating it with DNS.',
     ],
   }),
   mc({

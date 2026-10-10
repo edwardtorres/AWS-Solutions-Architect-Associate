@@ -288,8 +288,8 @@ const questions: Question[] = [
     bullets: ['1.3-S2'],
     d: 3,
     tags: ['trap:sse-s3-kms-c'],
-    stem: 'A company must supply its own encryption key with each upload request so that Amazon S3 never stores the key. It created a new general purpose bucket, and uploads that specify SSE-C now fail with an HTTP 403 AccessDenied error. Which action resolves this with the LEAST change?',
-    correct: ['Call PutBucketEncryption to set BlockedEncryptionTypes to NONE in the default encryption configuration of the bucket', 'SSE-C requests are rejected while SSE-C is blocked, and it must be deliberately enabled in the bucket\'s default encryption configuration.'],
+    stem: 'A company must supply its own encryption key with each upload request so that Amazon S3 never stores the key. It created a new general purpose bucket, and uploads that specify SSE-C fail with an HTTP 403 AccessDenied error. Which action resolves this with the LEAST change?',
+    correct: ['Call PutBucketEncryption to set BlockedEncryptionTypes to NONE in the default encryption configuration of the bucket', 'Amazon S3 blocks SSE-C on new general purpose buckets by default, so SSE-C requests are rejected until it is deliberately enabled in the default encryption configuration of the bucket.'],
     wrong: [
       ['Allow the application role to use a customer managed key in the key policy', 'SSE-C does not use a KMS key, so no key policy change addresses the rejected requests.'],
       ['Send the SSE-C headers over HTTP so the request is not inspected', 'Amazon S3 rejects any request made over HTTP when using SSE-C.'],
@@ -298,6 +298,7 @@ const questions: Question[] = [
     slot: 3,
     evidence: [
       "s3-sse-c|If your workload requires SSE-C, you must explicitly enable it by setting BlockedEncryptionTypes to NONE in your bucket's default encryption configuration using the PutBucketEncryption API.",
+      's3-sse-c|SSE-C is blocked by default for new buckets. You must explicitly enable SSE-C using the PutBucketEncryption API before you can upload objects with SSE-C encryption.',
       's3-sse-c|While SSE-C is blocked, any PutObject, CopyObject, PostObject, Multipart Upload, or replication request that specifies SSE-C encryption is rejected with an HTTP 403 AccessDenied error.',
       's3-sse-c|You must use HTTPS when specifying SSE-C headers on your requests.',
     ],

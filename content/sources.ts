@@ -570,6 +570,10 @@ const sources: Source[] = [
   aws('ecs-service-lb', `${D}/AmazonECS/latest/developerguide/service-load-balancing.html`, 'Use load balancing to distribute Amazon ECS service traffic'),
   aws('eks-fargate', `${D}/eks/latest/userguide/fargate.html`, 'Simplify compute management with AWS Fargate (Amazon EKS)'),
   aws('apigw-endpoint-types', `${D}/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html`, 'API endpoint types for REST APIs in API Gateway'),
+  aws('waf-managed-groups', `${D}/waf/latest/developerguide/waf-managed-rule-groups.html`, 'Using managed rule groups in AWS WAF'),
+  aws('waf-crs', `${D}/waf/latest/developerguide/aws-managed-rule-groups-baseline.html`, 'Baseline rule groups (AWS WAF)'),
+  aws('vpce-gateway-ddb', `${D}/vpc/latest/privatelink/vpc-endpoints-ddb.html`, 'Gateway endpoints for Amazon DynamoDB'),
+  aws('dx-macsec', `${D}/directconnect/latest/UserGuide/MACsec.html`, 'MAC Security in AWS Direct Connect'),
 ];
 
 export default sources;
