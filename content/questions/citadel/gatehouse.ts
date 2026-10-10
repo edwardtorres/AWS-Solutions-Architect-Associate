@@ -186,7 +186,7 @@ const questions: Question[] = [
     wrong: [
       ['Associate a second Elastic IP address with the existing NAT gateway', 'The NAT gateway is still created in a single Availability Zone, so a zone failure still removes it.'],
       ['Create a second NAT gateway in Availability Zone A and split the subnets between the two', 'Both gateways are still in the failed zone, so the other zones would still lose access.'],
-      ['Move the NAT gateway to a larger instance size in Availability Zone B for more capacity', 'A NAT gateway has a uniform offering without instance sizes, and it would still sit in one zone.'],
+      ['Replace the NAT gateway with a new one in Availability Zone B and route all of the subnets to it', 'It would still be one NAT gateway in one Availability Zone, so a failure of that zone removes outbound access for the subnets in the other zones.'],
     ],
     slot: 3,
     evidence: [
@@ -355,7 +355,7 @@ const questions: Question[] = [
     stem: 'A company deploys a web tier on Amazon EC2 instances that must keep running if one Availability Zone fails. How should the architect lay out the subnets for this tier to achieve the HIGHEST availability?',
     correct: ['Create at least one subnet for the tier in each Availability Zone it uses', 'A subnet resides entirely within one Availability Zone and cannot span zones.'],
     wrong: [
-      ['Create one large subnet and enable a multi-AZ setting on it', 'A subnet cannot span Availability Zones, so no such setting exists.'],
+      ['Create one subnet in one Availability Zone and use EC2 Auto Scaling to replace failed instances in it', 'The subnet and every replacement instance stay in one Availability Zone, so a failure of that zone stops the whole tier.'],
       ['Create one subnet and let the VPC place its addresses across zones', 'Each subnet is tied to a single zone when it is created.'],
       ['Create one subnet and add a second CIDR block for the other zone', 'Adding an address range does not move the subnet to another zone.'],
     ],
@@ -490,7 +490,7 @@ const questions: Question[] = [
     correct: ['An egress-only internet gateway with a route for ::/0 in the subnet route table', 'It allows outbound IPv6 communication and prevents the internet from initiating an IPv6 connection.'],
     wrong: [
       ['An internet gateway with a route for ::/0 in the subnet route table', 'IPv6 addresses are public by default, so the internet could initiate connections to the instances.'],
-      ['A public NAT gateway with an Elastic IP address and a route for ::/0', 'The documented outbound-only option for IPv6 is an egress-only internet gateway, and the NAT gateway adds more to manage.'],
+      ['A public NAT gateway with an Elastic IP address and a route for ::/0', 'A NAT gateway performs NAT64 for IPv6 workloads that reach IPv4 resources; it does not provide outbound-only IPv6-to-IPv6 access, which is what the instances need and what the egress-only internet gateway provides.'],
       ['A security group rule that denies all inbound IPv6 traffic on the instances', 'A security group cannot hold deny rules, and it provides no outbound path.'],
     ],
     slot: 0,
