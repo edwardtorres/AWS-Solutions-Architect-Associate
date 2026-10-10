@@ -1,0 +1,169 @@
+[
+ {
+  "id": "archive-annex-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-003",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on the documented DR statement (replication may not protect against corruption without versioning or point-in-time recovery). The phrase 'under a retention setting' in the correct option is vague but harmless; AWS Backup supports continuous (point-in-time) backups for some resources and scheduled backups for others, so say 'point-in-time recovery' only for resource types that support it if the stem names the database engine."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-010",
+  "verdict": "OK",
+  "issues": [
+   "Key matches the Macie docs, but the docs now name the destination 'AWS Security Hub CSPM' ('You can configure Macie to also publish findings to AWS Security Hub CSPM'), while the option and why say 'AWS Security Hub' (the exam-guide in-scope name). Using the guide name in the option is right under the naming rule; the explanation should show the docs name beside it so a reader checking the page is not confused."
+  ],
+  "suggestedFix": "Add 'documented as AWS Security Hub CSPM' to the Security Hub option's why (as the notes do), and keep the guide name in the option text."
+ },
+ {
+  "id": "archive-annex-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-014",
+  "verdict": "OK",
+  "issues": [
+   "Judged as asked: documented. replication-requirements.html: 'Both source and destination buckets must have versioning enabled.' and 'If the source bucket has S3 Object Lock enabled, the destination buckets must also have S3 Object Lock enabled.' and 'The destination buckets cannot be configured as Requester Pays buckets.' Both correct options are required, and each wrong option is wrong (versioning off, Requester Pays, a one-day expiry lifecycle rule). The same page adds that replication on an Object Lock bucket must be configured through the CLI, REST API or SDKs and that the replication role needs s3:GetObjectRetention and s3:GetObjectLegalHold; neither is offered, so no second correct answer exists. The two source buckets/destination-bucket requirements are direct documentation, not inference.",
+   "Minor: the lifecycle-expiry wrong option is weak (obviously not a replication setting); could be replaced by 'Enable default encryption with SSE-C on the destination', but not needed."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-019",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-022",
+  "verdict": "OK",
+  "issues": [
+   "Stem opens with a false premise ('An engineer says that Amazon EBS automatically backs up...'), which borders on the guide's 'no trick wording' rule, but the correct action is unambiguous and documented (ebs-snapshots: AWS does not automatically back up EBS volume data; use Data Lifecycle Manager or AWS Backup). Amazon Data Lifecycle Manager would also be valid but is not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-023",
+  "verdict": "OK",
+  "issues": [
+   "Stem phrase 'The company accepts that the lock cannot be removed after a short testing period' gives away compliance mode with a grace time; acceptable at d3 because the retention and administrator requirements still have to be matched. Key fully documented in backup-vault-lock."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-025",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "archive-annex-026",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

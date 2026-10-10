@@ -521,7 +521,7 @@ const questions: Question[] = [
     bullets: ['1.1-S1'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'A company has a standalone AWS account that is not part of AWS Organizations. Which TWO tasks can be done only by signing in as the root user? (Choose two.) Select the BEST answers.',
+    stem: 'A company has a standalone AWS account that is not part of AWS Organizations. Which TWO tasks can be done only by signing in as the root user? (Choose two.)',
     correct: [
       ['Close the AWS account', 'Standalone accounts require root credentials to close the account.'],
       ['Restore the permissions of the only IAM administrator after the administrator revoked them by mistake', 'The root user can edit policies to restore IAM user permissions.'],
