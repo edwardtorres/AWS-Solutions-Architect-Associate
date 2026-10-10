@@ -1,0 +1,21 @@
+[
+{"id":"federation-bridge-001","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-002","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-003","picks":["D"],"ambiguous":false},
+{"id":"federation-bridge-004","picks":["A"],"ambiguous":false},
+{"id":"federation-bridge-005","picks":["A"],"ambiguous":false},
+{"id":"federation-bridge-006","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-007","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-008","picks":["C"],"ambiguous":false},
+{"id":"federation-bridge-009","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-010","picks":["C"],"ambiguous":false,"note":"Identity Center connects to only one directory, so two AD Connectors (A) cannot work; AWS Managed AD with trusts is the approach."},
+{"id":"federation-bridge-011","picks":["C"],"ambiguous":false},
+{"id":"federation-bridge-012","picks":["C"],"ambiguous":false},
+{"id":"federation-bridge-013","picks":["A","B"],"ambiguous":false},
+{"id":"federation-bridge-014","picks":["A","B"],"ambiguous":false},
+{"id":"federation-bridge-015","picks":["C","D"],"ambiguous":false,"note":"Simple AD is not a supported Identity Center source."},
+{"id":"federation-bridge-016","picks":["C"],"ambiguous":false},
+{"id":"federation-bridge-017","picks":["B"],"ambiguous":false},
+{"id":"federation-bridge-018","picks":["A","B"],"ambiguous":false},
+{"id":"federation-bridge-019","picks":["A"],"ambiguous":false,"note":"Assumes AD Connector seamless domain join is considered simpler than Managed AD with trust."}
+]

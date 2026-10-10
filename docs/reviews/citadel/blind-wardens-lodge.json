@@ -1,0 +1,20 @@
+[
+{"id":"wardens-lodge-001","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-002","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-003","picks":["C"],"ambiguous":false},
+{"id":"wardens-lodge-004","picks":["A"],"ambiguous":false,"note":"ALB authenticate-cognito with a SAML-federated user pool (ALB also has authenticate-oidc, not offered)."},
+{"id":"wardens-lodge-005","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-006","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-007","picks":["A"],"ambiguous":false},
+{"id":"wardens-lodge-008","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-009","picks":["A","E","F"],"ambiguous":false,"note":"AWS managed key cannot be shared cross-account, so a customer managed key is needed; identity policy + resource policy + CMK key policy."},
+{"id":"wardens-lodge-010","picks":["C"],"ambiguous":false},
+{"id":"wardens-lodge-011","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-012","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-013","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-014","picks":["C","E"],"ambiguous":false,"note":"MFA and WAF web ACL (supported on Cognito user pools). Options A, B, D are not applicable."},
+{"id":"wardens-lodge-015","picks":["A","B"],"ambiguous":false,"note":"Custom Lambda rotation function plus enabling rotation. E (managed rotation without Lambda) is not generally available for an arbitrary third-party provider; mild doubt only if the provider were a managed external secret partner."},
+{"id":"wardens-lodge-016","picks":["C"],"ambiguous":false,"note":"Secrets Manager uses an interface endpoint; no gateway endpoint exists for it."},
+{"id":"wardens-lodge-017","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-018","picks":["A","D"],"ambiguous":false}
+]

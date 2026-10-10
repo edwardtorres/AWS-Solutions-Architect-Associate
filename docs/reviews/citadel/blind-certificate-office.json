@@ -1,0 +1,20 @@
+[
+{"id":"certificate-office-001","picks":["C"],"ambiguous":false},
+{"id":"certificate-office-002","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-003","picks":["B","E"],"ambiguous":false},
+{"id":"certificate-office-004","picks":["A"],"ambiguous":false,"note":"S3 website endpoints do not support HTTPS, so the standard S3 (REST) origin is needed. The viewer-policy wording in A is slightly beside the point but it is the only workable option."},
+{"id":"certificate-office-005","picks":["B"],"ambiguous":false},
+{"id":"certificate-office-006","picks":["B"],"ambiguous":false,"note":"Dedicated IP custom SSL (legacy clients support); ACM certificates are not the typical pairing, but the stem accepts the extra cost."},
+{"id":"certificate-office-007","picks":["B"],"ambiguous":false,"note":"NLB TCP listener passes TLS through; ALB has no TCP listener."},
+{"id":"certificate-office-008","picks":["A"],"ambiguous":false},
+{"id":"certificate-office-009","picks":["B"],"ambiguous":false},
+{"id":"certificate-office-010","picks":["C"],"ambiguous":false,"note":"Imported certificates are not renewed by ACM; replace with an ACM public cert in us-east-1 (required for CloudFront)."},
+{"id":"certificate-office-011","picks":["C"],"ambiguous":false},
+{"id":"certificate-office-012","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-013","picks":["A"],"ambiguous":false,"note":"Asymmetric KMS keys do not support automatic or on-demand rotation; the alias swap is the standard approach."},
+{"id":"certificate-office-014","picks":["D","E"],"ambiguous":false},
+{"id":"certificate-office-015","picks":["C","D"],"ambiguous":false,"note":"Missing validation record and certificate not in use by any integrated resource both block managed renewal. Note B is not a blocker (more associations are fine)."},
+{"id":"certificate-office-016","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-017","picks":["A"],"ambiguous":false},
+{"id":"certificate-office-018","picks":["D"],"ambiguous":false,"note":"AWS guidance is that ACM leaf certificates change on renewal, so pin (if at all) to Amazon root CAs. Option C (reuse same public key) I am not certain exists for ACM public certificates; if it did, it could compete with D."}
+]

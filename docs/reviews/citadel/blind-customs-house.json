@@ -1,0 +1,20 @@
+[
+{"id":"customs-house-001","picks":["B"],"ambiguous":false},
+{"id":"customs-house-002","picks":["B"],"ambiguous":false},
+{"id":"customs-house-003","picks":["A"],"ambiguous":false,"note":"Gateway endpoints are not reachable from on premises; interface endpoint for S3 is. Direct Connect public VIF would also reach S3 but gives public IPs, which the stem excludes."},
+{"id":"customs-house-004","picks":["A"],"ambiguous":false},
+{"id":"customs-house-005","picks":["A"],"ambiguous":false},
+{"id":"customs-house-006","picks":["B"],"ambiguous":false},
+{"id":"customs-house-007","picks":["A"],"ambiguous":false},
+{"id":"customs-house-008","picks":["C"],"ambiguous":false,"note":"MACsec is only available on 10/100/400 Gbps dedicated connections, not 1 Gbps; so VPN over Direct Connect (public or transit VIF) is the answer."},
+{"id":"customs-house-009","picks":["B"],"ambiguous":false},
+{"id":"customs-house-010","picks":["A"],"ambiguous":false},
+{"id":"customs-house-011","picks":["D","E"],"ambiguous":false,"note":"Gateway endpoint (free) for VPC, interface endpoint for on-premises over VPN. Option A (advertising a gateway endpoint prefix list) does not work."},
+{"id":"customs-house-012","picks":["D"],"ambiguous":false},
+{"id":"customs-house-013","picks":["A"],"ambiguous":false,"note":"aws:sourceVpce deny in bucket policy. Option C (endpoint policy) restricts the endpoint, not the bucket."},
+{"id":"customs-house-014","picks":["A","B"],"ambiguous":false},
+{"id":"customs-house-015","picks":["C","E"],"ambiguous":false,"note":"Private VIF for VPC, public VIF for S3 (public IPs). No option offers an interface endpoint approach."},
+{"id":"customs-house-016","picks":["B"],"ambiguous":false},
+{"id":"customs-house-017","picks":["A"],"ambiguous":false},
+{"id":"customs-house-018","picks":["B","D"],"ambiguous":false}
+]
