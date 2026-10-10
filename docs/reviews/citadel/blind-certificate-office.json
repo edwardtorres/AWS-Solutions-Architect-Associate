@@ -1,0 +1,20 @@
+[
+{"id":"certificate-office-001","picks":["C"],"ambiguous":false},
+{"id":"certificate-office-002","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-003","picks":["B","E"],"ambiguous":false},
+{"id":"certificate-office-004","picks":["A"],"ambiguous":false,"note":"S3 website endpoints do not support HTTPS; switching to the S3 REST endpoint origin (with OAC) is the fix. The viewer policy mention in A is irrelevant but the origin switch is the point."},
+{"id":"certificate-office-005","picks":["B"],"ambiguous":false},
+{"id":"certificate-office-006","picks":["B"],"ambiguous":false,"note":"Assumes the option names the dedicated-IP custom SSL (legacy clients) feature."},
+{"id":"certificate-office-007","picks":["B"],"ambiguous":false},
+{"id":"certificate-office-008","picks":["A"],"ambiguous":false},
+{"id":"certificate-office-009","picks":["B"],"ambiguous":false},
+{"id":"certificate-office-010","picks":["C"],"ambiguous":false},
+{"id":"certificate-office-011","picks":["C"],"ambiguous":false},
+{"id":"certificate-office-012","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-013","picks":["A"],"ambiguous":false,"note":"Asymmetric KMS keys do not support rotation; the alias swap is the documented manual approach."},
+{"id":"certificate-office-014","picks":["D","E"],"ambiguous":false},
+{"id":"certificate-office-015","picks":["C","D"],"ambiguous":false},
+{"id":"certificate-office-016","picks":["D"],"ambiguous":false},
+{"id":"certificate-office-017","picks":["A"],"ambiguous":false},
+{"id":"certificate-office-018","picks":["D"],"ambiguous":false,"note":"Option C describes an ACM feature I do not believe exists; pinning to Amazon root CAs is AWS guidance."}
+]

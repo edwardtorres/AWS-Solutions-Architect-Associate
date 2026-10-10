@@ -1,0 +1,20 @@
+[
+{"id":"wardens-lodge-001","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-002","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-003","picks":["C"],"ambiguous":false},
+{"id":"wardens-lodge-004","picks":["A"],"ambiguous":false},
+{"id":"wardens-lodge-005","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-006","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-007","picks":["A"],"ambiguous":false},
+{"id":"wardens-lodge-008","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-009","picks":["A","E","F"],"ambiguous":false,"note":"AWS managed key cannot be shared cross-account, so a customer managed key is needed; both resource policy and identity policy needed cross-account."},
+{"id":"wardens-lodge-010","picks":["C"],"ambiguous":false},
+{"id":"wardens-lodge-011","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-012","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-013","picks":["B"],"ambiguous":false},
+{"id":"wardens-lodge-014","picks":["C","E"],"ambiguous":false,"note":"WAF web ACL can be associated with a Cognito user pool; relies on that knowledge."},
+{"id":"wardens-lodge-015","picks":["A","B"],"ambiguous":false,"note":"Option E (managed rotation) applies only to supported partner/AWS-managed secrets; stem says provider is not a partner."},
+{"id":"wardens-lodge-016","picks":["C"],"ambiguous":false},
+{"id":"wardens-lodge-017","picks":["D"],"ambiguous":false},
+{"id":"wardens-lodge-018","picks":["A","D"],"ambiguous":false}
+]

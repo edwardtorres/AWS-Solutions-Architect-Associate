@@ -1,0 +1,20 @@
+[
+{"id":"customs-house-001","picks":["B"],"ambiguous":false},
+{"id":"customs-house-002","picks":["B"],"ambiguous":false},
+{"id":"customs-house-003","picks":["A"],"ambiguous":false,"note":"Gateway endpoints are not reachable from on-premises, so interface endpoint is required."},
+{"id":"customs-house-004","picks":["A"],"ambiguous":false},
+{"id":"customs-house-005","picks":["A"],"ambiguous":false},
+{"id":"customs-house-006","picks":["B"],"ambiguous":false},
+{"id":"customs-house-007","picks":["A"],"ambiguous":false},
+{"id":"customs-house-008","picks":["C"],"ambiguous":false,"note":"MACsec is not available on 1 Gbps dedicated connections (only 10/100/400 Gbps), so a VPN over DX is the answer. Relies on that detail."},
+{"id":"customs-house-009","picks":["B"],"ambiguous":false},
+{"id":"customs-house-010","picks":["A"],"ambiguous":false},
+{"id":"customs-house-011","picks":["D","E"],"ambiguous":false,"note":"Gateway endpoint prefix lists cannot be advertised to on-premises; interface endpoint needed for the on-prem path."},
+{"id":"customs-house-012","picks":["D"],"ambiguous":false},
+{"id":"customs-house-013","picks":["A"],"ambiguous":false,"note":"C limits what the endpoint can reach but does not restrict who can reach the bucket."},
+{"id":"customs-house-014","picks":["A","B"],"ambiguous":false},
+{"id":"customs-house-015","picks":["C","E"],"ambiguous":false,"note":"Public VIF for S3 public endpoints; private VIF for VPC."},
+{"id":"customs-house-016","picks":["B"],"ambiguous":false},
+{"id":"customs-house-017","picks":["A"],"ambiguous":false,"note":"100 Gbps dedicated supports MACsec."},
+{"id":"customs-house-018","picks":["B","D"],"ambiguous":false,"note":"Both needed together (second device plus a second VPN connection using it)."}
+]
