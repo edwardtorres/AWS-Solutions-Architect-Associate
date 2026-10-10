@@ -1,0 +1,177 @@
+[
+ {
+  "id": "gatehouse-001",
+  "verdict": "OK",
+  "issues": [
+   "Overlap with gatehouse-020 (network ACL deny versus security group that cannot deny); different scenario and purpose."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-008",
+  "verdict": "OK",
+  "issues": [
+   "Rests on a single, niche documented sentence in vpc-custom-nacl (deny for the backend subnet CIDR stops health checks); verified verbatim. Option C ('a deny rule applies only to outbound traffic') is a weak distractor."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-010",
+  "verdict": "FIX",
+  "issues": [
+   "Option C ('Move the NAT gateway to a larger instance size in Availability Zone B') invents a capability; a NAT gateway has no instance size and cannot be moved. The writing guide forbids invented features in distractors. Key (one NAT gateway per AZ, routed locally) is documented in vpc-nat-basics.",
+   "Note the regional NAT gateway (gatehouse-025) would also improve availability but is not offered, so the key stands."
+  ],
+  "suggestedFix": "Replace option C with a real but insufficient choice, for example 'Add a second route table entry that sends 0.0.0.0/0 to the NAT gateway and an internet gateway as a fallback' (a route table cannot fail over between targets), or 'Place the NAT gateway in a private subnet of Availability Zone B'."
+ },
+ {
+  "id": "gatehouse-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-019",
+  "verdict": "FIX",
+  "issues": [
+   "Option A ('enable a multi-AZ setting' on a subnet) is an invented feature; its why admits 'no such setting exists'. Options B and D are also non-features. The guide says distractors are real settings that fail a requirement. Key and evidence (subnets cannot span zones) are documented."
+  ],
+  "suggestedFix": "Replace option A with a real design that is less available, for example 'Create one subnet in one Availability Zone and place an Application Load Balancer in front' (the subnet still sits in one zone)."
+ },
+ {
+  "id": "gatehouse-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-022",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-023",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-025",
+  "verdict": "OK",
+  "issues": [
+   "Key is documented (vpc-nat-regional: automatic expansion across AZs, no public subnet needed, private NAT not supported on regional gateways) but it rests on a recent feature that post-dates the SAA-C03 guide; acceptable for a documented-fact question, but do not weight it heavily in the mock."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-026",
+  "verdict": "OK",
+  "issues": [
+   "Option C's why ('the documented outbound-only option... NAT gateway adds more to manage') is soft: vpc-nat-basics says a NAT gateway performs NAT64 for IPv6 workloads reaching IPv4 resources, so C is not flatly impossible. The real reason it fails is that a NAT gateway does not provide IPv6-to-IPv6 outbound-only access (NAT64 targets IPv4 destinations) and the stem asks for the SIMPLEST. Suggest rewording the why accordingly."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "gatehouse-027",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

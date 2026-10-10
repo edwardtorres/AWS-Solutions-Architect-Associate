@@ -1,0 +1,127 @@
+[
+ {
+  "id": "customs-house-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-002",
+  "verdict": "OK",
+  "issues": [
+   "Minor: wrong option 'Order an AWS Direct Connect connection for each employee' is close to absurd (guide: distractors never absurd). Key and quotes fine."
+  ],
+  "suggestedFix": "Optional: replace with 'Create a Site-to-Site VPN with a transit gateway' or similar plausible option."
+ },
+ {
+  "id": "customs-house-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-005",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on documented PrivateLink guidance for overlapping IPs and the peering overlap restriction. The statement that Transit Gateway 'does not solve the overlapping CIDR ranges' is a derived inference (the cached tgw-how page only says overlapping VPC CIDRs cannot be ECMP-balanced); acceptable because PrivateLink and peering are documented, and TGW fails the 'one service, not network access' requirement independently."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-008",
+  "verdict": "FIX",
+  "issues": [
+   "Key is right (1 Gbps: VPN tunnels on top; MACsec not available) and rests on the documented whitepaper sentence. But the MACsec wrong option's why says MACsec is for dedicated connections 'of 10 or 100 Gbps'. The Direct Connect MACsec page (MACsec.html, 'MACsec prerequisites for dedicated connections') says 'MACsec is supported on 10 Gbps, 100 Gbps, and 400 Gbps dedicated Direct Connect connections at selected points of presence.' So the list is incomplete and the quote's 'or' reads as exhaustive. The claim that 1 Gbps is not supported is still true. Also MACsec is only at selected points of presence, which is not a speed matter.",
+   "The stem and options do not depend on availability status; no rule violation."
+  ],
+  "suggestedFix": "Reword the why to 'MACsec is supported only on 10, 100 and 400 Gbps dedicated connections (at selected locations), so it is not available on a 1 Gbps connection.' Add evidence from https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACsec.html (add as a source) in place of, or besides, the whitepaper line."
+ },
+ {
+  "id": "customs-house-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-011",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps in concept with 001 and 003 (it is 001 + 003 combined) but at d3 as a MR; keep. Wrong option 1 'It works' fails only the MOST cost-effective qualifier, which is stated in the stem."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-015",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 'A second private virtual interface for access to Amazon S3': the why says S3 is a public service reached by a public VIF 'not a private VIF'. That contradicts customs-house-003 in the same building, where an interface endpoint for S3 is reached from on premises over a private path with private IP addresses (a private VIF reaches S3 through an interface endpoint in the VPC). The option is wrong because a second private VIF adds nothing and no S3 interface endpoint exists, not because a private VIF can never serve S3.",
+   "The key (private VIF + public VIF) matches the documented VIF purposes (Welcome page: public VIF for public services such as S3, private VIF for the VPC), but 'LEAST complexity' alone does not exclude 'private VIF + interface endpoint for S3', which is a defensible design that is simply not offered."
+  ],
+  "suggestedFix": "Change the why to 'A private virtual interface reaches the VPC; S3 over it would need an interface endpoint, which this design does not have, and a second private VIF adds nothing.' Optionally add to the stem 'The VPC has no interface endpoints and the company wants to avoid creating them' to close the defensible alternative."
+ },
+ {
+  "id": "customs-house-016",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of customs-house-001: both d1, both 'gateway VPC endpoint at the LOWEST cost' with the same distractor set (interface endpoint billed hourly, NAT, an unrelated connectivity service), differing only in S3 vs DynamoDB and EC2 vs Lambda. The key itself is correct and documented (gateway endpoints for S3 and DynamoDB, no additional charge).",
+   "Wrong option 'transit gateway' is weak and its evidence quote is the generic transit-gateway definition; fine but low value."
+  ],
+  "suggestedFix": "Retarget the reserve question at a different decision: e.g. a DynamoDB endpoint policy that limits the function to one table, or Lambda in a VPC with an interface endpoint for a service that has no gateway endpoint (Secrets Manager already covered in wardens-lodge-016), or drop it and use a Direct Connect / Client VPN reserve question."
+ },
+ {
+  "id": "customs-house-017",
+  "verdict": "OK",
+  "issues": [
+   "Key correct and documented. Minor: the supporting quote lists 'dedicated connections of 10 or 100 Gbps' (MACsec page also lists 400 Gbps); the key does not depend on it."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "customs-house-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

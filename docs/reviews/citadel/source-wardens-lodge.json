@@ -1,0 +1,120 @@
+[
+ {
+  "id": "wardens-lodge-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-004",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on documented fact: ALB authenticates through Cognito user pools including SAML corporate identities. ALB also supports direct OIDC, but the stem requires SAML 2.0, so Cognito federation is the only offered option that works."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-013",
+  "verdict": "OK",
+  "issues": [
+   "Minor: the first wrong option's why says 'It works'; it fails only the LEAST operational overhead qualifier, which is acceptable because the qualifier is in the stem. Rotation propagation to replicas is documented (secrets-replicate quote)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-015",
+  "verdict": "FIX",
+  "issues": [
+   "The wrong option 'Enable managed rotation ... without a Lambda function' rests on an over-broad why. The rotation page lists three forms: managed rotation (managed secrets), 'managed external secrets' rotation for secrets held by Secrets Manager partners (no Lambda function, updates the secret on the partner's system), and Lambda rotation for 'other types of secrets'. The why says rotating a key at ANY third-party provider is an 'other type of secret'; that is not what the page says, and the stem never says the payment provider is not a Secrets Manager partner. A reader can defend the option for a partner provider.",
+   "Correct-option why 'For secrets other than managed ones' is looser than the quote ('For other types of secrets'); it ignores managed external secrets.",
+   "Wrong option 'Parameter Store expiration notification policy and replace the key when the event arrives' does not say the replacement is manual; the ExpirationNotification policy raises an EventBridge event, so an automated replacement is conceivable. The why asserts a manual step the option does not state. The real defects are that the key lives in Secrets Manager (stem) and Parameter Store policies do not rotate or create a new key at the provider."
+  ],
+  "suggestedFix": "Stem: add 'The provider is not an AWS Secrets Manager partner and offers only a key-creation API' (or 'a custom API'). Rewrite the managed-rotation why: 'Managed rotation covers managed secrets, and managed external secrets rotation covers secrets of Secrets Manager partners; a key at a provider that is neither needs a Lambda rotation function.' Reword the Parameter Store option to 'and have an administrator replace the key when the notification arrives', or change the why to 'Parameter Store policies only notify or expire parameters; they neither create a new key at the provider nor rotate the secret in Secrets Manager.' Add the managed-external-secrets sentence from rotating-secrets.html as evidence."
+ },
+ {
+  "id": "wardens-lodge-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-017",
+  "verdict": "OK",
+  "issues": [
+   "Minor overlap with wardens-lodge-014 (both turn on Cognito user pool MFA); 017 is mock-reserve and d1, 014 is a MR with WAF, so keep both. Stem nearly names the answer ('one-time code from an authenticator app') but that is a d1 recall question."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "wardens-lodge-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

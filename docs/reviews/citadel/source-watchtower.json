@@ -1,0 +1,178 @@
+[
+ {
+  "id": "watchtower-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-002",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps with watchtower-009 and watchtower-012 (WAF rate-based rule as the answer). Second evidence quote (web ACL can be attached to CloudFront) is a topical support; the first quote is decisive."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-004",
+  "verdict": "OK",
+  "issues": [
+   "Evidence quote from shield-protected-resources is only the lead-in sentence of the list; I confirmed the list (CloudFront, Route 53 hosted zones, Global Accelerator, Elastic IPs, EC2, ALB, CLB, NLB through Elastic IPs) does not include API Gateway, so option C's why is true. Consider quoting a sentence that contains the list items."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-005",
+  "verdict": "OK",
+  "issues": [
+   "Basic recall of the AWS WAF SQL injection rule statement; together with watchtower-004 and watchtower-010 the SQL-injection-to-WAF decision appears three times in the building (different protected resource each time)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-008",
+  "verdict": "OK",
+  "issues": [
+   "Naming nuance: AWS Security Hub now aggregates GuardDuty, Inspector, Macie and Security Hub CSPM, and the 'checks against security standards' belong to the CSPM capability. The key (AWS Security Hub, the name in the exam guide) is still the correct and only plausible answer; the third quote is from an AWS blog (allowed host) rather than a docs page."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-009",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of watchtower-002 (flood of valid-looking HTTP requests from a limited set of clients; key is an AWS WAF rate-based rule; Shield Standard is the main distractor). Only the front end differs (ALB instead of CloudFront), and watchtower-012 repeats the rate-based rule on API Gateway. Option B (deny all inbound 443) is also a throwaway distractor.",
+   "Key itself is correct and documented (waf-rate-based, shield-overview)."
+  ],
+  "suggestedFix": "Drop 009, or change the decision it tests (for example choose between a rate-based rule and a Shield Advanced automatic layer 7 response, or add a requirement that makes AWS WAF managed rule groups the answer). Check that bullet 1.2-K6 keeps at least 3 non-reserve questions if dropped."
+ },
+ {
+  "id": "watchtower-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-011",
+  "verdict": "OK",
+  "issues": [
+   "Second evidence quote ('Compromised and exfiltrated AWS credentials.') is a list heading fragment; the first quote plus the GuardDuty page list support the key."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-016",
+  "verdict": "OK",
+  "issues": [
+   "Same decision as federation-bridge-012 (Cognito user pool for application customers versus IAM Identity Center) and watchtower-021 is its mirror image; across the district these form a cluster, keep at most one per mock."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-019",
+  "verdict": "OK",
+  "issues": [
+   "Tagged placement-eligible although it is close to a definition (Shield Standard is included automatically); the Shield Standard versus Shield Advanced versus WAF choice is a design decision, so acceptable, but consider removing the tag. 'No additional charge' is a documented statement, not a price."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-022",
+  "verdict": "FIX",
+  "issues": [
+   "The key is the only option that names both Macie features, and the stem reuses the wording of the Macie page ('broad visibility', 'deeper, more targeted analysis'), so it can be answered by pattern matching. Option D (Security Hub CSPM check) and the 'none for the others' phrasing in B and D read as filler.",
+   "The facts are documented (macie: automated discovery gives broad visibility, discovery jobs give deeper, more targeted analysis)."
+  ],
+  "suggestedFix": "Rewrite as a scenario with a decision (for example continuous sampling across all buckets plus a one-time scan of one bucket that must be fully analyzed) and give each option a coherent combination of real Macie features; drop the 'none for the others' wording."
+ },
+ {
+  "id": "watchtower-023",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-025",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "watchtower-026",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

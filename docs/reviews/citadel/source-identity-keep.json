@@ -1,0 +1,173 @@
+[
+ {
+  "id": "identity-keep-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-009",
+  "verdict": "OK",
+  "issues": [
+   "Second evidence quote (verify before granting public or cross-account access) is topical rather than confirming; first quote is the decisive one."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-019",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-021",
+  "verdict": "OK",
+  "issues": [
+   "Key (separate role per function) is an inference from the documented least-privilege definition and the warning about broad managed policies; inputs are documented. Same topic family as 016 and 017 but a different decision."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-022",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-023",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-025",
+  "verdict": "OK",
+  "issues": [
+   "Minor: stem phrase 'permissions for their job function' mirrors the key wording 'AWS managed policy for the job function', a mild giveaway; acceptable at d1/d2."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-026",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "identity-keep-027",
+  "verdict": "FIX",
+  "issues": [
+   "Stem ends '(Choose two.) Select the BEST answers.', an odd extra instruction that conflicts with 'can be done only by' (not a best-answer question).",
+   "Keys verified against iam-root-user: closing a standalone account and restoring the only IAM administrator's permissions are documented root-only tasks; alternate contacts are documented as not root-only."
+  ],
+  "suggestedFix": "Delete 'Select the BEST answers.' from the stem."
+ }
+]

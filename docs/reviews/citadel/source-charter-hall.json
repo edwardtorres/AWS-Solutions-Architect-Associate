@@ -1,0 +1,125 @@
+[
+ {
+  "id": "charter-hall-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-002",
+  "verdict": "OK",
+  "issues": [
+   "Second evidence quote (minimum of three AZs per Region) does not bear on the key; the first quote is the decisive one."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-003",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps with charter-hall-006 and charter-hall-018 (Region selection criteria)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-008",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate of charter-hall-014 and partly charter-hall-012 (guest OS patching on EC2 is the customer's job); same fact tested three times in the building."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-014",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate of charter-hall-008 (see there); 014 tests the 'shared control' wording of patch management, which is documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-016",
+  "verdict": "OK",
+  "issues": [
+   "Option C ('only Regions that have a single Availability Zone before any other Region') describes a situation that does not exist (each Region has multiple AZs), so it is a weak, slightly invented distractor. Key is documented in fault-isolation-az."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-017",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on the shared-responsibility page sentence 'Review third-party audit attestation documents to determine inherited controls...'; documented, though the page lists it as a recommended action rather than as the answer to an auditor request. AWS Artifact is not named, which is fine."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "charter-hall-018",
+  "verdict": "FIX",
+  "issues": [
+   "Option C's why argues the number of AZs 'is not one of the factors that AWS lists', which is an absence-of-evidence argument; Region AZ count can legitimately matter for a resilient design, so the distractor is defended weakly and could be read as defensible.",
+   "Overlaps with charter-hall-003 and charter-hall-006 (Region selection by service availability, latency, legal requirements)."
+  ],
+  "suggestedFix": "Make option C clearly wrong on its own terms, for example 'Whether the Region has the lowest Region code number in its name' is silly; better 'Whether the Region is the one used by most other AWS customers', and fail it by stating that none of the documented selection criteria (services, latency, legal) is met by popularity. Or drop 018 and keep 003/006 for this bullet's quota."
+ }
+]

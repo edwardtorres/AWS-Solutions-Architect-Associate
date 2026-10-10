@@ -1,0 +1,176 @@
+[
+ {
+  "id": "key-vault-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-009",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps in concept with key-vault-001 (customer managed vs AWS managed keys) but tests a different skill (which actions are exclusive); keep. 'Audit use in CloudTrail' and 'view key policy' are correctly shown as available on AWS managed keys by the quote."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-015",
+  "verdict": "FIX",
+  "issues": [
+   "Documented and current: ServerSideEncryptionCustomerKeys.html says 'SSE-C is blocked by default for new buckets. You must explicitly enable SSE-C using the PutBucketEncryption API', and 'In April 2026, Amazon S3 deployed an update so all new general purpose buckets have SSE-C encryption disabled for all new write requests'; the 403 AccessDenied behavior and the BlockedEncryptionTypes=NONE fix are stated on the same page and on 'Blocking or unblocking SSE-C for a general purpose bucket' (needs s3:PutEncryptionConfiguration). The key is correct and the wrong options are wrong (KMS key policy is irrelevant to SSE-C; S3 rejects SSE-C over HTTP; Bucket Keys are SSE-KMS only).",
+   "Status dependence: no availability wording appears, and this is a configuration default, not a service availability status, so the exam-era rule does not apply. But the stem's 'now fail' and 'new general purpose bucket' make the premise (new buckets block SSE-C) the thing the solver must already know, and the current evidence quotes (mechanism and 403) never state the premise that NEW buckets block SSE-C by default. The key therefore leans on an unquoted inference from the stem.",
+   "Freshness risk: the behavior dates from April 2026 and is not in older exam material; it should be tracked by the freshness check (check:freshness) and the explanation should name the source."
+  ],
+  "suggestedFix": "Drop 'now' from the stem. Add the evidence quote 's3-sse-c|SSE-C is blocked by default for new buckets. You must explicitly enable SSE-C using the PutBucketEncryption API before you can upload objects with SSE-C encryption.' and one sentence in the correct why: 'Amazon S3 blocks SSE-C on new general purpose buckets by default (AWS docs).' Do not add the April 2026 date to the stem."
+ },
+ {
+  "id": "key-vault-016",
+  "verdict": "OK",
+  "issues": [
+   "Stem nearly repeats the quote ('two independent layers of encryption'), so the answer is given away by wording; acceptable for a d1 recall question, but consider 'a compliance framework requires multilayer server-side encryption' to reduce the echo."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-017",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 'Modify the volume type to an encrypted volume type' is a near-invented feature (guide: never invented). Copying the snapshot with encryption enabled is another documented route but is not offered, so the key stands."
+  ],
+  "suggestedFix": "Optional: replace the volume-type distractor with 'Stop the instance and enable encryption on the volume attachment' or similar plausible-but-wrong step."
+ },
+ {
+  "id": "key-vault-018",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 'A security group that is attached to AWS KMS' is close to absurd for a d1 item; fine for difficulty 1 but weakens the distractor set."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-019",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 'Convert the key to an AWS managed key' is not a real operation (near-invented). Key rests on documented kms-key-policies and default key policy text."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-022",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-023",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 'Schedule all 40 keys for deletion' is destructive and weak but not defensible. Key rests on documented explicit-deny behavior. An SCP deny would also work but is not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-025",
+  "verdict": "OK",
+  "issues": [
+   "Key documented on both UsingKMSEncryption.html and enable-server-access-logging.html ('The destination bucket must use Amazon S3 managed keys (SSE-S3)'). Stem wording follows the doc closely. The SSE-C wrong option's why (logging service cannot supply customer keys) is an inference, but the SSE-S3 requirement already excludes it."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "key-vault-026",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

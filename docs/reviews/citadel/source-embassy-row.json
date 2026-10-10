@@ -1,0 +1,235 @@
+[
+ {
+  "id": "embassy-row-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-007",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate of embassy-row-009 (Developers group in a development account assuming a production-account role for an S3 bucket via trust policy); 009 only adds the sts:AssumeRole permission step. Keep both out of the same mock or vary the scenario of one."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-008",
+  "verdict": "FIX",
+  "issues": [
+   "First evidence quote is a sentence fragment that ends before the term the key rests on ('...is to address and prevent'); it does not itself say 'confused deputy'. The page sentence continues 'The confused deputy problem.' The key is correct and documented."
+  ],
+  "suggestedFix": "Quote the full page sentence 'The primary function of the external ID is to address and prevent The confused deputy problem.' (verbatim as on iam-third-party)."
+ },
+ {
+  "id": "embassy-row-009",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate scenario of embassy-row-007 (see there). Keys verified: trust policy naming the development account plus an sts:AssumeRole allow on the group are both documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-013",
+  "verdict": "OK",
+  "issues": [
+   "Option A is built to fail ('including the writes'); assuming the role only for the reads would also work, so the question rests on the constructed wording. Key is documented (iam-cross-account)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-019",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-022",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-023",
+  "verdict": "FIX",
+  "issues": [
+   "Option C describes a capability that does not exist ('landing zone dashboard configured to block noncompliant API calls'); the writing guide forbids invented features in distractors. Its why ('the dashboard offers oversight') is true but defends an invented option.",
+   "Key (Account Factory templates + detective controls) is documented in control-tower and control-tower-controls."
+  ],
+  "suggestedFix": "Replace option C with a real feature that fails the requirement, for example 'Preventive controls enabled on the organizational units' (they block actions but do not report drift of existing resources)."
+ },
+ {
+  "id": "embassy-row-024",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-025",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on the example sentence in the Control Tower controls reference (control name is documented there); no status wording found on the page. The CloudFront and private-bucket framing is decoration for the placement-eligible tag."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-026",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-027",
+  "verdict": "OK",
+  "issues": [
+   "Wording 'a policy that is attached to an IAM role' could be read as the role's trust policy (which does take a Principal); the intended meaning is a permissions policy, as the key and option D's why assume. Consider saying 'permissions policy'."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-028",
+  "verdict": "OK",
+  "issues": [
+   "Option A's why hedges ('does not support SSE-KMS or requires extra workarounds'), mirroring cf-oac wording; accurate but soft."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-029",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-030",
+  "verdict": "OK",
+  "issues": [
+   "Largely a recombination of embassy-row-028 and embassy-row-029 (OAC needs a regular S3 origin, bucket policy for cloudfront.amazonaws.com, KMS key policy statement); four OAC questions (028 to 031) in one building is heavy. Keys are documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-031",
+  "verdict": "FIX",
+  "issues": [
+   "Stem has no qualifier, and option D (second distribution with OAC, then delete the first once traffic has been switched) can also meet 'keep the bucket private and do not interrupt visitors'; option D's why rejects it only for being 'more change', a criterion the stem never states, so D is defensible as a second correct answer."
+  ],
+  "suggestedFix": "Add a qualifier such as 'with the LEAST change to the existing setup' (and keep the DNS or alias switch out of option D, or state that visitors use the existing distribution domain name)."
+ },
+ {
+  "id": "embassy-row-032",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-033",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-034",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "embassy-row-035",
+  "verdict": "OK",
+  "issues": [
+   "Same decision as embassy-row-004 (aws:PrincipalOrgID to avoid listing account IDs), applied to Lambda; acceptable as mock-reserve but is a near-duplicate concept. Option B also works functionally and is excluded only by the 'LEAST maintenance' qualifier, which is stated."
+  ],
+  "suggestedFix": ""
+ }
+]

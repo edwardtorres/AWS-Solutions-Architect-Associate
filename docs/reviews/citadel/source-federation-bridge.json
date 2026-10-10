@@ -1,0 +1,127 @@
+[
+ {
+  "id": "federation-bridge-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-003",
+  "verdict": "OK",
+  "issues": [
+   "Option D uses an IAM SAML provider although Google and Apple sign-in are OIDC-based; the why still holds (custom broker code), but an IAM OIDC provider would be the more natural distractor."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-011",
+  "verdict": "FIX",
+  "issues": [
+   "Stem says the company does not want to 'host a second directory in AWS', but the key is an 'AD Connector directory' (AD Connector is created as a directory in AWS Directory Service), so the stem and the key read as contradictory to a careful candidate.",
+   "Key itself is documented (sso-ad: AD Connector or Managed AD must reside in the management account)."
+  ],
+  "suggestedFix": "Reword the constraint to 'does not want to run AD FS servers or create a new set of user accounts in AWS' (and keep option B as 'Managed AD with re-created accounts')."
+ },
+ {
+  "id": "federation-bridge-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-013",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate of federation-bridge-001 (Organizations accounts, SAML 2.0 IdP, IAM Identity Center); 013 does add the permission-set decision, so keep both but do not let both appear in one mock."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-017",
+  "verdict": "OK",
+  "issues": [
+   "Option A text 'because it is the lowest-scale option' is awkward; the decisive differentiator is IAM Identity Center not supporting Simple AD (sso-ad), which is documented. Simple AD also supports joining Linux domains per ds-what-is, so the LDAP clue alone is not what excludes it; the Identity Center plan does, and it is stated in the stem."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "federation-bridge-019",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps with federation-bridge-005 (AD Connector to reach the existing on-premises domain); the decision differs (seamless domain join vs sign-in proxy). Acceptable."
+  ],
+  "suggestedFix": ""
+ }
+]

@@ -565,6 +565,11 @@ const sources: Source[] = [
   aws('cf-viewer-https', `${D}/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html`, 'Require HTTPS for communication between viewers and CloudFront'),
   aws('cf-origin-https', `${D}/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html`, 'Require HTTPS for communication between CloudFront and your custom origin'),
   aws('cf-s3-https', `${D}/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html`, 'Require HTTPS for communication between CloudFront and your Amazon S3 origin'),
+  aws('ecs-task-role', `${D}/AmazonECS/latest/developerguide/task-iam-roles.html`, 'Amazon ECS task IAM role'),
+  aws('ecs-task-definitions', `${D}/AmazonECS/latest/developerguide/task_definitions.html`, 'Amazon ECS task definitions'),
+  aws('ecs-service-lb', `${D}/AmazonECS/latest/developerguide/service-load-balancing.html`, 'Use load balancing to distribute Amazon ECS service traffic'),
+  aws('eks-fargate', `${D}/eks/latest/userguide/fargate.html`, 'Simplify compute management with AWS Fargate (Amazon EKS)'),
+  aws('apigw-endpoint-types', `${D}/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html`, 'API endpoint types for REST APIs in API Gateway'),
 ];
 
 export default sources;

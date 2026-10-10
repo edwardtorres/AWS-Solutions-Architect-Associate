@@ -1,0 +1,122 @@
+[
+ {
+  "id": "certificate-office-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-004",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on the documented limit (website endpoint: no HTTPS to the origin; S3 REST origin: HTTPS follows the viewer protocol policy). Minor: switching to the standard S3 origin drops website-endpoint behavior (index document per folder, redirects); the stem does not say the site needs it, so the key stands, but a reviewer could argue the change is not 'least overhead' for a site that depends on it."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-006",
+  "verdict": "OK",
+  "issues": [
+   "Key documented (Legacy Clients Support for non-SNI clients, additional monthly charges). No price in the item. The doc adds that Legacy Clients Support limits the available security policies and recommends SNI when viewers support it; not a problem for the key because the stem says the clients do not support SNI."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-010",
+  "verdict": "OK",
+  "issues": [
+   "Conceptual overlap with certificate-office-009 (imported certificate is not eligible for managed renewal; request a DNS-validated ACM certificate). Different services (CloudFront vs ALB) and 010 adds the us-east-1 rule, so acceptable; 017 repeats the imported-certificate distractor."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-011",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 'Switch the validation ... from DNS to email': the why says validation 'cannot be switched between DNS and email', but the cited quote (acm-email-validation) documents only the opposite direction ('After you create a certificate with email validation, you cannot switch to validating it with DNS'). The DNS-to-email direction is not in the evidence or in the ACM pages checked, so the why asserts an undocumented fact.",
+   "Wrong option 'Delete the certificate from the distribution and associate it again to restart the renewal': the why says removal 'stops automatic renewal rather than restarting it'. The documented reason it fails is that the missing CNAME record is what blocks validation (renewal status page: check that the DNS record exists and the certificate remains in use); re-associating would not restore the record. The why is an oversimplification and re-association could make the certificate 'in use' again."
+  ],
+  "suggestedFix": "Reword the DNS-to-email option's why to the documented point ('email validation would need someone to act on emails and does not restore the missing DNS record; ACM renews a DNS-validated certificate automatically when the CNAME is in place') or change the option to the documented direction. Reword the re-associate option's why: 'The certificate stays Pending validation until the CNAME record exists again; removing and re-adding it does not recreate the record.'"
+ },
+ {
+  "id": "certificate-office-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "certificate-office-018",
+  "verdict": "OK",
+  "issues": [
+   "Judged as asked: yes, documented. acm-bestpractices.html: 'To renew a certificate, ACM generates a new public-private key pair. If your application pins the ACM certificate and the certificate is successfully renewed with a new public key, the application might be unable to connect to your domain.' and 'If you're using a public certificate, pin your application to all available Amazon root certificates.' No ACM page checked (managed renewal, public certificates, exportable certificates, ACME) documents a setting to reuse the same public key on renewal, and a web search of AWS docs found none. So the wrong option 'Ask ACM to reuse the same public key' fails on a documented fact (new key pair on renewal); the absence of a reuse setting is inferred from the documented behavior, which is acceptable. A second documented route (import your own certificate and pin to it) is in the same doc but not offered, and it would not be 'least ongoing effort' anyway.",
+   "Minor: the wrong option 'Pin the app to the ARN' is near-absurd (an ARN is not in the TLS handshake)."
+  ],
+  "suggestedFix": "Optional: in the 'reuse the same public key' why, add 'AWS documents that renewal generates a new key pair and describes no setting to keep the old key.'"
+ }
+]
