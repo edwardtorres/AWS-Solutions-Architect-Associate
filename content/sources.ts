@@ -537,6 +537,9 @@ const sources: Source[] = [
   aws('cloudtrail-org-trail', `${D}/awscloudtrail/latest/userguide/creating-trail-organization.html`, 'Creating a trail for an organization'),
   aws('lambda-resource-policy', `${D}/lambda/latest/dg/access-control-resource-based.html`, 'Working with resource-based policies in Lambda'),
   aws('s3-bucket-policies', `${D}/AmazonS3/latest/userguide/bucket-policies.html`, 'Bucket policies for Amazon S3'),
+  aws('waf-cloudfront', `${D}/waf/latest/developerguide/cloudfront-features.html`, 'Using AWS WAF with Amazon CloudFront'),
+  aws('waf-ipset', `${D}/waf/latest/developerguide/waf-rule-statement-type-ipset-match.html`, 'IP set match rule statement'),
+  aws('apigw-waf', `${D}/apigateway/latest/developerguide/apigateway-control-access-aws-waf.html`, 'Use AWS WAF to protect your REST APIs in API Gateway'),
 ];
 
 export default sources;
