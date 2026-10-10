@@ -177,7 +177,7 @@ const questions: Question[] = [
     d: 2,
     stem: 'A security team wants Amazon Macie findings to appear in a broader view of the company security posture, and it wants a message sent to an Amazon SNS topic whenever Macie reports sensitive data. Which TWO actions meet these requirements with the LEAST custom development? (Choose two.)',
     correct: [
-      ['Configure Macie to publish its findings to AWS Security Hub', 'Macie can also publish findings to Security Hub, which gives a broader view of security posture.'],
+      ['Configure Macie to publish its findings to AWS Security Hub', 'Macie can also publish findings to Security Hub (documented as AWS Security Hub CSPM), which gives a broader view of security posture.'],
       ['Create an Amazon EventBridge rule for Macie findings that targets the SNS topic', 'Macie publishes findings to EventBridge as events, and EventBridge can route them to SNS topics.'],
     ],
     wrong: [

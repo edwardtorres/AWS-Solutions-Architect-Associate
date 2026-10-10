@@ -574,6 +574,15 @@ const sources: Source[] = [
   aws('waf-crs', `${D}/waf/latest/developerguide/aws-managed-rule-groups-baseline.html`, 'Baseline rule groups (AWS WAF)'),
   aws('vpce-gateway-ddb', `${D}/vpc/latest/privatelink/vpc-endpoints-ddb.html`, 'Gateway endpoints for Amazon DynamoDB'),
   aws('dx-macsec', `${D}/directconnect/latest/UserGuide/MACsec.html`, 'MAC Security in AWS Direct Connect'),
+  aws('s3-event-notifications', `${D}/AmazonS3/latest/userguide/EventNotifications.html`, 'Amazon S3 Event Notifications'),
+  aws('route53-latency', `${D}/Route53/latest/DeveloperGuide/routing-policy-latency.html`, 'Latency-based routing'),
+  aws('route53-geoproximity', `${D}/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html`, 'Geoproximity routing'),
+  aws('route53-weighted', `${D}/Route53/latest/DeveloperGuide/routing-policy-weighted.html`, 'Weighted routing'),
+  aws('route53-multivalue', `${D}/Route53/latest/DeveloperGuide/routing-policy-multivalue.html`, 'Multivalue answer routing'),
+  aws('route53-simple', `${D}/Route53/latest/DeveloperGuide/routing-policy-simple.html`, 'Simple routing'),
+  aws('route53-failover-routing', `${D}/Route53/latest/DeveloperGuide/routing-policy-failover.html`, 'Failover routing'),
+  aws('route53-hc-types', `${D}/Route53/latest/DeveloperGuide/health-checks-types.html`, 'Types of Amazon Route 53 health checks'),
+  aws('route53-hc-how', `${D}/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html`, 'How Amazon Route 53 determines whether a health check is healthy'),
 ];
 
 export default sources;

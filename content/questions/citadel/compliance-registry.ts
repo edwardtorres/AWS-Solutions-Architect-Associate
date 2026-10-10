@@ -30,7 +30,7 @@ const questions: Question[] = [
     wrong: [
       ['Grant each team permissions on every table by name and update the grants whenever a table is added', 'This keeps one grant per table, which does not scale to thousands of tables and misses new tables until someone updates the grants.'],
       ['Write one IAM policy per table that lists the teams that may read it', 'This creates thousands of separate policy definitions and repeats the work for every new table.'],
-      ['Place each classification in its own S3 bucket and manage access with a bucket policy per bucket', 'This forces the company to reorganize the data lake and still lacks column-level control through a central catalog.'],
+      ['Place each classification in its own S3 bucket and manage access with a bucket policy per bucket', 'Labeling a table does not move its data, so each new table would have to be relocated into the matching bucket before the bucket policy covers it, and the existing lake would have to be reorganized.'],
     ],
     slot: 1,
     evidence: [
@@ -213,8 +213,8 @@ const questions: Question[] = [
     stem: 'A company wants to be notified automatically when a resource in its account is created or changed in a way that violates the internal configuration standards. Which service BEST meets this requirement?',
     correct: ['AWS Config with rules that represent the ideal configuration settings', 'AWS Config continuously evaluates resources as they are created or changed and flags those that violate a rule.'],
     wrong: [
-      ['AWS CloudTrail event history with a saved search for configuration changes', 'CloudTrail records API activity and does not evaluate resources against configuration rules.'],
-      ['AWS Artifact reports for the AWS Region in use', 'Artifact provides AWS compliance documents, not an evaluation of the company resources.'],
+      ['AWS CloudTrail event history filtered for configuration-related API calls', 'CloudTrail records API activity, but it does not evaluate resources against configuration rules or flag violations.'],
+      ['AWS Artifact reports for the services in use', 'Artifact provides AWS compliance documents about the AWS services and does not evaluate the company resources.'],
       ['Amazon Macie with a sensitive data discovery job', 'Macie looks for sensitive data in Amazon S3 and does not check resource configuration.'],
     ],
     slot: 2,
@@ -289,7 +289,7 @@ const questions: Question[] = [
     building: 'compliance-registry',
     bullets: ['1.3-S1', '1.3-S6'],
     d: 2,
-    stem: 'A broker-dealer must keep electronic records in write-once-read-many storage in an environment that is subject to SEC 17a-4, CFTC, and FINRA regulations. The company wants an Amazon S3 feature that has been assessed for use in such environments. Which solution BEST meets this requirement?',
+    stem: 'A broker-dealer must keep electronic records so that they cannot be overwritten or deleted during the retention period, in an environment that is subject to SEC 17a-4, CFTC, and FINRA regulations. The company wants an Amazon S3 feature that has been assessed for use in such environments. Which solution BEST meets this requirement?',
     correct: ['Store the records in a bucket with S3 Versioning and S3 Object Lock', 'Object Lock uses a WORM model, works with versioning, and has been assessed for environments that are subject to these regulations.'],
     wrong: [
       ['Store the records in a bucket with S3 Versioning only', 'Versioning keeps multiple versions of objects and is not a write-once-read-many model.'],
@@ -332,7 +332,7 @@ const questions: Question[] = [
       ['Evaluate the company resources with AWS Config rules and share the compliance results', 'AWS Config evaluates the configuration settings of resources against the rules that represent the ideal settings.'],
     ],
     wrong: [
-      ['Use AWS Artifact to evaluate whether the company resources meet the configuration rules', 'Customers are responsible for documents about their own companies, and Artifact does not evaluate their resources.'],
+      ['Use AWS Artifact to evaluate whether the company resources meet the configuration rules', 'Artifact provides AWS documents and does not evaluate customer resources; customers are responsible for documents about their own companies.'],
       ['Use Amazon Macie reports as the evidence of AWS infrastructure compliance', 'Macie reports on sensitive data in the company S3 buckets and not on the compliance of the AWS infrastructure.'],
       ['Use the AWS CloudTrail event history as proof that the resources meet the configuration rules', 'Event history records activity and does not evaluate configuration against rules.'],
     ],
