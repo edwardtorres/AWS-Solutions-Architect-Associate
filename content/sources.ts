@@ -532,6 +532,11 @@ const sources: Source[] = [
   aws('vpc-infra-security', `${D}/vpc/latest/userguide/infrastructure-security.html`, 'Infrastructure security in Amazon VPC'),
   aws('ec2-sg-use-cases', `${D}/AWSEC2/latest/UserGuide/security-group-rules-reference.html`, 'Security group rules for different use cases'),
   aws('iam-idp-federation', `${D}/IAM/latest/UserGuide/id_roles_providers.html`, 'Identity providers and federation into AWS'),
+  aws('iam-global-condition-keys', `${D}/IAM/latest/UserGuide/reference_policies_condition-keys.html`, 'AWS global condition context keys'),
+  aws('iam-third-party', `${D}/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html`, 'Access to AWS accounts owned by third parties'),
+  aws('cloudtrail-org-trail', `${D}/awscloudtrail/latest/userguide/creating-trail-organization.html`, 'Creating a trail for an organization'),
+  aws('lambda-resource-policy', `${D}/lambda/latest/dg/access-control-resource-based.html`, 'Working with resource-based policies in Lambda'),
+  aws('s3-bucket-policies', `${D}/AmazonS3/latest/userguide/bucket-policies.html`, 'Bucket policies for Amazon S3'),
 ];
 
 export default sources;
