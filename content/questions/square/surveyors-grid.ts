@@ -39,7 +39,7 @@ const questions: Question[] = [
     d: 2,
     stem: 'A company\'s automation script assigns static private IP addresses to EC2 instances in a subnet with the CIDR block 10.0.4.0/24. Which TWO addresses are reserved and cannot be assigned to an instance? (Choose two.)',
     correct: [
-      ['10.0.4.2', 'It is one of the first four addresses of the subnet (the DNS server address is the base of the range plus two), which is reserved.'],
+      ['10.0.4.2', 'It is the base of the subnet range plus two, one of the first four addresses AWS reserves in every subnet, so it cannot be assigned to an instance.'],
       ['10.0.4.255', 'It is the last address in the subnet CIDR block, which is reserved.'],
     ],
     wrong: [
@@ -50,7 +50,7 @@ const questions: Question[] = [
     slots: [1, 4],
     evidence: [
       'vpc-subnet-sizing|The first four IP addresses and the last IP address in each subnet CIDR block are not available for your use, and they cannot be assigned to a resource, such as an EC2 instance.',
-      'vpc-subnet-sizing|The IP address of the DNS server is the base of the VPC network range plus two.',
+      'vpc-subnet-sizing|We also reserve the base of each subnet range plus two for all CIDR blocks in the VPC.',
     ],
   }),
   mc({
@@ -118,8 +118,9 @@ const questions: Question[] = [
     ],
     slot: 1,
     evidence: [
-      'vpc-sg-rules|Port range: For TCP, UDP, or a custom protocol, the range of ports to allow.',
-      'vpc-sg-rules|Source or destination: The source (inbound rules) or destination (outbound rules) for the traffic to allow.',
+      'ec2-sg-use-cases|To connect to your instance, your security group must have inbound rules that allow SSH access (for Linux instances) or RDP access (for Windows instances).',
+      'ec2-sg-use-cases|TCP 6 22 (SSH) The public IPv4 address of your computer, or a range of IP addresses in your local network.',
+      'ec2-sg-use-cases|TCP 6 3389 (RDP) The public IPv4 address of your computer, or a range of IP addresses in your local network.',
     ],
   }),
   mc({

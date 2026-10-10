@@ -79,16 +79,17 @@ const questions: Question[] = [
     building: 'safe-harbor-account',
     d: 3,
     stem: 'In a standalone AWS account, a misconfigured bucket policy on an Amazon S3 bucket denies all principals access to the bucket, including every administrator. The company must regain access with the LEAST workaround. Which action should it take?',
-    correct: ['Sign in as the root user and remove the bucket policy', 'Removing a misconfigured bucket policy that denies all principals is a task that requires root user credentials.'],
+    correct: ['Sign in as the root user and remove the bucket policy', 'Editing or deleting a bucket policy that denies all principals is a task that requires root user credentials.'],
     wrong: [
       ['Sign in as an AWS IAM Identity Center administrator and delete the bucket policy', 'The policy denies all principals, so an administrative user cannot remove it.'],
       ['Create a new IAM user with administrator permissions and delete the bucket policy', 'The new user is still a principal that the policy denies, so the delete is blocked.'],
-      ['Attach an IAM policy that allows the delete action to the administrator role', 'An allow in an IAM policy does not override the bucket policy\'s deny for all principals.'],
+      ['Attach an IAM policy that allows the delete action to the administrator role', 'An explicit deny in a resource-based policy overrides any allow, so adding an allow does not remove the lock-out.'],
     ],
     slot: 3,
     evidence: [
-      'iam-root-user|Remove a misconfigured bucket policy that denies all principals from accessing an Amazon S3 bucket.',
+      'iam-root-user|Edit or delete an Amazon S3 bucket policy that denies all principals.',
       'iam-root-user|Some tasks can only be performed when you sign in as the root user of an account.',
+      'iam-eval-logic|An explicit deny in either of these policies overrides the allow.',
     ],
   }),
   mc({
@@ -149,17 +150,17 @@ const questions: Question[] = [
     id: 'safe-harbor-account-009',
     building: 'safe-harbor-account',
     d: 1,
-    stem: 'A startup creates a standalone AWS account, not part of an organization, and a colleague says MFA for the root user is optional for standalone accounts. Which statement from the AWS documentation BEST describes the situation?',
-    correct: ['MFA is enforced for the root user of all account types', 'AWS states that MFA is enforced for all account types for their root user, and standalone accounts are included.'],
+    stem: 'A startup has created a standalone AWS account that is not part of an organization. The root user signs in with only an email address and password, and the founders worry that a stolen password would give an attacker complete access to the account. Which action protects the root user MOST effectively?',
+    correct: ['Register a multi-factor authentication (MFA) device for the root user', 'MFA adds a second authentication factor to the email address and password, and it can be enabled for the root user of standalone accounts.'],
     wrong: [
-      ['MFA is enforced only for the root user of management accounts', 'AWS states that root user MFA covers all account types, not only management accounts.'],
-      ['MFA is enforced only for the root user of member accounts', 'AWS states that root user MFA covers all account types, not only member accounts.'],
-      ['MFA for the root user is optional for standalone accounts', 'AWS lists standalone accounts among the account types where root user MFA is enforced.'],
+      ['Create root user access keys and store them in AWS Secrets Manager', 'AWS recommends against root access keys, and keys do not add a second factor to the root user sign-in.'],
+      ['Create an IAM user with the AdministratorAccess policy and keep using the root user for daily work', 'An administrative user does not protect the root sign-in, and the root user should be used only for tasks that require it.'],
+      ['Create an AWS Budgets forecast alert for the account', 'A budget warns about spending and does nothing to protect the root user sign-in from a stolen password.'],
     ],
     slot: 2,
     evidence: [
-      'iam-mfa|MFA is enforced for all account types for their root user.',
       'iam-mfa|You can enable MFA for the AWS account root user of all AWS accounts, including standalone accounts, management accounts, and member accounts, as well as for your IAM users.',
+      'iam-root-best-practices|Because a root user can perform privileged actions, it\'s crucial to add MFA for the root user as a second authentication factor in addition to the email address and password as sign-in credentials.',
     ],
   }),
   mc({
@@ -178,6 +179,7 @@ const questions: Question[] = [
       'iam-root-user|We recommend that you configure an administrative user in AWS IAM Identity Center to perform daily tasks and access AWS resources.',
       'iam-best-practices|Require human users to use federation with an identity provider to access AWS using temporary credentials',
       'budgets-managing|You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.',
+      'iam-root-best-practices|Because a root user can perform privileged actions, it\'s crucial to add MFA for the root user as a second authentication factor in addition to the email address and password as sign-in credentials.',
     ],
   }),
 ];

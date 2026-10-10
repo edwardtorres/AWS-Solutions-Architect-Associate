@@ -21,7 +21,7 @@ const questions: Question[] = [
     building: 'town-charter',
     d: 1,
     stem: 'A company needs to create thumbnails every time an image is uploaded to an Amazon S3 bucket. Uploads are unpredictable and sometimes none arrive for hours. The company wants the solution with the LEAST operational overhead. Which solution meets these requirements?',
-    correct: ['Invoke an AWS Lambda function from the S3 upload event', 'Lambda runs code in response to events and manages server maintenance, capacity provisioning, scaling and patching, which leaves nothing to operate.'],
+    correct: ['Invoke an AWS Lambda function from the S3 upload event', 'Lambda runs code in response to events and manages server maintenance, capacity provisioning, scaling and patching, so the team does not operate servers.'],
     wrong: [
       ['Run a fleet of Amazon EC2 instances that poll the bucket for new images', 'The company must patch, scale and monitor the instances, which adds the operational work the requirement tries to avoid.'],
       ['Run a self-managed container cluster on Amazon EC2 instances that scans the bucket', 'The cluster and its instances must be managed and sized by the company, which is more overhead than an event-driven function.'],
@@ -91,12 +91,13 @@ const questions: Question[] = [
     stem: 'A company keeps compliance documents in Amazon S3. Each document is read about once a month, but when it is needed it must open within milliseconds. The company wants the MOST cost-effective storage class that meets this access pattern. Which storage class should it use?',
     correct: ['S3 Standard-IA', 'S3 Standard-IA is designed for long-lived, infrequently accessed data and still provides millisecond access.'],
     wrong: [
-      ['S3 Standard', 'S3 Standard meets the access time, but it is intended for frequently accessed data and is not the lowest-cost fit for monthly reads.'],
+      ['S3 Standard', 'S3 Standard meets the access time, but it is designed for data accessed more than once a month and is not the lowest-cost fit for monthly reads.'],
       ['S3 Glacier Flexible Retrieval', 'Objects must be restored before use, with retrieval times of minutes to hours, so they do not open within milliseconds.'],
       ['S3 Glacier Deep Archive', 'Retrieval takes hours and objects are not available for real-time access, so it fails the millisecond requirement.'],
     ],
     slot: 1,
     evidence: [
+      's3-storage-classes|Long-lived, infrequently accessed data (once a month) with millisecond access',
       's3-storage-classes|S3 Standard-IA and S3 One Zone-IA storage classes are designed for long-lived and infrequently accessed data.',
       's3-storage-classes|S3 Standard-IA and S3 One Zone-IA objects are available for millisecond access (similar to the S3 Standard storage class).',
       's3-storage-classes|However, S3 Glacier Flexible Retrieval and S3 Glacier Deep Archive objects are archived, and not available for real-time access.',
@@ -106,14 +107,14 @@ const questions: Question[] = [
     id: 'town-charter-007',
     building: 'town-charter',
     d: 2,
-    stem: 'A company stores private reports in an Amazon S3 bucket. Only the company\'s own IAM principals may read them. Which TWO actions MOST effectively restrict access? (Choose two.)',
+    stem: 'A company stores private reports in an Amazon S3 bucket. An application on Amazon EC2 reads the reports, and only the company\'s own IAM principals may read them. Which TWO actions MOST effectively restrict access? (Choose two.)',
     correct: [
       ['Turn on S3 Block Public Access for the bucket', 'Block Public Access settings override policies and permissions that would otherwise make the data public.'],
       ['Grant the application read access through an IAM role with least-privilege permissions', 'A role limits access to authorized principals and grants only the permissions the task needs.'],
     ],
     wrong: [
-      ['Add an ACL that grants read access to all users', 'This makes the reports readable by anyone, which defeats the restriction.'],
-      ['Allow any principal in a bucket policy and rely on hard-to-guess object names', 'Obscure names are not access control, and the policy still allows everyone.'],
+      ['Grant the application\'s role the s3:* action on all resources', 'The role would be able to do far more than read these reports, which breaks the least-privilege requirement.'],
+      ['Turn on server-side encryption with Amazon S3 managed keys (SSE-S3) for the bucket', 'Encryption at rest protects stored data, but it does not decide which principals may read the objects, so it does not restrict access.'],
       ['Share one IAM user\'s long-term access keys with every team', 'Shared long-term keys cannot be tied to one principal and are harder to protect than role credentials.'],
     ],
     slots: [2, 4],
@@ -126,8 +127,8 @@ const questions: Question[] = [
     id: 'town-charter-008',
     building: 'town-charter',
     d: 3,
-    stem: 'A company runs a stateless web application on Amazon EC2 instances behind an Application Load Balancer, in one Availability Zone. The application must keep serving users if one Availability Zone becomes unavailable. Many designs would work. Which design is the MOST cost-effective?',
-    correct: ['Use an Auto Scaling group across two Availability Zones behind the load balancer', 'The group balances instances across zones and launches instances in the remaining zone if one becomes unavailable, without a permanently idle duplicate.'],
+    stem: 'A company runs a stateless web application on Amazon EC2 instances that all run in one Availability Zone, behind an Application Load Balancer. The application must keep serving users if one Availability Zone becomes unavailable. Many designs would work. Which design is the MOST cost-effective?',
+    correct: ['Use an Auto Scaling group across two Availability Zones behind the load balancer', 'The group balances instances across two zones, the load balancer spreads traffic across them, and the group launches instances in the remaining zone if one becomes unavailable, without a permanently idle duplicate.'],
     wrong: [
       ['Keep one Availability Zone and move every instance to the largest instance size', 'A larger instance does not survive the loss of its zone, so it fails the availability requirement.'],
       ['Run a permanent full-size copy of the whole fleet in a second AWS Region', 'It meets availability but pays for a full idle duplicate, which costs more than needed.'],
@@ -144,8 +145,8 @@ const questions: Question[] = [
     id: 'town-charter-009',
     building: 'town-charter',
     d: 3,
-    stem: 'A company\'s checkout site calls an order-processing service on Amazon EC2 synchronously. During flash sales the service is overwhelmed and some orders are lost. A review of the existing architecture must find the improvement with the LEAST data loss that keeps the current processing code. Which change should the company make?',
-    correct: ['Place an Amazon SQS queue between the site and the service so the service polls it', 'A durable queue decouples the two components, so orders wait in the queue instead of being lost when the service is busy.'],
+    stem: 'A company\'s checkout site calls an order-processing service on Amazon EC2 synchronously. During flash sales the service is overwhelmed and some orders are lost. Which change MOST effectively prevents orders from being lost during traffic spikes?',
+    correct: ['Place an Amazon SQS queue between the site and the service so the service polls it', 'A durable queue decouples the two components and buffers requests, so orders wait in the queue instead of being lost when the service is busy, and the queue scales to absorb spikes.'],
     wrong: [
       ['Increase the timeout of the site\'s request to the order-processing service', 'The site waits longer, but an overwhelmed service still drops work and orders can still be lost.'],
       ['Move the order-processing service to a larger Amazon EC2 instance type', 'A larger instance raises the ceiling, but spikes can still exceed it and nothing buffers the excess orders.'],
@@ -154,13 +155,14 @@ const questions: Question[] = [
     slot: 3,
     evidence: [
       'sqs-what-is|Amazon Simple Queue Service (Amazon SQS) offers a secure, durable, and available hosted queue that lets you integrate and decouple distributed software systems and components.',
+      'sqs-what-is|Scalability – Amazon SQS can process each buffered request independently, scaling transparently to handle any load increases or spikes without any provisioning instructions.',
     ],
   }),
   mr({
     id: 'town-charter-010',
     building: 'town-charter',
     d: 3,
-    stem: 'A company is moving a containerized web application and its relational database from self-managed servers to AWS. Leadership wants the LEAST operational overhead for both the application tier and the database tier. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A company is moving a containerized web application and its relational database from self-managed servers to AWS. The database must stay relational. Leadership wants the LEAST operational overhead for both the application tier and the database tier. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Run the containers on Amazon ECS with AWS Fargate', 'Fargate runs containers without having to manage servers or clusters of EC2 instances.'],
       ['Move the database to Amazon RDS', 'Amazon RDS is a managed database service that handles backups, software patching, automatic failure detection and recovery.'],
@@ -168,7 +170,7 @@ const questions: Question[] = [
     wrong: [
       ['Run the containers on a self-managed cluster of Amazon EC2 instances', 'The company must manage and patch the servers and the cluster, which keeps the overhead.'],
       ['Install the database engine on Amazon EC2 instances and script the backups', 'The company must handle software install, patching and backups itself, which keeps the overhead.'],
-      ['Patch the operating system images by hand every month', 'Manual patching is overhead, and this does not reduce it for either tier.'],
+      ['Convert the relational database to Amazon DynamoDB tables', 'DynamoDB is not a relational database, so this does not meet the requirement to keep the database relational and would force the application to be redesigned.'],
     ],
     slots: [0, 3],
     evidence: [

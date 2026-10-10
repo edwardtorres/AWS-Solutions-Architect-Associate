@@ -78,7 +78,7 @@ const questions: Question[] = [
     wrong: [
       ['Rely on the AWS CloudTrail Event history', 'Event history shows only the past 90 days of management events, which is shorter than 13 months.'],
       ['Turn on the AWS Config configuration recorder', 'It records resource configurations and relationships, not a record of the API calls made.'],
-      ['Create an Amazon CloudWatch alarm on the account API request metric', 'An alarm fires on a threshold and does not keep a record of each API call.'],
+      ['Create an Amazon CloudWatch dashboard that shows API activity', 'A dashboard displays metrics and does not keep a record of each API call for 13 months.'],
     ],
     slot: 0,
     evidence: [

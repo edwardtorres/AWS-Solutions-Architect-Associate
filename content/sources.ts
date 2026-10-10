@@ -529,6 +529,9 @@ const sources: Source[] = [
   aws('exam-in-scope', `${D}/aws-certification/latest/solutions-architect-associate-03/saa-03-in-scope-services.html`, 'In-Scope AWS Services (SAA-C03 exam guide)'),
   aws('ec2-iam-roles', `${D}/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html`, 'IAM roles for Amazon EC2'),
   aws('asg-benefits', `${D}/autoscaling/ec2/userguide/auto-scaling-benefits.html`, 'Auto Scaling benefits for application architecture'),
+  aws('vpc-infra-security', `${D}/vpc/latest/userguide/infrastructure-security.html`, 'Infrastructure security in Amazon VPC'),
+  aws('ec2-sg-use-cases', `${D}/AWSEC2/latest/UserGuide/security-group-rules-reference.html`, 'Security group rules for different use cases'),
+  aws('iam-idp-federation', `${D}/IAM/latest/UserGuide/id_roles_providers.html`, 'Identity providers and federation into AWS'),
 ];
 
 export default sources;
