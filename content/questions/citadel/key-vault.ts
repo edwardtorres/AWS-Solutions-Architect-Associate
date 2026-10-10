@@ -484,7 +484,7 @@ const questions: Question[] = [
     bullets: ['1.3-S2'],
     d: 2,
     tags: ['mock-reserve', 'trap:sse-s3-kms-c'],
-    stem: 'A company delivers Amazon S3 server access logs to a central bucket whose default encryption is SSE-KMS with a customer managed key. The log objects that arrive are encrypted with a key the security team cannot use. Which change resolves this with the LEAST effort?',
+    stem: 'A company delivers Amazon S3 server access logs to a central bucket whose default encryption is SSE-KMS with a customer managed key. The security team is already allowed by the key policy of that key, yet the log objects that arrive are encrypted with a key the team cannot use. Which change resolves this with the LEAST effort?',
     correct: ['Change the default encryption of the destination bucket to SSE-S3', 'A destination bucket for server access logging must use Amazon S3 managed keys.'],
     wrong: [
       ['Add the security team\'s role to the key policy of the customer managed key', 'The delivered log objects may use a key the team cannot access, so editing this key\'s policy does not fix it.'],

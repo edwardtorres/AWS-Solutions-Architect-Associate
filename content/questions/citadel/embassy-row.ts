@@ -564,7 +564,7 @@ const questions: Question[] = [
     bullets: ['1.1-S5'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company lets customers upload files with PUT requests through an Amazon CloudFront distribution to a private Amazon S3 bucket. The company wants to use origin access control (OAC), and the traffic between CloudFront and Amazon S3 must always use HTTPS. Which THREE actions meet these requirements? (Choose three.)',
+    stem: 'A company lets customers upload files with PUT requests through an Amazon CloudFront distribution to a private Amazon S3 bucket. The company wants to use origin access control (OAC), and the traffic between CloudFront and Amazon S3 must always use HTTPS. The bucket\'s S3 Object Ownership setting must also be compatible with OAC. Which THREE actions meet these requirements? (Choose three.)',
     correct: [
       ['Choose the Sign requests setting on the origin access control', 'Communication between CloudFront and Amazon S3 is always through HTTPS only when the OAC is set to always sign requests.'],
       ['Add a bucket policy statement that lets the CloudFront service principal use s3:GetObject and s3:PutObject for the distribution', 'The bucket policy for OAC can allow read and write access for the distribution, so uploads work while the bucket stays private.'],

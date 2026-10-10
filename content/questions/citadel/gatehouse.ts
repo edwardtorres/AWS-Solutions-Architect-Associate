@@ -146,7 +146,7 @@ const questions: Question[] = [
     bullets: ['1.2-K3'],
     d: 2,
     tags: ['trap:sg-vs-nacl'],
-    stem: 'An engineer adds a network ACL rule that denies all traffic from the CIDR block of the subnet that holds the backend Amazon EC2 instances of a load balancer. Soon after, the load balancer reports every target as unhealthy. Which statement BEST explains the failure?',
+    stem: 'An engineer adds a rule to the network ACL of the subnet that holds the backend Amazon EC2 instances of a load balancer. The rule denies all traffic whose source is that subnet\'s own CIDR block. Soon after, the load balancer reports every target as unhealthy. Which statement BEST explains the failure?',
     correct: ['The deny rule stops the load balancer from carrying out health checks on the instances', 'A deny rule for the subnet CIDR block blocks the health check traffic that the load balancer sends to its targets.'],
     wrong: [
       ['The security groups of the instances cannot be used together with a custom network ACL', 'Security groups and network ACLs work together, so this does not explain the failure.'],
