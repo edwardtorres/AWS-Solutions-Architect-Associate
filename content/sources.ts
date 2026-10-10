@@ -583,6 +583,7 @@ const sources: Source[] = [
   aws('route53-failover-routing', `${D}/Route53/latest/DeveloperGuide/routing-policy-failover.html`, 'Failover routing'),
   aws('route53-hc-types', `${D}/Route53/latest/DeveloperGuide/health-checks-types.html`, 'Types of Amazon Route 53 health checks'),
   aws('route53-hc-how', `${D}/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html`, 'How Amazon Route 53 determines whether a health check is healthy'),
+  aws('lambda-xray', `${D}/lambda/latest/dg/services-xray.html`, 'Visualize Lambda function invocations using AWS X-Ray'),
 ];
 
 export default sources;
