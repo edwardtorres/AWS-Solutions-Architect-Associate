@@ -12,7 +12,7 @@ const questions: Question[] = [
     wrong: [
       ['AWS DataSync with a task that copies from the partners\' systems into the S3 bucket', 'DataSync copies data between storage systems and AWS storage; it does not give partners an SFTP endpoint to upload to.'],
       ['AWS Storage Gateway with an S3 File Gateway that the partners mount', 'A file gateway offers file system protocols to on-premises applications, not an SFTP server for outside partners.'],
-      ['An Amazon EC2 instance that runs an SFTP server and copies the files to the bucket', 'This works, but the company must patch, scale, and operate the server, which adds the overhead it wants to avoid.'],
+      ['An Amazon EC2 instance that runs an SFTP server and copies each uploaded file to the bucket', 'This works, but the company must patch, scale, and operate the server, which adds the overhead it wants to avoid.'],
     ],
     slot: 0,
     evidence: [
@@ -30,7 +30,7 @@ const questions: Question[] = [
     wrong: [
       ['Deploy an S3 File Gateway and change the backup software to write files to a share', 'The backup software is not supposed to change, and a file gateway offers file shares rather than virtual tapes.'],
       ['Use AWS DataSync to copy the tape contents into an Amazon EFS file system every night', 'The backup software would have to change from tapes to files, and EFS is not an archive tier for backups.'],
-      ['Create AWS Transfer Family SFTP endpoints and have the backup software upload tape images', 'The software writes to virtual tapes and does not upload over SFTP, and the enabled endpoints would be billed while they run.'],
+      ['Create AWS Transfer Family SFTP endpoints and have the backup software upload its tape images each night', 'The software writes to virtual tapes and does not upload over SFTP, and the enabled endpoints would be billed while they run.'],
     ],
     slot: 1,
     evidence: [
@@ -47,7 +47,7 @@ const questions: Question[] = [
     correct: ['Run an AWS DataSync task from an on-premises agent to the S3 bucket over the existing connection', 'DataSync prepares, transfers, and verifies the data, and charges a flat per-gigabyte fee with no upfront costs and no minimum charges.'],
     wrong: [
       ['Order an AWS Direct Connect connection and copy the data with a script over it', 'A Direct Connect connection is a new circuit the company does not want, and a script does not verify the data.'],
-      ['Set up an AWS Transfer Family SFTP server and have an administrator upload the files', 'The server endpoint is billed while its protocols are enabled, and the manual uploads add effort and give no verification.'],
+      ['Set up an AWS Transfer Family SFTP server endpoint and have an administrator upload the files by hand', 'The server endpoint is billed while its protocols are enabled, and the manual uploads add effort and give no verification.'],
       ['Deploy an S3 File Gateway and copy the files into the share by hand', 'A gateway is for continuing hybrid access to the data, not for a one-time bulk copy that is verified.'],
     ],
     slot: 2,
@@ -164,11 +164,11 @@ const questions: Question[] = [
     bullets: ['4.1-S7'],
     d: 3,
     stem: 'A company copies about 400 GB of changed files each night from an on-premises NFS server to an Amazon EFS file system. The office network is shared with business applications during the day, so the copy must be limited in how much bandwidth it uses. The company wants the LEAST operational overhead. Which solution meets these requirements?',
-    correct: ['Use AWS DataSync with a recurring task that has a bandwidth limit and the EFS file system as the destination', 'DataSync supports EFS as a destination, and a task can limit how much bandwidth DataSync uses.'],
+    correct: ['Use AWS DataSync with a recurring, bandwidth-limited task that has the EFS file system as the destination', 'DataSync supports EFS as a destination, and a task can limit how much bandwidth DataSync uses.'],
     wrong: [
       ['Use an AWS Transfer Family SFTP server that writes to the EFS file system', 'The NFS server has no SFTP client to schedule the copy, and the endpoint adds a server that is billed while enabled.'],
-      ['Use an S3 File Gateway so that the server writes its files into the share every night', 'A file gateway stores the data in Amazon S3, not in the EFS file system that is the required destination.'],
-      ['Use an AWS Storage Gateway Volume Gateway to present volumes to the NFS server', 'Volume Gateway presents iSCSI volumes backed by S3, which neither copies the NFS files nor writes to EFS.'],
+      ['Use an S3 File Gateway so that the NFS server writes its changed files into the share every night', 'A file gateway stores the data in Amazon S3, not in the EFS file system that is the required destination.'],
+      ['Use an AWS Storage Gateway Volume Gateway to present cloud-backed iSCSI volumes to the NFS server', 'Volume Gateway presents iSCSI volumes backed by S3, which neither copies the NFS files nor writes to EFS.'],
     ],
     slot: 2,
     evidence: [
