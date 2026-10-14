@@ -163,7 +163,7 @@ const questions: Question[] = [
     bullets: ['3.2-S2'],
     d: 1,
     stem: 'A web application runs in an Amazon EC2 Auto Scaling group. The company wants the average CPU utilization of the group to stay near 50 percent as load rises and falls, and wants to manage as few CloudWatch alarms as possible. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Create a target tracking scaling policy using the ASGAverageCPUUtilization metric with a target of 50', 'Auto Scaling creates and manages the CloudWatch alarms and holds the metric near the target, like a thermostat.'],
+    correct: ['Create a target tracking policy on ASGAverageCPUUtilization with a target of 50', 'Auto Scaling creates and manages the CloudWatch alarms and holds the metric near the target, like a thermostat.'],
     wrong: [
       ['Create a step scaling policy with one alarm for scale out and a second alarm for scale in', 'With step scaling you create and manage the CloudWatch alarms yourself, which adds overhead.'],
       ['Create a scheduled action that sets the desired capacity to a fixed number for each day', 'A fixed schedule does not follow the CPU utilization of the group as load changes.'],
@@ -182,7 +182,7 @@ const questions: Question[] = [
     bullets: ['3.2-S2'],
     d: 2,
     stem: 'Worker instances in an Amazon EC2 Auto Scaling group process messages from an Amazon SQS queue. Each message takes a different time to process, and the company wants a target tracking policy that scales the workers in proportion to the work waiting. Which metric should the policy use to scale MOST effectively?',
-    correct: ['A custom metric for the queue backlog per instance, calculated from the number of messages divided by running instances', 'The backlog per instance changes as the group grows or shrinks, so it can drive proportional scaling.'],
+    correct: ['A custom backlog-per-instance metric: queue messages divided by running instances', 'The backlog per instance changes as the group grows or shrinks, so it can drive proportional scaling.'],
     wrong: [
       ['The ApproximateNumberOfMessagesVisible metric of the queue, used directly', 'The queue length does not change proportionally to the size of the group, so it is not a valid target tracking metric.'],
       ['The ASGAverageNetworkOut metric of the Auto Scaling group', 'Network bytes sent by the workers say little about how many messages are waiting for them.'],
@@ -245,7 +245,7 @@ const questions: Question[] = [
     d: 3,
     tags: ['mock-reserve', 'trap:cloudfront-vs-global-accelerator'],
     stem: 'A studio runs a multiplayer game backend on Network Load Balancers in two Regions. Players around the world connect over UDP, and the studio wants them to enter through fixed addresses on the AWS global network and be moved to the other Region if one becomes unhealthy. Which solution BEST meets these requirements?',
-    correct: ['Create a standard accelerator in AWS Global Accelerator with a UDP listener and both load balancers as endpoints', 'Static anycast addresses are single fixed entry points, listeners support UDP, and routing follows endpoint health.'],
+    correct: ['Use AWS Global Accelerator with a UDP listener and both load balancers as endpoints', 'Static anycast addresses are single fixed entry points, listeners support UDP, and routing follows endpoint health.'],
     wrong: [
       ['Create an Amazon CloudFront distribution that uses both load balancers as origins', 'CloudFront speeds up delivery of web content cached at edge locations, and it does not provide UDP game-traffic entry points.'],
       ['Create Amazon Route 53 latency records that point players at each load balancer', 'DNS answers can be cached by clients, so routing is not independent of DNS and players do not get fixed entry addresses.'],

@@ -1,0 +1,118 @@
+[
+ {
+  "id": "island-charts-001",
+  "verdict": "OK",
+  "issues": [
+   "Minor: key omits a load balancer, but the stem asks only for the simplest change that lets the app survive loss of a facility; acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-007",
+  "verdict": "OK",
+  "issues": [
+   "Verified against the How route priority works page: its own example (static igw route beats propagated vgw route for identical /24; longest prefix first). Question mirrors the documented example, so the key is a documented fact, not inference."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-010",
+  "verdict": "OK",
+  "issues": [
+   "Verified: dns-failover-types says to set Evaluate Target Health to Yes on alias records instead of creating health checks, for both primary and secondary. Key is documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-017",
+  "verdict": "OK",
+  "issues": [
+   "Verified: multivalue page says 'roughly at random' and returns only healthy values when health checks are associated. ALB distractor fails 'least additional infrastructure', which is a stated requirement."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "island-charts-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

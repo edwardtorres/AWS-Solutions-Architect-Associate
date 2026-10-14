@@ -1,0 +1,117 @@
+[
+  {
+    "id": "blueprint-hall-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-002",
+    "verdict": "OK",
+    "issues": [
+      "Minor: near-duplicate of -003 (session offload to ElastiCache behind an ALB/ASG) and of -016; keep but vary scenario or drop one if the district needs room."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-003",
+    "verdict": "OK",
+    "issues": [
+      "Minor: near-duplicate of -002 (session state to ElastiCache); the S3-for-photos half is new. Both correct options are documented in the Well-Architected stateless guidance."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-004",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-005",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-006",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 1 (provisioned with auto scaling would also help) is defended only by 'set to typical daily load'; the key is still clearly best under 'LEAST capacity planning'."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-007",
+    "verdict": "FIX",
+    "issues": [
+      "Option 3 (Lambda behind API Gateway) is also serverless with no web servers to manage, so it can be defended as meeting the stated requirement; only 'BEST' separates it. Its why ('adds components to manage') is weak.",
+      "The qualifier does not say what separates S3+CloudFront from Lambda+API Gateway."
+    ],
+    "suggestedFix": "Add a qualifier such as 'with the LEAST operational overhead and without running code per request', or reword option 3 so it clearly fails (for example, an EC2-hosted web server behind an API Gateway HTTP proxy). Rewrite the why for option 3 to name the exact failed requirement."
+  },
+  {
+    "id": "blueprint-hall-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-009",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-010",
+    "verdict": "OK",
+    "issues": [
+      "Minor: the stem asks for AZ-loss resilience but the database tier is never made Multi-AZ; the three keys are still the best of the five options."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-011",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 1 mentions 'the load balancer' although the stem does not say a load balancer sits between the tiers."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-012",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-013",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-014",
+    "verdict": "OK",
+    "issues": [
+      "Key rests on a whitepaper sentence ('Kinesis Data Streams can serve as your central event store, while Amazon S3 provides a durable storage for all event records'); documented, acceptable. Overlaps the trap:sqs-sns-eventbridge-kinesis pair, which is fine."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-015",
+    "verdict": "OK",
+    "issues": [
+      "Minor: options 0 and 1 use 'Always' absolutes and the key is the only hedged option, which gives it away; consider making distractors less absolute."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "blueprint-hall-016",
+    "verdict": "OK",
+    "issues": [
+      "Minor: third question in the building on offloading session state to ElastiCache (-002, -003, -016); the Spot angle is new."
+    ],
+    "suggestedFix": ""
+  }
+]

@@ -90,7 +90,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible', 'trap:ebs-efs-fsx'],
     stem: 'A company runs a content-management application on Linux Amazon EC2 instances in an Auto Scaling group across three Availability Zones. Editors upload files that every instance must read and write through standard file system calls with POSIX permissions, and the application code cannot be changed. The storage must grow automatically without capacity planning. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Mount a Regional Amazon EFS file system on every instance and store the files on it', 'EFS provides shared NFS file storage with POSIX permissions across Availability Zones and grows and shrinks automatically as files are added and removed.'],
+    correct: ['Mount a Regional Amazon EFS file system on every instance and store all of the files on it', 'EFS provides shared NFS file storage with POSIX permissions across Availability Zones and grows and shrinks automatically as files are added and removed.'],
     wrong: [
       ['Store the files in an Amazon S3 bucket and have every instance read and write them through the S3 API', 'S3 is accessed through an API rather than standard file system calls, so the application code would have to change.'],
       ['Attach an Amazon EBS volume to each instance and synchronize the volumes with a custom script', 'An EBS volume is attached to one instance in one Availability Zone and must be sized in advance, and the script is extra operational work.'],
@@ -153,7 +153,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible'],
     stem: 'A photo-sharing company serves user-uploaded photos directly to web and mobile clients over HTTPS. The collection grows unpredictably and is expected to reach several hundred terabytes. The company does not want to provision storage capacity or run servers just to serve the files. Which storage solution BEST meets these requirements?',
-    correct: ['Store the photos as objects in Amazon S3 and give clients access to them over HTTPS', 'S3 stores any amount of data, grows without provisioning, and gives clients access to objects over the internet through an API.'],
+    correct: ['Store the photos as objects in Amazon S3 and give web and mobile clients access over HTTPS', 'S3 stores any amount of data, grows without provisioning, and gives clients access to objects over the internet through an API.'],
     wrong: [
       ['Store the photos on an Amazon EFS file system that the web and mobile clients mount over NFS', 'EFS is a file system that compute resources mount over NFS, so web and mobile clients cannot read it directly over the internet.'],
       ['Store the photos on Amazon EBS volumes attached to a fleet of web servers that serve them', 'EBS volumes need provisioned capacity with a defined maximum size and servers to serve the files, both of which the company wants to avoid.'],
@@ -191,7 +191,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['trap:instance-store-vs-ebs'],
     stem: 'A company runs a database on an Amazon EC2 instance and keeps its data files on a block storage volume. Operations stops the instance every night to save cost and starts it again each morning, and the data files must still be there. Which storage option is the BEST choice for the data files?',
-    correct: ['An Amazon EBS volume attached to the instance', 'EBS volumes persist independently from the running life of an instance, so the data files survive the nightly stop and start.'],
+    correct: ['An Amazon EBS volume that is attached to the instance', 'EBS volumes persist independently from the running life of an instance, so the data files survive the nightly stop and start.'],
     wrong: [
       ['The instance store volumes of a storage optimized instance', 'Instance store data does not persist when the instance is stopped, so the data files would be lost every night.'],
       ['An Amazon EFS file system mounted on the instance', 'EFS is shared file storage, not the block storage volume on which the database keeps its data files.'],
@@ -210,7 +210,7 @@ const questions: Question[] = [
     d: 3,
     tags: ['trap:ebs-efs-fsx'],
     stem: 'A company runs a Linux application on two Amazon EC2 instances that are in different Availability Zones. Both instances must read and write the same files at the same time through standard file system calls. A developer proposes an Amazon EBS volume with Multi-Attach enabled. Which solution BEST meets the requirements?',
-    correct: ['Mount a Regional Amazon EFS file system on both instances', 'EFS is shared file storage that instances in different Availability Zones can mount and use at the same time.'],
+    correct: ['Mount a Regional Amazon EFS file system on both instances and use it as shared storage', 'EFS is shared file storage that instances in different Availability Zones can mount and use at the same time.'],
     wrong: [
       ['Create an io2 volume with Multi-Attach enabled and attach it to both instances', 'Multi-Attach attaches a volume only to instances in the same Availability Zone, so it cannot serve instances in two zones.'],
       ['Create an EBS volume in each Availability Zone and copy snapshots between them every minute', "Snapshots are point-in-time backups, not a live shared file system, so the instances would not see each other's writes at the same time."],
@@ -250,7 +250,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible'],
     stem: 'Field technicians upload video files of 8 GB or more to an Amazon S3 bucket over unreliable cellular connections. A dropped connection currently forces the whole upload to restart. The company wants a dropped connection to cost the LEAST re-sent data and wants each upload to use the available bandwidth in parallel. Which solution meets these requirements?',
-    correct: ['Upload each file with S3 multipart upload and retry only the parts that fail', 'Multipart upload sends parts independently and in parallel, and a failed part can be retransmitted without affecting the other parts.'],
+    correct: ['Upload each file with S3 multipart upload and retry only the parts that fail to upload', 'Multipart upload sends parts independently and in parallel, and a failed part can be retransmitted without affecting the other parts.'],
     wrong: [
       ['Upload each file with a single PUT request and retry the whole request when it fails', 'A single PUT sends the object in one operation, so a dropped connection restarts the whole upload and nothing runs in parallel.'],
       ['Enable S3 Transfer Acceleration and keep uploading each file with a single PUT request', 'Transfer Acceleration shortens the network path over long distances, but each file is still one request that restarts after a dropped connection.'],
@@ -311,11 +311,11 @@ const questions: Question[] = [
     bullets: ['3.1-S1'],
     d: 2,
     stem: 'A company runs a mission-critical transactional database on an Amazon EC2 instance. The database needs consistent sub-millisecond latency and sustained IOPS from its data volume. Which Amazon EBS volume type BEST meets these requirements?',
-    correct: ['A Provisioned IOPS SSD (io2 Block Express) volume', 'io2 Block Express is intended for workloads that need consistent sub-millisecond latency and sustained IOPS performance.'],
+    correct: ['A Provisioned IOPS SSD (io2 Block Express) volume with enough IOPS provisioned', 'io2 Block Express is intended for workloads that need consistent sub-millisecond latency and sustained IOPS performance.'],
     wrong: [
-      ['A General Purpose SSD (gp3) volume with the maximum IOPS provisioned', 'gp3 provides single-digit millisecond latency, which does not meet the sub-millisecond requirement.'],
-      ['A Throughput Optimized HDD (st1) volume sized for the whole data set', 'st1 is an HDD type optimized for large streaming workloads where throughput, not latency or IOPS, is the dominant attribute.'],
-      ['A Cold HDD (sc1) volume with the data files spread over several volumes', 'sc1 is an HDD type for infrequently accessed data where the lowest storage cost matters, not for a transactional database.'],
+      ['A General Purpose SSD (gp3) volume with the maximum IOPS and throughput provisioned', 'gp3 provides single-digit millisecond latency, which does not meet the sub-millisecond requirement.'],
+      ['A Throughput Optimized HDD (st1) volume that is sized for the whole data set', 'st1 is an HDD type optimized for large streaming workloads where throughput, not latency or IOPS, is the dominant attribute.'],
+      ['A Cold HDD (sc1) volume set with the data files spread over several volumes', 'sc1 is an HDD type for infrequently accessed data where the lowest storage cost matters, not for a transactional database.'],
     ],
     slot: 1,
     evidence: [
@@ -330,7 +330,7 @@ const questions: Question[] = [
     bullets: ['3.1-S1'],
     d: 3,
     stem: 'A media company renders images on Linux Amazon EC2 instances that read and write a shared Amazon EFS file system. Throughput demand is spiky and hard to forecast, with long idle periods followed by short, intense bursts. The company wants performance to follow demand without capacity planning. Which EFS configuration is the BEST fit?',
-    correct: ['General Purpose performance mode with Elastic throughput', 'Elastic throughput scales performance up and down automatically for spiky or unpredictable workloads, and General Purpose mode has the lowest per-operation latency.'],
+    correct: ['General Purpose performance mode with Elastic throughput so that performance follows demand', 'Elastic throughput scales performance up and down automatically for spiky or unpredictable workloads, and General Purpose mode has the lowest per-operation latency.'],
     wrong: [
       ['General Purpose performance mode with Provisioned throughput set to the expected peak', 'Provisioned throughput suits workloads whose performance requirements are known, and it must be set in advance rather than follow demand.'],
       ['General Purpose performance mode with Bursting throughput, which scales with the data stored', 'Bursting throughput follows the amount of stored data rather than demand, and a throughput-constrained workload is advised to move to Elastic or Provisioned throughput.'],
@@ -351,7 +351,7 @@ const questions: Question[] = [
     d: 1,
     tags: ['trap:ebs-efs-fsx'],
     stem: 'A company is building a data-processing pipeline on Linux Amazon EC2 instances in three Availability Zones. The instances share intermediate files over NFS. Nobody can predict how much data the pipeline will accumulate, and the company does not want to resize storage or provision capacity as it grows. Which storage solution meets these requirements with the LEAST operational overhead?',
-    correct: ['An Amazon EFS file system mounted on all of the instances', 'EFS grows and shrinks automatically as files are added and removed, so no capacity has to be provisioned or resized.'],
+    correct: ['An Amazon EFS file system that is mounted on all of the instances in the three zones', 'EFS grows and shrinks automatically as files are added and removed, so no capacity has to be provisioned or resized.'],
     wrong: [
       ['An Amazon EBS volume that one instance shares with the others through an NFS server', 'The volume has a defined size that must be increased by hand, and it lives in one Availability Zone behind a single NFS server.'],
       ['An Amazon EBS io2 volume with Multi-Attach enabled and a clustered file system on top', 'Multi-Attach works only for instances in the same Availability Zone, and the volume still has a size that must be managed.'],
