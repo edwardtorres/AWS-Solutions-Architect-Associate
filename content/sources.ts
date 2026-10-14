@@ -582,8 +582,14 @@ const sources: Source[] = [
   aws('route53-simple', `${D}/Route53/latest/DeveloperGuide/routing-policy-simple.html`, 'Simple routing'),
   aws('route53-failover-routing', `${D}/Route53/latest/DeveloperGuide/routing-policy-failover.html`, 'Failover routing'),
   aws('route53-hc-types', `${D}/Route53/latest/DeveloperGuide/health-checks-types.html`, 'Types of Amazon Route 53 health checks'),
-  aws('route53-hc-how', `${D}/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html`, 'How Amazon Route 53 determines whether a health check is healthy'),
   aws('lambda-xray', `${D}/lambda/latest/dg/services-xray.html`, 'Visualize Lambda function invocations using AWS X-Ray'),
+  aws('ssm-session-manager', `${D}/systems-manager/latest/userguide/session-manager.html`, 'AWS Systems Manager Session Manager'),
+  aws('ssm-run-command', `${D}/systems-manager/latest/userguide/run-command.html`, 'AWS Systems Manager Run Command'),
+  aws('cfn-stacksets', `${D}/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html`, 'Managing stacks across accounts and Regions with StackSets'),
+  aws('cfn-changesets', `${D}/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html`, 'Update CloudFormation stacks using change sets'),
+  aws('eb-deploy-policies', `${D}/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html`, 'Deployment policies and settings (Elastic Beanstalk)'),
+  aws('route53-failover-private', `${D}/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html`, 'Configuring failover in a private hosted zone'),
+  aws('asg-health-checks', `${D}/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html`, 'Health checks for instances in an Auto Scaling group'),
 ];
 
 export default sources;
