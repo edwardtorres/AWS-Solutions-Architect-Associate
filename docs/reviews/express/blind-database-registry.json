@@ -1,0 +1,19 @@
+[
+{"id":"database-registry-001","picks":["B"],"ambiguous":false},
+{"id":"database-registry-002","picks":["A"],"ambiguous":false},
+{"id":"database-registry-003","picks":["B","C"],"ambiguous":false},
+{"id":"database-registry-004","picks":["D"],"ambiguous":false},
+{"id":"database-registry-005","picks":["C"],"ambiguous":false},
+{"id":"database-registry-006","picks":["B"],"ambiguous":false},
+{"id":"database-registry-007","picks":["D"],"ambiguous":false},
+{"id":"database-registry-008","picks":["C"],"ambiguous":false},
+{"id":"database-registry-009","picks":["A"],"ambiguous":false,"note":"Provisioned with autoscaling; 'spend at or below defined rate' fits max capacity limit."},
+{"id":"database-registry-010","picks":["B"],"ambiguous":false},
+{"id":"database-registry-011","picks":["C"],"ambiguous":false},
+{"id":"database-registry-012","picks":["B"],"ambiguous":false},
+{"id":"database-registry-013","picks":["C","D"],"ambiguous":false},
+{"id":"database-registry-014","picks":["C"],"ambiguous":false},
+{"id":"database-registry-015","picks":["B"],"ambiguous":false,"note":"Relies on DynamoDB on-demand max throughput setting (recent feature)."},
+{"id":"database-registry-016","picks":["B"],"ambiguous":false},
+{"id":"database-registry-017","picks":["A"],"ambiguous":false}
+]

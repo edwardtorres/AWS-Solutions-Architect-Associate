@@ -1,0 +1,23 @@
+[
+{"id":"freight-depot-001","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-002","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-003","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-004","picks":["A","C"],"ambiguous":false},
+{"id":"freight-depot-005","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-006","picks":["D"],"ambiguous":false},
+{"id":"freight-depot-007","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-008","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-009","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-010","picks":["B"],"ambiguous":false},
+{"id":"freight-depot-011","picks":["B"],"ambiguous":false},
+{"id":"freight-depot-012","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-013","picks":["A"],"ambiguous":false},
+{"id":"freight-depot-014","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-015","picks":["C","D"],"ambiguous":false,"note":"D relies on cross-Region transfer being the bottleneck; C is solid."},
+{"id":"freight-depot-016","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-017","picks":["C"],"ambiguous":false},
+{"id":"freight-depot-018","picks":["B"],"ambiguous":false},
+{"id":"freight-depot-019","picks":["B","D"],"ambiguous":false},
+{"id":"freight-depot-020","picks":["B","E"],"ambiguous":false,"note":"FSx for ONTAP supports SMB; both are fully managed."},
+{"id":"freight-depot-021","picks":["C"],"ambiguous":false}
+]

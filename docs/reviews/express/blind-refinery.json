@@ -1,0 +1,104 @@
+[
+ {
+  "id": "refinery-001",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-003",
+  "picks": [
+   "D",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-004",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-005",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-006",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-007",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-008",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-009",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-010",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-011",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-013",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "refinery-014",
+  "picks": [
+   "A",
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "A assumes Glue streaming needs a catalog table or schema detection"
+ }
+]

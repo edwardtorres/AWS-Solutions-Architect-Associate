@@ -1,0 +1,15 @@
+[
+{"id":"turbine-hall-001","picks":["A"],"ambiguous":false},
+{"id":"turbine-hall-002","picks":["B"],"ambiguous":false},
+{"id":"turbine-hall-003","picks":["D","E"],"ambiguous":false},
+{"id":"turbine-hall-004","picks":["C"],"ambiguous":false},
+{"id":"turbine-hall-005","picks":["C"],"ambiguous":false},
+{"id":"turbine-hall-006","picks":["D"],"ambiguous":false},
+{"id":"turbine-hall-007","picks":["A"],"ambiguous":false,"note":"Warm pool in Stopped state; assumes data written to EBS persists/initialisation is the slow part."},
+{"id":"turbine-hall-008","picks":["A","D"],"ambiguous":false},
+{"id":"turbine-hall-009","picks":["A"],"ambiguous":false},
+{"id":"turbine-hall-010","picks":["D"],"ambiguous":false},
+{"id":"turbine-hall-011","picks":["D"],"ambiguous":false},
+{"id":"turbine-hall-012","picks":["A","E"],"ambiguous":false,"note":"B (total RequestCount) does not scale inversely with instance count."},
+{"id":"turbine-hall-013","picks":["A"],"ambiguous":false}
+]

@@ -1,0 +1,200 @@
+import type { Question } from '../../../src/content/types.ts';
+import { mc, mr } from '../helpers.ts';
+
+const questions: Question[] = [
+  mc({
+    id: 'haul-hybrid-customs-001',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-K8', '4.1-S7'],
+    d: 1,
+    stem: 'A company\'s trading partners deliver daily files to the company over SFTP. The company wants the files stored in Amazon S3 and wants a managed solution with the LEAST operational overhead. Which service should the company use?',
+    correct: ['AWS Transfer Family with an SFTP server endpoint that stores the files in the S3 bucket', 'Transfer Family offers fully managed support for transferring files over SFTP directly into and out of AWS storage services.'],
+    wrong: [
+      ['AWS DataSync with a task that copies from the partners\' systems into the S3 bucket', 'DataSync copies data between storage systems and AWS storage; it does not give partners an SFTP endpoint to upload to.'],
+      ['AWS Storage Gateway with an S3 File Gateway that the partners mount', 'A file gateway offers file system protocols to on-premises applications, not an SFTP server for outside partners.'],
+      ['An Amazon EC2 instance that runs an SFTP server and copies the files to the bucket', 'This works, but the company must patch, scale, and operate the server, which adds the overhead it wants to avoid.'],
+    ],
+    slot: 0,
+    evidence: [
+      'transfer-what-is|AWS Transfer Family offers fully managed support for the transfer of files over SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of AWS storage services.',
+      'datasync-what-is|DataSync works with the following on-premises storage systems: Network File System (NFS) Server Message Block (SMB) Hadoop Distributed File Systems (HDFS) Object storage',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-002',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-K8'],
+    d: 2,
+    stem: 'A company keeps backups on a physical tape library that is expensive to maintain. The backup software must keep writing to virtual tapes, and the company wants the backups archived durably in the cloud at the LOWEST cost without changing the backup software. Which solution meets these requirements?',
+    correct: ['Deploy an AWS Storage Gateway Tape Gateway that archives virtual tapes to S3 Glacier Deep Archive', 'Tape Gateway provides cloud-backed virtual tape storage and lets you cost-effectively and durably archive backup data in S3 Glacier.'],
+    wrong: [
+      ['Deploy an S3 File Gateway and change the backup software to write files to a share', 'The backup software is not supposed to change, and a file gateway offers file shares rather than virtual tapes.'],
+      ['Use AWS DataSync to copy the tape contents into an Amazon EFS file system every night', 'The backup software would have to change from tapes to files, and EFS is not an archive tier for backups.'],
+      ['Create AWS Transfer Family SFTP endpoints and have the backup software upload tape images', 'The software writes to virtual tapes and does not upload over SFTP, and the enabled endpoints would be billed while they run.'],
+    ],
+    slot: 1,
+    evidence: [
+      'sgw-tape|With Tape Gateway, you can cost-effectively and durably archive backup data in S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive.',
+      'sgw-tape|Tape Gateway provides cloud-backed virtual tape storage.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-003',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S7', '4.1-S3'],
+    d: 2,
+    stem: 'A company must copy 60 TB of data from an on-premises NFS server to Amazon S3 once, over its existing internet connection, within a few weeks. The company does not want to order a new network circuit, wants the data verified after the copy, and wants the LOWEST cost with little operational overhead. Which solution meets these requirements?',
+    correct: ['Run an AWS DataSync task from an on-premises agent to the S3 bucket over the existing connection', 'DataSync prepares, transfers, and verifies the data, and charges a flat per-gigabyte fee with no upfront costs and no minimum charges.'],
+    wrong: [
+      ['Order an AWS Direct Connect connection and copy the data with a script over it', 'A Direct Connect connection is a new circuit the company does not want, and a script does not verify the data.'],
+      ['Set up an AWS Transfer Family SFTP server and have an administrator upload the files', 'The server endpoint is billed while its protocols are enabled, and the manual uploads add effort and give no verification.'],
+      ['Deploy an S3 File Gateway and copy the files into the share by hand', 'A gateway is for continuing hybrid access to the data, not for a one-time bulk copy that is verified.'],
+    ],
+    slot: 2,
+    evidence: [
+      'datasync-how|How DataSync transfers files, objects, and directories During a task execution, DataSync prepares, transfers, and verifies your data.',
+      'datasync-pricing|You pay a flat, per-gigabyte fee for the amount of data transferred between your storage locations.',
+      'datasync-pricing|With DataSync, there are no upfront costs and no minimum charges.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-004',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S3'],
+    d: 2,
+    tags: ['trap:direct-connect-vs-vpn'],
+    stem: 'A small branch office must send a few gigabytes of files each day, encrypted, to private subnets in a VPC. The office already has an internet connection, needs the link working this week, and has no need for dedicated bandwidth. Which solution meets these requirements at the LOWEST cost?',
+    correct: ['An AWS Site-to-Site VPN connection over the existing internet connection', 'Site-to-Site VPN supports IPsec VPN connections between the office and the VPC and needs no new physical circuit.'],
+    wrong: [
+      ['An AWS Direct Connect dedicated connection from the office to a Direct Connect location', 'It links the network over a fiber-optic cable to a Direct Connect location, a physical circuit that cannot be set up in a week for a small, occasional transfer.'],
+      ['Two AWS Direct Connect connections at different locations for resilience', 'This adds more physical circuits than a small daily transfer needs and would not be ready this week.'],
+      ['Amazon S3 Transfer Acceleration on a bucket in the Region of the VPC', 'It speeds uploads to an S3 bucket but does not create an encrypted connection to private subnets.'],
+    ],
+    slot: 3,
+    evidence: [
+      's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.',
+      'dx-what-is|Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-005',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S1'],
+    d: 1,
+    stem: 'A company\'s devices produce 40 million tiny records each day, and an application uploads each record to Amazon S3 as its own object. The company wants to reduce the request charges of the uploads. Which design change is MOST cost-effective?',
+    correct: ['Combine many records into larger objects before uploading them', 'Ingesting objects with PUT requests is charged per request, so fewer, larger objects mean fewer billed requests.'],
+    wrong: [
+      ['Enable S3 Transfer Acceleration on the bucket and keep uploading each record', 'It speeds long-distance transfers and might add data transfer charges, and the request count stays the same.'],
+      ['Upload each record with multipart upload to improve the throughput', 'Multipart upload is for large objects, and it would add more requests for each tiny record.'],
+      ['Change the storage class of the bucket to S3 Intelligent-Tiering', 'The storage class does not reduce the number of upload requests, and objects below 128 KB are not eligible for auto-tiering.'],
+    ],
+    slot: 0,
+    evidence: [
+      's3-pricing|There are per-request ingest charges when using PUT, COPY, or lifecycle rules to move data into any S3 storage class.',
+      's3-storage-classes|If the size of an object is less than 128 KB, it is not monitored and not eligible for auto-tiering.',
+      's3-transfer-acceleration|When you use Transfer Acceleration, additional data transfer charges might apply.',
+    ],
+  }),
+  mr({
+    id: 'haul-hybrid-customs-006',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S1'],
+    d: 2,
+    stem: 'A company uploads 200 GB files to Amazon S3 over a network that drops connections. Uploads often fail near the end and restart from the beginning, and abandoned partial uploads keep adding storage cost. Which TWO actions fix the failures and control the cost with the LEAST operational overhead? (Choose two.)',
+    correct: [
+      ['Upload the files with multipart upload so that only a failed part is retransmitted', 'Parts are uploaded independently and in parallel, and a failed part can be retransmitted without restarting the whole upload.'],
+      ['Add a bucket lifecycle rule that aborts incomplete multipart uploads after a number of days', 'A lifecycle rule with the AbortIncompleteMultipartUpload action stops uploads that are not completed, which minimizes storage costs.'],
+    ],
+    wrong: [
+      ['Upload each file in a single PUT request and retry the whole request on failure', 'A failure still restarts the entire 200 GB upload, so the problem remains.'],
+      ['Enable S3 Transfer Acceleration to avoid any network errors during the uploads', 'It speeds long-distance transfers and might add charges; it does not stop a dropped connection from restarting a single request.'],
+      ['Switch the bucket to S3 One Zone-IA so that partial uploads are not billed', 'A storage class does not change the billing of the parts of an in-progress multipart upload.'],
+    ],
+    slots: [1, 2],
+    evidence: [
+      's3-multipart|Quick recovery from any network issues – Smaller part size minimizes the impact of restarting a failed upload due to a network error.',
+      's3-multipart|Throughout its lifetime, you are billed for all storage, bandwidth, and requests for this multipart upload and its associated parts.',
+      's3-mpu-abort|As a best practice, we recommend that you configure a lifecycle rule by using the AbortIncompleteMultipartUpload action to minimize your storage costs.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-007',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S1', '4.1-S3'],
+    d: 3,
+    stem: 'Customers on several continents upload large video files to one centralized Amazon S3 bucket in a single Region. Their uploads are slow over long distances and cannot use all of their available bandwidth. The company wants faster uploads with the LEAST operational overhead and accepts additional data transfer charges. Which solution meets these requirements?',
+    correct: ['Enable S3 Transfer Acceleration on the bucket and have customers use the accelerated endpoint', 'It speeds transfers over long distances to a centralized bucket by routing uploads through CloudFront edge locations.'],
+    wrong: [
+      ['Create a bucket in every customer Region and replicate each one into the central bucket', 'Every extra bucket and replication setup adds storage, cost, and management compared with one bucket setting.'],
+      ['Order an AWS Direct Connect connection for each customer location', 'The customers are individual internet users, and a physical connection per location is impractical and costly.'],
+      ['Install an AWS DataSync agent on every customer device to push the files', 'DataSync agents are set up for storage systems, and deploying and managing them for every customer adds overhead.'],
+    ],
+    slot: 1,
+    evidence: [
+      's3-transfer-acceleration|Your customers upload to a centralized general purpose bucket from all over the world.',
+      's3-transfer-acceleration|You can\'t use all of your available bandwidth over the internet when uploading to Amazon S3.',
+      's3-transfer-acceleration|When you use Transfer Acceleration, additional data transfer charges might apply.',
+    ],
+  }),
+  mr({
+    id: 'haul-hybrid-customs-008',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-K8', '4.1-S7'],
+    d: 3,
+    stem: 'A company is moving data to Amazon S3 in two ways. Research data on an on-premises NFS server must be copied to a bucket each night. Suppliers must also deliver files over FTPS directly into the bucket. The company wants the LEAST operational overhead. Which TWO actions meet these requirements? (Choose two.)',
+    correct: [
+      ['Use AWS DataSync to copy the NFS data to the bucket on a schedule', 'DataSync transfers file data between on-premises NFS storage and AWS storage services.'],
+      ['Use AWS Transfer Family with a server endpoint that has FTPS enabled and stores files in the bucket', 'Transfer Family offers fully managed support for transferring files over FTPS directly into AWS storage services.'],
+    ],
+    wrong: [
+      ['Use AWS Database Migration Service to migrate the NFS data and the supplier files', 'DMS migrates databases and other data stores, not files from an NFS server or from FTPS clients.'],
+      ['Use an AWS Storage Gateway Tape Gateway to receive the supplier files', 'Tape Gateway provides virtual tape storage for backups, not an FTPS endpoint for suppliers.'],
+      ['Run an FTP server on an Amazon EC2 instance and use it for both transfers', 'The company would patch and operate the server, and it still would not copy the NFS data on a schedule.'],
+    ],
+    slots: [0, 3],
+    evidence: [
+      'datasync-what-is|DataSync works with the following on-premises storage systems: Network File System (NFS) Server Message Block (SMB) Hadoop Distributed File Systems (HDFS) Object storage',
+      'transfer-what-is|AWS Transfer Family offers fully managed support for the transfer of files over SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of AWS storage services.',
+      'dms-what-is|AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-009',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-S7'],
+    d: 3,
+    stem: 'A company copies about 400 GB of changed files each night from an on-premises NFS server to an Amazon EFS file system. The office network is shared with business applications during the day, so the copy must be limited in how much bandwidth it uses. The company wants the LEAST operational overhead. Which solution meets these requirements?',
+    correct: ['Use AWS DataSync with a recurring task that has a bandwidth limit and the EFS file system as the destination', 'DataSync supports EFS as a destination, and a task can limit how much bandwidth DataSync uses.'],
+    wrong: [
+      ['Use an AWS Transfer Family SFTP server that writes to the EFS file system', 'The NFS server has no SFTP client to schedule the copy, and the endpoint adds a server that is billed while enabled.'],
+      ['Use an S3 File Gateway so that the server writes its files into the share every night', 'A file gateway stores the data in Amazon S3, not in the EFS file system that is the required destination.'],
+      ['Use an AWS Storage Gateway Volume Gateway to present volumes to the NFS server', 'Volume Gateway presents iSCSI volumes backed by S3, which neither copies the NFS files nor writes to EFS.'],
+    ],
+    slot: 2,
+    evidence: [
+      'datasync-what-is|DataSync works with the following AWS storage services: Amazon S3 Amazon EFS Amazon FSx for Windows File Server Amazon FSx for Lustre Amazon FSx for OpenZFS Amazon FSx for NetApp ONTAP',
+      'datasync-how|For example, you can specify what metadata gets copied, exclude certain files, and limit how much bandwidth DataSync uses, among other options.',
+      'sgw-volume|Volume Gateway provides cloud-backed storage volumes that you can mount as Internet Small Computer System Interface (iSCSI) devices from your on-premises application servers.',
+    ],
+  }),
+  mc({
+    id: 'haul-hybrid-customs-010',
+    building: 'haul-hybrid-customs',
+    bullets: ['4.1-K8'],
+    d: 2,
+    tags: ['mock-reserve'],
+    stem: 'A retailer exchanges purchase orders with its suppliers as business-to-business messages over the AS2 protocol and wants the files stored in Amazon S3. The retailer wants a managed service with the LEAST operational overhead. Which solution meets these requirements?',
+    correct: ['AWS Transfer Family with an AS2 server that stores the messages in the S3 bucket', 'Transfer Family offers fully managed support for transferring files over AS2 directly into AWS storage services.'],
+    wrong: [
+      ['AWS DataSync with a recurring task between the supplier systems and the bucket', 'DataSync copies data between storage systems and does not act as an AS2 endpoint for suppliers.'],
+      ['AWS Storage Gateway with a Volume Gateway that suppliers attach to', 'Volume Gateway provides iSCSI volumes to on-premises servers and is not an AS2 server for outside partners.'],
+      ['An Amazon EC2 instance running AS2 software that copies each message to the bucket', 'The retailer would install, patch, and scale the software, which adds the overhead it wants to avoid.'],
+    ],
+    slot: 3,
+    evidence: [
+      'transfer-what-is|AWS Transfer Family offers fully managed support for the transfer of files over SFTP, AS2, FTPS, FTP, and web browser-based transfers directly into and out of AWS storage services.',
+    ],
+  }),
+];
+
+export default questions;

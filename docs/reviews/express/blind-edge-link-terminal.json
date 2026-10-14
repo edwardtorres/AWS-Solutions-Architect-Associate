@@ -1,0 +1,104 @@
+[
+ {
+  "id": "edge-link-terminal-001",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-003",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-004",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-006",
+  "picks": [
+   "A",
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-007",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-008",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-009",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-010",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-011",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-012",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "Slight doubt: C is a tool to order, A is the substance; both fit"
+ },
+ {
+  "id": "edge-link-terminal-013",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-014",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ }
+]

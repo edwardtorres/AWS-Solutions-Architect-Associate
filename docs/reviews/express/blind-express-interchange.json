@@ -1,0 +1,67 @@
+[
+ {
+  "id": "express-interchange-001",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-002",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-003",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-004",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-006",
+  "picks": [
+   "C",
+   "E"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-008",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": 0
+ },
+ {
+  "id": "express-interchange-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": 0
+ }
+]

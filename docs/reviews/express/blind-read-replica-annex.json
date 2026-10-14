@@ -1,0 +1,15 @@
+[
+{"id":"read-replica-annex-001","picks":["B"],"ambiguous":false},
+{"id":"read-replica-annex-002","picks":["A"],"ambiguous":false},
+{"id":"read-replica-annex-003","picks":["D"],"ambiguous":false},
+{"id":"read-replica-annex-004","picks":["A"],"ambiguous":false},
+{"id":"read-replica-annex-005","picks":["A"],"ambiguous":false},
+{"id":"read-replica-annex-006","picks":["D"],"ambiguous":false},
+{"id":"read-replica-annex-007","picks":["A","D"],"ambiguous":false},
+{"id":"read-replica-annex-008","picks":["C","E"],"ambiguous":false},
+{"id":"read-replica-annex-009","picks":["C"],"ambiguous":false},
+{"id":"read-replica-annex-010","picks":["D"],"ambiguous":false},
+{"id":"read-replica-annex-011","picks":["D"],"ambiguous":false},
+{"id":"read-replica-annex-012","picks":["C","E","F"],"ambiguous":false,"note":"Third pick C (replacement replica) is the only remaining sensible one; weakest of the three."},
+{"id":"read-replica-annex-013","picks":["A"],"ambiguous":false}
+]
