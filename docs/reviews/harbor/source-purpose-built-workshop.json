@@ -1,0 +1,86 @@
+[
+  {
+    "id": "purpose-built-workshop-001",
+    "verdict": "OK",
+    "issues": [
+      "Minor: -001, -004 (first half) and -012 repeat one decision (Transfer Family versus a self-run EC2 server), differing only by protocol (SFTP, FTPS, AS2). Acceptable for bullet coverage, but consider varying -012."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-002",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-003",
+    "verdict": "OK",
+    "issues": [
+      "Minor: near-duplicate decision of message-quay-005 and blueprint-hall-011 (SQS queue between a producer and a slow consumer). Option 0 (SNS to an HTTPS endpoint) is defended by 'messages can be missed' which is hedged by the sqs-what-is quote; SNS does retry HTTP(S) deliveries for a limited period, so keep the wording 'can'."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-004",
+    "verdict": "OK",
+    "issues": [
+      "Judged: key is correct: Transfer Family FTPS into S3 (transfer-what-is lists FTPS) plus an S3 event notification to an SQS queue (s3-event-notifications lists SQS as a destination; the queue holds notifications until the application is online). Options 1 and 4 fail the managed-FTPS requirement; option 2 (SNS to an HTTPS endpoint) fails 'no notification may be lost' only in the sense that no queue holds messages: SNS does retry HTTP(S) deliveries for a limited time, so the why should say 'can be lost once the delivery retries are exhausted'. Not a second correct answer, because the app is offline for hours. Both halves are required, so the pair is unique."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-005",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-007",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-008",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 0 why calls DynamoDB 'a key-value database'; the decision guide does classify DynamoDB as key-value, but DynamoDB also stores document data, so the why should say 'DynamoDB has a different API from MongoDB and no rich querying across arbitrary document fields, so the application would change'."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-009",
+    "verdict": "OK",
+    "issues": [
+      "Minor: near-duplicate decision of blueprint-hall-009 and cache-edge-breakwater-011 (ElastiCache in front of RDS). The microsecond requirement and 'RDS stays the system of record' are the differentiators; acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-010",
+    "verdict": "FIX",
+    "issues": [
+      "Key (DocumentDB for catalog and profiles, DynamoDB for browsing, Aurora for inventory and orders) is a copy of the AWS decision-guide illustration ('DocumentDB (for product catalogs and user profiles) ... combine it with the low, predictable latency provided by DynamoDB (for when your users are browsing your product catalog) ... Aurora ... for inventory and order processing'), so it is documented, but the evidence quote chosen for DynamoDB ('purpose-built and optimized for operational workloads that require consistent performance at any scale') does not confirm that decision; the stem is also internally odd (catalog in one store, browsing the catalog from another), though no distractor is a second correct answer."
+    ],
+    "suggestedFix": "Replace the DynamoDB evidence quote with the decision-guide sentence 'combine it with the low, predictable latency provided by DynamoDB (for when your users are browsing your product catalog)'. Optionally reword the stem so browsing is a separate read-optimised view of the catalog."
+  },
+  {
+    "id": "purpose-built-workshop-011",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "purpose-built-workshop-012",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  }
+]

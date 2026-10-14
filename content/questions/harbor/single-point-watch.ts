@@ -47,7 +47,7 @@ const questions: Question[] = [
     stem: 'A company exposes a REST API through Amazon API Gateway to partner applications. The backend runs on Amazon EC2 instances. A faulty partner client sometimes floods the API with POST requests, which exhausts the backend and slows every other partner. The company wants the excess requests rejected with a throttled response, with the LEAST operational overhead and no backend code changes. Which solution meets these requirements?',
     correct: ['Configure throttling limits on the API Gateway stage so that requests above the rate and burst limits are rejected', 'Requests below the throttling rate are processed and those over the limit are rejected with 429 Too Many Requests, protecting the backend.'],
     wrong: [
-      ['Enable API caching on the stage so that repeated requests are answered without reaching the backend', 'The flood consists of POST requests that cannot be served from a cache, and a cache never rejects excess requests.'],
+      ['Enable API caching on the stage so that repeated requests are answered without reaching the backend', 'Caching is enabled only for GET methods by default, and a cache serves repeated responses but never rejects excess requests.'],
       ['Raise the maximum size of the backend Auto Scaling group so that the flood is absorbed by additional instances', 'This spends more on capacity for faulty traffic and does not reject the excess requests as the company requires.'],
       ['Create an Amazon CloudWatch alarm on the request count that notifies the operators so that they block the faulty partner', 'A notification and manual block is not automatic, so the backend stays overloaded until someone acts.'],
     ],
@@ -143,7 +143,7 @@ const questions: Question[] = [
     building: 'single-point-watch',
     bullets: ['2.2-K8'],
     d: 3,
-    stem: 'An Application Load Balancer is enabled in three Availability Zones. A bad deployment leaves most targets in one zone failing health checks, but the zone still has one healthy target, so the load balancer keeps sending clients to that zone and users see errors. The company wants clients to be directed only to zones that have enough healthy targets, with the LEAST operational overhead. Which solution meets these requirements?',
+    stem: 'An Application Load Balancer is enabled in three Availability Zones. A bad deployment leaves most targets in one zone failing health checks, but the zone still has one healthy target, so the load balancer keeps sending clients to that zone and users see errors. Cross-zone load balancing is turned off for the target group. The company wants clients to be directed only to zones that have enough healthy targets, with the LEAST operational overhead. Which solution meets these requirements?',
     correct: ['Set a minimum healthy target count or percentage on the target group and choose the DNS failover action', 'When healthy targets in a zone fall below the threshold, the zone is marked unhealthy in DNS and clients are routed only to healthy zones.'],
     wrong: [
       ['Set a minimum healthy target count or percentage on the target group and choose the routing failover action', 'Routing failover sends traffic to all targets in the zone, including unhealthy ones, instead of steering clients away from it.'],
@@ -154,6 +154,7 @@ const questions: Question[] = [
     evidence: [
       'alb-target-groups|By default, a target group is considered healthy as long as it has at least one healthy target.',
       'alb-target-groups|DNS failover – When the healthy targets in a zone fall below the threshold, we mark the IP addresses of the load balancer node for the zone as unhealthy in DNS.',
+      'alb-target-groups|If cross-zone load balancing is off, each node sends traffic only to the targets in its own zone, which means that the thresholds apply to the number of targets in each enabled zone separately.',
       'alb-target-groups|Routing failover – When the healthy targets in a zone fall below the threshold, the load balancer sends traffic to all targets that are available to the load balancer node, including unhealthy targets.',
     ],
   }),
@@ -361,14 +362,14 @@ const questions: Question[] = [
     correct: ['Have the API put each order in an Amazon SQS queue and have a consumer write the orders to the database later', 'Writes are buffered so requests can still be accepted while the primary is temporarily unavailable, and the consumer applies them afterwards.'],
     wrong: [
       ['Add a read replica and have the API write orders to the replica whenever the primary writer is unavailable', 'A read replica is read-only, so it cannot accept the order writes.'],
-      ['Raise the client timeout to five minutes and retry the insert until the writer becomes available again', 'Customers wait on an open request and still see errors if the failover takes longer than the timeout.'],
+      ['Retry the insert in the application for a few seconds and then return an error to the customer', 'Retries that give up after a few seconds still refuse orders while the writer is unavailable.'],
       ['Move the database to a larger DB instance class so that the failover completes in less time overall for every order', 'A larger class does not remove the unavailable period, so orders are still refused during failover.'],
     ],
     slot: 2,
     evidence: [
       'waf-graceful|Writes can be buffered, for example in an Amazon Simple Queue Service queue, so that write requests from customers can still be accepted even if the primary is temporarily unavailable.',
       'waf-graceful|Amazon Relational Database Service, like almost all relational databases, can only have one primary writer instance.',
-      'rds-multi-az-instance|You can\'t use a standby replica to serve read traffic.',
+      'rds-read-replicas|Clients have read/write access to the primary DB instance and read-only access to the replica.',
     ],
   }),
   mc({

@@ -595,6 +595,13 @@ const sources: Source[] = [
   aws('lambda-arch', `${D}/lambda/latest/dg/foundation-arch.html`, 'Selecting and configuring an instruction set architecture for your Lambda function'),
   aws('lambda-ephemeral', `${D}/lambda/latest/dg/configuration-ephemeral-storage.html`, 'Configure ephemeral storage for Lambda functions'),
   aws('dynamodb-atomic-counters', `${D}/amazondynamodb/latest/developerguide/WorkingWithItems.html`, 'Working with items and attributes in DynamoDB'),
+  aws('dynamodb-pk-uniform', `${D}/amazondynamodb/latest/developerguide/bp-partition-key-uniform-load.html`, 'Designing partition keys to distribute your workload in DynamoDB'),
+  aws('dynamodb-write-sharding', `${D}/amazondynamodb/latest/developerguide/bp-partition-key-sharding.html`, 'Using write sharding to distribute workloads evenly in your DynamoDB table'),
+  aws('dynamodb-rw-ops', `${D}/amazondynamodb/latest/developerguide/read-write-operations.html`, 'DynamoDB read and write operations'),
+  aws('dynamodb-max-throughput', `${D}/amazondynamodb/latest/developerguide/on-demand-capacity-mode-max-throughput.html`, 'DynamoDB maximum throughput for on-demand tables'),
+  aws('dynamodb-warm-throughput', `${D}/amazondynamodb/latest/developerguide/warm-throughput.html`, 'Understanding DynamoDB warm throughput'),
+  aws('aws-backup-plan-options', `${D}/aws-backup/latest/devguide/plan-options-and-configuration.html`, 'Backup plan options and configuration'),
+  aws('s3-replication-what-is-isnot-replicated', `${D}/AmazonS3/latest/userguide/replication-what-is-isnot-replicated.html`, 'What does Amazon S3 replicate?'),
 ];
 
 export default sources;

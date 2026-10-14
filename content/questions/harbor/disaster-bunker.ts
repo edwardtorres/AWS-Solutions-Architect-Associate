@@ -38,6 +38,7 @@ const questions: Question[] = [
     evidence: [
       'dr-options|How often you run your backup will determine your achievable recovery point (which should align to meet your RPO).',
       'dr-options|Or, you can use AWS Backup to copy backups across accounts and to other AWS Regions.',
+      'aws-backup-plan-options|You can also create a cron expression that creates snapshot backups as frequently as hourly.',
       'dr-options|Disaster recovery strategies available to you within AWS can be broadly categorized into four approaches, ranging from the low cost and low complexity of making backups to more complex strategies using multiple active Regions.',
     ],
   }),
@@ -313,8 +314,8 @@ const questions: Question[] = [
     bullets: ['2.2-K4'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'A company uses Amazon S3 Replication to copy objects to a bucket in a DR Region. After a malicious deletion in the source bucket, the company wants the objects in the DR Region to remain available. Which approach meets this requirement with the LEAST effort?',
-    correct: ['Keep the default replication behavior, where a delete in the source bucket adds a delete marker there only', 'By default the delete marker is added in the source bucket only, which protects data in the DR Region from malicious deletions in the source Region.'],
+    stem: 'A company uses Amazon S3 Replication to copy objects to a bucket in a DR Region. The replication rule uses the latest version of the replication configuration, with a Filter element. After a malicious deletion in the source bucket, the company wants the objects in the DR Region to remain available. Which approach meets this requirement with the LEAST effort?',
+    correct: ['Leave delete marker replication turned off on the replication rule, so a delete adds a delete marker in the source bucket only', 'With the latest configuration version the delete marker is not replicated by default, so it stays in the source bucket only, which protects data in the DR Region from malicious deletions in the source Region.'],
     wrong: [
       ['Configure the replication rule to also replicate delete markers from the source bucket to the DR bucket', 'Replicating delete markers sends the deletion to the DR bucket as well, which is what the company wants to avoid.'],
       ['Turn on S3 Replication Time Control for the replication rule between the source and the DR bucket', 'Replication Time Control is for monitoring replication times and does not change how deletes are handled.'],
@@ -324,6 +325,7 @@ const questions: Question[] = [
     evidence: [
       'dr-options|If you are using S3 replication to back up data to your DR region, then, by default, when an object is deleted in the source bucket, Amazon S3 adds a delete marker in the source bucket only.',
       'dr-options|This approach protects data in the DR Region from malicious deletions in the source Region.',
+      's3-replication-what-is-isnot-replicated|If you are using the latest version of the replication configuration (that is, you specify the Filter element in a replication configuration rule), Amazon S3 does not replicate the delete marker by default.',
       'dr-options|You can also configure whether or not to replicate delete markers between buckets in your active Regions.',
       'dr-options|Actual replication times can be monitored using service features like S3 Replication Time Control (S3 RTC) for S3 objects and management features of Amazon Aurora global databases.',
     ],
