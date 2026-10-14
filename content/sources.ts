@@ -590,6 +590,10 @@ const sources: Source[] = [
   aws('eb-deploy-policies', `${D}/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html`, 'Deployment policies and settings (Elastic Beanstalk)'),
   aws('route53-failover-private', `${D}/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html`, 'Configuring failover in a private hosted zone'),
   aws('asg-health-checks', `${D}/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html`, 'Health checks for instances in an Auto Scaling group'),
+  aws('s3-perf-guidelines', `${D}/AmazonS3/latest/userguide/optimizing-performance-guidelines.html`, 'Performance guidelines for Amazon S3'),
+  aws('ebs-extend-fs', `${D}/ebs/latest/userguide/recognize-expanded-volume-linux.html`, 'Extend the file system after resizing an Amazon EBS volume'),
+  aws('lambda-arch', `${D}/lambda/latest/dg/foundation-arch.html`, 'Selecting and configuring an instruction set architecture for your Lambda function'),
+  aws('lambda-ephemeral', `${D}/lambda/latest/dg/configuration-ephemeral-storage.html`, 'Configure ephemeral storage for Lambda functions'),
 ];
 
 export default sources;
