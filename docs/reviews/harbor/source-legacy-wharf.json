@@ -1,0 +1,119 @@
+[
+ {
+  "id": "legacy-wharf-001",
+  "verdict": "OK",
+  "issues": [
+   "Bullet 2.2-K2 is the subject of open item nv-ams-label (guide says 'AWS Managed Services (AMS)' but examples are Comprehend/Polly). The question does not mention AMS and tests Comprehend only, so it does not rely on the open claim."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-003",
+  "verdict": "OK",
+  "issues": [
+   "No Amazon Quick naming involved here (sticky sessions). Documented in alb-target-attrs."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-004",
+  "verdict": "OK",
+  "issues": [
+   "Concept repeated in single-point-watch-015/016/017 and legacy-wharf-013 (single-AZ RDS to Multi-AZ). Different framing (code cannot change), but the district has four questions on the same fix."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-005",
+  "verdict": "OK",
+  "issues": [
+   "No Quick naming involved. Verified: ec2-recover lists preserved elements (instance ID, public/private/Elastic IP, AZ) and says simplified automatic recovery is enabled by default at launch. Wrong option 3 why mentions a new public IPv4 address although the stem has an Elastic IP; harmless but slightly off."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-013",
+  "verdict": "OK",
+  "issues": [
+   "No Quick naming involved. Near-duplicate of -003 and -004 combined (sticky sessions + Multi-AZ); acceptable as a d3 combination question."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-015",
+  "verdict": "OK",
+  "issues": [
+   "Amazon Quick naming: stem uses the exam guide name 'Amazon Quick' and no option or stem uses 'QuickSight', so the open item nv-quick-naming (keyword QuickSight) is not triggered. quick-what-is says Quick includes 'Amazon Quick Sight - Interactive data visualization and business intelligence. Connect to data sources, build dashboards, and embed analytics in applications.' so the key is documented and matches content/renamed-services.ts. Note Quick is now described as an AI-powered service whose BI feature is Quick Sight; key is still correct.",
+   "Wrong option 'CloudWatch dashboards ... rather than business data from several sources' is slightly loose (CloudWatch dashboards can span data sources) but the option fails the embed-in-web-app BI requirement."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "legacy-wharf-016",
+  "verdict": "FIX",
+  "issues": [
+   "Fourth Route 53 active-passive failover question in the district (island-charts-010, disaster-bunker-006, single-point-watch-023, legacy-wharf-016) with near-identical key and distractors (latency/weighted/simple). Key is correct and documented; the problem is duplication and weak fit to bullet 2.2-S7 (legacy application)."
+  ],
+  "suggestedFix": "Replace with a different legacy-application resilience scenario (for example EC2 instance recovery vs Auto Scaling group of one, or a different Route 53 behaviour) or drop it from the mock-reserve pool."
+ },
+ {
+  "id": "legacy-wharf-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

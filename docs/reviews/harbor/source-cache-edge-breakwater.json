@@ -1,0 +1,91 @@
+[
+  {
+    "id": "cache-edge-breakwater-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-002",
+    "verdict": "OK",
+    "issues": [
+      "Safe because the traffic is UDP (CloudFront does not carry it); key and evidence (ga-faq) are documented. Note CloudFront can now provide Anycast static IPs for allow-listing (see -012), so keep UDP in the stem."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-003",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-004",
+    "verdict": "OK",
+    "issues": [
+      "Minor: 'Invalidate every file' is the weak distractor; a reader could argue invalidating only the changed JS and CSS paths is cheaper than versioning in effort, but that option is not offered and the key is the documented AWS recommendation."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-005",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-007",
+    "verdict": "OK",
+    "issues": [
+      "Minor: same decision (API Gateway stage caching for repeated GETs) as -010 and serverless-mill-010; keep one if the district needs room."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-008",
+    "verdict": "OK",
+    "issues": [
+      "Judged: exactly one option fits. Write-through is the only strategy in the options that guarantees an update is in the cache before the next read ('Data in the cache is never stale', quote verified on the page). Lazy loading alone and lazy loading with a long TTL both leave a stale window ('doesn't guarantee that a value isn't stale'). The stem's 'small delay on writes' matches the documented write penalty. Not a second correct answer: delete-on-write invalidation is not offered."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-009",
+    "verdict": "OK",
+    "issues": [
+      "Judged: exactly one pair fits. 'Only data that customers actually request' = lazy loading ('Only requested data is cached'); 'failed cache node must not break the application' = lazy loading ('Node failures aren't fatal'); 'must not stay stale for long' = TTL (the page's TTL section: 'it keeps data from getting too stale and requires that values in the cache are occasionally refreshed'). Write-through (option 1) fails the first requirement ('Most data is never read, which is a waste of resources'). All evidence quotes verified on Strategies.html, which is the Memcached-titled strategies page; the same text applies to ElastiCache generally. -008 and -009 are complementary, not duplicates. Minor: option 4's why ('Without a cache there is nothing to go stale') is true but option 4 is a throwaway distractor."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-010",
+    "verdict": "OK",
+    "issues": [
+      "Minor: two of the three correct/incorrect pairs repeat -003 and -007 (CloudFront for S3, API Gateway stage caching). Acceptable as a combined scenario."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-011",
+    "verdict": "OK",
+    "issues": [
+      "Key is correct (page: 'Amazon ElastiCache works with the Valkey, Memcached, and Redis OSS engines'); the why's mention of Valkey is covered by the page though not by the quotes. Easy d1."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cache-edge-breakwater-012",
+    "verdict": "FIX",
+    "issues": [
+      "Option 0's why says CloudFront (caching off) 'adds nothing for the fixed-address and fast-failover needs'. CloudFront now documents Anycast static IPs for allow-listing (docs 'Request Anycast static IPs to use for allowlisting'), so CloudFront with ALB origins and an origin group can be argued to meet the fixed-IP requirement, and the 'quick shift' requirement is only weakly separated (origin failover is request-based, GET/HEAD/OPTIONS only). The item risks a second defensible answer and the why is no longer strictly true.",
+      "Evidence quotes support Global Accelerator but do not rule out CloudFront."
+    ],
+    "suggestedFix": "Make the stem force Global Accelerator, for example state that the application uses non-HTTP TCP traffic, or that requests include POST/PUT, or require deterministic health-based Regional failover and weighted traffic dials; and rewrite option 0's why to name the failed requirement (CloudFront cannot proxy the non-HTTP protocol or fail over POST requests), not 'no static IPs'. Check the notes/dont-confuse pair for the same claim."
+  }
+]

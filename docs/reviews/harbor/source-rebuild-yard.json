@@ -1,0 +1,79 @@
+[
+ {
+  "id": "rebuild-yard-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-004",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 3 (rolling) and 'previous version cannot be returned to' rest on the Well-Architected immutable-infrastructure framing; acceptable. Near topical overlap with -008 and -011 (deployment strategies) but distinct decisions."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "rebuild-yard-012",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of legacy-wharf-010 (hung application on an instance that passes EC2 status checks; key: Auto Scaling group with load balancer health checks; distractor: EC2 recovery for system status checks) and overlaps single-point-watch-007/-018. Key is correct and documented, but it adds no new decision beyond adding a second Availability Zone.",
+   "Wrong option 3's why says termination 'does not launch the replacement that a group does', which is true; wrong option 1 is correct reasoning."
+  ],
+  "suggestedFix": "Drop this mock-reserve question or legacy-wharf-010, or move rebuild-yard-012 to a different immutable-infrastructure decision (for example replacing instances via a new launch template version vs patching)."
+ }
+]

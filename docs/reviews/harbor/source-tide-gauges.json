@@ -2,7 +2,9 @@
  {
   "id": "tide-gauges-001",
   "verdict": "OK",
-  "issues": [],
+  "issues": [
+   "Naming check: 'Service Quotas' is not on the exam guide in-scope services list (list is non-exhaustive; bullet 2.2-K10 itself is about service quotas). Lead to decide whether naming Service Quotas as the answer in -001 and -003 is acceptable under the 'in-scope names only' rule."
+  ],
   "suggestedFix": ""
  },
  {
@@ -18,7 +20,8 @@
   "verdict": "FIX",
   "issues": [
    "Service Quotas console alarm feature is documented (servicequotas-cw: create an alarm from the quota page, 'For Alarm threshold, choose a threshold'), but the page also says 'Select a quota that supports CloudWatch alarms', so only some quotas qualify; the stem says 'selected service quotas' without that condition. The page never says the threshold is a percentage, so '60 percent' is inference (reasonable).",
-   "Wrong option 1 states Trusted Advisor alerts 'at 80 percent and 90 percent'. That figure comes only from the Well-Architected page; the Trusted Advisor service limits checks describe usage 'more than 80%' of the quota. The two AWS pages differ, so the numbers should not be in an option or why."
+   "Wrong option 1 states Trusted Advisor alerts 'at 80 percent and 90 percent'. That figure comes only from the Well-Architected page; the Trusted Advisor service limits checks describe usage 'more than 80%' of the quota. The two AWS pages differ, so the numbers should not be in an option or why.",
+   "Naming check: Service Quotas console is not on the exam guide in-scope services list (see -001)."
   ],
   "suggestedFix": "Stem: 'for quotas that support CloudWatch alarms'. Wrong option 1: 'Rely on the AWS Trusted Advisor service quota checks, which flag usage above a fixed 80 percent level' (cite the Trusted Advisor service limits check text) and drop the 90 percent; or record the 80/90 vs 80 difference in content/contradictions.json."
  },

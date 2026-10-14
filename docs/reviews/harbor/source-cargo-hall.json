@@ -1,0 +1,82 @@
+[
+  {
+    "id": "cargo-hall-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-002",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-003",
+    "verdict": "OK",
+    "issues": [
+      "Judged: key is correct. Linux NFS shared access = EFS (efs-what-is, NFSv4.1/4.0); Windows SMB on a native Windows file system = FSx for Windows File Server (fsx-windows). 'Using Amazon EFS with Microsoft Windows-based Amazon EC2 instances is not supported' is verbatim on the EFS page, so option 2 is genuinely wrong. Option 0 is wrong (Multi-Attach is io1/io2 block storage in one AZ, not NFS). FSx for NetApp ONTAP or OpenZFS could also serve the Linux side but are not offered, so no second defensible answer. The finance team requirement is what forces FSx for Windows, so the pair is unique."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-004",
+    "verdict": "OK",
+    "issues": [
+      "Judged: gp3 and Multi-Attach: the cited page says Multi-Attach is for Provisioned IOPS SSD (io1 or io2) volumes, up to 16 Nitro instances in the same AZ, so option 0 (gp3) is wrong and key (io2 with Multi-Attach) is right. The 'Nitro System' wording in the stem matches the documented limitation. No evidence quote states 'gp3 is not supported' directly; the inference from 'io1 or io2' is documented-input and acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-005",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-007",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-009",
+    "verdict": "OK",
+    "issues": [
+      "Minor: Amazon Aurora would also fit the order system but is not offered; fine."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-010",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-011",
+    "verdict": "OK",
+    "issues": [
+      "Key rests on the storage-decision page sentences about FSx for NetApp ONTAP (NFS and SMB, concurrent multi-protocol, NetApp migration). Option 2's why (Lustre not for Windows SMB clients) is derived from 'designed for use with Unix/Linux-based file systems'; acceptable. FSx is in scope ('FSx (for all types)')."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "cargo-hall-012",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  }
+]
