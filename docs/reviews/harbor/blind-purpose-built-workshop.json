@@ -1,0 +1,91 @@
+[
+ {
+  "id": "purpose-built-workshop-001",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-002",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-003",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-004",
+  "picks": [
+   "A",
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "D (SNS to an HTTPS endpoint) is a defensible but weaker choice: if the app is offline for hours SNS retries may be exhausted; SQS durably buffers."
+ },
+ {
+  "id": "purpose-built-workshop-005",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-006",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-007",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-008",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-010",
+  "picks": [
+   "A",
+   "B",
+   "F"
+  ],
+  "ambiguous": false,
+  "note": "A and F are both for catalog-type data (browse latency vs rich document queries); only A, B, F form a plausible set of three, but the stem's overlap makes it slightly contrived."
+ },
+ {
+  "id": "purpose-built-workshop-011",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "purpose-built-workshop-012",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ }
+]

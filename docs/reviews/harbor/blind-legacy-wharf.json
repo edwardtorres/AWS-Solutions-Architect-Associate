@@ -1,0 +1,128 @@
+[
+ {
+  "id": "legacy-wharf-001",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-002",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-003",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-004",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-005",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-006",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-008",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-009",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-010",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "D (simplified auto recovery) only handles hardware failure, not app hangs."
+ },
+ {
+  "id": "legacy-wharf-011",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-012",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-013",
+  "picks": [
+   "B",
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "B and C; sessions in server memory are lost with the zone either way (sticky sessions only helps routing), D/E need code changes. Chose B and C as the least-effort pair."
+ },
+ {
+  "id": "legacy-wharf-014",
+  "picks": [
+   "B",
+   "E",
+   "F"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-015",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Assumes 'Amazon Quick' is the current name of QuickSight/Quick Suite BI."
+ },
+ {
+  "id": "legacy-wharf-016",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "legacy-wharf-017",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ }
+]

@@ -1,0 +1,89 @@
+[
+ {
+  "id": "rebuild-yard-001",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-003",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-004",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-005",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-006",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-008",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "Weighted records give gradual shift and immediate rollback; failover/geo don't fit. (A blue/green with ALB weighted target groups would also fit but isn't offered.)"
+ },
+ {
+  "id": "rebuild-yard-009",
+  "picks": [
+   "A",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-010",
+  "picks": [
+   "C",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-011",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ }
+]

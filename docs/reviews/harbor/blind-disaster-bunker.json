@@ -1,0 +1,127 @@
+[
+ {
+  "id": "disaster-bunker-001",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Hourly backups meet RPO 1h only barely; otherwise only warm standby/active-active are costlier, so B."
+ },
+ {
+  "id": "disaster-bunker-003",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-004",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-006",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-008",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-010",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-011",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-013",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "A and C; B and D replicate the deletion."
+ },
+ {
+  "id": "disaster-bunker-014",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-015",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-016",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "Answer A is a 'do nothing' option: default replication does not replicate delete markers, so DR copies remain. Odd for a 'least effort' item but defensible."
+ },
+ {
+  "id": "disaster-bunker-017",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ }
+]

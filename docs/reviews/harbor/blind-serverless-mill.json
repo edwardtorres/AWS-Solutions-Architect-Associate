@@ -1,0 +1,120 @@
+[
+ {
+  "id": "serverless-mill-001",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "AWS WAF attaches to REST API stages; not HTTP APIs."
+ },
+ {
+  "id": "serverless-mill-003",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-004",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-006",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-007",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-008",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "Lambda max is 15 minutes, so a 2-hour run needs Fargate."
+ },
+ {
+  "id": "serverless-mill-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-010",
+  "picks": [
+   "A",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-011",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-012",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "Provisioned concurrency requires a version or alias (not $LATEST); scheduled scaling covers business hours only."
+ },
+ {
+  "id": "serverless-mill-013",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-014",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-015",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "serverless-mill-016",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ }
+]

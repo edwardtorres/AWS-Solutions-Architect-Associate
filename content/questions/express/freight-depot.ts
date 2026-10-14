@@ -333,7 +333,7 @@ const questions: Question[] = [
     correct: ['General Purpose performance mode with Elastic throughput', 'Elastic throughput scales performance up and down automatically for spiky or unpredictable workloads, and General Purpose mode has the lowest per-operation latency.'],
     wrong: [
       ['General Purpose performance mode with Provisioned throughput set to the expected peak', 'Provisioned throughput suits workloads whose performance requirements are known, and it must be set in advance rather than follow demand.'],
-      ['General Purpose performance mode with Bursting throughput and a very large amount of stored data', 'Bursting throughput scales with the amount of data stored, and a throughput-constrained workload is advised to move to Elastic or Provisioned throughput.'],
+      ['General Purpose performance mode with Bursting throughput, which scales with the data stored', 'Bursting throughput follows the amount of stored data rather than demand, and a throughput-constrained workload is advised to move to Elastic or Provisioned throughput.'],
       ['Max I/O performance mode with Elastic throughput to handle the intense bursts', 'Max I/O mode is not supported for file systems that use Elastic throughput, and it has higher per-operation latencies than General Purpose.'],
     ],
     slot: 2,
