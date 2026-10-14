@@ -10,7 +10,7 @@ const questions: Question[] = [
     stem: 'A company lands CSV and JSON files under many new prefixes in Amazon S3 each week, and the schemas change over time. Analysts want to query the data with SQL without writing table definitions by hand. Which solution meets these requirements with the LEAST operational effort?',
     correct: ['Run an AWS Glue crawler on the S3 data to populate the AWS Glue Data Catalog, then query the tables with Amazon Athena', 'A crawler scans the data sources and extracts their metadata into the Data Catalog, which Athena can query.'],
     wrong: [
-      ['Write CREATE TABLE statements in Amazon Athena for every new prefix and update them whenever a schema changes', 'The tables would be defined by hand, which is the manual effort the company wants to avoid as schemas change.'],
+      ['Write CREATE TABLE statements in Amazon Athena for every new prefix and update them again whenever any schema changes', 'The tables would be defined by hand, which is the manual effort the company wants to avoid as schemas change.'],
       ['Launch an Amazon EMR cluster each week to inspect the files and write the table definitions into a Hive metastore', 'The cluster and the inspection work are added operational effort when a crawler discovers the schemas automatically.'],
       ['Store the inferred schemas in an Amazon DynamoDB table and have the analysts read it before they write each query', 'DynamoDB holds the schemas only as plain items, so the analysts would still write the queries against undefined tables.'],
     ],
@@ -25,11 +25,11 @@ const questions: Question[] = [
     building: 'refinery',
     bullets: ['3.5-K4'],
     d: 2,
-    stem: 'A retailer publishes clickstream events to an Amazon Kinesis data stream. The company must continuously clean and transform the events and load them into Amazon S3 for analytics, and wants NO clusters or servers to manage. Which solution meets these requirements?',
+    stem: 'A retailer publishes clickstream events to an Amazon Kinesis data stream. The company must continuously clean and transform the events and load them into Amazon S3 for analytics, and wants NO clusters or servers to manage. Which solution BEST meets these requirements?',
     correct: ['Create an AWS Glue streaming ETL job that reads from the Kinesis data stream and writes the cleaned records to Amazon S3', 'Glue streaming ETL uses continuously running serverless jobs that can ingest from Kinesis Data Streams and load into S3.'],
     wrong: [
       ['Run an Apache Spark Structured Streaming application on an Amazon EMR cluster that reads from the stream', 'This can transform the stream, but the company would configure and operate the cluster it wants to avoid.'],
-      ['Schedule Amazon Athena queries every few minutes that read the stream and write the cleaned records to S3', 'Athena is a SQL query service over data in S3, and it does not run continuous jobs against a Kinesis stream.'],
+      ['Schedule Amazon Athena queries every few minutes that read the stream and write the cleaned records to Amazon S3 buckets', 'Athena is a SQL query service over data in S3, and it does not run continuous jobs against a Kinesis stream.'],
       ['Run an AWS Batch job on a schedule that drains the stream and writes batches of records to Amazon S3', 'Batch runs queued batch workloads, not continuously running stream transformations, so the pipeline would not be continuous.'],
     ],
     slot: 1,
@@ -123,7 +123,7 @@ const questions: Question[] = [
     building: 'refinery',
     bullets: ['3.5-S5'],
     d: 3,
-    stem: 'Data scientists run interactive Apache Spark analysis on data in Amazon S3 and need each request to respond within seconds. Usage is sporadic, and the company will not operate clusters. Which solution meets these requirements?',
+    stem: 'Data scientists run interactive Apache Spark analysis on data in Amazon S3 and need each request to respond within seconds. Usage is sporadic, and the company will not operate clusters. Which solution BEST meets these requirements?',
     correct: ['Create an Amazon EMR Serverless application and pre-initialize the resources that it needs', 'EMR Serverless needs no cluster operations, and pre-initialized resources let applications respond within seconds for interactive analysis.'],
     wrong: [
       ['Create an Amazon EMR Serverless application without pre-initialized resources and let it start each job from nothing', 'Without pre-initialized resources, each interactive request waits for the application to get its resources, so seconds-level responses are not assured.'],
@@ -196,7 +196,7 @@ const questions: Question[] = [
     building: 'refinery',
     bullets: ['3.5-S7'],
     d: 2,
-    stem: 'A nightly AWS Glue job writes Parquet files to Amazon S3, and analysts query them with Amazon Athena by day. The company wants each query to scan only the days it filters on, and wants new days to be added to the Athena table with a single command. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A nightly AWS Glue job writes Parquet files to Amazon S3, and analysts query them with Amazon Athena by day. The company wants each query to scan only the days it filters on, and wants new days to be added to the Athena table with a single command. Which TWO actions BEST meet these requirements? (Choose two.)',
     correct: [
       ['Write the output under Hive-style prefixes that contain key value pairs, such as year=2025/month=01/day=26', 'Hive-style partition paths include both the partition key names and values, and a query that filters on the partition scans only that data.'],
       ['Run MSCK REPAIR TABLE after each load to add the new Hive-style partitions', 'MSCK REPAIR TABLE loads new Hive partitions into a partitioned table, but it works only with Hive-style partitions.'],

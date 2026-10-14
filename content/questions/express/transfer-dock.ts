@@ -27,7 +27,7 @@ const questions: Question[] = [
     building: 'transfer-dock',
     bullets: ['3.5-K3'],
     d: 2,
-    stem: 'A logistics company receives shipment files from trading partners. Some partners upload with SFTP clients and others exchange business-to-business messages over AS2, and the partners cannot change their client software. All files must land in Amazon S3, and the company wants NO servers to manage. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A logistics company receives shipment files from trading partners. Some partners upload with SFTP clients and others exchange business-to-business messages over AS2, and the partners cannot change their client software. All files must land in Amazon S3, and the company wants NO servers to manage. Which TWO actions meet these requirements with the LEAST operational overhead? (Choose two.)',
     correct: [
       ['Create an AWS Transfer Family server that enables SFTP and stores the files in Amazon S3', 'Transfer Family provides fully managed SFTP servers that write directly into S3, so the partners keep their existing clients and no servers are managed.'],
       ['Use AWS Transfer Family to set up AS2 for the partners that exchange business-to-business messages', 'Transfer Family supports AS2 for business-to-business transfers into AWS storage, with no server infrastructure to run.'],
@@ -50,7 +50,7 @@ const questions: Question[] = [
     bullets: ['3.5-K6'],
     d: 2,
     tags: ['trap:direct-connect-vs-vpn'],
-    stem: 'A media company must send about 8 Gbps of sustained traffic from its data center to a VPC every night for several months. The traffic must use a private, consistent network path and must not depend on the public internet. Which connectivity option meets these requirements?',
+    stem: 'A media company must send about 8 Gbps of sustained traffic from its data center to a VPC every night for several months. The traffic must use a private, consistent network path and must not depend on the public internet. Which connectivity option BEST meets these requirements?',
     correct: ['Provision an AWS Direct Connect dedicated connection with a 10 Gbps port and create a private virtual interface', 'A dedicated 10 Gbps port gives the required capacity over a private path that bypasses internet service providers, with a more consistent experience than internet-based connections.'],
     wrong: [
       ['Create an AWS Site-to-Site VPN connection with standard tunnels and spread the nightly traffic across them', 'Standard VPN tunnels carry up to 1.25 Gbps each and run over the internet, so neither the capacity nor the private path is met.'],
@@ -73,7 +73,7 @@ const questions: Question[] = [
     stem: 'A company must copy 4 TB of files from an on-premises NFS server to Amazon S3 within three weeks and then send nightly changes. The shared 1 Gbps internet link is needed by production traffic during business hours, so the copy may use only a fraction of it and must be paused during the day. Which solution meets these requirements with the LEAST operational effort?',
     correct: ['Use AWS DataSync with an on-premises agent, a task schedule outside business hours, and a bandwidth limit on the task', 'DataSync can schedule task runs, limit the bandwidth it uses, and later copy only the data that has changed, which fits the window and the nightly changes.'],
     wrong: [
-      ['Provision an AWS Direct Connect dedicated connection with a 10 Gbps port and run the copy over it', 'This adds a physical circuit that must be installed, which is far more effort than a 4 TB copy that the existing link can finish in time.'],
+      ['Provision an AWS Direct Connect dedicated connection with a 10 Gbps port and run the whole copy over that new link', 'This adds a physical circuit that must be installed, which is far more effort than a 4 TB copy that the existing link can finish in time.'],
       ['Create an AWS Transfer Family SFTP server and have an operator upload the files from the NFS server', 'Transfer Family accepts SFTP uploads but has no task schedule, bandwidth limit or changed-data copy for an NFS source, so people would script all of it.'],
       ['Deploy an AWS Storage Gateway Tape Gateway and have the NFS server write each night to virtual tapes', 'Tape Gateway presents a virtual tape library to backup software, so it cannot receive NFS file copies as S3 objects for reuse.'],
     ],
@@ -90,7 +90,7 @@ const questions: Question[] = [
     building: 'transfer-dock',
     bullets: ['3.5-S3'],
     d: 2,
-    stem: 'A company has a legacy payroll application that sends files to a partner endpoint over plain FTP, and its client software cannot be changed. The application runs in the corporate network, which connects to a VPC. The files must reach Amazon S3 and must not cross the public internet. Which solution meets these requirements?',
+    stem: 'A company has a legacy payroll application that sends files to a partner endpoint over plain FTP, and its client software cannot be changed. The application runs in the corporate network, which connects to a VPC. The files must reach Amazon S3 and must not cross the public internet. Which solution meets these requirements with the LEAST operational overhead?',
     correct: ['Create an AWS Transfer Family server that enables FTP, hosts its endpoint in the VPC, and uses Amazon S3 as storage', 'Transfer Family supports FTP, and an FTP server must use the VPC-hosted endpoint with internal access, so the files stay off the public network.'],
     wrong: [
       ['Create an AWS Transfer Family server that enables FTP with a publicly accessible endpoint and Amazon S3 storage', 'Publicly accessible endpoints are not supported for FTP servers, and the transfer would cross the public network.'],
@@ -210,7 +210,7 @@ const questions: Question[] = [
     bullets: ['3.5-K6'],
     d: 3,
     tags: ['trap:direct-connect-vs-vpn'],
-    stem: 'A company connects its data center to a transit gateway with an AWS Site-to-Site VPN connection and must replicate data at about 4 Gbps through a single tunnel while it waits for a dedicated circuit. The company wants to keep the VPN and avoid configuring ECMP across tunnels. Which solution meets these requirements?',
+    stem: 'A company connects its data center to a transit gateway with an AWS Site-to-Site VPN connection and must replicate data at about 4 Gbps through a single tunnel while it waits for a dedicated circuit. The company wants to keep the VPN and avoid configuring ECMP across tunnels. Which solution BEST meets these requirements?',
     correct: ['Configure the VPN connection attached to the transit gateway with a Large Bandwidth Tunnel', 'Large Bandwidth Tunnels support up to 5 Gbps per tunnel on VPN connections attached to a transit gateway, with no ECMP needed.'],
     wrong: [
       ['Keep the standard tunnels on the transit gateway attachment and add a second customer gateway device', 'Each standard tunnel is limited to 1.25 Gbps, and a single tunnel therefore cannot carry 4 Gbps of replication traffic.'],
@@ -268,10 +268,10 @@ const questions: Question[] = [
     bullets: ['3.5-K6', '3.5-S3'],
     d: 3,
     tags: ['mock-reserve', 'trap:direct-connect-vs-vpn'],
-    stem: 'A company moves sensitive files to a VPC over a 1 Gbps AWS Direct Connect dedicated connection. Security policy now requires IPsec encryption for the traffic in transit, and the company must keep the consistent throughput of the dedicated link. Which solution meets these requirements?',
-    correct: ['Create an AWS Site-to-Site VPN connection and run its tunnels on top of the existing Direct Connect connection', 'The VPN adds IPsec encryption while the traffic still rides the dedicated link, and VPN tunnels can be created on top of connections of 1 Gbps or less.'],
+    stem: 'A company moves sensitive files to a VPC over a 1 Gbps AWS Direct Connect dedicated connection. Security policy now requires IPsec encryption for the traffic in transit, and the company must keep the consistent throughput of the dedicated link. Which solution meets these requirements with the LEAST change to the traffic path?',
+    correct: ['Create an AWS Site-to-Site VPN connection and run its tunnels on top of the existing Direct Connect link', 'The VPN adds IPsec encryption while the traffic still rides the dedicated link, and VPN tunnels can be created on top of connections of 1 Gbps or less.'],
     wrong: [
-      ['Keep the private virtual interface and rely on Direct Connect to encrypt the traffic in transit', 'Direct Connect does not encrypt traffic by default, so the IPsec requirement is not met.'],
+      ['Keep the private virtual interface and rely on Direct Connect itself to encrypt all of the traffic in transit', 'Direct Connect does not encrypt traffic by default, so the IPsec requirement is not met.'],
       ['Add a second Direct Connect connection in another location to provide a redundant private path', 'A second connection improves resilience but does not add IPsec encryption to the traffic.'],
       ['Replace the dedicated connection with an AWS Site-to-Site VPN connection over the internet only', 'The internet-based VPN is encrypted but loses the consistent throughput of the dedicated link, which the company wants to keep.'],
     ],
