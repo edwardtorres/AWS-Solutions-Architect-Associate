@@ -11,9 +11,9 @@ const questions: Question[] = [
     stem: "A company's on-premises applications read and write files over NFS to a storage appliance that is almost full. The company wants the files stored as objects in Amazon S3 without changing the applications, and wants recently used files to stay available with low latency on premises. Which solution BEST meets these requirements?",
     correct: ['Deploy an Amazon S3 File Gateway on premises and mount its NFS file shares on the application servers', 'The gateway presents NFS file shares that store the files as S3 objects and keeps recently used data in a local cache, so the applications stay unchanged.'],
     wrong: [
-      ['Deploy a Volume Gateway on premises and present its volumes to the application servers over iSCSI', 'Volume Gateway presents iSCSI block volumes, not NFS file shares, so the applications would have to change.'],
-      ['Deploy a Tape Gateway on premises and have the applications write their files to virtual tapes', 'Tape Gateway provides virtual tape storage for archiving backup data, so the applications cannot read and write files over NFS to it.'],
-      ['Mount an Amazon EFS file system on the application servers over a private network connection', 'EFS keeps data in its own file system, not as S3 objects, and every request crosses the network with no local cache.'],
+      ['Deploy a Volume Gateway on premises and present its volumes to the application servers over iSCSI connections', 'Volume Gateway presents iSCSI block volumes, not NFS file shares, so the applications would have to change.'],
+      ['Deploy a Tape Gateway on premises and have the applications write their files to virtual tapes each night', 'Tape Gateway provides virtual tape storage for archiving backup data, so the applications cannot read and write files over NFS to it.'],
+      ['Mount an Amazon EFS file system on the application servers over a private network connection to AWS', 'EFS keeps data in its own file system, not as S3 objects, and every request crosses the network with no local cache.'],
     ],
     slot: 0,
     evidence: [
@@ -111,9 +111,9 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible', 'trap:ebs-efs-fsx'],
     stem: 'A research company keeps 300 TB of genomic data in Amazon S3. For each analysis run, hundreds of Linux compute instances must process the data through a POSIX file system with sub-millisecond latencies and very high throughput, and the results must go back to the S3 bucket. Which solution BEST meets these requirements?',
-    correct: ['Create an Amazon FSx for Lustre file system linked to the S3 bucket and mount it on the compute instances', 'FSx for Lustre is a POSIX-compliant, high-performance file system with sub-millisecond latencies that can be linked to data repositories on S3.'],
+    correct: ['Create an Amazon FSx for Lustre file system linked to the S3 bucket and mount it on the instances', 'FSx for Lustre is a POSIX-compliant, high-performance file system with sub-millisecond latencies that can be linked to data repositories on S3.'],
     wrong: [
-      ['Create an Amazon EFS file system, copy the data into it and mount it on the compute instances', 'EFS Standard has first-byte read latencies as low as 1 millisecond, not sub-millisecond, and the data would have to be copied out of S3.'],
+      ['Create an Amazon EFS file system, copy the data into it and mount it on all of the compute instances', 'EFS Standard has first-byte read latencies as low as 1 millisecond, not sub-millisecond, and the data would have to be copied out of S3.'],
       ['Attach one Amazon EBS volume with Multi-Attach enabled to all of the compute instances in the cluster', 'Multi-Attach supports up to 16 Nitro-based instances in one Availability Zone, so it cannot serve hundreds of instances.'],
       ['Create an Amazon FSx for Windows File Server file system and mount it on the instances over SMB', 'FSx for Windows File Server is a native Windows file system for SMB clients, not the high-speed POSIX file system these Linux jobs need.'],
     ],
@@ -232,7 +232,7 @@ const questions: Question[] = [
     stem: 'An analytics application on Amazon EC2 reads millions of small objects from one Amazon S3 bucket, and all the objects share a single key prefix. At peak the application needs a much higher GET request rate than a single prefix supports and receives HTTP 503 Slow Down responses. Which change will raise the achievable read request rate the MOST?',
     correct: ['Spread the objects across multiple prefixes in the bucket and read from the prefixes in parallel', 'S3 request rates apply per partitioned prefix and a bucket can have any number of prefixes, so reading from several prefixes in parallel multiplies the read rate.'],
     wrong: [
-      ['Enable S3 Transfer Acceleration on the bucket and use the accelerated endpoint for the reads', 'Transfer Acceleration speeds up transfers over long distances between a client and a bucket and does not raise the per-prefix request rate.'],
+      ['Enable S3 Transfer Acceleration on the bucket and use the accelerated endpoint for all of the reads', 'Transfer Acceleration speeds up transfers over long distances between a client and a bucket and does not raise the per-prefix request rate.'],
       ['Add more EC2 instances so that each instance reads the same prefix over its own connection', 'The request rate is defined per partitioned prefix, so more instances reading one prefix still share that one prefix.'],
       ['Use multipart upload for every object so that the reads are split into several parts', 'Multipart upload applies to uploading objects, so it does not raise the GET request rate that a prefix supports.'],
     ],
@@ -272,9 +272,9 @@ const questions: Question[] = [
     stem: 'A company collects several terabytes of media files every week from offices in Asia, Europe and South America. All files are uploaded to one Amazon S3 bucket in the us-east-1 Region, and the long-distance uploads use only a fraction of the available bandwidth. Which change will MOST improve upload speed with the LEAST operational overhead?',
     correct: ['Enable S3 Transfer Acceleration on the bucket and have the offices upload through the accelerate endpoint', 'Transfer Acceleration routes uploads through nearby edge locations and an optimized network path, which suits regular multi-terabyte transfers across continents.'],
     wrong: [
-      ['Create a bucket in each office Region and replicate every bucket into the central bucket', 'This adds buckets and replication to manage, and files reach the central bucket only after replication completes.'],
-      ['Spread the uploaded files across many key prefixes in the central bucket', 'Prefixes raise the request rate that a bucket supports, but they do not shorten the network path between a distant office and the bucket.'],
-      ['Change the bucket to the S3 One Zone-IA storage class and keep uploading as before', 'A storage class changes how objects are stored, not the network path that long-distance uploads take to the bucket.'],
+      ['Create a bucket in each office Region and replicate the contents of every bucket into the central bucket', 'This adds buckets and replication to manage, and files reach the central bucket only after replication completes.'],
+      ['Spread the uploaded files across many key prefixes in the central bucket so each office has its own', 'Prefixes raise the request rate that a bucket supports, but they do not shorten the network path between a distant office and the bucket.'],
+      ['Change the bucket to the S3 One Zone-IA storage class and keep uploading the files as before', 'A storage class changes how objects are stored, not the network path that long-distance uploads take to the bucket.'],
     ],
     slot: 0,
     evidence: [
@@ -419,11 +419,11 @@ const questions: Question[] = [
     d: 2,
     tags: ['mock-reserve'],
     stem: "A company's on-premises application uses iSCSI block volumes that grow by about 10 percent each month. The company does not want to keep buying on-premises storage, but the application needs low-latency access to the data it uses most often. Which solution meets these requirements MOST cost-effectively?",
-    correct: ['Deploy a Volume Gateway with cached volumes that store the data in Amazon S3 and keep frequently accessed data locally', 'Cached volumes keep the primary data in S3, retain frequently accessed subsets locally for low latency, and minimize the need to scale on-premises storage.'],
+    correct: ['Deploy a Volume Gateway with cached volumes that keep data in Amazon S3 and frequently used data locally', 'Cached volumes keep the primary data in S3, retain frequently accessed subsets locally for low latency, and minimize the need to scale on-premises storage.'],
     wrong: [
       ['Deploy a Volume Gateway with stored volumes that keep the entire dataset on the premises of the company', 'Stored volumes keep all data locally, so the on-premises storage would still have to grow with the dataset.'],
-      ['Deploy an Amazon S3 File Gateway and move the application from block volumes to NFS file shares', 'S3 File Gateway provides NFS or SMB file shares, so the application that uses iSCSI block volumes would have to change.'],
-      ['Deploy a Tape Gateway and write the application data to virtual tapes as the volumes grow larger', 'Tape Gateway archives backup data on virtual tapes and does not serve block volumes to a running application.'],
+      ['Deploy an Amazon S3 File Gateway and move the application from its block volumes to NFS file shares', 'S3 File Gateway provides NFS or SMB file shares, so the application that uses iSCSI block volumes would have to change.'],
+      ['Deploy a Tape Gateway and write the application data to virtual tapes as the volumes grow larger over time', 'Tape Gateway archives backup data on virtual tapes and does not serve block volumes to a running application.'],
     ],
     slot: 0,
     evidence: [
