@@ -123,12 +123,12 @@ const questions: Question[] = [
     building: 'blueprint-hall',
     bullets: ['2.1-K10'],
     d: 1,
-    stem: 'A company is designing a three-tier web application. The presentation tier is a set of static files and a JavaScript single-page application that calls backend APIs. The company wants to serve the presentation tier with no web servers to manage. Which solution BEST meets these requirements?',
+    stem: 'A company is designing a three-tier web application. The presentation tier is a set of static files and a JavaScript single-page application that calls backend APIs. The company wants to serve the presentation tier with no web servers to manage and with no code that runs for each file request. Which solution meets these requirements with the LEAST operational overhead?',
     correct: ['Store the files in Amazon S3 and serve them through Amazon CloudFront', 'Static web content can be served from Amazon S3 and Amazon CloudFront, so no web servers are needed.'],
     wrong: [
       ['Run a web server on Amazon EC2 instances in an Auto Scaling group that serves the files', 'The company would have to patch and manage the instances, which it wants to avoid.'],
       ['Run a web server in AWS Fargate containers that serves the files from the image', 'Containers still need a web server to build, deploy and maintain, which the company wants to avoid.'],
-      ['Return each file from an AWS Lambda function behind an Amazon API Gateway API', 'Static content does not need function code for every request, and this adds components to manage.'],
+      ['Return each file from an AWS Lambda function behind an Amazon API Gateway API', 'This runs function code for every file request, which the company wants to avoid, and adds a function and an API to maintain.'],
     ],
     slot: 1,
     evidence: [

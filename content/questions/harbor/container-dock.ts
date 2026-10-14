@@ -122,7 +122,7 @@ const questions: Question[] = [
     stem: 'A company must keep some workloads on its own on-premises servers because of data residency rules. It runs its cloud containers on Amazon ECS and wants to deploy to the on-premises servers with the same ECS APIs and tooling. Which solution meets these requirements with the LEAST operational overhead?',
     correct: ['Register the on-premises servers to the Amazon ECS cluster by using Amazon ECS Anywhere', 'ECS Anywhere registers an external server or VM to an ECS cluster, so the same ECS tooling deploys to it.'],
     wrong: [
-      ['Run AWS Fargate tasks on the on-premises servers by installing the Fargate agent on them', 'Fargate is the serverless compute option in the AWS Cloud, and it cannot be installed on the servers of the company.'],
+      ['Run AWS Fargate tasks on the on-premises servers and keep the existing on-premises servers as the compute capacity', 'Fargate is the serverless compute option in the AWS Cloud, and it cannot be installed on the servers of the company.'],
       ['Install a self-managed Kubernetes cluster on the on-premises servers and manage it separately', 'This creates a second orchestrator with different tooling instead of the same ECS APIs and tooling.'],
       ['Copy the images to Amazon S3 and start them on each server with a custom deployment script', 'Custom scripts replace the ECS scheduler and APIs that the company wants to keep using.'],
     ],

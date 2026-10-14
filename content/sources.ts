@@ -602,6 +602,11 @@ const sources: Source[] = [
   aws('dynamodb-warm-throughput', `${D}/amazondynamodb/latest/developerguide/warm-throughput.html`, 'Understanding DynamoDB warm throughput'),
   aws('aws-backup-plan-options', `${D}/aws-backup/latest/devguide/plan-options-and-configuration.html`, 'Backup plan options and configuration'),
   aws('s3-replication-what-is-isnot-replicated', `${D}/AmazonS3/latest/userguide/replication-what-is-isnot-replicated.html`, 'What does Amazon S3 replicate?'),
+  aws('aws-service-quotas-general', `${D}/general/latest/gr/aws_service_limits.html`, 'AWS service quotas'),
+  aws('trusted-advisor-service-limits', `${D}/awssupport/latest/user/service-limits.html`, 'Trusted Advisor service limits checks'),
+  aws('cw-usage-metrics', `${D}/AmazonCloudWatch/latest/monitoring/CloudWatch-Usage-Metrics.html`, 'AWS usage metrics (Amazon CloudWatch)'),
+  aws('cf-origin-failover', `${D}/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html`, 'Optimize high availability with CloudFront origin failover'),
+  aws('asg-instance-refresh-rollback', `${D}/autoscaling/ec2/userguide/instance-refresh-rollback.html`, 'Undo changes with a manual or auto rollback (Amazon EC2 Auto Scaling)'),
 ];
 
 export default sources;

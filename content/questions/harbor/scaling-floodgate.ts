@@ -30,7 +30,7 @@ const questions: Question[] = [
     correct: ['Modify the DB instance to use a larger DB instance class', 'Write traffic can only be handled by the primary, so the way to add capacity for writes is to scale vertically by changing the DB instance size.'],
     wrong: [
       ['Create an RDS read replica and send the INSERT and UPDATE statements to it', 'A read replica is read-only, so it cannot accept the write statements that are saturating the primary.'],
-      ['Enable Multi-AZ so that the standby replica takes a share of the write load', 'A standby replica exists for high availability and cannot serve traffic, so it does not relieve the primary.'],
+      ['Enable a Multi-AZ DB instance deployment so that the standby replica takes a share of the write load', 'The standby replica in a Multi-AZ DB instance deployment exists for high availability and cannot serve traffic, so it does not relieve the primary.'],
       ['Place an Amazon CloudFront distribution in front of the application to absorb the traffic', 'A CDN caches content for viewers and does not reduce the number of write statements the database must process.'],
     ],
     slot: 1,
@@ -45,19 +45,18 @@ const questions: Question[] = [
     building: 'scaling-floodgate',
     bullets: ['2.1-K6'],
     d: 2,
-    stem: "A web application keeps each user's shopping-cart session in memory on the Amazon EC2 instance that served the first request. The company wants to add and remove instances behind a load balancer so that any instance can serve any request, and a replaced instance must not lose carts. Which change BEST meets these requirements?",
-    correct: ['Store the session data in an in-memory cache such as Amazon ElastiCache that all instances share', 'Offloading session state removes the dependence on local memory, so servers can be replaced at will and any instance can serve any request.'],
+    stem: 'A company runs a web application on Amazon EC2 instances in an Auto Scaling group behind an Application Load Balancer. When the group scales in, some users see errors because an instance is removed while it is still completing requests that take up to two minutes. The company wants in-flight requests to finish before an instance is removed, with the LEAST change. Which solution meets these requirements?',
+    correct: ['Keep a deregistration delay on the target group that is longer than the longest request', 'The load balancer stops sending new requests to a deregistering target and waits for the delay, which lets in-flight requests complete before the instance is terminated.'],
     wrong: [
-      ['Turn on sticky sessions on the target group so that each user returns to the same instance', 'Stickiness binds a user to one target, so a replaced instance still loses its carts and not every instance can serve every user.'],
-      ['Move the application to a larger instance type that can hold more sessions in memory', 'This scales one instance vertically, which keeps the state on that instance and cannot support adding and removing instances.'],
-      ['Increase the deregistration delay so that instances being removed keep their sessions for longer', 'The delay only gives in-flight requests time to finish while the target stops receiving new requests, so the carts are still lost.'],
+      ['Turn on sticky sessions on the target group so that each user returns to the same instance', 'Stickiness binds a user to one target for routing and does not delay the removal of an instance that is being scaled in.'],
+      ['Turn on slow start mode on the target group so that removed instances are drained gradually', 'Slow start gives newly registered targets a ramp-up period and does not affect targets that are being removed.'],
+      ['Switch the target group to the least outstanding requests routing algorithm', 'The routing algorithm chooses which target receives a new request and does not make the load balancer wait for in-flight requests on a removed target.'],
     ],
     slot: 2,
     evidence: [
-      'waf-stateless|Systems should either not require state, or should offload state such that between different client requests, there is no dependence on locally stored data on disk and in memory.',
-      'waf-stateless|This allows servers to be replaced at will without causing an availability impact.',
-      'msa-data-store|Popular stores for session data are in-memory caches such as Memcached or Redis.',
-      "alb-target-attrs|However, you can use the sticky session feature (also known as session affinity) to enable the load balancer to bind a user's session to a specific target.",
+      'alb-target-attrs|Elastic Load Balancing stops sending requests to targets that are deregistering.',
+      'alb-target-attrs|By default, Elastic Load Balancing waits 300 seconds before completing the deregistration process, which can help in-flight requests to the target to complete.',
+      'alb-target-attrs|If the target is part of an Auto Scaling group, it can be terminated and replaced.',
     ],
   }),
   mc({
@@ -91,9 +90,9 @@ const questions: Question[] = [
       ['Create RDS read replicas and direct the catalogue queries to them', 'Read replicas offload read-intensive work from the primary, and the application only has to point its read-only queries at the replicas.'],
     ],
     wrong: [
-      ['Enable Multi-AZ so that the standby replica answers the catalogue queries', 'The standby replica in a Multi-AZ deployment cannot serve read traffic, so it does not relieve the read load.'],
+      ['Enable a Multi-AZ DB instance deployment so that the standby replica answers the catalogue queries', 'The standby replica in a Multi-AZ DB instance deployment cannot serve read traffic, so it does not relieve the read load.'],
       ['Replace the web tier with a single instance of the largest available instance type', 'This is vertical scaling of one server, which has a ceiling and leaves a single point of failure for the whole web tier.'],
-      ['Configure the DB instance to add and remove read replicas automatically as read demand changes', 'RDS does not support autoscaling of read replicas, so they must be created and removed manually.'],
+      ['Move the web tier to AWS Lambda functions and keep the single database unchanged', 'The catalogue read queries would still all run on the one saturated DB instance, so the database tier does not scale, and the web tier is redesigned.'],
     ],
     slots: [1, 3],
     evidence: [
@@ -212,7 +211,7 @@ const questions: Question[] = [
     stem: "A company's Amazon RDS for MySQL production database slows down every morning when analysts run long reporting queries. The analysts only read data and can accept results that are slightly out of date. The company wants to keep the reports from affecting production with the LEAST disruption. Which solution meets these requirements?",
     correct: ['Create a read replica and point the reporting queries at it', 'A read replica is a read-only copy that exists for scaling reads and business reporting, so the reports no longer compete with production work.'],
     wrong: [
-      ['Enable Multi-AZ and point the reporting queries at the standby replica', 'The standby replica in a Multi-AZ deployment cannot serve read traffic, so it cannot run the reports.'],
+      ['Enable a Multi-AZ DB instance deployment and point the reporting queries at the standby replica', 'The standby replica in a Multi-AZ DB instance deployment cannot serve read traffic, so it cannot run the reports.'],
       ['Restore a snapshot of the database into a new DB instance every morning for the analysts', 'This adds daily manual or scripted work, and the copy is already hours old when the analysts begin.'],
       ['Move the DB instance to a larger DB instance class so both workloads fit on the same server', 'The reports still run on the production instance, so they continue to compete with production traffic.'],
     ],
@@ -232,7 +231,7 @@ const questions: Question[] = [
     correct: ['Create read replicas for the product browsing queries and read the confirmation page from the primary instance', 'Replicas are updated asynchronously and can lag, so only the lag-tolerant browsing reads go to them while the order read goes to the primary.'],
     wrong: [
       ['Send every read, including the confirmation page, to the read replicas because replication to them is synchronous', 'Updates are copied to a read replica asynchronously, so a just-written order may not be there yet.'],
-      ['Enable Multi-AZ and read the confirmation page from the standby replica', 'The standby replica cannot serve read traffic, so the confirmation page could not be read from it.'],
+      ['Enable a Multi-AZ DB instance deployment and read the confirmation page from the standby replica', 'The standby replica in a Multi-AZ DB instance deployment cannot serve read traffic, so the confirmation page could not be read from it.'],
       ['Create read replicas and send the order writes to them so the confirmation page finds the order on the same node', 'Read replicas allow only read-only access, so the order writes would be rejected.'],
     ],
     slot: 1,
@@ -251,7 +250,7 @@ const questions: Question[] = [
     stem: 'A company runs Amazon RDS for MySQL with a few read replicas. Read traffic rises sharply during promotions and falls afterwards. The company wants the number of read replicas to follow demand automatically without paying for idle replicas, and is willing to change database engine. Which solution BEST meets these requirements with the LEAST operational overhead?',
     correct: ['Migrate to Amazon Aurora MySQL and apply an Aurora Auto Scaling policy to the Aurora Replicas', 'Aurora Auto Scaling adds and removes Aurora Replicas as the workload changes, which RDS read replicas cannot do automatically.'],
     wrong: [
-      ['Turn on auto scaling for the RDS read replicas in the RDS console', 'RDS does not support autoscaling of read replicas, so this option does not exist for RDS for MySQL.'],
+      ['Use an RDS Multi-AZ DB instance deployment so that the standby replica absorbs the extra read traffic', 'The standby replica in a Multi-AZ DB instance deployment cannot serve read traffic, and RDS read replicas are not autoscaled, so read capacity would not follow demand.'],
       ['Create enough RDS read replicas to cover the largest promotion and keep them running', 'Replicas that run permanently are billed as standard DB instances, so this pays for idle capacity between promotions.'],
       ['Write a scheduled AWS Lambda function that creates and deletes read replicas around promotions', 'This is custom code to build and maintain, and a schedule cannot follow unplanned changes in read demand.'],
     ],
@@ -260,6 +259,7 @@ const questions: Question[] = [
       "rds-read-replicas|RDS doesn't support autoscaling of read replicas, which is the automatic add or removing of read replicas as read demand changes.",
       'aurora-autoscaling|To meet your connectivity and workload requirements, Aurora Auto Scaling dynamically adjusts the number of Aurora Replicas (reader DB instances) provisioned for an Aurora DB cluster.',
       "rds-read-replicas|Read replicas are billed as standard DB instances at the same rates as the DB instance class used for the replica.",
+      "rds-read-replicas|Unlike a read replica, a standby replica can't serve read traffic.",
     ],
   }),
   mc({
@@ -291,10 +291,10 @@ const questions: Question[] = [
     stem: 'A company runs a single-Availability-Zone Amazon RDS for MySQL production DB instance. Read traffic is growing, and the company also wants the database to fail over automatically to another Availability Zone if the primary instance fails. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Create read replicas and route the read-only queries to them', 'Read replicas scale out reads beyond the capacity of a single DB instance.'],
-      ['Enable a Multi-AZ deployment so that a standby replica is maintained in another Availability Zone', 'A Multi-AZ deployment automatically fails over to the standby replica when the primary has a problem, which meets the failover requirement.'],
+      ['Enable a Multi-AZ DB instance deployment so that a standby replica is maintained in another Availability Zone', 'A Multi-AZ DB instance deployment automatically fails over to the standby replica when the primary has a problem, which meets the failover requirement.'],
     ],
     wrong: [
-      ['Send the read queries to the Multi-AZ standby replica to scale reads', 'A standby replica is there for high availability and cannot serve read traffic.'],
+      ['Send the read queries to the standby replica of a Multi-AZ DB instance deployment to scale reads', 'The standby replica in a Multi-AZ DB instance deployment is there for high availability and cannot serve read traffic.'],
       ['Increase the allocated storage of the DB instance so that it can serve more read requests', 'More allocated storage does not add read capacity and does not provide failover to another Availability Zone.'],
       ['Take hourly snapshots and restore the latest one to a new DB instance after a failure', 'A restore is a manual recovery and not an automatic failover, and it does not add read capacity.'],
     ],
@@ -379,6 +379,7 @@ const questions: Question[] = [
       'asg-sqs|The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain.',
       'asg-sqs|The issue with using a CloudWatch Amazon SQS metric like ApproximateNumberOfMessagesVisible for target tracking is that the number of messages in the queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue.',
       'asg-target-tracking|Instead of publishing new metrics to use in your scaling policy, you can use metric math to combine existing metrics.',
+      'asg-sqs|However, you can now save the cost and effort put into publishing your own metric by using metric math.',
     ],
   }),
   mc({
@@ -439,6 +440,7 @@ const questions: Question[] = [
     evidence: [
       'asg-what-is|Using auto scaling allows you to maintain application availability and reduce costs by adding capacity to handle peak loads and removing capacity when demand is lower.',
       'asg-what-is|Within a single Auto Scaling group, you can launch multiple instance types and purchase options (Spot and On-Demand Instances), allowing you to optimize costs through Spot Instance usage.',
+      'ec2-spot|Spot Instances are a cost-effective choice if you can be flexible about when your applications run and if your applications can be interrupted.',
     ],
   }),
 ];

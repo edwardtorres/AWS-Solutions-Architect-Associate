@@ -130,13 +130,14 @@ const questions: Question[] = [
     correct: ['Create an AWS Backup plan that runs at least hourly and restore from a recovery point', 'Backups are point-in-time copies whose frequency sets the achievable recovery point, so files can be restored to a state from before the corruption.'],
     wrong: [
       ['Enable EFS replication to a file system in a second Region and fail over to the replica', 'Replication copies changes to the destination continuously, so the corrupted files reach the replica as well.'],
-      ['Migrate to an EFS One Zone file system that AWS Backup protects automatically', 'This narrows storage to one Availability Zone and sets no backup frequency to meet the one-hour recovery point.'],
+      ['Migrate to an EFS One Zone file system that AWS Backup protects automatically', 'Changing the storage class does not choose a backup frequency: the one-hour recovery point still needs a backup schedule that runs hourly, and the migration adds work and keeps all data in one Availability Zone.'],
       ['Turn on EFS lifecycle management so that older files move to Infrequent Access', 'Lifecycle management moves files between storage classes by access time and keeps no earlier copy of a corrupted file.'],
     ],
     slot: 2,
     evidence: [
       'dr-options|How often you run your backup will determine your achievable recovery point (which should align to meet your RPO).',
       'dr-options|Continuous data replication protects you against some types of disaster, but it may not protect you against data corruption or destruction unless your strategy also includes versioning of stored data or options for point-in-time recovery.',
+      'aws-backup-plan-options|You can also create a cron expression that creates snapshot backups as frequently as hourly.',
       'efs-replication|When you enable replication on an EFS file system, Amazon EFS automatically and transparently replicates the data and metadata on the source file system to a destination file system.',
     ],
   }),

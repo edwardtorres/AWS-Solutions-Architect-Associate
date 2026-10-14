@@ -233,10 +233,10 @@ const questions: Question[] = [
     bullets: ['2.1-K7'],
     d: 2,
     tags: ['mock-reserve', 'trap:cloudfront-vs-global-accelerator'],
-    stem: 'A company serves a personalised web application from Application Load Balancers in two AWS Regions. The responses cannot be cached. Partner networks must allow-list fixed IP addresses, and traffic must shift to the other Region quickly when one becomes unhealthy. The company wants the LEAST operational overhead. Which solution meets these requirements?',
+    stem: 'A company serves a personalised web application from Application Load Balancers in two AWS Regions. The responses cannot be cached. Clients send POST and PUT requests as well as GET requests. Partner networks must allow-list fixed IP addresses, and traffic, including the POST and PUT requests, must shift to the other Region quickly when one becomes unhealthy. The company wants the LEAST operational overhead. Which solution meets these requirements?',
     correct: ['Create an AWS Global Accelerator accelerator and add both load balancers as endpoints', 'The accelerator provides static IP addresses as fixed entry points and routes traffic only to healthy endpoints in either Region.'],
     wrong: [
-      ['Create an Amazon CloudFront distribution and turn off caching for the behaviors', 'CloudFront is built to speed up delivery of content, and with caching off it adds nothing for the fixed-address and fast-failover needs.'],
+      ['Create an Amazon CloudFront distribution and turn off caching for the behaviors', 'CloudFront origin failover applies only when the viewer request is a GET, HEAD or OPTIONS request, so POST and PUT requests would not shift to the other Region.'],
       ['Create Amazon Route 53 failover records that point to the two load balancers', 'DNS answers are cached by client devices and resolvers, so a shift to the other Region is not deterministic and fast.'],
       ['Run proxy instances with Elastic IP addresses in each Region and fail over with a script', 'The company would patch, scale and script the proxies itself, which is far more operational overhead than a managed service.'],
     ],
@@ -245,6 +245,7 @@ const questions: Question[] = [
       'ga-faq|Global Accelerator is a good fit for non-HTTP use cases, such as gaming (UDP), IoT (MQTT), or Voice over IP, as well as for HTTP use cases that specifically require static IP addresses or deterministic, fast regional failover.',
       'ga-how|The static IP addresses provided by AWS Global Accelerator serve as single fixed entry points for your clients.',
       'ga-faq|Some client devices and internet resolvers cache DNS answers for long periods of time.',
+      'cf-origin-failover|CloudFront does not fail over when the viewer sends a different HTTP method (for example POST, PUT, and so on).',
     ],
   }),
 ];

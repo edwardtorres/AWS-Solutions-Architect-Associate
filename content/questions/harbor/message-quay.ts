@@ -173,7 +173,7 @@ const questions: Question[] = [
     stem: 'A company runs its own Apache ActiveMQ message broker whose applications use JMS and AMQP. It wants a managed broker on AWS and does not want to rewrite the messaging code of the applications. Which service BEST meets these requirements?',
     correct: ['Amazon MQ with an Apache ActiveMQ broker', 'Amazon MQ is a managed message broker service for ActiveMQ, and existing brokers can be migrated without rewriting messaging code.'],
     wrong: [
-      ['Amazon SQS with standard queues', 'SQS is a queue service that applications use through its own API, so the applications would need new messaging code.'],
+      ['Amazon SQS with standard queues', 'SQS does not support the AMQP protocol, and AWS recommends Amazon MQ for applications that rely on JMS and AMQP compatibility.'],
       ['Amazon SNS with topics for each application', 'SNS is a publish and subscribe service and is not a managed broker for JMS and AMQP applications.'],
       ['Amazon EventBridge with an event bus', 'EventBridge routes events to targets and is not a message broker that supports JMS and AMQP clients.'],
     ],
@@ -330,7 +330,7 @@ const questions: Question[] = [
     stem: 'A news application must send each breaking-news message to a very large number of subscribed endpoints, including mobile push notifications and email addresses. Messages come from many publishers at high throughput and with low latency, and the message format is not fixed. Which service BEST meets these requirements?',
     correct: ['Amazon SNS, with a topic that the endpoints subscribe to', 'SNS suits high-throughput, low-latency messages with very high fanout, its topics do not depend on a message schema, and it supports push and email endpoints.'],
     wrong: [
-      ['Amazon EventBridge, with a rule for each subscribed endpoint', 'EventBridge uses a predefined schema for events and is recommended for reacting to events from SaaS applications, AWS services or custom applications.'],
+      ['Amazon EventBridge, with a rule for each subscribed endpoint', 'EventBridge works on events with a predefined schema and rules, and it is not the service recommended for very high fanout of schema-agnostic messages to mobile push and email endpoints.'],
       ['Amazon SQS, with one queue for each subscribed endpoint', 'Queues are polled by consumers and do not push messages to mobile devices or email addresses.'],
       ['Amazon Kinesis Data Streams, with a stream that each endpoint reads', 'A stream is read by consumer applications and does not push messages to mobile devices or email addresses.'],
     ],

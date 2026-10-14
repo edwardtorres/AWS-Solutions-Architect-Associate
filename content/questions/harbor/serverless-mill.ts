@@ -96,6 +96,7 @@ const questions: Question[] = [
       'apigw-usage-plans|The plan uses API keys to identify API clients and who can access the associated API stages for each key.',
       'apigw-http-vs-rest|Features REST API HTTP API Custom domains Yes Yes API keys Yes No Per-client rate limiting Yes No Per-client usage throttling Yes No',
       'apigw-throttling|Per-account limits are applied to all APIs in an account in a specified Region.',
+      'apigw-usage-plans|A quota limit sets the target maximum number of requests with a given API key that can be submitted within a specified time interval.',
     ],
   }),
   mc({
@@ -227,10 +228,10 @@ const questions: Question[] = [
     bullets: ['2.1-K12'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company runs an interactive web application on Amazon API Gateway and AWS Lambda. Traffic is predictable: it rises every weekday at 08:00 and falls after 18:00, and users report slow first requests at the start of the peak because of cold starts. The company wants to remove the slow starts while paying for pre-initialized capacity only during business hours. Which TWO actions meet these requirements at the LOWEST cost? (Choose two.)',
+    stem: 'A company runs an interactive web application on Amazon API Gateway and AWS Lambda. Traffic is predictable: it rises every weekday at 08:00 and falls after 18:00, and users report slow first requests at the start of the peak because of cold starts. The company wants to remove the slow starts while paying for the higher level of pre-initialized capacity only during business hours. Which TWO actions meet these requirements at the LOWEST cost? (Choose two.)',
     correct: [
       ['Publish a function version and configure provisioned concurrency on an alias that points to it', 'Provisioned concurrency keeps pre-initialized execution environments ready, and it works with versions and aliases but not with the $LATEST version.'],
-      ['Use Application Auto Scaling scheduled scaling to raise provisioned concurrency before 08:00 and lower it after 18:00', 'Scheduled scaling follows predictable load changes, so pre-initialized capacity exists only when it is needed.'],
+      ['Use Application Auto Scaling scheduled scaling to raise provisioned concurrency before 08:00 and reduce it after 18:00', 'Scheduled scaling follows predictable load changes, so the higher level of pre-initialized capacity exists only during business hours.'],
     ],
     wrong: [
       ['Configure provisioned concurrency on the $LATEST version of the function', 'Provisioned concurrency cannot be used with the $LATEST version of a function.'],
@@ -298,7 +299,7 @@ const questions: Question[] = [
     wrong: [
       ['A Regional endpoint that serves the clients of every continent from one Region', 'A Regional API endpoint is intended for clients in the same Region and does not route requests through nearby edge locations.'],
       ['A private endpoint that the mobile clients reach through an interface VPC endpoint', 'A private API endpoint can only be accessed from a VPC, so mobile clients on the internet cannot reach it.'],
-      ['An HTTP API with an edge-optimized endpoint to keep the cost of the API low', 'HTTP APIs do not offer the edge-optimized endpoint type, so this combination does not exist.'],
+      ['A Regional endpoint with an Amazon CloudFront distribution that the company creates in front of it', 'This needs another service to create and configure, but the company wants no other services to configure.'],
     ],
     slot: 3,
     evidence: [

@@ -74,7 +74,7 @@ const questions: Question[] = [
     ],
     wrong: [
       ['Run an FTPS server on an Amazon EC2 instance that writes the files to the S3 bucket', 'The company would run, patch and scale the FTPS server itself.'],
-      ['Send an S3 event notification to an Amazon SNS topic with the application\'s HTTPS endpoint as the subscriber', 'An offline subscriber can miss messages because no queue holds them, so notifications could be lost.'],
+      ['Send an S3 event notification to an Amazon SNS topic with the application\'s HTTPS endpoint as the subscriber', 'An offline subscriber can miss messages because no queue holds them, so notifications can be lost once delivery retries are exhausted.'],
       ['Turn on Amazon S3 Transfer Acceleration and have the suppliers upload to the accelerate endpoint', 'Suppliers send files over FTPS, and Transfer Acceleration provides an S3 endpoint rather than an FTPS server.'],
     ],
     slots: [0, 3],
@@ -199,7 +199,7 @@ const questions: Question[] = [
     evidence: [
       'database-decision|in an ecommerce use case, you might use Amazon DocumentDB (for product catalogs and user profiles) for the flexibility that is provided by semi-structured data',
       'database-decision|You might also add Aurora into the mix for inventory and order processing, where a relational data model and transaction support are needed.',
-      'dynamodb-what-is|DynamoDB is purpose-built and optimized for operational workloads that require consistent performance at any scale.',
+      'database-decision|combine it with the low, predictable latency provided by DynamoDB (for when your users are browsing your product catalog)',
     ],
   }),
   mc({

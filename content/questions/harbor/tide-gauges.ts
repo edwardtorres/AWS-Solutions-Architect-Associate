@@ -8,7 +8,7 @@ const questions: Question[] = [
     bullets: ['2.2-K10'],
     d: 1,
     stem: "During a promotion, an Auto Scaling group cannot launch more Amazon EC2 instances because the account has reached a service quota for running instances in the Region. The group's maximum size is already higher than the number of instances that are running. The company wants the group to be able to grow, with the LEAST effort. What should the company do?",
-    correct: ['Request an increase of that quota for the Region through Service Quotas', 'Service Quotas lets the company look up its service quotas and request increases, which raises the account ceiling that blocks the launches.'],
+    correct: ['Request an increase of that quota for the Region through AWS Support', 'Support can approve a quota increase request, which raises the account ceiling that blocks the launches.'],
     wrong: [
       ["Raise the maximum size of the group further so that it is allowed to run more instances", "The group's maximum is not the limit that is blocking launches; the account-level quota is, and it stays unchanged."],
       ["Create an Amazon CloudWatch alarm on the group's CPU utilization so that scaling out starts sooner", 'Scaling out sooner still runs into the same account quota, so the launches keep failing.'],
@@ -16,8 +16,8 @@ const questions: Question[] = [
     ],
     slot: 0,
     evidence: [
-      'servicequotas|Quotas, also referred to as limits in AWS services, are the maximum values for the resources, actions, and items in your AWS account.',
-      'servicequotas|Service Quotas enables you to look up your service quotas and to request increases.',
+      'aws-service-quotas-general|You can request increases for some quotas, but not all quotas can be increased.',
+      'aws-service-quotas-general|To request a quota increase Support might approve, deny, or partially approve your quota increase requests.',
     ],
   }),
   mc({
@@ -44,18 +44,18 @@ const questions: Question[] = [
     building: 'tide-gauges',
     bullets: ['2.2-K10'],
     d: 3,
-    stem: 'An operations team wants an Amazon SNS notification when usage of selected service quotas reaches 60 percent, so that it has time to request increases before an outage. Alerts that arrive after usage is already near the limit are too late. Which solution meets these requirements with the LEAST custom work?',
-    correct: ['Create Amazon CloudWatch alarms for those quotas from the Service Quotas console and set the alarm threshold to 60 percent', 'The console lets the team create an alarm on a quota and choose its threshold, so the notification arrives well before the limit is reached.'],
+    stem: 'An operations team wants an Amazon SNS notification when usage of a service quota that publishes usage metrics reaches 60 percent, so that it has time to request increases before an outage. Alerts that arrive after usage is already near the limit are too late. Which solution meets these requirements with the LEAST custom work?',
+    correct: ['Create an Amazon CloudWatch alarm on the quota usage metric with a threshold at 60 percent of the quota value and an SNS action', 'Quota usage metrics are published to CloudWatch, so an alarm with a chosen threshold sends the notification well before the limit is reached.'],
     wrong: [
-      ['Rely on the AWS Trusted Advisor service limit alerts, which are raised at 80 percent and 90 percent of a quota', 'Those alerts come later than the 60 percent point the team needs, and the team cannot choose the threshold.'],
+      ['Rely on the AWS Trusted Advisor service limit checks, which flag usage that is more than 80 percent of a quota', 'Those checks flag usage only above 80 percent, which is later than the 60 percent point the team needs.'],
       ['Create a CloudWatch alarm on the CPUUtilization metric of the instances in every Region that the team currently uses for production', 'CPU utilization measures load on the instances and says nothing about how much of a quota is used.'],
       ['Search the AWS CloudTrail event history every week for errors that were returned when a limit was exceeded', 'This finds failures after they have happened and does not warn the team before usage nears the limit.'],
     ],
     slot: 2,
     evidence: [
-      'servicequotas-cw|You can create Amazon CloudWatch alarms to notify you when you\'re close to a quota value threshold.',
-      'servicequotas-cw|For Alarm threshold, choose a threshold.',
-      'waf-quotas-regions|AWS Trusted Advisor provides alerts for 80% and 90% threshold breaches.',
+      'cw-usage-metrics|These metrics correspond to AWS service quotas.',
+      'cw-usage-metrics|Service quota usage metrics are in the AWS/Usage namespace and are collected every minute.',
+      'trusted-advisor-service-limits|Checks for usage that is more than 80% of the CloudFormation stacks quota.',
     ],
   }),
   mc({
@@ -147,7 +147,7 @@ const questions: Question[] = [
     stem: 'A serverless API uses Amazon API Gateway and an AWS Lambda function that calls other AWS services. The team wants trace segments for the function invocations and a service map of the calls, with the LEAST effort. What should the team do?',
     correct: ['Turn on active tracing for the Lambda function so that Lambda sends trace data to AWS X-Ray', 'With active tracing Lambda creates trace segments for invocations, and the console adds the permissions the function needs.'],
     wrong: [
-      ['Run the X-Ray daemon on an Amazon EC2 instance and make the function send its trace segments to it', 'Lambda can run the daemon on its workers, so a separate instance is extra work to build and maintain.'],
+      ['Run the X-Ray daemon on an Amazon EC2 instance and make the function send its trace segments to it', 'With active tracing Lambda creates and sends the trace segments itself, so a separate daemon instance is unnecessary extra work to build and maintain.'],
       ['Create an AWS CloudTrail trail for the function and query the recorded events to build the service map', 'CloudTrail records API actions as events and does not trace the latency of the calls a request makes.'],
       ['Set the X-Ray sampling rate of the function to 100 percent in the function configuration of the console', 'The sampling rate for Lambda functions cannot be configured, so this setting cannot be changed.'],
     ],
@@ -260,8 +260,8 @@ const questions: Question[] = [
     correct: ['The workload can theoretically achieve about 99.97 percent, because the availabilities of the hard dependencies multiply', 'For a hard dependency, the invoking system availability is the product of the availabilities, 99.99% × 99.99% × 99.99%, or 99.97%.'],
     wrong: [
       ['The workload can theoretically achieve 99.99 percent, because it is as available as its least available component', 'This ignores that an interruption in a hard dependency directly interrupts the invoking system, so availabilities multiply.'],
-      ['The workload can theoretically achieve about 99.999999 percent, because the failure rates of the three components multiply', 'That calculation is for independent redundant components, but hard dependencies are not redundant copies of each other.'],
-      ['The workload availability cannot be estimated, because dependencies do not publish availability design goals for their service', 'Many AWS services publish availability design goals, and MTBF and MTTR can estimate the rest.'],
+      ['The workload can theoretically achieve about 99.9999999999 percent, because 100 percent minus the product of the failure rates applies', 'That calculation is for independent redundant components, but hard dependencies are not redundant copies of each other.'],
+      ['The workload achieves the average of the three availabilities, which is 99.99 percent', 'Hard dependencies do not average out: an interruption in any of them interrupts the invoking system, so the availabilities multiply.'],
     ],
     slot: 3,
     evidence: [
@@ -298,8 +298,8 @@ const questions: Question[] = [
     bullets: ['2.2-K10'],
     d: 1,
     tags: ['mock-reserve'],
-    stem: 'An operations team wants one AWS service that inspects the environment and recommends where to save money, improve availability and performance, and close security gaps, and that also alerts when quota usage passes 80 and 90 percent. Which service BEST meets these requirements?',
-    correct: ['AWS Trusted Advisor, which inspects the environment and flags quota usage thresholds', 'Trusted Advisor makes recommendations to save money, improve availability and performance, or close security gaps, and alerts on quota thresholds.'],
+    stem: 'An operations team wants one AWS service that inspects the environment and recommends where to save money, improve availability and performance, and close security gaps, and that also checks whether usage is more than 80 percent of a service quota. Which service BEST meets these requirements?',
+    correct: ['AWS Trusted Advisor, which inspects the environment and flags quota usage above a threshold', 'Trusted Advisor makes recommendations to save money, improve availability and performance, or close security gaps, and its service limit checks flag usage of more than 80 percent of a quota.'],
     wrong: [
       ['AWS Config, which keeps the configuration history of resources and evaluates it against rules', 'Config evaluates configuration settings against rules and does not recommend cost savings or alert on quota usage.'],
       ['AWS CloudTrail, which records the actions taken by users, roles and services as events in the account', 'CloudTrail records who did what and does not inspect the environment for recommendations or quota usage.'],
@@ -308,7 +308,7 @@ const questions: Question[] = [
     slot: 0,
     evidence: [
       'trusted-advisor|Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps.',
-      'waf-quotas-regions|AWS Trusted Advisor provides alerts for 80% and 90% threshold breaches.',
+      'trusted-advisor-service-limits|Checks for usage that is more than 80% of the CloudFormation stacks quota.',
     ],
   }),
   mc({
