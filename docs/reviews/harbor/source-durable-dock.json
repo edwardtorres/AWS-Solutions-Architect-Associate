@@ -1,0 +1,79 @@
+[
+ {
+  "id": "durable-dock-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-006",
+  "verdict": "OK",
+  "issues": [
+   "No hourly claim here (only 'on a schedule'). Snapshot replication across AZs, Multi-Attach same-AZ limit and AWS Backup support are all documented in the cited quotes. Fourth quote (io2 durability) only supports a wrong option, harmless."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-007",
+  "verdict": "FIX",
+  "issues": [
+   "Key 'AWS Backup plan that runs at least hourly' relies on AWS Backup supporting hourly schedules; no evidence quote states this. It is documented on the AWS Backup plan options page ('You can also create a cron expression that creates snapshot backups as frequently as hourly.'), not currently cited.",
+   "Wrong option 2 why ('sets no backup frequency') is vague; EFS automatic backups exist for One Zone too. The option still fails because it does not give an hourly recovery point."
+  ],
+  "suggestedFix": "Add source id for https://docs.aws.amazon.com/aws-backup/latest/devguide/plan-options-and-configuration.html (not yet in content/sources.ts; use scripts/add-source.ts) and cite 'You can also create a cron expression that creates snapshot backups as frequently as hourly.' (verified on the page). Reword wrong-option-2 why to: 'One Zone does not add point-in-time copies at one-hour intervals; the default automatic backup is not hourly' only if that is sourced, otherwise drop the claim."
+ },
+ {
+  "id": "durable-dock-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "durable-dock-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

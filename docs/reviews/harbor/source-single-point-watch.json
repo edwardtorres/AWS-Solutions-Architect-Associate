@@ -1,0 +1,156 @@
+[
+ {
+  "id": "single-point-watch-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-003",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 1 why says the POST flood 'cannot be served from a cache'. The caching page says only GET methods have caching enabled by default and other methods can be enabled by overriding method settings, so 'cannot' overstates. The option is still wrong because a cache never rejects excess requests.",
+   "Note: stage-level limits throttle all callers together; a per-client usage plan would isolate the faulty partner. No usage-plan option is offered, so the key is still the best of the four."
+  ],
+  "suggestedFix": "Reword wrong-option-1 why to: 'Caching is enabled only for GET methods by default, and a cache serves repeated responses but never rejects excess requests.'"
+ },
+ {
+  "id": "single-point-watch-004",
+  "verdict": "OK",
+  "issues": [
+   "Derived inference for the FIFO distractor (oldest-first processing delays fresh requests) is reasoning rather than a documented sentence, but the key rests on documented WAF text (buffer with a queue, drop stale messages by timestamp). Acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-008",
+  "verdict": "FIX",
+  "issues": [
+   "Key (DNS failover action on the target group minimum healthy count or percentage) IS documented in the ALB target group health section (alb-target-groups: 'DNS failover - ... we mark the IP addresses of the load balancer node for the zone as unhealthy in DNS'; 'Routing failover ... sends traffic to all targets ... including unhealthy targets'). Wrong option 'routing failover' is accurately described.",
+   "Stem is not self-consistent as written: ALB cross-zone load balancing is on by default, and the page says that with it on the thresholds apply to the total targets across all zones, so a zone with one healthy target would not cause errors (each node sends to all healthy targets). The page's zone-level example only applies when cross-zone load balancing is off.",
+   "Wrong option 2 (per-zone Route 53 health checks on load balancer nodes) describes managing node IP records by hand, which is not a normal ALB practice; acceptable as a worse distractor."
+  ],
+  "suggestedFix": "Add to the stem: 'Cross-zone load balancing is turned off for the target group' (so each node sends traffic only to targets in its own zone). Optionally add a quote: 'If cross-zone load balancing is off, each node sends traffic only to the targets in its own zone, which means that the thresholds apply to the number of targets in each enabled zone separately.'"
+ },
+ {
+  "id": "single-point-watch-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-012",
+  "verdict": "OK",
+  "issues": [
+   "Quote about 'up to 66%' is verified on the page; the question uses only the DNS-cache and preserved-connection facts. Pointing the app at the proxy endpoint is a configuration change, consistent with 'no code changes'."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-018",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-019",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 2 (raise client timeout to five minutes and retry until the writer is available) is defensible: a typical Multi-AZ failover finishes in about a minute or two, so a long timeout with retry would also avoid losing orders. The why is conditional ('if the failover takes longer than the timeout') and names no requirement it really fails; the 'keep accepting orders' requirement is only weakly violated.",
+   "Evidence quote 'You can't use a standby replica to serve read traffic' does not confirm the key or any wrong option."
+  ],
+  "suggestedFix": "Change wrong option 2 to a clearly insufficient variant, e.g. 'Retry the insert in the application for a few seconds and then return an error to the customer', with why: 'Retries that give up after a few seconds still refuse orders while the writer is unavailable.' Or state in the stem that failover can take longer than a customer will wait. Replace the third evidence quote with one tied to the key."
+ },
+ {
+  "id": "single-point-watch-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-022",
+  "verdict": "OK",
+  "issues": [
+   "Same concept area as -011 (RDS Proxy) but a different requirement (shed load vs. Lambda connection exhaustion); not a near-duplicate."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "single-point-watch-023",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

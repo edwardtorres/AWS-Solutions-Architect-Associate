@@ -1,0 +1,106 @@
+[
+  {
+    "id": "container-dock-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-002",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-003",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-004",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-005",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-007",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 0 ('install the Fargate agent') names a component that customers cannot install; it is a distractor built on a nonexistent artifact. The why is accurate (Fargate is an AWS Cloud service), but consider rewording to 'Run AWS Fargate tasks on the on-premises servers'."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-009",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-010",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-011",
+    "verdict": "OK",
+    "issues": [
+      "Minor: same offload-state decision as blueprint-hall-002/-003/-016 (district near-duplicate in spirit, ECS instead of EC2). The third evidence quote ('Service: A long running stateless application') is topical, not confirming."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-012",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-013",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-014",
+    "verdict": "OK",
+    "issues": [
+      "Minor: the stem mentions a password 'baked into a machine image' while the workload is containers; harmless. ECS injects secrets at task start, so 'reach the container at runtime' is satisfied but a rotated value only reaches new tasks; wording of the key is still accurate."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-015",
+    "verdict": "OK",
+    "issues": [
+      "Judged: EKS Auto Mode IS documented on the cited eks-what-is page (quotes: 'EKS extends its control to manage Nodes (Kubernetes data plane) as well' and 'automatically provisioning infrastructure ... dynamically scaling resources ... patching operating systems'), so the key rests on a documented fact. No availability-status wording. Fargate for EKS would also remove node management but is not offered here, and -016 separates it by the 'own compute boundary' requirement, so the two questions do not collide."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "container-dock-016",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  }
+]

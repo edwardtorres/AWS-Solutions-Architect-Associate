@@ -1,0 +1,112 @@
+[
+  {
+    "id": "serverless-mill-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-002",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-003",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-004",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-005",
+    "verdict": "OK",
+    "issues": [
+      "Minor: evidence has no quote for the monthly quota part of the key; the usage-plans page says 'A quota limit sets the target maximum number of requests with a given API key that can be submitted within a specified time interval.' Add it."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-006",
+    "verdict": "OK",
+    "issues": [
+      "Minor: the 'caching applies to GET methods by default' claim in option 3's why has no evidence quote; it is documented API Gateway behaviour but could be dropped from the why."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-007",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-009",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-010",
+    "verdict": "OK",
+    "issues": [
+      "Key (REST API + stage cache with 300 s TTL) is documented; the table row 'Caching Yes No ... Request validation Yes No' confirms. Option 1's 'at a lower price' is a relative cost statement with no quote; acceptable, but could say 'HTTP APIs do not offer request validation or caching' only."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-011",
+    "verdict": "OK",
+    "issues": [
+      "Minor: DynamoDB in the key is not required by the stem (no data store mentioned) and no evidence quote covers it; acceptable as the serverless data tier but the stem could mention a key-value data store."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-012",
+    "verdict": "OK",
+    "issues": [
+      "Judged: both correct options are documented (no provisioned concurrency on $LATEST; scheduled scaling for predictable load changes) and options 0, 2, 3 each fail a stated requirement. Minor: the lambda-provisioned page example registers min-capacity 1 and notes an initial provisioned concurrency value must be configured first, so 'lower it after 18:00' (not necessarily to zero) is the safe reading; avoid wording implying capacity drops to zero. Also quote 3 only defines provisioned concurrency, not the cost-saving schedule."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-013",
+    "verdict": "OK",
+    "issues": [
+      "Options 2 and 3 are two halves of creating one role (the trust policy is part of the role), so the 'TWO actions' format is a little artificial, but both are documented and the distractors each fail clearly."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-014",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "serverless-mill-015",
+    "verdict": "FIX",
+    "issues": [
+      "Option 2 ('HTTP API with an edge-optimized endpoint') is an invented combination; its own why admits 'this combination does not exist'. The guide forbids invented features as options."
+    ],
+    "suggestedFix": "Replace option 2 with a real alternative, for example 'A Regional endpoint with an Amazon CloudFront distribution that the company creates in front of it', whose why is that it needs another service to configure (the stem says no other services), and keep the why accurate."
+  },
+  {
+    "id": "serverless-mill-016",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  }
+]

@@ -1,0 +1,156 @@
+[
+  {
+    "id": "message-quay-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-002",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-003",
+    "verdict": "OK",
+    "issues": [
+      "Judged: exactly the two correct actions are needed (a rule with an event pattern, and both functions as targets of the same rule); the quotes eventbridge-rules ('A single rule can send an event to multiple targets, which then run in parallel') and eda-overview (filter across the event body, no continuous polling) confirm both halves. Options 1, 3, 4 each fail a stated requirement. Same EventBridge-rule idea as -002 but a different decision (multi-target, filtering), acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-004",
+    "verdict": "OK",
+    "issues": [
+      "Judged: key (DynamoDB stream -> EventBridge pipe with enrichment -> event bus -> rules) is documented by the three eventbridge-what-is quotes (single source/single target; enrichment; pipe with an event bus target). Option 0 correctly fails on single target. Acceptable d3; the DynamoDB-stream-as-pipe-source fact is inferred from the Pipes feature set but is a documented source type."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-005",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 0 (SNS to HTTPS) is defended by 'messages can be lost when subscribers are offline'; SNS does retry HTTP(S) deliveries, so the why should say 'only for a limited retry period and without a durable buffer' to stay strictly true. The key (SQS buffer) is correct."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-007",
+    "verdict": "OK",
+    "issues": [
+      "Options 3 and 4 are two halves of one setup (a redrive policy is what attaches the DLQ), so the pair is valid but option 4 is vague ('high enough'). Option 1 (maxReceiveCount 1) is poor practice per the cited guidance and is acceptable as the wrong option because the stem says messages 'fail repeatedly'."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-009",
+    "verdict": "FIX",
+    "issues": [
+      "Option 0 why says SQS needs 'new messaging code' because it is used through its own API. AWS does ship a JMS-compatible client for SQS, so this is not strictly true for JMS; it is true for AMQP, which SQS does not support. The key and the sqs-what-is evidence ('We recommend Amazon MQ for migrating applications ... that rely on ... JMS ... AMQP') stand."
+    ],
+    "suggestedFix": "Reword the option 0 why to: 'SQS does not support the AMQP protocol, and AWS recommends Amazon MQ for applications that rely on JMS and AMQP compatibility.'"
+  },
+  {
+    "id": "message-quay-010",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-011",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-012",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-013",
+    "verdict": "OK",
+    "issues": [
+      "The callback/task token quote is awkwardly worded (a banking-transfer example) but does confirm the task-token wait; fine."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-014",
+    "verdict": "OK",
+    "issues": [
+      "Minor: stem phrases 'high-event-rate processing' twice, which echoes the quote and gives the answer away; option 2 (Lambda calling steps) is the weakest distractor."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-015",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 4 is only wrong because it says 'wait for several days', which the stem never requires; the why is accurate for the option as written, so acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-016",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-017",
+    "verdict": "FIX",
+    "issues": [
+      "Option 0 why does not name a failed requirement: it restates EventBridge's schema/recommendation. Better: EventBridge cannot deliver directly to mobile push or email endpoints and is built for schema-based rule routing, not very high fanout."
+    ],
+    "suggestedFix": "Rewrite the option 0 why to name the failed requirement (very high fanout to push/email endpoints with schema-agnostic messages), for example: 'EventBridge works on events with a predefined schema and rules, and is not the service AWS recommends for very high fanout to thousands or millions of endpoints.'"
+  },
+  {
+    "id": "message-quay-018",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-019",
+    "verdict": "OK",
+    "issues": [
+      "Minor: the stem never mentions poison messages, so the dead-letter queue (option 3) is chosen mostly by elimination; the cited sqs-dlq quote shows what a DLQ is, not that it improves resilience here. Still the best third action among the six."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-020",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-021",
+    "verdict": "OK",
+    "issues": [
+      "Option 1 states a false fact as an option (default retention is 10 days); acceptable because the why corrects it and the default is documented (4 days), but it tests recall of one number."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "message-quay-022",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  }
+]

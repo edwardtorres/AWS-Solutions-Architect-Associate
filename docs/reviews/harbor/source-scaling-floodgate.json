@@ -1,0 +1,160 @@
+[
+  {
+    "id": "scaling-floodgate-001",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-002",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 2 says 'Enable Multi-AZ'; a Multi-AZ DB cluster has readable standbys, so the why ('standby cannot serve traffic') is accurate only for a Multi-AZ DB instance deployment. Say 'Multi-AZ DB instance deployment' in the option."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-003",
+    "verdict": "FIX",
+    "issues": [
+      "Near-duplicate of blueprint-hall-002 (cart/session in instance memory, ALB, sticky sessions vs ElastiCache) and of blueprint-hall-016 and container-dock-011; same key, same three distractors, same evidence."
+    ],
+    "suggestedFix": "Drop it, or change the decision it tests (for example, session state in Amazon DynamoDB versus an ElastiCache cluster with LEAST-operational-overhead wording, or tie it to the scale-in/deregistration behaviour only)."
+  },
+  {
+    "id": "scaling-floodgate-004",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-005",
+    "verdict": "FIX",
+    "issues": [
+      "Option 4 ('Configure the DB instance to add and remove read replicas automatically') is a setting RDS does not have (the cited page says RDS does not support autoscaling of read replicas); the guide forbids invented features as options.",
+      "Option 0 says 'Enable Multi-AZ' without 'DB instance deployment' (Multi-AZ DB clusters have readable standbys)."
+    ],
+    "suggestedFix": "Replace option 4 with a real alternative that fails a requirement (for example, 'Move the web tier to AWS Lambda and keep the database unchanged'), and word option 0 as 'Enable a Multi-AZ DB instance deployment so that the standby answers the catalogue queries'. Keep rds-read-replicas evidence for the key."
+  },
+  {
+    "id": "scaling-floodgate-006",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-007",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-008",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-009",
+    "verdict": "OK",
+    "issues": [
+      "Key rests on documented cross-zone behaviour (disabled by default for Network Load Balancers). Acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-010",
+    "verdict": "OK",
+    "issues": [
+      "Judged: both keys documented (slow start gives targets time to warm up; instance warmup keeps warming instances out of aggregated metrics). Option 1 (least outstanding requests) is correctly wrong via the documented conflict with slow start. Minor: 'full share of requests' implies the default round-robin algorithm, so the stem and key are consistent. No second correct answer found."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-011",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 1 says 'Enable Multi-AZ' (not 'DB instance deployment'); on an existing instance Multi-AZ is the instance deployment, so the why is acceptable, but tightening is safer."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-012",
+    "verdict": "OK",
+    "issues": [
+      "Minor: key rests on asynchronous replication, documented; option 2 same Multi-AZ wording caveat as -002."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-013",
+    "verdict": "FIX",
+    "issues": [
+      "Option 0 ('Turn on auto scaling for the RDS read replicas in the RDS console') is a feature that does not exist; its own why says 'this option does not exist for RDS for MySQL'. The guide forbids invented features as options.",
+      "Key (Aurora Auto Scaling of Aurora Replicas) is documented and correct."
+    ],
+    "suggestedFix": "Replace option 0 with a real approach that fails a requirement, for example 'Use an RDS Multi-AZ DB instance deployment so the standby replica scales with read traffic' (standby cannot serve reads) or 'Add an RDS Proxy to scale reads automatically'; keep the rds-read-replicas 'doesn't support autoscaling' quote only as support in the key's why."
+  },
+  {
+    "id": "scaling-floodgate-014",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-015",
+    "verdict": "OK",
+    "issues": [
+      "Minor: option 1 and key 4 say 'Multi-AZ' / 'standby cannot serve read traffic'; true for a Multi-AZ DB instance deployment only. State 'Multi-AZ DB instance deployment' in options 1 and 4."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-016",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-017",
+    "verdict": "OK",
+    "issues": [
+      "Judged: scheduled actions fit (one-time, known time, raise before and lower after); predictive scaling is correctly rejected because it needs daily or weekly patterns. 'Earlier sales needed far more capacity' could suggest history but the stem says one flash sale at a known time. Acceptable."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-018",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-019",
+    "verdict": "OK",
+    "issues": [
+      "Judged: key is documented (backlog per instance; ApproximateNumberOfMessagesVisible does not change proportionally to group size; metric math saves publishing a custom metric). The cited quote for metric math is the generic asg-target-tracking sentence; the asg-sqs page also says 'you can now save the cost and effort put into publishing your own metric by using metric math', which is a better quote. 'LEAST custom code' is satisfied by metric math. No second correct answer among the options."
+    ],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-020",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-021",
+    "verdict": "OK",
+    "issues": [],
+    "suggestedFix": ""
+  },
+  {
+    "id": "scaling-floodgate-022",
+    "verdict": "OK",
+    "issues": [
+      "Judged: key (scale in when demand is lower, and mix Spot Instances in the group) is documented by the asg-what-is quotes. 'Fault-tolerant' is what makes Spot suitable, but the stem does not use the word 'interruption'; the Spot-suitability quote (ec2-spot) is not in the evidence. Option 2 is nearly a restatement of what an Auto Scaling group does, so the item is easy. Suggested: add an ec2-spot quote about fault-tolerant/flexible workloads."
+    ],
+    "suggestedFix": ""
+  }
+]

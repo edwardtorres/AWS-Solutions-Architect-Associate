@@ -1,0 +1,114 @@
+[
+ {
+  "id": "disaster-bunker-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-002",
+  "verdict": "FIX",
+  "issues": [
+   "Key depends on AWS Backup being able to run hourly, which no cited evidence quote states (dr-options says only that backup frequency sets the achievable recovery point). The fact is documented on the AWS Backup plan options page, which is not in the evidence.",
+   "Equating an hourly schedule with a 1-hour RPO is a mild inference (backup duration and copy time add to worst-case data loss); acceptable if stated as 'frequency determines the achievable recovery point'.",
+   "This question does not involve delete markers (that is -016).",
+   "Cross-district near-duplicate concept: Route 53 failover appears in island-charts-010, -006 here and single-point-watch-023; not this question."
+  ],
+  "suggestedFix": "Add source id for https://docs.aws.amazon.com/aws-backup/latest/devguide/plan-options-and-configuration.html (not yet in content/sources.ts; use scripts/add-source.ts) and cite 'You can also create a cron expression that creates snapshot backups as frequently as hourly.' (verified on the page)."
+ },
+ {
+  "id": "disaster-bunker-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-006",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate concept with island-charts-010 (Route 53 active-passive failover alias records) and single-point-watch-023; different framing (d1 policy choice), keep but consider dropping one if the bank is over-weighted on this fact."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-015",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "disaster-bunker-016",
+  "verdict": "FIX",
+  "issues": [
+   "Key says 'keep the default replication behavior, where a delete adds a delete marker in the source only'. The DR whitepaper says this, but the S3 replication docs (replication-what-is-isnot-replicated) say the default depends on configuration version: with the current configuration (Filter element) delete markers are not replicated by default, but without a Filter element (V1) S3 replicates delete markers from user actions. The stem does not say which, so 'default' is ambiguous and the two AWS pages differ (candidate for content/contradictions.json).",
+   "Deleting a specific version ID is not replicated in either case, which is the stronger 'protects from malicious deletion' fact."
+  ],
+  "suggestedFix": "Make the stem explicit: 'The replication rule uses the current replication configuration (with a filter)' and reword the key to 'Leave delete marker replication turned off on the replication rule'; add the quote 'Amazon S3 does not replicate the delete marker by default' from s3-replication-what-is-isnot-replicated (add source), or record the V1/V2 difference in contradictions.json."
+ },
+ {
+  "id": "disaster-bunker-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

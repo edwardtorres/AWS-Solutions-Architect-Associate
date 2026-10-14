@@ -594,6 +594,7 @@ const sources: Source[] = [
   aws('ebs-extend-fs', `${D}/ebs/latest/userguide/recognize-expanded-volume-linux.html`, 'Extend the file system after resizing an Amazon EBS volume'),
   aws('lambda-arch', `${D}/lambda/latest/dg/foundation-arch.html`, 'Selecting and configuring an instruction set architecture for your Lambda function'),
   aws('lambda-ephemeral', `${D}/lambda/latest/dg/configuration-ephemeral-storage.html`, 'Configure ephemeral storage for Lambda functions'),
+  aws('dynamodb-atomic-counters', `${D}/amazondynamodb/latest/developerguide/WorkingWithItems.html`, 'Working with items and attributes in DynamoDB'),
 ];
 
 export default sources;
