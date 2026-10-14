@@ -1,0 +1,18 @@
+[
+{"id":"blueprint-hall-001","picks":["D"],"ambiguous":false},
+{"id":"blueprint-hall-002","picks":["D"],"ambiguous":false},
+{"id":"blueprint-hall-003","picks":["A","D"],"ambiguous":false},
+{"id":"blueprint-hall-004","picks":["C"],"ambiguous":false},
+{"id":"blueprint-hall-005","picks":["D"],"ambiguous":false},
+{"id":"blueprint-hall-006","picks":["C"],"ambiguous":false},
+{"id":"blueprint-hall-007","picks":["C"],"ambiguous":false},
+{"id":"blueprint-hall-008","picks":["D"],"ambiguous":false},
+{"id":"blueprint-hall-009","picks":["A"],"ambiguous":false},
+{"id":"blueprint-hall-010","picks":["C","D","F"],"ambiguous":false},
+{"id":"blueprint-hall-011","picks":["C"],"ambiguous":false},
+{"id":"blueprint-hall-012","picks":["C"],"ambiguous":false},
+{"id":"blueprint-hall-013","picks":["B","C"],"ambiguous":false,"note":"Fargate counts as serverless compute; relies on that."},
+{"id":"blueprint-hall-014","picks":["D"],"ambiguous":false,"note":"Kinesis plus S3 is the best of weak options."},
+{"id":"blueprint-hall-015","picks":["B"],"ambiguous":false},
+{"id":"blueprint-hall-016","picks":["A"],"ambiguous":false}
+]

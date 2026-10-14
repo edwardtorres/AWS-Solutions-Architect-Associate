@@ -184,7 +184,7 @@ const questions: Question[] = [
     building: 'purpose-built-workshop',
     bullets: ['2.1-S7'],
     d: 3,
-    stem: 'An e-commerce company is designing a new platform. The product catalog and user profiles are semi-structured JSON-like documents that need rich queries across fields. Product browsing needs low, predictable latency at a very high request rate. Inventory and order processing need a relational data model with transaction support. The company wants a purpose-built managed database for each need. Which THREE choices meet these requirements? (Choose three.)',
+    stem: 'An e-commerce company is designing a new platform. The product catalog and user profiles are semi-structured JSON-like documents that need rich queries across fields. The product pages are served by simple key-based lookups that need low, predictable latency at a very high request rate, while the catalog documents themselves are managed and queried separately. Inventory and order processing need a relational data model with transaction support. The company wants a purpose-built managed database for each need. Which THREE choices meet these requirements? (Choose three.)',
     correct: [
       ['Amazon DocumentDB (with MongoDB compatibility) for the catalog and user profiles', 'DocumentDB stores semi-structured documents and supports rich queries across their fields.'],
       ['Amazon DynamoDB for serving product browsing requests', 'DynamoDB provides low, predictable latency at very high request rates.'],
