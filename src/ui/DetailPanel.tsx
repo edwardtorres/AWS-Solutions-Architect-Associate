@@ -14,8 +14,10 @@ import {
   type BuildingState,
 } from '../data';
 import { deriveAll, STATE_HELP, STATE_LABEL } from '../save/state';
-import { useSnapshot } from '../save/context';
-import { hrefFor, hrefNotes, type PanelView } from '../lib/route';
+import { useSaveStore, useSnapshot } from '../save/context';
+import { DEFAULT_ENV } from '../game/env';
+import { inspectionLockedUntil, nextAction, placementAvailability } from '../game/lifecycle';
+import { hrefAttempt, hrefFor, hrefNotes, type PanelView } from '../lib/route';
 import { CloseIcon, RoadIcon, StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -32,6 +34,7 @@ interface Props {
 export default function DetailPanel({ buildingId, view, onClose }: Props) {
   const ref = useRef<HTMLDialogElement>(null);
   const snapshot = useSnapshot();
+  const store = useSaveStore();
   const building = BUILDING_BY_ID.get(buildingId);
 
   // Ignore the close event when the dialog was closed and reopened (e.g. effect re-run in StrictMode).
@@ -86,6 +89,15 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
   const links = atlasLinks(building.id);
   const linkedFamilies = [...new Set(links.map((l) => l.family))];
 
+  const save = snapshot.save;
+  const day = store.today();
+  const action = nextAction(save, building.id, DEFAULT_ENV, day);
+  const placement = placementAvailability(save, building.id, DEFAULT_ENV, day);
+  const lockedUntil = inspectionLockedUntil(save, building.id, day);
+  const activeHere = save.game.active && save.game.active.building === building.id ? save.game.active : null;
+  const placed = save.buildings[building.id]?.via === 'placement' && state === 'commissioned';
+  const resumeHref = activeHere ? hrefAttempt(activeHere.kind === 'inspection' ? 'inspect' : activeHere.kind === 'placement' ? 'place' : 'startup', building.id) : null;
+
   const roadItem = (id: string, reason: string) => {
     const other = BUILDING_BY_ID.get(id);
     if (!other) return null;
@@ -135,6 +147,11 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
           <span className="chip" data-kind="state">
             <StateIcon state={state} /> {STATE_LABEL[state]}
           </span>
+          {placed && (
+            <span className="chip" data-kind="placed">
+              Placed
+            </span>
+          )}
           {task ? (
             <span className="chip">
               Task {task.id}: {task.title}
@@ -262,7 +279,7 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-1 text-xs text-[var(--fg-muted)]">A placement check on SAA-level design decisions arrives in Step 4.</p>
+                <p className="mt-1 text-xs text-[var(--fg-muted)]">A placement check on SAA-level design decisions is available under “Build this”.</p>
               </div>
             )}
             {building.azure && (
@@ -300,6 +317,66 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
             )}
           </section>
         )}
+
+        <section className="mt-4" aria-labelledby="p-build" data-testid="build-section">
+          <h3 id="p-build" className="text-lg font-semibold">
+            Build this
+          </h3>
+          {resumeHref && (
+            <p className="mt-1">
+              <a className="btn" href={resumeHref} data-testid="resume">
+                Resume your {activeHere?.kind === 'inspection' ? 'inspection' : activeHere?.kind === 'placement' ? 'placement check' : 'start-up check'}
+              </a>
+            </p>
+          )}
+          {action === 'done' && <p className="mt-1 text-sm">Commissioned{placed ? ' by placement' : ''}. Nothing more to do here.</p>}
+          {action === 'locked-planned' && <p className="mt-1 text-sm">Locked until its prerequisite roads are commissioned.</p>}
+          {action === 'notes' && (
+            <p className="mt-1 text-sm">
+              Open the study notes first: the start-up check unlocks once you have.{' '}
+              <a className="btn ml-1" href={hrefNotes(building.id)}>
+                Open the notes
+              </a>
+            </p>
+          )}
+          {action === 'startup' && !resumeHref && (
+            <p className="mt-1">
+              <a className="btn" href={hrefAttempt('startup', building.id)}>
+                Start-up check
+              </a>
+              <span className="ml-2 text-sm text-[var(--fg-muted)]">2 questions, both right to start construction.</span>
+            </p>
+          )}
+          {action === 'inspection' && !resumeHref && (
+            <p className="mt-1">
+              <a className="btn" href={hrefAttempt('inspect', building.id)}>
+                Inspection
+              </a>
+              <span className="ml-2 text-sm text-[var(--fg-muted)]">5 questions, 4 right to commission.</span>
+            </p>
+          )}
+          {action === 'inspection-locked' && lockedUntil && (
+            <p role="status" className="mt-1 text-sm" data-testid="lock-message">
+              Inspections for this building are locked until tomorrow ({lockedUntil}): you failed twice today. Re-read the notes.
+            </p>
+          )}
+          {building.portfolio && state !== 'commissioned' && !resumeHref && (
+            <div className="mt-3">
+              {placement.ok ? (
+                <p>
+                  <a className="btn" href={hrefAttempt('place', building.id)} data-testid="place-link">
+                    Placement check
+                  </a>
+                  <span className="ml-2 text-sm text-[var(--fg-muted)]">5 questions, all right to place this building now. One try per day.</span>
+                </p>
+              ) : (
+                <p role="status" className="text-sm" data-testid="placement-message">
+                  {placement.message}
+                </p>
+              )}
+            </div>
+          )}
+        </section>
 
         <section className="mt-4" aria-labelledby="p-notes">
           <h3 id="p-notes" className="text-lg font-semibold">

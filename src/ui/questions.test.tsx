@@ -5,6 +5,11 @@ import type { Question } from '../content/types';
 import { parseHash } from '../lib/route';
 import QuestionBrowser from './QuestionBrowser';
 import Settings from './Settings';
+import { SaveContext } from '../save/context';
+import { createSaveStore } from '../save/store';
+
+const store = createSaveStore({ knownIds: new Set(['gatehouse']), storage: null });
+const withStore = (ui: React.ReactElement) => <SaveContext.Provider value={store}>{ui}</SaveContext.Provider>;
 
 const q = (id: string, tags: string[] = []): Question => ({
   id,
@@ -33,7 +38,7 @@ describe('question access', () => {
 
   it('shows a warning before the browser opens, and can be cancelled', async () => {
     const user = userEvent.setup();
-    render(<Settings />);
+    render(withStore(<Settings />));
     expect(screen.queryByText(/Stem for/)).toBeNull();
     await user.click(screen.getByRole('button', { name: 'Browse questions' }));
     const dialog = screen.getByRole('alertdialog');

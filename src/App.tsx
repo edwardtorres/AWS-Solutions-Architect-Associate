@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { CityMap } from './ui/CityMap';
 import { navigate, useRoute } from './lib/route';
 import { useSaveStore, useSnapshot } from './save/context';
+import { rankFor } from './game/ranks';
 
 // Code-split by feature: only the map ships in the first load.
 const DetailPanel = lazy(() => import('./ui/DetailPanel'));
@@ -11,6 +12,8 @@ const Settings = lazy(() => import('./ui/Settings'));
 const NotesPage = lazy(() => import('./ui/notes/NotesPage'));
 const GlossaryPage = lazy(() => import('./ui/notes/GlossaryPage'));
 const ConfusePage = lazy(() => import('./ui/notes/ConfusePage'));
+const AttemptPage = lazy(() => import('./ui/play/AttemptPage'));
+const ProgressPage = lazy(() => import('./ui/ProgressPage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
 const NOTICE: Record<string, string | undefined> = {
@@ -26,6 +29,7 @@ export default function App() {
   const store = useSaveStore();
   const snapshot = useSnapshot();
   const notice = NOTICE[snapshot.status];
+  const rank = rankFor(snapshot.save.game.xp);
 
   const closePanel = () => {
     navigate({ view: route.view, building: null, param: null });
@@ -59,6 +63,9 @@ export default function App() {
             >
               Service Atlas
             </a>
+            <a href="#/progress" className="btn" aria-current={route.view === 'progress' ? 'page' : undefined} data-testid="rank-chip">
+              {rank.rank.name} · {snapshot.save.game.xp.toLocaleString('en-US')} XP
+            </a>
             <a href="#/glossary" className="btn" aria-current={route.view === 'glossary' ? 'page' : undefined}>
               Glossary
             </a>
@@ -84,13 +91,17 @@ export default function App() {
           {route.view === 'notes' && <NotesPage buildingId={route.param ?? null} />}
           {route.view === 'glossary' && <GlossaryPage termId={route.param ?? null} />}
           {route.view === 'confuse' && <ConfusePage pairId={route.param ?? null} />}
+          {route.view === 'startup' && <AttemptPage key={`s-${route.param}`} kind="startup" buildingId={route.param ?? null} />}
+          {route.view === 'inspect' && <AttemptPage key={`i-${route.param}`} kind="inspection" buildingId={route.param ?? null} />}
+          {route.view === 'place' && <AttemptPage key={`p-${route.param}`} kind="placement" buildingId={route.param ?? null} />}
+          {route.view === 'progress' && <ProgressPage />}
         </Suspense>
         <Suspense fallback={null}>
           <SaveMenu />
           <Settings />
         </Suspense>
         <footer className="mt-8 pb-8 text-xs text-[var(--fg-muted)]">
-          Outline source: the official AWS exam guide for SAA-C03 (docs.aws.amazon.com). Study notes, questions and labs arrive in later steps.
+          Outline source: the official AWS exam guide for SAA-C03 (docs.aws.amazon.com). Puzzles, labs, spaced review and the mock exam arrive in later steps.
         </footer>
       </main>
 

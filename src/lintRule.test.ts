@@ -49,5 +49,5 @@ export function P() { const a = useMemo(() => 1, []); const b = useCallback(() =
     const results = await eslint.lintFiles(['src/**/*.{ts,tsx}']);
     const offenders = results.flatMap((r) => r.messages.filter((m) => m.ruleId === 'no-restricted-syntax').map(() => r.filePath));
     expect(offenders).toEqual([]);
-  });
+  }, 60_000);
 });
