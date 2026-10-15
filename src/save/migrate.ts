@@ -1,4 +1,4 @@
-import { CURRENT_VERSION, freshSave, type Save, type StoredState, type UiPrefs } from './schema';
+import { CURRENT_VERSION, LOG_CAP, freshGame, freshSave, type ActiveAttempt, type AttemptKind, type GameState, type LogEntry, type LogKind, type Save, type StoredState, type UiPrefs } from './schema';
 
 type Migration = (old: Record<string, unknown>) => Record<string, unknown>;
 
@@ -17,6 +17,8 @@ export const MIGRATIONS: Record<number, Migration> = {
     }
     return { version: 1, updatedAt: at, buildings, ui: {} };
   },
+  // Version 2 adds the game block (notes, inspections, placement, XP, streaks, badges, flags, answer log).
+  1: (old) => ({ ...old, version: 2, game: {} }),
 };
 
 export type MigrateResult =
@@ -59,6 +61,7 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
       buildings[id] = {
         state: state as StoredState,
         changedAt: typeof entry.changedAt === 'string' ? entry.changedAt : base.updatedAt,
+        ...(state === 'commissioned' && (entry.via === 'inspection' || entry.via === 'placement') ? { via: entry.via } : {}),
       };
     }
   }
@@ -69,9 +72,78 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
     if (typeof raw.ui.lastBuilding === 'string' && knownIds.has(raw.ui.lastBuilding)) ui.lastBuilding = raw.ui.lastBuilding;
   }
   return {
-    version: 1,
+    version: 2,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : base.updatedAt,
     buildings,
     ui,
+    game: sanitizeGame(raw.game, knownIds, now),
   };
+}
+
+const DAY = /^\d{4}-\d{2}-\d{2}$/;
+const KINDS: readonly LogKind[] = ['startup', 'inspection', 'placement', 'review', 'puzzle', 'lab', 'mock'];
+const ATTEMPTS: readonly AttemptKind[] = ['startup', 'inspection', 'placement'];
+const isStr = (v: unknown): v is string => typeof v === 'string';
+const num = (v: unknown, min = 0): number => (typeof v === 'number' && Number.isFinite(v) && v >= min ? v : min);
+const strings = (v: unknown): string[] => (Array.isArray(v) ? v.filter(isStr) : []);
+const ints = (v: unknown): number[] => (Array.isArray(v) ? v.filter((x): x is number => Number.isInteger(x) && x >= 0 && x < 12) : []);
+
+function recordOf<T>(v: unknown, keep: (k: string, x: unknown) => T | null): Record<string, T> {
+  const out: Record<string, T> = {};
+  if (!isObject(v)) return out;
+  for (const [k, x] of Object.entries(v)) {
+    const r = keep(k, x);
+    if (r !== null) out[k] = r;
+  }
+  return out;
+}
+
+/** Validates the game block field by field; anything malformed falls back to its empty value. */
+export function sanitizeGame(raw: unknown, knownIds: ReadonlySet<string>, now: () => string): GameState {
+  const base = freshGame();
+  if (!isObject(raw)) return base;
+  const known = (k: string) => knownIds.has(k);
+  const game: GameState = {
+    notesOpened: recordOf(raw.notesOpened, (k, x) => (known(k) && isStr(x) ? x : null)),
+    startups: recordOf(raw.startups, (k, x) => (known(k) && isObject(x) ? { prevIds: strings(x.prevIds) } : null)),
+    inspections: recordOf(raw.inspections, (k, x) =>
+      known(k) && isObject(x) && isStr(x.day) && DAY.test(x.day) ? { day: x.day, fails: Math.floor(num(x.fails)), prevIds: strings(x.prevIds) } : null,
+    ),
+    placements: recordOf(raw.placements, (k, x) => (known(k) && isObject(x) && isStr(x.lastStartDay) && DAY.test(x.lastStartDay) ? { lastStartDay: x.lastStartDay } : null)),
+    active: sanitizeActive(raw.active, knownIds),
+    xp: Math.floor(num(raw.xp)),
+    seen: recordOf(raw.seen, (_k, x) => (typeof x === 'number' && x >= 1 ? Math.floor(x) : null)),
+    days: recordOf(raw.days, (k, x) => (DAY.test(k) && typeof x === 'number' && x >= 1 ? Math.floor(x) : null)),
+    bestStreak: Math.floor(num(raw.bestStreak)),
+    badges: recordOf(raw.badges, (_k, x) => (isStr(x) ? x : null)),
+    bonus: recordOf(raw.bonus, (k, x) => (known(k) && x === true ? (true as const) : null)),
+    flags: [],
+    log: [],
+  };
+  if (Array.isArray(raw.flags)) {
+    for (const f of raw.flags) {
+      if (!isObject(f) || !isStr(f.id) || !isStr(f.questionId)) continue;
+      game.flags.push({ id: f.id, questionId: f.questionId, note: isStr(f.note) ? f.note.slice(0, 2000) : '', myAnswer: ints(f.myAnswer), at: isStr(f.at) ? f.at : now() });
+    }
+  }
+  if (Array.isArray(raw.log)) {
+    for (const e of raw.log) {
+      if (!Array.isArray(e) || e.length !== 4) continue;
+      const [q, ok, at, kind] = e as unknown[];
+      if (isStr(q) && (ok === 0 || ok === 1) && isStr(at) && KINDS.includes(kind as LogKind)) game.log.push([q, ok, at, kind as LogKind] as LogEntry);
+    }
+    if (game.log.length > LOG_CAP) game.log = game.log.slice(game.log.length - LOG_CAP);
+  }
+  return game;
+}
+
+function sanitizeActive(raw: unknown, knownIds: ReadonlySet<string>): ActiveAttempt | null {
+  if (!isObject(raw)) return null;
+  if (!isStr(raw.id) || !ATTEMPTS.includes(raw.kind as AttemptKind) || !isStr(raw.building) || !knownIds.has(raw.building)) return null;
+  const questionIds = strings(raw.questionIds);
+  if (questionIds.length === 0 || !isStr(raw.startedAt) || !isStr(raw.day) || !DAY.test(raw.day)) return null;
+  const answers = recordOf(raw.answers, (k, x) =>
+    questionIds.includes(k) && isObject(x) && typeof x.correct === 'boolean' ? { chosen: ints(x.chosen), correct: x.correct, xp: Math.floor(num(x.xp)) } : null,
+  );
+  return { id: raw.id, kind: raw.kind as AttemptKind, building: raw.building, questionIds, seed: Math.floor(num(raw.seed)), startedAt: raw.startedAt, day: raw.day, answers };
 }

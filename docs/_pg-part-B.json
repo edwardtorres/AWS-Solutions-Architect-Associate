@@ -1,0 +1,506 @@
+{
+  "features": [
+    {
+      "id": "elasticache-valkey",
+      "name": "ElastiCache for Valkey",
+      "introduced": "2024-10",
+      "certainty": "confirmed",
+      "source": "pg-elasticache-valkey",
+      "quote": "ElastiCache for Valkey is now available in all AWS regions.",
+      "patterns": [
+        "\\bvalkey\\b"
+      ],
+      "predecessorPatterns": [
+        "redis oss",
+        "elasticache for redis"
+      ],
+      "predecessor": "ElastiCache for Redis OSS (node-based clusters or replication groups)"
+    },
+    {
+      "id": "elasticache-serverless",
+      "name": "ElastiCache Serverless (including reads from replicas)",
+      "introduced": "2023-11",
+      "certainty": "confirmed",
+      "source": "pg-elasticache-serverless",
+      "quote": "With ElastiCache Serverless, you can create a highly available and scalable cache in less than a minute, eliminating the need to plan for, provision, and manage cache cluster capacity.",
+      "patterns": [
+        "elasticache serverless",
+        "serverless (elasticache|cache|redis|memcached)",
+        "elasticache[\\s\\S]{0,60}serverless"
+      ],
+      "predecessorPatterns": [
+        "node-based",
+        "replication group",
+        "cache cluster"
+      ],
+      "predecessor": "Node-based ElastiCache cluster or replication group that the team sizes, scales and places in Availability Zones. Reading from replicas on a serverless cache (the cache-pavilion-007 claim) is not dated by this page: needs-verification"
+    },
+    {
+      "id": "dms-schema-conversion",
+      "name": "DMS Schema Conversion",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-dms-schema-conversion",
+      "quote": "DMS Schema Conversion is a fully managed feature of AWS DMS that automatically assesses and converts the database schema to a format compatible with the target database service in AWS, enabling you to modernize your database and analytics workloads.",
+      "patterns": [
+        "dms schema conversion",
+        "schema conversion (feature|in (aws )?dms)",
+        "dms sc\\b"
+      ],
+      "predecessorPatterns": [
+        "schema conversion tool",
+        "\\bsct\\b"
+      ],
+      "predecessor": "AWS Schema Conversion Tool (SCT) run on a workstation"
+    },
+    {
+      "id": "dynamodb-on-demand-max-throughput",
+      "name": "DynamoDB on-demand maximum throughput",
+      "introduced": "2024-05",
+      "certainty": "confirmed",
+      "source": "pg-ddb-max-throughput",
+      "quote": "Starting today, you can optionally configure maximum read or write (or both) throughput for individual on-demand tables and associated secondary indexes, making it easy to balance costs and performance.",
+      "patterns": [
+        "maximum (read|write)( and (read|write))? throughput",
+        "(configure|configured|set) (a )?maximum (table )?throughput",
+        "no maximum throughput",
+        "Max(Read|Write)RequestUnits"
+      ],
+      "predecessorPatterns": [
+        "provisioned capacity[\\s\\S]{0,40}auto scaling",
+        "auto scaling[\\s\\S]{0,40}maximum capacity"
+      ],
+      "predecessor": "On-demand mode with only account-level quotas, or provisioned capacity with auto scaling and a chosen maximum to bound spend"
+    },
+    {
+      "id": "dynamodb-warm-throughput",
+      "name": "DynamoDB warm throughput",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-ddb-warm-throughput",
+      "quote": "You can now check your tables’ warm throughput value to assess if your table can handle large traffic spikes for peak events.",
+      "patterns": [
+        "warm throughput",
+        "pre-?warm\\w*[\\s\\S]{0,60}(table|dynamodb)",
+        "(table|dynamodb)[\\s\\S]{0,60}pre-?warm"
+      ],
+      "predecessorPatterns": [
+        "previous (peak|traffic)",
+        "scheduled scaling",
+        "provisioned capacity[\\s\\S]{0,60}(before|ahead|raise)"
+      ],
+      "predecessor": "Letting on-demand or auto scaling adapt to the spike (throttling risk), or raising provisioned capacity ahead of the event"
+    },
+    {
+      "id": "dms-serverless",
+      "name": "DMS Serverless",
+      "introduced": "2023-06",
+      "certainty": "confirmed",
+      "source": "pg-dms-serverless",
+      "quote": "AWS DMS Serverless is now available in all AWS Regions, except China (Beijing, operated by Sinnet), China (Ningxia, operated by NWCD), AWS GovCloud (US-East), and AWS GovCloud (US-West).",
+      "patterns": [
+        "dms serverless",
+        "serverless (dms|replication)",
+        "database migration service serverless"
+      ],
+      "predecessorPatterns": [
+        "replication instance"
+      ],
+      "predecessor": "DMS replication instance that the team sizes, provisions and patches"
+    },
+    {
+      "id": "aurora-io-optimized",
+      "name": "Aurora I/O-Optimized",
+      "introduced": "2023-05",
+      "certainty": "confirmed",
+      "source": "pg-aurora-io-optimized",
+      "quote": "With Aurora I/O-Optimized, there are zero charges for read and write I/O operations—you only pay for your database instances and storage usage, making it easy to predict your database spend up front.",
+      "patterns": [
+        "i/o-optimized",
+        "io-optimized",
+        "aurora standard"
+      ],
+      "predecessorPatterns": [
+        "aurora standard",
+        "per[- ]request i/o",
+        "i/o charges",
+        "charged for (read and write )?i/o"
+      ],
+      "predecessor": "Aurora Standard configuration with per-request I/O charges"
+    },
+    {
+      "id": "aurora-serverless-v2-scale-to-zero",
+      "name": "Aurora Serverless v2 scale to zero (auto-pause at 0 ACU)",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-aurora-sv2-zero",
+      "quote": "Instead of scaling down to 0.5 ACUs, the database can now scale down to 0 ACUs.",
+      "patterns": [
+        "\\b(0|zero) acus?\\b",
+        "auto-?pause",
+        "aurora serverless[\\s\\S]{0,200}(pause|scal\\w+ (down )?to (zero|0)\\b)",
+        "pauses? (when|while) idle",
+        "min(imum)? (capacity|acu)\\w* (of|to|at|is|set to) (0|zero) acus?"
+      ],
+      "predecessorPatterns": [
+        "0\\.5 acus?",
+        "serverless v1",
+        "stop(ped)? (and start )?the (db |aurora )?(cluster|instance)",
+        "scheduled (stop|start)"
+      ],
+      "predecessor": "Aurora Serverless v2 with a 0.5 ACU minimum, or stopping and starting the cluster on a schedule"
+    },
+    {
+      "id": "rds-gp3-storage",
+      "name": "RDS gp3 storage",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-rds-gp3",
+      "quote": "Amazon RDS gp3 volumes give you the flexibility to provision storage performance independently of storage capacity, paying only for the resources you need.",
+      "patterns": [
+        "\\brds\\b[\\s\\S]{0,500}\\bgp3\\b",
+        "\\bgp3\\b[\\s\\S]{0,500}\\brds\\b"
+      ],
+      "predecessorPatterns": [
+        "\\bgp2\\b",
+        "provisioned iops",
+        "\\bio1\\b"
+      ],
+      "predecessor": "RDS General Purpose (gp2) or Provisioned IOPS (io1) storage"
+    },
+    {
+      "id": "eventbridge-pipes",
+      "name": "EventBridge Pipes",
+      "introduced": "2022-12",
+      "certainty": "confirmed",
+      "source": "pg-eventbridge-pipes",
+      "quote": "EventBridge Pipes makes it easy to connect your applications with data from sources including Amazon SQS, Amazon Kinesis, Amazon DynamoDB, Amazon Managed Streaming Kafka, self-managed Kafka, and Amazon MQ.",
+      "patterns": [
+        "eventbridge pipes?\\b",
+        "\\bpipes\\b[\\s\\S]{0,40}eventbridge"
+      ],
+      "predecessorPatterns": [
+        "lambda[\\s\\S]{0,60}(poll|reads? from|consum|forward)",
+        "glue code",
+        "custom (polling|integration|consumer)"
+      ],
+      "predecessor": "A Lambda function (or custom consumer code) that polls the source, filters, enriches and calls the target"
+    },
+    {
+      "id": "eventbridge-scheduler",
+      "name": "EventBridge Scheduler",
+      "introduced": "2022-11-10",
+      "certainty": "confirmed",
+      "source": "pg-eventbridge-scheduler",
+      "quote": "EventBridge Scheduler enables customers to schedule millions of events and tasks across 200+ AWS services without provisioning or managing the underlying infrastructure.",
+      "patterns": [
+        "eventbridge scheduler",
+        "amazon scheduler"
+      ],
+      "predecessorPatterns": [
+        "scheduled rule",
+        "eventbridge rule[\\s\\S]{0,60}(schedule|cron|rate)",
+        "cron expression",
+        "schedule expression"
+      ],
+      "predecessor": "EventBridge scheduled rule (cron or rate expression) on the default event bus"
+    },
+    {
+      "id": "regional-nat-gateway",
+      "name": "Regional NAT gateway (regional availability mode)",
+      "introduced": "2025-11",
+      "certainty": "confirmed",
+      "source": "pg-nat-regional",
+      "quote": "With this launch, you can create a NAT Gateway and set its availability to regional.",
+      "patterns": [
+        "regional nat",
+        "regional availability mode",
+        "availability mode",
+        "nat gateway[\\s\\S]{0,60}regional (mode|availability)",
+        "regional (mode|availability)[\\s\\S]{0,60}nat gateway"
+      ],
+      "predecessorPatterns": [
+        "zonal nat",
+        "nat gateway (in|per) (each|every) (az|availability zone)",
+        "(one|a|separate|second) (public )?nat gateway in (each|every|the same)",
+        "nat gateways? in (each|every|both|multiple|two|three)"
+      ],
+      "predecessor": "One zonal NAT gateway in each Availability Zone with a route table per zone"
+    },
+    {
+      "id": "vpn-large-bandwidth-tunnel",
+      "name": "Site-to-Site VPN Large Bandwidth Tunnel (5 Gbps)",
+      "introduced": "2025-11",
+      "certainty": "confirmed",
+      "source": "pg-vpn-5gbps",
+      "quote": "With this launch, customers can now configure their tunnel bandwidth to 5 Gbps, reducing the need to deploy complex protocols such as ECMP while ensuring consistent bandwidth performance.",
+      "patterns": [
+        "large bandwidth",
+        "5 ?gbps[\\s\\S]{0,60}(tunnel|vpn)",
+        "(tunnel|vpn)[\\s\\S]{0,60}5 ?gbps"
+      ],
+      "predecessorPatterns": [
+        "1\\.25 ?gbps",
+        "\\becmp\\b",
+        "multiple (vpn )?(tunnels|connections)"
+      ],
+      "predecessor": "Standard 1.25 Gbps tunnels spread with ECMP across several tunnels or connections on a transit gateway, or Direct Connect"
+    },
+    {
+      "id": "database-savings-plans",
+      "name": "Database Savings Plans",
+      "introduced": "2025-12-02",
+      "certainty": "confirmed",
+      "source": "pg-database-savings-plans",
+      "quote": "Database Savings Plans automatically apply to eligible serverless and provisioned instance usage regardless of supported engine, instance family, size, deployment option, or AWS Region.",
+      "patterns": [
+        "database savings plans?"
+      ],
+      "predecessorPatterns": [
+        "reserved (db |database )?(instances?|nodes?)",
+        "reserved capacity"
+      ],
+      "predecessor": "Reserved DB instances, reserved cache nodes and DynamoDB reserved capacity"
+    },
+    {
+      "id": "cost-allocation-tag-backfill",
+      "name": "Cost allocation tag backfill",
+      "introduced": "2024-03",
+      "certainty": "confirmed",
+      "source": "pg-cost-tag-backfill",
+      "quote": "This retroactive application feature is available in all Commercial AWS Regions.",
+      "patterns": [
+        "backfill",
+        "retroactiv\\w+[\\s\\S]{0,80}tag",
+        "tags?[\\s\\S]{0,80}retroactiv",
+        "cost allocation tags?[\\s\\S]{0,120}(historical|past|previous months)"
+      ],
+      "predecessorPatterns": [
+        "only (from|after|going forward)",
+        "from the (activation|date)",
+        "going forward"
+      ],
+      "predecessor": "Tags apply to cost data only from the activation date forward"
+    },
+    {
+      "id": "athena-query-result-reuse",
+      "name": "Athena query result reuse",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-athena-result-reuse",
+      "quote": "Query Result Reuse works by returning a previously stored query result when a repeat query is submitted.",
+      "patterns": [
+        "query result reuse",
+        "result reuse",
+        "reuse[\\s\\S]{0,30}(previous|cached|prior|query) results?"
+      ],
+      "predecessorPatterns": [
+        "materializ",
+        "\\bctas\\b|create table as select",
+        "cache"
+      ],
+      "predecessor": "Re-running the query, or caching or materializing results outside Athena (for example CTAS or an application cache)"
+    },
+    {
+      "id": "cloudfront-oac",
+      "name": "CloudFront origin access control (OAC)",
+      "introduced": "2022-08-25",
+      "certainty": "confirmed",
+      "source": "pg-cloudfront-oac",
+      "quote": "Origin Access Control improves upon Origin Access Identity by strengthening security and deepening feature integrations.",
+      "patterns": [
+        "origin access control",
+        "\\boac\\b"
+      ],
+      "predecessorPatterns": [
+        "origin access identit",
+        "\\boai\\b"
+      ],
+      "predecessor": "CloudFront origin access identity (OAI)"
+    },
+    {
+      "id": "metric-math-target-tracking",
+      "name": "Target tracking with metric math (SQS backlog per instance or task)",
+      "introduced": "2022-12",
+      "certainty": "confirmed",
+      "source": "pg-asg-metric-math",
+      "quote": "Now, if the custom metric is a simple function of other existing metrics, you can use CloudWatch Metric Math in the Target Tracking policy, instead of publishing (and paying for) a new custom CloudWatch metric.",
+      "patterns": [
+        "metric math",
+        "math expression"
+      ],
+      "predecessorPatterns": [
+        "custom[- ](cloudwatch )?metric",
+        "backlog[- ]per[- ](instance|task)",
+        "publish\\w* [\\s\\S]{0,30}metric"
+      ],
+      "predecessor": "Publishing a custom CloudWatch backlog-per-instance metric yourself and tracking it. EC2 Auto Scaling 2022-12; Application Auto Scaling (ECS and others) followed in 2023-03"
+    },
+    {
+      "id": "ecs-predictive-scaling",
+      "name": "Predictive scaling for Amazon ECS services",
+      "introduced": "2024-11-21",
+      "certainty": "confirmed",
+      "source": "pg-ecs-predictive-scaling",
+      "quote": "Predictive scaling is a new capability that harnesses advanced machine learning algorithms, pre-trained on millions of data points, to proactively scale out ECS services ahead of anticipated demand surges.",
+      "patterns": [
+        "\\becs\\b[\\s\\S]{0,250}predictive scaling",
+        "predictive scaling[\\s\\S]{0,250}\\becs\\b"
+      ],
+      "predecessorPatterns": [
+        "scheduled (scaling|action)",
+        "target tracking",
+        "step scaling"
+      ],
+      "predecessor": "Scheduled scaling, target tracking or step scaling only"
+    },
+    {
+      "id": "aurora-global-switchover",
+      "name": "Aurora Global Database switchover (renamed from managed planned failover)",
+      "introduced": "2023-08",
+      "certainty": "approximate",
+      "source": "pg-aurora-global-switchover",
+      "quote": "Starting today, we are also renaming “Managed Planned Failover” to “Global Database Switchover”, which is a fully managed cross-region database failover experience meant for planned events such as regional rotations.",
+      "patterns": [
+        "global (database|cluster)[\\s\\S]{0,200}switchover",
+        "switchover[\\s\\S]{0,200}global (database|cluster)",
+        "managed planned failover"
+      ],
+      "predecessorPatterns": [
+        "managed planned failover",
+        "detach",
+        "promot\\w+[\\s\\S]{0,30}secondary"
+      ],
+      "predecessor": "Managed planned failover (same capability under its older name, before 2023-08); or detaching and promoting a secondary cluster"
+    },
+    {
+      "id": "nat-gateway-secondary-ips",
+      "name": "NAT gateway multiple secondary IPv4 addresses (up to 8)",
+      "introduced": "2023-02",
+      "certainty": "confirmed",
+      "source": "pg-nat-secondary-ips",
+      "quote": "This feature allows you to associate up to a total of eight IP addresses to further increase this limit by eight times to 440,000 concurrent connections to a single destination.",
+      "patterns": [
+        "nat gateway[\\s\\S]{0,200}(secondary|additional)[\\s\\S]{0,40}(ip|address)",
+        "(secondary|additional)[\\s\\S]{0,40}(ip|address)[\\s\\S]{0,200}nat gateway",
+        "440,?000"
+      ],
+      "predecessorPatterns": [
+        "55,?000",
+        "(second|another|additional|multiple) nat gateways?"
+      ],
+      "predecessor": "One IP address per NAT gateway (55,000 concurrent connections to one destination) and extra NAT gateways to scale"
+    },
+    {
+      "id": "firehose-zero-buffering",
+      "name": "Firehose zero buffering",
+      "introduced": "2023-12",
+      "certainty": "confirmed",
+      "source": "pg-firehose-zero-buffering",
+      "quote": "With zero buffering, customers can setup a Amazon Kinesis Data Firehose stream to not buffer data before delivery, and most streams with no additional processing are delivered within five seconds.",
+      "patterns": [
+        "zero buffering",
+        "buffer\\w* (interval|hint)s?[\\s\\S]{0,30}(of )?(0|zero)\\b",
+        "(0|zero)[- ]second buffer"
+      ],
+      "predecessorPatterns": [
+        "60[- ]seconds?",
+        "buffer\\w* (interval|hint)",
+        "buffer interval"
+      ],
+      "predecessor": "Buffer interval of at least 60 seconds"
+    },
+    {
+      "id": "security-hub-unified",
+      "name": "Security Hub (unified, 2025) versus Security Hub CSPM",
+      "introduced": "2025-12",
+      "certainty": "confirmed",
+      "source": "pg-security-hub-ga",
+      "quote": "With general availability, Security Hub now includes near real-time risk analytics, advanced trends, unified enablement and management, and streamlined pricing across multiple AWS security services.",
+      "patterns": [
+        "security hub cspm",
+        "security hub[\\s\\S]{0,120}(exposure|unified|risk analytics|near real-time)",
+        "exposure findings?"
+      ],
+      "predecessorPatterns": [
+        "security hub[\\s\\S]{0,120}(aggregat|standards|cis|foundational)",
+        "aggregat\\w+ [\\s\\S]{0,20}findings"
+      ],
+      "predecessor": "AWS Security Hub as a findings aggregator with standards checks (now documented as AWS Security Hub CSPM)"
+    },
+    {
+      "id": "aurora-dsql",
+      "name": "Amazon Aurora DSQL",
+      "introduced": "2025-05",
+      "certainty": "confirmed",
+      "source": "pg-aurora-dsql-ga",
+      "quote": "Aurora DSQL enables you to build always available applications with virtually unlimited scalability, the highest availability, and zero infrastructure management.",
+      "patterns": [
+        "aurora dsql",
+        "\\bdsql\\b"
+      ],
+      "predecessorPatterns": [
+        "aurora global database",
+        "dynamodb global tables",
+        "multi-region"
+      ],
+      "predecessor": "Aurora Global Database (single writer Region) or DynamoDB global tables for multi-Region writes"
+    },
+    {
+      "id": "dynamodb-price-cut-2024",
+      "name": "DynamoDB on-demand price cut (50%) and lower global tables prices",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-ddb-price-cut",
+      "quote": "Starting today, we have made Amazon DynamoDB even more cost-effective by reducing prices for on-demand throughput by 50% and global tables by up to 67%.",
+      "patterns": [
+        "^(?=[\\s\\S]*dynamodb)(?=[\\s\\S]*(steady|forecast\\w*|predictable))(?=[\\s\\S]*provisioned capacity)[\\s\\S]*$",
+        "dynamodb reserved capacity",
+        "(purchase|buy)\\w* reserved capacity[\\s\\S]{0,80}provisioned",
+        "on-demand[\\s\\S]{0,120}(not the lower-cost|lower-cost mode)"
+      ],
+      "predecessorPatterns": [
+        "provisioned capacity",
+        "reserved capacity"
+      ],
+      "predecessor": "Provisioned capacity (with reserved capacity) as the lowest-cost mode for steady, forecastable traffic"
+    }
+  ],
+  "preGuide": [
+    {
+      "id": "glue-sensitive-data-detection",
+      "name": "AWS Glue sensitive data detection",
+      "introduced": "2022-04",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/04/aws-announcing-sensitive-data-detection-glue/",
+      "quote": "Sensitive data detection in AWS Glue identifies a variety of PII and other sensitive data like credit card numbers.",
+      "note": "GA before the cutoff. Later additions (250 entity types 2023-06; entity-level actions 2023-11) are post-guide, but refinery-004 would only depend on them if it names entity-level actions or the 250 types."
+    },
+    {
+      "id": "rds-multi-az-db-cluster",
+      "name": "RDS Multi-AZ DB cluster (two readable standbys)",
+      "introduced": "2022-03",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/03/amazon-rds-multi-az-transaction-commit-latency/",
+      "quote": "This configuration supports up to 2x faster transaction commits than a Multi-AZ DB instance deployment with one standby, without compromising data durability.",
+      "note": "Pre-guide. Only later add-ons are post-guide: up to 15 read replicas (2023-04 MySQL, 2023-05 PostgreSQL), gp3 support (2024-02), IAM database authentication (2024-10)."
+    },
+    {
+      "id": "cloud-wan",
+      "name": "AWS Cloud WAN",
+      "introduced": "2022-07-12",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/07/general-availability-aws-cloud-wan/",
+      "quote": "Cloud WAN automatically creates a global network across AWS Regions by using Border Gateway Protocol (BGP) so that you can easily exchange routes around the world.",
+      "note": "GA 2022-07 (day from search summary of the preview blog update), before the cutoff. Post-guide additions: Service Insertion 2024-06, Direct Connect attachment 2024-11, Routing Policy 2025-11."
+    },
+    {
+      "id": "ecs-min-capacity-0",
+      "name": "ECS service auto scaling minimum capacity 0",
+      "introduced": "unknown (ECS service auto scaling itself 2016-09-01)",
+      "certainty": "unconfirmed",
+      "note": "The ECS developer guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' but gives no date. Application Auto Scaling doc history lists ECS support on 2016-09-01 and nothing about a minimum of 0. Best judgement: pre-guide and not a registry feature. Predictive scaling for ECS (2024-11-21) is registered separately as ecs-predictive-scaling."
+    }
+  ],
+  "notes": "Dates come from the What's New URL path (year/month) and search summaries; the fetched What's New page text carries no 'Posted on' line, so each quote supports the launch, not the date itself. Day-level dates are given only where a search summary stated them (EventBridge Scheduler 2022-11-10, OAC 2022-08-25, Database Savings Plans 2025-12-02, ECS predictive scaling 2024-11-21). Corrections to the candidate list: Athena query result reuse is 2022-11 (not 2022-08); DMS Schema Conversion announced 2022-11; Cost allocation tag backfill 2024-03; metric math for target tracking is 2022-12 (EC2 Auto Scaling) and 2023-03 (Application Auto Scaling for ECS); Aurora Global Database 'switchover' is a 2023-08 rename of 'managed planned failover' (capability older, so predecessor patterns include the old name). Pre-guide, not features: Glue sensitive data detection (2022-04), RDS Multi-AZ DB cluster (2022-03), Cloud WAN (2022-07-12), ECS minimum capacity 0 (undated, judged pre-guide). Aurora DSQL: no question body (stem, options, explanations) matches; database-registry-004 and -017 mention it only in evidence, which questionBody excludes. Same for the Aurora Serverless v2 zero ACU mention outside service-selection-bureau. DynamoDB pricing (decide): the 2024-11 on-demand cut (50%) is registered as dynamodb-price-cut-2024, with patterns matching DynamoDB questions that set provisioned or reserved capacity against on-demand for steady traffic. Questions whose key depends on provisioned or reserved being cheaper than on-demand: capacity-meter-001, capacity-meter-004, service-selection-bureau-002, service-selection-bureau-010, database-registry-009. Not price-dependent (idle or unpredictable traffic, or auto scaling vs fixed): capacity-meter-003, capacity-meter-008, database-registry-008, service-selection-bureau-003. DynamoDB reserved capacity: no change found; Database Savings Plans (2025-12) now also cover DynamoDB, so reserved-capacity answers should carry a note, but the claim 'reserved capacity exists' was not re-verified. Regional NAT gateway, VPN Large Bandwidth Tunnel and Security Hub unified were found in What's New with launch sentences. Security Hub unified patterns miss watchtower-008 (it says only 'AWS Security Hub' without the CSPM or exposure wording); that question's wording is the predecessor design. Security Hub (unified) rename: the earlier service is called Security Hub CSPM from 2025-12 on; archive-annex-010 uses the CSPM name already. rds-gp3-storage matches tuning-bay-006 only because the pattern requires 'rds' within 500 characters of gp3; EBS gp3 questions (freight-depot, block-warehouse, durable-dock) do not match, which is intended since EBS gp3 dates from 2020-12. Not registered: ElastiCache Serverless 'read from replicas' (cache-pavilion-007) could not be dated from the launch page and should go to needs-verification if the key depends on it."
+}

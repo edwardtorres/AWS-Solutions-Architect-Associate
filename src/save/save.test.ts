@@ -23,7 +23,7 @@ class MemoryStorage implements KeyValueStorage {
 
 const makeStore = (storage: KeyValueStorage | null) => createSaveStore({ knownIds: known, storage, now: clock });
 
-describe('save schema v1', () => {
+describe('save schema', () => {
   it('starts fresh with version 1 and nothing built', () => {
     const store = makeStore(new MemoryStorage());
     const s = store.getSnapshot();
@@ -64,13 +64,13 @@ describe('migrations', () => {
     for (let v = 0; v < CURRENT_VERSION; v += 1) expect(MIGRATIONS[v]).toBeTypeOf('function');
   });
 
-  it('migrates the unversioned v0 shape to v1 and writes it back', () => {
+  it('migrates the unversioned v0 shape to the current version and writes it back', () => {
     const storage = new MemoryStorage();
     storage.setItem(STORAGE_KEY, JSON.stringify({ buildings: { 'identity-keep': 'commissioned', bogus: 'commissioned', gatehouse: 'planned' } }));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
     expect(Object.keys(store.getSnapshot().save.buildings)).toEqual(['identity-keep']);
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(1);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(CURRENT_VERSION);
   });
 
   it('prunes unknown ids and coerces bad fields when sanitizing', () => {
@@ -226,5 +226,87 @@ describe('derived building state', () => {
     save.buildings['safe-harbor-account'] = { state: 'under_construction', changedAt: clock() };
     save.buildings['pillar-plaza'] = { state: 'commissioned', changedAt: clock() };
     expect(state('ledger-office', save)).toBe('planned');
+  });
+});
+
+describe('v1 to v2 migration', () => {
+  const v1 = {
+    version: 1,
+    updatedAt: '2025-12-01T00:00:00.000Z',
+    buildings: { 'identity-keep': { state: 'commissioned', changedAt: '2025-12-01T00:00:00.000Z' }, gatehouse: { state: 'under_construction', changedAt: '2025-12-02T00:00:00.000Z' }, ghost: { state: 'commissioned', changedAt: 'x' } },
+    ui: { view: 'atlas', lastBuilding: 'gatehouse', roads: 'all' },
+  };
+
+  it('keeps v1 progress and UI untouched and adds an empty game block', () => {
+    const r = migrate(v1, known, clock);
+    expect(r.status).toBe('migrated');
+    if (r.status !== 'migrated') return;
+    expect(r.save.version).toBe(2);
+    expect(r.save.buildings).toEqual({ 'identity-keep': v1.buildings['identity-keep'], gatehouse: v1.buildings.gatehouse });
+    expect(r.save.ui).toEqual(v1.ui);
+    expect(r.save.game).toEqual(freshSave(clock).game);
+  });
+
+  it('loads a v1 export through the store, writes v2 back and keeps it', () => {
+    const storage = new MemoryStorage();
+    storage.setItem(STORAGE_KEY, JSON.stringify(v1));
+    const store = makeStore(storage);
+    expect(store.getSnapshot().status).toBe('migrated');
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(2);
+    const other = makeStore(null);
+    expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: v1 })).ok).toBe(true);
+    expect(other.getSnapshot().save.version).toBe(2);
+    expect(Object.keys(other.getSnapshot().save.buildings)).toHaveLength(2);
+  });
+
+  it('round-trips a v2 save with game data through export and import', () => {
+    const store = makeStore(null);
+    store.markNotesOpened('identity-keep');
+    store.addFlag('some-question-001', 'unclear', [2]);
+    const text = store.exportJson();
+    const other = makeStore(null);
+    expect(other.importJson(text).ok).toBe(true);
+    expect(other.getSnapshot().save.game.notesOpened['identity-keep']).toBeTruthy();
+    expect(other.getSnapshot().save.game.flags[0]).toMatchObject({ questionId: 'some-question-001', note: 'unclear', myAnswer: [2] });
+  });
+
+  it('sanitizes a malformed game block field by field', () => {
+    const r = sanitize(
+      {
+        version: 2,
+        buildings: {},
+        ui: {},
+        game: {
+          notesOpened: { gatehouse: '2026-01-01T00:00:00Z', ghost: 'x', 'key-vault': 5 },
+          inspections: { gatehouse: { day: 'yesterday', fails: 1, prevIds: [] }, 'key-vault': { day: '2026-01-02', fails: -4, prevIds: ['a', 7] } },
+          placements: { gatehouse: { lastStartDay: '2026-01-02' } },
+          xp: -50,
+          seen: { 'q-1': 2, 'q-2': 0, 'q-3': 'many' },
+          days: { '2026-01-02': 11, nope: 5 },
+          flags: [{ id: 'f1', questionId: 'q-1', note: 'n', myAnswer: [0, 99, 'x'] }, { id: 7 }],
+          log: [['q-1', 1, '2026-01-02T00:00:00Z', 'inspection'], ['q-2', 3, 'x', 'inspection'], ['q-3', 0, 'x', 'bogus'], 'junk'],
+          active: { id: 'a', kind: 'inspection', building: 'ghost', questionIds: ['q'], startedAt: 'x', day: '2026-01-02' },
+        },
+      },
+      known,
+      clock,
+    );
+    expect(Object.keys(r.game.notesOpened)).toEqual(['gatehouse']);
+    expect(r.game.inspections).toEqual({ 'key-vault': { day: '2026-01-02', fails: 0, prevIds: ['a'] } });
+    expect(r.game.placements).toEqual({ gatehouse: { lastStartDay: '2026-01-02' } });
+    expect(r.game.xp).toBe(0);
+    expect(r.game.seen).toEqual({ 'q-1': 2 });
+    expect(r.game.days).toEqual({ '2026-01-02': 11 });
+    expect(r.game.flags).toHaveLength(1);
+    expect(r.game.flags[0]?.myAnswer).toEqual([0]);
+    expect(r.game.log).toEqual([['q-1', 1, '2026-01-02T00:00:00Z', 'inspection']]);
+    expect(r.game.active).toBeNull();
+  });
+
+  it('caps the answer log at 4000 newest entries', () => {
+    const log = Array.from({ length: 4100 }, (_, i) => [`q-${i}`, 1, '2026-01-02T00:00:00Z', 'inspection']);
+    const r = sanitize({ version: 2, buildings: {}, ui: {}, game: { log } }, known, clock);
+    expect(r.game.log).toHaveLength(4000);
+    expect(r.game.log[0]?.[0]).toBe('q-100');
   });
 });

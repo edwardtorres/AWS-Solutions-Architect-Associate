@@ -13,6 +13,7 @@ import { join, relative } from 'node:path';
 import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
 import { checkQuestions } from './lib/questionChecks.ts';
 import { checkNotes } from './lib/notesChecks.ts';
+import { buildMetaSource } from './lib/questionMeta.ts';
 import {
   diffOutline,
   diffServices,
@@ -66,6 +67,15 @@ async function main() {
       appFiles,
     }).map((x) => `questions: ${x}`),
   );
+
+  const metaPath = join(repoRoot, 'src/questions/meta.ts');
+  let metaNow = '';
+  try {
+    metaNow = readFileSync(metaPath, 'utf8');
+  } catch {
+    metaNow = '';
+  }
+  if (metaNow !== buildMetaSource(qb.questions)) problems.push('questions: src/questions/meta.ts is stale; run `npm run gen:meta`');
 
   let liveNote = '';
   if (live) {

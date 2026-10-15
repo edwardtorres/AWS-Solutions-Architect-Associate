@@ -1,5 +1,10 @@
 import { APP_ID, CORRUPT_KEY, STORAGE_KEY, freshSave, type Save, type StoredState, type UiPrefs } from './schema';
 import { migrate } from './migrate';
+import type { Question } from '../content/types';
+import { systemClock, today as todayKey, type Clock } from '../game/day';
+import { DEFAULT_ENV, type GameEnv } from '../game/env';
+import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, startAttempt, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx, type StartResult } from '../game/engine';
+import type { AttemptKind } from './schema';
 
 /** The subset of the Web Storage API the store uses. */
 export interface KeyValueStorage {
@@ -21,6 +26,12 @@ export interface StoreOptions {
   knownIds: ReadonlySet<string>;
   storage?: KeyValueStorage | null;
   now?: () => string;
+  /** The city the rules apply to; tests pass a synthetic one. */
+  env?: GameEnv;
+  /** Local-day clock; tests inject a time zone and a fixed time. */
+  clock?: Clock;
+  /** Random source for attempt draws. */
+  random?: () => number;
 }
 
 /** window.localStorage can throw on access (private windows, blocked site data). */
@@ -45,7 +56,11 @@ export function createSaveStore(opts: StoreOptions) {
   const now = opts.now ?? (() => new Date().toISOString());
   const storage = opts.storage ?? null;
   const listeners = new Set<() => void>();
+  const env = opts.env ?? DEFAULT_ENV;
+  const clock = opts.clock ?? systemClock;
+  const random = opts.random ?? Math.random;
   let snapshot: Snapshot = load();
+  const ctxFor = (lookup: (id: string) => Question | undefined = () => undefined): Ctx => ({ env, clock, lookup });
 
   function load(): Snapshot {
     if (!storage) return { save: freshSave(now), status: 'storage-unavailable', readOnly: false };
@@ -111,6 +126,40 @@ export function createSaveStore(opts: StoreOptions) {
       else buildings[id] = { state, changedAt: now() };
       commit({ ...snapshot.save, buildings });
     },
+    markNotesOpened(id: string): void {
+      if (!opts.knownIds.has(id)) return;
+      const next = markNotesOpened(snapshot.save, id, { clock });
+      if (next !== snapshot.save) commit(next);
+    },
+    /** Starts (or resumes) an attempt. The caller passes the loaded question bank. */
+    startAttempt(kind: AttemptKind, building: string, bank: readonly Question[]): StartResult {
+      if (snapshot.readOnly) return { ok: false, availability: { ok: false, code: 'wrong-state', message: 'This save is read-only (it is from a newer version of the app).' } };
+      const r = startAttempt(snapshot.save, kind, building, bank, ctxFor(), random);
+      if (r.ok && !r.resumed) commit(r.save);
+      return r;
+    },
+    submitAnswer(questionId: string, chosen: readonly number[], lookup: (id: string) => Question | undefined): AnswerResult | null {
+      const r = submitAnswer(snapshot.save, questionId, chosen, ctxFor(lookup));
+      if (r && r.save !== snapshot.save) commit(r.save);
+      return r;
+    },
+    completeAttempt(): AttemptSummary | null {
+      const r = completeAttempt(snapshot.save, ctxFor());
+      if (!r) return null;
+      commit(r.save);
+      return r.summary;
+    },
+    abandonAttempt(): void {
+      const next = abandonAttempt(snapshot.save, ctxFor());
+      if (next !== snapshot.save) commit(next);
+    },
+    addFlag(questionId: string, note: string, myAnswer: readonly number[]): void {
+      commit(addFlag(snapshot.save, questionId, note, myAnswer, { clock }));
+    },
+    removeFlag(flagId: string): void {
+      commit(removeFlag(snapshot.save, flagId));
+    },
+    today: (): string => todayKey(clock),
     setUi(patch: Partial<UiPrefs>): void {
       const ui = { ...snapshot.save.ui, ...patch };
       if (ui.lastBuilding !== null && !opts.knownIds.has(ui.lastBuilding)) ui.lastBuilding = null;
