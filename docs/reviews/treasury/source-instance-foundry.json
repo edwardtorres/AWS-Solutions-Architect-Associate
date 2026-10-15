@@ -1,0 +1,11 @@
+[
+{"id":"instance-foundry-001","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-002","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-003","verdict":"FIX","issues":["Key (fixed performance instance) is documented. Wrong option A (add more burstable instances in unlimited mode) is not clearly wrong: spreading the load over more instances can bring per-instance CPU back under the baseline, so its why ('average CPU above the baseline incurs surplus credit charges, which is the problem') does not follow."],"suggestedFix":"Replace option A with 'Switch the burstable instances from unlimited mode to standard mode' (why: in standard mode an instance that has used its credits is held to its baseline CPU, so the site would be throttled during sustained load). Verify the standard-mode throttling sentence on the burstable credits page and cite it."},
+{"id":"instance-foundry-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-006","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-007","verdict":"OK","issues":["Second correct option ('make sure the instances have accumulated sufficient metric data') is a precondition the stem already satisfies ('run for months'), so it is a weak 'action'; documented and correct, though."],"suggestedFix":"Optional: replace it with 'Review the findings and recommended instance types in the Compute Optimizer console' (documented) to make it an action."},
+{"id":"instance-foundry-008","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"instance-foundry-009","verdict":"FIX","issues":["Key (Arm AMI + launch on a Graviton instance type) is correct per the architecture rule.","The why of correct option 2 is garbled: 'an Arm-limited instance cannot be reached by changing an x86 type' reads as nonsense and mixes the key with a distractor's reason.","Stem says 'portable Linux application' but the 'required' steps omit nothing else; acceptable."],"suggestedFix":"Reword correct option 2's why to: 'Graviton is a family of processors designed to deliver the best price performance for workloads on EC2; the application must run on a new instance of a Graviton-based type because an existing x86 instance cannot be changed to an Arm-based type.'"}
+]

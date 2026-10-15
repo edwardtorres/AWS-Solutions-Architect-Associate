@@ -1,0 +1,11 @@
+[
+{"id":"counting-house-001","verdict":"OK","issues":["Second evidence quote (cost allocation tags) supports a wrong option, not the key; harmless."],"suggestedFix":""},
+{"id":"counting-house-002","verdict":"FIX","issues":["Blind dispute resolved: the AWS-generated aws:createdBy tag exists, must be activated in the billing console, and is applied to EC2 instances on RunInstances (AWS-generated tags page, list of supported events), so the key is correct.","But the AWS page says the tag is populated only in a list of Regions (e.g. us-east-1, eu-west-1, ap-southeast-1) and only after the listed creation events; the stem names no Region, and the cited evidence page (cost-alloc-tags) has only the one-line 'tracks who created the resource', not the RunInstances/Region facts."],"suggestedFix":"Add 'in the US East (N. Virginia) Region' to the stem and add the AWS-generated tags page (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tags.html, via add-source) as evidence, with a quote such as 'The AWS-generated tag createdBy is a tag that AWS defines and applies to supported AWS resources for cost allocation purposes.'"},
+{"id":"counting-house-003","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"counting-house-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"counting-house-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"counting-house-006","verdict":"OK","issues":["Second correct option (handle the two-minute notice) is a design practice rather than a purchasing choice, but it is documented and the only sound partner to Spot among the options."],"suggestedFix":""},
+{"id":"counting-house-007","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"counting-house-008","verdict":"OK","issues":["Combines the facts of -003 (recommendation in Cost Explorer) and -004 (Budgets utilization/coverage); near-duplicate content inside the building but a different question shape."],"suggestedFix":""},
+{"id":"counting-house-009","verdict":"OK","issues":[],"suggestedFix":""}
+]
