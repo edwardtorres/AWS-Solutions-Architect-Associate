@@ -191,7 +191,7 @@ const questions: Question[] = [
     bullets: ['3.2-S3', '3.2-S4'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company runs a CPU-intensive AWS Lambda function that encodes video clips. All of the function\'s dependencies are available for the arm64 architecture. The company wants better performance and price performance with the LEAST change to the application. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A company runs a CPU-intensive AWS Lambda function that encodes video clips. All of the function\'s dependencies are available for the arm64 architecture. The company wants faster encoding with the LEAST change to the application. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Change the instruction set architecture of the function to arm64', 'Functions on arm64 (AWS Graviton2) can achieve significantly better price and performance than the same function on x86_64, and AWS suggests arm64 for compute-intensive work such as video encoding.'],
       ['Increase the memory setting of the function', 'Lambda allocates CPU power in proportion to the memory configured, so more memory gives a CPU-bound function more computational power.'],

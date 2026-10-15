@@ -30,7 +30,7 @@ const questions: Question[] = [
     wrong: [
       ['A /28 block, with 16 addresses of which a few are reserved', 'A /28 holds only 16 addresses, far fewer than 120 even before the reserved ones are removed.'],
       ['A /24 block, with 256 addresses of which 251 remain after the reserved addresses', 'A /24 fits the fleet but is twice the size needed, so it is not the smallest block that works.'],
-      ['A /16 block, with 65,536 addresses available for use in the subnet', 'A /16 fits the fleet but is by far larger than needed, so it is not the smallest block that works.'],
+      ['A /16 block, with 65,536 addresses of which 65,531 remain after the reserved addresses', 'A /16 fits the fleet but is by far larger than needed, so it is not the smallest block that works.'],
     ],
     slot: 1,
     evidence: [
