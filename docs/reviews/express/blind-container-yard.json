@@ -1,0 +1,14 @@
+[
+{"id":"container-yard-001","picks":["D"],"ambiguous":false},
+{"id":"container-yard-002","picks":["A","D"],"ambiguous":false},
+{"id":"container-yard-003","picks":["A","D"],"ambiguous":false},
+{"id":"container-yard-004","picks":["A"],"ambiguous":false},
+{"id":"container-yard-005","picks":["B"],"ambiguous":false},
+{"id":"container-yard-006","picks":["B"],"ambiguous":false},
+{"id":"container-yard-007","picks":["C"],"ambiguous":false},
+{"id":"container-yard-008","picks":["A"],"ambiguous":false},
+{"id":"container-yard-009","picks":["B"],"ambiguous":false},
+{"id":"container-yard-010","picks":["D"],"ambiguous":false},
+{"id":"container-yard-011","picks":["D"],"ambiguous":false,"note":"Relies on SnapStart not supporting EFS."},
+{"id":"container-yard-012","picks":["C"],"ambiguous":false}
+]

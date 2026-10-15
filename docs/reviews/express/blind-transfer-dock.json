@@ -1,0 +1,108 @@
+[
+ {
+  "id": "transfer-dock-001",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-002",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-003",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-004",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "relies on knowing Enhanced mode handles very large file counts; moderately sure"
+ },
+ {
+  "id": "transfer-dock-005",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-006",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-007",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "assumes DataSync supports S3->EFS in same Region without agent"
+ },
+ {
+  "id": "transfer-dock-008",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "Transfer Family web app"
+ },
+ {
+  "id": "transfer-dock-009",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "20 TB in 4h needs ~11 Gbps, so 10 Gbps falls short; depends on TB vs TiB, either way >10"
+ },
+ {
+  "id": "transfer-dock-010",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-011",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "Large Bandwidth Tunnel on transit gateway attachments"
+ },
+ {
+  "id": "transfer-dock-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-013",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-014",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ }
+]

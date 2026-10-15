@@ -1,0 +1,69 @@
+[
+ {
+  "id": "ingestion-gate-001",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-002",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "aws:SourceVpce condition"
+ },
+ {
+  "id": "ingestion-gate-003",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-004",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-005",
+  "picks": [
+   "D",
+   "E"
+  ],
+  "ambiguous": false,
+  "note": "Transfer Family VPC endpoint internet-facing with EIPs plus security groups"
+ },
+ {
+  "id": "ingestion-gate-006",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-008",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ingestion-gate-009",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ }
+]

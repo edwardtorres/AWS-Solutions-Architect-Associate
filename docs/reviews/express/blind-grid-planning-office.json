@@ -1,0 +1,105 @@
+[
+ {
+  "id": "grid-planning-office-001",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-002",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-003",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-004",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "PrivateLink works with overlapping CIDRs"
+ },
+ {
+  "id": "grid-planning-office-005",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-006",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-007",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-008",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-009",
+  "picks": [
+   "C",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-010",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-011",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-012",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "/12 is not an allowed VPC size"
+ },
+ {
+  "id": "grid-planning-office-013",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "grid-planning-office-014",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ }
+]

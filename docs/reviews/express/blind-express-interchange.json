@@ -1,0 +1,68 @@
+[
+ {
+  "id": "express-interchange-001",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-002",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-003",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-004",
+  "picks": [
+   "B",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-006",
+  "picks": [
+   "C",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "PrivateLink needs NLB/GWLB front end; NLB can target ALB"
+ },
+ {
+  "id": "express-interchange-008",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "express-interchange-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ }
+]
