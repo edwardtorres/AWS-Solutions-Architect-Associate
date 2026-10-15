@@ -109,9 +109,9 @@ const questions: Question[] = [
     d: 3,
     tags: ['placement-eligible'],
     stem: 'A data-science team is launching one new Amazon EC2 On-Demand Instance for an in-memory analysis application. The application needs about 20 minutes to load its working set into memory every time it starts, and the team uses it only during working hours. The team wants to stop paying for instance usage overnight and still resume the application with its in-memory state each morning. Which solution is the MOST cost-effective?',
-    correct: ['Launch the instance with hibernation enabled on an encrypted root volume that can hold the memory contents, and hibernate it each evening', 'Hibernation saves the memory to the EBS root volume and resumes the running processes later, and no instance usage is charged while it is stopped.'],
+    correct: ['Launch the instance with hibernation enabled and an encrypted root volume that can hold the memory, then hibernate it nightly', 'Hibernation saves the memory to the EBS root volume and resumes the running processes later, and no instance usage is charged while it is stopped.'],
     wrong: [
-      ['Stop the instance each evening and start it again each morning', 'Stopping does not save the memory contents, so the application would spend another 20 minutes loading its working set.'],
+      ['Stop the instance each evening and start it again each morning, expecting the application to continue where it left off', 'Stopping does not save the memory contents, so the application would spend another 20 minutes loading its working set.'],
       ['Keep the instance running overnight and buy a Compute Savings Plan to lower the hourly cost', 'The team would still pay for instance usage overnight, which it wants to avoid.'],
       ['Create an AMI each evening, terminate the instance, and launch a new instance from the AMI each morning', 'A new instance boots fresh from the AMI, so the in-memory state is lost and the 20-minute load starts again.'],
     ],
@@ -171,7 +171,7 @@ const questions: Question[] = [
     stem: 'A company runs a web application on one Amazon EC2 instance. The instance is overloaded during a daily peak of about three hours and mostly idle the rest of the day. Changing the instance size requires stopping the instance, and the company cannot accept downtime during the peak. Which solution is the MOST cost-effective?',
     correct: ['Put the instances in an Auto Scaling group behind an Application Load Balancer and add instances only during the peak', 'Horizontal scaling adds and removes instances as demand changes, so no instance has to be stopped and the extra capacity is paid for only during the peak.'],
     wrong: [
-      ['Change the instance to a larger instance type and keep it running all day', 'The type change requires stopping the instance, and the larger rate is paid for all day, including the idle hours.'],
+      ['Change the instance to a larger instance type and keep it running all day so that the peak is covered without extra instances', 'The type change requires stopping the instance, and the larger rate is paid for all day, including the idle hours.'],
       ['Run a second instance of the same size around the clock and place both behind a load balancer', 'The second instance runs through the idle hours too, and nothing removes the extra capacity when the peak ends.'],
       ['Buy Reserved Instances for a larger instance type that can handle the peak and resize the instance', 'The resize still requires stopping the instance, and the commitment pays for peak-sized capacity all day.'],
     ],
@@ -249,9 +249,9 @@ const questions: Question[] = [
     d: 2,
     tags: ['mock-reserve', 'trap:alb-nlb-gwlb'],
     stem: 'A company runs four low-traffic HTTP services in one VPC, and each service has its own Application Load Balancer. Clients reach the services by host names such as orders.example.com and billing.example.com. The company wants to reduce the number of load balancers while keeping routing by host name. Which solution meets these requirements with the LEAST change?',
-    correct: ['Replace them with one Application Load Balancer that has listener rules on the host header, each forwarding to its own target group', 'An Application Load Balancer can route requests by the host name of each request, so one load balancer can front all four services.'],
+    correct: ['Replace them with one Application Load Balancer that has host-header listener rules, each forwarding to its own target group', 'An Application Load Balancer can route requests by the host name of each request, so one load balancer can front all four services.'],
     wrong: [
-      ['Replace them with one Network Load Balancer that has a listener on a different port for each service', 'A Network Load Balancer works at layer 4, so clients would have to use ports instead of host names to choose a service.'],
+      ['Replace them with one Network Load Balancer that has a separate listener on a different port for each service, so that each host name maps to a port', 'A Network Load Balancer works at layer 4, so clients would have to use ports instead of host names to choose a service.'],
       ['Replace them with one Gateway Load Balancer that has each service registered as a target', 'A Gateway Load Balancer deploys and scales virtual appliances and does not route requests by host name.'],
       ['Keep the four Application Load Balancers and place an Amazon CloudFront distribution in front of them', 'The number of load balancers stays the same, so the requirement to reduce them is not met.'],
     ],

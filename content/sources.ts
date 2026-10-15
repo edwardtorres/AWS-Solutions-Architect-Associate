@@ -614,6 +614,7 @@ const sources: Source[] = [
   aws('dax-cluster-mgmt', `${D}/amazondynamodb/latest/developerguide/DAX.cluster-management.html`, 'Managing DAX clusters'),
   aws('dx-gateway', `${D}/directconnect/latest/UserGuide/direct-connect-gateways-intro.html`, 'Direct Connect gateways'),
   aws('vpn-accelerated', `${D}/vpn/latest/s2svpn/accelerated-vpn.html`, 'Accelerated Site-to-Site VPN connections'),
+  aws('dynamodb-gsi', `${D}/amazondynamodb/latest/developerguide/GSI.html`, 'Using global secondary indexes in DynamoDB'),
 ];
 
 export default sources;

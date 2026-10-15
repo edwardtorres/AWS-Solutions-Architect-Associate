@@ -47,7 +47,7 @@ const questions: Question[] = [
     stem: 'A company is deploying an order-processing system. The production database must keep running automatically if the Availability Zone that hosts it fails. A staging copy of the system is used only for release testing, and a few minutes of downtime after a failure is acceptable there. Which design is the MOST cost-effective?',
     correct: ['Run the production database as a Multi-AZ DB instance deployment and the staging database as a Single-AZ DB instance', 'Production gets a synchronous standby in a different Availability Zone, while staging avoids paying for redundancy that its availability needs do not require.'],
     wrong: [
-      ['Run both the production database and the staging database as Multi-AZ DB instance deployments', 'Staging would pay for a standby that its relaxed availability needs do not require.'],
+      ['Run both the production database and the staging database as Multi-AZ DB instance deployments so that both environments are configured identically', 'Staging would pay for a standby that its relaxed availability needs do not require.'],
       ['Run both databases as Single-AZ DB instances and restore from automated backups after a failure', 'Production would not fail over automatically when its Availability Zone fails.'],
       ['Run production as a Single-AZ DB instance with a read replica in another Region and staging as Multi-AZ', 'Production would not fail over automatically, and staging would pay for a standby it does not need.'],
     ],
@@ -141,7 +141,7 @@ const questions: Question[] = [
     stem: 'A company runs a latency-sensitive application on AWS Outposts in its own data center. The servers on the Outpost must talk to instances and services in the parent Region over private IP addresses. The company wants one VPC and one set of route tables and security groups for both locations, with the LEAST new network components. Which solution meets these requirements?',
     correct: ['Create a subnet on the Outpost in the existing Region VPC and launch the on-premises servers into that subnet', 'Instances in Outpost subnets communicate with instances in the Region over private IP addresses within the same VPC.'],
     wrong: [
-      ['Create a separate VPC on the Outpost and connect it to the Region VPC with a transit gateway', 'This builds a second VPC and extra connections, so route tables and security groups are not shared in one VPC.'],
+      ['Create a separate VPC for the Outpost servers and connect it to the Region VPC with an AWS Transit Gateway attachment', 'This builds a second VPC and extra connections, so route tables and security groups are not shared in one VPC.'],
       ['Place the servers in an AWS Local Zone and extend the Region VPC to that zone', 'A Local Zone is not in the company data center, so the servers would no longer run on the Outpost.'],
       ['Give the Outpost servers public IP addresses and let them reach the Region over the internet', 'Traffic would use public addresses rather than private IP addresses, which the company requires.'],
     ],
@@ -183,7 +183,7 @@ const questions: Question[] = [
     correct: ['Run the instances in an Auto Scaling group across two Availability Zones behind an Application Load Balancer', 'The group balances instances across the zones, so the application keeps serving from the other zone, with no second Region to pay for.'],
     wrong: [
       ['Run a full second copy of the application in another Region with DNS failover', 'A whole second Region is more redundancy than the requirement calls for and costs a second environment.'],
-      ['Keep the instances in one zone on a larger instance type and take hourly snapshots', 'If the zone fails, the instances are still unavailable until someone restores them elsewhere.'],
+      ['Keep the instances in one zone on a larger instance type and take hourly Amazon EBS snapshots of every volume for recovery', 'If the zone fails, the instances are still unavailable until someone restores them elsewhere.'],
       ['Move the instances to Spot Instances in the same Availability Zone', 'The instances would still all sit in one zone, so a zone failure still takes the application offline.'],
     ],
     slot: 3,

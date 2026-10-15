@@ -29,7 +29,7 @@ const questions: Question[] = [
     stem: 'A company runs databases in four AWS accounts that are billed separately. Reserved DB instances bought in one account are only partly used there, while the other accounts run matching DB instances at on-demand rates. The company wants one bill and wants the unused discount to benefit the other accounts, with the LEAST effort. Which solution meets these requirements?',
     correct: ['Join the accounts to one organization in AWS Organizations and use consolidated billing', 'Consolidated billing combines usage across the accounts and shares Reserved Instance discounts, and the management account pays one bill.'],
     wrong: [
-      ['Buy matching reserved DB instances in each of the other accounts as well', 'The company would pay for extra reservations while the existing discount stays partly unused.'],
+      ['Buy matching reserved DB instances in each of the three other accounts so that every account has its own reservation', 'The company would pay for extra reservations while the existing discount stays partly unused.'],
       ['Create a Cost and Usage Report in each account and share the reports with finance', 'Reports describe cost and usage but do not move discounts between accounts or merge the bills.'],
       ['Create an AWS Budgets reservation budget in each of the four accounts', 'A budget monitors utilization and alerts, but it does not share discounts or combine the bills.'],
     ],
@@ -170,7 +170,7 @@ const questions: Question[] = [
     wrong: [
       ['Only usage in account A, because a reservation is always limited to the account that bought it', 'Consolidated billing shares Reserved Instance discounts across the member accounts, so it is not limited to account A.'],
       ['DB instance usage in accounts B and C in any Region, whatever the instance type', 'The discount of a reserved DB instance is tied to instance type and Region, so mismatched usage is not covered.'],
-      ['Only usage in accounts B and C that runs in the same Availability Zone as the reservation of account A', 'The discount is tied to instance type and Region, and nothing in the description limits it to one Availability Zone.'],
+      ['Only usage in accounts B and C that runs in the same Availability Zone as the reservation of account A, and no usage elsewhere', 'The discount is tied to instance type and Region, and nothing in the description limits it to one Availability Zone.'],
     ],
     slot: 2,
     evidence: [
