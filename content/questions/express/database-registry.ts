@@ -165,12 +165,12 @@ const questions: Question[] = [
     bullets: ['3.3-S4'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company\'s order-history service uses a DynamoDB table with traffic that grows slowly and follows a daily curve. The team knows the curve well, wants spend to stay at or below a defined request rate, and does not want to pay for unused capacity in the quiet hours. Which throughput configuration BEST meets these requirements?',
-    correct: ['Provisioned mode with DynamoDB auto scaling, using minimum and maximum capacity set from the daily curve', 'Provisioned mode suits workloads with a defined request rate, and auto scaling lowers capacity when the workload decreases.'],
+    stem: 'A company\'s order-history service uses a DynamoDB table with traffic that grows slowly and follows a daily curve. The team knows the curve well, wants capacity to follow the known curve between a floor and a ceiling that the team sets, and does not want to pay for unused capacity in the quiet hours. Which throughput configuration BEST meets these requirements?',
+    correct: ['Provisioned mode with DynamoDB auto scaling, using minimum and maximum capacity set from the daily curve', 'Provisioned mode suits workloads with a known traffic pattern, and auto scaling lowers capacity when the workload decreases.'],
     wrong: [
       ['Provisioned mode at a fixed level sized for the daily peak with no auto scaling', 'The table is charged for the provisioned throughput through the quiet hours, so the company pays for unused capacity.'],
       ['Provisioned mode at the average daily level with no auto scaling', 'Traffic above the average would exceed the provisioned capacity at the daily peak, so requests would be throttled.'],
-      ['On-demand capacity mode with only the default quotas and no throughput limit set by the team', 'Nothing in this setup holds spend to the defined request rate that the team planned, so the cost ceiling is not met.'],
+      ['On-demand capacity mode, which accepts whatever traffic arrives', 'The team knows the curve, so on-demand pays per request at a rate that is not tuned to the known pattern, and the team gets no minimum and maximum capacity to set.'],
     ],
     slot: 3,
     evidence: [
@@ -308,7 +308,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['mock-reserve'],
     stem: 'A company is moving a production Oracle database to Amazon Aurora PostgreSQL-Compatible Edition. The source and target use different database engines, and the source must stay online and in sync until the cutover. Which solution meets these requirements?',
-    correct: ['Convert the schema with the AWS Schema Conversion Tool, then migrate the data with an AWS DMS replication instance that replicates ongoing changes', 'The engines differ, so the schema is converted first and then AWS DMS migrates the data and replicates ongoing changes to keep source and target in sync.'],
+    correct: ['Convert the schema with AWS SCT, then migrate with an AWS DMS replication instance that replicates ongoing changes', 'The engines differ, so the schema is converted first and then AWS DMS migrates the data and replicates ongoing changes to keep source and target in sync.'],
     wrong: [
       ['Run AWS DMS with a replication instance alone and apply no converted schema to the target', 'The source schemas must be converted and applied to the target before DMS migrates the data when the engines differ.'],
       ['Convert the schema with the AWS Schema Conversion Tool and stop there', 'The tool converts source schemas, but it does not move the data or keep the source and target in sync until cutover.'],

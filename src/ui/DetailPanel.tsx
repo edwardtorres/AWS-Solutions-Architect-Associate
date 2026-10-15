@@ -38,16 +38,20 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
   const building = BUILDING_BY_ID.get(buildingId);
 
   // Ignore the close event when the dialog was closed and reopened (e.g. effect re-run in StrictMode).
+  const unmounting = useRef(false);
   const handleClose = () => {
-    if (ref.current?.open) return;
+    // A close caused by leaving the view must not navigate again (it would undo the navigation that caused it).
+    if (ref.current?.open || unmounting.current) return;
     onClose();
   };
 
   useEffect(() => {
     const dialog = ref.current;
     if (!dialog) return;
+    unmounting.current = false;
     if (!dialog.open) dialog.showModal();
     return () => {
+      unmounting.current = true;
       if (dialog.open) dialog.close();
     };
   }, []);

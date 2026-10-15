@@ -70,8 +70,8 @@ const questions: Question[] = [
     building: 'transfer-dock',
     bullets: ['3.5-K6', '3.5-S3'],
     d: 3,
-    stem: 'A company must copy a dataset of about 400 million small files from an on-premises NFS server to Amazon S3 and then keep the copy current, with the LEAST operational effort. The files must be encrypted in transit and verified on arrival. The company has chosen AWS DataSync for the copy. Which DataSync configuration meets these requirements?',
-    correct: ['A Basic mode task that uses an agent deployed on premises to read from the NFS server', 'Basic mode transfers files between AWS storage and other supported locations such as on-premises NFS through an agent, with built-in encryption and integrity validation.'],
+    stem: 'A company must copy a dataset of about 20 million small files from an on-premises NFS server to Amazon S3 and then keep the copy current, with the LEAST operational effort. The files must be encrypted in transit and verified on arrival. The company has chosen AWS DataSync for the copy. Which DataSync configuration meets these requirements?',
+    correct: ['A Basic mode task that uses an agent deployed on premises to read from the NFS server', 'Basic mode transfers files between AWS storage and other supported locations such as on-premises NFS through an agent, with built-in encryption and integrity validation, and about 20 million files is under its per-task quota.'],
     wrong: [
       ['A task that reads the NFS server through an AWS Transfer Family SFTP endpoint without an agent', 'Transfer Family is a separate file transfer service, and it is not a DataSync source location, so the copy would not run as a DataSync task.'],
       ['A task that reads the NFS server directly from AWS with no agent, because DataSync can reach any NFS server over the internet', 'A DataSync agent is needed to copy data from an on-premises storage system, so a task with no agent cannot read the server.'],
@@ -81,6 +81,7 @@ const questions: Question[] = [
     evidence: [
       'datasync-modes|Basic mode – Transfer files or objects between AWS storage and all other supported DataSync locations.',
       'datasync-how|The diagram illustrates a common DataSync use case: A DataSync agent copying data from an on-premises storage system.',
+      'datasync-limits|storage services For more information, see How DataSync transfers files, objects, and directories 50 million',
       'datasync-what-is|DataSync includes automatic encryption and data integrity validation to help make sure that your data arrives securely, intact, and ready to use.',
     ],
   }),

@@ -287,7 +287,7 @@ const questions: Question[] = [
     bullets: ['1.3-S2'],
     d: 3,
     tags: ['trap:sse-s3-kms-c'],
-    stem: 'A company must supply its own encryption key with each upload request, and it wants Amazon S3 to perform the encryption and decryption of the objects without the company running encryption code. Which solution meets these requirements with the LEAST change?',
+    stem: 'A company must supply its own encryption key with each upload request, and it wants Amazon S3 to perform the encryption and decryption of the objects without the company running encryption code. The objects go to an existing bucket that already accepts SSE-C uploads. Which solution meets these requirements with the LEAST change?',
     correct: ['Use server-side encryption with customer-provided keys (SSE-C) and send the key over HTTPS with each request', 'The company provides the key in each request, and Amazon S3 encrypts and decrypts the objects with it.'],
     wrong: [
       ['Use server-side encryption with AWS KMS keys (SSE-KMS) with a customer managed key', 'The key is created and held in AWS KMS rather than supplied by the company with each request.'],

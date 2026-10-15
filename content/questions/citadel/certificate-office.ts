@@ -258,6 +258,7 @@ const questions: Question[] = [
     slot: 3,
     evidence: [
       'kms-rotation|Automatic key rotation is supported only on symmetric encryption KMS keys with key material that AWS KMS generates (AWS_KMS origin).',
+      'kms-rotation|Manual rotation is a good choice when you want to rotate KMS keys that are not eligible for automatic or on-demand key rotation, including asymmetric KMS keys, HMAC KMS keys and KMS keys in custom key stores.',
     ],
   }),
   mr({

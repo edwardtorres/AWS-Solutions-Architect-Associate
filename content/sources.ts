@@ -690,6 +690,7 @@ const sources: Source[] = [
   aws('iam-mfa-require-api', `${D}/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html`, 'Require MFA for API access (IAM)'),
   aws('elasticache-autofailover', `${D}/AmazonElastiCache/latest/dg/AutoFailover.html`, 'Minimizing downtime in ElastiCache by using Multi-AZ'),
   aws('eks-managed-node-groups', `${D}/eks/latest/userguide/managed-node-groups.html`, 'Simplify node lifecycle with managed node groups'),
+  aws('datasync-limits', `${D}/datasync/latest/userguide/datasync-limits.html`, 'AWS DataSync quotas'),
 ];
 
 export default sources;

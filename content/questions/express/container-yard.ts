@@ -74,7 +74,7 @@ const questions: Question[] = [
     bullets: ['3.2-K5'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A latency-sensitive API runs on an AWS Lambda function that uses the Java 17 managed runtime. A large framework makes initialization take several seconds, so the first request in each new execution environment is slow. Traffic is predictable, and the company needs execution environments to be already initialized when requests arrive, without changing the function code. Which solution meets these requirements?',
+    stem: 'A latency-sensitive API runs on an AWS Lambda function that uses the Java 17 managed runtime. The function mounts an Amazon EFS file system, and a large framework makes initialization take several seconds, so the first request in each new execution environment is slow. Traffic is predictable, and the company needs execution environments to be already initialized when requests arrive, without changing the function code. Which solution meets these requirements?',
     correct: ['Configure provisioned concurrency on an alias of a published version, sized to the expected peak', 'Provisioned concurrency keeps pre-initialized execution environments ready, which reduces cold start latencies.'],
     wrong: [
       ['Raise the reserved concurrency of the function to the expected peak', 'Reserved concurrency sets the maximum concurrency and Lambda might terminate idle environments, so it does not pre-initialize them.'],

@@ -212,9 +212,9 @@ const questions: Question[] = [
     d: 2,
     tags: ['mock-reserve'],
     stem: 'A company runs Linux application servers in several Availability Zones that must share one file system over NFS. Files are hot for a few weeks and then are rarely read. The company does not want to move files between tiers by hand. Which solution is the MOST cost-effective?',
-    correct: ['A Regional Amazon EFS file system with lifecycle management that moves files not accessed for a period to the Infrequent Access (IA) storage class', 'EFS is shared across Availability Zones, and lifecycle management moves files to the lower-cost IA class automatically, with no manual tiering.'],
+    correct: ['A Regional Amazon EFS file system with lifecycle management to the IA storage class', 'EFS is shared across Availability Zones, and lifecycle management moves files to the lower-cost IA class automatically, with no manual tiering.'],
     wrong: [
-      ['An Amazon EBS Provisioned IOPS SSD volume with Multi-Attach enabled and a larger size', 'Multi-Attach works only for instances in the same Availability Zone, and the volume keeps all data on costly storage with no automatic tiering.'],
+      ['An Amazon EBS Provisioned IOPS SSD volume with Multi-Attach enabled and extra size', 'Multi-Attach works only for instances in the same Availability Zone, and the volume keeps all data on costly storage with no automatic tiering.'],
       ['An Amazon FSx for Windows File Server file system', 'It serves SMB file shares for Windows workloads and does not fit Linux servers that use NFS.'],
       ['A Cold HDD (sc1) volume attached to one instance and shared by a script', 'A single volume is not a shared file system across zones, and it needs a size chosen up front.'],
     ],

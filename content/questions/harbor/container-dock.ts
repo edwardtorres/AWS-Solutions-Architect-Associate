@@ -284,7 +284,7 @@ const questions: Question[] = [
     bullets: ['2.1-K14'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'A company runs Kubernetes workloads on Amazon EKS and needs Amazon EC2 instances as worker nodes. The company wants AWS to automate creating, updating and terminating the nodes, with nodes drained during updates, and wants the LEAST operational overhead. Which solution meets these requirements?',
+    stem: 'A company runs Kubernetes workloads on Amazon EKS and needs Amazon EC2 instances as worker nodes built from a custom AMI, with extra kubelet arguments set at the node level. The company wants AWS to automate creating, updating and terminating the nodes, with nodes drained during updates, and wants the LEAST operational overhead. Which solution meets these requirements?',
     correct: ['Add a managed node group to the EKS cluster', 'Managed node groups automate the provisioning and lifecycle management of nodes, and updates and terminations drain nodes automatically.'],
     wrong: [
       ['Launch EC2 instances in an Auto Scaling group that the company builds and join them to the cluster as self-managed nodes', 'The company would create, update and drain these nodes itself, which is the overhead it wants to avoid.'],
@@ -295,7 +295,7 @@ const questions: Question[] = [
     evidence: [
       'eks-managed-node-groups|You can create, automatically update, or terminate nodes for your cluster with a single operation.',
       'eks-managed-node-groups|Node updates and terminations automatically drain nodes to ensure that your applications stay available.',
-      'eks-what-is|EKS standard: AWS manages the Kubernetes control plane when you create a cluster with EKS.',
+      'eks-managed-node-groups|For example, you can specify extra kubelet arguments and use a custom AMI.',
     ],
   }),
   mc({

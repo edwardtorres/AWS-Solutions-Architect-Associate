@@ -1,0 +1,358 @@
+[
+ {
+  "id": "backup-archive-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "cache-edge-breakwater-011",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "cache-pavilion-003",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "cache-pavilion-007",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "capacity-meter-001",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "capacity-meter-004",
+  "picks": [
+   "D",
+   "E"
+  ],
+  "ambiguous": true,
+  "note": "Ambiguous: D (reserved capacity) only applies once the table is provisioned (E); on its own D is not possible on an on-demand table. Standard-IA lowers storage, not throughput cost."
+ },
+ {
+  "id": "certificate-office-013",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "Unsure whether on-demand rotation / newer rotation features matter; asymmetric keys have no automatic rotation in 2022."
+ },
+ {
+  "id": "container-dock-015",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "container-yard-004",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "container-yard-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Karpenter reached GA after Aug 2022 (v0.16, Nov 2022); an Aug-2022 exam would expect Cluster Autoscaler. Only plausible option though."
+ },
+ {
+  "id": "container-yard-011",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "customs-house-018",
+  "picks": [
+   "B",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "database-registry-009",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "database-registry-015",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "database-registry-016",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "db-cost-desk-005",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-013",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "edge-link-terminal-014",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "embassy-row-028",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "embassy-row-029",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "embassy-row-031",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "engine-exchange-005",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "engine-exchange-007",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "freight-depot-017",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "Elastic throughput (Nov 2022) postdates exam era; answer assumes Provisioned. Slightly unsure."
+ },
+ {
+  "id": "gatehouse-025",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "identity-keep-007",
+  "picks": [
+   "A",
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "identity-keep-026",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Root-user SCP deny works in member accounts; fine for 2022."
+ },
+ {
+  "id": "key-vault-005",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "key-vault-015",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "key-vault-016",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "ledger-office-009",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "message-quay-020",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "nat-toll-008",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "nat-toll-009",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "read-replica-annex-013",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "rebuild-yard-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "safe-harbor-account-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "scaling-floodgate-019",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "service-selection-bureau-002",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "service-selection-bureau-010",
+  "picks": [
+   "A",
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "single-point-watch-008",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "storage-market-009",
+  "picks": [
+   "A",
+   "E"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "storage-market-011",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "streaming-canal-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Service named Amazon Data Firehose (renamed 2024); Aug-2022 name was Kinesis Data Firehose."
+ },
+ {
+  "id": "streaming-canal-014",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-004",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Basic vs Enhanced task mode is a 2024 DataSync feature; 400M files hints at Enhanced mode. Not expected in Aug 2022."
+ },
+ {
+  "id": "transfer-dock-009",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "transfer-dock-012",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false
+ },
+ {
+  "id": "tuning-bay-017",
+  "picks": [
+   "D"
+  ],
+  "ambiguous": false
+ }
+]

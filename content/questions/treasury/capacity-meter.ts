@@ -67,10 +67,10 @@ const questions: Question[] = [
     bullets: ['4.3-K5'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company\'s Amazon DynamoDB table uses on-demand capacity mode and the Standard table class. Read and write traffic has been steady and forecastable for two years and is expected to stay at the same level for the next year. The throughput charges are the dominant cost of the table. Which TWO actions reduce the cost of the table? (Choose two.)',
+    stem: 'A company\'s Amazon DynamoDB table uses on-demand capacity mode and the Standard table class. Read and write traffic has been steady and forecastable for two years and is expected to stay at the same level for the next year. The throughput charges are the dominant cost of the table. Which TWO actions, taken together, reduce the cost of the table the MOST? (Choose two.)',
     correct: [
       ['Switch the table to provisioned capacity mode with read and write capacity sized from the forecast', 'AWS points to provisioned capacity for steady workloads whose capacity can be reliably forecast.'],
-      ['Purchase reserved capacity for the steady provisioned read and write capacity', 'Provisioned capacity used up to the reserved amount is charged at the lower reserved capacity rate.'],
+      ['Purchase reserved capacity for the steady read and write capacity the table will provision', 'On top of provisioned mode, provisioned capacity used up to the reserved amount is charged at the lower reserved capacity rate.'],
     ],
     wrong: [
       ['Change the table to the DynamoDB Standard-IA table class', 'Standard-IA has higher throughput costs and suits tables where storage, not throughput, is the dominant cost.'],

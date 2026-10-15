@@ -3,7 +3,8 @@ import { migrate } from './migrate';
 import type { Question } from '../content/types';
 import { systemClock, today as todayKey, type Clock } from '../game/day';
 import { DEFAULT_ENV, type GameEnv } from '../game/env';
-import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, startAttempt, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx, type StartResult } from '../game/engine';
+import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
+import type { StartResult } from '../game/start';
 import type { AttemptKind } from './schema';
 
 /** The subset of the Web Storage API the store uses. */
@@ -132,8 +133,10 @@ export function createSaveStore(opts: StoreOptions) {
       if (next !== snapshot.save) commit(next);
     },
     /** Starts (or resumes) an attempt. The caller passes the loaded question bank. */
-    startAttempt(kind: AttemptKind, building: string, bank: readonly Question[]): StartResult {
+    async startAttempt(kind: AttemptKind, building: string, bank: readonly Question[]): Promise<StartResult> {
       if (snapshot.readOnly) return { ok: false, availability: { ok: false, code: 'wrong-state', message: 'This save is read-only (it is from a newer version of the app).' } };
+      // The draw code names the mock-reserve tag, so it loads with the question bank, never in the first chunk.
+      const { startAttempt } = await import('../game/start');
       const r = startAttempt(snapshot.save, kind, building, bank, ctxFor(), random);
       if (r.ok && !r.resumed) commit(r.save);
       return r;

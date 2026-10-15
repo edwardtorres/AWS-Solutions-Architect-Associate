@@ -254,8 +254,9 @@ export default function AttemptPage({ kind, buildingId }: { kind: AttemptKind; b
           type="button"
           className="btn mt-4"
           onClick={() => {
-            const r = store.startAttempt(kind, building.id, bank);
-            if (!r.ok) setProblem(r.availability.message);
+            void store.startAttempt(kind, building.id, bank).then((r) => {
+              if (!r.ok) setProblem(r.availability.message);
+            });
           }}
         >
           Begin {TITLE[kind].toLowerCase()}

@@ -335,7 +335,7 @@ const questions: Question[] = [
     correct: ['Switch the table to provisioned capacity mode and set the read capacity units for the expected peak before the sale', 'In provisioned mode the table has the throughput that you specify from the start, so the jump does not depend on gradual scaling.'],
     wrong: [
       ['Keep on-demand mode and rely on it alone to serve any traffic level', 'On-demand accommodates up to double the previous peak, and throttling can occur if traffic exceeds that within 30 minutes.'],
-      ['Switch to provisioned mode with auto scaling at a low initial capacity and let it follow the sale traffic', 'Auto scaling reacts only after consumed capacity breaches the target utilization for two consecutive minutes, so a sudden tenfold jump can still throttle.'],
+      ['Switch to provisioned mode with auto scaling at a low initial capacity and let it follow the sale traffic', 'Auto scaling reacts only after consumed capacity breaches the target utilization for two consecutive minutes, so a sudden jump of more than tenfold can still throttle.'],
       ['Add a global secondary index on the table\'s partition key', 'An index adds another copy of the data to maintain and does not raise the base table\'s ability to absorb the read spike.'],
     ],
     slot: 1,

@@ -500,10 +500,10 @@ const questions: Question[] = [
     bullets: ['1.1-S1'],
     d: 3,
     tags: ['mock-reserve'],
-    stem: 'A company manages 60 member accounts with AWS Organizations. Security wants to make sure that no one can use the root user of any member account to perform actions, with the LEAST ongoing effort. No root-only tasks are planned. Which solution meets these requirements?',
-    correct: ['Attach a service control policy to the organization root that denies all actions for the root user principal in member accounts', 'An SCP applies to every member account, including the root user of each one, so one policy covers all 60 accounts.'],
+    stem: 'A company manages 60 member accounts with AWS Organizations. Every member account keeps its root user sign-in in place. Security wants a preventive guardrail that blocks the root user of every current and future member account from performing actions, even if someone obtains the password and the MFA device, with the LEAST ongoing effort. Which solution meets these requirements?',
+    correct: ['Attach a service control policy to the organization root that denies all actions for the root user', 'An SCP applies to every member account, including the root user of each one, so one policy covers all 60 accounts.'],
     wrong: [
-      ['Require a hardware MFA token for the root user of each member account', 'MFA protects sign-in but does not stop someone with the factors from using the root user, and it is repeated in 60 accounts.'],
+      ['Require a hardware MFA token for the root user of every member account and store the tokens safely', 'MFA protects sign-in but does not stop someone with the factors from using the root user, and it is repeated in 60 accounts.'],
       ['Create an Amazon CloudWatch alarm on root user sign-in events in each member account', 'An alarm detects use of the root user but does not prevent it.'],
       ['Add the root user of each member account to an IAM group that has an explicit deny policy', 'The root user is not an IAM user and cannot be added to an IAM group, and this would be repeated in each account.'],
     ],

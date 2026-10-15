@@ -43,7 +43,7 @@ const questions: Question[] = [
     bullets: ['3.3-K2'],
     d: 1,
     stem: 'A company needs an in-memory cache for a session store. The cache must survive the loss of a node or an Availability Zone with only a brief interruption, and the company wants AWS to manage the nodes. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Create an Amazon ElastiCache for Redis OSS replication group with replicas in another Availability Zone and Multi-AZ enabled', 'If the primary node fails, ElastiCache promotes a replica and propagates its DNS name, so writes resume quickly with no servers to manage.'],
+    correct: ['Create an ElastiCache for Redis OSS replication group with a replica in another Availability Zone and Multi-AZ', 'If the primary node fails, ElastiCache promotes a replica and propagates its DNS name, so writes resume quickly with no servers to manage.'],
     wrong: [
       ['Create a single-node Amazon ElastiCache for Redis OSS cluster with no replicas', 'There is no replica to promote, so losing the node or its Availability Zone loses the cache and interrupts the application.'],
       ['Create an Amazon ElastiCache for Memcached cluster with nodes in one Availability Zone', 'The Memcached engine is the simplest model, without replica promotion, and one Availability Zone offers no protection against its loss.'],
@@ -123,7 +123,7 @@ const questions: Question[] = [
     bullets: ['3.3-S5'],
     d: 2,
     stem: 'A company runs a read-heavy product catalog on Amazon RDS. Reads of the same items repeat constantly, and the database is the bottleneck. The team wants lower read latency and less database load, and can change the application code. Which solution BEST meets these requirements?',
-    correct: ['Add an Amazon ElastiCache cache and use lazy loading, so the application reads from the cache first and fills it from the database on a miss', 'Lazy loading loads only requested data into the cache, and repeated reads are answered from memory instead of the database.'],
+    correct: ['Add Amazon ElastiCache and use lazy loading so reads go to the cache first', 'Lazy loading loads only requested data into the cache, and repeated reads are answered from memory instead of the database.'],
     wrong: [
       ['Add a DAX cluster in front of the RDS database to hold the hottest items', 'DAX is a caching service for DynamoDB tables and cannot sit in front of an RDS database.'],
       ['Place an Amazon CloudFront distribution in front of the database endpoint', 'CloudFront caches web content at edge locations and cannot serve queries directly from an RDS database.'],

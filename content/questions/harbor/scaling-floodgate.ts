@@ -378,7 +378,7 @@ const questions: Question[] = [
     evidence: [
       'asg-sqs|The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain.',
       'asg-sqs|The issue with using a CloudWatch Amazon SQS metric like ApproximateNumberOfMessagesVisible for target tracking is that the number of messages in the queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue.',
-      'asg-sqs|The following information and steps shows you how to calculate the Amazon SQS queue backlog per instance using the ApproximateNumberOfMessages queue attribute before publishing it as a custom metric to CloudWatch.',
+      'asg-sqs|If you use a target tracking scaling policy based on a custom Amazon SQS queue metric, dynamic scaling can adjust to the demand curve of your application more effectively.',
     ],
   }),
   mc({

@@ -144,7 +144,7 @@ const questions: Question[] = [
     bullets: ['2.2-K8'],
     d: 3,
     stem: 'A company runs a web application behind an Application Load Balancer in each of two AWS Regions. The primary Region should receive all client traffic, and the second Region should receive traffic only when the primary Region cannot serve requests. When every target in the primary Region fails, clients currently get errors because DNS keeps returning the primary load balancer. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Create Amazon Route 53 failover alias records for the two load balancers, with the primary record using a health check or target health evaluation', 'With failover routing, Route 53 sends traffic to the primary resource while it is healthy and to the secondary resource when the primary is unhealthy.'],
+    correct: ['Create Route 53 failover alias records for the two load balancers with a health check on the primary', 'With failover routing, Route 53 sends traffic to the primary resource while it is healthy and to the secondary resource when the primary is unhealthy.'],
     wrong: [
       ['Create one simple routing record that lists both load balancers', 'Simple routing returns the values in random order and does not health check them, so clients would still reach the failed Region.'],
       ['Enable cross-zone load balancing on both load balancers', 'Cross-zone load balancing distributes traffic across targets in the Availability Zones of one load balancer and cannot send clients to another Region.'],

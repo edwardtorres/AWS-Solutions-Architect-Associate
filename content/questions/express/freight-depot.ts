@@ -330,11 +330,11 @@ const questions: Question[] = [
     bullets: ['3.1-S1'],
     d: 3,
     stem: 'A media company renders images on Linux Amazon EC2 instances that read and write a shared Amazon EFS file system. The file system holds a small amount of data, but the workload drives a steady, known level of throughput that is high compared with the stored data. The workload needs the lowest per-operation latency. Which EFS configuration is the BEST fit?',
-    correct: ['General Purpose performance mode with Provisioned throughput set to the known requirement', 'Provisioned throughput suits workloads whose performance requirements are known, and General Purpose mode has the lowest per-operation latency.'],
+    correct: ['General Purpose mode with Provisioned throughput', 'Provisioned throughput suits workloads whose performance requirements are known, and General Purpose mode has the lowest per-operation latency.'],
     wrong: [
-      ['General Purpose performance mode with Bursting throughput', 'Bursting throughput scales with the amount of storage in the file system, which is small here, so it cannot deliver the steady high throughput.'],
-      ['Max I/O performance mode with Provisioned throughput', 'Max I/O mode has higher per-operation latencies than General Purpose, and the workload needs the lowest latency.'],
-      ['Max I/O performance mode with Bursting throughput', 'Max I/O mode has higher per-operation latencies, and Bursting throughput scales with the small amount of stored data.'],
+      ['General Purpose mode with Bursting throughput', 'Bursting throughput scales with the amount of storage in the file system, which is small here, so it cannot deliver the steady high throughput.'],
+      ['Max I/O mode with Provisioned throughput', 'Max I/O mode has higher per-operation latencies than General Purpose, and the workload needs the lowest latency.'],
+      ['Max I/O mode with Bursting throughput', 'Max I/O mode has higher per-operation latencies, and Bursting throughput scales with the small amount of stored data.'],
     ],
     slot: 2,
     evidence: [

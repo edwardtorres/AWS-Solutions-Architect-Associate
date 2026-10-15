@@ -34,3 +34,14 @@ describe('rng', () => {
     globalThis.__SAA_SEED__ = undefined;
   });
 });
+
+describe('attemptRandom', () => {
+  it('is stable for one attempt and question, and differs between attempts', async () => {
+    const { attemptRandom } = await import('./rng');
+    const a = attemptRandom(123, 'gatehouse-001');
+    const b = attemptRandom(123, 'gatehouse-001');
+    expect([a(), a(), a()]).toEqual([b(), b(), b()]);
+    expect(attemptRandom(123, 'gatehouse-001')()).not.toBe(attemptRandom(124, 'gatehouse-001')());
+    expect(attemptRandom(123, 'gatehouse-001')()).not.toBe(attemptRandom(123, 'gatehouse-002')());
+  });
+});

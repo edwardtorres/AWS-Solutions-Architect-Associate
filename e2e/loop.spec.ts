@@ -1,5 +1,12 @@
-import { expect, test } from '@playwright/test';
+import { expect, test, type Page } from '@playwright/test';
 import { answerAll, axeClean, buildingName as name, link, noSidewaysScroll, pickChain, pickPortfolio, questions } from './helpers';
+
+/** Opens the notes from the panel (this is what unlocks the start-up check), then returns to the panel. */
+async function openNotesAndBack(page: Page, id: string): Promise<void> {
+  await link(page, 'Open the study notes').tap();
+  await expect(page.locator('article h2').first()).toHaveText(name(id));
+  await page.goto(`/#/map/${id}`);
+}
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
@@ -17,7 +24,7 @@ test('building flow: notes, start-up check, inspection, commissioned, dependent 
   await expect(page.getByTestId('build-section')).toContainText('Open the study notes first');
   await expect(link(page, 'Start-up check')).toHaveCount(0);
   await link(page, 'Open the study notes').tap();
-  await expect(page.getByRole('heading', { level: 2, name: name(start) })).toBeVisible();
+  await expect(page.locator('article h2').first()).toHaveText(name(start));
   await noSidewaysScroll(page);
   await page.goto(`/#/map/${start}`);
   await link(page, 'Start-up check').tap();
@@ -50,18 +57,19 @@ test('building flow: notes, start-up check, inspection, commissioned, dependent 
 test('failing two inspections in one day locks the building', async ({ page }) => {
   const { start } = pickChain();
   await page.goto(`/#/map/${start}`);
-  await link(page, 'Open the study notes').tap();
-  await page.goto(`/#/map/${start}`);
+  await openNotesAndBack(page, start);
   await link(page, 'Start-up check').tap();
   await page.getByRole('button', { name: /Begin start-up check/i }).tap();
   await answerAll(page, 2, [true, true]);
   for (let attempt = 1; attempt <= 2; attempt += 1) {
+    await page.goto('/#/map');
     await page.goto(`/#/inspect/${start}`);
     await page.getByRole('button', { name: /Begin inspection/i }).tap();
     await answerAll(page, 5, [false, false, false, false, false]);
     await expect(page.getByRole('heading', { level: 2 })).toContainText('not passed');
     if (attempt === 2) await expect(page.getByTestId('summary')).toContainText('locked until tomorrow');
   }
+  await page.goto('/#/map');
   await page.goto(`/#/inspect/${start}`);
   await expect(page.getByTestId('unavailable')).toContainText('locked until tomorrow');
   await expect(page.getByRole('button', { name: /Begin inspection/i })).toHaveCount(0);
@@ -91,6 +99,7 @@ test('a failed placement uses the day: a second try is refused', async ({ page }
   await page.getByRole('button', { name: /Begin placement check/i }).tap();
   await answerAll(page, 5, [true, true, true, true, false]);
   await expect(page.getByRole('heading', { level: 2 })).toContainText('not passed');
+  await page.goto('/#/map');
   await page.goto(`/#/place/${id}`);
   await expect(page.getByTestId('unavailable')).toContainText('already used today');
 });
@@ -98,8 +107,7 @@ test('a failed placement uses the day: a second try is refused', async ({ page }
 test('flag a question and export the flags', async ({ page }) => {
   const { start } = pickChain();
   await page.goto(`/#/map/${start}`);
-  await link(page, 'Open the study notes').tap();
-  await page.goto(`/#/map/${start}`);
+  await openNotesAndBack(page, start);
   await link(page, 'Start-up check').tap();
   await page.getByRole('button', { name: /Begin start-up check/i }).tap();
   await answerAll(page, 2, [true, false]);
