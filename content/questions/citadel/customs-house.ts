@@ -101,7 +101,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'customs-house-006',
+    id: 'customs-house-006', postGuide: ['vpn-large-bandwidth-tunnel'],
     building: 'customs-house',
     bullets: ['1.2-S4'],
     d: 2,
@@ -140,7 +140,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'customs-house-008',
+    id: 'customs-house-008', postGuide: ['direct-connect-400g'],
     building: 'customs-house',
     bullets: ['1.2-S4'],
     d: 2,
@@ -180,7 +180,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'customs-house-010',
+    id: 'customs-house-010', postGuide: ['vpn-large-bandwidth-tunnel'],
     building: 'customs-house',
     bullets: ['1.2-S4'],
     d: 2,
@@ -349,7 +349,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'customs-house-018',
+    id: 'customs-house-018', postGuide: ['vpn-large-bandwidth-tunnel'],
     building: 'customs-house',
     bullets: ['1.2-S4'],
     d: 2,

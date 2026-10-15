@@ -23,7 +23,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'container-yard-002',
+    id: 'container-yard-002', postGuide: ['lambda-snapstart'],
     building: 'container-yard',
     bullets: ['3.2-K5'],
     d: 3,
@@ -69,7 +69,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'container-yard-004',
+    id: 'container-yard-004', postGuide: ['lambda-snapstart'], postGuideKey: ['lambda-snapstart'],
     building: 'container-yard',
     bullets: ['3.2-K5'],
     d: 3,
@@ -168,7 +168,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'container-yard-009',
+    id: 'container-yard-009', postGuide: ['eks-auto-mode'], postGuideKey: ['eks-auto-mode'],
     building: 'container-yard',
     bullets: ['3.2-K6'],
     d: 2,
@@ -205,7 +205,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'container-yard-011',
+    id: 'container-yard-011', postGuide: ['lambda-snapstart'],
     building: 'container-yard',
     bullets: ['3.2-K5'],
     d: 3,

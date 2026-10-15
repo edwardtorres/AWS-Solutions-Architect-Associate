@@ -40,7 +40,7 @@ async function main() {
   const qb = await loadQuestionsBundle();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set(qb.questions.flatMap((q) => q.evidence.map((e) => e.src))), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
   );
 
   const repoRoot = here('../');
@@ -69,7 +69,7 @@ async function main() {
   );
 
   const metaPath = join(repoRoot, 'src/questions/meta.ts');
-  let metaNow = '';
+  let metaNow: string;
   try {
     metaNow = readFileSync(metaPath, 'utf8');
   } catch {

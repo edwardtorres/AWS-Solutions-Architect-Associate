@@ -64,7 +64,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'message-quay-004',
+    id: 'message-quay-004', postGuide: ['eventbridge-pipes'], postGuideKey: ['eventbridge-pipes'],
     building: 'message-quay',
     bullets: ['2.1-K5'],
     d: 3,
@@ -385,7 +385,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'message-quay-020',
+    id: 'message-quay-020', postGuide: ['eventbridge-scheduler'], postGuideKey: ['eventbridge-scheduler'],
     building: 'message-quay',
     bullets: ['2.1-K5', '2.1-S3'],
     d: 2,

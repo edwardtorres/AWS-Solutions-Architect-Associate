@@ -1,4 +1,1065 @@
 {
   "cutoff": "2022-08-01",
-  "features": []
+  "features": [
+    {
+      "id": "efs-elastic-throughput",
+      "name": "Amazon EFS Elastic throughput mode",
+      "introduced": "2022-11-27",
+      "certainty": "confirmed",
+      "source": "pg-efs-elastic",
+      "quote": "Elastic Throughput is ideal for spiky and unpredictable workloads with performance requirements that are difficult to forecast.",
+      "patterns": [
+        "\\belastic throughput\\b",
+        "throughput mode[^\\n]{0,40}\\belastic\\b",
+        "\\belastic\\b[^\\n]{0,20}throughput mode"
+      ],
+      "predecessor": "EFS Provisioned or Bursting throughput mode",
+      "predecessorPatterns": [
+        "\\bprovisioned throughput\\b",
+        "\\bbursting throughput\\b",
+        "(provisioned|bursting)[^\\n]{0,20}throughput mode",
+        "throughput mode[^\\n]{0,40}(provisioned|bursting)"
+      ]
+    },
+    {
+      "id": "efs-archive-class",
+      "name": "Amazon EFS Archive storage class",
+      "introduced": "2023-11-26",
+      "certainty": "confirmed",
+      "source": "pg-efs-archive",
+      "quote": "With EFS Archive, you now have a cost-effective way to retain even your coldest data so that it\u2019s always available to power new business insights.",
+      "patterns": [
+        "\\bEFS Archive\\b",
+        "\\bEFS\\b[^\\n]{0,160}(?<!Deep )(?<!Glacier )\\bArchive storage class\\b",
+        "\\bEFS\\b[^\\n]{0,100}\\b(move|moves|transition|transitions)\\b[^\\n]{0,40}\\bto Archive\\b",
+        "\\bArchive storage class\\b[^\\n]{0,80}\\bEFS\\b",
+        "\\bInfrequent Access and Archive( classes)?\\b"
+      ],
+      "predecessor": "EFS Standard with lifecycle management to EFS Infrequent Access (IA) as the coldest tier",
+      "predecessorPatterns": [
+        "\\bEFS (Standard-)?(IA|Infrequent Access)\\b",
+        "\\bInfrequent Access\\b[^\\n]{0,40}\\bEFS\\b",
+        "\\bEFS\\b[^\\n]{0,60}\\bInfrequent Access\\b"
+      ]
+    },
+    {
+      "id": "fsx-openzfs-intelligent-tiering",
+      "name": "Amazon FSx for OpenZFS Intelligent-Tiering storage class",
+      "introduced": "2024-12-01",
+      "certainty": "confirmed",
+      "source": "pg-fsx-tiering",
+      "quote": "With FSx Intelligent-Tiering, customers no longer need to provision or manage storage and get automatic storage cost optimization as data access patterns change.",
+      "patterns": [
+        "\\bFSx Intelligent-Tiering\\b",
+        "\\bFSx for OpenZFS\\b[^\\n]{0,120}\\bIntelligent-Tiering\\b",
+        "\\bIntelligent-Tiering\\b[^\\n]{0,80}\\bFSx for OpenZFS\\b"
+      ],
+      "predecessor": "FSx for OpenZFS SSD storage class with provisioned SSD capacity",
+      "predecessorPatterns": [
+        "\\bFSx for OpenZFS\\b[^\\n]{0,100}\\bSSD\\b",
+        "\\bSSD (storage class|capacity|storage)\\b[^\\n]{0,60}\\bOpenZFS\\b",
+        "\\bprovision(ed)?\\b[^\\n]{0,40}\\bSSD\\b"
+      ]
+    },
+    {
+      "id": "datasync-enhanced-mode",
+      "name": "AWS DataSync Enhanced mode",
+      "introduced": "2024-10-30",
+      "certainty": "confirmed",
+      "source": "pg-datasync-enhanced",
+      "quote": "With Enhanced mode, you can transfer datasets with virtually unlimited numbers of objects at higher levels of performance than Basic mode.",
+      "patterns": [
+        "\\bDataSync\\b[\\s\\S]{0,400}\\bEnhanced mode\\b",
+        "\\bEnhanced mode\\b[\\s\\S]{0,400}\\bDataSync\\b"
+      ],
+      "predecessor": "A DataSync task in Basic mode, for example with an on-premises agent",
+      "predecessorPatterns": [
+        "\\bBasic mode\\b",
+        "\\bDataSync agent\\b",
+        "\\bon-premises (DataSync )?agent\\b",
+        "\\bagent\\b[^\\n]{0,60}\\bDataSync\\b"
+      ]
+    },
+    {
+      "id": "transfer-family-web-app",
+      "name": "AWS Transfer Family web apps",
+      "introduced": "2024-12-01",
+      "certainty": "confirmed",
+      "source": "pg-transfer-web-apps",
+      "quote": "With Transfer Family web apps, you can provide your workforce with a fully managed, branded, and secure portal for your end users to browse, upload, and download data in S3.",
+      "patterns": [
+        "\\bTransfer Family\\b[^\\n]{0,120}\\bweb apps?\\b",
+        "\\bweb apps?\\b[^\\n]{0,80}\\bTransfer Family\\b",
+        "\\bTransfer Family web apps?\\b"
+      ],
+      "predecessor": "A Transfer Family SFTP server or a custom-built web portal for browser access to S3",
+      "predecessorPatterns": [
+        "\\bSFTP\\b",
+        "\\bFTPS\\b",
+        "\\bTransfer Family (SFTP )?server\\b",
+        "\\bcustom(-built)? (web )?(application|app|portal)\\b"
+      ]
+    },
+    {
+      "id": "datasync-azure-blob",
+      "name": "AWS DataSync Azure Blob Storage location",
+      "introduced": "2023-03-29",
+      "certainty": "confirmed",
+      "source": "pg-datasync-azure-preview",
+      "quote": "Using DataSync, you can move your object data at scale from Azure Blob Storage to AWS Storage services such as Amazon S3.",
+      "patterns": [
+        "\\bDataSync\\b[^\\n]{0,150}\\bAzure Blob\\b",
+        "\\bAzure Blob\\b[^\\n]{0,150}\\bDataSync\\b"
+      ],
+      "predecessor": "Copying Azure Blob Storage data with AzCopy or custom scripts, or a device-based transfer",
+      "predecessorPatterns": [
+        "\\bAzCopy\\b",
+        "\\bscripts?\\b[^\\n]{0,80}\\bAzure\\b",
+        "\\bAzure\\b[^\\n]{0,80}\\bscripts?\\b",
+        "\\bSnow(ball)?\\b[^\\n]{0,60}\\bAzure\\b"
+      ]
+    },
+    {
+      "id": "s3-default-sse-s3",
+      "name": "S3 applies SSE-S3 by default to all new objects",
+      "introduced": "2023-01-05",
+      "certainty": "confirmed",
+      "source": "pg-s3-default-sse",
+      "quote": "With this update, Amazon S3 will automatically apply SSE-S3 as the base level of Default Encryption setting for all new buckets and for existing buckets without any customer configured encryption setting.",
+      "patterns": [
+        "\\b(by default|automatically|base level|already)\\b[^\\n]{0,100}\\bSSE-S3\\b",
+        "\\bSSE-S3\\b[^\\n]{0,100}\\b(by default|automatically|base level|all new objects|every new object|already (encrypts?|applied))"
+      ],
+      "predecessor": "Turning on default bucket encryption or a bucket policy that denies unencrypted PutObject requests",
+      "predecessorPatterns": [
+        "default encryption (must be |is )?(enabled|turned on|configured)",
+        "(enable|turn on|configure) (S3 )?default encryption",
+        "(bucket policy|policy)[^\\n]{0,100}(deny|require)[^\\n]{0,80}(unencrypted|encrypt|x-amz-server-side-encryption)",
+        "x-amz-server-side-encryption"
+      ]
+    },
+    {
+      "id": "kms-external-key-store",
+      "name": "AWS KMS external key store (XKS)",
+      "introduced": "2022-11-29",
+      "certainty": "confirmed",
+      "source": "pg-kms-xks",
+      "quote": "XKS may help you address your compliance needs where encryption keys for regulated workloads must be outside AWS and solely under your control.",
+      "patterns": [
+        "\\bexternal key stores?\\b",
+        "\\bXKS\\b"
+      ],
+      "predecessor": "A KMS custom key store backed by AWS CloudHSM, or importing key material into KMS",
+      "predecessorPatterns": [
+        "\\bcustom key store\\b",
+        "\\bCloudHSM key store\\b",
+        "\\bAWS CloudHSM\\b",
+        "\\bimport(ed)? key material\\b"
+      ]
+    },
+    {
+      "id": "s3-ssec-blocked-default",
+      "name": "S3 blocks SSE-C by default on new buckets",
+      "introduced": "2026-04",
+      "certainty": "confirmed",
+      "source": "pg-s3-ssec-faq",
+      "quote": "In April 2026, Amazon S3 deployed an update so all new general purpose buckets have SSE-C encryption disabled for all new write requests.",
+      "patterns": [
+        "\\bSSE-C\\b[^\\n]{0,150}\\b(disabled|blocked|block|off)\\b[^\\n]{0,80}\\b(by default|new buckets)\\b",
+        "\\b(disabled|blocked|off)\\b[^\\n]{0,60}\\bby default\\b[^\\n]{0,100}\\bSSE-C\\b",
+        "\\bSSE-C\\b[^\\n]{0,80}\\bby default\\b",
+        "\\bblock(ing|ed)? SSE-C\\b"
+      ],
+      "predecessor": "SSE-C usable on any new bucket without an opt-in",
+      "predecessorPatterns": [
+        "\\bSSE-C\\b",
+        "customer-provided (encryption )?keys"
+      ]
+    },
+    {
+      "id": "s3-dsse-kms",
+      "name": "Dual-layer server-side encryption with KMS keys (DSSE-KMS)",
+      "introduced": "2023-06-13",
+      "certainty": "confirmed",
+      "source": "pg-s3-dsse",
+      "quote": "Dual-layer server-side encryption with keys stored in AWS Key Management Service (DSSE-KMS) is designed to meet National Security Agency CNSSP 15 for FIPS compliance and Data-at-Rest Capability Package (DAR CP) Version 5.0 guidance for two layers of CNSA encryption.",
+      "patterns": [
+        "\\bDSSE-KMS\\b",
+        "\\bdual-layer\\b",
+        "\\btwo layers of (server-side )?encryption\\b"
+      ],
+      "predecessor": "SSE-KMS (one layer) combined with client-side encryption before upload to get two layers",
+      "predecessorPatterns": [
+        "\\bSSE-KMS\\b",
+        "\\bclient-side encryption\\b"
+      ]
+    },
+    {
+      "id": "iam-multiple-mfa-devices",
+      "name": "Multiple MFA devices per IAM user and root user",
+      "introduced": "2022-11-16",
+      "certainty": "confirmed",
+      "source": "pg-iam-multi-mfa",
+      "quote": "Now it is possible to add up to eight MFA devices per user, including FIDO security keys, software time-based one-time password (TOTP) with virtual authenticator applications, or hardware TOTP tokens.",
+      "patterns": [
+        "\\bmultiple (MFA|multi-factor)[^\\n]{0,20}devices?\\b",
+        "\\b(two|second|additional|extra|backup|more than one|up to eight|eight) (MFA|multi-factor)[^\\n]{0,30}devices?\\b",
+        "\\bMFA devices\\b[^\\n]{0,60}\\b(up to eight|more than one|two)\\b",
+        "\\bregister(ed)? (a )?(second|another|additional|backup) (MFA|virtual|hardware|security)"
+      ],
+      "predecessor": "A single MFA device per IAM user, with account recovery if the device is lost",
+      "predecessorPatterns": [
+        "\\b(single|one|only one) (virtual |hardware )?MFA device\\b",
+        "\\bsingle MFA\\b"
+      ]
+    },
+    {
+      "id": "iam-passkey-mfa",
+      "name": "Passkeys as an MFA method for IAM and root users",
+      "introduced": "2024-06-11",
+      "certainty": "confirmed",
+      "source": "pg-iam-passkey",
+      "quote": "IAM now allows you to secure access to AWS accounts using passkeys for multi-factor authentication (MFA) with support for built-in authenticators, such as Touch ID on Apple MacBooks and Windows Hello facial recognition on PCs.",
+      "patterns": [
+        "\\bpasskeys?\\b"
+      ],
+      "predecessor": "FIDO U2F security keys, virtual (TOTP) or hardware TOTP MFA devices",
+      "predecessorPatterns": [
+        "\\bFIDO( ?U2F|2)?\\b",
+        "\\bU2F\\b",
+        "\\bTOTP\\b",
+        "\\bvirtual MFA\\b",
+        "\\bhardware (MFA|TOTP)\\b",
+        "\\bsecurity keys?\\b"
+      ]
+    },
+    {
+      "id": "iam-centralized-root-access",
+      "name": "Centralized root access management for member accounts",
+      "introduced": "2024-11-15",
+      "certainty": "confirmed",
+      "source": "pg-iam-root-central",
+      "quote": "Now, administrators can remove unnecessary root credentials for member accounts in AWS Organizations and then, if needed, perform tightly scoped privileged actions using temporary credentials.",
+      "patterns": [
+        "\\bcentrali[sz]ed root access\\b",
+        "\\broot access management\\b",
+        "\\bprivileged root (actions?|tasks?|sessions?)\\b",
+        "\\bcentrally (manage|remove|secure)[^\\n]{0,40}root\\b",
+        "\\broot (user )?credentials\\b[^\\n]{0,80}\\bmember accounts?\\b",
+        "\\bmember accounts?\\b[^\\n]{0,80}\\broot (user )?credentials\\b"
+      ],
+      "predecessor": "Securing the root user of each member account individually (password, MFA, access keys) and signing in as root for tasks",
+      "predecessorPatterns": [
+        "\\bsign in as the root user\\b",
+        "\\broot user\\b[^\\n]{0,100}\\b(each|every) (member )?account\\b",
+        "\\b(each|every) (member )?account\\b[^\\n]{0,100}\\broot user\\b",
+        "\\broot user MFA\\b"
+      ]
+    },
+    {
+      "id": "s3-bpa-organizations-policy",
+      "name": "S3 Block Public Access organization-level policy in AWS Organizations",
+      "introduced": "2025-11-26",
+      "certainty": "confirmed",
+      "source": "pg-s3-bpa-org",
+      "quote": "S3 Block Public Access at the organization level uses a single configuration that controls all public access settings across accounts within your organization.",
+      "patterns": [
+        "\\b(organization|organisations?|Organizations)[- ]level\\b[^\\n]{0,40}\\bBlock Public Access\\b",
+        "\\bBlock Public Access\\b[^\\n]{0,60}\\b(organization-level|organization policy|Organizations policy|organization-wide)",
+        "\\bS3 polic(y|ies)\\b[^\\n]{0,80}\\b(Organizations|Block Public Access)\\b",
+        "\\bOrganizations\\b[^\\n]{0,40}\\bS3 polic(y|ies)\\b"
+      ],
+      "predecessor": "Account-level S3 Block Public Access in each account, protected by an SCP",
+      "predecessorPatterns": [
+        "\\baccount-level\\b[^\\n]{0,40}\\bBlock Public Access\\b",
+        "\\bPutAccountPublicAccessBlock\\b",
+        "\\bSCP\\b[^\\n]{0,100}\\bBlock Public Access\\b",
+        "\\bBlock Public Access\\b[^\\n]{0,100}\\bSCP\\b"
+      ]
+    },
+    {
+      "id": "lakeformation-hybrid-access",
+      "name": "AWS Lake Formation hybrid access mode",
+      "introduced": "2023-09-26",
+      "certainty": "confirmed",
+      "source": "pg-lf-hybrid",
+      "quote": "With the Hybrid Access Mode, you now have an incremental path wherein you can enable Lake Formation for a specific set of users without interrupting other existing users or workloads.",
+      "patterns": [
+        "\\bhybrid access mode\\b"
+      ],
+      "predecessor": "Moving every principal to Lake Formation permissions at once, or keeping IAM and S3 bucket policies",
+      "predecessorPatterns": [
+        "\\bIAMAllowedPrincipals\\b",
+        "\\bIAM (and|or) S3 (bucket )?polic(y|ies)\\b",
+        "\\bIAM polic(y|ies) and (S3 )?bucket polic(y|ies)\\b"
+      ]
+    },
+    {
+      "id": "lambda-snapstart",
+      "name": "AWS Lambda SnapStart",
+      "introduced": "2022-11-28",
+      "certainty": "confirmed",
+      "source": "pg-snapstart",
+      "quote": "Lambda SnapStart offers improved startup times by initializing the function\u2019s code ahead of time, taking a snapshot of the initialized execution environment, and caching it.",
+      "patterns": [
+        "\\bSnapStart\\b"
+      ],
+      "predecessor": "Lambda provisioned concurrency to keep execution environments initialized",
+      "predecessorPatterns": [
+        "\\bprovisioned concurrency\\b"
+      ]
+    },
+    {
+      "id": "eks-auto-mode",
+      "name": "Amazon EKS Auto Mode",
+      "introduced": "2024-12-01",
+      "certainty": "confirmed",
+      "source": "pg-eks-auto",
+      "quote": "Amazon EKS Auto Mode simplifies running Kubernetes by offloading cluster operations to AWS, improves the performance and security of your applications, and helps optimize compute costs.",
+      "patterns": [
+        "\\bEKS Auto Mode\\b",
+        "\\bAuto Mode\\b[^\\n]{0,80}\\bEKS\\b",
+        "\\bEKS\\b[^\\n]{0,80}\\bAuto Mode\\b"
+      ],
+      "predecessor": "EKS managed node groups or self-managed nodes with Cluster Autoscaler or Karpenter that you operate",
+      "predecessorPatterns": [
+        "\\bmanaged node groups?\\b",
+        "\\bself-managed (worker )?nodes?\\b",
+        "\\bCluster Autoscaler\\b",
+        "\\bKarpenter\\b"
+      ]
+    },
+    {
+      "id": "lambda-sqs-maximum-concurrency",
+      "name": "Lambda maximum concurrency for an SQS event source mapping",
+      "introduced": "2023-01-12",
+      "certainty": "confirmed",
+      "source": "pg-lambda-sqs-maxconc",
+      "quote": "Maximum Concurrency for SQS as an event source allows customers to control the maximum concurrent invokes by the Amazon SQS event source.",
+      "patterns": [
+        "\\bmaximum concurrency\\b[^\\n]{0,150}\\b(SQS|event source)",
+        "\\b(SQS|event source)[^\\n]{0,150}\\bmaximum concurrency\\b",
+        "\\bMaximumConcurrency\\b",
+        "\\bScalingConfig\\b"
+      ],
+      "predecessor": "Function-level reserved concurrency to throttle SQS consumption",
+      "predecessorPatterns": [
+        "\\breserved concurrency\\b"
+      ]
+    },
+    {
+      "id": "asg-instance-refresh-rollback",
+      "name": "EC2 Auto Scaling instance refresh rollback (including automatic rollback on alarms)",
+      "introduced": "2023-02-10",
+      "certainty": "confirmed",
+      "source": "pg-asg-refresh-rollback",
+      "quote": "With today\u2019s launch, you can use rollback to undo changes an instance refresh made when it fails.",
+      "patterns": [
+        "\\binstance refresh\\b[^\\n]{0,150}\\b(roll\\s?back|rolls? back|revert)",
+        "\\b(roll\\s?back|revert)[^\\n]{0,150}\\binstance refresh\\b",
+        "\\b(automatic|auto)[- ]?roll\\s?back\\b[^\\n]{0,80}\\bAuto Scaling\\b"
+      ],
+      "predecessor": "Instance refresh or a CloudFormation rolling update without rollback, so a failed rollout is reverted by hand",
+      "predecessorPatterns": [
+        "\\bAutoScalingRollingUpdate\\b",
+        "\\brolling update\\b",
+        "\\bmanually (roll|revert|restore)"
+      ]
+    },
+    {
+      "id": "alb-target-group-health-requirements",
+      "name": "ALB target group health requirements (minimum healthy targets, DNS failover and routing failover)",
+      "introduced": "2022-11-28",
+      "certainty": "confirmed",
+      "source": "pg-alb-dochistory",
+      "quote": "This release adds support to configure the minimum count or percentage of targets that must be healthy, and what actions the load balancer takes when the threshold is not met.",
+      "patterns": [
+        "\\bminimum healthy targets?\\b",
+        "\\b(target group )?health (requirements?|thresholds?)\\b",
+        "\\bhealthy state requirements?\\b",
+        "\\brouting failover\\b",
+        "\\bunhealthy[_ ]state[_ ]routing\\b",
+        "\\bfail[- ]open\\b"
+      ],
+      "predecessor": "Route 53 health checks and failover routing in front of the load balancer",
+      "predecessorPatterns": [
+        "\\bRoute 53\\b[^\\n]{0,80}\\b(health check|failover)",
+        "\\bfailover routing\\b"
+      ]
+    },
+    {
+      "id": "s3-express-one-zone",
+      "name": "Amazon S3 Express One Zone",
+      "introduced": "2023-11-28",
+      "certainty": "confirmed",
+      "source": "pg-s3-express",
+      "quote": "S3 Express One Zone can improve data access speeds by 10x and reduce request costs by 50% compared to S3 Standard.",
+      "patterns": [
+        "\\bS3 Express One Zone\\b",
+        "\\bExpress One Zone\\b",
+        "\\bdirectory buckets?\\b",
+        "\\bS3 Express\\b"
+      ],
+      "predecessor": "S3 Standard (or S3 One Zone-IA) general purpose buckets",
+      "predecessorPatterns": [
+        "\\bS3 Standard(?!-)",
+        "\\bS3 One Zone-IA\\b"
+      ]
+    },
+    {
+      "id": "kms-on-demand-rotation",
+      "name": "AWS KMS on-demand key rotation and custom rotation periods",
+      "introduced": "2024-04-12",
+      "certainty": "confirmed",
+      "source": "pg-kms-rotation",
+      "quote": "You can now customize the frequency of rotation period between 90 days to 7 years (2560 days) as well as invoke key rotation on demand for customer managed KMS keys.",
+      "patterns": [
+        "\\bon[- ]demand\\b[^\\n]{0,40}\\b(key )?rotat",
+        "\\brotat\\w*[^\\n]{0,40}\\bon demand\\b",
+        "\\bRotateKeyOnDemand\\b",
+        "\\b(custom|customi[sz]able|configurable)[^\\n]{0,20}rotation (period|frequency|interval)"
+      ],
+      "predecessor": "Automatic annual KMS rotation, or creating a new key and repointing the alias to rotate immediately",
+      "predecessorPatterns": [
+        "\\bautomatic (key )?rotation\\b",
+        "\\b(annual|yearly)\\b[^\\n]{0,30}rotation",
+        "\\bnew (KMS )?key\\b[^\\n]{0,80}\\balias\\b"
+      ]
+    },
+    {
+      "id": "secrets-manager-managed-external-secrets",
+      "name": "AWS Secrets Manager managed external secrets",
+      "introduced": "2025-11-19",
+      "certainty": "confirmed",
+      "source": "pg-secrets-external",
+      "quote": "At launch, managed external secrets feature is available for 3 listed partners \u2014 Salesforce, BigID and Snowflake.",
+      "patterns": [
+        "\\bmanaged external secrets?\\b",
+        "\\bexternal secrets?\\b[^\\n]{0,80}\\bSecrets Manager\\b",
+        "\\bSecrets Manager\\b[^\\n]{0,100}\\b(third-party|SaaS)\\b[^\\n]{0,80}\\b(secrets?|rotat)"
+      ],
+      "predecessor": "A custom rotation Lambda function that rotates the SaaS provider secret",
+      "predecessorPatterns": [
+        "\\brotation (Lambda )?function\\b",
+        "\\bcustom rotation\\b",
+        "\\bLambda function\\b[^\\n]{0,60}\\brotat"
+      ]
+    },
+    {
+      "id": "s3-lifecycle-default-min-size",
+      "name": "S3 Lifecycle default minimum object size of 128 KB for transitions",
+      "introduced": "2024-09-24",
+      "certainty": "confirmed",
+      "source": "pg-s3-lifecycle-128",
+      "quote": "While the object size filter for your existing S3 Lifecycle rules will not automatically change, this new default behavior will be applied to any new or modified S3 Lifecycle configuration.",
+      "patterns": [
+        "\\b128\\s?(KB|KiB)\\b[\\s\\S]{0,150}\\b(lifecycle|transition)",
+        "\\b(lifecycle|transition)[\\s\\S]{0,150}\\b128\\s?(KB|KiB)\\b",
+        "\\bminimum object size\\b[^\\n]{0,80}\\b(lifecycle|transition)",
+        "\\b(lifecycle|transition)[^\\n]{0,80}\\bminimum object size\\b",
+        "\\bObjectSizeGreaterThan\\b"
+      ],
+      "predecessor": "Lifecycle transition rules applied to all objects, including very small ones, with no size default",
+      "predecessorPatterns": [
+        "\\bsmall objects\\b",
+        "\\ball objects\\b[^\\n]{0,60}\\btransition",
+        "\\btransition[^\\n]{0,60}\\ball objects\\b"
+      ]
+    },
+    {
+      "id": "direct-connect-400g",
+      "name": "AWS Direct Connect native 400 Gbps dedicated connections",
+      "introduced": "2024-07-01",
+      "certainty": "confirmed",
+      "source": "pg-dx-400g",
+      "quote": "Native 400 Gbps connections provide higher bandwidth, without the operational overhead of managing multiple 100 Gbps connections in a link aggregation group.",
+      "patterns": [
+        "\\b400\\s?-?Gbps\\b",
+        "\\b(next|largest|highest|biggest|maximum|top)\\b[^\\n]{0,80}\\b(port|dedicated|speed)[^\\n]{0,60}\\b100 Gbps\\b",
+        "\\bport speeds?\\b[^\\n]{0,80}\\b(1|10),? (and |or )?(10,? )?(and |or )?100\\b"
+      ],
+      "predecessor": "A LAG of several 100 Gbps (or smaller) dedicated connections",
+      "predecessorPatterns": [
+        "\\bLAG\\b",
+        "\\blink aggregation group\\b",
+        "\\b100\\s?Gbps\\b",
+        "\\b(four|4)\\b[^\\n]{0,30}\\b100\\b"
+      ]
+    },
+    {
+      "id": "backup-ebs-cold-storage",
+      "name": "AWS Backup cold storage tier for Amazon EBS snapshots (EBS Snapshots Archive)",
+      "introduced": "2023-11-27",
+      "certainty": "confirmed",
+      "source": "pg-backup-ebs-archive",
+      "quote": "You can now use AWS Backup to transition your EBS Snapshots to EBS Snapshots Archive and manage their lifecycle, alongside AWS Backup\u2019s other supported resources.",
+      "patterns": [
+        "\\b(EBS|Elastic Block Store)\\b[\\s\\S]{0,900}\\bcold storage\\b",
+        "\\bcold storage\\b[\\s\\S]{0,900}\\b(EBS|Elastic Block Store)\\b",
+        "\\bAWS Backup\\b[\\s\\S]{0,300}\\b(EBS )?Snapshots? Archive\\b",
+        "\\b(EBS )?Snapshots? Archive\\b[\\s\\S]{0,300}\\bAWS Backup\\b"
+      ],
+      "predecessor": "EBS backups kept in warm storage only (or EBS snapshots in the standard tier)",
+      "predecessorPatterns": [
+        "\\bwarm storage\\b",
+        "\\bstandard tier\\b"
+      ]
+    },
+    {
+      "id": "elasticache-valkey",
+      "name": "ElastiCache for Valkey",
+      "introduced": "2024-10",
+      "certainty": "confirmed",
+      "source": "pg-elasticache-valkey",
+      "quote": "ElastiCache for Valkey is now available in all AWS regions.",
+      "patterns": [
+        "\\bvalkey\\b"
+      ],
+      "predecessorPatterns": [
+        "redis oss",
+        "elasticache for redis"
+      ],
+      "predecessor": "ElastiCache for Redis OSS (node-based clusters or replication groups)"
+    },
+    {
+      "id": "elasticache-serverless",
+      "name": "ElastiCache Serverless (including reads from replicas)",
+      "introduced": "2023-11",
+      "certainty": "confirmed",
+      "source": "pg-elasticache-serverless",
+      "quote": "With ElastiCache Serverless, you can create a highly available and scalable cache in less than a minute, eliminating the need to plan for, provision, and manage cache cluster capacity.",
+      "patterns": [
+        "elasticache serverless",
+        "serverless (elasticache|cache|redis|memcached)",
+        "elasticache[\\s\\S]{0,60}serverless"
+      ],
+      "predecessorPatterns": [
+        "node-based",
+        "replication group",
+        "cache cluster"
+      ],
+      "predecessor": "Node-based ElastiCache cluster or replication group that the team sizes, scales and places in Availability Zones. Reading from replicas on a serverless cache (the cache-pavilion-007 claim) is not dated by this page: needs-verification"
+    },
+    {
+      "id": "dms-schema-conversion",
+      "name": "DMS Schema Conversion",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-dms-schema-conversion",
+      "quote": "DMS Schema Conversion is a fully managed feature of AWS DMS that automatically assesses and converts the database schema to a format compatible with the target database service in AWS, enabling you to modernize your database and analytics workloads.",
+      "patterns": [
+        "dms schema conversion",
+        "schema conversion (feature|in (aws )?dms)",
+        "dms sc\\b"
+      ],
+      "predecessorPatterns": [
+        "schema conversion tool",
+        "\\bsct\\b"
+      ],
+      "predecessor": "AWS Schema Conversion Tool (SCT) run on a workstation"
+    },
+    {
+      "id": "dynamodb-on-demand-max-throughput",
+      "name": "DynamoDB on-demand maximum throughput",
+      "introduced": "2024-05",
+      "certainty": "confirmed",
+      "source": "pg-ddb-max-throughput",
+      "quote": "Starting today, you can optionally configure maximum read or write (or both) throughput for individual on-demand tables and associated secondary indexes, making it easy to balance costs and performance.",
+      "patterns": [
+        "maximum (read|write)( and (read|write))? throughput",
+        "(configure|configured|set) (a )?maximum (table )?throughput",
+        "no maximum throughput",
+        "Max(Read|Write)RequestUnits"
+      ],
+      "predecessorPatterns": [
+        "provisioned capacity[\\s\\S]{0,40}auto scaling",
+        "auto scaling[\\s\\S]{0,40}maximum capacity"
+      ],
+      "predecessor": "On-demand mode with only account-level quotas, or provisioned capacity with auto scaling and a chosen maximum to bound spend"
+    },
+    {
+      "id": "dynamodb-warm-throughput",
+      "name": "DynamoDB warm throughput",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-ddb-warm-throughput",
+      "quote": "You can now check your tables\u2019 warm throughput value to assess if your table can handle large traffic spikes for peak events.",
+      "patterns": [
+        "warm throughput",
+        "pre-?warm\\w*[\\s\\S]{0,60}(table|dynamodb)",
+        "(table|dynamodb)[\\s\\S]{0,60}pre-?warm"
+      ],
+      "predecessorPatterns": [
+        "previous (peak|traffic)",
+        "scheduled scaling",
+        "provisioned capacity[\\s\\S]{0,60}(before|ahead|raise)"
+      ],
+      "predecessor": "Letting on-demand or auto scaling adapt to the spike (throttling risk), or raising provisioned capacity ahead of the event"
+    },
+    {
+      "id": "dms-serverless",
+      "name": "DMS Serverless",
+      "introduced": "2023-06",
+      "certainty": "confirmed",
+      "source": "pg-dms-serverless",
+      "quote": "AWS DMS Serverless is now available in all AWS Regions, except China (Beijing, operated by Sinnet), China (Ningxia, operated by NWCD), AWS GovCloud (US-East), and AWS GovCloud (US-West).",
+      "patterns": [
+        "dms serverless",
+        "serverless (dms|replication)",
+        "database migration service serverless"
+      ],
+      "predecessorPatterns": [
+        "replication instance"
+      ],
+      "predecessor": "DMS replication instance that the team sizes, provisions and patches"
+    },
+    {
+      "id": "aurora-io-optimized",
+      "name": "Aurora I/O-Optimized",
+      "introduced": "2023-05",
+      "certainty": "confirmed",
+      "source": "pg-aurora-io-optimized",
+      "quote": "With Aurora I/O-Optimized, there are zero charges for read and write I/O operations\u2014you only pay for your database instances and storage usage, making it easy to predict your database spend up front.",
+      "patterns": [
+        "i/o-optimized",
+        "io-optimized",
+        "aurora standard"
+      ],
+      "predecessorPatterns": [
+        "aurora standard",
+        "per[- ]request i/o",
+        "i/o charges",
+        "charged for (read and write )?i/o"
+      ],
+      "predecessor": "Aurora Standard configuration with per-request I/O charges"
+    },
+    {
+      "id": "aurora-serverless-v2-scale-to-zero",
+      "name": "Aurora Serverless v2 scale to zero (auto-pause at 0 ACU)",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-aurora-sv2-zero",
+      "quote": "Instead of scaling down to 0.5 ACUs, the database can now scale down to 0 ACUs.",
+      "patterns": [
+        "\\b(0|zero) acus?\\b",
+        "auto-?pause",
+        "aurora serverless[\\s\\S]{0,200}(pause|scal\\w+ (down )?to (zero|0)\\b)",
+        "pauses? (when|while) idle",
+        "min(imum)? (capacity|acu)\\w* (of|to|at|is|set to) (0|zero) acus?"
+      ],
+      "predecessorPatterns": [
+        "0\\.5 acus?",
+        "serverless v1",
+        "stop(ped)? (and start )?the (db |aurora )?(cluster|instance)",
+        "scheduled (stop|start)"
+      ],
+      "predecessor": "Aurora Serverless v2 with a 0.5 ACU minimum, or stopping and starting the cluster on a schedule"
+    },
+    {
+      "id": "rds-gp3-storage",
+      "name": "RDS gp3 storage",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-rds-gp3",
+      "quote": "Amazon RDS gp3 volumes give you the flexibility to provision storage performance independently of storage capacity, paying only for the resources you need.",
+      "patterns": [
+        "\\brds\\b[\\s\\S]{0,500}\\bgp3\\b",
+        "\\bgp3\\b[\\s\\S]{0,500}\\brds\\b"
+      ],
+      "predecessorPatterns": [
+        "\\bgp2\\b",
+        "provisioned iops",
+        "\\bio1\\b"
+      ],
+      "predecessor": "RDS General Purpose (gp2) or Provisioned IOPS (io1) storage"
+    },
+    {
+      "id": "eventbridge-pipes",
+      "name": "EventBridge Pipes",
+      "introduced": "2022-12",
+      "certainty": "confirmed",
+      "source": "pg-eventbridge-pipes",
+      "quote": "EventBridge Pipes makes it easy to connect your applications with data from sources including Amazon SQS, Amazon Kinesis, Amazon DynamoDB, Amazon Managed Streaming Kafka, self-managed Kafka, and Amazon MQ.",
+      "patterns": [
+        "eventbridge pipes?\\b",
+        "\\bpipes\\b[\\s\\S]{0,40}eventbridge"
+      ],
+      "predecessorPatterns": [
+        "lambda[\\s\\S]{0,60}(poll|reads? from|consum|forward)",
+        "glue code",
+        "custom (polling|integration|consumer)"
+      ],
+      "predecessor": "A Lambda function (or custom consumer code) that polls the source, filters, enriches and calls the target"
+    },
+    {
+      "id": "eventbridge-scheduler",
+      "name": "EventBridge Scheduler",
+      "introduced": "2022-11-10",
+      "certainty": "confirmed",
+      "source": "pg-eventbridge-scheduler",
+      "quote": "EventBridge Scheduler enables customers to schedule millions of events and tasks across 200+ AWS services without provisioning or managing the underlying infrastructure.",
+      "patterns": [
+        "eventbridge scheduler",
+        "amazon scheduler"
+      ],
+      "predecessorPatterns": [
+        "scheduled rule",
+        "eventbridge rule[\\s\\S]{0,60}(schedule|cron|rate)",
+        "cron expression",
+        "schedule expression"
+      ],
+      "predecessor": "EventBridge scheduled rule (cron or rate expression) on the default event bus"
+    },
+    {
+      "id": "regional-nat-gateway",
+      "name": "Regional NAT gateway (regional availability mode)",
+      "introduced": "2025-11",
+      "certainty": "confirmed",
+      "source": "pg-nat-regional",
+      "quote": "With this launch, you can create a NAT Gateway and set its availability to regional.",
+      "patterns": [
+        "regional nat",
+        "regional availability mode",
+        "availability mode",
+        "nat gateway[\\s\\S]{0,60}regional (mode|availability)",
+        "regional (mode|availability)[\\s\\S]{0,60}nat gateway"
+      ],
+      "predecessorPatterns": [
+        "zonal nat",
+        "nat gateway (in|per) (each|every) (az|availability zone)",
+        "(one|a|separate|second) (public )?nat gateway in (each|every|the same)",
+        "nat gateways? in (each|every|both|multiple|two|three)"
+      ],
+      "predecessor": "One zonal NAT gateway in each Availability Zone with a route table per zone"
+    },
+    {
+      "id": "vpn-large-bandwidth-tunnel",
+      "name": "Site-to-Site VPN Large Bandwidth Tunnel (5 Gbps)",
+      "introduced": "2025-11",
+      "certainty": "confirmed",
+      "source": "pg-vpn-5gbps",
+      "quote": "With this launch, customers can now configure their tunnel bandwidth to 5 Gbps, reducing the need to deploy complex protocols such as ECMP while ensuring consistent bandwidth performance.",
+      "patterns": [
+        "large bandwidth",
+        "5 ?gbps[\\s\\S]{0,60}(tunnel|vpn)",
+        "(tunnel|vpn)[\\s\\S]{0,60}5 ?gbps"
+      ],
+      "predecessorPatterns": [
+        "1\\.25 ?gbps",
+        "\\becmp\\b",
+        "multiple (vpn )?(tunnels|connections)"
+      ],
+      "predecessor": "Standard 1.25 Gbps tunnels spread with ECMP across several tunnels or connections on a transit gateway, or Direct Connect"
+    },
+    {
+      "id": "database-savings-plans",
+      "name": "Database Savings Plans",
+      "introduced": "2025-12-02",
+      "certainty": "confirmed",
+      "source": "pg-database-savings-plans",
+      "quote": "Database Savings Plans automatically apply to eligible serverless and provisioned instance usage regardless of supported engine, instance family, size, deployment option, or AWS Region.",
+      "patterns": [
+        "database savings plans?"
+      ],
+      "predecessorPatterns": [
+        "reserved (db |database )?(instances?|nodes?)",
+        "reserved capacity"
+      ],
+      "predecessor": "Reserved DB instances, reserved cache nodes and DynamoDB reserved capacity"
+    },
+    {
+      "id": "cost-allocation-tag-backfill",
+      "name": "Cost allocation tag backfill",
+      "introduced": "2024-03",
+      "certainty": "confirmed",
+      "source": "pg-cost-tag-backfill",
+      "quote": "This retroactive application feature is available in all Commercial AWS Regions.",
+      "patterns": [
+        "backfill",
+        "retroactiv\\w+[\\s\\S]{0,80}tag",
+        "tags?[\\s\\S]{0,80}retroactiv",
+        "cost allocation tags?[\\s\\S]{0,120}(historical|past|previous months)"
+      ],
+      "predecessorPatterns": [
+        "only (from|after|going forward)",
+        "from the (activation|date)",
+        "going forward"
+      ],
+      "predecessor": "Tags apply to cost data only from the activation date forward"
+    },
+    {
+      "id": "athena-query-result-reuse",
+      "name": "Athena query result reuse",
+      "introduced": "2022-11",
+      "certainty": "confirmed",
+      "source": "pg-athena-result-reuse",
+      "quote": "Query Result Reuse works by returning a previously stored query result when a repeat query is submitted.",
+      "patterns": [
+        "query result reuse",
+        "result reuse",
+        "reuse[\\s\\S]{0,30}(previous|cached|prior|query) results?"
+      ],
+      "predecessorPatterns": [
+        "materializ",
+        "\\bctas\\b|create table as select",
+        "cache"
+      ],
+      "predecessor": "Re-running the query, or caching or materializing results outside Athena (for example CTAS or an application cache)"
+    },
+    {
+      "id": "cloudfront-oac",
+      "name": "CloudFront origin access control (OAC)",
+      "introduced": "2022-08-25",
+      "certainty": "confirmed",
+      "source": "pg-cloudfront-oac",
+      "quote": "Origin Access Control improves upon Origin Access Identity by strengthening security and deepening feature integrations.",
+      "patterns": [
+        "origin access control",
+        "\\boac\\b"
+      ],
+      "predecessorPatterns": [
+        "origin access identit",
+        "\\boai\\b"
+      ],
+      "predecessor": "CloudFront origin access identity (OAI)"
+    },
+    {
+      "id": "metric-math-target-tracking",
+      "name": "Target tracking with metric math (SQS backlog per instance or task)",
+      "introduced": "2022-12",
+      "certainty": "confirmed",
+      "source": "pg-asg-metric-math",
+      "quote": "Now, if the custom metric is a simple function of other existing metrics, you can use CloudWatch Metric Math in the Target Tracking policy, instead of publishing (and paying for) a new custom CloudWatch metric.",
+      "patterns": [
+        "metric math",
+        "math expression"
+      ],
+      "predecessorPatterns": [
+        "custom[- ](cloudwatch )?metric",
+        "backlog[- ]per[- ](instance|task)",
+        "publish\\w* [\\s\\S]{0,30}metric"
+      ],
+      "predecessor": "Publishing a custom CloudWatch backlog-per-instance metric yourself and tracking it. EC2 Auto Scaling 2022-12; Application Auto Scaling (ECS and others) followed in 2023-03"
+    },
+    {
+      "id": "ecs-predictive-scaling",
+      "name": "Predictive scaling for Amazon ECS services",
+      "introduced": "2024-11-21",
+      "certainty": "confirmed",
+      "source": "pg-ecs-predictive-scaling",
+      "quote": "Predictive scaling is a new capability that harnesses advanced machine learning algorithms, pre-trained on millions of data points, to proactively scale out ECS services ahead of anticipated demand surges.",
+      "patterns": [
+        "\\becs\\b[\\s\\S]{0,250}predictive scaling",
+        "predictive scaling[\\s\\S]{0,250}\\becs\\b"
+      ],
+      "predecessorPatterns": [
+        "scheduled (scaling|action)",
+        "target tracking",
+        "step scaling"
+      ],
+      "predecessor": "Scheduled scaling, target tracking or step scaling only"
+    },
+    {
+      "id": "aurora-global-switchover",
+      "name": "Aurora Global Database switchover (renamed from managed planned failover)",
+      "introduced": "2023-08",
+      "certainty": "approximate",
+      "source": "pg-aurora-global-switchover",
+      "quote": "Starting today, we are also renaming \u201cManaged Planned Failover\u201d to \u201cGlobal Database Switchover\u201d, which is a fully managed cross-region database failover experience meant for planned events such as regional rotations.",
+      "patterns": [
+        "global (database|cluster)[\\s\\S]{0,200}switchover",
+        "switchover[\\s\\S]{0,200}global (database|cluster)",
+        "managed planned failover"
+      ],
+      "predecessorPatterns": [
+        "managed planned failover",
+        "detach",
+        "promot\\w+[\\s\\S]{0,30}secondary"
+      ],
+      "predecessor": "Managed planned failover (same capability under its older name, before 2023-08); or detaching and promoting a secondary cluster"
+    },
+    {
+      "id": "nat-gateway-secondary-ips",
+      "name": "NAT gateway multiple secondary IPv4 addresses (up to 8)",
+      "introduced": "2023-02",
+      "certainty": "confirmed",
+      "source": "pg-nat-secondary-ips",
+      "quote": "This feature allows you to associate up to a total of eight IP addresses to further increase this limit by eight times to 440,000 concurrent connections to a single destination.",
+      "patterns": [
+        "nat gateway[\\s\\S]{0,200}(secondary|additional)[\\s\\S]{0,40}(ip|address)",
+        "(secondary|additional)[\\s\\S]{0,40}(ip|address)[\\s\\S]{0,200}nat gateway",
+        "440,?000"
+      ],
+      "predecessorPatterns": [
+        "55,?000",
+        "(second|another|additional|multiple) nat gateways?"
+      ],
+      "predecessor": "One IP address per NAT gateway (55,000 concurrent connections to one destination) and extra NAT gateways to scale"
+    },
+    {
+      "id": "firehose-zero-buffering",
+      "name": "Firehose zero buffering",
+      "introduced": "2023-12",
+      "certainty": "confirmed",
+      "source": "pg-firehose-zero-buffering",
+      "quote": "With zero buffering, customers can setup a Amazon Kinesis Data Firehose stream to not buffer data before delivery, and most streams with no additional processing are delivered within five seconds.",
+      "patterns": [
+        "zero buffering",
+        "buffer\\w* (interval|hint)s?[\\s\\S]{0,30}(of )?(0|zero)\\b",
+        "(0|zero)[- ]second buffer"
+      ],
+      "predecessorPatterns": [
+        "60[- ]seconds?",
+        "buffer\\w* (interval|hint)",
+        "buffer interval"
+      ],
+      "predecessor": "Buffer interval of at least 60 seconds"
+    },
+    {
+      "id": "security-hub-unified",
+      "name": "Security Hub (unified, 2025) versus Security Hub CSPM",
+      "introduced": "2025-12",
+      "certainty": "confirmed",
+      "source": "pg-security-hub-ga",
+      "quote": "With general availability, Security Hub now includes near real-time risk analytics, advanced trends, unified enablement and management, and streamlined pricing across multiple AWS security services.",
+      "patterns": [
+        "security hub cspm",
+        "security hub[\\s\\S]{0,120}(exposure|unified|risk analytics|near real-time)",
+        "exposure findings?"
+      ],
+      "predecessorPatterns": [
+        "security hub[\\s\\S]{0,120}(aggregat|standards|cis|foundational)",
+        "aggregat\\w+ [\\s\\S]{0,20}findings"
+      ],
+      "predecessor": "AWS Security Hub as a findings aggregator with standards checks (now documented as AWS Security Hub CSPM)"
+    },
+    {
+      "id": "aurora-dsql",
+      "name": "Amazon Aurora DSQL",
+      "introduced": "2025-05",
+      "certainty": "confirmed",
+      "source": "pg-aurora-dsql-ga",
+      "quote": "Aurora DSQL enables you to build always available applications with virtually unlimited scalability, the highest availability, and zero infrastructure management.",
+      "patterns": [
+        "aurora dsql",
+        "\\bdsql\\b"
+      ],
+      "predecessorPatterns": [
+        "aurora global database",
+        "dynamodb global tables",
+        "multi-region"
+      ],
+      "predecessor": "Aurora Global Database (single writer Region) or DynamoDB global tables for multi-Region writes"
+    },
+    {
+      "id": "dynamodb-price-cut-2024",
+      "name": "DynamoDB on-demand price cut (50%) and lower global tables prices",
+      "introduced": "2024-11",
+      "certainty": "confirmed",
+      "source": "pg-ddb-price-cut",
+      "quote": "Starting today, we have made Amazon DynamoDB even more cost-effective by reducing prices for on-demand throughput by 50% and global tables by up to 67%.",
+      "patterns": [
+        "^(?=[\\s\\S]*dynamodb)(?=[\\s\\S]*(steady|forecast\\w*|predictable))(?=[\\s\\S]*provisioned capacity)[\\s\\S]*$",
+        "dynamodb reserved capacity",
+        "(purchase|buy)\\w* reserved capacity[\\s\\S]{0,80}provisioned",
+        "on-demand[\\s\\S]{0,120}(not the lower-cost|lower-cost mode)"
+      ],
+      "predecessorPatterns": [
+        "provisioned capacity",
+        "reserved capacity"
+      ],
+      "predecessor": "Provisioned capacity (with reserved capacity) as the lowest-cost mode for steady, forecastable traffic"
+    }
+  ],
+  "preGuide": [
+    {
+      "id": "s3-batch-replication-existing",
+      "name": "S3 Batch Replication for existing objects",
+      "introduced": "2022-02-08",
+      "certainty": "confirmed",
+      "source": "pg-s3-batch-replication",
+      "quote": "Now, with S3 Batch Replication, you can synchronize existing objects between buckets.",
+      "patterns": [
+        "\\bBatch Replication\\b",
+        "\\breplicat\\w*[^\\n]{0,40}\\bexisting objects\\b",
+        "\\bexisting objects\\b[^\\n]{0,60}\\breplicat"
+      ],
+      "predecessor": "Live replication (SRR or CRR) for new objects only, plus S3 Batch Operations copy or sync",
+      "predecessorPatterns": [
+        "\\bS3 Batch Operations\\b",
+        "\\bs3 sync\\b",
+        "\\bnew objects\\b"
+      ]
+    },
+    {
+      "id": "backup-org-policies-tags",
+      "name": "AWS Organizations backup policies applied to resources by tag",
+      "introduced": "2020-07-08",
+      "certainty": "confirmed",
+      "source": "pg-orgs-dochistory",
+      "quote": "You can use backup policies to create and enforce backup policies across all of the accounts in your organization.",
+      "patterns": [
+        "\\bbackup polic(y|ies)\\b[\\s\\S]{0,150}\\b(Organizations|tag)",
+        "\\bOrganizations\\b[\\s\\S]{0,100}\\bbackup polic",
+        "\\borgani[sz]ation (backup )?polic(y|ies)\\b[\\s\\S]{0,150}\\btag"
+      ],
+      "predecessor": "Backup plans configured account by account",
+      "predecessorPatterns": [
+        "\\beach account\\b",
+        "\\bevery account\\b"
+      ]
+    },
+    {
+      "id": "backup-hourly-frequency",
+      "name": "AWS Backup hourly backup frequency",
+      "introduced": "2019-01",
+      "certainty": "unconfirmed",
+      "patterns": [
+        "\\b(AWS Backup|backup plan|backup rule)[\\s\\S]{0,200}\\bhourly\\b",
+        "\\bhourly\\b[\\s\\S]{0,100}\\b(AWS Backup|backup plan|backup rule)",
+        "\\bevery hour\\b[\\s\\S]{0,100}\\bAWS Backup\\b",
+        "\\bAWS Backup\\b[\\s\\S]{0,100}\\bevery hour\\b"
+      ],
+      "predecessor": "Daily or 12-hour backup schedules",
+      "predecessorPatterns": [
+        "\\bdaily\\b",
+        "\\bonce a day\\b",
+        "\\bevery 12 hours\\b"
+      ]
+    },
+    {
+      "id": "glue-sensitive-data-detection",
+      "name": "AWS Glue sensitive data detection",
+      "introduced": "2022-04",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/04/aws-announcing-sensitive-data-detection-glue/",
+      "quote": "Sensitive data detection in AWS Glue identifies a variety of PII and other sensitive data like credit card numbers.",
+      "note": "GA before the cutoff. Later additions (250 entity types 2023-06; entity-level actions 2023-11) are post-guide, but refinery-004 would only depend on them if it names entity-level actions or the 250 types."
+    },
+    {
+      "id": "rds-multi-az-db-cluster",
+      "name": "RDS Multi-AZ DB cluster (two readable standbys)",
+      "introduced": "2022-03",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/03/amazon-rds-multi-az-transaction-commit-latency/",
+      "quote": "This configuration supports up to 2x faster transaction commits than a Multi-AZ DB instance deployment with one standby, without compromising data durability.",
+      "note": "Pre-guide. Only later add-ons are post-guide: up to 15 read replicas (2023-04 MySQL, 2023-05 PostgreSQL), gp3 support (2024-02), IAM database authentication (2024-10)."
+    },
+    {
+      "id": "cloud-wan",
+      "name": "AWS Cloud WAN",
+      "introduced": "2022-07-12",
+      "certainty": "confirmed",
+      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/07/general-availability-aws-cloud-wan/",
+      "quote": "Cloud WAN automatically creates a global network across AWS Regions by using Border Gateway Protocol (BGP) so that you can easily exchange routes around the world.",
+      "note": "GA 2022-07 (day from search summary of the preview blog update), before the cutoff. Post-guide additions: Service Insertion 2024-06, Direct Connect attachment 2024-11, Routing Policy 2025-11."
+    },
+    {
+      "id": "ecs-min-capacity-0",
+      "name": "ECS service auto scaling minimum capacity 0",
+      "introduced": "unknown (ECS service auto scaling itself 2016-09-01)",
+      "certainty": "unconfirmed",
+      "note": "The ECS developer guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' but gives no date. Application Auto Scaling doc history lists ECS support on 2016-09-01 and nothing about a minimum of 0. Best judgement: pre-guide and not a registry feature. Predictive scaling for ECS (2024-11-21) is registered separately as ecs-predictive-scaling."
+    }
+  ]
 }

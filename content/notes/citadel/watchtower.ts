@@ -9,7 +9,7 @@ const notes: BuildingNotes = {
       ['shield-overview|A DDoS attack is an attack in which multiple compromised systems try to flood a target with traffic.',
        'waf-sqli|Attackers insert malicious SQL code into web requests in order to do things like modify your database or extract data from it.',
        'guardduty|Amazon GuardDuty is a threat detection service that continuously monitors, analyzes, and processes AWS data sources and logs in your AWS environment.',
-       'macie|Amazon Macie is a data security service that discovers sensitive data by using machine learning and pattern matching']),
+       'macie|Amazon Macie is a data security service that discovers sensitive data by using machine learning and pattern matching'], { newer: ['security-hub-unified'] }),
   ],
   beyondProject: [
     b('If your static site is delivered through CloudFront, CloudFront is one of the resource types AWS WAF can protect; the AWS WAF guide also lists Amazon API Gateway REST APIs, so an API Gateway HTTP API is not on that list. SAA adds the design choices: put a web ACL on the distribution or REST API to filter requests, and know that Shield Standard gives every AWS customer automatic DDoS protection at no additional charge.',
@@ -38,13 +38,13 @@ const notes: BuildingNotes = {
           ['security-hub', 'detective'],
           ['security-hub|AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM) provides you with a comprehensive view of your security state in AWS',
            'security-hub|In addition to generating control findings, Security Hub CSPM also receives findings from other AWS services—such as Amazon GuardDuty, Amazon Inspector, and Amazon Macie',
-           'detective|Amazon Detective automatically collects log data from your AWS resources and uses machine learning (ML), statistical analysis, and graph theory to build a dataset that you can use to conduct more efficient security investigations.']),
+           'detective|Amazon Detective automatically collects log data from your AWS resources and uses machine learning (ML), statistical analysis, and graph theory to build a dataset that you can use to conduct more efficient security investigations.'], { newer: ['security-hub-unified'] }),
         b('Amazon Cognito handles user sign-in and access for applications; user pools and identity pools are covered in Warden\'s Lodge.',
           'cognito-what-is', ['With Amazon Cognito, you can authenticate and authorize users from the built-in user directory, from your enterprise directory, and from consumer identity providers like Google and Facebook.']),
         b('AWS now describes separate Security Hub products. AWS Security Hub CSPM provides automated security best practice checks to help you understand your security posture across accounts. The newer AWS Security Hub aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub CSPM and Amazon Macie, organising them by threats, exposures, resources and security coverage.',
           ['securityhub-faq', 'securityhub-ga'],
           ['securityhub-faq|Security Hub CSPM (Cloud Security Posture Management) provides automated security best practice checks to help you understand your overall security posture across your AWS accounts.',
-           'securityhub-ga|Available for individual accounts or entire AWS Organizations accounts, Security Hub automatically aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM), and Amazon Macie, organizing them by threats, exposures, resources, and security coverage.']),
+           'securityhub-ga|Available for individual accounts or entire AWS Organizations accounts, Security Hub automatically aggregates and correlates signals from Amazon GuardDuty, Amazon Inspector, AWS Security Hub Cloud Security Posture Management (AWS Security Hub CSPM), and Amazon Macie, organizing them by threats, exposures, resources, and security coverage.'], { newer: ['security-hub-unified'] }),
       ],
       services: ['Amazon GuardDuty', 'Amazon Macie', 'Amazon Inspector', 'AWS Security Hub', 'Amazon Detective', 'Amazon Cognito'],
       design: [
@@ -54,7 +54,7 @@ const notes: BuildingNotes = {
            'macie|Amazon Macie is a data security service that discovers sensitive data by using machine learning and pattern matching',
            'inspector|continually scans them for software vulnerabilities and unintended network exposure',
            'security-hub|Security Hub CSPM runs checks against security controls and generates control findings to help you assess your compliance against security best practices.',
-           'detective|Determine potential security issues through a unified view of user and resource interactions.']),
+           'detective|Determine potential security issues through a unified view of user and resource interactions.'], { newer: ['security-hub-unified'] }),
       ],
     },
     {
@@ -202,7 +202,7 @@ const notes: BuildingNotes = {
         ['guardduty-data|AWS CloudTrail management eventsVPC Flow LogsRoute53 Resolver DNS query logs',
          'security-hub|Security Hub CSPM also receives findings from other AWS services—such as Amazon GuardDuty, Amazon Inspector, and Amazon Macie',
          'detective|Investigate and respond to security findings with streamlined visualizations.',
-         'learn-hub|Detect and investigate advanced attacks on-premises and in the cloud.']),
+         'learn-hub|Detect and investigate advanced attacks on-premises and in the cloud.'], { newer: ['security-hub-unified'] }),
     },
     {
       concept: 'Microsoft Defender for Cloud',
@@ -216,7 +216,7 @@ const notes: BuildingNotes = {
         ['inspector|Amazon Inspector discovers and scans Amazon EC2 instances, container images in Amazon ECR, and Lambda functions.',
          'security-hub|Security Hub CSPM runs checks against security controls and generates control findings to help you assess your compliance against security best practices.',
          'learn-hub|It automatically assesses applications for vulnerabilities or deviations from best practices.'],
-        { allow: ['two'] }),
+        { newer: ['security-hub-unified'], allow: ['two'] }),
     },
     {
       concept: 'Azure Firewall',

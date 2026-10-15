@@ -279,7 +279,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'container-dock-015',
+    id: 'container-dock-015', postGuide: ['eks-auto-mode'], postGuideKey: ['eks-auto-mode'],
     building: 'container-dock',
     bullets: ['2.1-K14'],
     d: 2,

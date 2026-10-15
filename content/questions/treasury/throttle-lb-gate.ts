@@ -123,7 +123,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'throttle-lb-gate-007',
+    id: 'throttle-lb-gate-007', postGuide: ['lambda-sqs-maximum-concurrency'], postGuideKey: ['lambda-sqs-maximum-concurrency'],
     building: 'throttle-lb-gate',
     bullets: ['4.4-S6'],
     d: 2,

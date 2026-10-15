@@ -325,7 +325,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'freight-depot-017',
+    id: 'freight-depot-017', postGuide: ['efs-elastic-throughput'], postGuideKey: ['efs-elastic-throughput'],
     building: 'freight-depot',
     bullets: ['3.1-S1'],
     d: 3,

@@ -20,7 +20,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'safe-harbor-account-002',
+    id: 'safe-harbor-account-002', postGuide: ['iam-passkey-mfa'], postGuideKey: ['iam-passkey-mfa'],
     building: 'safe-harbor-account',
     d: 2,
     stem: 'A company wants to add MFA to the root user of a new account. The security team wants the MOST phishing-resistant option. Which MFA type should it choose?',

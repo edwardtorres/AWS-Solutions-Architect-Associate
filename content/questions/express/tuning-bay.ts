@@ -101,7 +101,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'tuning-bay-006',
+    id: 'tuning-bay-006', postGuide: ['rds-gp3-storage'],
     building: 'tuning-bay',
     bullets: ['3.3-K4'],
     d: 1,
@@ -326,7 +326,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'tuning-bay-017',
+    id: 'tuning-bay-017', postGuide: ['dynamodb-on-demand-max-throughput', 'dynamodb-warm-throughput'], postGuideKey: ['dynamodb-warm-throughput'],
     building: 'tuning-bay',
     bullets: ['3.3-K4'],
     d: 3,

@@ -16,7 +16,7 @@ const notes: BuildingNotes = {
       ['dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.',
        'dynamodb-ondemand|If you are driving zero traffic to your table, then with on-demand, you are not charged for any throughput.',
        'dynamodb-provisioned|When you create a new provisioned table in DynamoDB, you must specify its provisioned throughput capacity.',
-       'dynamodb-provisioned|You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes.']),
+       'dynamodb-provisioned|You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes.'], { newer: ['dynamodb-price-cut-2024'] }),
   ],
   bullets: [
     {
@@ -60,7 +60,7 @@ const notes: BuildingNotes = {
           ['Scaling to Zero In recent Aurora MySQL and Aurora PostgreSQL versions, Aurora serverless writers and readers can scale all the way down to zero ACUs.',
            'We refer to this capability as automatic pause and resume, or auto-pause.',
            'You can choose whether to allow this behavior by specifying a zero or nonzero value for the minimum capacity.'],
-          { allow: ['zero'] }),
+          { newer: ['aurora-serverless-v2-scale-to-zero'], allow: ['zero'] }),
         b('Older material may describe Aurora Serverless v1, which AWS now calls a deprecated product with a different architecture from the current Aurora serverless. Treat v1 behaviour as history, not as the answer to a new design question.',
           'aurora-serverless-how',
           ['Platform versions should not be confused with Aurora Serverless v1, which is a deprecated product with a different architecture.'],
@@ -68,7 +68,7 @@ const notes: BuildingNotes = {
         b('Serverless is not a synonym for cheapest. A steady workload that runs all day may cost less on a provisioned instance with a commitment, since a Database Savings Plan applies to provisioned and serverless usage, and reserved DB instances give a billing discount for the term. Check how steady the load is before choosing.',
           ['savings-plans-types', 'rds-reserved'],
           ['savings-plans-types|These plans automatically apply to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone (AZ), or Region, and also apply to serverless usage.',
-           'rds-reserved|Reserved DB instances provide you with a significant discount compared to on-demand DB instance pricing.']),
+           'rds-reserved|Reserved DB instances provide you with a significant discount compared to on-demand DB instance pricing.'], { newer: ['database-savings-plans'] }),
       ],
       services: ['Amazon DynamoDB', 'Amazon RDS', 'Amazon Aurora Serverless'],
       design: [
@@ -76,7 +76,7 @@ const notes: BuildingNotes = {
           ['aurora-serverless', 'dynamodb-ondemand', 'rds-reserved'],
           ['aurora-serverless|These range from development and testing environments, to websites and applications that have unpredictable workloads, to the most demanding, business-critical applications that require high scale and availability.',
            'dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.',
-           'rds-reserved|Reserved DB instances provide you with a significant discount compared to on-demand DB instance pricing.']),
+           'rds-reserved|Reserved DB instances provide you with a significant discount compared to on-demand DB instance pricing.'], { newer: ['database-savings-plans'] }),
       ],
     },
     {
@@ -142,13 +142,13 @@ const notes: BuildingNotes = {
          'learn-databases|SQL Database serverless can automatically scale compute and pause during inactivity.',
          'aurora-serverless|Aurora serverless is an on-demand, autoscaling configuration for Amazon Aurora.',
          'aurora-serverless-how|Scaling to Zero In recent Aurora MySQL and Aurora PostgreSQL versions, Aurora serverless writers and readers can scale all the way down to zero ACUs.'],
-        { allow: ['zero'] }),
+        { newer: ['aurora-serverless-v2-scale-to-zero'], allow: ['zero'] }),
       breaks: b('Learn says these services use different scaling and billing models. On Aurora, whether it can pause is controlled by the minimum capacity you set (zero allows auto-pause), and capacity is adjusted automatically based on application demand.',
         ['learn-databases', 'aurora-serverless', 'aurora-serverless-how'],
         ['learn-databases|These services use different scaling and billing models.',
          'aurora-serverless|Capacity is adjusted automatically based on application demand.',
          'aurora-serverless-how|You can choose whether to allow this behavior by specifying a zero or nonzero value for the minimum capacity.'],
-        { allow: ['zero'] }),
+        { newer: ['aurora-serverless-v2-scale-to-zero'], allow: ['zero'] }),
     },
     {
       concept: 'Azure Cosmos DB for NoSQL',

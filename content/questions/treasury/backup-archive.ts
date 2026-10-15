@@ -62,7 +62,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'backup-archive-004',
+    id: 'backup-archive-004', postGuide: ['backup-ebs-cold-storage'],
     building: 'backup-archive',
     bullets: ['4.1-S6'],
     d: 3,
@@ -82,7 +82,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'backup-archive-005',
+    id: 'backup-archive-005', postGuide: ['backup-ebs-cold-storage'], postGuideKey: ['backup-ebs-cold-storage'],
     building: 'backup-archive',
     bullets: ['4.1-K5', '4.1-S6'],
     d: 2,

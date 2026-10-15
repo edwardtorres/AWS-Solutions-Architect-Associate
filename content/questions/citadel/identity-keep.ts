@@ -111,7 +111,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'identity-keep-007',
+    id: 'identity-keep-007', postGuide: ['iam-multiple-mfa-devices', 'iam-passkey-mfa'], postGuideKey: ['iam-multiple-mfa-devices', 'iam-passkey-mfa'],
     building: 'identity-keep',
     bullets: ['1.1-S1'],
     d: 2,
@@ -496,7 +496,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'identity-keep-026',
+    id: 'identity-keep-026', postGuide: ['iam-multiple-mfa-devices', 'iam-centralized-root-access'], postGuideKey: ['iam-centralized-root-access'],
     building: 'identity-keep',
     bullets: ['1.1-S1'],
     d: 3,

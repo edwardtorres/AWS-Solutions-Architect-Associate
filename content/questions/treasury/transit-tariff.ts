@@ -128,7 +128,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transit-tariff-007',
+    id: 'transit-tariff-007', postGuide: ['direct-connect-400g'],
     building: 'transit-tariff',
     bullets: ['4.4-S7'],
     d: 2,

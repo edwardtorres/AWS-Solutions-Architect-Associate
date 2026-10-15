@@ -17,7 +17,7 @@ const notes: BuildingNotes = {
        'CloudFront provides two ways to send authenticated requests to an Amazon S3 origin: origin access control (OAC) and origin access identity (OAI).',
        'We recommend that you use OAC instead because it supports the following features:',
        'This origin must be a regular S3 bucket, not a bucket configured as a website endpoint.'],
-      { allow: ['two'] }),
+      { newer: ['cloudfront-oac'], allow: ['two'] }),
   ],
   bullets: [
     {
@@ -207,7 +207,7 @@ const notes: BuildingNotes = {
         b('The `Condition` element lets you specify conditions for when a policy is in effect. Here it matches on a distribution ARN, so the statement applies to requests from that distribution. The element is optional.', 'iam-el-condition',
           ['The Condition element (or Condition block) lets you specify conditions for when a policy is in effect.', 'The Condition element is optional.']),
         b('Illustrative only: `<ACCOUNT_ID>` and `<DISTRIBUTION_ID>` are placeholders, and the bucket name is made up. The CloudFront documentation on restricting access to an S3 origin publishes its own example of a read-only bucket policy for a distribution with OAC enabled.', 'cf-oac',
-          ['Example S3 bucket policy that allows read-only access for a CloudFront distribution with OAC enabled']),
+          ['Example S3 bucket policy that allows read-only access for a CloudFront distribution with OAC enabled'], { newer: ['cloudfront-oac'] }),
       ]),
     example('Trust policy for a role that another account may assume', 'iam-policy',
       `

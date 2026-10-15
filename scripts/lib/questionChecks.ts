@@ -88,6 +88,8 @@ export interface PostGuideFeature {
 export interface PostGuideRegistry {
   cutoff: string;
   features: PostGuideFeature[];
+  /** Candidates that turned out to predate the cutoff, kept with their dating source as a record. */
+  preGuide?: PostGuideFeature[];
 }
 
 /** Text a post-guide feature can hide in: stem, options and every explanation (not the evidence quotes). */

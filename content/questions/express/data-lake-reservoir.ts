@@ -211,7 +211,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'data-lake-reservoir-012',
+    id: 'data-lake-reservoir-012', postGuide: ['athena-query-result-reuse'], postGuideKey: ['athena-query-result-reuse'],
     building: 'data-lake-reservoir',
     bullets: ['3.5-S4'],
     d: 2,

@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'key-vault-001',
+    id: 'key-vault-001', postGuide: ['s3-default-sse-s3'],
     building: 'key-vault',
     bullets: ['1.3-K4'],
     d: 1,
@@ -43,7 +43,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-003',
+    id: 'key-vault-003', postGuide: ['kms-external-key-store'],
     building: 'key-vault',
     bullets: ['1.3-K4'],
     d: 2,
@@ -63,7 +63,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-004',
+    id: 'key-vault-004', postGuide: ['kms-external-key-store'],
     building: 'key-vault',
     bullets: ['1.3-K4'],
     d: 2,
@@ -83,7 +83,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-005',
+    id: 'key-vault-005', postGuide: ['kms-external-key-store'], postGuideKey: ['kms-external-key-store'],
     building: 'key-vault',
     bullets: ['1.3-K4'],
     d: 3,
@@ -184,7 +184,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-010',
+    id: 'key-vault-010', postGuide: ['s3-default-sse-s3'], postGuideKey: ['s3-default-sse-s3'],
     building: 'key-vault',
     bullets: ['1.3-S2'],
     d: 1,
@@ -223,7 +223,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-012',
+    id: 'key-vault-012', postGuide: ['s3-dsse-kms'],
     building: 'key-vault',
     bullets: ['1.3-S2'],
     d: 2,
@@ -283,7 +283,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-015',
+    id: 'key-vault-015', postGuide: ['s3-ssec-blocked-default'], postGuideKey: ['s3-ssec-blocked-default'],
     building: 'key-vault',
     bullets: ['1.3-S2'],
     d: 3,
@@ -304,7 +304,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'key-vault-016',
+    id: 'key-vault-016', postGuide: ['s3-dsse-kms'], postGuideKey: ['s3-dsse-kms'],
     building: 'key-vault',
     bullets: ['1.3-S2'],
     d: 1,

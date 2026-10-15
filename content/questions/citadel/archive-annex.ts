@@ -95,7 +95,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'archive-annex-006',
+    id: 'archive-annex-006', postGuide: ['backup-ebs-cold-storage'],
     building: 'archive-annex',
     bullets: ['1.3-K3'],
     d: 2,
@@ -171,7 +171,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'archive-annex-010',
+    id: 'archive-annex-010', postGuide: ['security-hub-unified'], postGuideKey: ['security-hub-unified'],
     building: 'archive-annex',
     bullets: ['1.3-K3'],
     d: 2,

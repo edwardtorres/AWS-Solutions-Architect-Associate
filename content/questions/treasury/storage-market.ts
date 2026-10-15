@@ -42,7 +42,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'storage-market-003',
+    id: 'storage-market-003', postGuide: ['efs-archive-class'], postGuideKey: ['efs-archive-class'],
     building: 'storage-market',
     bullets: ['4.1-K9'],
     d: 2,
@@ -62,7 +62,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'storage-market-004',
+    id: 'storage-market-004', postGuide: ['efs-archive-class'],
     building: 'storage-market',
     bullets: ['4.1-K9', '4.1-S10'],
     d: 3,
@@ -164,7 +164,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'storage-market-009',
+    id: 'storage-market-009', postGuide: ['efs-elastic-throughput', 'efs-archive-class'], postGuideKey: ['efs-elastic-throughput', 'efs-archive-class'],
     building: 'storage-market',
     bullets: ['4.1-K9'],
     d: 3,
@@ -207,7 +207,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'storage-market-011',
+    id: 'storage-market-011', postGuide: ['fsx-openzfs-intelligent-tiering'], postGuideKey: ['fsx-openzfs-intelligent-tiering'],
     building: 'storage-market',
     bullets: ['4.1-K9', '4.1-S10'],
     d: 2,

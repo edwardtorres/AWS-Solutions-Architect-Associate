@@ -461,7 +461,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'gatehouse-025',
+    id: 'gatehouse-025', postGuide: ['regional-nat-gateway'], postGuideKey: ['regional-nat-gateway'],
     building: 'gatehouse',
     bullets: ['1.2-S1'],
     d: 3,

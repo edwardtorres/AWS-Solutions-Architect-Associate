@@ -79,7 +79,7 @@ const notes: BuildingNotes = {
           ['backup-what-is', 'ebs-snapshot-archive', 'sgw-tape'],
           ['backup-what-is|Use these backup plans to define your backup requirements and then apply them to the AWS resources that you want to protect across the AWS services that you use.',
            'ebs-snapshot-archive|Amazon EBS Snapshots Archive is a storage tier that you can use for low-cost, long-term storage of your rarely-accessed snapshots that do not need frequent or fast retrieval.',
-           'sgw-tape|Tape Gateway provides cloud-backed virtual tape storage.']),
+           'sgw-tape|Tape Gateway provides cloud-backed virtual tape storage.'], { newer: ['backup-ebs-cold-storage'] }),
       ],
     },
   ],
@@ -113,7 +113,7 @@ const notes: BuildingNotes = {
       breaks: b('On AWS, EBS Snapshots Archive is a storage tier for low-cost, long-term storage of rarely-accessed snapshots. Learn pairs AWS Backup with Azure Backup by function, backing up and recovering files, databases, disks and virtual machines, and has no pairing for EBS Snapshots Archive.',
         ['ebs-snapshot-archive', 'learn-storage'],
         ['ebs-snapshot-archive|Amazon EBS Snapshots Archive is a storage tier that you can use for low-cost, long-term storage of your rarely-accessed snapshots that do not need frequent or fast retrieval.',
-         'learn-storage|Backup Backup This option is used to back up and recover files, databases, disks, and virtual machines.']),
+         'learn-storage|Backup Backup This option is used to back up and recover files, databases, disks, and virtual machines.'], { newer: ['backup-ebs-cold-storage'] }),
     },
     {
       concept: 'Storage archive access tier',

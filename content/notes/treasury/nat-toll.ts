@@ -71,7 +71,7 @@ const notes: BuildingNotes = {
            'Unlike standard NAT gateways (referred to as zonal NAT gateways), which operate in a single Availability Zone, regional NAT gateways follow your workloads to provide automatic high availability.',
            'Consider using Regional NAT Gateways for all use cases except those that require private connectivity.',
            'Regional NAT Gateways do not offer private connectivity and we recommend using your NAT Gateways in zonal availability mode for private NAT use cases.',
-           'For pricing information, see Amazon VPC Pricing.']),
+           'For pricing information, see Amazon VPC Pricing.'], { newer: ['regional-nat-gateway'] }),
       ],
       services: ['Amazon VPC'],
       design: [
@@ -79,7 +79,7 @@ const notes: BuildingNotes = {
           ['vpc-nat-basics', 'vpc-nat-comparison', 'vpc-nat-regional'],
           ['vpc-nat-basics|If you have resources in multiple Availability Zones and they share one NAT gateway, and if the NAT gateway\'s Availability Zone is down, resources in the other Availability Zones lose internet access.',
            'vpc-nat-comparison|Create a NAT gateway in each Availability Zone to ensure zone-independent architecture.',
-           'vpc-nat-regional|A regional NAT gateway automatically expands across Availability Zones based on your workload presence.']),
+           'vpc-nat-regional|A regional NAT gateway automatically expands across Availability Zones based on your workload presence.'], { newer: ['regional-nat-gateway'] }),
       ],
     },
   ],

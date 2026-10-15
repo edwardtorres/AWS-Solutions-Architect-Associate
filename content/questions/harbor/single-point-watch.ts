@@ -139,7 +139,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'single-point-watch-008',
+    id: 'single-point-watch-008', postGuide: ['alb-target-group-health-requirements'], postGuideKey: ['alb-target-group-health-requirements'],
     building: 'single-point-watch',
     bullets: ['2.2-K8'],
     d: 3,

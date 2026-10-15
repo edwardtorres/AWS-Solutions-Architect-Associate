@@ -87,7 +87,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'nat-toll-005',
+    id: 'nat-toll-005', postGuide: ['nat-gateway-secondary-ips'],
     building: 'nat-toll',
     bullets: ['4.4-S1'],
     d: 2,
@@ -148,7 +148,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'nat-toll-008',
+    id: 'nat-toll-008', postGuide: ['regional-nat-gateway'], postGuideKey: ['regional-nat-gateway'],
     building: 'nat-toll',
     bullets: ['4.4-S1'],
     d: 3,
@@ -168,7 +168,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'nat-toll-009',
+    id: 'nat-toll-009', postGuide: ['nat-gateway-secondary-ips'], postGuideKey: ['nat-gateway-secondary-ips'],
     building: 'nat-toll',
     bullets: ['4.4-S1'],
     d: 2,

@@ -60,7 +60,7 @@ const notes: BuildingNotes = {
         b('For keys, AWS KMS can rotate key material. By default, enabling automatic key rotation on a KMS key makes AWS KMS generate new cryptographic material for it every year; you can also set a custom rotation period or rotate on demand.',
           'kms-rotation',
           ['By default, when you enable automatic key rotation for a KMS key, AWS KMS generates new cryptographic material for the KMS key every year.',
-           'You can also specify a custom rotation-period to define the number of days after you enable automatic key rotation that AWS KMS will rotate your key material']),
+           'You can also specify a custom rotation-period to define the number of days after you enable automatic key rotation that AWS KMS will rotate your key material'], { newer: ['kms-on-demand-rotation'] }),
         b('Rotation facts differ by key type. AWS KMS automatically rotates AWS managed keys every year and you cannot enable or disable that rotation. Automatic rotation is optional for customer managed keys and is supported only on symmetric encryption KMS keys with key material that AWS KMS generates; asymmetric KMS keys, HMAC KMS keys and keys in custom key stores can only be rotated manually. Rotating the key material does not change the properties of the KMS key.',
           'kms-rotation',
           ['AWS KMS automatically rotates AWS managed keys every year (approximately 365 days). You cannot enable or disable key rotation for AWS managed keys.',

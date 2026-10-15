@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'capacity-meter-001',
+    id: 'capacity-meter-001', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
     building: 'capacity-meter',
     bullets: ['4.3-K5'],
     d: 1,
@@ -43,7 +43,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'capacity-meter-003',
+    id: 'capacity-meter-003', postGuide: ['dynamodb-price-cut-2024'],
     building: 'capacity-meter',
     bullets: ['4.3-K5'],
     d: 2,
@@ -62,7 +62,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'capacity-meter-004',
+    id: 'capacity-meter-004', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
     building: 'capacity-meter',
     bullets: ['4.3-K5'],
     d: 3,
@@ -145,7 +145,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'capacity-meter-008',
+    id: 'capacity-meter-008', postGuide: ['dynamodb-price-cut-2024'],
     building: 'capacity-meter',
     bullets: ['4.3-K5'],
     d: 1,

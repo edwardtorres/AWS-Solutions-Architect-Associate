@@ -277,7 +277,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'wardens-lodge-015',
+    id: 'wardens-lodge-015', postGuide: ['secrets-manager-managed-external-secrets'],
     building: 'wardens-lodge',
     bullets: ['1.2-K1'],
     d: 3,

@@ -22,7 +22,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'service-selection-bureau-002',
+    id: 'service-selection-bureau-002', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 2,
@@ -61,7 +61,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'service-selection-bureau-004',
+    id: 'service-selection-bureau-004', postGuide: ['aurora-serverless-v2-scale-to-zero'], postGuideKey: ['aurora-serverless-v2-scale-to-zero'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 3,
@@ -81,7 +81,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'service-selection-bureau-005',
+    id: 'service-selection-bureau-005', postGuide: ['aurora-serverless-v2-scale-to-zero'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 3,
@@ -181,7 +181,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'service-selection-bureau-010',
+    id: 'service-selection-bureau-010', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 3,

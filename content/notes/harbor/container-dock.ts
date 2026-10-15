@@ -57,7 +57,7 @@ const notes: BuildingNotes = {
           ['Amazon Elastic Kubernetes Service (EKS) provides a fully managed Kubernetes service that eliminates the complexity of operating Kubernetes clusters.',
            'Amazon EKS is certified Kubernetes-conformant, so you can deploy Kubernetes-compatible applications without refactoring and use Kubernetes community tooling and plugins.',
            'EKS standard: AWS manages the Kubernetes control plane when you create a cluster with EKS.',
-           'EKS Auto Mode: Using the EKS Auto Mode feature, EKS extends its control to manage Nodes (Kubernetes data plane) as well.']),
+           'EKS Auto Mode: Using the EKS Auto Mode feature, EKS extends its control to manage Nodes (Kubernetes data plane) as well.'], { newer: ['eks-auto-mode'] }),
         b('Fargate is not a separate orchestrator: you can use Fargate with both Amazon ECS and Amazon EKS, and EC2 instances can be the compute layer for both too.',
           'container-decision',
           ['You can use Fargate with both Amazon ECS and Amazon EKS.',
@@ -134,7 +134,7 @@ const notes: BuildingNotes = {
         ['learn-compute|Azure Kubernetes Service (AKS) provides two modes: AKS Standard for full control and customization and AKS Automatic for simplified, production-ready deployments with built-in best practices.',
          'learn-compute|AWS service Azure service Description Amazon Elastic Container Service (Amazon ECS) Azure Container Apps Amazon ECS is a container orchestration service for deploying and managing containerized applications.',
          'eks-what-is|Two of the main approaches to using Amazon EKS are as follows: EKS standard: AWS manages the Kubernetes control plane when you create a cluster with EKS.'],
-        { allow: ['two'] }),
+        { newer: ['eks-auto-mode'], allow: ['two'] }),
     },
     {
       concept: 'Azure Container Registry',

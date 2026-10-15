@@ -192,14 +192,14 @@ const pairs: ConfusePair[] = [
       },
     ],
     choose: [
-      b('Nothing specified: SSE-S3 already applies to every new object.', 's3-sse-s3', ['All new object uploads to Amazon S3 buckets are encrypted by default with server-side encryption with Amazon S3 managed keys (SSE-S3).']),
+      b('Nothing specified: SSE-S3 already applies to every new object.', 's3-sse-s3', ['All new object uploads to Amazon S3 buckets are encrypted by default with server-side encryption with Amazon S3 managed keys (SSE-S3).'], { newer: ['s3-default-sse-s3'] }),
       b('Need to control who can use the key with key policies (for example separate key administrators and users)? SSE-KMS.', 'kms-key-policies', ['Key policies are the primary way to control access to KMS keys.']),
       b('Need to keep the key outside AWS and supply it on every request? SSE-C.', 's3-sse-c', ['The only thing that you need to do is manage the encryption keys that you provide.']),
     ],
     trap: b('Encryption at rest is already on by default with SSE-S3, so a requirement that says only "encrypt the objects" is already met with no extra work. The choice moves to SSE-KMS when the question adds a need to control who can use the key with a key policy, and to SSE-C when it says the customer supplies the key with each request (new general purpose buckets have SSE-C disabled until you enable it).', ['s3-sse-s3-specify', 's3-sse', 's3-sse-c'],
       ['s3-sse-s3-specify|all new objects that are uploaded to an S3 bucket are automatically encrypted at rest.',
        's3-sse-c|SSE-C requires you to provide the encryption key with every request',
-       's3-sse|applications that need SSE-C encryption must deliberately enable SSE-C by using the PutBucketEncryption API operation after creating a new bucket.']),
+       's3-sse|applications that need SSE-C encryption must deliberately enable SSE-C by using the PutBucketEncryption API operation after creating a new bucket.'], { newer: ['s3-default-sse-s3'] }),
   },
   {
     id: 'gateway-vs-interface-endpoints',
@@ -975,7 +975,7 @@ const pairs: ConfusePair[] = [
              's3-storage-classes|If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days.',
              's3-storage-classes|If an object is less than 128 KB, Amazon S3 charges you for 128 KB.',
              'storage-decision|Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access.'],
-            { allow: ['30', '128'] }),
+            { newer: ['s3-lifecycle-default-min-size'], allow: ['30', '128'] }),
         ],
       },
       {
@@ -1049,7 +1049,7 @@ const pairs: ConfusePair[] = [
              'savings-plans-types|These plans automatically apply to usage regardless of instance size (for example, m5.xlarge, m5.2xlarge, etc.), OS (for example, Windows, Linux, etc.), and tenancy (Host, Dedicated, Default) within the specified family in a Region.',
              'savings-plans-vs-ri|Savings Plans offer lower prices compared to On-Demand pricing in exchange for a commitment, and can\'t be cancelled during the term.',
              'savings-plans|You can pay for your commitment using All upfront, Partial upfront, or No upfront payment options.',
-             'savings-plans-database|regardless of engine, instance family, size, deployment option, or AWS Region with no upfront payment.']),
+             'savings-plans-database|regardless of engine, instance family, size, deployment option, or AWS Region with no upfront payment.'], { newer: ['database-savings-plans'] }),
         ],
       },
       {
@@ -1145,7 +1145,7 @@ const pairs: ConfusePair[] = [
         ['Bastion servers Not supported.']),
       b('Want high availability across Availability Zones without managing a gateway in each zone, and no private NAT? A regional NAT gateway.', 'vpc-nat-regional',
         ['A regional NAT gateway automatically expands across Availability Zones based on your workload presence.',
-         'Regional NAT Gateways do not offer private connectivity and we recommend using your NAT Gateways in zonal availability mode for private NAT use cases.']),
+         'Regional NAT Gateways do not offer private connectivity and we recommend using your NAT Gateways in zonal availability mode for private NAT use cases.'], { newer: ['regional-nat-gateway'] }),
     ],
     trap: b('Both let private instances reach the internet without being reachable from it, but they are billed differently: a NAT gateway by the number of gateways, the duration and the data sent through it, a NAT instance by the number of instances, the duration and the instance type and size, so the cheaper-looking answer is not automatic. A NAT instance is also a server you patch, size and fail over yourself, while a NAT gateway is managed by AWS and implemented with redundancy within its Availability Zone. For a zonal NAT gateway that redundancy is per zone: to survive losing a zone, create a zonal NAT gateway in each Availability Zone (or use a regional NAT gateway, which expands across zones), because resources in other zones that share one zonal gateway lose internet access if its zone is down. A NAT gateway also bills for the data it processes, so a workload that mostly talks to S3 or DynamoDB should use a gateway endpoint (no hourly or data processing charge) instead of sending that traffic through NAT; interface endpoints bill hourly and per gigabyte.', ['vpc-nat-comparison', 'vpc-nat-basics', 'vpc-nat-pricing', 'vpc-pricing', 'privatelink-pricing', 'vpce-interface', 'vpc-nat-regional'],
       ['vpc-nat-comparison|Charged depending on the number of NAT gateways you use, duration of usage, and amount of data that you send through the NAT gateways.',
@@ -1159,7 +1159,7 @@ const pairs: ConfusePair[] = [
        'vpc-pricing|There are no data processing or hourly charges for using Gateway Type VPC endpoints.',
        'vpce-interface|You are billed for hourly usage and data processing charges.',
        'vpc-nat-regional|A regional NAT gateway automatically expands across Availability Zones based on your workload presence.',
-       'privatelink-pricing|Data processing charges apply for each Gigabyte processed through the VPC endpoint regardless of the traffic’s source or destination.']),
+       'privatelink-pricing|Data processing charges apply for each Gigabyte processed through the VPC endpoint regardless of the traffic’s source or destination.'], { newer: ['regional-nat-gateway'] }),
 
   },
 ];

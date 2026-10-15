@@ -78,7 +78,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'db-cost-desk-005',
+    id: 'db-cost-desk-005', postGuide: ['database-savings-plans'], postGuideKey: ['database-savings-plans'],
     building: 'db-cost-desk',
     bullets: ['4.3-K2'],
     d: 3,
@@ -119,7 +119,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'db-cost-desk-007',
+    id: 'db-cost-desk-007', postGuide: ['database-savings-plans'],
     building: 'db-cost-desk',
     bullets: ['4.3-K2'],
     d: 2,

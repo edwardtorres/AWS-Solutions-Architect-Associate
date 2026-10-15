@@ -45,7 +45,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-003',
+    id: 'transfer-dock-003', postGuide: ['vpn-large-bandwidth-tunnel'],
     building: 'transfer-dock',
     bullets: ['3.5-K6'],
     d: 2,
@@ -66,7 +66,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-004',
+    id: 'transfer-dock-004', postGuide: ['datasync-enhanced-mode'], postGuideKey: ['datasync-enhanced-mode'],
     building: 'transfer-dock',
     bullets: ['3.5-K6', '3.5-S3'],
     d: 3,
@@ -145,7 +145,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-008',
+    id: 'transfer-dock-008', postGuide: ['transfer-family-web-app'], postGuideKey: ['transfer-family-web-app'],
     building: 'transfer-dock',
     bullets: ['3.5-K3'],
     d: 2,
@@ -163,7 +163,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-009',
+    id: 'transfer-dock-009', postGuide: ['direct-connect-400g'], postGuideKey: ['direct-connect-400g'],
     building: 'transfer-dock',
     bullets: ['3.5-K6'],
     d: 2,
@@ -203,7 +203,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-011',
+    id: 'transfer-dock-011', postGuide: ['vpn-large-bandwidth-tunnel'], postGuideKey: ['vpn-large-bandwidth-tunnel'],
     building: 'transfer-dock',
     bullets: ['3.5-K6'],
     d: 3,
@@ -223,7 +223,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'transfer-dock-012',
+    id: 'transfer-dock-012', postGuide: ['datasync-azure-blob'], postGuideKey: ['datasync-azure-blob'],
     building: 'transfer-dock',
     bullets: ['3.5-K3', '3.5-S3'],
     d: 2,

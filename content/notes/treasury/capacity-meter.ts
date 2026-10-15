@@ -16,7 +16,7 @@ const notes: BuildingNotes = {
       ['dynamodb-provisioned', 'dynamodb-capacity'],
       ['dynamodb-provisioned|For an item up to 4 KB, one read capacity unit (RCU) represents one strongly consistent read operation per second, or two eventually consistent read operations per second.',
        'dynamodb-capacity|You can choose to use provisioned capacity if you have steady workloads with predictable growth, and if you can reliably forecast capacity requirements for your application.'],
-      { allow: ['two'] }),
+      { newer: ['dynamodb-price-cut-2024'], allow: ['two'] }),
   ],
   bullets: [
     {
@@ -61,7 +61,7 @@ const notes: BuildingNotes = {
            'dynamodb-table-classes|The DynamoDB Standard-Infrequent Access (DynamoDB Standard-IA) table class is optimized for tables where storage is the dominant cost.',
            'dynamodb-ttl|Time To Live (TTL) for DynamoDB is a cost-effective method for deleting items that are no longer relevant.',
            'dynamodb-ttl|DynamoDB automatically deletes expired items within a few days of their expiration time, without consuming write throughput.',
-           'dynamodb-pricing|Each hour, if the amount of capacity used is less than or equal to the total reserved provisioned capacity you’ve purchased, all capacity will be charged at the reserved capacity rate.']),
+           'dynamodb-pricing|Each hour, if the amount of capacity used is less than or equal to the total reserved provisioned capacity you’ve purchased, all capacity will be charged at the reserved capacity rate.'], { newer: ['dynamodb-price-cut-2024'] }),
         b('For relational databases, capacity planning means choosing the DB instance class and storage. The instance class determines the computation and memory capacity of a DB instance, and you can change the class as the workload changes.',
           'rds-instance-class',
           ['The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance.']),

@@ -3,6 +3,7 @@ import { BUILDING_BY_ID, BULLET_BY_ID, DISTRICT_BY_ID, FAMILY_NAME, TASK_BY_ID }
 import { loadBuildingNotes, loadShared, type Shared } from '../../content/store';
 import type { BuildingNotes } from '../../content/types';
 import { hrefFor } from '../../lib/route';
+import { useSaveStore } from '../../save/context';
 import { BlockView, CitesContext } from './Inline';
 import { ConfuseCard } from './ConfuseCard';
 import { SourceList } from './SourceList';
@@ -16,6 +17,12 @@ type State =
 export default function NotesPage({ buildingId }: { buildingId: string | null }) {
   const [state, setState] = useState<State>(null);
   const building = buildingId ? BUILDING_BY_ID.get(buildingId) : undefined;
+  const store = useSaveStore();
+
+  // Opening the notes is what unlocks the start-up check.
+  useEffect(() => {
+    if (buildingId && BUILDING_BY_ID.has(buildingId)) store.markNotesOpened(buildingId);
+  }, [buildingId, store]);
 
   useEffect(() => {
     let cancelled = false;

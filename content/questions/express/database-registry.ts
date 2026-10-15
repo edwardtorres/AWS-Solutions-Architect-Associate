@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'database-registry-001',
+    id: 'database-registry-001', postGuide: ['dms-schema-conversion'],
     building: 'database-registry',
     bullets: ['3.3-K6'],
     d: 1,
@@ -21,7 +21,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-002',
+    id: 'database-registry-002', postGuide: ['dms-schema-conversion'], postGuideKey: ['dms-schema-conversion'],
     building: 'database-registry',
     bullets: ['3.3-K6'],
     d: 2,
@@ -41,7 +41,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'database-registry-003',
+    id: 'database-registry-003', postGuide: ['dms-schema-conversion'], postGuideKey: ['dms-schema-conversion'],
     building: 'database-registry',
     bullets: ['3.3-K6'],
     d: 2,
@@ -102,7 +102,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-006',
+    id: 'database-registry-006', postGuide: ['dms-schema-conversion'],
     building: 'database-registry',
     bullets: ['3.3-S3'],
     d: 2,
@@ -122,7 +122,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-007',
+    id: 'database-registry-007', postGuide: ['elasticache-valkey'],
     building: 'database-registry',
     bullets: ['3.3-K8'],
     d: 1,
@@ -140,7 +140,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-008',
+    id: 'database-registry-008', postGuide: ['dynamodb-price-cut-2024'],
     building: 'database-registry',
     bullets: ['3.3-S4'],
     d: 2,
@@ -160,7 +160,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-009',
+    id: 'database-registry-009', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
     building: 'database-registry',
     bullets: ['3.3-S4'],
     d: 3,
@@ -180,7 +180,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-010',
+    id: 'database-registry-010', postGuide: ['elasticache-valkey'],
     building: 'database-registry',
     bullets: ['3.3-S4'],
     d: 2,
@@ -283,7 +283,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-015',
+    id: 'database-registry-015', postGuide: ['dynamodb-on-demand-max-throughput', 'dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-on-demand-max-throughput'],
     building: 'database-registry',
     bullets: ['3.3-S4'],
     d: 2,
@@ -303,7 +303,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'database-registry-016',
+    id: 'database-registry-016', postGuide: ['dms-schema-conversion', 'dms-serverless'], postGuideKey: ['dms-serverless'],
     building: 'database-registry',
     bullets: ['3.3-K6'],
     d: 2,

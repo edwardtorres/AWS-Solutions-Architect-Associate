@@ -256,7 +256,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'blueprint-hall-014',
+    id: 'blueprint-hall-014', postGuide: ['eventbridge-pipes'],
     building: 'blueprint-hall',
     bullets: ['2.1-S1'],
     d: 3,

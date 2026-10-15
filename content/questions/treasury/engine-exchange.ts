@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'engine-exchange-001',
+    id: 'engine-exchange-001', postGuide: ['dms-schema-conversion'],
     building: 'engine-exchange',
     bullets: ['4.3-K7'],
     d: 1,
@@ -21,7 +21,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'engine-exchange-002',
+    id: 'engine-exchange-002', postGuide: ['dms-schema-conversion'], postGuideKey: ['dms-schema-conversion'],
     building: 'engine-exchange',
     bullets: ['4.3-K7', '4.3-S5'],
     d: 2,
@@ -80,7 +80,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'engine-exchange-005',
+    id: 'engine-exchange-005', postGuide: ['aurora-io-optimized'], postGuideKey: ['aurora-io-optimized'],
     building: 'engine-exchange',
     bullets: ['4.3-S2'],
     d: 2,
@@ -99,7 +99,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'engine-exchange-006',
+    id: 'engine-exchange-006', postGuide: ['dms-schema-conversion'], postGuideKey: ['dms-schema-conversion'],
     building: 'engine-exchange',
     bullets: ['4.3-K7', '4.3-S5'],
     d: 3,
@@ -118,7 +118,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'engine-exchange-007',
+    id: 'engine-exchange-007', postGuide: ['dms-schema-conversion', 'dms-serverless'], postGuideKey: ['dms-serverless'],
     building: 'engine-exchange',
     bullets: ['4.3-S5'],
     d: 2,

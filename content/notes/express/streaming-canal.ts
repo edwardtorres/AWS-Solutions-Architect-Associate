@@ -26,7 +26,7 @@ const notes: BuildingNotes = {
           ['firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.',
            'firehose|Buffer Size is in MBs and Buffer Interval is in seconds.',
            'firehose-faqs|It can capture, transform, and load streaming data into Amazon S3, Amazon Redshift, Amazon OpenSearch Service, Snowflake, Apache Iceberg tables and Splunk, enabling near real-time analytics with existing business intelligence tools and dashboards you’re already using today.',
-           'firehose-faqs|You can configure the values for S3 buffer size (1 MB to 128 MB) or buffer interval (0 to 900 seconds), and the condition satisfied first triggers data delivery to Amazon S3.']),
+           'firehose-faqs|You can configure the values for S3 buffer size (1 MB to 128 MB) or buffer interval (0 to 900 seconds), and the condition satisfied first triggers data delivery to Amazon S3.'], { newer: ['firehose-zero-buffering'] }),
         b('Kinesis Data Streams lets consumers process records as they arrive in real time, with the data retained for a retention period that defaults to 24 hours and can be increased up to 8760 hours (365 days), which AWS documents on its terminology page.',
           'kinesis-concepts',
           ['A stream’s retention period is set to a default of 24 hours after creation.',

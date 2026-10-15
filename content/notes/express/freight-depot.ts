@@ -119,7 +119,7 @@ const notes: BuildingNotes = {
           'efs-performance',
           ['The following configurations impact the performance of an Amazon EFS file system: File system type – Regional or One ZonePerformance mode – General Purpose or Max I/O ImportantMax I/O performance mode has higher per-operation latencies than General Purpose performance mode.',
            'For faster performance, we recommend always using General Purpose performance mode.',
-           'Throughput mode – Elastic, Provisioned, or Bursting']),
+           'Throughput mode – Elastic, Provisioned, or Bursting'], { newer: ['efs-elastic-throughput'] }),
       ],
       services: ['Amazon S3', 'Amazon EBS', 'Amazon EFS'],
       design: [

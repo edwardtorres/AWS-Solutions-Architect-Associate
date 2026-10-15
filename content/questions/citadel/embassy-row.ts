@@ -519,7 +519,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'embassy-row-028',
+    id: 'embassy-row-028', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
     building: 'embassy-row',
     bullets: ['1.1-S5'],
     d: 3,
@@ -539,7 +539,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'embassy-row-029',
+    id: 'embassy-row-029', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
     building: 'embassy-row',
     bullets: ['1.1-S5'],
     d: 2,
@@ -559,7 +559,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'embassy-row-030',
+    id: 'embassy-row-030', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
     building: 'embassy-row',
     bullets: ['1.1-S5'],
     d: 3,
@@ -583,7 +583,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'embassy-row-031',
+    id: 'embassy-row-031', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
     building: 'embassy-row',
     bullets: ['1.1-S5'],
     d: 3,

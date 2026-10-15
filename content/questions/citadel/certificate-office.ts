@@ -244,7 +244,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'certificate-office-013',
+    id: 'certificate-office-013', postGuide: ['kms-on-demand-rotation'], postGuideKey: ['kms-on-demand-rotation'],
     building: 'certificate-office',
     bullets: ['1.3-S7'],
     d: 3,

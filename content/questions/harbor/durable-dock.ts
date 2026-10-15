@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'durable-dock-001',
+    id: 'durable-dock-001', postGuide: ['s3-express-one-zone'],
     building: 'durable-dock',
     bullets: ['2.2-K11'],
     d: 1,

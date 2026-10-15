@@ -17,6 +17,12 @@ describe('hash routes', () => {
     expect(parseHash('#/glossary/vpc')).toEqual({ view: 'glossary', building: null, param: 'vpc' });
     expect(parseHash('#/confuse')).toEqual({ view: 'confuse', building: null, param: null });
   });
+  it('parses attempt and progress routes without opening a panel', () => {
+    expect(parseHash('#/startup/gatehouse')).toEqual({ view: 'startup', building: null, param: 'gatehouse' });
+    expect(parseHash('#/inspect/gatehouse')).toEqual({ view: 'inspect', building: null, param: 'gatehouse' });
+    expect(parseHash('#/place/embassy-row')).toEqual({ view: 'place', building: null, param: 'embassy-row' });
+    expect(parseHash('#/progress')).toEqual({ view: 'progress', building: null, param: null });
+  });
   it('round-trips through hrefFor', () => {
     for (const r of [
       { view: 'map', building: null, param: null },

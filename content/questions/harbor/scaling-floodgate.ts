@@ -363,7 +363,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'scaling-floodgate-019',
+    id: 'scaling-floodgate-019', postGuide: ['metric-math-target-tracking'], postGuideKey: ['metric-math-target-tracking'],
     building: 'scaling-floodgate',
     bullets: ['2.1-S2'],
     d: 3,

@@ -100,6 +100,19 @@ async function main() {
         if (!hasText(page, e.text)) problems.push(`question ${q.id}: evidence not found on ${src.id}: "${e.text.slice(0, 90)}"${closest(page, e.text)}`);
       }
     }
+    // The post-guide registry dates each feature with a quote from an AWS page.
+    for (const f of [...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])]) {
+      if (!f.source || !f.quote) continue;
+      quoteCount += 1;
+      const src = byId.get(f.source);
+      if (!src) {
+        problems.push(`post-guide ${f.id}: unknown source ${f.source}`);
+        continue;
+      }
+      const page = pages.get(stripFragment(src.url));
+      if (!page || page instanceof Error) continue;
+      if (!hasText(page, f.quote)) problems.push(`post-guide ${f.id}: date quote not found on ${src.id}: "${f.quote.slice(0, 90)}"${closest(page, f.quote)}`);
+    }
   }
 
   for (const w of warnings) console.warn(`  note: ${w}`);

@@ -221,7 +221,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'rebuild-yard-012',
+    id: 'rebuild-yard-012', postGuide: ['asg-instance-refresh-rollback'], postGuideKey: ['asg-instance-refresh-rollback'],
     building: 'rebuild-yard',
     bullets: ['2.2-S1'],
     d: 3,

@@ -55,7 +55,7 @@ const notes: BuildingNotes = {
           ['tags-backfill|Management account users can request a backfill of cost allocation tags for up to twelve months.',
            'tags-backfill|As a result, the Project tag is retroactively activated for the prior months from January to December 2023.',
            'cost-alloc-tags|All tags can take up to 24 hours to appear in the Billing and Cost Management console.'],
-          { allow: ['twelve', '24'] }),
+          { newer: ['cost-allocation-tag-backfill'], allow: ['twelve', '24'] }),
       ],
       services: ['AWS Organizations'],
       design: [

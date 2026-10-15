@@ -31,7 +31,8 @@
         "\\bEFS Archive\\b",
         "\\bEFS\\b[^\\n]{0,160}(?<!Deep )(?<!Glacier )\\bArchive storage class\\b",
         "\\bEFS\\b[^\\n]{0,100}\\b(move|moves|transition|transitions)\\b[^\\n]{0,40}\\bto Archive\\b",
-        "\\bArchive storage class\\b[^\\n]{0,80}\\bEFS\\b"
+        "\\bArchive storage class\\b[^\\n]{0,80}\\bEFS\\b",
+        "\\bInfrequent Access and Archive( classes)?\\b"
       ],
       "predecessor": "EFS Standard with lifecycle management to EFS Infrequent Access (IA) as the coldest tier",
       "predecessorPatterns": [

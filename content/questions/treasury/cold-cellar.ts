@@ -183,7 +183,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cold-cellar-010',
+    id: 'cold-cellar-010', postGuide: ['s3-lifecycle-default-min-size'], postGuideKey: ['s3-lifecycle-default-min-size'],
     building: 'cold-cellar',
     bullets: ['4.1-K10', '4.1-S8'],
     d: 3,

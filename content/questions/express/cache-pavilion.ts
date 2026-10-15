@@ -3,7 +3,7 @@ import { mc, mr } from '../helpers.ts';
 
 const questions: Question[] = [
   mc({
-    id: 'cache-pavilion-001',
+    id: 'cache-pavilion-001', postGuide: ['elasticache-valkey'], postGuideKey: ['elasticache-valkey'],
     building: 'cache-pavilion',
     bullets: ['3.3-K2'],
     d: 2,
@@ -21,7 +21,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cache-pavilion-002',
+    id: 'cache-pavilion-002', postGuide: ['elasticache-valkey'],
     building: 'cache-pavilion',
     bullets: ['3.3-K2'],
     d: 1,
@@ -38,7 +38,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cache-pavilion-003',
+    id: 'cache-pavilion-003', postGuide: ['elasticache-valkey', 'elasticache-serverless'], postGuideKey: ['elasticache-serverless'],
     building: 'cache-pavilion',
     bullets: ['3.3-K2'],
     d: 1,
@@ -118,7 +118,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cache-pavilion-007',
+    id: 'cache-pavilion-007', postGuide: ['elasticache-serverless'], postGuideKey: ['elasticache-serverless'],
     building: 'cache-pavilion',
     bullets: ['3.3-S5'],
     d: 2,

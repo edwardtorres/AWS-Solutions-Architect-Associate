@@ -247,7 +247,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'edge-link-terminal-013',
+    id: 'edge-link-terminal-013', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
     building: 'edge-link-terminal',
     bullets: ['3.4-K1'],
     d: 3,
@@ -270,7 +270,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'edge-link-terminal-014',
+    id: 'edge-link-terminal-014', postGuide: ['direct-connect-400g'],
     building: 'edge-link-terminal',
     bullets: ['3.4-K4'],
     d: 2,

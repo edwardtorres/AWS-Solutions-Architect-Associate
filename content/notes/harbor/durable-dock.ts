@@ -21,7 +21,7 @@ const notes: BuildingNotes = {
            'S3 Standard, S3 Intelligent-Tiering, S3 Standard-IA, S3 Glacier Instant Retrieval, S3 Glacier Flexible Retrieval, and S3 Glacier Deep Archive are all designed to sustain data in the event of the loss of an entire Amazon S3 Availability Zone.']),
         b('A single-zone S3 class is different: with S3 Express One Zone your data is redundantly stored on multiple devices within a single Availability Zone, so unlike the multi-AZ classes it does not spread data across zones.',
           's3-storage-classes',
-          ['With S3 Express One Zone, your data is redundantly stored on multiple devices within a single Availability Zone.']),
+          ['With S3 Express One Zone, your data is redundantly stored on multiple devices within a single Availability Zone.'], { newer: ['s3-express-one-zone'] }),
         b('Amazon EBS volumes are durable, block-level storage devices that you attach to instances, and the volume and instance must be in the same Availability Zone. How durable a volume is depends on the volume type: io2 Block Express volumes have the highest durability, and other volume types are less durable, according to AWS. Snapshots are point-in-time backups that persist independently from the volume.',
           ['ebs-volumes', 'ebs-what-is'],
           ['ebs-volumes|An Amazon EBS volume is a durable, block-level storage device that you can attach to your instances.',

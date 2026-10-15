@@ -248,7 +248,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'read-replica-annex-013',
+    id: 'read-replica-annex-013', postGuide: ['aurora-global-switchover'], postGuideKey: ['aurora-global-switchover'],
     building: 'read-replica-annex',
     bullets: ['3.3-K1'],
     d: 3,

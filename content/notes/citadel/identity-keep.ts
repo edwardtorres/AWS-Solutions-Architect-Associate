@@ -56,7 +56,7 @@ const notes: BuildingNotes = {
            'Instead of accessing the root user, create an administrative user for everyday tasks.']),
         b('MFA: AWS recommends phishing-resistant MFA such as passkeys and security keys whenever possible. Those FIDO-based authenticators use public key cryptography and resist phishing, man-in-the-middle and replay attacks.',
           'iam-mfa', ['We recommend that you use phishing-resistant MFA such as passkeys and security keys whenever possible.',
-            'These FIDO-based authenticators use public key cryptography and are resistant to phishing, man-in-the-middle, and replay attacks']),
+            'These FIDO-based authenticators use public key cryptography and are resistant to phishing, man-in-the-middle, and replay attacks'], { newer: ['iam-passkey-mfa'] }),
         b('IAM users: an IAM user is an entity you create in your AWS account, and AWS\'s best practices say human users should use federation with an identity provider to get temporary credentials instead.',
           'iam-users', ['An IAM user is an entity that you create in your AWS account.',
             'IAM best practices recommend that you require human users to use federation with an identity provider to access AWS using temporary credentials']),

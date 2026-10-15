@@ -208,7 +208,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cache-edge-breakwater-011',
+    id: 'cache-edge-breakwater-011', postGuide: ['elasticache-valkey'], postGuideKey: ['elasticache-valkey'],
     building: 'cache-edge-breakwater',
     bullets: ['2.1-K3'],
     d: 1,

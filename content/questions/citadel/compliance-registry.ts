@@ -56,7 +56,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'compliance-registry-004',
+    id: 'compliance-registry-004', postGuide: ['lakeformation-hybrid-access'], postGuideKey: ['lakeformation-hybrid-access'],
     building: 'compliance-registry',
     bullets: ['1.3-K1'],
     d: 3,
@@ -74,7 +74,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'compliance-registry-005',
+    id: 'compliance-registry-005', postGuide: ['s3-bpa-organizations-policy'], postGuideKey: ['s3-bpa-organizations-policy'],
     building: 'compliance-registry',
     bullets: ['1.3-K1', '1.3-S6'],
     d: 2,

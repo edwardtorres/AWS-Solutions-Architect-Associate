@@ -32,7 +32,7 @@ const notes: BuildingNotes = {
            'eventbridge-rules|Scheduled rules are a legacy feature of EventBridge.EventBridge offers a more flexible and powerful way to create, run, and manage scheduled tasks centrally, at scale: EventBridge Scheduler.',
            'eventbridge-what-is|The Custom Event Bus routes events to subscribers that consumers create themselves, retains events for a period that you set, and supports ordered delivery, replay, and non-JSON payloads.',
            'eventbridge-what-is|For new applications, start with the Custom Event Bus.',
-           'eventbridge-what-is|Custom Event Bus - Classic remains available, and this guide describes both.']),
+           'eventbridge-what-is|Custom Event Bus - Classic remains available, and this guide describes both.'], { newer: ['eventbridge-scheduler'] }),
       ],
       services: ['Amazon EventBridge', 'AWS Lambda', 'Amazon SNS', 'Amazon SQS'],
       design: [

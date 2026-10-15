@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-export type View = 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse';
+export type View = 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse' | 'startup' | 'inspect' | 'place' | 'progress';
 /** Views that can open a building's detail panel. */
 export type PanelView = 'map' | 'atlas';
 
@@ -12,11 +12,13 @@ export interface Route {
   param?: string | null;
 }
 
-const VIEWS: readonly View[] = ['map', 'atlas', 'notes', 'glossary', 'confuse'];
+const VIEWS: readonly View[] = ['map', 'atlas', 'notes', 'glossary', 'confuse', 'startup', 'inspect', 'place', 'progress'];
 
 /**
  * Hash routes work on any static host without rewrite rules:
- * #/map, #/atlas, #/map/<id>, #/atlas/<id>, #/notes/<id>, #/glossary[/<term>], #/confuse[/<pair>].
+ * #/map, #/atlas, #/map/<id>, #/atlas/<id>, #/notes/<id>, #/glossary[/<term>], #/confuse[/<pair>],
+ * #/startup/<id>, #/inspect/<id>, #/place/<id> (an attempt on a building) and #/progress.
+ * No route shows an answer key outside a finished attempt.
  */
 export function parseHash(hash: string): Route {
   const parts = hash.replace(/^#\/?/, '').split('/').filter(Boolean);
@@ -32,6 +34,8 @@ export function hrefFor(route: Route): string {
 }
 
 export const hrefNotes = (buildingId: string): string => hrefFor({ view: 'notes', building: null, param: buildingId });
+export const hrefAttempt = (kind: 'startup' | 'inspect' | 'place', buildingId: string): string => hrefFor({ view: kind, building: null, param: buildingId });
+export const hrefProgress = (): string => '#/progress';
 export const hrefGlossary = (termId?: string): string => hrefFor({ view: 'glossary', building: null, param: termId ?? null });
 export const hrefConfuse = (pairId?: string): string => hrefFor({ view: 'confuse', building: null, param: pairId ?? null });
 

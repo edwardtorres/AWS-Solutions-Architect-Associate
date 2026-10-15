@@ -21,7 +21,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'streaming-canal-002',
+    id: 'streaming-canal-002', postGuide: ['firehose-zero-buffering'], postGuideKey: ['firehose-zero-buffering'],
     building: 'streaming-canal',
     bullets: ['3.5-K2'],
     d: 2,
@@ -253,7 +253,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'streaming-canal-014',
+    id: 'streaming-canal-014', postGuide: ['firehose-zero-buffering'], postGuideKey: ['firehose-zero-buffering'],
     building: 'streaming-canal',
     bullets: ['3.5-K2'],
     d: 2,
