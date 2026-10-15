@@ -36,6 +36,7 @@ async function main() {
     services: readJson('./official-services.json'),
     shortNames: readJson<{ items: { short: string; full: string }[] }>('./official-short-names.json').items,
     era: qb.era,
+    postGuide: qb.postGuide,
     scope: new Set(mine.map((b) => b.district)),
   });
   const live = own.filter((q) => !q.tags.includes('mock-reserve'));

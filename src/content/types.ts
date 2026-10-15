@@ -18,6 +18,8 @@ export interface Block {
   sources: string[];
   quotes?: Quote[];
   status?: Status;
+  /** Registry ids (content/post-guide.json) of features newer than the exam guide that this block discusses; shown as a small label. */
+  newer?: string[];
   /** Number tokens that are structural rather than factual claims (e.g. "four" strategies). */
   allow?: string[];
 }
@@ -148,4 +150,8 @@ export interface Question {
   evidence: Quote[];
   /** Set when the question involves an in-scope service whose availability status changed (content/exam-era.json). */
   era?: string;
+  /** Registry ids (content/post-guide.json) of features newer than the exam guide that this question mentions or relies on. Implies the `post-guide` tag. */
+  postGuide?: string[];
+  /** The subset of `postGuide` that the key itself rests on. The exam-era design must not appear among the options. */
+  postGuideKey?: string[];
 }

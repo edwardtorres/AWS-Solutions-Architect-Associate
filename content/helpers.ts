@@ -3,6 +3,8 @@ import type { Block, Cue, Example, Status } from '../src/content/types.ts';
 export interface BlockOpts {
   allow?: string[];
   status?: Status;
+  /** Post-guide feature ids discussed in this block. */
+  newer?: string[];
 }
 
 /**
@@ -21,6 +23,7 @@ export function b(text: string, sources: string | string[], quotes: string[] = [
   }
   if (opts.allow) block.allow = opts.allow;
   if (opts.status) block.status = opts.status;
+  if (opts.newer) block.newer = opts.newer;
   return block;
 }
 

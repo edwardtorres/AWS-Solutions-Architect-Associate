@@ -254,3 +254,4 @@ button, a, summary {
 }
 .inline-link:hover { text-decoration-color: var(--accent); }
 .chip[data-kind='status'] { border-color: #f9a8d4; color: #fbcfe8; }
+.chip[data-kind='newer'] { border-color: #fde68a; color: #fef3c7; }

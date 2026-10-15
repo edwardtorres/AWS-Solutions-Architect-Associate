@@ -1,7 +1,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import type { EraEntry } from './questionChecks.ts';
+import type { EraEntry, PostGuideRegistry } from './questionChecks.ts';
 import type { BuildingNotes, Question, ConfusePair, GlossaryTerm, RenamedService, Source } from '../../src/content/types.ts';
 
 const root = fileURLToPath(new URL('../../content', import.meta.url));
@@ -55,5 +55,7 @@ export async function loadQuestionsBundle() {
   const scopePath = join(root, 'questions-scope.json');
   const scope = existsSync(scopePath) ? (JSON.parse(readFileSync(scopePath, 'utf8')) as { districts?: string[] }).districts ?? [] : [];
   const era = JSON.parse(readFileSync(join(root, 'exam-era.json'), 'utf8')) as { inScopeWithChangedStatus: EraEntry[] };
-  return { questions, scope: new Set(scope), era: era.inScopeWithChangedStatus };
+  const pgPath = join(root, 'post-guide.json');
+  const postGuide: PostGuideRegistry = existsSync(pgPath) ? (JSON.parse(readFileSync(pgPath, 'utf8')) as PostGuideRegistry) : { cutoff: '2022-08-01', features: [] };
+  return { questions, scope: new Set(scope), era: era.inScopeWithChangedStatus, postGuide };
 }

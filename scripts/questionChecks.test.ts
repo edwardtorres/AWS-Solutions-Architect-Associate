@@ -177,6 +177,33 @@ describe('question checks', () => {
     expect(problems(many, (i) => (i.scope = new Set(['citadel']))).join()).toMatch(/strictly the longest/);
   });
 
+  it('enforces the post-guide rule', () => {
+    const registry = {
+      cutoff: '2022-08-01',
+      features: [
+        { id: 'regional-nat', name: 'Regional NAT gateway', introduced: '2025-11-01', certainty: 'confirmed' as const, patterns: ['regional NAT'], predecessorPatterns: ['NAT gateway in each Availability Zone'], predecessor: 'one NAT gateway per AZ' },
+      ],
+    };
+    const withRegistry = (qs: Question[]) => problems(qs, (i) => (i.postGuide = registry)).join();
+    const mention = q({ stem: 'A company stores audit logs in Amazon S3 and needs the MOST secure way; a regional NAT design is considered here.' });
+    expect(withRegistry([mention])).toMatch(/mentions the post-guide feature "regional-nat"/);
+    const declared = q({ stem: mention.stem, postGuide: ['regional-nat'] });
+    declared.tags = [];
+    expect(withRegistry([declared])).toMatch(/must carry the post-guide tag/);
+    const tagged = q({ stem: mention.stem, postGuide: ['regional-nat'] });
+    expect(withRegistry([tagged])).toBe('');
+    const unneeded = q({ postGuide: ['regional-nat'] });
+    expect(withRegistry([unneeded])).toMatch(/no pattern of it matches/);
+    const unknown = q({ postGuide: ['nope'], });
+    expect(withRegistry([unknown])).toMatch(/not in content\/post-guide.json/);
+    // The key rests on the new feature while the exam-era design is an option: a violation.
+    const violation = q({ stem: mention.stem, postGuide: ['regional-nat'], postGuideKey: ['regional-nat'] });
+    violation.options[1]!.text = 'Use a NAT gateway in each Availability Zone';
+    expect(withRegistry([violation])).toMatch(/exam-era design/);
+    const reserve = q({ stem: mention.stem, postGuide: ['regional-nat'], tags: ['mock-reserve'] });
+    expect(withRegistry([reserve])).toMatch(/cannot be in the mock reserve/);
+  });
+
   it('keeps question data behind src/questions', () => {
     const p = problems([], (i) => (i.appFiles = [{ path: 'src/ui/Quiz.tsx', content: "import q from '../../content/questions/citadel/x'" }, { path: 'src/questions/pool.ts', content: "import('../../content/questions/citadel/x')" }]));
     expect(p.join()).toMatch(/src\/ui\/Quiz.tsx imports question data directly/);

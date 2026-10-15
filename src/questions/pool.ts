@@ -10,13 +10,17 @@ export type DrawMode = 'startup' | 'inspection' | 'placement' | 'review' | 'debr
 export const RESERVE_TAG = 'mock-reserve';
 export const PLACEMENT_TAG = 'placement-eligible';
 
+export const POST_GUIDE_TAG = 'post-guide';
+
 export const isReserve = (q: Question): boolean => q.tags.includes(RESERVE_TAG);
+export const isPostGuide = (q: Question): boolean => q.tags.includes(POST_GUIDE_TAG);
 
 /** Questions a mode may use. */
 export function eligible(questions: readonly Question[], mode: DrawMode): Question[] {
   switch (mode) {
     case 'mock':
-      return [...questions];
+      // Mocks may use the reserve, but never a question that depends on a feature newer than the exam guide.
+      return questions.filter((q) => !isPostGuide(q));
     case 'placement':
       return questions.filter((q) => !isReserve(q) && q.tags.includes(PLACEMENT_TAG));
     default:

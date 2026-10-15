@@ -22,7 +22,7 @@ const make = (id: string, tags: string[], building = 'b1', bullets = ['1.1-K1'])
   evidence: [],
 });
 
-const bank = [make('live', []), make('placed', ['placement-eligible']), make('reserve', ['mock-reserve']), make('other', [], 'b2', ['1.2-K1'])];
+const bank = [make('live', []), make('placed', ['placement-eligible']), make('reserve', ['mock-reserve']), make('other', [], 'b2', ['1.2-K1']), make('newer', ['post-guide'])];
 
 describe('question pool', () => {
   const modes: DrawMode[] = ['startup', 'inspection', 'placement', 'review', 'debrief', 'browse'];
@@ -36,13 +36,20 @@ describe('question pool', () => {
     expect(eligible(bank, 'mock').some(isReserve)).toBe(true);
   });
 
+  it('never puts a post-guide question in a mock draw', () => {
+    expect(eligible(bank, 'mock').map((q) => q.id)).not.toContain('newer');
+    for (let seed = 0; seed < 20; seed += 1) expect(draw(bank, 'mock', 10, mulberry32(seed)).map((q) => q.id)).not.toContain('newer');
+    // Other modes still use them: the exam-era design is tested through rewritten questions.
+    expect(eligible(bank, 'inspection').map((q) => q.id)).toContain('newer');
+  });
+
   it('placement only uses placement-eligible questions', () => {
     expect(eligible(bank, 'placement').map((q) => q.id)).toEqual(['placed']);
   });
 
   it('filters by building and bullet and respects the count', () => {
     expect(draw(bank, 'review', 10, mulberry32(1), { building: 'b2' }).map((q) => q.id)).toEqual(['other']);
-    expect(draw(bank, 'review', 10, mulberry32(1), { bullet: '1.1-K1' }).map((q) => q.id).sort()).toEqual(['live', 'placed']);
+    expect(draw(bank, 'review', 10, mulberry32(1), { bullet: '1.1-K1' }).map((q) => q.id).sort()).toEqual(['live', 'newer', 'placed']);
     expect(draw(bank, 'review', 1, mulberry32(1))).toHaveLength(1);
     expect(draw(bank, 'review', 0, mulberry32(1))).toHaveLength(0);
   });

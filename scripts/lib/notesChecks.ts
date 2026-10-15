@@ -1,3 +1,4 @@
+import type { PostGuideRegistry } from './questionChecks.ts';
 import type {
   Block,
   BuildingNotes,
@@ -23,6 +24,8 @@ export interface NotesInput {
   requiredPairs?: typeof REQUIRED_PAIRS;
   /** Source ids cited by question evidence; they count as used. */
   citedElsewhere?: ReadonlySet<string>;
+  /** The post-guide registry: blocks that discuss a registry feature must carry the label. */
+  postGuide?: PostGuideRegistry;
 }
 
 /** Pairs the brief requires. `members` must each be named by an item of the pair. */
@@ -132,6 +135,7 @@ interface Ctx {
   terms: ReadonlySet<string>;
   renamedOld: readonly string[];
   renameIds: ReadonlySet<string>;
+  postGuide?: PostGuideRegistry;
 }
 
 function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-note', used: { sources: Set<string>; terms: Set<string> }): string[] {
@@ -168,6 +172,14 @@ function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-
     if (!quoted.includes(t)) p.push(`${where}: number "${tok}" is not backed by a quote from a cited page`);
   }
   if (PRICE.test(block.text)) p.push(`${where}: states a price; compare costs only in relative terms`);
+  if (ctx.postGuide) {
+    const known = new Set(ctx.postGuide.features.map((f) => f.id));
+    for (const id of block.newer ?? []) if (!known.has(id)) p.push(`${where}: unknown post-guide feature "${id}"`);
+    for (const f of ctx.postGuide.features) {
+      const hit = f.patterns.some((pat) => new RegExp(pat, 'i').test(block.text));
+      if (hit && !(block.newer ?? []).includes(f.id)) p.push(`${where}: discusses the post-guide feature "${f.id}" (${f.name}) and needs newer: ['${f.id}']`);
+    }
+  }
   if (STATUS_WORDS.test(block.text) && !block.status) p.push(`${where}: mentions preview/deprecated/retired but has no status label`);
   if (block.status && !(block.quotes ?? []).some((q) => /preview|deprecat|retire|end of (life|support)|no longer|sunset|discontinu|not available to new|close new customer|closed to new/i.test(q.text))) {
     p.push(`${where}: status "${block.status}" needs a quote showing AWS says so`);
@@ -195,7 +207,7 @@ export function checkNotes(input: NotesInput): string[] {
   const sources = new Map(input.sources.map((s) => [s.id, s]));
   const terms = new Set(input.glossary.map((g) => g.id));
   const used = { sources: new Set<string>(), terms: new Set<string>() };
-  const ctx: Ctx = { sources, terms, renamedOld: input.renamed.map((r) => r.otherName), renameIds: new Set(input.renamed.map((r) => r.id)) };
+  const ctx: Ctx = { sources, terms, renamedOld: input.renamed.map((r) => r.otherName), renameIds: new Set(input.renamed.map((r) => r.id)), ...(input.postGuide ? { postGuide: input.postGuide } : {}) };
 
   p.push(...checkSources(input.sources));
 

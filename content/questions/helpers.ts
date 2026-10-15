@@ -15,6 +15,10 @@ interface Base {
   /** "src-id|verbatim excerpt" strings; a bare string is tied to the first listed source. */
   evidence: string[];
   era?: string;
+  /** Post-guide feature ids (content/post-guide.json) mentioned or relied on; adds the `post-guide` tag. */
+  postGuide?: string[];
+  /** Subset of postGuide that the key rests on. */
+  postGuideKey?: string[];
 }
 
 function evidenceOf(list: string[]): Question['evidence'] {
@@ -23,6 +27,13 @@ function evidenceOf(list: string[]): Question['evidence'] {
     if (i <= 0 || !/^[a-z0-9-]+$/.test(q.slice(0, i))) throw new Error(`evidence needs a "source-id|quote" form: ${q.slice(0, 50)}`);
     return { src: q.slice(0, i), text: q.slice(i + 1) };
   });
+}
+
+function postGuideFields(s: Base): Pick<Question, 'postGuide' | 'postGuideKey'> & { tags: string[] } {
+  const pg = s.postGuide ?? [];
+  const tags = [...(s.tags ?? [])];
+  if (pg.length > 0 && !tags.includes('post-guide')) tags.push('post-guide');
+  return { tags, ...(pg.length > 0 ? { postGuide: pg } : {}), ...(s.postGuideKey && s.postGuideKey.length > 0 ? { postGuideKey: s.postGuideKey } : {}) };
 }
 
 /** Places correct options at the given positions and fills the rest with wrong options in the given order. */
@@ -55,7 +66,7 @@ export function mc(s: Base & { correct: Opt; wrong: readonly [Opt, Opt, Opt]; sl
     difficulty: s.d,
     stem: s.stem,
     options: place([s.correct], s.wrong, [s.slot], s.id),
-    tags: s.tags ?? [],
+    ...postGuideFields(s),
     evidence: evidenceOf(s.evidence),
     ...(s.era ? { era: s.era } : {}),
   };
@@ -72,7 +83,7 @@ export function mr(s: Base & { correct: readonly Opt[]; wrong: readonly Opt[]; s
     difficulty: s.d,
     stem: s.stem,
     options: place(s.correct, s.wrong, s.slots, s.id),
-    tags: s.tags ?? [],
+    ...postGuideFields(s),
     evidence: evidenceOf(s.evidence),
     ...(s.era ? { era: s.era } : {}),
   };

@@ -39,7 +39,7 @@ async function main() {
   const qb = await loadQuestionsBundle();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set(qb.questions.flatMap((q) => q.evidence.map((e) => e.src))) }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set(qb.questions.flatMap((q) => q.evidence.map((e) => e.src))), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
   );
 
   const repoRoot = here('../');
@@ -61,6 +61,7 @@ async function main() {
       services,
       shortNames: readJson<{ items: { short: string; full: string }[] }>('./official-short-names.json').items,
       era: qb.era,
+      postGuide: qb.postGuide,
       scope: qb.scope,
       appFiles,
     }).map((x) => `questions: ${x}`),

@@ -16,7 +16,7 @@ export const MIN_DIFFICULTY_3_SHARE = 0.22;
 export const MIN_QUALIFIER_SHARE = 0.6;
 export const NEAR_DUPLICATE = 0.7;
 
-export const KNOWN_TAGS = new Set(['placement-eligible', 'mock-reserve']);
+export const KNOWN_TAGS = new Set(['placement-eligible', 'mock-reserve', 'post-guide']);
 export const QUALIFIER = /\b(MOST|LEAST|LOWEST|HIGHEST|FASTEST|BEST|MINIMUM|MINIMAL|SIMPLEST|SHORTEST|LONGEST|MAXIMUM)\b/;
 export const NONE_OF_ABOVE = /\b(all|none|both|neither)\s+of\s+the\s+(above|following)\b|\ball of these\b|\bnone of these\b|\bboth (a|b|1|2)\b/i;
 /** Questions test design choices, never availability. */
@@ -69,6 +69,30 @@ export interface EraEntry {
   patterns: string[];
 }
 
+export interface PostGuideFeature {
+  id: string;
+  name: string;
+  /** YYYY-MM-DD (or YYYY-MM) of introduction. */
+  introduced: string;
+  certainty: 'confirmed' | 'approximate' | 'unconfirmed';
+  /** Source id in content/sources.ts and a verbatim quote that dates the feature. */
+  source?: string;
+  quote?: string;
+  /** Case-insensitive regexes that detect the feature in question text. */
+  patterns: string[];
+  /** Regexes that detect the established exam-era design in option text. */
+  predecessorPatterns?: string[];
+  predecessor?: string;
+}
+
+export interface PostGuideRegistry {
+  cutoff: string;
+  features: PostGuideFeature[];
+}
+
+/** Text a post-guide feature can hide in: stem, options and every explanation (not the evidence quotes). */
+export const questionBody = (q: Question) => [q.stem, ...q.options.flatMap((o) => [o.text, o.why])].join('\n');
+
 export interface QuestionCheckInput {
   questions: readonly Question[];
   buildings: readonly Building[];
@@ -82,6 +106,8 @@ export interface QuestionCheckInput {
   era: readonly EraEntry[];
   /** District ids whose questions are complete and checked for minimums. */
   scope: ReadonlySet<string>;
+  /** The post-guide registry (content/post-guide.json). */
+  postGuide?: PostGuideRegistry;
   /** Source files of the app, for the mock-isolation scan: path to text. */
   appFiles?: readonly { path: string; content: string }[];
 }
@@ -255,6 +281,31 @@ export function checkEachQuestion(input: QuestionCheckInput): string[] {
       if (re.test(asked)) p.push(`${w}: names out-of-scope service "${n}" in the stem or an option`);
     }
     for (const u of unknownServiceMentions(asked, known)) p.push(`${w}: "${u}" is not an in-scope service name or short name`);
+
+    // Post-guide rule.
+    if (input.postGuide) {
+      const reg = input.postGuide;
+      const declared = new Set(q.postGuide ?? []);
+      const key = q.postGuideKey ?? [];
+      const known = new Map(reg.features.map((f) => [f.id, f]));
+      for (const id of declared) if (!known.has(id)) p.push(`${w}: post-guide feature "${id}" is not in content/post-guide.json`);
+      for (const f of reg.features) {
+        const hit = f.patterns.some((pat) => new RegExp(pat, 'i').test(questionBody(q)));
+        if (hit && !declared.has(f.id)) p.push(`${w}: mentions the post-guide feature "${f.id}" (${f.name}) but does not declare it in postGuide`);
+        if (!hit && declared.has(f.id)) p.push(`${w}: declares post-guide feature "${f.id}" but no pattern of it matches the text`);
+      }
+      if (declared.size > 0 && !q.tags.includes('post-guide')) p.push(`${w}: has post-guide features and must carry the post-guide tag`);
+      if (declared.size === 0 && q.tags.includes('post-guide')) p.push(`${w}: tagged post-guide but lists no feature in postGuide`);
+      for (const id of key) {
+        if (!declared.has(id)) p.push(`${w}: postGuideKey "${id}" is not in postGuide`);
+        const f = known.get(id);
+        for (const pat of f?.predecessorPatterns ?? []) {
+          const bad = q.options.find((o) => new RegExp(pat, 'i').test(o.text));
+          if (bad) p.push(`${w}: the key rests on post-guide "${id}" but an option shows the exam-era design (${f?.predecessor ?? pat}): "${bad.text.slice(0, 60)}"`);
+        }
+      }
+      if (q.tags.includes('post-guide') && q.tags.includes('mock-reserve')) p.push(`${w}: a post-guide question cannot be in the mock reserve`);
+    }
 
     // Exam-era.
     for (const e of input.era) {
