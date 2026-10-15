@@ -43,10 +43,10 @@ const questions: Question[] = [
     building: 'instance-foundry',
     bullets: ['4.2-K7'],
     d: 3,
-    stem: 'A high-volume website runs on burstable performance instances configured in unlimited mode. CPU utilization stays well above the baseline for most of the day, and the bill keeps showing charges for surplus credits. Which change BEST fits this workload?',
+    stem: 'A high-volume website runs on burstable performance instances configured in unlimited mode. CPU utilization stays well above the baseline for most of the day, and the bill keeps showing charges for surplus credits. The site must keep its full CPU performance under sustained load. Which change BEST fits this workload?',
     correct: ['Move to a fixed performance instance type that is sized for the sustained load', 'Fixed performance instances sustain full CPU performance for as long as a workload needs it, which avoids surplus credit charges.'],
     wrong: [
-      ['Keep the burstable instances in unlimited mode and add more instances of the same type', 'Average CPU use above the baseline over 24 hours incurs charges for surplus credits, which is the problem the company has.'],
+      ['Switch the burstable instances from unlimited mode to standard mode', 'In standard mode, CPU utilization is lowered to the baseline once accrued credits run low, so the site would be throttled during sustained load.'],
       ['Move the web servers to memory optimized instances sized for large in-memory data sets', 'Memory optimized instances are designed for large data sets in memory, and the site is limited by CPU and not by memory.'],
       ['Move the web servers to storage optimized instances with large local storage volumes', 'Storage optimized instances are designed for high sequential access to very large data sets on local storage, which the site does not need.'],
     ],
@@ -54,6 +54,7 @@ const questions: Question[] = [
     evidence: [
       'ec2-instance-types|If you need consistently high CPU performance for applications such as video encoding, high volume websites, or HPC applications, we recommend that you use fixed performance instances.',
       'ec2-t-unlimited|If the average CPU usage over a 24-hour period exceeds the baseline, you incur charges for surplus credits.',
+      'ec2-t-standard|If the instance is running low on accrued credits, CPU utilization is gradually lowered to the baseline level, so that the instance does not experience a sharp performance drop-off when its accrued CPU credit balance is depleted.',
     ],
   }),
   mc({
@@ -159,7 +160,7 @@ const questions: Question[] = [
     stem: 'A company runs a portable Linux application on x86 Amazon EC2 instances and wants better price performance by using AWS Graviton processors. Which TWO actions are required to move the application? (Choose two.)',
     correct: [
       ['Use an AMI that is built for the Arm processor architecture', 'An AMI is specific to its processor architecture, so Graviton instances need an Arm AMI.'],
-      ['Launch the application on a new instance of a Graviton-based instance type', 'Graviton is a family of processors designed to deliver the best price performance for workloads on EC2, and an Arm-limited instance cannot be reached by changing an x86 type.'],
+      ['Launch the application on a new instance of a Graviton-based instance type', 'Graviton is a family of processors designed to deliver the best price performance for workloads on EC2, and the application must run on a new instance of a Graviton-based type because an existing x86 instance cannot be changed to an Arm-based type.'],
     ],
     wrong: [
       ['Change the instance type of the running x86 instances to a Graviton type', 'The new type must have the same processor architecture as the current type, so an x86 instance cannot be changed to an Arm type.'],

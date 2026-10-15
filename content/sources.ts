@@ -627,6 +627,8 @@ const sources: Source[] = [
   aws('kinesis-kpl', `${D}/streams/latest/dev/kinesis-kpl-concepts.html`, 'KPL key concepts'),
   aws('ecs-data-volumes', `${D}/AmazonECS/latest/developerguide/using_data_volumes.html`, 'Storage options for Amazon ECS tasks'),
   aws('fsx-lustre-dra', `${D}/fsx/latest/LustreGuide/overview-dra-data-repo.html`, 'Linking your file system to an Amazon S3 bucket'),
+  aws('aws-generated-tags', `${D}/awsaccountbilling/latest/aboutv2/aws-tags.html`, 'AWS-generated cost allocation tags'),
+  aws('ec2-t-standard', `${D}/AWSEC2/latest/UserGuide/burstable-performance-instances-standard-mode.html`, 'Standard mode for burstable performance instances'),
 ];
 
 export default sources;

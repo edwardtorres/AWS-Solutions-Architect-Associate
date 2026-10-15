@@ -63,17 +63,18 @@ const questions: Question[] = [
     bullets: ['4.1-S3'],
     d: 2,
     tags: ['trap:direct-connect-vs-vpn'],
-    stem: 'A small branch office must send a few gigabytes of files each day, encrypted, to private subnets in a VPC. The office already has an internet connection, needs the link working this week, and has no need for dedicated bandwidth. Which solution meets these requirements at the LOWEST cost?',
+    stem: 'A small branch office must send a few gigabytes of files each day, encrypted, to private subnets in a VPC. The office already has an internet connection and has no need for dedicated bandwidth. Which solution meets these requirements at the LOWEST cost?',
     correct: ['An AWS Site-to-Site VPN connection over the existing internet connection', 'Site-to-Site VPN supports IPsec VPN connections between the office and the VPC and needs no new physical circuit.'],
     wrong: [
-      ['An AWS Direct Connect dedicated connection from the office to a Direct Connect location', 'It links the network over a fiber-optic cable to a Direct Connect location, a physical circuit that cannot be set up in a week for a small, occasional transfer.'],
-      ['Two AWS Direct Connect connections at different locations for resilience', 'This adds more physical circuits than a small daily transfer needs and would not be ready this week.'],
+      ['An AWS Direct Connect dedicated connection from the office to a Direct Connect location', 'It links the network over a fiber-optic cable to a Direct Connect location, a physical circuit, and AWS Direct Connect is not encrypted by default.'],
+      ['Two AWS Direct Connect connections at different locations for resilience', 'This adds more physical circuits than a small daily transfer needs and is not encrypted by default.'],
       ['Amazon S3 Transfer Acceleration on a bucket in the Region of the VPC', 'It speeds uploads to an S3 bucket but does not create an encrypted connection to private subnets.'],
     ],
     slot: 3,
     evidence: [
       's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.',
       'dx-what-is|Direct Connect links your internal network to a Direct Connect location over a standard Ethernet fiber-optic cable.',
+      'dx-encryption|AWS Direct Connect does not encrypt your traffic that is in transit by default.',
     ],
   }),
   mc({
@@ -100,13 +101,13 @@ const questions: Question[] = [
     building: 'haul-hybrid-customs',
     bullets: ['4.1-S1'],
     d: 2,
-    stem: 'A company uploads 200 GB files to Amazon S3 over a network that drops connections. Uploads often fail near the end and restart from the beginning, and abandoned partial uploads keep adding storage cost. Which TWO actions fix the failures and control the cost with the LEAST operational overhead? (Choose two.)',
+    stem: 'A company uploads 4 GB files to Amazon S3 over a network that drops connections. Uploads often fail near the end and restart from the beginning, and abandoned partial uploads keep adding storage cost. Which TWO actions fix the failures and control the cost with the LEAST operational overhead? (Choose two.)',
     correct: [
       ['Upload the files with multipart upload so that only a failed part is retransmitted', 'Parts are uploaded independently and in parallel, and a failed part can be retransmitted without restarting the whole upload.'],
       ['Add a bucket lifecycle rule that aborts incomplete multipart uploads after a number of days', 'A lifecycle rule with the AbortIncompleteMultipartUpload action stops uploads that are not completed, which minimizes storage costs.'],
     ],
     wrong: [
-      ['Upload each file in a single PUT request and retry the whole request on failure', 'A failure still restarts the entire 200 GB upload, so the problem remains.'],
+      ['Upload each file in a single PUT request and retry the whole request on failure', 'A failure still restarts the entire 4 GB upload, so the problem remains.'],
       ['Enable S3 Transfer Acceleration to avoid any network errors during the uploads', 'It speeds long-distance transfers and might add charges; it does not stop a dropped connection from restarting a single request.'],
       ['Switch the bucket to S3 One Zone-IA so that partial uploads are not billed', 'A storage class does not change the billing of the parts of an in-progress multipart upload.'],
     ],
@@ -166,7 +167,7 @@ const questions: Question[] = [
     stem: 'A company copies about 400 GB of changed files each night from an on-premises NFS server to an Amazon EFS file system. The office network is shared with business applications during the day, so the copy must be limited in how much bandwidth it uses. The company wants the LEAST operational overhead. Which solution meets these requirements?',
     correct: ['Use AWS DataSync with a recurring, bandwidth-limited task that has the EFS file system as the destination', 'DataSync supports EFS as a destination, and a task can limit how much bandwidth DataSync uses.'],
     wrong: [
-      ['Use an AWS Transfer Family SFTP server that writes to the EFS file system', 'The NFS server has no SFTP client to schedule the copy, and the endpoint adds a server that is billed while enabled.'],
+      ['Use an AWS Transfer Family SFTP server that writes to the EFS file system', 'Transfer Family gives partners an SFTP endpoint; it does not pull NFS data on a schedule or limit bandwidth, and the endpoint adds a server that is billed while enabled.'],
       ['Use an S3 File Gateway so that the NFS server writes its changed files into the share every night', 'A file gateway stores the data in Amazon S3, not in the EFS file system that is the required destination.'],
       ['Use an AWS Storage Gateway Volume Gateway to present cloud-backed iSCSI volumes to the NFS server', 'Volume Gateway presents iSCSI volumes backed by S3, which neither copies the NFS files nor writes to EFS.'],
     ],

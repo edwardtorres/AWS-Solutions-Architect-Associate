@@ -31,8 +31,8 @@ const questions: Question[] = [
       ['After the converted code is applied, use AWS DMS to migrate the data from the Oracle database', 'AWS DMS migrates the data once the converted schema exists on the target, and can keep replicating changes.'],
     ],
     wrong: [
-      ['Create an Aurora PostgreSQL read replica that uses the on-premises Oracle database as its source', 'A read replica copies a database into the same engine; it cannot turn Oracle tables and procedures into PostgreSQL objects.'],
-      ['Restore a snapshot of the Oracle database directly into the Aurora PostgreSQL cluster', 'A snapshot holds data in the format of its own engine and cannot be restored as a different engine.'],
+      ['Export the Oracle tables to CSV files and load them into Aurora PostgreSQL with the PostgreSQL COPY command', 'This moves rows only; the views and stored procedures are not converted, so the team would write that code by hand.'],
+      ['Rewrite the views and stored procedures by hand in PostgreSQL syntax, then use AWS DMS to migrate the data', 'The data step works, but hand-writing the schema code is the custom work that DMS Schema Conversion avoids.'],
       ['Run AWS DMS alone and let it rewrite the Oracle stored procedures as PostgreSQL code', 'AWS DMS moves data; converting code objects to a new engine is the job of schema conversion.'],
     ],
     slots: [1, 3],
@@ -106,9 +106,9 @@ const questions: Question[] = [
     stem: 'A company runs Microsoft SQL Server on premises, and the licence costs are high. Developers are willing to adjust application code. The company wants to move to Amazon Aurora PostgreSQL-Compatible, keep the source database in use while the data is copied, and avoid writing its own conversion tools. Which approach is the MOST cost-effective way to meet these requirements?',
     correct: ['Convert and apply the schema with DMS Schema Conversion, then run AWS DMS to load the data and replicate changes until the cutover', 'The engine changes, so the schema is converted first, and DMS then migrates the data and keeps source and target in sync.'],
     wrong: [
-      ['Restore a SQL Server backup to an RDS for SQL Server instance and change its engine to PostgreSQL in place', 'A DB instance cannot change its engine in place, and an RDS for SQL Server instance would keep the commercial licence cost.'],
+      ['Export the SQL Server tables to CSV files, load them into Aurora PostgreSQL with COPY, and rewrite the views and procedures by hand', 'This is a one-time copy with no ongoing replication, so the source and target drift apart, and all code conversion is custom work.'],
       ['Run AWS DMS with a full load only, and ask developers to recreate the views and stored procedures by hand', 'Without schema conversion the developers write the conversion by hand, and a full load alone leaves the source out of sync after the copy.'],
-      ['Move the database to Amazon RDS for SQL Server and later migrate it in a second project when budget allows', 'This keeps the commercial engine and the licence cost the company wants to remove, and it still needs the same heterogeneous migration later.'],
+      ['Convert the schema with DMS Schema Conversion, stop the application, and copy the data once with a database export and import', 'The source database would be unavailable during the copy, which fails the requirement to keep it in use while the data is copied.'],
     ],
     slot: 0,
     evidence: [

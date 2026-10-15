@@ -25,7 +25,7 @@ const questions: Question[] = [
     building: 'counting-house',
     bullets: ['4.2-K1'],
     d: 3,
-    stem: 'A company has already activated its user-defined Team tag for cost allocation. For Amazon EC2 instances that are launched from now on, finance also wants Cost Explorer to show the cost grouped by who created each instance, and it does not want people to type this information on each instance. Which action meets this requirement with the LEAST operational overhead?',
+    stem: 'A company has already activated its user-defined Team tag for cost allocation. For Amazon EC2 instances that are launched from now on in the US East (N. Virginia) Region (us-east-1), finance also wants Cost Explorer to show the cost grouped by who created each instance, and it does not want people to type this information on each instance. Which action meets this requirement with the LEAST operational overhead?',
     correct: ['Activate the AWS-generated createdBy cost allocation tag in the billing console', 'The createdBy tag is applied by AWS and tracks who created a resource, and it must be activated separately from user-defined tags.'],
     wrong: [
       ['Ask each engineer to add a user-defined Owner tag with their name to every new instance', 'This relies on people typing the value on each instance, which the company wants to avoid, and untagged instances would be missed.'],
@@ -36,6 +36,7 @@ const questions: Question[] = [
     evidence: [
       'cost-alloc-tags|You must activate both types of tags separately before they can appear in Cost Explorer or on a cost allocation report.',
       'cost-alloc-tags|The createdBy tag tracks who created the resource.',
+      'aws-generated-tags|The AWS-generated tag createdBy is a tag that AWS defines and applies to supported AWS resources for cost allocation purposes.',
     ],
   }),
   mc({

@@ -101,18 +101,18 @@ const questions: Question[] = [
     building: 'network-cost-audit',
     bullets: ['4.4-K2'],
     d: 3,
-    stem: 'A company wants every line item of its AWS costs, broken down by hour and by product, delivered automatically to an Amazon S3 bucket that the company owns. Analysts will run their own queries on the files to find the sources of network charges. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Create an AWS Cost and Usage Report that delivers to the bucket', 'The report holds the most comprehensive cost and usage data, with line items by product and usage type, published to a bucket you own.'],
+    stem: 'Analysts at a company must find out which usage types, such as data transfer between Availability Zones and NAT gateway data processing, drive the network charges. They need every line item of the AWS costs, and they want to answer the question with SQL queries. The company does not want to run or manage a database cluster for this. Which solution meets these requirements with the LEAST operational overhead?',
+    correct: ['Create an AWS Cost and Usage Report that delivers to an Amazon S3 bucket, and query it with Amazon Athena', 'The report holds line items by product and usage type in a bucket the company owns, and Athena runs SQL on those files with no cluster to manage.'],
     wrong: [
-      ['Create an AWS Budgets cost budget with notifications to an Amazon SNS topic', 'A budget tracks spending against a limit and sends alerts; it does not deliver line-item data to a bucket.'],
-      ['Turn on AWS Cost Anomaly Detection with an alert subscription for the finance team', 'Cost Anomaly Detection alerts on unusual spend patterns and does not deliver line items for analysts to query.'],
-      ['Use the AWS Cost Explorer console and save a report for each month', 'Cost Explorer is an interactive view of costs and does not publish detailed hourly line items to a bucket the company owns.'],
+      ['Create an AWS Cost and Usage Report and load it into an Amazon Redshift provisioned cluster that the company manages', 'This works, but it needs a cluster to run and manage, which the company wants to avoid.'],
+      ['Use AWS Cost Explorer and group the costs by usage type each month', 'Cost Explorer is an interactive console view and does not give analysts every line item to query with SQL.'],
+      ['Create an AWS Budgets cost budget for each usage type with notifications to an Amazon SNS topic', 'A budget tracks spending against a limit and sends alerts; it does not provide line items to query.'],
     ],
     slot: 0,
     evidence: [
-      'cur-what-is|AWS Cost and Usage Reports (AWS CUR) contains the most comprehensive set of cost and usage data available.',
-      'cur-what-is|You can use Cost and Usage Reports to publish your AWS billing reports to an Amazon Simple Storage Service (Amazon S3) bucket that you own.',
       'cur-what-is|Each report contains line items for each unique combination of AWS products, usage type, and operation that you use in your AWS account.',
+      'cur-what-is|You can download your report from the Amazon S3 console, query the report using Amazon Athena, or upload the report into Amazon Redshift or Quick.',
+      'cur-what-is|AWS Cost and Usage Reports (AWS CUR) contains the most comprehensive set of cost and usage data available.',
     ],
   }),
   mc({
@@ -120,7 +120,7 @@ const questions: Question[] = [
     building: 'network-cost-audit',
     bullets: ['4.4-S5'],
     d: 2,
-    stem: 'A company is reviewing an existing workload that has been running for two years. The team suspects that some NAT gateways, VPC interface endpoints and Elastic IP addresses no longer carry traffic or are not attached to anything, and it wants to find them with the LEAST effort. Which solution meets these requirements?',
+    stem: 'A company is reviewing an existing workload that has been running for two years. The team suspects that some NAT gateways, VPC interface endpoints and Elastic IP addresses no longer carry traffic or are not attached to anything, and it wants to find them with the LEAST effort. The company has a Business Support plan. Which solution meets these requirements?',
     correct: ['Review the AWS Trusted Advisor cost optimization checks for idle and unassociated network resources', 'Trusted Advisor has cost checks for idle NAT gateways, inactive VPC interface endpoints and unassociated Elastic IP addresses.'],
     wrong: [
       ['Enable VPC Flow Logs for the whole VPC and analyze the records for resources with no traffic', 'Flow logs add logging charges and analysis work, while a Trusted Advisor check already reports these resources.'],
@@ -161,8 +161,8 @@ const questions: Question[] = [
     bullets: ['4.4-K2'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'A company has seasonal traffic, so its spending on data transfer changes a lot from month to month and no fixed limit fits. The company wants to be alerted when spending departs from its normal pattern, without choosing a threshold. Which AWS feature meets this requirement with the LEAST effort?',
-    correct: ['AWS Cost Anomaly Detection, with an alert subscription', 'It uses machine learning models to detect and alert on anomalous spend patterns, including seasonality, without a threshold.'],
+    stem: 'A company has seasonal traffic, so its spending on data transfer changes a lot from month to month and no fixed limit fits. The company wants to be alerted when spending departs from its normal pattern, without setting a fixed monthly spending limit. Which AWS feature meets this requirement with the LEAST effort?',
+    correct: ['AWS Cost Anomaly Detection, with an alert subscription', 'It uses machine learning models to detect anomalous spend patterns, taking weekly or monthly seasonality into account, so no fixed monthly limit is needed.'],
     wrong: [
       ['AWS Budgets, with a cost budget set to a fixed monthly amount', 'A fixed amount does not fit seasonal spending, so it would alert falsely in busy months and miss spikes in quiet ones.'],
       ['AWS Cost and Usage Report, delivered to Amazon S3 and reviewed each week', 'The report delivers data files and does not alert on spending that departs from a normal pattern.'],
@@ -172,6 +172,7 @@ const questions: Question[] = [
     evidence: [
       'cost-anomaly|AWS Cost Anomaly Detection is a feature that uses machine learning models to detect and alert on anomalous spend patterns in your deployed AWS services.',
       'cost-anomaly|You can evaluate your spend patterns using machine learning methods to minimize false positive alerts.',
+      'cost-anomaly|For example, you can evaluate weekly or monthly seasonality and natural growth.',
     ],
   }),
 ];

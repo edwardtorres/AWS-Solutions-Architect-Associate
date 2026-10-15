@@ -89,7 +89,7 @@ const questions: Question[] = [
     stem: 'A company uses an AWS Backup plan to take a monthly backup of its Amazon EBS volumes. Each backup must be kept for two years and is rarely restored. The company wants the LOWEST storage cost for the long retention with the LEAST operational overhead. Which lifecycle setting meets these requirements?',
     correct: ['Move backups to cold storage after 30 days and set the total retention period to 730 days', 'Cold storage for EBS is the Snapshots Archive tier, it needs monthly or less frequent backups and a total retention of at least 90 days.'],
     wrong: [
-      ['Move backups to cold storage after 1 day and set the total retention period to 730 days', 'Moving a full backup to cold storage this early makes AWS Backup create another warm full backup, which adds cost; at least 8 days in warm storage is recommended.'],
+      ['Move backups to cold storage after 30 days and set the total retention period to 60 days', 'The backups must be kept for two years, so a 60-day retention period is too short, and cold storage needs a total retention period of 90 days or greater.'],
       ['Keep every backup in warm storage for the full 730 days and do not use cold storage', 'EBS backups taken monthly can use the cheaper cold tier, so leaving two years of backups warm pays more than needed.'],
       ['Run a script on an instance that copies each backup to Amazon S3 Glacier Deep Archive', 'The script must be written and maintained, which conflicts with the least operational overhead, and it bypasses the central backup plan.'],
     ],
@@ -97,7 +97,7 @@ const questions: Question[] = [
     evidence: [
       'backup-create-plan|Cold storage for Amazon EBS is Amazon EBS Snapshots Archive.',
       'aws-backup-plan-options|If Amazon EBS is one of the resources you back up and your backup frequency is monthly or less frequent, you can transition them to cold tier using EBS snapshot archival.',
-      'backup-create-plan|If the full backup is transitioned to cold storage too soon (for example, a transition to cold storage after 1 day), AWS Backup will create another warm full backup.',
+      'aws-backup-plan-options|AWS Backup requires the retention to be set for 90 days longer than the “transition to cold after days” setting.',
     ],
   }),
   mc({
@@ -151,7 +151,7 @@ const questions: Question[] = [
     wrong: [
       ['Keep the volume detached and keep a snapshot in the standard tier', 'The company would keep paying for the volume as well as the standard-tier snapshot, which is not needed once a snapshot is stored.'],
       ['Keep a snapshot of the volume in the EBS Snapshot standard tier only', 'It works, but the archive tier exists for snapshots kept 90 days or longer and rarely accessed, so the standard tier costs more.'],
-      ['Copy the snapshot to an S3 Glacier Deep Archive bucket by using the Amazon S3 console', 'Snapshots are stored in S3 buckets that the company cannot access, so they cannot be copied with the Amazon S3 console or API.'],
+      ['Copy the snapshot to a second AWS Region and keep the copy in the standard tier', 'It adds a second copy and stays in the standard tier, which costs more than the archive tier for a snapshot kept 90 days or longer and rarely accessed.'],
     ],
     slot: 1,
     evidence: [
@@ -166,17 +166,17 @@ const questions: Question[] = [
     bullets: ['4.1-S6'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'A company\'s backup software writes nightly backups to virtual tapes by using the iSCSI tape protocol. The company must keep the backups for ten years and rarely restores them. It wants cost-effective archival in AWS without changing the backup software. Which solution meets these requirements?',
-    correct: ['Use AWS Storage Gateway as a Tape Gateway, with the virtual tapes in S3 Glacier Deep Archive', 'Tape Gateway lets the existing tape-based software write to cloud-backed virtual tapes, which can be archived in Deep Archive.'],
+    stem: 'A company runs an on-premises database server that uses iSCSI block volumes. The application needs low-latency access to the entire 5 TB dataset from local disks, and the company wants point-in-time backups of that data stored in AWS without changing the application. Which solution meets these requirements with the LEAST operational overhead?',
+    correct: ['Deploy an AWS Storage Gateway Volume Gateway that uses stored volumes', 'Stored volumes keep the entire dataset on premises for low-latency access and asynchronously back up point-in-time snapshots to Amazon S3.'],
     wrong: [
-      ['Change the backup software to write to an Amazon EBS volume and snapshot it nightly', 'The software would have to change, and ten years of nightly snapshots of a growing volume is not a low-cost archive.'],
-      ['Change the backup software to write to an Amazon EFS file system with the Standard storage class', 'The software would have to change, and keeping ten years of backups in a file system is costlier than archive storage.'],
-      ['Use an AWS Backup plan that backs up the backup server\'s EBS volume and keeps it for ten years', 'It protects the server\'s volume and does not archive the tape-based backups that the software produces.'],
+      ['Deploy a Volume Gateway that uses cached volumes', 'Cached volumes keep the primary data in AWS and only frequently accessed data locally, so the entire dataset is not available at local latency.'],
+      ['Deploy an Amazon S3 File Gateway and move the database files to its file share', 'It offers file shares rather than iSCSI block volumes, so the application would have to change.'],
+      ['Deploy a Tape Gateway and have the server write its data to virtual tapes', 'It presents virtual tapes to backup software and does not give the database local block volumes.'],
     ],
     slot: 3,
     evidence: [
-      'sgw-tape|With Tape Gateway, you can cost-effectively and durably archive backup data in S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive.',
-      'sgw-tape|Tape Gateway provides cloud-backed virtual tape storage.',
+      'sgw-volume|Stored volumes – If you need low-latency access to your entire dataset, first configure your on-premises gateway to store all your data locally.',
+      'sgw-volume|Then asynchronously back up point-in-time snapshots of this data to Amazon S3.',
     ],
   }),
 ];

@@ -168,10 +168,10 @@ const questions: Question[] = [
     bullets: ['4.2-S2'],
     d: 2,
     tags: ['placement-eligible'],
-    stem: 'A company runs a web application on one Amazon EC2 instance. The instance is overloaded during a daily peak of about three hours and mostly idle the rest of the day. Changing the instance size requires stopping the instance, and the company cannot accept downtime during the peak. Which solution is the MOST cost-effective?',
+    stem: 'A company runs a stateless web application on one Amazon EC2 instance. The instance is overloaded during a daily peak of about three hours and mostly idle the rest of the day. Changing the instance size requires stopping the instance, and the company cannot accept downtime during the peak. Which solution is the MOST cost-effective?',
     correct: ['Put the instances in an Auto Scaling group behind an Application Load Balancer and add instances only during the peak', 'Horizontal scaling adds and removes instances as demand changes, so no instance has to be stopped and the extra capacity is paid for only during the peak.'],
     wrong: [
-      ['Change the instance to a larger instance type and keep it running all day so that the peak is covered without extra instances', 'The type change requires stopping the instance, and the larger rate is paid for all day, including the idle hours.'],
+      ['Change the instance to a larger instance type and keep it running all day so that the peak is covered without extra instances', 'The larger rate is paid for all day, including the idle hours, and the type change also requires stopping the instance.'],
       ['Run a second instance of the same size around the clock and place both behind a load balancer', 'The second instance runs through the idle hours too, and nothing removes the extra capacity when the peak ends.'],
       ['Buy Reserved Instances for a larger instance type that can handle the peak and resize the instance', 'The resize still requires stopping the instance, and the commitment pays for peak-sized capacity all day.'],
     ],

@@ -124,10 +124,10 @@ const questions: Question[] = [
     bullets: ['4.3-S4'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company records a high volume of sensor events in Amazon DynamoDB. Every write goes to the current month. The current month is read often, the previous month rarely, and older months almost never, but all data must stay available for occasional historical queries. Storage is now the largest part of the bill. Which design is the MOST cost-effective?',
+    stem: 'A company records a high volume of sensor events in Amazon DynamoDB. Every write goes to the current month. The current month is read often, the previous month rarely, and older months almost never, but all data must stay available for occasional historical queries. Most of the stored bytes are in older months, while almost all of the read and write throughput is on the current month. Which design is the MOST cost-effective?',
     correct: ['Use one table per month, keep the current month on the Standard table class, and switch older months to Standard-IA', 'The active table keeps cheaper throughput, while older tables that are rarely read move to the class that lowers storage cost.'],
     wrong: [
-      ['Keep one table for all months and switch that whole table to the Standard-IA table class', 'The table that takes all the writes and frequent reads would pay the higher throughput cost of Standard-IA.'],
+      ['Keep one table for all months and switch that whole table to the Standard-IA table class', 'The current month, which takes almost all the throughput, would pay the higher throughput rates of Standard-IA.'],
       ['Keep one table on the Standard class and turn on auto scaling for the write and read capacity of the single table that holds every month', 'Auto scaling follows throughput and does nothing about the storage cost of the old months.'],
       ['Move all sensor events into a Multi-AZ Amazon RDS DB instance and keep every month in one table', 'The company would pay for a DB instance and its standby and give up the serverless table, with no cut in storage cost.'],
     ],
@@ -186,7 +186,7 @@ const questions: Question[] = [
     bullets: ['4.3-S3'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'An Amazon DynamoDB table holds years of order history. Reads and writes are low and steady, the capacity needs can be forecast, and storage has become the dominant cost of the table. Which TWO changes lower the cost of the table? (Choose two.)',
+    stem: 'An Amazon DynamoDB table holds years of order history. The table currently uses on-demand capacity mode. Reads and writes are low and steady, the capacity needs can be forecast, and storage has become the dominant cost of the table. Which TWO changes lower the cost of the table? (Choose two.)',
     correct: [
       ['Change the table to the DynamoDB Standard-IA table class', 'Standard-IA is optimized for tables where storage is the dominant cost, such as infrequently accessed order history.'],
       ['Use provisioned capacity mode with auto scaling sized from the forecast', 'AWS points to provisioned capacity for steady workloads whose capacity can be reliably forecast.'],
@@ -194,7 +194,7 @@ const questions: Question[] = [
     wrong: [
       ['Keep the Standard table class and add a replica table in a second Region', 'A replica copies all the data again, which adds to the storage cost instead of lowering it.'],
       ['Copy the order history into a Multi-AZ Amazon RDS DB instance', 'The company would pay for a DB instance and a standby on top of storage, and it would manage a server.'],
-      ['Keep the Standard table class and switch the table to on-demand mode', 'The workload is steady and forecastable, and the change does nothing about the storage cost.'],
+      ['Keep the Standard table class and keep the table in on-demand mode', 'The table already uses on-demand mode, so this is no change, and on-demand is not the lower-cost mode for steady, forecastable traffic.'],
     ],
     slots: [1, 2],
     evidence: [
