@@ -1,0 +1,11 @@
+[
+{"id":"block-warehouse-001","verdict":"FIX","issues":["Stem puts 40 TB on one volume, above the 16 TiB maximum for sc1 (and st1); the key is still the cheapest type but the scenario is technically impossible as a single volume."],"suggestedFix":"Change '40 TB' to '10 TB' (below 16 TiB). Keep the key (sc1)."},
+{"id":"block-warehouse-002","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"block-warehouse-003","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"block-warehouse-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"block-warehouse-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"block-warehouse-006","verdict":"OK","issues":["Correct option 'provision what is needed now' is design reasoning rather than a documented fact, but it is the only sound partner to autoscaling among the options."],"suggestedFix":""},
+{"id":"block-warehouse-007","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"block-warehouse-008","verdict":"OK","issues":["Second evidence quote (cannot decrease volume size) does not confirm the key; harmless."],"suggestedFix":""},
+{"id":"block-warehouse-009","verdict":"FIX","issues":["Volume two holds 30 TB on one volume, above the 16 TiB sc1 maximum (the page's own table says 125 GiB - 16 TiB); impossible as a single volume.","Log volume at 12 TB is within 16 TiB and 400 MiB/s is within st1 500 / sc1 250 MiB/s, so that half is sound."],"suggestedFix":"Change '30 TB of compliance data' to '10 TB of compliance data'."}
+]

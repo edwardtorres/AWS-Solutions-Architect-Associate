@@ -1,0 +1,11 @@
+[
+{"id":"ledger-office-001","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-002","verdict":"OK","issues":["Stem is slightly convoluted (account A runs the app, role belongs to B) but the key is documented in the Requester Pays page."],"suggestedFix":""},
+{"id":"ledger-office-003","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-006","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-007","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-008","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"ledger-office-009","verdict":"OK","issues":["Backfill (up to 12 months, eight months fits) is documented; nv-cost-allocation-tags-retroactive is resolved, not open."],"suggestedFix":""}
+]

@@ -623,6 +623,8 @@ const sources: Source[] = [
   aws('datasync-modes', `${D}/datasync/latest/userguide/choosing-task-mode.html`, 'Choosing a task mode for your DataSync transfer'),
   aws('glue-streaming', `${D}/glue/latest/dg/add-job-streaming.html`, 'Streaming ETL jobs in AWS Glue'),
   aws('firehose-format', `${D}/firehose/latest/dev/record-format-conversion.html`, 'Convert input data format in Amazon Data Firehose'),
+  aws('firehose-partition', `${D}/firehose/latest/dev/dynamic-partitioning.html`, 'Partition streaming data in Amazon Data Firehose'),
+  aws('kinesis-kpl', `${D}/streams/latest/dev/kinesis-kpl-concepts.html`, 'KPL key concepts'),
 ];
 
 export default sources;
