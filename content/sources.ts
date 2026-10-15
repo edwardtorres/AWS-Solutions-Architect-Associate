@@ -621,6 +621,7 @@ const sources: Source[] = [
   aws('athena-ctas-what', `${D}/athena/latest/ug/ctas.html`, 'Create a table from query results (CTAS)'),
   aws('kinesis-retries', `${D}/streams/latest/dev/kinesis-producer-adv-retries-rate-limiting.html`, 'Retries and rate limiting (Kinesis producers)'),
   aws('datasync-modes', `${D}/datasync/latest/userguide/choosing-task-mode.html`, 'Choosing a task mode for your DataSync transfer'),
+  aws('glue-streaming', `${D}/glue/latest/dg/add-job-streaming.html`, 'Streaming ETL jobs in AWS Glue'),
 ];
 
 export default sources;
