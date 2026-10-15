@@ -1,0 +1,12 @@
+[
+{"id":"distribution-office-001","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-002","verdict":"OK","issues":["RDS stop is temporary (automatic restart after seven days); a weekend stop is within it."],"suggestedFix":""},
+{"id":"distribution-office-003","verdict":"OK","issues":["Same theme (pay for redundancy only where needed) as -007 and -010; acceptable."],"suggestedFix":""},
+{"id":"distribution-office-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-006","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-007","verdict":"OK","issues":["Wrong option A contradicts the stem outright (weak distractor); evidence 2 and 3 are generic but the key rests on the scheduled-actions quote."],"suggestedFix":""},
+{"id":"distribution-office-008","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-009","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"distribution-office-010","verdict":"OK","issues":[],"suggestedFix":""}
+]

@@ -1,0 +1,15 @@
+[
+{"id":"elastic-mint-001","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-002","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-003","verdict":"OK","issues":["Key assumes refactoring into ECS/Fargate services; documented microservices, ECS service scaling and ALB listener-rule facts support it. Check for overlap with ALB path-routing questions in throttle-lb-gate."],"suggestedFix":""},
+{"id":"elastic-mint-004","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-005","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-006","verdict":"OK","issues":["Hibernation also needs a supported instance type and RAM size; the stem's 'new On-Demand instance' keeps it consistent."],"suggestedFix":""},
+{"id":"elastic-mint-007","verdict":"OK","issues":["Three ALB/NLB/GWLB questions in this building (-007, -008, -013) plus -003; acceptable, different decisions."],"suggestedFix":""},
+{"id":"elastic-mint-008","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-009","verdict":"FIX","issues":["Key (Auto Scaling group + ALB, add instances only at peak) silently assumes the web application is stateless and can run on several instances; the stem does not say so.","The 'must stop the instance to resize' argument is not decisive: the resize could be done off-peak. The real documented failure of option A is paying the larger rate all day."],"suggestedFix":"Add 'The application is stateless' to the stem and make option A's why rest on paying the larger instance rate all day; keep the stop-required fact as secondary."},
+{"id":"elastic-mint-010","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-011","verdict":"OK","issues":["Warm pool stopped-state cost (volumes and Elastic IPs) is stated on the warm pools page; add that sentence to evidence if desired."],"suggestedFix":""},
+{"id":"elastic-mint-012","verdict":"OK","issues":[],"suggestedFix":""},
+{"id":"elastic-mint-013","verdict":"OK","issues":[],"suggestedFix":""}
+]
