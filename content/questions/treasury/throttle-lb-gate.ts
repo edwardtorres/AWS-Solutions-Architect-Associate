@@ -27,7 +27,7 @@ const questions: Question[] = [
     bullets: ['4.4-K3'],
     d: 1,
     tags: [],
-    stem: 'A company has many test environments that have been shut down over the past year, but the load balancers that served them were never deleted. A cloud engineer needs a built-in way to find load balancers that receive no traffic so that they can be removed. Which solution meets this requirement with the LEAST effort?',
+    stem: 'A company has many test environments that have been shut down over the past year, but the load balancers that served them were never deleted. The company has a Business Support plan. A cloud engineer needs a built-in way to find load balancers that receive no traffic so that they can be removed. Which solution meets this requirement with the LEAST effort?',
     correct: ['Review the Idle Load Balancers check in the cost optimization category of AWS Trusted Advisor', 'Trusted Advisor has a cost optimization check named Idle Load Balancers, and an idle load balancer is still running and so still accrues the hourly charge.'],
     wrong: [
       ['Create an AWS Budgets budget and wait for it to list the load balancers that have no traffic', 'A budget alerts on spend or usage thresholds; it does not list individual load balancers that are idle.'],
@@ -72,7 +72,7 @@ const questions: Question[] = [
       ['Consolidate the small live services behind a single Application Load Balancer that uses listener rules', 'Listener rules route requests to different target groups by content, so several services can share one hourly charge.'],
     ],
     wrong: [
-      ['Disable cross-zone load balancing on each Application Load Balancer to avoid data transfer charges between zones', 'Cross-zone load balancing is always on for Application Load Balancers and AWS does not charge for that transfer, so nothing is saved.'],
+      ['Disable cross-zone load balancing on each Application Load Balancer to avoid data transfer charges between zones', 'AWS does not charge for the regional data transfer caused by cross-zone load balancing on an Application Load Balancer, so disabling it saves nothing on the bill.'],
       ['Replace each remaining Application Load Balancer with its own Gateway Load Balancer', 'A Gateway Load Balancer is billed per hour and per capacity unit as well, so the hourly charges remain and the traffic type is wrong.'],
       ['Create a second Application Load Balancer in every project to take part of the traffic', 'Each extra balancer adds a further hourly charge, which raises the bill instead of lowering it.'],
     ],
@@ -91,9 +91,9 @@ const questions: Question[] = [
     d: 2,
     tags: ['trap:alb-nlb-gwlb'],
     stem: 'A company serves a web application through an Application Load Balancer in three Availability Zones. The zones hold different numbers of targets. A manager asks the team to turn off cross-zone load balancing on the Application Load Balancer to avoid charges for data transfer between zones. What is the MOST cost-effective recommendation?',
-    correct: ['Leave the setting alone, because cross-zone load balancing is always on for an Application Load Balancer and there is no charge for that transfer', 'Cross-zone load balancing is always enabled at the load balancer level for Application Load Balancers, and AWS says you are not charged for this type of regional data transfer.'],
+    correct: ['Keep cross-zone load balancing as it is, because AWS does not charge for the regional data transfer it causes on an Application Load Balancer', 'There is no cross-zone charge to avoid, so turning it off would save nothing and would unbalance the zones that hold different numbers of targets.'],
     wrong: [
-      ['Disable cross-zone load balancing on the target group so that each node serves only the targets in its own zone and keeps the data local', 'Charges are not the reason to change it, and uneven target counts per zone would then leave some targets overloaded.'],
+      ['Disable cross-zone load balancing on the target group so that each node serves only the targets in its own zone and keeps the data local', 'It can be disabled at the target group level, but there is no cross-zone charge to avoid, and with uneven target counts some targets would be overloaded.'],
       ['Switch to a Network Load Balancer, because it never charges for traffic that crosses Availability Zones', 'A Network Load Balancer charges for regional data transfer between zones when cross-zone load balancing is enabled.'],
       ['Move all targets into a single Availability Zone and keep the balancer in the other two zones', 'This makes the application depend on one zone and does not address a charge that the Application Load Balancer does not have.'],
     ],
@@ -128,17 +128,19 @@ const questions: Question[] = [
     bullets: ['4.4-S6'],
     d: 2,
     tags: ['placement-eligible'],
-    stem: 'A mobile app calls an API on Amazon API Gateway that invokes a Lambda function and then writes to a relational database. A faulty app release sends bursts of requests that overload the database. The company wants to cap the request rate that reaches the backend at the LOWEST additional cost. Which solution meets this requirement?',
-    correct: ['Configure throttling rate and burst limits on the API Gateway stage so that excess requests are rejected before the backend', 'API Gateway begins to throttle requests when submissions exceed the steady-state rate and burst limits, so excess calls never reach the database.'],
+    stem: 'A retailer\'s checkout API on Amazon API Gateway invokes an AWS Lambda function that writes orders to a relational database with a limited number of connections. Marketing campaigns send short bursts of orders that overload the database. Orders must not be rejected, but they can be processed a few minutes later. The company wants to protect the database at the LOWEST additional cost. Which solution meets these requirements?',
+    correct: ['Send the orders to an Amazon SQS queue and set a maximum concurrency on the queue\'s Lambda event source', 'The queue holds the burst and the maximum concurrency limits how many function instances write at once, at no charge for the setting.'],
     wrong: [
-      ['Configure provisioned concurrency on the Lambda function so that it can absorb the bursts of requests', 'Provisioned concurrency incurs additional charges and lets more requests reach the database instead of limiting them.'],
-      ['Scale the database to a larger instance class so that it can handle the burst traffic of the faulty release and keep the API unchanged', 'A larger instance increases cost permanently to absorb traffic that the faulty release should never have been able to send.'],
-      ['Place a Network Load Balancer in front of the API so that it queues the requests until the database is free', 'A load balancer distributes traffic to targets; it does not queue or limit requests, and it adds an hourly charge.'],
+      ['Configure throttling rate and burst limits on the API Gateway stage so that excess requests are rejected', 'Throttled requests are rejected, and the company needs every order to be accepted and processed later.'],
+      ['Configure provisioned concurrency on the Lambda function so that it can absorb the burst of orders', 'Provisioned concurrency incurs additional charges and lets more function instances connect to the database instead of limiting them.'],
+      ['Scale the database to a larger instance class so that it can accept the connections of the burst', 'A larger instance increases the cost permanently to serve bursts that are short and can be delayed.'],
     ],
     slot: 1,
     evidence: [
-      'apigw-throttling|When request submissions exceed the steady-state request rate and burst limits, API Gateway begins to throttle requests.',
-      'lambda-concurrency|Configuring provisioned concurrency incurs charges to your AWS account.',
+      'lambda-sqs-scaling|The maximum concurrency setting limits the number of concurrent instances of the function that an Amazon SQS event source can invoke.',
+      'lambda-sqs-scaling|There is no charge for configuring maximum concurrency on an Amazon SQS event source.',
+      'sqs-what-is|Scalability – Amazon SQS can process each buffered request independently, scaling transparently to handle any load increases or spikes without any provisioning instructions.',
+      'lambda-provisioned|Configuring provisioned concurrency incurs additional charges to your AWS account.',
     ],
   }),
   mc({
@@ -195,7 +197,7 @@ const questions: Question[] = [
     wrong: [
       ['Amazon API Gateway REST API with a usage plan, API keys and API caching enabled', 'A REST API supports more features that the startup does not need, so it is not the lowest price for this workload.'],
       ['An Application Load Balancer with a Lambda function registered as a target in a target group', 'The balancer adds an hourly charge and a capacity-unit charge on top of the function costs for features the startup does not need.'],
-      ['A Network Load Balancer in front of the function with cross-zone load balancing enabled', 'A Network Load Balancer works at the connection level, is charged by the hour, and cross-zone traffic adds regional transfer charges.'],
+      ['Amazon API Gateway REST API with a Lambda proxy integration and none of the extra features turned on', 'A REST API supports more features than an HTTP API, while HTTP APIs are designed with minimal features so that they can be offered at a lower price.'],
     ],
     slot: 0,
     evidence: [
@@ -213,12 +215,13 @@ const questions: Question[] = [
     correct: ['Keep the default setting of cross-zone load balancing disabled and run the same number of appliances in each zone', 'Cross-zone load balancing is disabled by default for Gateway Load Balancers, so each node uses the appliances in its own zone and traffic stays in the zone.'],
     wrong: [
       ['Enable cross-zone load balancing so that every node can reach appliances in all zones at any time', 'Enabled cross-zone load balancing distributes traffic across zones, which is the behaviour that creates the zone-to-zone transfer.'],
-      ['Replace the Gateway Load Balancer with an Application Load Balancer that routes by URL path to the appliances in both of the zones', 'An Application Load Balancer does not provide the transparent inspection of all traffic that the appliances need.'],
+      ['Replace the Gateway Load Balancer with a Network Load Balancer that has cross-zone load balancing enabled', 'Cross-zone data transfer on a Network Load Balancer is charged as well, and it does not forward traffic transparently to the appliances.'],
       ['Register all appliances in one zone and route the other zone through a second Gateway Load Balancer', 'A second balancer adds hourly and capacity-unit charges and still moves traffic between zones.'],
     ],
     slot: 1,
     evidence: [
       'elb-how-it-works|With Network Load Balancers and Gateway Load Balancers, cross-zone load balancing is disabled by default.',
+      'elb-faqs|Yes, you will be charged for data transfer between Availability Zones with Gateway Load Balancer when cross-zone load balancing is enabled.',
       'elb-how-it-works|When cross-zone load balancing is disabled, each load balancer node distributes traffic only across the registered targets in its Availability Zone.',
     ],
   }),

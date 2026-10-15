@@ -629,6 +629,10 @@ const sources: Source[] = [
   aws('fsx-lustre-dra', `${D}/fsx/latest/LustreGuide/overview-dra-data-repo.html`, 'Linking your file system to an Amazon S3 bucket'),
   aws('aws-generated-tags', `${D}/awsaccountbilling/latest/aboutv2/aws-tags.html`, 'AWS-generated cost allocation tags'),
   aws('ec2-t-standard', `${D}/AWSEC2/latest/UserGuide/burstable-performance-instances-standard-mode.html`, 'Standard mode for burstable performance instances'),
+  aws('lambda-sqs-scaling', `${D}/lambda/latest/dg/services-sqs-scaling.html`, 'Configuring scaling behavior for SQS event source mappings'),
+  aws('dx-faqs', 'https://aws.amazon.com/directconnect/faqs/', 'AWS Direct Connect FAQs'),
+  aws('dx-lags', `${D}/directconnect/latest/UserGuide/lags.html`, 'Direct Connect link aggregation groups'),
+  aws('cloudfront-origin-shield', `${D}/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html`, 'Use Amazon CloudFront Origin Shield'),
 ];
 
 export default sources;

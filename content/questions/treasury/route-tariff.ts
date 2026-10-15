@@ -48,14 +48,14 @@ const questions: Question[] = [
     bullets: ['4.4-K6', '4.4-S3'],
     d: 2,
     tags: ['placement-eligible', 'trap:peering-tgw-privatelink'],
-    stem: 'A test environment runs a reporting application in one VPC that queries a database in a peered VPC of the same Region, thousands of times per hour. The instances currently run in different Availability Zones, and the bill shows data transfer charges on the peering connection. The environment does not need to survive a zone failure. Which TWO actions lower these charges the MOST? (Choose two.)',
+    stem: 'A test environment keeps a database in VPC A in one Region. Reporting instances in a peered VPC B in the same Region query it thousands of times per hour from a different Availability Zone. A batch analytics tier in a peered VPC C in a second Region also queries it heavily. The bill shows data transfer charges on both peering connections. There is no residency or recovery reason for the layout, and the environment does not need to survive a zone failure. Which TWO actions lower these charges the MOST? (Choose two.)',
     correct: [
-      ['Keep the VPC peering connection between the two VPCs', 'There is no charge to create a peering connection, and transfer over it that stays within a zone is free.'],
       ['Launch the reporting instances in the same Availability Zone as the database instances', 'Data transfer over a peering connection that stays within an Availability Zone is free, even between accounts.'],
+      ['Move the batch analytics tier into the Region of the database', 'Charges apply for transfer over peering connections that cross Regions, so keeping the tier in the same Region removes those charges.'],
     ],
     wrong: [
       ['Replace the peering connection with an AWS Transit Gateway that has an attachment for each VPC', 'A transit gateway is charged hourly for each attachment and for the traffic processed, which adds charges.'],
-      ['Move the database VPC to another Region so that the transfer stays in the Region of the reporting tier', 'Charges apply for transfer over peering connections that cross Regions, so this adds cost.'],
+      ['Move the database VPC to a third Region so that neither tier shares a Region with it', 'Charges apply for transfer over peering connections that cross Regions, so this adds cost.'],
       ['Create an interface VPC endpoint in each zone for the database and send the queries through it', 'Interface endpoints are billed hourly in each zone plus for every gigabyte processed, which adds charges.'],
     ],
     slots: [2, 3],
@@ -76,13 +76,15 @@ const questions: Question[] = [
     wrong: [
       ['Create a gateway VPC endpoint for Amazon S3 and keep reading from the bucket in the other Region', 'Traffic destined for S3 in a different Region goes to the internet gateway because prefix lists are specific to a Region, so the NAT path stays.'],
       ['Create a NAT gateway in every Availability Zone of the cluster and spread the reads across them', 'More gateways add hourly charges, and every gigabyte of the reads is still processed by a NAT gateway.'],
-      ['Put an AWS Global Accelerator accelerator in front of the bucket to carry the reads from the cluster in the other Region', 'An accelerator is charged a fixed hourly fee plus a premium over standard data transfer, and it does not remove the NAT path.'],
+      ['Create an interface VPC endpoint for Amazon S3 in the cluster\'s Region and keep reading from the bucket in the other Region', 'An interface endpoint is billed for each hour in each zone and for each gigabyte processed, and the reads still cross Regions.'],
     ],
     slot: 2,
     evidence: [
       'vpce-gateway|Traffic that\'s destined for the service (Amazon S3 or DynamoDB) in a different Region goes to the internet gateway because prefix lists are specific to a Region.',
       'vpce-gateway|There is no additional charge for using gateway endpoints.',
-      'ga-pricing|For every accelerator that is provisioned (both enabled and disabled), you are charged a fixed hourly fee and an incremental charge over your standard Data Transfer rates, also called a Data Transfer-Premium fee (DT-Premium).',
+      'vpce-gateway|Gateway VPC endpoints provide reliable connectivity to Amazon S3 and DynamoDB without requiring an internet gateway or a NAT device for your VPC.',
+      's3-replication-requirements|For example, inter-Region data transfer charges vary depending on the Regions that you choose.',
+      'privatelink-pricing|You will be billed for each hour that your VPC endpoint remains provisioned in each Availability Zone, irrespective of the state of its association with the service (learn more).',
     ],
   }),
   mc({
@@ -95,13 +97,14 @@ const questions: Question[] = [
     correct: ['Move the application servers into the same Region as the database so the calls no longer cross Regions', 'Charges apply for data transfer over peering connections that cross Regions, so keeping the chatty tier next to its database removes them.'],
     wrong: [
       ['Add a transit gateway in each Region, peer the two transit gateways and attach both VPCs', 'A transit gateway is charged hourly for each attachment and for the traffic it processes, on top of the cross-Region traffic.'],
-      ['Put an AWS Global Accelerator accelerator in front of the database endpoint in the second Region for the page views', 'An accelerator adds a fixed hourly fee and a premium over standard data transfer, and the calls still cross Regions.'],
-      ['Replace the peering connection with a second peering connection and split the calls across both', 'A second connection does not change the charges, because the traffic still crosses Regions.'],
+      ['Move the database to a DB instance class with more network bandwidth', 'More bandwidth does not change the charges, because the calls still cross Regions.'],
+      ['Replace the peering connection with a Site-to-Site VPN connection between the two Regions', 'The standard data transfer charges still apply to the traffic through the VPN connection, and the VPN connection adds its own charges.'],
     ],
     slot: 3,
     evidence: [
       'peering-what-is|Charges apply for data transfer over VPC peering connections that cross Availability Zones and Regions.',
       'tgw-what-is|You are charged hourly for each attachment on a transit gateway, and you are charged for the amount of traffic processed on the transit gateway.',
+      'vpn-pricing|You also incur standard AWS data transfer charges for all data transferred via the VPN connection.',
     ],
   }),
   mc({
@@ -113,7 +116,7 @@ const questions: Question[] = [
     stem: 'A publisher serves popular product images from an Amazon S3 bucket directly to users around the world. The same images are requested repeatedly, and the company wants to reduce request load and data transfer cost on the origin and improve latency. Which solution is the MOST cost-effective?',
     correct: ['Put an Amazon CloudFront distribution in front of the bucket and serve the repeated requests from edge locations', 'Cached content is served from edge locations, so fewer requests reach the origin, and transfer from AWS origins to CloudFront is waived.'],
     wrong: [
-      ['Put an AWS Global Accelerator accelerator in front of the bucket to route users over the AWS network', 'An accelerator is charged a fixed hourly fee plus a premium over standard data transfer and does not cache, so origin requests stay.'],
+      ['Enable Amazon S3 Transfer Acceleration on the bucket and have users download through the accelerate endpoint', 'Transfer Acceleration can add data transfer charges and does not serve repeated requests from a cache, so every request still reaches the bucket.'],
       ['Replicate the bucket to several Regions and have each user choose the nearest bucket through a separate URL', 'This multiplies storage and replication, and every request still reaches an origin bucket instead of an edge cache.'],
       ['Create an Amazon Route 53 latency record for each of the replicated buckets in the other Regions', 'Latency routing only sends users to a Region, so it needs replicas to exist and caches nothing at the edge.'],
     ],
@@ -121,7 +124,7 @@ const questions: Question[] = [
     evidence: [
       'cloudfront-pricing|you\'ll see fewer requests hitting your origin servers, databases, and other AWS services that charge based on usage—reducing your costs.',
       'cloudfront-pricing|Data transfer between CloudFront and your AWS origins is automatically waived when serving traffic through CloudFront, giving you a monthly price for both CloudFront delivery and your AWS origin’s data transfer costs to CloudFront.',
-      'ga-pricing|For every accelerator that is provisioned (both enabled and disabled), you are charged a fixed hourly fee and an incremental charge over your standard Data Transfer rates, also called a Data Transfer-Premium fee (DT-Premium).',
+      's3-transfer-acceleration|When you use Transfer Acceleration, additional data transfer charges might apply.',
     ],
   }),
   mr({
@@ -157,7 +160,7 @@ const questions: Question[] = [
     stem: 'A company delivers downloads through Amazon CloudFront. Almost all users are in North America and Europe, and the company accepts slightly higher latency for the few users elsewhere. The distribution uses the default settings. The company wants to lower the CloudFront cost with the LEAST effort. Which solution meets these requirements?',
     correct: ['Change the distribution to a price class that serves objects from only the CloudFront Regions where most users are', 'The price class setting lets you choose the maximum price you want to pay, instead of the default of serving from edge locations in all Regions.'],
     wrong: [
-      ['Add an AWS Global Accelerator accelerator in front of the distribution for the users in the two Regions that serve most traffic', 'An accelerator adds a fixed hourly fee and a premium over standard data transfer, so it raises cost.'],
+      ['Enable CloudFront Origin Shield for the origin of the distribution', 'Origin Shield adds a caching layer in front of the origin with its own charge per 10,000 requests, and it does not limit the edge locations that serve the users.'],
       ['Create a second distribution for each continent and publish a separate domain name for each of them', 'Several distributions need extra management, and a price class on one distribution already limits the locations used.'],
       ['Turn off caching on the distribution so that edge locations do not hold copies of the downloads', 'Caching reduces requests to the origin, so turning it off increases origin usage instead of lowering cost.'],
     ],
@@ -165,6 +168,7 @@ const questions: Question[] = [
     evidence: [
       'cloudfront-settings|Choose the price class that corresponds with the maximum price that you want to pay for CloudFront service.',
       'cloudfront-settings|By default, CloudFront serves your objects from edge locations in all CloudFront Regions.',
+      'cloudfront-origin-shield|For more information about the charge per 10,000 requests for Origin Shield, see CloudFront Pricing.',
     ],
   }),
   mc({
@@ -193,18 +197,20 @@ const questions: Question[] = [
     bullets: ['4.4-K7', '4.4-S3'],
     d: 3,
     tags: ['placement-eligible', 'trap:cloudfront-vs-global-accelerator'],
-    stem: 'A company runs the same API in two Regions behind Amazon API Gateway regional endpoints. Users are worldwide and should reach the Region with the best latency. The clients use DNS names, do not need static IP addresses, and can tolerate DNS-based failover. The company wants the LOWEST additional networking cost. Which solution meets these requirements?',
-    correct: ['Amazon Route 53 latency routing records for the two Regions, with health checks for failover', 'Latency routing sends users to the Region with the best latency, and it adds no accelerator that is billed hourly with a transfer premium.'],
+    stem: 'A company runs the same API in two Regions, each behind an Application Load Balancer. Users are worldwide and should reach the Region with the best latency. The clients use DNS names, do not need static IP addresses, and can tolerate DNS-based failover. The company wants the LOWEST additional networking cost. Which solution meets these requirements?',
+    correct: ['Amazon Route 53 latency alias records for the two load balancers, with health checks for failover', 'Latency routing sends users to the Region with the best latency, and alias records that point to load balancers do not incur a DNS query charge or an accelerator fee.'],
     wrong: [
-      ['An AWS Global Accelerator accelerator with the two regional endpoints as the endpoints of one listener', 'An accelerator is charged a fixed hourly fee plus a premium over standard data transfer, for static IP benefits the clients do not need.'],
+      ['An AWS Global Accelerator accelerator with the two load balancers as the endpoints of one listener', 'An accelerator is charged a fixed hourly fee plus a premium over standard data transfer, for static IP benefits the clients do not need.'],
       ['Amazon Route 53 failover routing with the first Region as primary and the second as the standby', 'Failover routing sends all users to the primary Region, so users near the second Region do not get the best latency.'],
-      ['An Amazon CloudFront distribution with caching disabled in front of both Regions, with no records for the Regions', 'This adds a distribution and still needs a way to pick the Region, and an uncached API gets no benefit from the cache.'],
+      ['Amazon Route 53 weighted records with equal weights for the two load balancers', 'Weighted routing splits traffic in the proportions specified and does not consider the latency of the user.'],
     ],
     slot: 3,
     evidence: [
       'route53-routing|Latency routing policy – Use when you have resources in multiple AWS Regions and you want to route traffic to the Region that provides the best latency.',
       'route53-routing|Failover routing policy – Use when you want to configure active-passive failover.',
+      'route53-pricing|Alias A/AAAA records that are mapped to the following AWS services do not incur a charge: Elastic Load Balancers',
       'ga-pricing|For every accelerator that is provisioned (both enabled and disabled), you are charged a fixed hourly fee and an incremental charge over your standard Data Transfer rates, also called a Data Transfer-Premium fee (DT-Premium).',
+      'route53-routing|Weighted routing policy – Use to route traffic to multiple resources in proportions that you specify.',
     ],
   }),
   mc({
