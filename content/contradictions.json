@@ -49,5 +49,22 @@
     ],
     "handling": "The AWS page is the authority for AWS behaviour. The notes show the Azure comparison row as written on Learn and the AWS reading beside it, and teach only the AWS statement. The single-IP claim is kept out of questions.",
     "added": "2026-10-09"
+  },
+  {
+    "id": "c-alb-cross-zone-always-on",
+    "building": "throttle-lb-gate",
+    "topic": "Whether cross-zone load balancing on an Application Load Balancer is always on",
+    "readings": [
+      {
+        "source": "https://aws.amazon.com/elasticloadbalancing/faqs/",
+        "says": "Since cross-zone load balancing is always on with Application Load Balancer, you are not charged for this type of regional data transfer."
+      },
+      {
+        "source": "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html",
+        "says": "Check whether cross-zone load balancing is turned on or turned off."
+      }
+    ],
+    "handling": "The FAQ says always on; the User Guide treats it as a target group attribute that can be turned off, with on as the default at the load balancer level. Questions say it is on by default, never always on, and do not rest a key on the difference.",
+    "added": "2026-10-15"
   }
 ]

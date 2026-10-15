@@ -86,15 +86,14 @@ const questions: Question[] = [
     stem: 'A company runs steady production databases on Amazon RDS for Oracle. During the next year it expects to modernize some of them to Aurora PostgreSQL-Compatible Edition and to change DB instance sizes. The company wants to commit to database usage to lower its bill while staying free to change engines and sizes. Which commitment is the MOST cost-effective?',
     correct: ['Database Savings Plans', 'Database Savings Plans apply across Aurora, RDS and other database services, so the discount is kept when a workload moves from RDS for Oracle to Aurora PostgreSQL-Compatible Edition.'],
     wrong: [
-      ['Reserved DB instances for the current RDS for Oracle instance type', 'The discount of a reserved DB instance is tied to instance type and Region, so it does not follow a change of size or engine.'],
+      ['Reserved DB instances for the current RDS for Oracle instance type', 'A reserved DB instance is tied to its DB engine, instance type and Region, so moving to Aurora PostgreSQL-Compatible Edition would leave the reservation without matching usage.'],
       ['Compute Savings Plans', 'Compute Savings Plans apply to Amazon EC2, AWS Fargate and AWS Lambda usage, not to the database services.'],
       ['No commitment, with On-Demand pricing and an AWS Budgets alert on database spend', 'The steady database usage would stay at On-Demand rates, and a budget only warns about spend and does not lower it.'],
     ],
     slot: 0,
     evidence: [
       'savings-plans-types|For example, with Database Savings Plans, you can change between Aurora db.r7g and db.r8g instances, shift a workload from EU (Ireland) to EU (London), modernize from RDS for Oracle to Aurora PostgreSQL-Compatible Edition, or move a workload from RDS to DynamoDB while maintaining your discounted rates.',
-      'rds-reserved|Discounts for reserved DB instances are tied to instance type and AWS Region.',
-      'savings-plans-types|They also apply to your Fargate and Lambda usage.',
+      'rds-reserved|The new DB instance that you create must have the same specifications as the reserved DB instance for the following: AWS Region DB engine (The DB engine\'s version number doesn\'t need to match.)',
     ],
   }),
   mr({

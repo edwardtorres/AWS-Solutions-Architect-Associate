@@ -625,6 +625,8 @@ const sources: Source[] = [
   aws('firehose-format', `${D}/firehose/latest/dev/record-format-conversion.html`, 'Convert input data format in Amazon Data Firehose'),
   aws('firehose-partition', `${D}/firehose/latest/dev/dynamic-partitioning.html`, 'Partition streaming data in Amazon Data Firehose'),
   aws('kinesis-kpl', `${D}/streams/latest/dev/kinesis-kpl-concepts.html`, 'KPL key concepts'),
+  aws('ecs-data-volumes', `${D}/AmazonECS/latest/developerguide/using_data_volumes.html`, 'Storage options for Amazon ECS tasks'),
+  aws('fsx-lustre-dra', `${D}/fsx/latest/LustreGuide/overview-dra-data-repo.html`, 'Linking your file system to an Amazon S3 bucket'),
 ];
 
 export default sources;

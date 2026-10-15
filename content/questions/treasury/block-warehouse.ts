@@ -7,7 +7,7 @@ const questions: Question[] = [
     building: 'block-warehouse',
     bullets: ['4.1-K6'],
     d: 1,
-    stem: 'A company keeps 40 TB of infrequently accessed data on a non-boot data volume of an Amazon EC2 instance. The data is read sequentially a few times a year, and the company wants the LOWEST storage cost. Which Amazon EBS volume type should the company use?',
+    stem: 'A company keeps 10 TB of infrequently accessed data on a non-boot data volume of an Amazon EC2 instance. The data is read sequentially a few times a year, and the company wants the LOWEST storage cost. Which Amazon EBS volume type should the company use?',
     correct: ['Cold HDD (sc1)', 'Cold HDD is throughput-oriented storage for infrequently accessed data where the lowest storage cost is important.'],
     wrong: [
       ['General Purpose SSD (gp3)', 'It is the lowest cost SSD type, but the data is rarely read and does not need SSD performance.'],
@@ -159,7 +159,7 @@ const questions: Question[] = [
     bullets: ['4.1-K6'],
     d: 3,
     tags: ['mock-reserve'],
-    stem: 'A company attaches two non-boot data volumes to Amazon EC2 instances. Volume one holds 12 TB of log data that is scanned sequentially every day and must deliver 400 MiB/s of throughput per volume. Volume two holds 30 TB of compliance data that is read a few times a year. Which TWO volume choices meet these requirements at the LOWEST storage cost? (Choose two.)',
+    stem: 'A company attaches two non-boot data volumes to Amazon EC2 instances. Volume one holds 12 TB of log data that is scanned sequentially every day and must deliver 400 MiB/s of throughput per volume. Volume two holds 10 TB of compliance data that is read a few times a year. Which TWO volume choices meet these requirements at the LOWEST storage cost? (Choose two.)',
     correct: [
       ['Use Throughput Optimized HDD (st1) for the log data', 'st1 suits log processing and large streaming workloads, and its maximum throughput per volume covers 400 MiB/s.'],
       ['Use Cold HDD (sc1) for the compliance data', 'sc1 is for infrequently accessed data where the lowest storage cost is important.'],
