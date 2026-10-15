@@ -80,7 +80,7 @@ const questions: Question[] = [
     bullets: ['3.3-S5'],
     d: 3,
     stem: 'An application reads product items from Amazon DynamoDB through a DAX cluster that uses the default item cache settings. A third-party batch tool that the company cannot modify writes price updates directly to the DynamoDB table, and shoppers see old prices for several minutes after each batch. New prices must appear within about 30 seconds, and the company still wants repeated reads served from the cache. Which solution meets these requirements with the LEAST change?',
-    correct: ['Create a new DAX cluster with an item cache TTL of 30 seconds and point the application at it', 'Items expire from the item cache after the TTL setting, so each item is re-read from DynamoDB within 30 seconds and other reads still hit the cache.'],
+    correct: ['Create a custom DAX parameter group that sets the item cache TTL to 30 seconds and use it for the cluster', 'The TTL of the item cache is set through a parameter group, and items expire after that TTL, so each item is re-read from DynamoDB within 30 seconds while other reads still hit the cache.'],
     wrong: [
       ['Change the batch tool to send its price updates through the DAX cluster endpoint instead of DynamoDB', 'Writes through DAX are written through to the cache, but the batch tool cannot be modified, so this change is not possible.'],
       ['Have the application request strongly consistent reads for every product read through the DAX client', 'Strongly consistent reads are passed through to DynamoDB, so the cache would no longer serve the repeated reads the company wants.'],
@@ -90,7 +90,8 @@ const questions: Question[] = [
     evidence: [
       'dax-concepts|The item cache has a Time to Live (TTL) setting, which is 5 minutes by default.',
       'dax-concepts|An item expires if it has remained in the cache for longer than the TTL setting.',
-      'dax-concepts|You can specify the TTL setting for the item cache when you create a new DAX cluster.',
+      'dax-cluster-mgmt|You can use a parameter group to specify cache TTL behavior.',
+      'dax-cluster-mgmt|If you want to use different TTL settings, you can launch a DAX cluster using a custom parameter group.',
       'dax-concepts|If the request specifies strongly consistent reads, DAX passes the request through to DynamoDB.',
     ],
   }),

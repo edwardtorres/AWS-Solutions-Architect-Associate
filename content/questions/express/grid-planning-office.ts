@@ -197,7 +197,7 @@ const questions: Question[] = [
     wrong: [
       ['A VPC peering connection between the billing VPC and each consumer VPC in the other accounts', 'Peering routes between the whole VPC address ranges, so consumers could reach far more than the one service.'],
       ['An AWS Transit Gateway with every consumer VPC and the billing VPC attached as spokes to it', 'A transit gateway interconnects the networks, which gives consumers network-level reach beyond the one service.'],
-      ['A Site-to-Site VPN connection from each consumer VPC to the billing VPC through virtual private gateways', 'A VPN builds a network-level link between the VPCs, so it does not limit access to the one service.'],
+      ['Share the billing VPC subnets with each consumer account by using AWS Resource Access Manager', 'Sharing subnets puts consumer resources inside the billing network itself, which gives network-level reach and not access to just the one service.'],
     ],
     slot: 2,
     evidence: [
@@ -216,7 +216,7 @@ const questions: Question[] = [
     wrong: [
       ['Create an inter-Region VPC peering connection between every pair of VPCs that must communicate in the two Regions', 'Peering connections are one-to-one and not transitive, so all pairs would need their own connection, which is the mesh the company wants to avoid.'],
       ['Create PrivateLink interface endpoints in every VPC for every other VPC\'s workloads across both Regions', 'PrivateLink provides access to specific services and does not give network-level connectivity between 40 VPCs.'],
-      ['Create a Site-to-Site VPN connection between every pair of VPCs across the two Regions over the internet', 'Each pair would again need its own connection, which is a full mesh of 40 VPCs to maintain.'],
+      ['Run software VPN appliances in each VPC and connect every pair of VPCs across the two Regions over the internet', 'Each pair would again need its own tunnel, which is the full mesh the company wants to avoid, and the traffic crosses the internet instead of the AWS network.'],
     ],
     slot: 3,
     evidence: [

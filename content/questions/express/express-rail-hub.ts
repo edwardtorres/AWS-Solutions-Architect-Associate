@@ -33,7 +33,7 @@ const questions: Question[] = [
     wrong: [
       ['An Amazon SQS FIFO queue in which all messages share one message group ID', 'Strict ordering is designed for workloads where order is critical or duplicates cannot be tolerated, which this one does not need.'],
       ['An Amazon SNS topic with an HTTPS endpoint on each worker instance as a subscriber', 'A topic pushes messages and holds no backlog, so jobs are missed when workers are busy or offline.'],
-      ['An Amazon MQ message broker that the workers connect to', 'Amazon MQ is recommended for migrating existing brokers and adds a broker to manage, where a queue service does not.'],
+      ['An Amazon MQ message broker that the workers connect to', 'Amazon MQ lets existing brokers migrate without rewriting code, but it adds a broker to manage, where a queue service does not.'],
     ],
     slot: 2,
     evidence: [
@@ -47,21 +47,20 @@ const questions: Question[] = [
     building: 'express-rail-hub',
     bullets: ['3.2-K3'],
     d: 2,
-    stem: 'Workers read messages from an Amazon SQS queue that has a visibility timeout of 30 seconds. Most messages take about one minute to process, and a few take much longer. Other workers receive messages that are still being processed, so work is duplicated. If a worker crashes, the company wants its message retried reasonably soon. Which TWO actions meet these requirements with the LEAST effort? (Choose two.)',
+    stem: 'An order service sends account updates to a worker fleet through a queue. The updates for one customer must be processed in the order they were sent, but updates for different customers can be processed at the same time by many workers. The company wants no ordering code in the workers. Which TWO actions meet these requirements with the LEAST effort? (Choose two.)',
     correct: [
-      ['Raise the queue visibility timeout to a little above the typical processing time', 'A suitable timeout stops other consumers picking up a message while it is being processed, and a crashed worker\'s message returns to the queue soon.'],
-      ['Have workers call ChangeMessageVisibility to extend the timeout for messages that run long', 'The timeout can be extended programmatically for tasks that do not finish within the initial timeout.'],
+      ['Use an Amazon SQS FIFO queue as the queue between the service and the workers', 'FIFO queues are designed for workloads where the order of operations and events is critical.'],
+      ['Set the message group ID of each message to the customer ID', 'FIFO queues support multiple ordered message groups within a single queue, so each customer keeps its order while different customers proceed in parallel.'],
     ],
     wrong: [
-      ['Set the visibility timeout of the queue to its maximum for every message', 'A crashed worker\'s message would stay hidden for the whole maximum period before another worker could retry it.'],
-      ['Switch the queue to short polling so that workers query only a subset of servers', 'Polling mode changes how responses are returned and does not hide in-flight messages from other consumers for longer.'],
-      ['Delete each message as soon as a worker receives it and before processing starts', 'A crash after deletion loses the message, so the work is never retried.'],
+      ['Use an Amazon SQS standard queue and have each worker sort the updates by a sequence number', 'A standard queue can deliver messages out of order, and the sorting would be ordering code in the workers.'],
+      ['Send every message to a FIFO queue with one fixed message group ID', 'All customers would share one ordered group, so updates for different customers could not be processed at the same time.'],
+      ['Publish the updates to an Amazon SNS standard topic with an HTTPS endpoint on every worker', 'A standard topic gives no ordering guarantee, and it holds no backlog for busy or offline workers.'],
     ],
     slots: [0, 3],
     evidence: [
-      'sqs-visibility|If you don\'t delete it before the timeout expires, the message becomes visible again in the queue and can be retrieved by another consumer.',
-      'sqs-visibility|If a task fails to complete within the initial visibility timeout, you can extend the timeout programmatically.',
-      'sqs-visibility|Use the ChangeMessageVisibility action to programmatically extend or shorten the timeout as needed.',
+      'sqs-fifo|Additionally, FIFO queues support message groups that allow multiple ordered message groups within a single queue.',
+      'sqs-fifo|FIFO (First-In-First-Out) queues have all the capabilities of the standard queues, but are designed to enhance messaging between applications when the order of operations and events is critical, or where duplicates can\'t be tolerated.',
     ],
   }),
   mc({

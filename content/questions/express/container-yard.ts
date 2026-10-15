@@ -155,7 +155,7 @@ const questions: Question[] = [
     d: 3,
     tags: ['placement-eligible'],
     stem: 'Worker tasks of an Amazon ECS service on AWS Fargate consume messages from an Amazon SQS queue. The company wants the number of tasks to follow the backlog of messages and to fall to zero when the queue is empty, with the LEAST operational overhead. Which solution meets these requirements?',
-    correct: ['Scale the service with Application Auto Scaling on a backlog-per-task metric, with a minimum capacity of 0', 'The backlog per task reflects the queue, and a minimum capacity of 0 lets the task count scale to zero.'],
+    correct: ['Scale the ECS service automatically on a backlog-per-task metric, with a minimum capacity of 0', 'The backlog per task reflects the queue, and a minimum capacity of 0 lets the task count scale to zero.'],
     wrong: [
       ['Scale the service with a target tracking policy on average CPU utilization and a minimum capacity of 1', 'CPU utilization does not measure messages waiting in the queue, and a minimum of 1 keeps a task running when there is no work.'],
       ['Use scheduled actions that change the number of tasks at the start of every hour', 'A schedule is not tied to the queue, so tasks run when the queue is empty and are missing when it is long.'],
@@ -192,7 +192,7 @@ const questions: Question[] = [
     bullets: ['3.2-K6'],
     d: 1,
     stem: 'A team runs an Amazon ECS service that serves employees only. The number of tasks should drop each evening at 19:00 and rise again at 07:00 every day, and nobody should have to make the changes. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Create scheduled actions for the service in Application Auto Scaling', 'Scheduled actions increase or decrease the number of tasks of the service based on the date and time.'],
+    correct: ['Create scheduled scaling actions for the ECS service', 'Scheduled actions increase or decrease the number of tasks of the service based on the date and time (the service uses Application Auto Scaling for this).'],
     wrong: [
       ['Create scheduled actions in an Amazon EC2 Auto Scaling group', 'EC2 Auto Scaling scheduled actions change instance capacity, and the task count of the service is scaled through Application Auto Scaling.'],
       ['Create a step scaling policy that responds to a CloudWatch alarm on CPU utilization', 'An alarm on CPU follows load and not the clock, so tasks would not change at 19:00 and 07:00.'],
@@ -230,17 +230,17 @@ const questions: Question[] = [
     bullets: ['3.2-K6'],
     d: 2,
     tags: ['mock-reserve'],
-    stem: 'An Amazon ECS service shows the same traffic pattern every day and week, but the size of each peak varies. The team wants tasks added ahead of each peak without maintaining schedules by hand. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Enable predictive scaling for the service in Application Auto Scaling', 'Predictive scaling uses historical load data to detect daily or weekly patterns and scales the number of tasks ahead of them.'],
+    stem: 'An Amazon ECS service on AWS Fargate has load that changes unpredictably through the day. The team wants the average CPU utilization of the service kept near a chosen value, with tasks added and removed automatically and the LEAST configuration effort. Which solution meets these requirements?',
+    correct: ['Attach a target tracking scaling policy on average CPU utilization to the service', 'Target tracking adjusts the task count to keep the metric near the target value, and it is the easiest scaling mode to use.'],
     wrong: [
-      ['Create scheduled actions for every hour of the week and update them as peaks change', 'The team would have to review the patterns and keep every schedule current by hand.'],
-      ['Create a step scaling policy on a CloudWatch alarm for CPU utilization', 'It reacts only after the alarm is breached, so tasks are not added ahead of the peak.'],
-      ['Raise the minimum task count to the size of the largest peak seen so far', 'The service would run peak capacity around the clock, which wastes capacity between peaks.'],
+      ['Attach a step scaling policy with thresholds and task counts that the team defines for each alarm', 'The team must define every threshold and the number of tasks to add or remove, which is more configuration than target tracking.'],
+      ['Create scheduled scaling actions that set the task count for each part of the day', 'A schedule follows the clock, not the load, so it cannot keep CPU near a value when the load is unpredictable.'],
+      ['Set the desired task count to the largest number of tasks ever needed', 'The service would run peak capacity around the clock and nothing adjusts the count to the CPU value.'],
     ],
     slot: 0,
     evidence: [
-      'ecs-autoscaling|Use historical patterns to scale Amazon ECS services with predictive scaling—Increase or decrease the number of tasks that your service runs based on historical load data analytics to detect daily or weekly patterns in traffic flows.',
-      'ecs-autoscaling|Amazon ECS leverages the Application Auto Scaling service to provide this functionality.',
+      'ecs-autoscaling|Target tracking is the easiest mode to use.',
+      'ecs-autoscaling|With step scaling you can more quickly react to changes in demand, because you define the specific thresholds for your scaling metrics, and how many tasks to add or remove when the thresholds are crossed.',
     ],
   }),
 ];

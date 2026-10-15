@@ -610,6 +610,10 @@ const sources: Source[] = [
   aws('microservices', 'https://aws.amazon.com/microservices/', 'Microservices on AWS'),
   aws('fargate-pricing', 'https://aws.amazon.com/fargate/pricing/', 'AWS Fargate pricing'),
   aws('alb-rule-conditions', `${D}/elasticloadbalancing/latest/application/rule-condition-types.html`, 'Condition types for listener rules'),
+  aws('dynamodb-time-series', `${D}/amazondynamodb/latest/developerguide/bp-time-series.html`, 'Best practices for handling time series data in DynamoDB'),
+  aws('dax-cluster-mgmt', `${D}/amazondynamodb/latest/developerguide/DAX.cluster-management.html`, 'Managing DAX clusters'),
+  aws('dx-gateway', `${D}/directconnect/latest/UserGuide/direct-connect-gateways-intro.html`, 'Direct Connect gateways'),
+  aws('vpn-accelerated', `${D}/vpn/latest/s2svpn/accelerated-vpn.html`, 'Accelerated Site-to-Site VPN connections'),
 ];
 
 export default sources;

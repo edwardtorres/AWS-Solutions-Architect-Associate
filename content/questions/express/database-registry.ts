@@ -312,14 +312,13 @@ const questions: Question[] = [
     correct: ['AWS DMS Serverless', 'It provisions and scales capacity automatically and removes capacity estimation, provisioning and patching of replication instances.'],
     wrong: [
       ['AWS DMS with a replication instance sized for the largest migration', 'The company would still estimate capacity, provision the instance and manage its engine version and patching.'],
-      ['DMS Fleet Advisor', 'Fleet Advisor discovers and inventories source data infrastructure and does not migrate any data.'],
+      ['AWS DMS with a replication instance in a Multi-AZ configuration', 'The company would still choose the instance size, provision it and manage its engine version and patching, so the overhead remains.'],
       ['DMS Schema Conversion', 'It assesses and converts schemas for a new target engine, but it does not move the data between databases.'],
     ],
     slot: 1,
     evidence: [
       'dms-serverless|AWS DMS Serverless is a feature that provides automatic provisioning, scaling, built-in high availability, and a pay-for-use billing model, to increase operations agility and optimize your costs.',
       'dms-serverless|The Serverless feature eliminates replication instance management tasks like capacity estimation, provisioning, cost optimization, and managing replication engine versions and patching.',
-      'dms-what-is|To discover your source data infrastructure, you can use DMS Fleet Advisor.',
     ],
   }),
   mc({

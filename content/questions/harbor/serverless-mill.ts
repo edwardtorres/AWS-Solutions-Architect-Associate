@@ -231,7 +231,7 @@ const questions: Question[] = [
     stem: 'A company runs an interactive web application on Amazon API Gateway and AWS Lambda. Traffic is predictable: it rises every weekday at 08:00 and falls after 18:00, and users report slow first requests at the start of the peak because of cold starts. The company wants to remove the slow starts while paying for the higher level of pre-initialized capacity only during business hours. Which TWO actions meet these requirements at the LOWEST cost? (Choose two.)',
     correct: [
       ['Publish a function version and configure provisioned concurrency on an alias that points to it', 'Provisioned concurrency keeps pre-initialized execution environments ready, and it works with versions and aliases but not with the $LATEST version.'],
-      ['Use Application Auto Scaling scheduled scaling to raise provisioned concurrency before 08:00 and reduce it after 18:00', 'Scheduled scaling follows predictable load changes, so the higher level of pre-initialized capacity exists only during business hours.'],
+      ['Schedule the provisioned concurrency setting to rise before 08:00 and fall after 18:00', 'Scheduled scaling (through Application Auto Scaling) follows predictable load changes, so the higher level of pre-initialized capacity exists only during business hours.'],
     ],
     wrong: [
       ['Configure provisioned concurrency on the $LATEST version of the function', 'Provisioned concurrency cannot be used with the $LATEST version of a function.'],

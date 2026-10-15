@@ -7,7 +7,7 @@ const questions: Question[] = [
     building: 'network-cost-audit',
     bullets: ['4.4-K1'],
     d: 1,
-    stem: 'A company has 14 AWS accounts that were opened by separate teams and are paid separately. Finance wants one bill for all of the accounts and a way to track the charges across them, with no additional fee. Which solution meets these requirements?',
+    stem: 'A company has 14 AWS accounts that were opened by separate teams and are paid separately. Finance wants one bill for all of the accounts and a way to track the charges across them, with no additional fee. Which solution meets these requirements with the LEAST effort?',
     correct: ['Add the accounts to an organization in AWS Organizations and use consolidated billing', 'Consolidated billing gives one bill for multiple accounts, lets the management account track charges across them, and has no extra fee.'],
     wrong: [
       ['Create an AWS Budgets budget in every account and send the alerts to one finance mailbox', 'Budgets alert on spending but do not combine the accounts into one bill.'],
@@ -44,7 +44,7 @@ const questions: Question[] = [
     building: 'network-cost-audit',
     bullets: ['4.4-K1', '4.4-K2'],
     d: 2,
-    stem: 'Three teams share one account and one VPC. Each team has tagged its NAT gateways and load balancers with a team tag. Finance wants a monthly breakdown of these network costs by team in the Billing and Cost Management console. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'Three teams share one account and one VPC. Each team has tagged its NAT gateways and load balancers with a team tag. Finance wants a monthly breakdown of these network costs by team in the Billing and Cost Management console. Which TWO actions meet these requirements with the LEAST effort? (Choose two.)',
     correct: [
       ['Activate the team tag as a cost allocation tag', 'A tag must be activated before it can appear in Cost Explorer or on a cost allocation report.'],
       ['Group the costs by the team tag in AWS Cost Explorer', 'Cost Explorer can filter and group costs by tag, which gives the cost per team.'],
@@ -101,7 +101,7 @@ const questions: Question[] = [
     building: 'network-cost-audit',
     bullets: ['4.4-K2'],
     d: 3,
-    stem: 'A company wants every line item of its AWS costs, broken down by hour and by product, delivered automatically to an Amazon S3 bucket that the company owns. Analysts will run their own queries on the files to find the sources of network charges. Which solution meets these requirements?',
+    stem: 'A company wants every line item of its AWS costs, broken down by hour and by product, delivered automatically to an Amazon S3 bucket that the company owns. Analysts will run their own queries on the files to find the sources of network charges. Which solution meets these requirements with the LEAST operational overhead?',
     correct: ['Create an AWS Cost and Usage Report that delivers to the bucket', 'The report holds the most comprehensive cost and usage data, with line items by product and usage type, published to a bucket you own.'],
     wrong: [
       ['Create an AWS Budgets cost budget with notifications to an Amazon SNS topic', 'A budget tracks spending against a limit and sends alerts; it does not deliver line-item data to a bucket.'],

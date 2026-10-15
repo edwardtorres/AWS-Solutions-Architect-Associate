@@ -104,7 +104,7 @@ const questions: Question[] = [
     bullets: ['3.2-K4'],
     d: 2,
     stem: 'A company runs an Amazon ECS service and an Amazon DynamoDB table. The company wants both resources to scale automatically with load, using a single scaling service and no custom scaling code. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Define scaling policies for both resources in Application Auto Scaling', 'Application Auto Scaling scales resources of individual AWS services beyond EC2, including ECS services and DynamoDB tables.'],
+    correct: ['Define target tracking scaling policies on the ECS service and on the DynamoDB table', 'One scaling service (Application Auto Scaling) scales resources of individual AWS services beyond EC2, including ECS services and DynamoDB tables.'],
     wrong: [
       ['Define scaling policies for both resources in an Amazon EC2 Auto Scaling group', 'EC2 Auto Scaling manages groups of EC2 instances, so it cannot scale a DynamoDB table or an ECS service.'],
       ['Create Amazon CloudWatch alarms that email an administrator through Amazon SNS', 'A notification needs a person to change capacity, so the scaling is not automatic.'],
