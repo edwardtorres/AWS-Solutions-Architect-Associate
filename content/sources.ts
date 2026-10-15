@@ -615,6 +615,12 @@ const sources: Source[] = [
   aws('dx-gateway', `${D}/directconnect/latest/UserGuide/direct-connect-gateways-intro.html`, 'Direct Connect gateways'),
   aws('vpn-accelerated', `${D}/vpn/latest/s2svpn/accelerated-vpn.html`, 'Accelerated Site-to-Site VPN connections'),
   aws('dynamodb-gsi', `${D}/amazondynamodb/latest/developerguide/GSI.html`, 'Using global secondary indexes in DynamoDB'),
+  aws('athena-views', `${D}/athena/latest/ug/views.html`, 'Work with views (Amazon Athena)'),
+  aws('athena-reuse', `${D}/athena/latest/ug/reusing-query-results.html`, 'Reuse query results in Athena'),
+  aws('redshift-concurrency', `${D}/redshift/latest/dg/concurrency-scaling.html`, 'Concurrency scaling (Amazon Redshift)'),
+  aws('athena-ctas-what', `${D}/athena/latest/ug/ctas.html`, 'Create a table from query results (CTAS)'),
+  aws('kinesis-retries', `${D}/streams/latest/dev/kinesis-producer-adv-retries-rate-limiting.html`, 'Retries and rate limiting (Kinesis producers)'),
+  aws('datasync-modes', `${D}/datasync/latest/userguide/choosing-task-mode.html`, 'Choosing a task mode for your DataSync transfer'),
 ];
 
 export default sources;

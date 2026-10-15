@@ -50,7 +50,7 @@ const questions: Question[] = [
     stem: 'A media company moves large volumes of video from its data centre to Amazon S3 every day, all year, and the transfers need consistent network performance. The traffic currently uses internet-based connections and the company wants to reduce network costs over time. Which solution is the MOST cost-effective for this steady workload?',
     correct: ['Provision an AWS Direct Connect connection and send the data through a public virtual interface to Amazon S3', 'Direct Connect can reduce network costs, increase bandwidth throughput and provide a more consistent network experience than internet-based connections.'],
     wrong: [
-      ['Keep using internet connections and add an AWS Site-to-Site VPN with two tunnels for the transfers', 'A VPN still runs over the internet, so it does not provide the consistent network performance the workload needs.'],
+      ['Keep using internet connections and add an AWS Site-to-Site VPN with two tunnels for the transfers from the data centre', 'A VPN still runs over the internet, so it does not provide the consistent network performance the workload needs.'],
       ['Add an AWS Client VPN endpoint and have the transfer servers connect to it as individual clients', 'Client VPN is for remote users, it travels over the internet, and it does not lower the cost of steady bulk transfers.'],
       ['Open more internet circuits at the data centre and spread the transfers across all of them', 'This adds circuits to pay for and still gives the variable network experience of internet-based connections.'],
     ],
@@ -68,7 +68,7 @@ const questions: Question[] = [
     tags: ['trap:direct-connect-vs-vpn'],
     stem: 'A bank must send large, steady volumes of data from its data centre to a VPC over a private path with consistent performance, and a security policy requires the data to be encrypted in transit. The bank wants to keep network costs low and avoid sending the data over the public internet. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
-      ['Provision an AWS Direct Connect connection between the data centre and AWS', 'Direct Connect gives a private, dedicated line with a more consistent experience than internet-based connections.'],
+      ['Provision an AWS Direct Connect connection from the data centre to a Direct Connect location', 'Direct Connect gives a private, dedicated line with a more consistent experience than internet-based connections.'],
       ['Create an AWS Site-to-Site VPN connection that runs over the Direct Connect connection', 'The combination provides an IPsec-encrypted private connection, which meets the encryption policy.'],
     ],
     wrong: [
@@ -87,13 +87,13 @@ const questions: Question[] = [
     id: 'transit-tariff-005',
     building: 'transit-tariff',
     bullets: ['4.4-S2', '4.4-S7'],
-    d: 3,
+    d: 2,
     tags: ['trap:direct-connect-vs-vpn'],
     stem: 'A retailer needs a private, dedicated link from its data centre to AWS for about 200 Mbps of steady traffic. It does not expect to need much more for years, and it wants to avoid paying for far more port capacity than it uses. Which solution is the MOST cost-effective?',
     correct: ['An AWS Direct Connect hosted connection at 200 Mbps provisioned by an AWS Direct Connect Partner', 'Hosted connections offer speeds below 1 Gbps, including 200 Mbps, and port hour pricing depends on capacity, so the port is sized to the load.'],
     wrong: [
       ['An AWS Direct Connect dedicated connection at 1 Gbps requested through the console', 'The lowest dedicated speed is 1 Gbps, five times the need, and port hour pricing is determined by capacity.'],
-      ['An AWS Direct Connect dedicated connection at 10 Gbps so the link never has to be replaced', 'Ten gigabits is far more capacity than the need, and port hour pricing depends on capacity and connection type.'],
+      ['An AWS Direct Connect dedicated connection at 10 Gbps so the link never has to be replaced as traffic grows', 'Ten gigabits is far more capacity than the need, and port hour pricing depends on capacity and connection type.'],
       ['An AWS Client VPN endpoint sized for 200 Mbps with client software on the data centre servers', 'Client VPN is a user-access service over the internet, so it is not a dedicated link for the data centre.'],
     ],
     slot: 3,
@@ -132,10 +132,10 @@ const questions: Question[] = [
     bullets: ['4.4-S7'],
     d: 2,
     tags: [],
-    stem: 'A company is ordering a dedicated AWS Direct Connect connection. Measured traffic is about 3 Gbps now and is forecast to reach 8 Gbps within the first year. The company wants to avoid creating and configuring a new connection later, and does not want more port capacity than the forecast needs. Which port speed should the company choose?',
+    stem: 'A company is ordering a dedicated AWS Direct Connect connection. Measured traffic is about 3 Gbps now and is forecast to reach 8 Gbps within the first year. The company wants to avoid creating and configuring a new connection later, and does not want more port capacity than the forecast needs. Which port speed is the MOST cost-effective choice?',
     correct: ['10 Gbps, because a dedicated port speed cannot be changed after the request and 10 Gbps covers the forecast', 'The port speed cannot be changed after the request, and 10 Gbps is the smallest dedicated speed that covers the eight gigabit forecast.'],
     wrong: [
-      ['1 Gbps now, and then increase the port speed of the same connection when the traffic grows', 'The port speed cannot be changed after the connection request, and 1 Gbps is already below the current traffic.'],
+      ['1 Gbps now, and then increase the port speed of the same connection when the traffic grows within the next year', 'The port speed cannot be changed after the connection request, and 1 Gbps is already below the current traffic.'],
       ['100 Gbps, so that the connection never has to change whatever happens to the traffic', '100 Gbps is far more capacity than the forecast, and port hour pricing is determined by capacity.'],
       ['400 Gbps, so that the company can later divide the capacity between its business units', '400 Gbps greatly exceeds the forecast, and port hour pricing is determined by capacity and connection type.'],
     ],
@@ -175,7 +175,7 @@ const questions: Question[] = [
     stem: 'A company uses an AWS Direct Connect connection as its primary path to AWS. If the connection fails, the business can work with lower speeds and an internet path for a few hours. The company wants a backup path at the LOWEST cost. Which solution meets these requirements?',
     correct: ['An AWS Site-to-Site VPN connection over the internet configured as a backup to the Direct Connect connection', 'A Site-to-Site VPN is an IPsec connection over the internet with no physical port, charged per connection-hour plus data transfer.'],
     wrong: [
-      ['A second Direct Connect connection on separate devices in a different location for maximum resiliency', 'This gives the highest resiliency but adds port charges and more cost than a backup that can run at lower speeds.'],
+      ['A second Direct Connect connection on separate devices in a different location for maximum resiliency for the company', 'This gives the highest resiliency but adds port charges and more cost than a backup that can run at lower speeds.'],
       ['An AWS Client VPN endpoint that the application servers use as a failover path to the VPC', 'Client VPN is a client-based service for users and is not designed as a network-to-network backup path.'],
       ['A larger port speed on the existing Direct Connect connection so that it is less likely to fail', 'A larger port does not protect against a device, connectivity or location failure and increases port charges.'],
     ],

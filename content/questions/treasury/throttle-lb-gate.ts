@@ -12,7 +12,7 @@ const questions: Question[] = [
     correct: ['Keep one Application Load Balancer and add listener rules that route each URL path to a target group for its service', 'An Application Load Balancer can route requests to different target groups based on the content of the traffic, so one balancer replaces twelve and only one hourly charge remains.'],
     wrong: [
       ['Replace each Application Load Balancer with a Network Load Balancer and register the same instances as targets', 'A Network Load Balancer is also charged for each hour it runs, so twelve balancers remain, and it does not route by URL path.'],
-      ['Place a Gateway Load Balancer in front of the twelve Application Load Balancers to share the traffic between them', 'Twelve Application Load Balancers would still run and be billed every hour, and a Gateway Load Balancer adds a thirteenth billed balancer.'],
+      ['Place a Gateway Load Balancer in front of the twelve Application Load Balancers to share the traffic between them across zones', 'Twelve Application Load Balancers would still run and be billed every hour, and a Gateway Load Balancer adds a thirteenth billed balancer.'],
       ['Reduce the number of registered targets behind each Application Load Balancer so that fewer capacity units are used', 'Each balancer is still charged for every hour or partial hour it is running, so twelve hourly charges remain whatever the target count.'],
     ],
     slot: 0,
@@ -90,10 +90,10 @@ const questions: Question[] = [
     bullets: ['4.4-K3'],
     d: 2,
     tags: ['trap:alb-nlb-gwlb'],
-    stem: 'A company serves a web application through an Application Load Balancer in three Availability Zones. The zones hold different numbers of targets. A manager asks the team to turn off cross-zone load balancing on the Application Load Balancer to avoid charges for data transfer between zones. What should the solutions architect recommend?',
+    stem: 'A company serves a web application through an Application Load Balancer in three Availability Zones. The zones hold different numbers of targets. A manager asks the team to turn off cross-zone load balancing on the Application Load Balancer to avoid charges for data transfer between zones. What is the MOST cost-effective recommendation?',
     correct: ['Leave the setting alone, because cross-zone load balancing is always on for an Application Load Balancer and there is no charge for that transfer', 'Cross-zone load balancing is always enabled at the load balancer level for Application Load Balancers, and AWS says you are not charged for this type of regional data transfer.'],
     wrong: [
-      ['Disable cross-zone load balancing on the target group so that each node serves only the targets in its own zone', 'Charges are not the reason to change it, and uneven target counts per zone would then leave some targets overloaded.'],
+      ['Disable cross-zone load balancing on the target group so that each node serves only the targets in its own zone and keeps the data local', 'Charges are not the reason to change it, and uneven target counts per zone would then leave some targets overloaded.'],
       ['Switch to a Network Load Balancer, because it never charges for traffic that crosses Availability Zones', 'A Network Load Balancer charges for regional data transfer between zones when cross-zone load balancing is enabled.'],
       ['Move all targets into a single Availability Zone and keep the balancer in the other two zones', 'This makes the application depend on one zone and does not address a charge that the Application Load Balancer does not have.'],
     ],
@@ -128,11 +128,11 @@ const questions: Question[] = [
     bullets: ['4.4-S6'],
     d: 2,
     tags: ['placement-eligible'],
-    stem: 'A mobile app calls an API on Amazon API Gateway that invokes a Lambda function and then writes to a relational database. A faulty app release sends bursts of requests that overload the database. The company wants to cap the request rate that reaches the backend at the lowest additional cost. Which solution meets this requirement?',
+    stem: 'A mobile app calls an API on Amazon API Gateway that invokes a Lambda function and then writes to a relational database. A faulty app release sends bursts of requests that overload the database. The company wants to cap the request rate that reaches the backend at the LOWEST additional cost. Which solution meets this requirement?',
     correct: ['Configure throttling rate and burst limits on the API Gateway stage so that excess requests are rejected before the backend', 'API Gateway begins to throttle requests when submissions exceed the steady-state rate and burst limits, so excess calls never reach the database.'],
     wrong: [
       ['Configure provisioned concurrency on the Lambda function so that it can absorb the bursts of requests', 'Provisioned concurrency incurs additional charges and lets more requests reach the database instead of limiting them.'],
-      ['Scale the database to a larger instance class so that it can handle the burst traffic of the faulty release', 'A larger instance increases cost permanently to absorb traffic that the faulty release should never have been able to send.'],
+      ['Scale the database to a larger instance class so that it can handle the burst traffic of the faulty release and keep the API unchanged', 'A larger instance increases cost permanently to absorb traffic that the faulty release should never have been able to send.'],
       ['Place a Network Load Balancer in front of the API so that it queues the requests until the database is free', 'A load balancer distributes traffic to targets; it does not queue or limit requests, and it adds an hourly charge.'],
     ],
     slot: 1,
@@ -213,7 +213,7 @@ const questions: Question[] = [
     correct: ['Keep the default setting of cross-zone load balancing disabled and run the same number of appliances in each zone', 'Cross-zone load balancing is disabled by default for Gateway Load Balancers, so each node uses the appliances in its own zone and traffic stays in the zone.'],
     wrong: [
       ['Enable cross-zone load balancing so that every node can reach appliances in all zones at any time', 'Enabled cross-zone load balancing distributes traffic across zones, which is the behaviour that creates the zone-to-zone transfer.'],
-      ['Replace the Gateway Load Balancer with an Application Load Balancer that routes by URL path to the appliances', 'An Application Load Balancer does not provide the transparent inspection of all traffic that the appliances need.'],
+      ['Replace the Gateway Load Balancer with an Application Load Balancer that routes by URL path to the appliances in both of the zones', 'An Application Load Balancer does not provide the transparent inspection of all traffic that the appliances need.'],
       ['Register all appliances in one zone and route the other zone through a second Gateway Load Balancer', 'A second balancer adds hourly and capacity-unit charges and still moves traffic between zones.'],
     ],
     slot: 1,
@@ -232,7 +232,7 @@ const questions: Question[] = [
     correct: ['Set a lower method-level throttling target for the report method and keep the stage-level target for the other methods', 'API Gateway lets an API developer set target limits for individual API stages or methods, so one method can be restricted on its own.'],
     wrong: [
       ['Lower the account-level throttle so that every API in the account receives fewer requests per second', 'The account-level limit applies to all APIs in the account per Region and would also slow the read-heavy method.'],
-      ['Create a second REST API for the report method and give the new API a lower throttle than the first one', 'A second API adds management work, and the requirement was to avoid creating a second API.'],
+      ['Create a second REST API for the report method and give the new API a lower throttle than the first one for the callers of the report', 'A second API adds management work, and the requirement was to avoid creating a second API.'],
       ['Enable provisioned concurrency on the report function so that the long database query is served sooner', 'Provisioned concurrency incurs charges and does not limit how many report requests can arrive.'],
     ],
     slot: 3,

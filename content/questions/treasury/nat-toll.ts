@@ -30,7 +30,7 @@ const questions: Question[] = [
     stem: 'A development VPC needs outbound internet access for a few private instances. The administrators also want to reach those private instances over SSH through the same device and to forward one inbound port to a test server. The team accepts managing the device. Which solution meets these requirements MOST cost-effectively?',
     correct: ['A NAT instance on a small Amazon EC2 instance type that is also configured as the bastion server with port forwarding', 'A NAT instance can be used as a bastion server and supports port forwarding by manual configuration, and it is charged by instance type and size.'],
     wrong: [
-      ['A NAT gateway in a public subnet with a security group attached that allows SSH and the forwarded port', 'A NAT gateway cannot have security groups associated with it, does not support bastion servers, and does not support port forwarding.'],
+      ['A NAT gateway in a public subnet with a security group attached that allows SSH and the forwarded port from the administrator network', 'A NAT gateway cannot have security groups associated with it, does not support bastion servers, and does not support port forwarding.'],
       ['A NAT gateway in each Availability Zone with an Elastic IP address that administrators use for SSH access', 'A NAT gateway does not support bastion servers, so administrators could not reach the private instances through it.'],
       ['A private NAT gateway in the development VPC with a route to the administrators\' network', 'A private NAT gateway is for communication with on-premises or overlapping networks, and it does not act as a bastion server.'],
     ],
@@ -118,7 +118,7 @@ const questions: Question[] = [
     wrong: [
       ['One NAT gateway in each Availability Zone, with each private subnet routed to the gateway in its own zone', 'This doubles the hourly charge to remove a failure risk that the team has said it accepts.'],
       ['One NAT gateway in each Availability Zone plus a NAT instance in each zone as a standby device', 'This adds two more devices to pay for and manage when the team accepts the dependency on one zone.'],
-      ['One Network Load Balancer in front of two NAT gateways in different zones to spread the outbound traffic', 'A load balancer adds an hourly charge and two gateways cost more than the single gateway the requirement allows.'],
+      ['One Network Load Balancer in front of two NAT gateways in different zones to spread the outbound traffic from the private subnets in both zones', 'A load balancer adds an hourly charge and two gateways cost more than the single gateway the requirement allows.'],
     ],
     slot: 3,
     evidence: [
@@ -136,7 +136,7 @@ const questions: Question[] = [
     correct: ['A private NAT gateway that translates the traffic to the allow-listed address pool toward the on-premises network', 'A private NAT gateway enables communication from the VPC to the on-premises network using a pool of allow-listed addresses, even where CIDR ranges overlap.'],
     wrong: [
       ['A public NAT gateway with an Elastic IP address that the on-premises firewall is changed to allow', 'A public NAT gateway sends traffic to the internet, and the traffic is required to stay off the internet.'],
-      ['A NAT instance in a public subnet with a source and destination check turned off and manual address translation', 'The team would manage and patch the instance itself, which raises overhead compared with a managed gateway.'],
+      ['A NAT instance in a public subnet with a source and destination check turned off and manual address translation for each flow', 'The team would manage and patch the instance itself, which raises overhead compared with a managed gateway.'],
       ['A new VPC with an internet gateway where each workload gets its own public IP address and a security group', 'Public addresses move the traffic onto the internet and do not provide the allow-listed pool the on-premises system accepts.'],
     ],
     slot: 0,
@@ -176,7 +176,7 @@ const questions: Question[] = [
     wrong: [
       ['Move every resource of the tier into the first zone so that it sits next to the single NAT gateway', 'This removes the use of the other two zones, which the company wants to keep in service.'],
       ['Replace the NAT gateway with a larger NAT instance placed in the first zone for all three zones', 'Traffic from the other zones would still cross zones to reach the instance, and the company would administer it.'],
-      ['Add an interface VPC endpoint for the internet destinations in each zone to avoid using the NAT gateway', 'Interface endpoints reach AWS services and endpoint services, not general internet destinations, and they add hourly charges.'],
+      ['Add an interface VPC endpoint for the internet destinations in each zone to avoid using the NAT gateway for the tier', 'Interface endpoints reach AWS services and endpoint services, not general internet destinations, and they add hourly charges.'],
     ],
     slot: 2,
     evidence: [

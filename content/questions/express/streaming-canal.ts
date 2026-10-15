@@ -176,10 +176,10 @@ const questions: Question[] = [
     building: 'streaming-canal',
     bullets: ['3.5-S2'],
     d: 3,
-    stem: 'A telemetry platform writes records to a provisioned Amazon Kinesis data stream with 4 shards, using the customer ID as the partition key. One large customer produces most of the records, so one shard is throttled while the others are almost idle. The company wants the load spread across shards. Which TWO actions should the company take? (Choose two.)',
+    stem: 'A telemetry platform writes about 5 MB of records per second to a provisioned Amazon Kinesis data stream with 4 shards, using the customer ID as the partition key. Each shard accepts up to 1 MB per second of writes. One large customer produces most of the records, so one shard is throttled while the others are almost idle, and even a perfectly even spread would exceed what 4 shards accept. The company wants the writes to stop being throttled. Which TWO actions should the company take? (Choose two.)',
     correct: [
       ['Change the partition key to a value with many distinct values, such as the device ID', 'The partition key determines the shard of each record, so many distinct values spread records across shards.'],
-      ['Increase the number of shards of the stream', 'Stream capacity is a function of the number of shards, and more shards give the spread records more capacity.'],
+      ['Increase the number of shards so that the total write capacity is above 5 MB per second', 'Stream capacity is a function of the number of shards, and 4 shards at 1 MB per second cannot take 5 MB per second even when the load is even.'],
     ],
     wrong: [
       ['Increase the retention period of the stream to 7 days', 'Retention controls how long records stay in the stream and does not change which shard receives a record.'],
@@ -190,6 +190,7 @@ const questions: Question[] = [
     evidence: [
       'kinesis-concepts|It uses the partition key that is associated with each data record to determine which shard a given data record belongs to.',
       'kinesis-concepts|The data capacity of your stream is a function of the number of shards that you specify for the stream.',
+      'kinesis-retries|to handle any resulting throttling determined as excessive by expanding the capacity of the stream and implementing an appropriate partition key strategy.',
     ],
   }),
   mc({
