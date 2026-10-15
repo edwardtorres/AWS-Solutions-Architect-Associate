@@ -1,0 +1,11 @@
+[
+{"id":"nat-toll-001","picks":["B"],"ambiguous":false},
+{"id":"nat-toll-002","picks":["C"],"ambiguous":false},
+{"id":"nat-toll-003","picks":["B"],"ambiguous":false},
+{"id":"nat-toll-004","picks":["A","B"],"ambiguous":false},
+{"id":"nat-toll-005","picks":["A","D"],"ambiguous":false},
+{"id":"nat-toll-006","picks":["B"],"ambiguous":false},
+{"id":"nat-toll-007","picks":["B"],"ambiguous":false},
+{"id":"nat-toll-008","picks":["D"],"ambiguous":true,"note":"Regional NAT gateway (C) is newer and may only support public connectivity; if it supports private mode, C could compete. Picked D as it explicitly says private."},
+{"id":"nat-toll-009","picks":["B"],"ambiguous":false,"note":"Port exhaustion toward one destination ip:port; add IPs to the NAT gateway."}
+]

@@ -1,0 +1,12 @@
+[
+{"id":"distribution-office-001","picks":["C"],"ambiguous":false},
+{"id":"distribution-office-002","picks":["D"],"ambiguous":false,"note":"Assumes RDS stop (up to 7 days) is acceptable."},
+{"id":"distribution-office-003","picks":["D"],"ambiguous":false},
+{"id":"distribution-office-004","picks":["C"],"ambiguous":false},
+{"id":"distribution-office-005","picks":["D"],"ambiguous":false},
+{"id":"distribution-office-006","picks":["C"],"ambiguous":false},
+{"id":"distribution-office-007","picks":["A","E"],"ambiguous":false},
+{"id":"distribution-office-008","picks":["A"],"ambiguous":false},
+{"id":"distribution-office-009","picks":["C","E"],"ambiguous":false,"note":"Local Zone is not on site, so Outposts for the factory."},
+{"id":"distribution-office-010","picks":["B"],"ambiguous":false}
+]

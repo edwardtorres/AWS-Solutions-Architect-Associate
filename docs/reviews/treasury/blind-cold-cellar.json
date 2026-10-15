@@ -1,0 +1,15 @@
+[
+{"id":"cold-cellar-001","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-002","picks":["C"],"ambiguous":false},
+{"id":"cold-cellar-003","picks":["C"],"ambiguous":true,"note":"One Zone-IA is cheapest because thumbnails are regenerable; Standard-IA or Intelligent-Tiering could be defended if the reader assumes loss of an AZ is unacceptable. The 400 KB size avoids small-object issues."},
+{"id":"cold-cellar-004","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-005","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-006","picks":["C"],"ambiguous":false,"note":"Minimum storage durations and transition fees make transitions a loss."},
+{"id":"cold-cellar-007","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-008","picks":["C"],"ambiguous":false},
+{"id":"cold-cellar-009","picks":["C","D"],"ambiguous":false,"note":"E also meets requirements but costs more than Flexible Retrieval; relies on 'few hours' pointing to Flexible Retrieval."},
+{"id":"cold-cellar-010","picks":["B"],"ambiguous":false,"note":"Relies on 128 KB default minimum object size for transitions to IA and Intelligent-Tiering not auto-tiering small objects."},
+{"id":"cold-cellar-011","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-012","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-013","picks":["C"],"ambiguous":false}
+]

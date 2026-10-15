@@ -47,7 +47,7 @@ const questions: Question[] = [
     bullets: ['1.3-S3'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A company serves its application through Amazon CloudFront with an Application Load Balancer in eu-west-1 as the custom origin. Viewers use https://www.example.com and the origin domain name is origin.example.com. Traffic must be encrypted between viewers and CloudFront and between CloudFront and the origin, using ACM certificates. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A company serves its application through Amazon CloudFront with an Application Load Balancer in eu-west-1 as the custom origin. Viewers use the HTTPS address www.example.com and the origin domain name is origin.example.com. Traffic must be encrypted between viewers and CloudFront and between CloudFront and the origin, using ACM certificates. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Request an ACM certificate for www.example.com in us-east-1 and associate it with the distribution', 'A certificate for the viewer-facing name must be requested or imported in us-east-1 for CloudFront.'],
       ['Request an ACM certificate for origin.example.com in eu-west-1, deploy it on an HTTPS listener of the load balancer, and set the origin protocol policy to HTTPS Only', 'The origin certificate lives in the load balancer\'s Region, and HTTPS Only makes CloudFront use only HTTPS to the origin.'],
@@ -91,7 +91,7 @@ const questions: Question[] = [
     bullets: ['1.3-S3'],
     d: 2,
     tags: ['placement-eligible'],
-    stem: 'A company serves its site through Amazon CloudFront under its own domain name over HTTPS. Many external links and bookmarks still use http://. All viewer traffic to CloudFront must use HTTPS, while viewers who follow HTTP links must still reach the content. Which viewer protocol policy BEST meets these requirements?',
+    stem: 'A company serves its site through Amazon CloudFront under its own domain name over HTTPS. Many external links and bookmarks still use the plain HTTP scheme. All viewer traffic to CloudFront must use HTTPS, while viewers who follow HTTP links must still reach the content. Which viewer protocol policy BEST meets these requirements?',
     correct: ['Redirect HTTP to HTTPS', 'HTTP GET and HEAD requests are redirected to HTTPS, so HTTP links keep working and the viewer then uses HTTPS.'],
     wrong: [
       ['HTTPS Only', 'CloudFront returns HTTP status code 403 to a viewer who sends an HTTP request, so HTTP links would stop working.'],

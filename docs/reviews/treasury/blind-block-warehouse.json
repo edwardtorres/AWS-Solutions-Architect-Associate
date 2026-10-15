@@ -1,0 +1,11 @@
+[
+{"id":"block-warehouse-001","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-002","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-003","picks":["B"],"ambiguous":false},
+{"id":"block-warehouse-004","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-005","picks":["D"],"ambiguous":false,"note":"EBS volumes cannot be shrunk."},
+{"id":"block-warehouse-006","picks":["C","D"],"ambiguous":false},
+{"id":"block-warehouse-007","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-008","picks":["B"],"ambiguous":false},
+{"id":"block-warehouse-009","picks":["D","E"],"ambiguous":false,"note":"Relies on sc1 max throughput 250 MiB/s per volume vs st1 500 MiB/s."}
+]

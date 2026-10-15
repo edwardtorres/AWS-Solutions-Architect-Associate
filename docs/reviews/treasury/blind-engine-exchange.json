@@ -1,0 +1,11 @@
+[
+{"id":"engine-exchange-001","picks":["A"],"ambiguous":false},
+{"id":"engine-exchange-002","picks":["A","E"],"ambiguous":false},
+{"id":"engine-exchange-003","picks":["C"],"ambiguous":false},
+{"id":"engine-exchange-004","picks":["B"],"ambiguous":false},
+{"id":"engine-exchange-005","picks":["A"],"ambiguous":false},
+{"id":"engine-exchange-006","picks":["B"],"ambiguous":false},
+{"id":"engine-exchange-007","picks":["C"],"ambiguous":false},
+{"id":"engine-exchange-008","picks":["B"],"ambiguous":false},
+{"id":"engine-exchange-009","picks":["D"],"ambiguous":false,"note":"DMS supports S3 targets (Parquet)."}
+]

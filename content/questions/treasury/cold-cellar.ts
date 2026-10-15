@@ -46,7 +46,7 @@ const questions: Question[] = [
     bullets: ['4.1-S8'],
     d: 3,
     tags: ['placement-eligible', 'trap:s3-storage-classes'],
-    stem: 'An online store keeps a 400 KB thumbnail for every product image under the thumbs/ prefix of an Amazon S3 bucket. The thumbnails can be regenerated from the original images, which are stored separately. After the first 30 days a thumbnail is requested about once a month, but each request must still be served in milliseconds. Which solution has the LOWEST storage cost and meets these requirements?',
+    stem: 'An online store keeps a 400 KB thumbnail for every product image under the thumbs/ prefix of an Amazon S3 bucket. The thumbnails can be regenerated from the original images, which are stored separately, so losing them in a single Availability Zone failure is acceptable. After the first 30 days a thumbnail is requested about once a month, but each request must still be served in milliseconds. Which solution has the LOWEST storage cost and meets these requirements?',
     correct: ['A lifecycle rule for the thumbs/ prefix that moves thumbnails to S3 One Zone-IA after 30 days', 'One Zone-IA gives millisecond access to recreatable, infrequently accessed data and is less expensive than Standard-IA because it keeps one copy in one Availability Zone.'],
     wrong: [
       ['A lifecycle rule for the thumbs/ prefix that moves thumbnails to S3 Standard-IA after 30 days', 'It also gives millisecond access, but it stores the data across several Availability Zones, a resilience the regenerable thumbnails do not need and One Zone-IA avoids paying for.'],

@@ -1,0 +1,14 @@
+[
+{"id":"throttle-lb-gate-001","picks":["C"],"ambiguous":false},
+{"id":"throttle-lb-gate-002","picks":["C"],"ambiguous":false},
+{"id":"throttle-lb-gate-003","picks":["B"],"ambiguous":false},
+{"id":"throttle-lb-gate-004","picks":["B","D"],"ambiguous":false,"note":"E is wrong for ALB (cross-zone has no charge and is on by default)."},
+{"id":"throttle-lb-gate-005","picks":["B"],"ambiguous":true,"note":"Relies on ALB inter-AZ transfer being free for cross-zone; D could be defended by someone who thinks target-group-level disabling saves money."},
+{"id":"throttle-lb-gate-006","picks":["B"],"ambiguous":false},
+{"id":"throttle-lb-gate-007","picks":["C"],"ambiguous":false},
+{"id":"throttle-lb-gate-008","picks":["D"],"ambiguous":false},
+{"id":"throttle-lb-gate-009","picks":["A","E"],"ambiguous":false},
+{"id":"throttle-lb-gate-010","picks":["B"],"ambiguous":false},
+{"id":"throttle-lb-gate-011","picks":["D"],"ambiguous":false},
+{"id":"throttle-lb-gate-012","picks":["C"],"ambiguous":false}
+]

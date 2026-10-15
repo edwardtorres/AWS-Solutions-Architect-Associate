@@ -1,0 +1,11 @@
+[
+{"id":"backup-archive-001","picks":["D"],"ambiguous":false},
+{"id":"backup-archive-002","picks":["B"],"ambiguous":false},
+{"id":"backup-archive-003","picks":["A","C"],"ambiguous":false},
+{"id":"backup-archive-004","picks":["C"],"ambiguous":true,"note":"Relies on 90-day minimum for snapshot archive / AWS Backup cold storage making archiving a 30-day-retention snapshot a loss; if the reader ignores minimum durations, A looks right."},
+{"id":"backup-archive-005","picks":["B"],"ambiguous":false,"note":"Assumes EBS backups can transition to cold storage and 90-day minimum is satisfied."},
+{"id":"backup-archive-006","picks":["C"],"ambiguous":false},
+{"id":"backup-archive-007","picks":["B","C"],"ambiguous":false},
+{"id":"backup-archive-008","picks":["B"],"ambiguous":false},
+{"id":"backup-archive-009","picks":["B"],"ambiguous":false}
+]
