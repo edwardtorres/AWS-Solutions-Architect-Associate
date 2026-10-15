@@ -17,4 +17,4 @@ After the source-review fixes every question was blind-reviewed again from fresh
 - cache-pavilion-005 now rests on the documented DAX parameter group (record-ttl-millis).
 
 ## Left as reviewed
-- transfer-dock-011 and transfer-dock/transit-tariff Large Bandwidth Tunnel questions rely on a recent but generally available feature; kept as reserve-weight questions.
+- transfer-dock-011 and transfer-dock/transit-tariff Large Bandwidth Tunnel questions rely on a recent but generally available feature; kept (one live question in transfer-dock and one in transit-tariff); the quoted VPN tunnel options page documents it with no preview label.
