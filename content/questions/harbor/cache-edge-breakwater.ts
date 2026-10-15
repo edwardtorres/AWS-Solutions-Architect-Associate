@@ -208,13 +208,13 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'cache-edge-breakwater-011', postGuide: ['elasticache-valkey'], postGuideKey: ['elasticache-valkey'],
+    id: 'cache-edge-breakwater-011',
     building: 'cache-edge-breakwater',
     bullets: ['2.1-K3'],
     d: 1,
     tags: ['mock-reserve'],
     stem: 'A company wants a managed in-memory data store that sits between its application servers and a relational database and holds frequently read query results. The store must support the Redis OSS or Memcached engines, and the company wants the LEAST operational overhead. Which service should the company use?',
-    correct: ['Amazon ElastiCache', 'ElastiCache is a fully managed in-memory data store and cache that works with the Valkey, Memcached and Redis OSS engines.'],
+    correct: ['Amazon ElastiCache', 'ElastiCache is a fully managed in-memory data store and cache that supports the Redis OSS and Memcached engines.'],
     wrong: [
       ['Amazon DynamoDB Accelerator (DAX)', 'DAX is a caching service for DynamoDB tables and does not cache results from a relational database.'],
       ['Amazon CloudFront', 'CloudFront caches web content at edge locations and is not an in-memory store that application servers query before a database.'],

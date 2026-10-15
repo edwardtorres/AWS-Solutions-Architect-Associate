@@ -244,22 +244,20 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'certificate-office-013', postGuide: ['kms-on-demand-rotation'], postGuideKey: ['kms-on-demand-rotation'],
+    id: 'certificate-office-013',
     building: 'certificate-office',
     bullets: ['1.3-S7'],
     d: 3,
     stem: 'A company signs documents with an asymmetric RSA KMS key. Policy requires that the key material be rotated every year. Which solution BEST meets this requirement?',
-    correct: ['Create a new asymmetric KMS key and point the alias that the application uses to it', 'Asymmetric keys cannot use automatic or on-demand rotation, so they are rotated manually by switching to a new key.'],
+    correct: ['Create a new asymmetric KMS key and point the alias that the application uses to it', 'Asymmetric keys are not eligible for automatic rotation, so they are rotated manually by switching to a new key.'],
     wrong: [
       ['Enable automatic key rotation on the asymmetric KMS key', 'Automatic rotation is supported only on symmetric encryption KMS keys with key material that AWS KMS generates.'],
-      ['Run an on-demand rotation of the asymmetric KMS key every year', 'Neither automatic nor on-demand rotation is supported for asymmetric KMS keys.'],
-      ['Move the asymmetric KMS key into a custom key store and enable automatic rotation there', 'Keys in custom key stores cannot be rotated automatically or on demand either.'],
+      ['Schedule an Amazon EventBridge rule that calls AWS KMS every year to replace the key material of the existing asymmetric key', 'AWS KMS does not replace the key material of an asymmetric KMS key in place, so no API call performs this rotation.'],
+      ['Move the asymmetric KMS key into a custom key store and enable automatic rotation there', 'Keys in custom key stores are not eligible for automatic rotation either.'],
     ],
     slot: 3,
     evidence: [
       'kms-rotation|Automatic key rotation is supported only on symmetric encryption KMS keys with key material that AWS KMS generates (AWS_KMS origin).',
-      'kms-rotation|Neither automatic nor on-demand key rotation is supported for the following types of KMS keys, but you can rotate these KMS keys manually.',
-      'kms-rotation|Manual rotation is a good choice when you want to rotate KMS keys that are not eligible for automatic or on-demand key rotation, including asymmetric KMS keys, HMAC KMS keys and KMS keys in custom key stores.',
     ],
   }),
   mr({

@@ -82,22 +82,21 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'backup-archive-005', postGuide: ['backup-ebs-cold-storage'], postGuideKey: ['backup-ebs-cold-storage'],
+    id: 'backup-archive-005',
     building: 'backup-archive',
     bullets: ['4.1-K5', '4.1-S6'],
     d: 2,
-    stem: 'A company uses an AWS Backup plan to take a monthly backup of its Amazon EBS volumes. Each backup must be kept for two years and is rarely restored. The company wants the LOWEST storage cost for the long retention with the LEAST operational overhead. Which lifecycle setting meets these requirements?',
-    correct: ['Move backups to cold storage after 30 days and set the total retention period to 730 days', 'Cold storage for EBS is the Snapshots Archive tier, it needs monthly or less frequent backups and a total retention of at least 90 days.'],
+    stem: 'A company uses an AWS Backup plan to take a monthly backup of its Amazon EFS file systems. Each backup must be kept for two years and is rarely restored. The company wants the LOWEST storage cost for the long retention with the LEAST operational overhead. Which lifecycle setting meets these requirements?',
+    correct: ['Move backups to cold storage after 30 days and set the total retention period to 730 days', 'Cold storage is a lower-cost tier for long-kept backups, and it needs a total retention period of 90 days or greater, which 730 days satisfies.'],
     wrong: [
       ['Move backups to cold storage after 30 days and set the total retention period to 60 days', 'The backups must be kept for two years, so a 60-day retention period is too short, and cold storage needs a total retention period of 90 days or greater.'],
-      ['Keep every backup in warm storage for the full 730 days and do not use cold storage', 'EBS backups taken monthly can use the cheaper cold tier, so leaving two years of backups warm pays more than needed.'],
+      ['Keep every backup in warm storage for the full 730 days and do not use cold storage', 'Backups that are rarely restored can use the cheaper cold tier, so leaving two years of backups warm pays more than needed.'],
       ['Run a script on an instance that copies each backup to Amazon S3 Glacier Deep Archive', 'The script must be written and maintained, which conflicts with the least operational overhead, and it bypasses the central backup plan.'],
     ],
     slot: 2,
     evidence: [
-      'backup-create-plan|Cold storage for Amazon EBS is Amazon EBS Snapshots Archive.',
-      'aws-backup-plan-options|If Amazon EBS is one of the resources you back up and your backup frequency is monthly or less frequent, you can transition them to cold tier using EBS snapshot archival.',
-      'aws-backup-plan-options|AWS Backup requires the retention to be set for 90 days longer than the “transition to cold after days” setting.',
+      'aws-backup-plan-options|Depending on how long you choose to store your backup, you may wish to transition your backup to a lower-cost tier called cold storage.',
+      'backup-create-plan|To use cold storage, you must have a total retention period of 90 days or greater.',
     ],
   }),
   mc({

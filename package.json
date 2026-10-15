@@ -13,12 +13,13 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:layout": "tsx scripts/test-layout.ts",
+    "e2e": "playwright test",
     "fetch:official": "tsx scripts/fetch-official.ts",
     "check:content": "tsx scripts/check-content.ts",
     "check:bundle": "tsx scripts/check-bundle.ts",
     "check:hygiene": "tsx scripts/check-hygiene.ts",
     "check": "npm run typecheck && npm run lint && npm test && npm run check:content && npm run build && npm run check:bundle && npm run check:hygiene",
-    "check:all": "npm run check && npm run check:links && npm run test:layout",
+    "check:all": "npm run check && npm run check:links && npm run test:layout && npm run e2e",
     "check:links": "tsx scripts/check-links.ts",
     "page": "tsx scripts/page.ts",
     "q": "tsx scripts/q.ts",
@@ -31,6 +32,7 @@
     "react-dom": "^19.3.0"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.64.0",
     "@tailwindcss/vite": "^4.3.3",

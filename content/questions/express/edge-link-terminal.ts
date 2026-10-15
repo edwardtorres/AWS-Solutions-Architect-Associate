@@ -247,7 +247,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'edge-link-terminal-013', postGuide: ['cloudfront-oac'], postGuideKey: ['cloudfront-oac'],
+    id: 'edge-link-terminal-013',
     building: 'edge-link-terminal',
     bullets: ['3.4-K1'],
     d: 3,
@@ -255,7 +255,7 @@ const questions: Question[] = [
     stem: 'A company serves private PDF manuals from an Amazon S3 bucket through an Amazon CloudFront distribution. Viewers must always use HTTPS, and the objects must be reachable only through the distribution, never by direct S3 URLs. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Set the viewer protocol policy of the cache behavior to require HTTPS', 'The viewer protocol policy of a cache behavior can require HTTPS between viewers and CloudFront.'],
-      ['Use origin access control on the S3 origin, with a bucket policy that allows only the CloudFront service principal for this distribution', 'The bucket policy allows CloudFront to read the bucket only for requests made on behalf of the distribution, so direct S3 URLs are refused.'],
+      ['Use an origin access identity on the S3 origin, with a bucket policy that grants read access only to that identity', 'The bucket policy gives the identity permission to read the bucket, and no one else, so direct S3 URLs are refused.'],
     ],
     wrong: [
       ['Turn off S3 Block Public Access and add a bucket policy that allows public reads of the objects', 'Public reads make the objects reachable by direct S3 URLs, which the requirement forbids.'],
@@ -265,12 +265,11 @@ const questions: Question[] = [
     slots: [0, 2],
     evidence: [
       'cf-viewer-https|you change the Viewer Protocol Policy setting for one or more cache behaviors to require HTTPS communication.',
-      'cf-oac|Use an S3 bucket policy to allow the CloudFront service principal (cloudfront.amazonaws.com) to access the bucket.',
-      'cf-oac|Use a Condition element in the policy to allow CloudFront to access the bucket only when the request is on behalf of the CloudFront distribution that contains the S3 origin.',
+      'cf-oac|When you create an OAI or add one to a distribution with the CloudFront console, you can automatically update the Amazon S3 bucket policy to give the OAI permission to access your bucket.',
     ],
   }),
   mc({
-    id: 'edge-link-terminal-014', postGuide: ['direct-connect-400g'],
+    id: 'edge-link-terminal-014',
     building: 'edge-link-terminal',
     bullets: ['3.4-K4'],
     d: 2,
@@ -278,14 +277,14 @@ const questions: Question[] = [
     stem: 'A company has two 10 Gbps dedicated AWS Direct Connect connections to the same Direct Connect endpoint and needs about 20 Gbps of throughput. The company wants to manage the two connections as one logical connection. Which solution BEST meets these requirements?',
     correct: ['Create a link aggregation group and add both existing connections to it', 'A link aggregation group aggregates multiple dedicated connections at a single Direct Connect endpoint into one logical connection.'],
     wrong: [
-      ['Request a dedicated connection with a port speed of 20 Gbps and retire the two connections', 'The possible port speeds of a dedicated connection are 1, 10, 100 and 400 Gbps, so a 20 Gbps port cannot be selected.'],
+      ['Request a hosted connection with a port speed of 20 Gbps from a Direct Connect Partner and retire the two connections', 'Hosted connections are offered only at specific port speeds, and 20 Gbps is not one of them.'],
       ['Create a Direct Connect gateway and attach a private virtual interface to each connection', 'A Direct Connect gateway connects virtual interfaces to VPCs, but it does not combine the two connections into one logical connection.'],
       ['Order a third connection at a different Direct Connect location and use the three separately', 'This adds location diversity, but the connections stay separate rather than becoming one logical connection.'],
     ],
     slot: 3,
     evidence: [
       'connectivity-dx|For dedicated connections, you can also use a link aggregation group (LAG) to aggregate multiple connections at a single AWS Direct Connect endpoint.',
-      'dx-dedicated|Port speed The possible values are 1 Gbps, 10 Gbps, 100 Gbps, and 400 Gbps.',
+      'dx-hosted|Port speed For hosted connections, the possible values are 50 Mbps, 100 Mbps, 200 Mbps, 300 Mbps, 400 Mbps, 500 Mbps, 1 Gbps, 2 Gbps, 5 Gbps, 10 Gbps, and 25 Gbps.',
     ],
   }),
 ];

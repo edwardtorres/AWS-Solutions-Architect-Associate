@@ -22,7 +22,7 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'service-selection-bureau-002', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
+    id: 'service-selection-bureau-002', postGuide: ['dynamodb-price-cut-2024'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 2,
@@ -181,7 +181,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'service-selection-bureau-010', postGuide: ['dynamodb-price-cut-2024'], postGuideKey: ['dynamodb-price-cut-2024'],
+    id: 'service-selection-bureau-010', postGuide: ['dynamodb-price-cut-2024'],
     building: 'service-selection-bureau',
     bullets: ['4.3-S3'],
     d: 3,
@@ -194,7 +194,7 @@ const questions: Question[] = [
     wrong: [
       ['Keep the Standard table class and add a replica table in a second Region', 'A replica copies all the data again, which adds to the storage cost instead of lowering it.'],
       ['Copy the order history into a Multi-AZ Amazon RDS DB instance', 'The company would pay for a DB instance and a standby on top of storage, and it would manage a server.'],
-      ['Keep the Standard table class and keep the table in on-demand mode', 'The table already uses on-demand mode, so this is no change, and on-demand is not the lower-cost mode for steady, forecastable traffic.'],
+      ['Keep the Standard table class and keep the table in on-demand mode', 'The table already uses on-demand mode, so this is no change, and it does not use the capacity forecast or the steady traffic.'],
     ],
     slots: [1, 2],
     evidence: [

@@ -363,12 +363,12 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'scaling-floodgate-019', postGuide: ['metric-math-target-tracking'], postGuideKey: ['metric-math-target-tracking'],
+    id: 'scaling-floodgate-019',
     building: 'scaling-floodgate',
     bullets: ['2.1-S2'],
     d: 3,
-    stem: 'A video-processing application runs worker instances in an Auto Scaling group that read jobs from an Amazon SQS queue. The jobs spend most of their time waiting on a remote service, so CPU utilization stays low even when the queue is long. The company wants the group to scale so that each instance has a steady number of waiting jobs, with the LEAST custom code. Which solution BEST meets these requirements?',
-    correct: ['Create a target tracking policy on a backlog-per-instance metric that is built with metric math', 'The number of messages per instance changes in proportion to group size, so it works as a target tracking metric, and metric math avoids publishing a custom metric.'],
+    stem: 'A video-processing application runs worker instances in an Auto Scaling group that read jobs from an Amazon SQS queue. The jobs spend most of their time waiting on a remote service, so CPU utilization stays low even when the queue is long. The company wants the group to scale so that each instance has a steady number of waiting jobs. Which solution BEST meets these requirements?',
+    correct: ['Publish a backlog-per-instance custom metric to Amazon CloudWatch and create a target tracking policy on it', 'The number of messages per instance changes in proportion to group size, so it works as a target tracking metric once it is published as a custom metric.'],
     wrong: [
       ['Create a target tracking policy directly on the ApproximateNumberOfMessagesVisible queue metric', 'The queue length does not change in proportion to the size of the group that processes it, so it is not suitable for target tracking.'],
       ['Create a target tracking policy on average CPU utilization of the group with a target of 50 percent', 'The jobs wait on a remote service, so CPU stays low whatever the queue length and the group would not scale on the backlog.'],
@@ -378,8 +378,7 @@ const questions: Question[] = [
     evidence: [
       'asg-sqs|The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain.',
       'asg-sqs|The issue with using a CloudWatch Amazon SQS metric like ApproximateNumberOfMessagesVisible for target tracking is that the number of messages in the queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue.',
-      'asg-target-tracking|Instead of publishing new metrics to use in your scaling policy, you can use metric math to combine existing metrics.',
-      'asg-sqs|However, you can now save the cost and effort put into publishing your own metric by using metric math.',
+      'asg-sqs|The following information and steps shows you how to calculate the Amazon SQS queue backlog per instance using the ApproximateNumberOfMessages queue attribute before publishing it as a custom metric to CloudWatch.',
     ],
   }),
   mc({

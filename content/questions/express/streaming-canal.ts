@@ -21,13 +21,13 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'streaming-canal-002', postGuide: ['firehose-zero-buffering'], postGuideKey: ['firehose-zero-buffering'],
+    id: 'streaming-canal-002',
     building: 'streaming-canal',
     bullets: ['3.5-K2'],
     d: 2,
     tags: ['trap:kds-vs-firehose'],
     stem: 'Web servers produce application logs continuously. The company wants the logs stored in Amazon S3 as objects roughly every five minutes for later analysis. A delay of a few minutes is acceptable, and the company does not want to write or run any consumer code. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['Send the logs to Amazon Data Firehose with S3 as the destination and a buffer interval of 300 seconds', 'Firehose buffers incoming data by size or time, here five minutes, and delivers it to S3 with no applications to write.'],
+    correct: ['Send the logs to Amazon Data Firehose with S3 as the destination and a buffer interval of five minutes', 'Firehose buffers incoming data by size or time, here five minutes, and delivers it to S3 with no applications to write.'],
     wrong: [
       ['Send the logs to Amazon Kinesis Data Streams and run a consumer application on Amazon EC2 that writes files to S3', 'It works, but the company would write and operate the consumer, which it wants to avoid.'],
       ['Send the logs to an Amazon MSK cluster and write a Kafka consumer that stores the records in S3 every five minutes', 'A Kafka cluster and a custom consumer must both be run, which is far more than a managed delivery service.'],
@@ -37,7 +37,7 @@ const questions: Question[] = [
     evidence: [
       'firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.',
       'firehose|With Amazon Data Firehose, you don\'t need to write applications or manage resources.',
-      'firehose-faqs|You can configure the values for S3 buffer size (1 MB to 128 MB) or buffer interval (0 to 900 seconds), and the condition satisfied first triggers data delivery to Amazon S3.',
+      'firehose-faqs|The frequency of data delivery to Amazon S3 is determined by the S3 buffer size and buffer interval value you configured for your Firehose stream.',
     ],
   }),
   mc({
@@ -253,21 +253,22 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'streaming-canal-014', postGuide: ['firehose-zero-buffering'], postGuideKey: ['firehose-zero-buffering'],
+    id: 'streaming-canal-014',
     building: 'streaming-canal',
     bullets: ['3.5-K2'],
     d: 2,
     tags: ['mock-reserve', 'trap:kds-vs-firehose'],
-    stem: 'An Amazon Data Firehose stream delivers events to Amazon S3. The analysts want objects of about 64 MB for efficient queries, but new data must appear in S3 within 10 minutes even in quiet periods. Which buffering configuration meets these requirements?',
-    correct: ['A buffer size of 64 MB and a buffer interval of 600 seconds', 'Whichever condition is satisfied first triggers delivery, and both values are within the allowed ranges.'],
+    stem: 'An Amazon Data Firehose stream delivers events to Amazon S3. Analysts report that the stream writes a very large number of tiny objects, which slows their queries. The company wants larger objects with the LEAST change and no new code. Which action meets these requirements?',
+    correct: ['Increase the S3 buffer size and buffer interval values on the Firehose stream', 'The frequency of delivery to S3 is determined by the buffer size and buffer interval, so larger values produce fewer, larger objects with no new code.'],
     wrong: [
-      ['A buffer size of 256 MB and a buffer interval of 600 seconds', 'The S3 buffer size can be set only from 1 MB to 128 MB, so 256 MB cannot be configured.'],
-      ['A buffer size of 64 MB and a buffer interval of 1,200 seconds', 'The S3 buffer interval can be set only from 0 to 900 seconds, and 1,200 seconds would also exceed the 10-minute limit.'],
-      ['A buffer size of 1 MB and a buffer interval of 0 seconds', 'It would deliver tiny objects almost at once, not the objects of about 64 MB that the analysts want.'],
+      ['Decrease the S3 buffer size and buffer interval values on the Firehose stream', 'Smaller values trigger delivery more often, which produces even more small objects.'],
+      ['Add shards to the Firehose stream to raise its capacity', 'Firehose needs no resources to manage, so there are no shards to add, and capacity does not control object size.'],
+      ['Replace Firehose with Amazon Kinesis Data Streams and an EC2 consumer that batches records into files', 'It needs a consumer application that the company must write and operate, which is much more than changing a setting.'],
     ],
     slot: 2,
     evidence: [
-      'firehose-faqs|You can configure the values for S3 buffer size (1 MB to 128 MB) or buffer interval (0 to 900 seconds), and the condition satisfied first triggers data delivery to Amazon S3.',
+      'firehose-faqs|The frequency of data delivery to Amazon S3 is determined by the S3 buffer size and buffer interval value you configured for your Firehose stream.',
+      'firehose|With Amazon Data Firehose, you don\'t need to write applications or manage resources.',
     ],
   }),
 ];

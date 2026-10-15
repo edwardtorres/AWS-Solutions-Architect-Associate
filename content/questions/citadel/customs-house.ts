@@ -349,7 +349,7 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'customs-house-018', postGuide: ['vpn-large-bandwidth-tunnel'],
+    id: 'customs-house-018',
     building: 'customs-house',
     bullets: ['1.2-S4'],
     d: 2,
@@ -360,7 +360,7 @@ const questions: Question[] = [
       ['Create a second Site-to-Site VPN connection that uses the same virtual private gateway and the new customer gateway', 'A second VPN connection through the second device protects against loss of connectivity if one device becomes unavailable.'],
     ],
     wrong: [
-      ['Turn on the Large Bandwidth Tunnel option on the existing connection', 'It raises the bandwidth of a tunnel, but both tunnels still end on the same device.'],
+      ['Configure both tunnels of the existing connection with different pre-shared keys', 'The connection already has two tunnels, but both end on the same customer gateway device, which remains a single point of failure.'],
       ['Create a Client VPN endpoint for the data center network', 'Client VPN connects individual clients and does not give the network a second path.'],
       ['Add a NAT gateway in each Availability Zone of the VPC', 'A NAT gateway gives private subnets outbound internet access and does not add a path to the data center.'],
     ],
@@ -368,7 +368,7 @@ const questions: Question[] = [
     evidence: [
       'vpn-redundant|To protect against a loss of connectivity in case your customer gateway device becomes unavailable, you can set up a second Site-to-Site VPN connection to your VPC and virtual private gateway by adding a second customer gateway device.',
       'vpn-redundant|Set up a second Site-to-Site VPN connection by using the same virtual private gateway and creating a new customer gateway.',
-      's2s-vpn|Large Bandwidth Tunnel : A tunnel configuration that supports up to 5 Gbps bandwidth per tunnel, compared to the standard 1.25 Gbps.',
+      'vpn-tunnels|Each Site-to-Site VPN connection has two tunnels, with each tunnel using a unique public IP address.',
     ],
   }),
 ];

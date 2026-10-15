@@ -20,19 +20,18 @@ const questions: Question[] = [
     ],
   }),
   mc({
-    id: 'safe-harbor-account-002', postGuide: ['iam-passkey-mfa'], postGuideKey: ['iam-passkey-mfa'],
+    id: 'safe-harbor-account-002',
     building: 'safe-harbor-account',
     d: 2,
     stem: 'A company wants to add MFA to the root user of a new account. The security team wants the MOST phishing-resistant option. Which MFA type should it choose?',
-    correct: ['A passkey or security key', 'Passkeys and security keys are FIDO-based, use public key cryptography and resist phishing, man-in-the-middle and replay attacks.'],
+    correct: ['A FIDO security key', 'FIDO-based security keys use public key cryptography and resist phishing, man-in-the-middle and replay attacks.'],
     wrong: [
       ['A virtual authenticator application generating one-time codes', 'This is a TOTP-based option, which AWS describes as a weaker level of security than FIDO-based authenticators.'],
-      ['A hardware TOTP token', 'It is a TOTP-based option, which is not the phishing-resistant choice that AWS recommends first.'],
+      ['A hardware TOTP token', 'It is a TOTP-based option, which is a weaker level of security than a FIDO-based authenticator.'],
       ['A longer root user password and no second factor', 'A password alone is a single factor and does not add the second authentication factor that MFA provides.'],
     ],
     slot: 1,
     evidence: [
-      'iam-mfa|We recommend that you use phishing-resistant MFA such as passkeys and security keys whenever possible.',
       'iam-mfa|These FIDO-based authenticators use public key cryptography and are resistant to phishing, man-in-the-middle, and replay attacks, providing a stronger level of security than TOTP-based options.',
     ],
   }),
