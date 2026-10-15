@@ -1,0 +1,88 @@
+[
+ {
+  "id": "read-replica-annex-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-005",
+  "verdict": "OK",
+  "issues": [
+   "Verified: Aurora Global Database writer endpoint is documented and always points to the primary cluster writer, so the wrong option's why is true."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-010",
+  "verdict": "OK",
+  "issues": [
+   "Theme overlaps -003 (cross-Region read replica) but for latency vs DR; acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-011",
+  "verdict": "OK",
+  "issues": [
+   "Verified: rds-multi-az states a Multi-AZ DB cluster has standby DB instances that provide failover and can serve read traffic, while a Multi-AZ DB instance standby does not. Key sound for RDS for MySQL. Wrong option 2 genuinely fails the 'no separate read replica instances' requirement. Judged OK."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-012",
+  "verdict": "OK",
+  "issues": [
+   "Verified: the three keyed steps are exactly the three steps listed in the RDS promotion page under 'Implementing failure recovery' (promote, direct traffic, create replacement replica). Stem says 'restore service'; the third step restores a replica rather than service. Consider 'complete the documented recovery procedure' wording. No wrong option is defensible."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "read-replica-annex-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

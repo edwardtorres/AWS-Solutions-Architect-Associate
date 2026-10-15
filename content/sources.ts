@@ -607,6 +607,9 @@ const sources: Source[] = [
   aws('cw-usage-metrics', `${D}/AmazonCloudWatch/latest/monitoring/CloudWatch-Usage-Metrics.html`, 'AWS usage metrics (Amazon CloudWatch)'),
   aws('cf-origin-failover', `${D}/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html`, 'Optimize high availability with CloudFront origin failover'),
   aws('asg-instance-refresh-rollback', `${D}/autoscaling/ec2/userguide/instance-refresh-rollback.html`, 'Undo changes with a manual or auto rollback (Amazon EC2 Auto Scaling)'),
+  aws('microservices', 'https://aws.amazon.com/microservices/', 'Microservices on AWS'),
+  aws('fargate-pricing', 'https://aws.amazon.com/fargate/pricing/', 'AWS Fargate pricing'),
+  aws('alb-rule-conditions', `${D}/elasticloadbalancing/latest/application/rule-condition-types.html`, 'Condition types for listener rules'),
 ];
 
 export default sources;

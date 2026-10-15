@@ -1,0 +1,65 @@
+[
+ {
+  "id": "cache-pavilion-001",
+  "verdict": "OK",
+  "issues": [
+   "Evidence table compares Memcached/Redis OSS/Valkey features; confirm the quoted table row includes the Valkey column on the live page (check:links covers verbatim)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-005",
+  "verdict": "FIX",
+  "issues": [
+   "Mechanism is imprecise. The DAX Developer Guide (cluster management, 'Configuring TTL settings') says TTLs are set through a parameter group (record-ttl-millis for the item cache), a custom parameter group is chosen when a cluster is launched, and 'you can modify a parameter group attached to a running DAX cluster' (changes apply only to items written afterwards; the default parameter group cannot be modified). The key says 'create a new DAX cluster with an item cache TTL of 30 seconds', which is supported by the dax-concepts sentence but hides the parameter group and is not clearly the 'LEAST change' (a custom parameter group on the cluster is). A knowledgeable candidate can argue a better, unlisted answer; none of the listed wrong options is defensible, so the key is still the best listed.",
+   "Evidence does not cover the parameter-group mechanism or that parameter changes apply only to newly written items."
+  ],
+  "suggestedFix": "Reword the key to 'Create a custom DAX parameter group that sets the item cache TTL to 30 seconds and launch a new DAX cluster that uses it', cite the DAX cluster-management page ('If you want to use different TTL settings, you can launch a DAX cluster using a custom parameter group'), and either drop 'with the LEAST change' or accept that repointing the app is the cost."
+ },
+ {
+  "id": "cache-pavilion-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-007",
+  "verdict": "OK",
+  "issues": [
+   "Verified: the key is a direct AWS statement (elasticache-strategies: reading from replicas instead of the primary can significantly improve performance for serverless caches). Wrong options fail stated constraints. OK."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "cache-pavilion-009",
+  "verdict": "OK",
+  "issues": [
+   "Uses 'ElastiCache for Redis OSS' while -001 uses Valkey; both names are current on the engines page, but vary consistently. Valkey also supports Pub/Sub, so it would be equally correct if offered; it is not offered."
+  ],
+  "suggestedFix": ""
+ }
+]

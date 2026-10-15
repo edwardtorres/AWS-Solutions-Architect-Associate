@@ -1,0 +1,88 @@
+[
+ {
+  "id": "turbine-hall-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-004",
+  "verdict": "OK",
+  "issues": [
+   "Predictive scaling is not offered as an option, so scheduled is the unique best; fine. Topic overlaps 005 and 008 (scheduled vs predictive vs dynamic) but each tests a distinct decision."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-006",
+  "verdict": "FIX",
+  "issues": [
+   "Names 'Application Auto Scaling' in stem-level key and explanation. It is not on the exam guide in-scope list (the list has 'AWS Auto Scaling' and 'Amazon EC2 Auto Scaling'); nv-aws-auto-scaling-plans says scaling plans are not stated current. The facts are well documented (appas-what-is lists ECS services and DynamoDB tables), so the key is technically right, but the service name breaks the 'in-scope names only' rule."
+  ],
+  "suggestedFix": "Lead decision: either accept Application Auto Scaling as the documented engine behind AWS Auto Scaling (add to exam-era/naming notes) or rewrite the key as 'scaling policies from the AWS Auto Scaling family that cover ECS and DynamoDB' with the same evidence. Same issue in any other building that names it."
+ },
+ {
+  "id": "turbine-hall-007",
+  "verdict": "OK",
+  "issues": [
+   "Verified: asg-warm-pools describes pre-initialized instances, Stopped state minimises cost, and the long-boot / write-data-to-disk example matches the stem. Key sound; step-scaling-earlier and min-capacity options genuinely fail the cost or boot-time requirement."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "turbine-hall-013",
+  "verdict": "OK",
+  "issues": [
+   "Key rests on documented UDP listeners, static entry IPs and health routing. Wrong-option CloudFront 'does not provide UDP entry points' is not directly quoted but true; fine."
+  ],
+  "suggestedFix": ""
+ }
+]

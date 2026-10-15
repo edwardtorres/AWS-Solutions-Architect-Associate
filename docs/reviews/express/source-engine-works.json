@@ -1,0 +1,90 @@
+[
+ {
+  "id": "engine-works-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-004",
+  "verdict": "OK",
+  "issues": [
+   "Theme overlaps engine-works-002 (about three-hour containerised jobs, no EC2 management, cost-minded). Different answers (Fargate Spot vs Batch), so acceptable but vary the job length or workload in one of them."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-008",
+  "verdict": "OK",
+  "issues": [
+   "Fine: 6 GB file vs 10,240 MB maximum ephemeral storage is documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-009",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option rests on 'Compute Optimizer supports only x86_64 for Lambda', which the live lambda-memory page states today; documented but a fact that may change. Key (Power Tuning) is documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-010",
+  "verdict": "FIX",
+  "issues": [
+   "Stem asks for 'better performance and price performance'. arm64 is documented for price performance; 'increase memory' is documented only for more CPU (performance) and the cited quote says nothing about price performance or lower cost. Not a defensible second answer in a wrong way: no wrong option (timeout, reserved concurrency, EC2 container) competes, so memory is the only viable second key, but the pair is chosen by elimination and the 'price performance' clause is not supported for the memory option."
+  ],
+  "suggestedFix": "Reword the qualifier to 'faster execution and better price performance' (or just 'better performance') and keep the explanation to the documented fact that CPU scales in proportion to memory; do not claim price performance for the memory option."
+ },
+ {
+  "id": "engine-works-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-012",
+  "verdict": "OK",
+  "issues": [
+   "EMR Serverless is a feature of Amazon EMR (in scope); documented key."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "engine-works-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

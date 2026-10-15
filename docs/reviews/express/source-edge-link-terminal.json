@@ -1,0 +1,110 @@
+[
+ {
+  "id": "edge-link-terminal-001",
+  "verdict": "OK",
+  "issues": [
+   "Key quotes document CloudFront caching of dynamic and static content; the 60-second identical-response premise is a scenario assumption (cache TTL), acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-005",
+  "verdict": "OK",
+  "issues": [
+   "Real-world caveat: the HTML pages that reference the new file names are themselves cached for the long duration, so the scenario implicitly assumes the pages are served with a short cache time or are also versioned. The key still follows the documented AWS recommendation (version identifiers in file names). Optionally add 'the pages are not cached long' to the stem."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-006",
+  "verdict": "FIX",
+  "issues": [
+   "Documented in the DX encryption page (VPN over Direct Connect public virtual interface gives IPsec-encrypted private connection).",
+   "Near-duplicate of customs-house-008 (citadel) and transfer-dock-014: Direct Connect is not encrypted by default, add Site-to-Site VPN on top for IPsec."
+  ],
+  "suggestedFix": "Keep only one such item across the bank; if kept here, make the stem distinct (steady high-volume plus private)."
+ },
+ {
+  "id": "edge-link-terminal-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-008",
+  "verdict": "OK",
+  "issues": [
+   "Stem nearly restates the custom-routing definition (d3 rating generous), but the key is documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-009",
+  "verdict": "DROP",
+  "issues": [
+   "Near-duplicate of grid-planning-office-004 (overlapping CIDRs between two VPC owners: answer PrivateLink endpoint service behind an NLB); the cross-bank pair tests the same decision. Key is documented and sound.",
+   "Wrong option 3 (Site-to-Site VPN between the company VPC and each customer VPC) is not a native VPC-to-VPC feature (VPN connects a VGW/transit gateway to a customer gateway device); the same unsupported construct as in grid-planning-office-010/011.",
+   "Near-identical duplicate of customs-house-005 (citadel): SaaS app behind an NLB, hundreds of customer accounts with overlapping CIDRs, answer is an endpoint service plus interface endpoints; also overlaps grid-planning-office-004."
+  ],
+  "suggestedFix": "Differentiate from grid-planning-office-004 (e.g. add the many-customers, per-customer-account, cross-account access-approval angle or the Gateway/Network LB endpoint service acceptance setting), and replace the VPN option with a real alternative such as 'Share the company subnets with each customer by using AWS Resource Access Manager' or 'Publish the API behind an internet-facing load balancer and restrict by security group'. Drop this item."
+ },
+ {
+  "id": "edge-link-terminal-010",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 2 (Outposts at players' homes) is somewhat absurd but its why is accurate."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-011",
+  "verdict": "OK",
+  "issues": [
+   "Route 53 latency routing is documented. Global Accelerator would also work but is not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-012",
+  "verdict": "FIX",
+  "issues": [
+   "Correct option 1 ('Use the Direct Connect Resiliency Toolkit connection wizard') is a tooling/workflow action, not an architecture decision: the wizard only orders connections that option 2 already describes (connections at multiple locations). The two keys overlap, and the wizard is not required to meet the requirement, so the pair does not cleanly test a resilient design; the documented fact ('best practice is to use the Connection wizard') is a recommendation, not a requirement. A candidate who skips the wizard and orders connections at two locations meets the stem, so option 1 is arguably not necessary.",
+   "The stem says 'HIGHEST resiliency' (the documented Maximum resiliency model is connections at two or more locations, each with redundant connections/devices), but neither key states redundant connections per location or separate customer routers.",
+   "Also overlaps customs-house-012 (citadel), which already tests maximum resiliency (separate connections on separate devices in more than one location) without the toolkit wizard."
+  ],
+  "suggestedFix": "Make the two keys design actions: (a) order dedicated connections at more than one Direct Connect location, and (b) terminate redundant connections on separate customer routers (or two connections per location, the Maximum resiliency model). Keep the toolkit only as a quote in the explanation, not as an option. If kept, make it distinct from customs-house-012 or drop it."
+ },
+ {
+  "id": "edge-link-terminal-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "edge-link-terminal-014",
+  "verdict": "FIX",
+  "issues": [
+   "Documented: dedicated port speeds start at 1 Gbps; hosted connections via Partners in smaller capacities (the hosted quote lists capacities, 'about 200 Mbps' is within it). Available hosted capacities vary by partner; acceptable.",
+   "Near-duplicate of transfer-dock-009 (about 200 Mbps private connection, hosted connection via a Partner versus dedicated 1 Gbps port)."
+  ],
+  "suggestedFix": "Drop one of edge-link-terminal-014 and transfer-dock-009."
+ }
+]

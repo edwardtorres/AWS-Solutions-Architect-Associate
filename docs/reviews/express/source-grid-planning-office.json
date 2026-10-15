@@ -1,0 +1,118 @@
+[
+ {
+  "id": "grid-planning-office-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-002",
+  "verdict": "FIX",
+  "issues": [
+   "Inputs are quoted (first four + last address reserved; 128 addresses per half of a /24; /16 and /28 limits), and /25 = 128 addresses is basic prefix arithmetic, so the key (/25, 123 usable) is sound.",
+   "Wrong option 'A /16 block, with 65,536 addresses available for use in the subnet' is inaccurate: five addresses are reserved in any subnet, so 65,536 are not available for use. The option text contradicts the reservation rule the question teaches.",
+   "No quote states that a /25 holds 128 addresses directly (the 'two subnets, each supporting 128' quote is about halves of a /24); acceptable derived inference."
+  ],
+  "suggestedFix": "Reword the /16 option to 'A /16 block, with 65,536 addresses of which 65,531 remain after the reserved addresses' (or drop the 'available for use' phrase)."
+ },
+ {
+  "id": "grid-planning-office-003",
+  "verdict": "OK",
+  "issues": [
+   "Minor: the route-table quote only shows destination/target structure, not that 0.0.0.0/0 to a NAT gateway is the pattern; key still rests on the NAT gateway quote. Optionally add the vpc-nat-gateway sentence about the private subnet route table."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-004",
+  "verdict": "OK",
+  "issues": [
+   "PrivateLink for overlapping CIDRs also appears in customs-house-005 and edge-link-terminal-009; keep only one of these three."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-005",
+  "verdict": "OK",
+  "issues": [
+   "mock-reserve; documented (route priority page, longest prefix). Wrong options are clearly wrong."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-006",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 1 (all public + security groups) is workable in practice; it is rejected only by the 'protected from direct internet access' requirement and the AWS recommendation quote. Acceptable for a d1 BEST question.",
+   "Partly overlaps gatehouse-022 (citadel: public/private subnet layout across two AZs) but with a different qualifier."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-007",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 2 (pairwise peering) genuinely works; it loses only on LEAST operational overhead, which the why states."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-008",
+  "verdict": "OK",
+  "issues": [
+   "Evidence quotes 'A VPN connection to a transit gateway' / 'An AWS Direct Connect gateway' are bare list fragments of the attachment-types list; they confirm attachability only weakly. The first quote (interconnects VPCs and on-premises networks) carries the key.",
+   "Near-duplicate theme with 007 and 011 (hub vs peering) but different tested point."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-009",
+  "verdict": "OK",
+  "issues": [
+   "Correct option 2 does not say how shared-services attachments are handled; it is acceptable because shared services belong to the production domain in the scenario. Documented: multiple TGW route tables, one association per attachment, propagation."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-010",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 'Site-to-Site VPN connection from each consumer VPC to the billing VPC through virtual private gateways' describes an unsupported topology: a Site-to-Site VPN connects a virtual private gateway/transit gateway to a customer gateway device, not one VGW to another VGW. The option is partly invented, and its why ('builds a network-level link between the VPCs') rests on that.",
+   "Key (PrivateLink, least exposure) is documented and sound."
+  ],
+  "suggestedFix": "Replace the VPN option with a real alternative, e.g. 'Share the billing VPC subnets with the consumer accounts by using AWS Resource Access Manager' or 'An AWS Direct Connect gateway linking the consumer VPCs', with a why naming broader network reach; or reword the VPN option to a VPN through a customer gateway software appliance."
+ },
+ {
+  "id": "grid-planning-office-011",
+  "verdict": "FIX",
+  "issues": [
+   "Key (TGW per Region + peering attachment) is documented.",
+   "Wrong option 3 'Site-to-Site VPN connection between every pair of VPCs across the two Regions over the internet' is not a native VPC-to-VPC feature (needs a customer gateway appliance); same flaw as 010, lower severity because the why (full mesh) still holds."
+  ],
+  "suggestedFix": "Reword option 3 to 'Run software VPN appliances in each VPC and connect every pair over the internet', or replace with a real alternative such as a Direct Connect gateway for each VPC pair."
+ },
+ {
+  "id": "grid-planning-office-012",
+  "verdict": "OK",
+  "issues": [
+   "Inputs quoted (/16 = 65,536, allowed /16-/28). Key is an inference ('largest block avoids rework'), but 001 in the same building says CIDR blocks can be added later, so /24 is 'more rework' not impossible; the stem's 'avoid rework' qualifier makes it acceptable. Reserved-address quote is not needed for the key."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-013",
+  "verdict": "OK",
+  "issues": [
+   "Wrong option 3 (peering between subnets and the transit gateway) is conceptually nonsensical rather than a real feature, but it is plainly wrong and its why is accurate. Bullet 3.4-S2 is loosely tested; 3.4-S1 fits better."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "grid-planning-office-014",
+  "verdict": "OK",
+  "issues": [
+   "Partial overlap with 004 (peering and overlapping CIDRs) but tests planning ahead; acceptable."
+  ],
+  "suggestedFix": ""
+ }
+]

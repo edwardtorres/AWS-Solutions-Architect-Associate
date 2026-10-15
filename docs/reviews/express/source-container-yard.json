@@ -1,0 +1,89 @@
+[
+ {
+  "id": "container-yard-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-002",
+  "verdict": "OK",
+  "issues": [
+   "Second key (quota increase) is only required because the stem adds 'total demand exceeds the Regional limit'; reserved concurrency alone would let order-lookup keep running. Defensible but stem-constructed; consider dropping that clause or asking for the two actions explicitly."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-004",
+  "verdict": "OK",
+  "issues": [
+   "SnapStart no-extra-charge for Java is documented (lambda-snapstart); wording 'no extra charge' in the stem is a cost cue, not a price. Fine."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-007",
+  "verdict": "OK",
+  "issues": [
+   "Application Auto Scaling appears only in the explanations, with documented support; fine."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-008",
+  "verdict": "FIX",
+  "issues": [
+   "Key option text names 'Application Auto Scaling', which is not on the exam guide in-scope list (documented fact itself is sound: ecs-autoscaling backlog-per-task and minimum capacity 0)."
+  ],
+  "suggestedFix": "Lead decision on naming (same issue as turbine-hall-006). If kept, add Application Auto Scaling to exam-era/naming notes; or word the key as 'ECS service auto scaling with a backlog-per-task metric and minimum capacity 0'."
+ },
+ {
+  "id": "container-yard-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-010",
+  "verdict": "FIX",
+  "issues": [
+   "Key and a wrong option name 'Application Auto Scaling', not on the in-scope list. Documented fact is sound (scheduled actions for ECS services). Also the stem is a trivial recall item with a giveaway pairing (the only option naming the ECS-side service)."
+  ],
+  "suggestedFix": "Reword to 'scheduled scaling actions for the ECS service' without the service name, or accept per lead decision on Application Auto Scaling."
+ },
+ {
+  "id": "container-yard-011",
+  "verdict": "OK",
+  "issues": [
+   "Verified: lambda-snapstart states SnapStart does not support provisioned concurrency, EFS or ephemeral storage greater than 512 MB; and recommends provisioned concurrency for strict cold-start needs. Key (PC on alias with EFS mount) sound; reserved concurrency and SnapStart options genuinely fail. Note the 4 GB ephemeral option is a wrong-option fact that needs the live page to stay true."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "container-yard-012",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of turbine-hall-005 (predictive scaling for a daily/weekly pattern with varying peaks, same 'schedule every hour of the week' and 'raise the minimum to the largest peak' distractors), transposed from EC2 to ECS.",
+   "Key rests on ecs-autoscaling, which does document predictive scaling for ECS services (not marked preview there), so the fact is sound. Names 'Application Auto Scaling' (not on in-scope list)."
+  ],
+  "suggestedFix": "Drop one of the pair or change this one to a different decision (e.g. predictive vs target tracking for a growing steady trend) and rephrase distractors; resolve the Application Auto Scaling naming."
+ }
+]

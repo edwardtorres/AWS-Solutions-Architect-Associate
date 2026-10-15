@@ -1,0 +1,119 @@
+[
+ {
+  "id": "refinery-001",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate across buildings of data-lake-reservoir-004 (Glue crawler keeps Data Catalog tables current for Athena over new S3 prefixes, with the LEAST effort). Same decision, same quotes (glue-catalog crawler sentence).",
+   "Key itself is documented and sound."
+  ],
+  "suggestedFix": "Keep one of the two. Differentiate refinery-001 (for example, focus on schema evolution and the Data Catalog as a metastore shared by Athena and EMR), or drop it given refinery-013 also tests the Data Catalog."
+ },
+ {
+  "id": "refinery-002",
+  "verdict": "OK",
+  "issues": [
+   "Documented: Glue streaming ETL ingests from Kinesis Data Streams, serverless. Managed Service for Apache Flink would also fit but is not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-003",
+  "verdict": "OK",
+  "issues": [
+   "Option 2 wording 'run after the job' is a scheduling inference (crawlers run on a schedule or by trigger/workflow); the quote 'Schedule when crawlers run' supports a schedule but not ordering. Acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-004",
+  "verdict": "OK",
+  "issues": [
+   "FindMatches and sensitive data detection are both documented on the Glue page. The stem's 'imperfect matches' mirrors the feature name, but the item is d3 on breadth only; acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-005",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps 007 (EMR Serverless) but tests a different property."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-006",
+  "verdict": "OK",
+  "issues": [
+   "Lambda 15-minute limit is quoted from lambda-quotas. ECS on AWS Fargate would also run the container but is not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-007",
+  "verdict": "OK",
+  "issues": [
+   "Documented verbatim (pre-initialized resources for responses within seconds). Niche setting, but the stem supplies the cue; note pre-initialized capacity keeps warm resources, which sits slightly oddly with 'sporadic usage', yet the qualifier is BEST for seconds-level response."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-008",
+  "verdict": "OK",
+  "issues": [
+   "AWS Glue (serverless Spark) could be defended as an alternative, but it is not offered, and the stem asks for a managed platform for the Spark framework, which is the EMR description."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-009",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps data-lake-reservoir-006 (convert CSV to Parquet) in concept; difficulty 1 and plain, acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-010",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of data-lake-reservoir-011 (Athena CTAS to write Parquet) and of refinery-009; CTAS to Parquet is tested in three places.",
+   "Key itself is documented (CTAS format property; CTAS converts to Parquet in one step)."
+  ],
+  "suggestedFix": "Keep the SQL-only-team CTAS item here and rewrite data-lake-reservoir-011 (already flagged), or merge 009 and 010 by dropping one."
+ },
+ {
+  "id": "refinery-011",
+  "verdict": "OK",
+  "issues": [
+   "Documented: MSCK REPAIR TABLE works only with Hive-style partitions. Wrong option 1 is wrong for that reason. ALTER TABLE ADD PARTITION is also a single command per partition, but it is only mentioned inside a why, not offered."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-012",
+  "verdict": "FIX",
+  "issues": [
+   "Key is sound (Glue scheduled job plus crawler), but near-duplicates refinery-003 (scheduled Glue job plus scheduled crawler) and data-lake-reservoir-004.",
+   "Wrong option 2 (Lambda per CSV file, about 6 GB each) is not clearly wrong: its why hedges ('is a risk'). A Lambda function can be serverless and convert a file of this size within the limits, so it meets 'without servers'; it loses only on custom code and a missing catalog update. A candidate could defend it, and the hedged why does not name a hard failure."
+  ],
+  "suggestedFix": "Strengthen the Lambda option's failure: raise file size so a single file cannot finish in 15 minutes or exceeds the ephemeral storage limit, or state in the why that it needs custom code and has no Data Catalog update. Differentiate the scenario from refinery-003 (for example, remove the crawler and ask about schema or format conversion only)."
+ },
+ {
+  "id": "refinery-013",
+  "verdict": "OK",
+  "issues": [
+   "mock-reserve; overlaps the Data Catalog theme of 001, acceptable at difficulty 1."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "refinery-014",
+  "verdict": "FIX",
+  "issues": [
+   "Glue streaming ETL ingesting from Amazon MSK, built on Spark Structured Streaming and loading to S3 is documented (glue-components quotes), so option 1 is sound.",
+   "Option 2 ('Describe the stream schema in a Data Catalog table, or enable schema detection') is a hedge with 'or', so it is satisfied by almost any configuration; it is not an architectural requirement and not shown to be required (a streaming job can also be defined with direct source options). As a 'choose two' it is an inferred detail rather than a documented requirement, and the other three options are obviously wrong, so the item reduces to 'pick Glue'.",
+   "The 'Lambda does not run continuously' why is overstated for Lambda with an MSK event source mapping, though the option says 'on a schedule', so the option is still wrong."
+  ],
+  "suggestedFix": "Convert to a single-answer multiple choice (Glue streaming ETL job vs EMR cluster vs Lambda vs Batch), or make the second correct action a documented prerequisite such as 'Create an AWS Glue connection to the MSK cluster in the VPC' with a supporting quote."
+ }
+]

@@ -1,0 +1,72 @@
+[
+ {
+  "id": "express-rail-hub-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-002",
+  "verdict": "OK",
+  "issues": [
+   "Amazon MQ distractor why says 'recommended for migrating existing brokers'; the cited page only says you can migrate existing brokers without rewriting code. Soften wording to the quoted fact."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-003",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of message-quay-011 (Harbor): same default 30 s visibility timeout, workers needing more time, duplicate processing, key 'increase visibility timeout'. The extra ChangeMessageVisibility option does add a documented second fact, but the scenario and first key are the same."
+  ],
+  "suggestedFix": "Rewrite around a different angle (e.g. crash recovery with variable job length, where ChangeMessageVisibility heartbeats are the point) or drop one of the two; keep Harbor's and remove/rework this one."
+ },
+ {
+  "id": "express-rail-hub-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-006",
+  "verdict": "OK",
+  "issues": [
+   "Documented by asg-sqs (scale-in protection for long-running tasks). Sound."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-007",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps in theme with message-quay-0xx (dead-letter queue for failed messages, Harbor) but tests maxReceiveCount sizing, which is documented; acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-008",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-009",
+  "verdict": "OK",
+  "issues": [
+   "Key is documented (SNS push plus SQS persistence). Wrong option 2 ('topic holds no backlog') is true in substance, although SNS retries deliveries for a period; a nightly gap exceeds any retry window, so it is not a defensible second answer. Same SNS-to-SQS fan-out pattern as -004 (two consumers, durability): acceptable as mock-reserve but vary the stem if -004 stays."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-rail-hub-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

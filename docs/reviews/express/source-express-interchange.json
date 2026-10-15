@@ -1,0 +1,80 @@
+[
+ {
+  "id": "express-interchange-001",
+  "verdict": "DROP",
+  "issues": [
+   "Classic Load Balancer used as a distractor in 001, 005 and 008 (repetitive); its why correctly names the missing capability here.",
+   "Near-duplicate across buildings of scaling-floodgate-007 (harbor): one ALB routing /products and /cart (or /orders and /catalog) by URL path to separate target groups, same distractors (NLB, GWLB/Classic)."
+  ],
+  "suggestedFix": "Keep one: drop this or scaling-floodgate-007."
+ },
+ {
+  "id": "express-interchange-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-interchange-003",
+  "verdict": "DROP",
+  "issues": [
+   "Evidence quote for ALB protocols is a flattened comparison-table row ('Protocol listeners HTTP, HTTPS, gRPC TCP, UDP, TLS IP TCP, SSL/TLS...'), hard to read as a per-product statement; prefer the ALB intro sentence on HTTP/HTTPS/gRPC listeners. Key rests on the two nlb-intro cross-zone quotes, which are correct.",
+   "Near-identical duplicate of scaling-floodgate-009 (harbor): NLB, TCP, 2 targets in zone A and 8 in zone B, overloaded zone A, fix is cross-zone load balancing, with the same ALB-replacement distractor."
+  ],
+  "suggestedFix": "Drop this item or scaling-floodgate-009."
+ },
+ {
+  "id": "express-interchange-004",
+  "verdict": "OK",
+  "issues": [
+   "Same flattened-table quote as 003 supports the UDP distractor. Key quotes (path routing, user authentication) are documented."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-interchange-005",
+  "verdict": "FIX",
+  "issues": [
+   "Key (NLB with Elastic IP per subnet) is documented.",
+   "Wrong option 3 (Classic Load Balancer): the why gives only 'previous generation, AWS recommends migrating', which is a status argument and does not name a requirement it fails (it has no Elastic IP / fixed address support, and is not the extreme-performance choice). A reader could call it merely 'worse', and it leans on availability/recommendation wording.",
+   "Wrong option 1 (ALB) why cites only a recommendation; the failing requirement is that an ALB offers no fixed IP addresses (clients use its DNS name, whose addresses change)."
+  ],
+  "suggestedFix": "Rewrite the whys to name the failed requirement: ALB and Classic Load Balancer nodes have no Elastic IP association, so no fixed addresses for the partner allow-list (check an AWS page, e.g. the NLB intro quote on static IP support, or the ELB features page, for a quote that ALB/CLB lack static IP)."
+ },
+ {
+  "id": "express-interchange-006",
+  "verdict": "OK",
+  "issues": [
+   "Both correct options are documented in the GWLB intro (appliances registered in a target group; endpoint as next hop in the application subnet's route table).",
+   "Detail 'in its own subnet' is not in any quote; it is accepted design guidance but undocumented in the cited sentences. Consider dropping 'in its own subnet' or adding a quote.",
+   "Wrong option 3 why ('no flow stickiness') is an uncited aside but harmless."
+  ],
+  "suggestedFix": "Optional: drop 'in its own subnet of' from correct option 2 or add a supporting quote."
+ },
+ {
+  "id": "express-interchange-007",
+  "verdict": "OK",
+  "issues": [
+   "Two quotes document the NLB-to-ALB target and endpoint-service requirement; the combination is the standard documented pattern."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-interchange-008",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps the path-routing idea of 001 but adds Lambda targets; acceptable. The target-type table quote is a flattened row, but 'Support for registering Lambda functions as targets' is a clean quote."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "express-interchange-009",
+  "verdict": "FIX",
+  "issues": [
+   "Key (target in each enabled AZ) is documented verbatim.",
+   "Wrong option 'Turn off health checks on the target group' describes a setting that does not exist for NLB instance/IP targets: AWS documents that health checks are always enabled for instance, IP and ALB target types and cannot be disabled (ModifyTargetGroup API reference). Invented option.",
+   "Enabling cross-zone load balancing would also fix the symptom; it is not offered, so no second-correct problem, but the stem premise ('drops out of DNS') leans on undocumented DNS behavior in the stem."
+  ],
+  "suggestedFix": "Replace option 2 with a real setting, e.g. 'Increase the health check interval of the target group' with a why that it does not give the empty zone a target; consider rewording the stem to 'clients connecting through the zone without targets fail'."
+ }
+]

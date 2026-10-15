@@ -58,7 +58,7 @@ export const GENERIC_ALLOW = [
 ];
 
 /** Out-of-scope names that are not on the official out-of-scope list but must never be answers or appear (see content/exam-era.json). */
-export const EXTRA_OUT_OF_SCOPE = ['App Runner', 'Timestream', 'Elastic Disaster Recovery', 'AWS Elastic Disaster Recovery', 'CodeCommit', 'Cloud9', 'AWS Proton', 'Service Quotas'];
+export const EXTRA_OUT_OF_SCOPE = ['App Runner', 'Timestream', 'Elastic Disaster Recovery', 'AWS Elastic Disaster Recovery', 'CodeCommit', 'Cloud9', 'AWS Proton', 'Service Quotas', 'Application Auto Scaling'];
 
 export interface EraEntry {
   service: string;

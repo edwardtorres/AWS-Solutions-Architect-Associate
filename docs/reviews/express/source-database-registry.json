@@ -1,0 +1,122 @@
+[
+ {
+  "id": "database-registry-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-003",
+  "verdict": "OK",
+  "issues": [
+   "Evidence quote for the read replica distractor (info 'doesn't apply to ... on-premises' ) does not directly confirm the why (cannot replicate across engines). The why is true (a PostgreSQL replica cannot use a MySQL source); cite a better quote or soften."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-005",
+  "verdict": "OK",
+  "issues": [
+   "Wrong options specify Multi-AZ DB instance deployment, so the three-AZ claim stays correct (RDS Multi-AZ DB cluster would also span three AZs, but it is not offered)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-008",
+  "verdict": "OK",
+  "issues": [
+   "Near-duplicate of tuning-bay-001 (same scenario and distractors); one of the pair should be reworked."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-009",
+  "verdict": "OK",
+  "issues": [
+   "Interaction with -015: on-demand tables can now have a maximum throughput, so the claim in wrong option 4 holds only because the option says no limit is set. Keep that wording exactly; do not reword to 'on-demand cannot cap spend'. Provisioned for forecastable workloads is the documented fit.",
+   "Near-duplicate of tuning-bay-002; one of the pair should be reworked."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-011",
+  "verdict": "OK",
+  "issues": [
+   "Heavy migration for 'LEAST ongoing effort' is acceptable (one-time vs ongoing). No offered option removes the single-writer limit besides DynamoDB."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-012",
+  "verdict": "OK",
+  "issues": [
+   "Key is a derived inference from two documented facts: DMS supports DynamoDB as a target (dms-what-is) and DMS replicates ongoing changes; the DMS DynamoDB-target page confirms CDC is supported (with the caveat that primary key updates are not). Inputs documented, so acceptable. Wrong options each fail a stated requirement (capacity planning, sync, key lookups). Cite the DMS DynamoDB target page for a direct quote if possible."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-015",
+  "verdict": "OK",
+  "issues": [
+   "Verified: dynamodb-max-throughput documents optional per-table maximum throughput for on-demand tables, bounding usage and costs; page does not mark it preview. Key sound. Wrong option 'on-demand default' is carefully worded as 'no maximum configured', so it is not a second answer.",
+   "Near-duplicate of tuning-bay-015 (on-demand maximum throughput); one of the pair should be reworked."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "database-registry-016",
+  "verdict": "FIX",
+  "issues": [
+   "Wrong option 'DMS Fleet Advisor' (and its evidence quote): AWS DMS docs state Fleet Advisor stopped accepting new customers in 2025 and support ended on 20 May 2026. It is a retired/closed capability, not on the in-scope list, and the guide forbids options for services unavailable to new customers unless era-handled. Key (DMS Serverless) is documented and sound; the other two distractors are fine."
+  ],
+  "suggestedFix": "Replace the Fleet Advisor distractor with an in-scope option, e.g. 'AWS DMS with a replication instance in a Multi-AZ configuration' or 'AWS Application Migration Service', and drop the Fleet Advisor evidence quote."
+ },
+ {
+  "id": "database-registry-017",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

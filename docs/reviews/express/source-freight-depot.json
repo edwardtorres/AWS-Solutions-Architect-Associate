@@ -1,0 +1,138 @@
+[
+ {
+  "id": "freight-depot-001",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-002",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-003",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-005",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-008",
+  "verdict": "OK",
+  "issues": [
+   "Third evidence quote (EBS volume size table) does not confirm the key; harmless."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-011",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps in idea with 005/007 (shared EFS across AZs) but distinct trap (Multi-Attach); acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-015",
+  "verdict": "FIX",
+  "issues": [
+   "Key B (same Region) is documented only as a general S3 performance guideline; the explanation justifies it with latency and data-transfer cost, not throughput, and the stem hint 'run in a different Region' gives it away. Key A (Range header concurrent fetches) is solidly documented. No wrong option is defensible (prefixes, storage class, SSE-KMS do not add per-object parallelism)."
+  ],
+  "suggestedFix": "Reword the B explanation to the documented recommendation ('access the bucket from EC2 in the same Region to optimize performance') and drop the cost claim; or change the stem so Region placement is not spelled out."
+ },
+ {
+  "id": "freight-depot-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-017",
+  "verdict": "OK",
+  "issues": [
+   "Defensible-second risk is low but real: 'long idle periods then bursts' is the classic Bursting description; the key rests on the documented Elastic recommendation for spiky/unpredictable workloads and the stem's 'without capacity planning'. Acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-018",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of freight-depot-005 (and 007/011): Linux EC2 across three AZs, shared NFS-style file storage, grows automatically, LEAST overhead, EFS key. Four EFS shared-across-AZ items in one building."
+  ],
+  "suggestedFix": "Rewrite 018 around a different angle (e.g. EFS One Zone vs Regional, or EFS vs FSx for a stated protocol), or drop it since 005 already covers the bullet."
+ },
+ {
+  "id": "freight-depot-019",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-020",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "freight-depot-021",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ }
+]

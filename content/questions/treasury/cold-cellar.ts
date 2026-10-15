@@ -30,9 +30,9 @@ const questions: Question[] = [
     stem: 'A photo-sharing website keeps user-uploaded images in Amazon S3 Standard. Some photos are viewed every day for months and others are never viewed again, and the company cannot predict which. The company wants lower storage cost with no retrieval fees and no age-based rules to maintain. Which solution is MOST cost-effective?',
     correct: ['Store the images in S3 Intelligent-Tiering so that S3 moves each object between access tiers based on use', 'Intelligent-Tiering suits unknown or changing access patterns, moves unaccessed objects to cheaper tiers automatically, and has no retrieval fees.'],
     wrong: [
-      ['Add a lifecycle rule that moves all images to S3 Standard-IA 30 days after upload', 'Standard-IA charges a per-GB retrieval fee, so photos that are still viewed daily would incur retrieval fees, which the company wants to avoid.'],
-      ['Add a lifecycle rule that moves all images to S3 Glacier Flexible Retrieval 30 days after upload', 'Retrieval takes minutes to hours and requires a restore first, which does not suit photos that users may open at any time.'],
-      ['Add a lifecycle rule that moves all images to S3 One Zone-IA 30 days after upload', 'It still charges retrieval fees, and it keeps the only copy of the photos in one Availability Zone that is not resilient to the loss of that zone.'],
+      ['Add a lifecycle rule that moves all images to S3 Standard-IA 30 days after upload and keeps them there', 'Standard-IA charges a per-GB retrieval fee, so photos that are still viewed daily would incur retrieval fees, which the company wants to avoid.'],
+      ['Add a lifecycle rule that moves all images to S3 Glacier Flexible Retrieval 30 days after upload and keeps them there', 'Retrieval takes minutes to hours and requires a restore first, which does not suit photos that users may open at any time.'],
+      ['Add a lifecycle rule that moves all images to S3 One Zone-IA 30 days after upload and keeps them there', 'It still charges retrieval fees, and it keeps the only copy of the photos in one Availability Zone that is not resilient to the loss of that zone.'],
     ],
     slot: 0,
     evidence: [
@@ -66,7 +66,7 @@ const questions: Question[] = [
     bullets: ['4.1-K7'],
     d: 1,
     stem: 'A company stores monthly report files in an Amazon S3 bucket. The reports are rarely opened after 90 days, so the company wants them moved to a lower-cost storage class automatically, with the LEAST operational overhead and no custom code. Which solution meets these requirements?',
-    correct: ['Create an S3 Lifecycle rule with a transition action that moves objects to the cheaper class 90 days after creation', 'Transition actions define when objects move to another storage class, and S3 performs the move without code to run.'],
+    correct: ['Create an S3 Lifecycle rule that transitions objects to the cheaper class 90 days after creation', 'Transition actions define when objects move to another storage class, and S3 performs the move without code to run.'],
     wrong: [
       ['Configure S3 Replication to copy objects older than 90 days into a second bucket that uses the cheaper class', 'Replication copies new objects as they are written and does not age objects into another class, and the originals would stay in the first bucket.'],
       ['Run an AWS Lambda function on an Amazon EventBridge schedule to copy old reports into the cheaper class', 'This works, but the company would write and maintain the code, which conflicts with the requirement for no custom code and the least overhead.'],
@@ -125,7 +125,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible'],
     stem: 'A company hosts a static website from an Amazon S3 bucket that has S3 Versioning enabled. Each deployment overwrites the site files, and the company needs previous versions for only 14 days to allow a rollback. Older noncurrent versions keep accumulating. Which lifecycle configuration solves this with the LEAST operational overhead?',
-    correct: ['A rule with a NoncurrentVersionExpiration action that permanently deletes noncurrent versions after 14 days', 'The noncurrent-version expiration action is the lifecycle action that permanently deletes noncurrent versions, and the live site files are not touched.'],
+    correct: ['A rule with a NoncurrentVersionExpiration action set to 14 days', 'The noncurrent-version expiration action is the lifecycle action that permanently deletes noncurrent versions, and the live site files are not touched.'],
     wrong: [
       ['A rule with an Expiration action that deletes objects 14 days after they are created', 'Expiration applies only to the current version and, in a versioned bucket, adds a delete marker, which would take the live site files down.'],
       ['A rule with an AbortIncompleteMultipartUpload action set to 14 days', 'It only cleans up multipart uploads that never completed and has no effect on the noncurrent versions of completed deployments.'],
@@ -145,7 +145,7 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible'],
     stem: 'Mobile users upload large video files to an Amazon S3 bucket by using multipart upload. Many uploads are abandoned part way, and the bucket bill keeps growing from parts of uploads that never completed. The company wants to stop this cost with the LEAST operational overhead. Which solution meets these requirements?',
-    correct: ['An S3 Lifecycle rule with an AbortIncompleteMultipartUpload action that removes uploads still in progress after 7 days', 'The abort action sets a maximum number of days that multipart uploads may remain in progress, and AWS recommends it to minimize storage costs.'],
+    correct: ['An S3 Lifecycle rule with an AbortIncompleteMultipartUpload action set to 7 days', 'The abort action sets a maximum number of days that multipart uploads may remain in progress, and AWS recommends it to minimize storage costs.'],
     wrong: [
       ['An S3 Lifecycle rule with an expiration action that deletes objects 7 days after creation', 'Object expiration lifecycle configurations do not remove incomplete multipart uploads, and it would also delete finished videos.'],
       ['An AWS Lambda function on an Amazon EventBridge schedule that lists and aborts old multipart uploads', 'This can work, but it adds code to write and maintain, while the built-in lifecycle action does the same with no code.'],
@@ -249,7 +249,7 @@ const questions: Question[] = [
     d: 3,
     tags: ['mock-reserve'],
     stem: 'A company stores project files in one Amazon S3 bucket, and the files have no common key prefix. Only objects that teams tag with archive set to true must move to S3 Glacier Flexible Retrieval 90 days after creation. All other objects must stay in S3 Standard. Which solution meets these requirements with the LEAST operational overhead?',
-    correct: ['One lifecycle rule whose filter selects the tag archive with the value true and that has a 90-day transition action', 'A lifecycle filter can select objects by one or more object tags, so only tagged objects are transitioned.'],
+    correct: ['One lifecycle rule with a tag filter for archive=true and a 90-day transition action', 'A lifecycle filter can select objects by one or more object tags, so only tagged objects are transitioned.'],
     wrong: [
       ['One lifecycle rule with a key prefix filter that matches the project name and a 90-day transition action', 'The files have no common prefix, so a prefix filter cannot select the tagged objects.'],
       ['One lifecycle rule with no filter and a 90-day transition action, with untagged objects copied back by hand', 'A rule without a filter applies to all objects, so untagged objects would be moved and need manual correction.'],

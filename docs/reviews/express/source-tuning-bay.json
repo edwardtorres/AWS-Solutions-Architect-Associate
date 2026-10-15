@@ -1,0 +1,122 @@
+[
+ {
+  "id": "tuning-bay-001",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of database-registry-008 (new mobile app/game on DynamoDB, unpredictable traffic, no capacity planning, on-demand with the same three provisioned distractors). Key is sound and documented."
+  ],
+  "suggestedFix": "Drop or rework: e.g. test on-demand vs provisioned when the table is idle most of the time, or switching capacity mode on an existing table; keep only one of the pair for the same decision."
+ },
+ {
+  "id": "tuning-bay-002",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of database-registry-009 (steady, predictable growth, spend held to a defined request rate, provisioned plus auto scaling).",
+   "Wrong option 1 says on-demand spend 'follows usage rather than being held to a defined request rate'; that conflicts with the documented on-demand maximum throughput setting (tuning-bay-015 and database-registry-015), so a knowledgeable candidate can defend on-demand with a max. The stem does not mention a cap on on-demand, so the key is still best, but the why is misleading."
+  ],
+  "suggestedFix": "Merge with database-registry-009 or differentiate; reword option 1 why to 'on-demand has no capacity to forecast and its spend follows requests; the documented fit for steady, forecastable workloads is provisioned'."
+ },
+ {
+  "id": "tuning-bay-003",
+  "verdict": "OK",
+  "issues": [
+   "'SIMPLEST' is debatable (changing the partition key means rebuilding the table), but no listed option is simpler and works. Acceptable."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-004",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-005",
+  "verdict": "OK",
+  "issues": [
+   "Arithmetic verified: 8 KB item = 2 x 4 KB; strongly consistent 2 RCU, eventually consistent 1 RCU -> 600 RCU. 2 KB write = 2 WCU x 300 = 600 WCU. Distractors match the strongly consistent figure (1,200), unrounded writes (300) and halved figures. Documented in read-write-operations (round up to 4 KB boundary and halve for eventually consistent; writes rounded to 1 KB). Key sound; consider citing the 'round up to the next 4 KB boundary / divide by two' sentence for the 8 KB step."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-008",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of read-replica-annex-002 (reporting queries slow the production RDS primary; key read replica; distractors Multi-AZ standby cannot serve reads and RDS Proxy). Only the engine (MySQL vs PostgreSQL) and dashboard wording differ. Key is sound."
+  ],
+  "suggestedFix": "Drop or rework to a different decision, e.g. read replica vs caching for repeated read-heavy queries, or a replica in another Region."
+ },
+ {
+  "id": "tuning-bay-009",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-010",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-011",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-013",
+  "verdict": "OK",
+  "issues": [
+   "Overlaps in decision with read-replica-annex-007 and -001 (Multi-AZ plus read replica) and tuning-bay-008/010; acceptable as a combined three-part item."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-014",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-015",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of database-registry-015 (DynamoDB on-demand with a configured maximum throughput to bound consumption/cost). Key is documented (dynamodb-max-throughput, not marked preview) and sound; wrong options fail as stated."
+  ],
+  "suggestedFix": "Keep one of the two; make the other test a different on-demand feature, e.g. warm throughput or the table-level quota."
+ },
+ {
+  "id": "tuning-bay-016",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "tuning-bay-017",
+  "verdict": "FIX",
+  "issues": [
+   "Numbers do not fit the documented limits: the on-demand page says throughput above the default 40,000 table-level read quota is throttled and needs a quota increase, and the warm-throughput page says a table can be pre-warmed only up to the account's table quota. The stem has a table peaking near 40,000 reads per second and a sale of more than ten times that (over 400,000), so warm throughput alone could not avoid throttling; the quota increase is the missing step and is not offered.",
+   "Warm throughput itself is documented and not marked preview; the 'double the previous peak within 30 minutes' claim is documented."
+  ],
+  "suggestedFix": "Scale the numbers down so the sale peak stays under the default quota (e.g. normal peak about 2,000 reads/s, sale peak more than ten times that, about 25,000), or add the quota increase to the key."
+ }
+]

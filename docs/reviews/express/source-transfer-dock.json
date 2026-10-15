@@ -1,0 +1,113 @@
+[
+ {
+  "id": "transfer-dock-001",
+  "verdict": "OK",
+  "issues": [
+   "Evidence quote on Transfer Family storage is a bare fragment ('Amazon Elastic File System (Amazon EFS) Network File System (NFS) file systems.'); the claim that Transfer Family cannot write to FSx rests on the absence of FSx in that list. Acceptable but implicit; consider quoting the sentence listing S3 and EFS as storage."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-002",
+  "verdict": "OK",
+  "issues": [
+   "Combines two scenarios that are already single items elsewhere: SFTP partners into S3 (purpose-built-workshop-001, haul-hybrid-customs-001) and AS2 (purpose-built-workshop-012, haul-hybrid-customs-010). Acceptable as a combined MR but the topic is saturated."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-003",
+  "verdict": "OK",
+  "issues": [
+   "Direct Connect appears in seven questions across edge-link-terminal (003, 006, 012, 014) and transfer-dock (003, 009, 011, 014); watch the overall share of this topic."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-004",
+  "verdict": "FIX",
+  "issues": [
+   "Key facts (schedule, bandwidth limit, changed-data copy) are documented. 'Must be paused during the day' is satisfied by scheduling the run outside business hours plus a bandwidth limit; acceptable.",
+   "Overlaps haul-hybrid-customs-009 (treasury): scheduled DataSync copy from on-premises NFS with a bandwidth limit because the office link is shared with business traffic."
+  ],
+  "suggestedFix": "Differentiate (for example, add a verification or S3 destination storage-class angle) or drop one."
+ },
+ {
+  "id": "transfer-dock-005",
+  "verdict": "FIX",
+  "issues": [
+   "Key is documented: the Transfer Family FTP page says 'When you enable FTP, you must choose the internal access option for the VPC-hosted endpoint' and 'Publicly accessible endpoints are not supported'. Transfer Family FTP on VPC endpoints is therefore documented.",
+   "Stem is confusing: 'sends files to a partner endpoint over plain FTP' contradicts 'the files must reach Amazon S3'. It is unclear whether the application is the FTP client of a partner or of the new server.",
+   "Wrong option 1 is trivially refuted by the page (public endpoints unsupported for FTP) and shares its premise with the key, so it is a weak distractor."
+  ],
+  "suggestedFix": "Reword the stem: 'A legacy payroll application uploads files with a plain FTP client that cannot be changed. The application runs in the corporate network, which connects to a VPC. The files must land in Amazon S3 and must not cross the public internet.'"
+ },
+ {
+  "id": "transfer-dock-006",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-007",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-008",
+  "verdict": "OK",
+  "issues": [
+   "Quotes mention web browser-based transfers generally; the 'web app' feature name in the option is not in the quoted sentences. Verify that the transfer-what-is page names Transfer Family web apps, or add a quote that does."
+  ],
+  "suggestedFix": "Add an evidence quote that names the Transfer Family web app (user guide page on web apps) if the cached page lacks it."
+ },
+ {
+  "id": "transfer-dock-009",
+  "verdict": "FIX",
+  "issues": [
+   "Near-duplicate of edge-link-terminal-014: both ask for about 200 Mbps private connectivity, with the answer a Direct Connect hosted connection from a Partner and the dedicated 1 Gbps port as the main distractor.",
+   "Key itself is documented (hosted connections list 200 Mbps; Partner provisions on behalf of the customer)."
+  ],
+  "suggestedFix": "Drop one of the two (this one or edge-link-terminal-014), or change this scenario to a different hosted-versus-dedicated decision, such as 5 Gbps of capacity where a Partner hosted connection at 5 Gbps beats a 10 Gbps dedicated port."
+ },
+ {
+  "id": "transfer-dock-010",
+  "verdict": "OK",
+  "issues": [
+   "Both keys are documented (VPC endpoints for DataSync; private virtual interface to reach a VPC)."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-011",
+  "verdict": "OK",
+  "issues": [
+   "Large Bandwidth Tunnel is documented on the Site-to-Site VPN tunnel options page: up to 5 Gbps per tunnel, available only for VPN connections attached to Transit Gateway or Cloud WAN, not supported for virtual private gateway attachments, reduces the need for ECMP. The page does not say 'generally available', but it carries no preview or limited-release label, and the AWS announcement (November 2025) states general availability in most commercial Regions (a few Regions excluded). So it is documented and generally available.",
+   "Concerns: it is very recent (post exam-guide era) and niche for SAA-level; the stem's 'avoid ECMP' constraint is contrived. Acceptable but a low-priority exam topic; consider keeping it out of the mock reserve."
+  ],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-012",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-013",
+  "verdict": "OK",
+  "issues": [],
+  "suggestedFix": ""
+ },
+ {
+  "id": "transfer-dock-014",
+  "verdict": "DROP",
+  "issues": [
+   "Near-duplicate of edge-link-terminal-006 (Direct Connect is not encrypted by default; add Site-to-Site VPN on top for IPsec while keeping the dedicated link): same decision and same evidence (dx-encryption).",
+   "Key is documented. The '1 Gbps or less' quote makes the 1 Gbps port detail meaningful, but it is a whitepaper aside; the DX encryption page already supports the key.",
+   "Near-duplicate of customs-house-008 (citadel: 1 Gbps dedicated Direct Connect, regulation requires encryption, VPN tunnels on top of Direct Connect) and edge-link-terminal-006."
+  ],
+  "suggestedFix": "Drop this one (mock-reserve) or change to MACsec versus VPN with a 10 Gbps port (MACsec is available only on certain ports), which differs from edge-link-terminal-006. Drop this item."
+ }
+]
