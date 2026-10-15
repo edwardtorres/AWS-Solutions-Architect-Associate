@@ -1,0 +1,11 @@
+[
+{"id":"network-cost-audit-001","picks":["B"],"ambiguous":false},
+{"id":"network-cost-audit-002","picks":["A"],"ambiguous":false},
+{"id":"network-cost-audit-003","picks":["A","E"],"ambiguous":false},
+{"id":"network-cost-audit-004","picks":["D"],"ambiguous":false},
+{"id":"network-cost-audit-005","picks":["C"],"ambiguous":false},
+{"id":"network-cost-audit-006","picks":["A"],"ambiguous":false},
+{"id":"network-cost-audit-007","picks":["C"],"ambiguous":false},
+{"id":"network-cost-audit-008","picks":["D","E"],"ambiguous":false,"note":"E clearly; D (CloudWatch NAT metrics) is the only other traffic-capturing option, though it shows volume not flows."},
+{"id":"network-cost-audit-009","picks":["B"],"ambiguous":false}
+]

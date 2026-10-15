@@ -1,0 +1,11 @@
+[
+{"id":"transit-tariff-001","picks":["B"],"ambiguous":false},
+{"id":"transit-tariff-002","picks":["B"],"ambiguous":false},
+{"id":"transit-tariff-003","picks":["A"],"ambiguous":false,"note":"Assumes Direct Connect lowers data-transfer-out cost vs internet, the standard rationale."},
+{"id":"transit-tariff-004","picks":["B","C"],"ambiguous":false,"note":"VPN over Direct Connect public VIF (or MACsec) is the encryption route; A is cost-adding, E false."},
+{"id":"transit-tariff-005","picks":["D"],"ambiguous":false},
+{"id":"transit-tariff-006","picks":["B","C"],"ambiguous":false,"note":"ECMP needs Transit Gateway plus BGP dynamic routing."},
+{"id":"transit-tariff-007","picks":["C"],"ambiguous":false,"note":"Dedicated port speed cannot be changed in place, so A is wrong; 10 Gbps covers 8 Gbps."},
+{"id":"transit-tariff-008","picks":["D"],"ambiguous":false,"note":"Relies on the newer Large Bandwidth Tunnels feature (Transit Gateway attachments)."},
+{"id":"transit-tariff-009","picks":["D"],"ambiguous":false}
+]

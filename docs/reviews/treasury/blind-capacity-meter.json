@@ -1,0 +1,16 @@
+[
+{"id":"capacity-meter-001","picks":["A"],"ambiguous":false},
+{"id":"capacity-meter-002","picks":["C"],"ambiguous":false,"note":"6 KB -> 2 RCU strongly consistent, 1 RCU eventually consistent per read; x200 = 200."},
+{"id":"capacity-meter-003","picks":["B"],"ambiguous":false},
+{"id":"capacity-meter-004","picks":["D","E"],"ambiguous":false},
+{"id":"capacity-meter-005","picks":["B"],"ambiguous":false},
+{"id":"capacity-meter-006","picks":["C"],"ambiguous":false},
+{"id":"capacity-meter-007","picks":["A"],"ambiguous":false},
+{"id":"capacity-meter-008","picks":["B"],"ambiguous":false},
+{"id":"capacity-meter-009","picks":["B"],"ambiguous":false},
+{"id":"capacity-meter-010","picks":["A","E"],"ambiguous":false},
+{"id":"capacity-meter-011","picks":["A","E"],"ambiguous":false},
+{"id":"capacity-meter-012","picks":["D"],"ambiguous":false,"note":"Relies on same-Region RDS replication having no data transfer charge."},
+{"id":"capacity-meter-013","picks":["B"],"ambiguous":false},
+{"id":"capacity-meter-014","picks":["B"],"ambiguous":false}
+]

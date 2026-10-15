@@ -1,0 +1,11 @@
+[
+{"id":"block-warehouse-001","picks":["A"],"ambiguous":false,"note":"40 TB exceeds the 16 TiB single-volume max for sc1, but sc1 is still the cheapest type."},
+{"id":"block-warehouse-002","picks":["A"],"ambiguous":false,"note":"sc1/st1 cannot be boot volumes."},
+{"id":"block-warehouse-003","picks":["B"],"ambiguous":false},
+{"id":"block-warehouse-004","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-005","picks":["D"],"ambiguous":false},
+{"id":"block-warehouse-006","picks":["C","D"],"ambiguous":false},
+{"id":"block-warehouse-007","picks":["A"],"ambiguous":false},
+{"id":"block-warehouse-008","picks":["B"],"ambiguous":false},
+{"id":"block-warehouse-009","picks":["D","E"],"ambiguous":false,"note":"sc1 max throughput 250 MiB/s so st1 for logs; 30 TB exceeds 16 TiB per-volume max (stem says volume two holds 30 TB), minor wording issue."}
+]

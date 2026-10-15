@@ -1,0 +1,11 @@
+[
+{"id":"counting-house-001","picks":["C"],"ambiguous":false},
+{"id":"counting-house-002","picks":["A"],"ambiguous":false,"note":"Relies on the AWS-generated aws:createdBy tag."},
+{"id":"counting-house-003","picks":["A"],"ambiguous":false},
+{"id":"counting-house-004","picks":["B"],"ambiguous":false},
+{"id":"counting-house-005","picks":["C"],"ambiguous":false},
+{"id":"counting-house-006","picks":["B","C"],"ambiguous":false},
+{"id":"counting-house-007","picks":["B"],"ambiguous":false},
+{"id":"counting-house-008","picks":["D","E"],"ambiguous":false},
+{"id":"counting-house-009","picks":["A"],"ambiguous":false}
+]

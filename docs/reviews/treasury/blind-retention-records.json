@@ -1,0 +1,11 @@
+[
+{"id":"retention-records-001","picks":["C"],"ambiguous":false},
+{"id":"retention-records-002","picks":["D"],"ambiguous":false},
+{"id":"retention-records-003","picks":["B"],"ambiguous":false},
+{"id":"retention-records-004","picks":["C"],"ambiguous":false,"note":"Retained automated backups expire per the instance's retention period (14 days)."},
+{"id":"retention-records-005","picks":["A"],"ambiguous":false},
+{"id":"retention-records-006","picks":["A"],"ambiguous":false},
+{"id":"retention-records-007","picks":["A","C"],"ambiguous":false},
+{"id":"retention-records-008","picks":["C"],"ambiguous":false},
+{"id":"retention-records-009","picks":["B"],"ambiguous":false,"note":"Aurora minimum retention is 1 day (0 not allowed)."}
+]

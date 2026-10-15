@@ -1,0 +1,15 @@
+[
+{"id":"cold-cellar-001","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-002","picks":["C"],"ambiguous":false},
+{"id":"cold-cellar-003","picks":["C"],"ambiguous":false,"note":"One Zone-IA is cheapest of the ms-access options; works because thumbnails are re-creatable."},
+{"id":"cold-cellar-004","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-005","picks":["A"],"ambiguous":false},
+{"id":"cold-cellar-006","picks":["C"],"ambiguous":false},
+{"id":"cold-cellar-007","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-008","picks":["C"],"ambiguous":false},
+{"id":"cold-cellar-009","picks":["C","D"],"ambiguous":true,"note":"Flexible Retrieval (D) fits 'few hours restore' and yearly reads; Glacier Instant Retrieval (E) is also defensible if retrieval fees/millisecond access matter. I chose D on 'hours is acceptable'."},
+{"id":"cold-cellar-010","picks":["A","E"],"ambiguous":false},
+{"id":"cold-cellar-011","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-012","picks":["D"],"ambiguous":false},
+{"id":"cold-cellar-013","picks":["C"],"ambiguous":false}
+]

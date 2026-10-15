@@ -1,0 +1,14 @@
+[
+{"id":"storage-market-001","picks":["B"],"ambiguous":false},
+{"id":"storage-market-002","picks":["C"],"ambiguous":false},
+{"id":"storage-market-003","picks":["C"],"ambiguous":false},
+{"id":"storage-market-004","picks":["D"],"ambiguous":true,"note":"FSx for OpenZFS Intelligent-Tiering (A) is also a no-retrieval-fee tiering option, but requires moving to a file system the HTTPS service would have to mount; S3 Intelligent-Tiering fits best because nobody mounts it. Depends on knowing the newer FSx class."},
+{"id":"storage-market-005","picks":["C"],"ambiguous":false},
+{"id":"storage-market-006","picks":["A"],"ambiguous":false},
+{"id":"storage-market-007","picks":["C","E"],"ambiguous":false,"note":"E is vague (write results back via FSx-S3 data repository export); relies on C for context."},
+{"id":"storage-market-008","picks":["D"],"ambiguous":false},
+{"id":"storage-market-009","picks":["A","E"],"ambiguous":false},
+{"id":"storage-market-010","picks":["A"],"ambiguous":false},
+{"id":"storage-market-011","picks":["A"],"ambiguous":false,"note":"Relies on knowledge of the FSx for OpenZFS Intelligent-Tiering class."},
+{"id":"storage-market-012","picks":["B"],"ambiguous":false}
+]
