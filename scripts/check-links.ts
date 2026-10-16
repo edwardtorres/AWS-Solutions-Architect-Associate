@@ -5,6 +5,7 @@
  * Page text is cached in .cache/ (git-ignored); --fresh refetches.
  */
 import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
+import { loadPuzzles } from './lib/loadPuzzles.ts';
 import { everyBlock } from './lib/notesChecks.ts';
 import { fetchPage, hasText, stripFragment, type PageInfo } from './lib/pageCache.ts';
 
@@ -98,6 +99,21 @@ async function main() {
         const page = pages.get(stripFragment(src.url));
         if (!page || page instanceof Error) continue;
         if (!hasText(page, e.text)) problems.push(`question ${q.id}: evidence not found on ${src.id}: "${e.text.slice(0, 90)}"${closest(page, e.text)}`);
+      }
+    }
+    // Puzzle rules (and per-scenario facts) each carry a verbatim AWS quote.
+    for (const [type, mod] of await loadPuzzles()) {
+      const rules = [...mod.def.rules.map((r) => ({ where: `puzzles ${type}`, r })), ...mod.scenarios.flatMap((sc) => (mod.def.scenarioRules?.(sc.data) ?? []).map((r) => ({ where: sc.id, r })))];
+      for (const { where, r } of rules) {
+        quoteCount += 1;
+        const src = byId.get(r.src);
+        if (!src) {
+          problems.push(`${where} rule ${r.id}: unknown source ${r.src}`);
+          continue;
+        }
+        const page = pages.get(stripFragment(src.url));
+        if (!page || page instanceof Error) continue;
+        if (!hasText(page, r.quote)) problems.push(`${where} rule ${r.id}: quote not found on ${src.id}: "${r.quote.slice(0, 90)}"${closest(page, r.quote)}`);
       }
     }
     // The post-guide registry dates each feature with a quote from an AWS page.

@@ -14,6 +14,9 @@ import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
 import { checkQuestions } from './lib/questionChecks.ts';
 import { checkNotes } from './lib/notesChecks.ts';
 import { buildMetaSource } from './lib/questionMeta.ts';
+import { loadPuzzles } from './lib/loadPuzzles.ts';
+import { checkPuzzles } from './lib/puzzleChecks.ts';
+import { PUZZLE_TYPES } from '../src/puzzles/types.ts';
 import {
   diffOutline,
   diffServices,
@@ -29,6 +32,7 @@ const here = (p: string) => fileURLToPath(new URL(p, import.meta.url));
 const readJson = <T>(p: string): T => JSON.parse(readFileSync(here(p), 'utf8')) as T;
 
 async function main() {
+  const puzzleRequired = !process.argv.includes('--no-puzzle-minimums');
   const live = process.argv.includes('--live');
   const outline = readJson<OutlineDoc>('./official-outline.json');
   const services = readJson<ServicesDoc>('./official-services.json');
@@ -38,9 +42,10 @@ async function main() {
 
   const bundle = await loadNotesBundle();
   const qb = await loadQuestionsBundle();
+  const puzzles = await loadPuzzles();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...[...puzzles.values()].flatMap((m) => [...m.def.rules.map((r) => r.src), ...m.scenarios.flatMap((sc) => (m.def.scenarioRules?.(sc.data) ?? []).map((r) => r.src))]), ...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
   );
 
   const repoRoot = here('../');
@@ -66,6 +71,21 @@ async function main() {
       scope: qb.scope,
       appFiles,
     }).map((x) => `questions: ${x}`),
+  );
+
+  problems.push(
+    ...checkPuzzles({
+      modules: puzzles,
+      buildings: BUILDINGS,
+      bulletIds,
+      sources: bundle.sources,
+      banned: BANNED_TERMS,
+      queue,
+      services,
+      shortNames: readJson<{ items: { short: string; full: string }[] }>('./official-short-names.json').items,
+      postGuide: qb.postGuide,
+      require: puzzleRequired ? PUZZLE_TYPES : [],
+    }).map((x) => `puzzles: ${x}`),
   );
 
   const metaPath = join(repoRoot, 'src/questions/meta.ts');

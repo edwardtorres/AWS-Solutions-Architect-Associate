@@ -1,0 +1,272 @@
+{
+ "version": 2,
+ "updatedAt": "2026-10-16T02:51:16.727Z",
+ "buildings": {
+  "pillar-plaza": {
+   "state": "commissioned",
+   "changedAt": "2026-10-16T02:51:14.638Z",
+   "via": "inspection"
+  },
+  "charter-hall": {
+   "state": "under_construction",
+   "changedAt": "2026-10-16T02:51:15.039Z"
+  }
+ },
+ "ui": {
+  "view": "map",
+  "lastBuilding": null,
+  "roads": "selected"
+ },
+ "game": {
+  "notesOpened": {
+   "pillar-plaza": "2026-10-16T02:51:11.465Z",
+   "charter-hall": "2026-10-16T02:51:14.684Z"
+  },
+  "startups": {
+   "pillar-plaza": {
+    "prevIds": [
+     "pillar-plaza-010",
+     "pillar-plaza-005"
+    ]
+   },
+   "charter-hall": {
+    "prevIds": [
+     "charter-hall-009",
+     "charter-hall-002"
+    ]
+   }
+  },
+  "inspections": {
+   "pillar-plaza": {
+    "day": "2026-10-16",
+    "fails": 1,
+    "prevIds": [
+     "pillar-plaza-005",
+     "pillar-plaza-010",
+     "pillar-plaza-002",
+     "pillar-plaza-007",
+     "pillar-plaza-008"
+    ]
+   },
+   "charter-hall": {
+    "day": "2026-10-16",
+    "fails": 1,
+    "prevIds": [
+     "charter-hall-008",
+     "charter-hall-012",
+     "charter-hall-013",
+     "charter-hall-015",
+     "charter-hall-003"
+    ]
+   }
+  },
+  "placements": {
+   "identity-keep": {
+    "lastStartDay": "2026-10-16"
+   }
+  },
+  "active": null,
+  "xp": 430,
+  "seen": {
+   "pillar-plaza-002": 2,
+   "pillar-plaza-008": 2,
+   "pillar-plaza-010": 2,
+   "pillar-plaza-005": 2,
+   "pillar-plaza-006": 1,
+   "pillar-plaza-009": 1,
+   "pillar-plaza-001": 1,
+   "pillar-plaza-003": 1,
+   "pillar-plaza-004": 1,
+   "pillar-plaza-007": 1,
+   "charter-hall-009": 1,
+   "charter-hall-002": 1,
+   "charter-hall-008": 1,
+   "charter-hall-012": 1,
+   "charter-hall-013": 1,
+   "charter-hall-015": 1,
+   "charter-hall-003": 1,
+   "identity-keep-021": 1,
+   "identity-keep-018": 1,
+   "identity-keep-016": 1,
+   "identity-keep-023": 1,
+   "identity-keep-017": 1
+  },
+  "days": {
+   "2026-10-16": 26
+  },
+  "bestStreak": 1,
+  "badges": {},
+  "bonus": {
+   "pillar-plaza": true
+  },
+  "flags": [
+   {
+    "id": "identity-keep-021@2026-10-16T02:51:16.727Z",
+    "questionId": "identity-keep-021",
+    "note": "Wording check",
+    "myAnswer": [
+     3
+    ],
+    "at": "2026-10-16T02:51:16.727Z"
+   }
+  ],
+  "log": [
+   [
+    "pillar-plaza-002",
+    1,
+    "2026-10-16T02:51:12.591Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-008",
+    0,
+    "2026-10-16T02:51:12.704Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-010",
+    1,
+    "2026-10-16T02:51:12.938Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-005",
+    1,
+    "2026-10-16T02:51:13.055Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-006",
+    1,
+    "2026-10-16T02:51:13.287Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-009",
+    0,
+    "2026-10-16T02:51:13.471Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-001",
+    1,
+    "2026-10-16T02:51:13.621Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-003",
+    0,
+    "2026-10-16T02:51:13.738Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-004",
+    1,
+    "2026-10-16T02:51:13.921Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-005",
+    1,
+    "2026-10-16T02:51:14.139Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-010",
+    1,
+    "2026-10-16T02:51:14.273Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-002",
+    1,
+    "2026-10-16T02:51:14.388Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-007",
+    1,
+    "2026-10-16T02:51:14.521Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-008",
+    0,
+    "2026-10-16T02:51:14.638Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-009",
+    1,
+    "2026-10-16T02:51:14.921Z",
+    "startup"
+   ],
+   [
+    "charter-hall-002",
+    1,
+    "2026-10-16T02:51:15.038Z",
+    "startup"
+   ],
+   [
+    "charter-hall-008",
+    0,
+    "2026-10-16T02:51:15.271Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-012",
+    0,
+    "2026-10-16T02:51:15.438Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-013",
+    0,
+    "2026-10-16T02:51:15.554Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-015",
+    1,
+    "2026-10-16T02:51:15.771Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-003",
+    1,
+    "2026-10-16T02:51:15.888Z",
+    "inspection"
+   ],
+   [
+    "identity-keep-021",
+    1,
+    "2026-10-16T02:51:16.138Z",
+    "placement"
+   ],
+   [
+    "identity-keep-018",
+    1,
+    "2026-10-16T02:51:16.254Z",
+    "placement"
+   ],
+   [
+    "identity-keep-016",
+    1,
+    "2026-10-16T02:51:16.371Z",
+    "placement"
+   ],
+   [
+    "identity-keep-023",
+    1,
+    "2026-10-16T02:51:16.487Z",
+    "placement"
+   ],
+   [
+    "identity-keep-017",
+    0,
+    "2026-10-16T02:51:16.605Z",
+    "placement"
+   ]
+  ]
+ }
+}

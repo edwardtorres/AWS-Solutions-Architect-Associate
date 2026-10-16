@@ -114,7 +114,7 @@ export interface QuestionCheckInput {
   appFiles?: readonly { path: string; content: string }[];
 }
 
-const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
+export const norm = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim();
 const questionText = (q: Question) => [q.stem, ...q.options.map((o) => o.text)].join('\n');
 const fullText = (q: Question) => [q.stem, ...q.options.flatMap((o) => [o.text, o.why])].join('\n');
 const isReserve = (q: Question) => q.tags.includes('mock-reserve');
@@ -158,7 +158,7 @@ export function unknownServiceMentions(text: string, known: readonly string[]): 
   return out;
 }
 
-function outOfScopeNames(services: ServicesDoc): string[] {
+export function outOfScopeNames(services: ServicesDoc): string[] {
   const names = new Set<string>(EXTRA_OUT_OF_SCOPE);
   for (const c of services.outOfScope.categories) {
     for (const s of c.services) {
