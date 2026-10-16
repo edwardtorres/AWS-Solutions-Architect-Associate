@@ -8,7 +8,17 @@ interface Q {
   select: number;
   options: { text: string; correct: boolean }[];
 }
+export interface PuzzleDump {
+  type: string;
+  id: string;
+  building: string;
+  title: string;
+  fields: { id: string; multi: boolean; correct: string[] }[];
+  reference: { short: string; kindLabel: string; cell: string }[] | null;
+}
 interface Dump {
+  puzzles: PuzzleDump[];
+  buildingIds: string[];
   chain: { start: string; dependent: string };
   portfolio: string;
   names: Record<string, string>;
@@ -22,6 +32,8 @@ const data = (): Dump => {
 };
 export const questions = (): Q[] => data().questions;
 export const buildingName = (id: string): string => data().names[id] as string;
+export const puzzleDump = (): PuzzleDump[] => data().puzzles;
+export const allBuildingIds = (): string[] => data().buildingIds;
 export const pickChain = (): { start: string; dependent: string } => data().chain;
 export const pickPortfolio = (): string => data().portfolio;
 

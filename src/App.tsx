@@ -14,6 +14,8 @@ const GlossaryPage = lazy(() => import('./ui/notes/GlossaryPage'));
 const ConfusePage = lazy(() => import('./ui/notes/ConfusePage'));
 const AttemptPage = lazy(() => import('./ui/play/AttemptPage'));
 const ProgressPage = lazy(() => import('./ui/ProgressPage'));
+const WorkbenchPage = lazy(() => import('./ui/puzzles/WorkbenchPage'));
+const PuzzlePage = lazy(() => import('./ui/puzzles/PuzzlePage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
 const NOTICE: Record<string, string | undefined> = {
@@ -95,6 +97,8 @@ export default function App() {
           {route.view === 'inspect' && <AttemptPage key={`i-${route.param}`} kind="inspection" buildingId={route.param ?? null} />}
           {route.view === 'place' && <AttemptPage key={`p-${route.param}`} kind="placement" buildingId={route.param ?? null} />}
           {route.view === 'progress' && <ProgressPage />}
+          {route.view === 'workbench' && <WorkbenchPage key={route.param} buildingId={route.param ?? null} />}
+          {route.view === 'puzzle' && <PuzzlePage key={route.param} scenarioId={route.param ?? null} />}
         </Suspense>
         <Suspense fallback={null}>
           <SaveMenu />

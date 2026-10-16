@@ -95,7 +95,7 @@ async function main() {
   } catch {
     metaNow = '';
   }
-  if (metaNow !== buildMetaSource(qb.questions)) problems.push('questions: src/questions/meta.ts is stale; run `npm run gen:meta`');
+  if (metaNow !== buildMetaSource(qb.questions, [...puzzles.values()].flatMap((m) => m.scenarios.map((sc) => ({ id: sc.id, building: sc.building, bullets: sc.bullets, difficulty: sc.difficulty }))))) problems.push('questions: src/questions/meta.ts is stale; run `npm run gen:meta`');
 
   let liveNote = '';
   if (live) {

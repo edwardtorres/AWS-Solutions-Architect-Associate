@@ -22,6 +22,8 @@ describe('hash routes', () => {
     expect(parseHash('#/inspect/gatehouse')).toEqual({ view: 'inspect', building: null, param: 'gatehouse' });
     expect(parseHash('#/place/embassy-row')).toEqual({ view: 'place', building: null, param: 'embassy-row' });
     expect(parseHash('#/progress')).toEqual({ view: 'progress', building: null, param: null });
+    expect(parseHash('#/workbench/gatehouse')).toEqual({ view: 'workbench', building: null, param: 'gatehouse' });
+    expect(parseHash('#/puzzle/packet-tracer-001')).toEqual({ view: 'puzzle', building: null, param: 'packet-tracer-001' });
   });
   it('round-trips through hrefFor', () => {
     for (const r of [

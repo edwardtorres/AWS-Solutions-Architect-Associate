@@ -5,6 +5,8 @@ import { systemClock, today as todayKey, type Clock } from '../game/day';
 import { DEFAULT_ENV, type GameEnv } from '../game/env';
 import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
 import type { StartResult } from '../game/start';
+import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
+import type { Difficulty } from '../content/types';
 import type { AttemptKind } from './schema';
 
 /** The subset of the Web Storage API the store uses. */
@@ -155,6 +157,12 @@ export function createSaveStore(opts: StoreOptions) {
     abandonAttempt(): void {
       const next = abandonAttempt(snapshot.save, ctxFor());
       if (next !== snapshot.save) commit(next);
+    },
+    /** Records a puzzle play (practice: XP, history and readiness, never a building state). Null while the Workbench is locked. */
+    playPuzzle(play: { id: string; building: string; difficulty: Difficulty; correct: boolean }): PuzzlePlayResult | null {
+      const r = playPuzzle(snapshot.save, play, ctxFor());
+      if (r) commit(r.save);
+      return r;
     },
     addFlag(questionId: string, note: string, myAnswer: readonly number[]): void {
       commit(addFlag(snapshot.save, questionId, note, myAnswer, { clock }));

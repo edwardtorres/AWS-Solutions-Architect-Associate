@@ -66,5 +66,22 @@
     ],
     "handling": "The FAQ says always on; the User Guide treats it as a target group attribute that can be turned off, with on as the default at the load balancer level. Questions say it is on by default, never always on, and do not rest a key on the difference.",
     "added": "2026-10-15"
+  },
+  {
+    "id": "c-glacier-access-frequency",
+    "building": "cold-cellar",
+    "topic": "How often data is accessed for S3 Glacier Flexible Retrieval and S3 Glacier Deep Archive",
+    "readings": [
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+        "says": "S3 Glacier Flexible Retrieval (GLACIER) Long-lived archive data accessed once a year with retrieval times of minutes to hours"
+      },
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/glacier-storage-classes.html",
+        "says": "S3 Glacier Flexible Retrieval 90 days Semi-annually Minutes to 12 hours Yes S3 Glacier Deep Archive 180 days Annually 9 to 48 hours Yes"
+      }
+    ],
+    "handling": "The storage classes page says Flexible Retrieval is for data accessed once a year and Deep Archive less than once a year; the Glacier classes page says semi-annually and annually. The Cold Cellar planner avoids the overlap: it uses 'a few times a year' and 'less than once a year' and refuses the 'once a year, hours are fine' case. Kept out of questions.",
+    "added": "2026-10-16"
   }
 ]

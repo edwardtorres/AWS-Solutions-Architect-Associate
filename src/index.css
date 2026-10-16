@@ -276,3 +276,14 @@ button, a, summary {
 .btn:disabled { opacity: 0.55; cursor: not-allowed; }
 .meter { display: block; width: 100%; height: 14px; accent-color: var(--accent); }
 .note-field { width: 100%; min-height: 88px; padding: 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
+
+.scroll-box { max-width: 100%; overflow-x: auto; }
+.scroll-box:focus-visible { outline: 3px solid var(--focus); }
+
+/* Architecture Builder board: columns per zone, never wider than the page. */
+.board-row { display: grid; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.board-row[data-azs='3'] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.board-row[data-azs='1'] { grid-template-columns: minmax(0, 1fr); }
+.board-cell { min-width: 0; border: 1px dashed var(--line); border-radius: 10px; padding: 6px; }
+.board-cell .btn { padding: 6px 4px; font-size: 0.8rem; }
+.board-cell .chip { min-height: 44px; justify-content: center; }

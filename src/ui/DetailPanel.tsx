@@ -17,7 +17,11 @@ import { deriveAll, STATE_HELP, STATE_LABEL } from '../save/state';
 import { useSaveStore, useSnapshot } from '../save/context';
 import { DEFAULT_ENV } from '../game/env';
 import { inspectionLockedUntil, nextAction, placementAvailability } from '../game/lifecycle';
-import { hrefAttempt, hrefFor, hrefNotes, type PanelView } from '../lib/route';
+import { hrefAttempt, hrefFor, hrefNotes, hrefWorkbench, type PanelView } from '../lib/route';
+import { QUESTION_META } from '../questions/meta';
+import { puzzleTypeOf } from '../puzzles/load';
+import { PUZZLE_TYPE_NAME } from '../puzzles/types';
+import { workbenchAvailability } from '../game/puzzle';
 import { CloseIcon, RoadIcon, StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -101,6 +105,13 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
   const activeHere = save.game.active && save.game.active.building === building.id ? save.game.active : null;
   const placed = save.buildings[building.id]?.via === 'placement' && state === 'commissioned';
   const resumeHref = activeHere ? hrefAttempt(activeHere.kind === 'inspection' ? 'inspect' : activeHere.kind === 'placement' ? 'place' : 'startup', building.id) : null;
+
+  const workbench = workbenchAvailability(save, building.id, { env: DEFAULT_ENV });
+  const puzzleCounts = new Map<string, number>();
+  for (const m of QUESTION_META.values()) {
+    const t = m.building === building.id ? puzzleTypeOf(m.id) : null;
+    if (t) puzzleCounts.set(PUZZLE_TYPE_NAME[t], (puzzleCounts.get(PUZZLE_TYPE_NAME[t]) ?? 0) + 1);
+  }
 
   const roadItem = (id: string, reason: string) => {
     const other = BUILDING_BY_ID.get(id);
@@ -381,6 +392,26 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
             </div>
           )}
         </section>
+
+        {puzzleCounts.size > 0 && (
+          <section className="mt-4" aria-labelledby="p-bench" data-testid="workbench-section">
+            <h3 id="p-bench" className="text-lg font-semibold">
+              Workbench
+            </h3>
+            <p className="mt-1 text-sm text-[var(--fg-muted)]">
+              Practice puzzles: {[...puzzleCounts].map(([n, c]) => `${n} (${c})`).join(', ')}. They earn XP and feed readiness, but never commission a building.
+            </p>
+            {workbench.ok ? (
+              <a className="btn mt-1" href={hrefWorkbench(building.id)} data-testid="workbench-link">
+                Open the Workbench
+              </a>
+            ) : (
+              <p role="status" className="mt-1 text-sm" data-testid="workbench-locked">
+                {workbench.message}
+              </p>
+            )}
+          </section>
+        )}
 
         <section className="mt-4" aria-labelledby="p-notes">
           <h3 id="p-notes" className="text-lg font-semibold">

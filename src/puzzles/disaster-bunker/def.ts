@@ -38,11 +38,11 @@ export type BlockId =
   | 'user-routing-policies'
   | 'multi-region-writes';
 
-export type CostConstraint =
-  | { kind: 'cheapest' }
-  | { kind: 'at-most'; strategy: string }
-  | { kind: 'cheaper-than'; strategy: string }
-  | { kind: string; strategy?: string };
+/** `cheapest`, `at-most` or `cheaper-than` (with a strategy id) are supported; any other kind is refused. */
+export interface CostConstraint {
+  kind: string;
+  strategy?: string;
+}
 
 export interface BunkerData {
   workload: string;

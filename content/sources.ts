@@ -691,6 +691,11 @@ const sources: Source[] = [
   aws('elasticache-autofailover', `${D}/AmazonElastiCache/latest/dg/AutoFailover.html`, 'Minimizing downtime in ElastiCache by using Multi-AZ'),
   aws('eks-managed-node-groups', `${D}/eks/latest/userguide/managed-node-groups.html`, 'Simplify node lifecycle with managed node groups'),
   aws('datasync-limits', `${D}/datasync/latest/userguide/datasync-limits.html`, 'AWS DataSync quotas'),
+  aws('dr-reliability-strategies', `${D}/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_disaster_recovery.html`, 'REL13-BP02 Use defined recovery strategies to meet the recovery objectives'),
+  aws('iam-eval-denyallow', `${D}/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html`, 'How AWS enforcement code logic evaluates requests to allow or deny access'),
+  aws('iam-cond-operators', `${D}/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html`, 'IAM JSON policy elements: Condition operators'),
+  aws('orgs-scp-syntax', `${D}/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html`, 'SCP syntax'),
+  aws('rds-working-vpc', `${D}/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html`, 'Working with a DB instance in a VPC'),
 ];
 
 export default sources;
