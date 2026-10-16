@@ -1,0 +1,288 @@
+[
+ {
+  "id": "puzzle-packet-tracer-001",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "addr:web-1"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-002",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-003",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:db-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-004",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-005",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-006",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-007",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:priv-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Public IP present but subnet routes via NAT, no IGW route in priv-rt"
+ },
+ {
+  "id": "puzzle-packet-tracer-008",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-009",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:app-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-010",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:priv-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-011",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:ep-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-012",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:worker-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-013",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-014",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-015",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:main-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-016",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-017",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:db-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-packet-tracer-018",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:b-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Return route to 10.0.0.0/16 missing in b-rt (reply cannot return)"
+ },
+ {
+  "id": "puzzle-packet-tracer-019",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-ab"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Transitive peering unsupported; pcx-ab cannot forward to C"
+ },
+ {
+  "id": "puzzle-packet-tracer-020",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-hs"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Peering does not forward to hub IGW/NAT (edge-to-edge)"
+ },
+ {
+  "id": "puzzle-packet-tracer-021",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-hs"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Peering cannot use hub gateway endpoint"
+ },
+ {
+  "id": "puzzle-packet-tracer-022",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

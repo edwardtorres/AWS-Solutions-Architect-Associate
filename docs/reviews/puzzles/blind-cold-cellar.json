@@ -19,7 +19,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Day 2 is d60: Standard-IA has 30-day minimum, stage 3 start (45) would be early."
+  "note": ""
  },
  {
   "id": "puzzle-cold-cellar-002",
@@ -99,7 +99,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Glacier IR 90-day minimum from day 30."
+  "note": ""
  },
  {
   "id": "puzzle-cold-cellar-007",
@@ -121,7 +121,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Minutes = Glacier Flexible Retrieval (expedited); GIR is a defensible but pricier alternative."
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
  },
  {
   "id": "puzzle-cold-cellar-008",
@@ -137,7 +137,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Minutes = Flexible Retrieval expedited; GIR pricier."
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
  },
  {
   "id": "puzzle-cold-cellar-009",
@@ -153,7 +153,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Minutes not hours rules out Deep Archive; Flexible Retrieval expedited (1-5 min). Standard retrieval is hours, so relies on expedited."
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
  },
  {
   "id": "puzzle-cold-cellar-010",
@@ -178,8 +178,8 @@
     "standard"
    ]
   },
-  "ambiguous": true,
-  "note": "Standard vs Intelligent-Tiering tie for objects under 128 KB (no tiering, frequent-access rate); IA/Glacier IR bill 128 KB minimum. I chose standard."
+  "ambiguous": false,
+  "note": ""
  },
  {
   "id": "puzzle-cold-cellar-012",
@@ -188,8 +188,8 @@
     "standard"
    ]
   },
-  "ambiguous": true,
-  "note": "Same as 011: Standard vs Intelligent-Tiering tie below 128 KB."
+  "ambiguous": false,
+  "note": ""
  },
  {
   "id": "puzzle-cold-cellar-013",
@@ -227,7 +227,7 @@
    ]
   },
   "ambiguous": false,
-  "note": "Re-creatable so One Zone-IA; day 2 d60 for 30-day minimum."
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
  },
  {
   "id": "puzzle-cold-cellar-015",
@@ -254,8 +254,8 @@
     "d165"
    ]
   },
-  "ambiguous": true,
-  "note": "Day 2: IA minimum met at 60, stage starts 75; I chose 75 (match access pattern). d60 also charge-free, so choice rests on 'earliest vs stage start'."
+  "ambiguous": false,
+  "note": ""
  },
  {
   "id": "puzzle-cold-cellar-016",
@@ -293,6 +293,6 @@
    ]
   },
   "ambiguous": false,
-  "note": "Stage 3 starts 40 but IA 30-day minimum pushes move to d60."
+  "note": ""
  }
 ]

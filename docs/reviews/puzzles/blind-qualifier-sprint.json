@@ -117,20 +117,20 @@
   "id": "puzzle-qualifier-sprint-007",
   "answers": {
    "overhead": [
-    "c"
+    "a"
    ],
    "cost": [
     "b"
    ],
    "secure": [
-    "d"
+    "c"
    ],
    "available": [
-    "a"
+    "d"
    ]
   },
-  "ambiguous": true,
-  "note": "overhead: Parameter Store standard parameter (b) vs Secrets Manager with auto rotation (c) defensible; I chose c."
+  "ambiguous": false,
+  "note": ""
  },
  {
   "id": "puzzle-qualifier-sprint-008",
@@ -155,20 +155,20 @@
   "id": "puzzle-qualifier-sprint-009",
   "answers": {
    "overhead": [
-    "b"
+    "a"
    ],
    "cost": [
-    "c"
+    "b"
    ],
    "secure": [
-    "d"
+    "c"
    ],
    "available": [
-    "a"
+    "d"
    ]
   },
   "ambiguous": true,
-  "note": "overhead: single NAT gateway (b) vs NAT gateway + S3 gateway endpoint (c) arguable; I chose b."
+  "note": "cost: Spot is cheapest but cannot guarantee the scheduled start the story requires; Capacity Reservation vs Spot defensible"
  },
  {
   "id": "puzzle-qualifier-sprint-010",
@@ -231,20 +231,20 @@
   "id": "puzzle-qualifier-sprint-013",
   "answers": {
    "overhead": [
-    "b"
+    "a"
    ],
    "cost": [
-    "c"
+    "a"
    ],
    "secure": [
-    "d"
+    "c"
    ],
    "available": [
-    "e"
+    "d"
    ]
   },
-  "ambiguous": true,
-  "note": "overhead: one VPN to TGW (b) chosen; cost: single DX (c) chosen over VPN given many TB/month, defensible but not fully settled."
+  "ambiguous": false,
+  "note": ""
  },
  {
   "id": "puzzle-qualifier-sprint-014",

@@ -327,7 +327,7 @@ const scenarios: S[] = [
     9,
     2,
     'A nightly risk simulation',
-    'A bank runs a risk simulation on EC2 every night. The job saves its progress and restarts cleanly if an instance disappears. It must start at its scheduled time even on a busy night, and the regulator prefers that no other customer\'s instances share the hardware. Every design below runs the job.',
+    'A bank runs a risk simulation on EC2 every night. The job saves its progress and restarts cleanly if an instance disappears. Starting on time is preferred, but if capacity is short the run may slip to the next night. The regulator prefers that no other customer\'s instances share the hardware. Every design below runs the job.',
     {
       options: [
         { id: 'a', text: 'On-Demand Instances launched when the job starts' },
@@ -353,7 +353,7 @@ const scenarios: S[] = [
           quote: 'This means that Dedicated Instances are physically isolated at the host hardware level from instances that belong to other AWS accounts, even if those accounts are linked to a single payer account.',
         },
         available: {
-          text: 'A Capacity Reservation holds capacity for a future date, so the instances are there when the job starts, even on a busy night.',
+          text: 'A Capacity Reservation holds capacity for a future date, so the instances are there at the scheduled start even on a busy night, which none of the other designs guarantee.',
           src: 'ec2-capacity-reservations',
           quote: 'You can request a Capacity Reservation for immediate use or you can request a Capacity Reservation for a future date.',
         },

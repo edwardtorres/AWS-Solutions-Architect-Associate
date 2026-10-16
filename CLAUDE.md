@@ -16,6 +16,8 @@ Vite + React 19 + TypeScript (`strict`, `noUncheckedIndexedAccess`) + Tailwind v
 | `npm run check:hygiene` | No private links, session links, tokens, account IDs or local paths in files or commits |
 | `npm run e2e` | Playwright against the production preview at 1440 px and 390 px (touch, `tap()` only) with axe (fails on serious/critical): building flow, inspection lock, placement, flags. Run `npm run build` first. Also in `check:all` |
 | `npm run gen:meta` | Regenerates `src/questions/meta.ts` (id, building, bullets, difficulty; no keys). `check:content` fails if it is stale |
+| `npx tsx scripts/check-puzzles.ts [type]` | Puzzle checks alone (also run inside `check:content`; `--no-puzzle-minimums` there skips the count minimums) |
+| `npx tsx scripts/blind-puzzles.ts export\|score` | Keyless export of puzzle scenarios for a blind reviewer / compare the reviewer's answers with the computed ones |
 | `npm run test:layout` | Playwright at 390 px (touch) and 1280 px (keyboard): no sideways scroll, targets ≥ 44 px, panels, saves |
 | `npm run check` / `npm run check:all` | Everything offline / plus the layout test |
 | `npm run fetch:official` | Regenerates the official data files (outline, services, short names) from the live guide |
@@ -102,6 +104,17 @@ The exam guide dates from August 2022. A feature AWS introduced on or after **20
 - **Leaving an unfinished inspection counts as a failed inspection** (it counts toward the same-day lock).
 - **Start-up checks keep XP and streak credit** but never count towards readiness.
 
+## Answer history and readiness (save v3, Step 5)
+- `game.history[itemId]` summarises every question or puzzle answered (times answered, times correct, current correct streak, last time, last result, last attempt type). Updated on every answer, never trimmed.
+- `game.recent["1".."4"]` holds the counted results per domain that readiness can ever look at (the newest 100 non-puzzle results plus the newest 8 puzzle plays). **Readiness and future spaced review never read the capped answer log**; the log (4,000 newest) is only an audit trail. Migration `MIGRATIONS[2]` builds both from a v2 log (tested on a real v2 save in `src/save/__fixtures__/`).
+
+## Puzzles (Step 5)
+- Seven types: Policy Court (IAM evaluation), Packet Tracer (VPC traffic), Disaster Bunker drill, Cold Cellar planner (S3 lifecycle), Purchase Planner (compute pricing models), Architecture Builder, Qualifier Sprint (Town Charter). Contract in `src/puzzles/types.ts`; evaluators in `src/puzzles/<type>/def.ts`; scenarios (inputs only) in `content/puzzles/<type>.ts`; writer rules in `docs/puzzle-writing-guide.md`. Puzzle ids are `puzzle-<type>-NNN` (the prefix keeps them apart from question ids such as `cold-cellar-001`).
+- **Computed answers:** where rules decide, a small evaluator applies rules that each carry an AWS quote (`Rule.src` + verbatim `quote`, verified by `check:links`); the answer is computed, never stored. An evaluator returns `null` (a refusal) for anything its rules do not settle, and `check:content` rejects any scenario that hits one. Architecture Builder and Qualifier Sprint are authored with sourced checks/facts.
+- **Practice only:** a puzzle play earns XP like a question (10/20/40, repeats a quarter), counts toward the streak, is logged with attempt type `puzzle` and feeds readiness, but never changes a building state. **In each domain's 30-answer readiness window at most the 8 most recent puzzle plays count** (older ones are skipped); a domain still needs 10 counted answers, so puzzles alone never produce a readiness value. Town Charter (a Foundation) has no domain, so its plays never affect readiness.
+- **Workbench:** each building's panel lists its puzzles once the building is surveyed (any state except planned). Routes `#/workbench/<building>` and `#/puzzle/<id>`.
+- **Rules:** no puzzle text or rule may match a post-guide registry feature (a rule that must may declare `newer`, and no scenario's answer may depend on it); in-scope services only; banned terms and open queue items apply; reviewed by a blind pass and a source pass (`docs/reviews/puzzles.md`).
+
 ## Layout
 `scripts/` official data + content/bundle/hygiene/layout checks · `content/` sources, glossary, don't-confuse pairs, renamed services, needs-verification queue, contradictions, notes per district · `src/data/` buildings, roads, districts, families, outline · `src/save/` save schema v1, migrations, store · `src/ui/` map, panel, atlas, save menu, `src/ui/notes/` notes, glossary and don't-confuse pages · `src/dev/` dev-only hooks · `src/lib/` graph, rng, routing.
 
@@ -110,7 +123,7 @@ The exam guide dates from August 2022. A feature AWS introduced on or after **20
 2. **Done (approved):** Step 1 fixes (69 buildings, Machine Learning family, Foundation cap 5), notes for every building (audit in `docs/step-2-audit.md`). Scope: notes for every building, sourced from AWS docs, with "don't confuse" pairs (security groups vs network ACLs, gateway vs interface endpoints, ALB vs NLB vs GWLB, S3 storage classes, RDS Multi-AZ vs read replicas, SQS vs SNS vs EventBridge vs Kinesis, Savings Plans vs Reserved Instances vs Spot, EBS vs EFS vs FSx, KMS vs CloudHSM, Shield vs WAF, Direct Connect vs Site-to-Site VPN, CloudFront vs Global Accelerator), scenario keyword cues, and Azure crosswalk notes.
 3. **Done (awaiting approval):** question bank (audit in `docs/step-3-audit.md`): multiple choice and multiple response only, AWS scenario style, weighted 30/26/24/20, in-scope services only, independent review.
 4. **Done (awaiting approval):** core game loop (audit in `docs/step-4-audit.md`): lifecycle, inspections with a same-day retry lock, placement checks, XP, ranks, streaks, badges, readiness weighted by domain (excluding start-up checks), save migrations.
-5. Puzzles with computed answers: IAM policy evaluator (explicit deny, SCPs, permission boundaries, resource policies), VPC traffic tracer (security groups, NACLs, route tables), DR strategy picker by RTO/RPO, S3 lifecycle planner, architecture builder, cost-choice scenarios with no hardcoded prices.
+5. **Done (awaiting approval):** puzzles (audit in `docs/step-5-audit.md`). Puzzles with computed answers: IAM policy evaluator (explicit deny, SCPs, permission boundaries, resource policies), VPC traffic tracer (security groups, NACLs, route tables), DR strategy picker by RTO/RPO, S3 lifecycle planner, architecture builder, cost-choice scenarios with no hardcoded prices.
 6. Hands-on labs in a real AWS account with cost guardrails (budget and alerts first, free-tier-friendly, cost warnings, cleanup steps), building on the portfolio projects.
 7. Spaced review, Weak Spots, and a mock exam (65 questions, 130 minutes, MC and MR only, domain-weighted, freshness rule, ready-to-book rule, note that 720 is a scaled score).
 8. Full claim fact-check against AWS docs, `verifiedAt` dates, `check:freshness` (compare content hashes where pages publish no dates).
