@@ -13,7 +13,7 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Audit logs that cool in two steps',
     story:
-      'A payments team writes audit logs to a bucket. The first month they are searched constantly. After that, auditors open them about once a month for a while, and the logs cannot be rebuilt. Later they sit untouched for years, and a restore that takes hours is fine. Plan the classes and the days of the two moves.',
+      'A payments team writes audit logs to a bucket. The first month they are searched constantly. After that, auditors open them about once a month for a while, and the logs cannot be rebuilt. From day 45 they are read less than once a year, and a restore that takes hours is fine. Choose the classes and the days of the two moves so that no early-move charge applies.',
     data: {
       objects: 'Compressed audit log files.',
       sizeKB: 20480,
@@ -97,7 +97,7 @@ const scenarios: S[] = [
     difficulty: 1,
     title: 'Uploads with no pattern',
     story:
-      'A team receives customer uploads. Some files are read daily for months, others are never read again, and nobody can predict which. Retrieval fees would be a nuisance. Which single class should the objects be uploaded to?',
+      'A team receives customer uploads. Some files are read daily for months, others are never read again, and nobody can predict which. Which single class should the objects be uploaded to?',
     data: {
       objects: 'Customer-uploaded data files.',
       sizeKB: 10240,
@@ -138,14 +138,14 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Monthly reports, then occasional lookups',
     story:
-      'A finance team writes monthly report bundles that cannot be regenerated. For 30 days they are read daily. Then they are read about once a month. From day 50 they are read only a few times a year, and the analysts accept a restore of minutes to hours. Choose the classes and the two days.',
+      'A finance team writes monthly report bundles that cannot be regenerated. For 30 days they are read daily. Then they are read about once a month. From day 50 they are read about twice a year, and a restore must finish within minutes. Choose the classes and the two days.',
     data: {
       objects: 'Report bundles in compressed files.',
       sizeKB: 8192,
       phases: [
         { from: 0, access: 'frequent', wait: 'ms', recreatable: false },
         { from: 30, access: 'monthly', wait: 'ms', recreatable: false },
-        { from: 50, access: 'few-per-year', wait: 'minutes', recreatable: false },
+        { from: 50, access: 'twice-yearly', wait: 'minutes', recreatable: false },
       ],
       dayOptions: [
         [30, 45, 60],
@@ -160,15 +160,15 @@ const scenarios: S[] = [
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
     difficulty: 2,
-    title: 'A few reads a year, hours allowed',
+    title: 'Twice a year, hours allowed',
     story:
-      'A research lab stores finished experiment data. It is read daily for a month, and afterwards a few times a year. The lab can wait hours for a restore. The cheapest-sounding archive tends to attract attention, so check which class matches how often the data is read.',
+      'A research lab stores finished experiment data. It is read daily for a month, and afterwards about twice a year. The lab can wait hours for a restore.',
     data: {
       objects: 'Experiment result archives.',
       sizeKB: 102400,
       phases: [
         { from: 0, access: 'frequent', wait: 'ms' },
-        { from: 30, access: 'few-per-year', wait: 'hours' },
+        { from: 30, access: 'twice-yearly', wait: 'hours' },
       ],
       dayOptions: [[14, 30, 60, 90]],
       rot: 2,
@@ -239,7 +239,7 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Re-creatable, but tiny',
     story:
-      'A build system stores small cache files of 100 KB each. They can be rebuilt at any time, and each is read about once a month. The team wants a one-Availability-Zone class to save money. The objects stay in one class for their whole life. Which class fits?',
+      'A build system stores small cache files of 100 KB each. They can be rebuilt at any time, and each is read about once a month. These objects are smaller than the 128 KB that the infrequent-access classes bill as a minimum, and the team is tempted to save money with a one-Availability-Zone class. The objects stay in one class for their whole life. Which class fits?',
     data: {
       objects: 'Small build cache files.',
       sizeKB: 100,
@@ -256,7 +256,7 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Unknown at first, archive later',
     story:
-      'A data team lands datasets whose use cannot be predicted during their first six months. After day 180 the data is read less than once a year and a restore taking hours is fine. The team wants no retrieval fees while the pattern is unknown. Choose the classes and the day of the move.',
+      'A data team lands datasets whose use cannot be predicted during their first six months. After day 180 the data is read less than once a year and a restore taking hours is fine. The pattern is unknown for that whole period. Choose the classes and the day of the move.',
     data: {
       objects: 'Large dataset files.',
       sizeKB: 5120,
@@ -276,14 +276,14 @@ const scenarios: S[] = [
     difficulty: 3,
     title: 'One Zone, then Flexible Retrieval',
     story:
-      'A media team stores rendered previews that a job can regenerate. They are read daily for a month, then about once a month. From day 45 they are read a few times a year and a restore of minutes is fine. Choose the classes and the two days, keeping the lifecycle rules supported.',
+      'A media team stores rendered previews that a job can regenerate. They are read daily for a month, then about once a month. From day 45 they are read about twice a year and a restore must finish within minutes. Choose the classes and the two days, keeping the lifecycle rules supported.',
     data: {
       objects: 'Rendered preview videos.',
       sizeKB: 25600,
       phases: [
         { from: 0, access: 'frequent', wait: 'ms', recreatable: true },
         { from: 30, access: 'monthly', wait: 'ms', recreatable: true },
-        { from: 45, access: 'few-per-year', wait: 'minutes', recreatable: true },
+        { from: 45, access: 'twice-yearly', wait: 'minutes', recreatable: true },
       ],
       dayOptions: [
         [14, 30, 45, 60],

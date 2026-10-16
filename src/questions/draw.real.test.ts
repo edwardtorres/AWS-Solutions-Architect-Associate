@@ -45,7 +45,10 @@ describe('draws over the real bank', () => {
 
   it('the generated meta lists every question', async () => {
     const bank = await loadQuestions();
-    expect(QUESTION_META.size).toBe(bank.length);
+    // The meta also lists the puzzle scenarios (ids `<type>-NNN`); every question must be there.
+    const questionIds = new Set(bank.map((q) => q.id));
+    expect([...QUESTION_META.keys()].filter((id) => questionIds.has(id))).toHaveLength(bank.length);
+    expect(QUESTION_META.size).toBeGreaterThan(bank.length);
     for (const q of bank) {
       const m = QUESTION_META.get(q.id);
       expect(m?.building).toBe(q.building);

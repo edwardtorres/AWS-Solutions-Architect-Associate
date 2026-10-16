@@ -170,7 +170,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'nat-public-subnet',
-    text: 'The NAT gateway sits in a public subnet, so that subnet needs a route to the internet gateway.',
+    text: 'A public NAT gateway is created in a public subnet.',
     src: 'vpc-nat-gateway',
     quote: 'You create a public NAT gateway in a public subnet and must associate an Elastic IP address with the NAT gateway at creation.',
   },
@@ -247,6 +247,18 @@ export const rules: Rule[] = [
     quote: 'You can reference the ID of the prefix list for Amazon S3 in security group rules.',
   },
   {
+    id: 'gwep-prefix-sg-ddb',
+    text: 'A security group rule can name the DynamoDB prefix list.',
+    src: 'vpce-gateway-ddb',
+    quote: 'You can reference the ID of the prefix list for DynamoDB in security group rules.',
+  },
+  {
+    id: 'gwep-nacl-ddb',
+    text: 'The network ACL of the subnet must still allow traffic to and from DynamoDB.',
+    src: 'vpce-gateway-ddb',
+    quote: 'The network ACL for the subnet for your instances that access DynamoDB through a gateway endpoint must allow traffic to and from DynamoDB.',
+  },
+  {
     id: 'gwep-nacl',
     text: 'The network ACL of the subnet must still allow traffic to and from the service.',
     src: 'vpce-gateway-s3',
@@ -305,6 +317,12 @@ export const rules: Rule[] = [
     text: 'Security groups are stateful: replies to allowed traffic are allowed whatever the rules in the other direction say.',
     src: 'vpc-security-groups',
     quote: 'Responses to allowed inbound traffic are allowed to leave the instance, regardless of the outbound rules.',
+  },
+  {
+    id: 'sg-stateful-reply',
+    text: 'Security groups are stateful: the reply to a request an instance sends is allowed back in whatever the inbound rules say.',
+    src: 'vpc-security-groups',
+    quote: 'For example, if you send a request from an instance, the response traffic for that request is allowed to reach the instance regardless of the inbound security group rules.',
   },
   {
     id: 'sg-reference',
@@ -380,7 +398,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'eph-linux',
-    text: 'A Linux client (including Amazon Linux) uses ports 32768-61000.',
+    text: 'Many Linux kernels, including the Amazon Linux kernel, use ports 32768-61000 for replies; the scenarios use Amazon Linux clients.',
     src: 'vpc-custom-nacl',
     quote: 'Many Linux kernels (including the Amazon Linux kernel) use ports 32768-61000.',
   },
@@ -800,7 +818,7 @@ function pushNacl(c: Ctx, nacl: Nacl, dir: 'in' | 'out', d: NaclResult, what: st
   void dir;
 }
 
-function pushSg(c: Ctx, n: Node, d: SgResult, dir: 'in' | 'out', what: string, o: { ep?: boolean; gw?: boolean } = {}) {
+function pushSg(c: Ctx, n: Node, d: SgResult, dir: 'in' | 'out', what: string, o: { ep?: boolean; gw?: boolean; svc?: Service | null } = {}) {
   const text = `${what} ${dir === 'in' ? 'into' : 'out of'} ${n.name}`;
   if (d.ok) {
     let rule = 'sg-allow-only';
@@ -809,7 +827,7 @@ function pushSg(c: Ctx, n: Node, d: SgResult, dir: 'in' | 'out', what: string, o
     else if (d.via === 'default') rule = 'sg-outbound-default';
     else if (d.via === 'sg') rule = 'sg-reference';
     else if (d.via === 'sg-peer') rule = 'sg-reference-peer';
-    else if (d.via === 'pl') rule = 'gwep-prefix-sg';
+    else if (d.via === 'pl') rule = o.svc === 'dynamodb' ? 'gwep-prefix-sg-ddb' : 'gwep-prefix-sg';
     else if (o.gw) rule = 'gwep-sg';
     c.ok(rule, `${d.sg} allows ${text}.`);
   } else {
@@ -879,11 +897,12 @@ function outbound(c: Ctx, sv: Vpc, sn: Node, dst: Endpoint, dn: Node | undefined
 
   const { route: found, matched } = lookup(sv, rt, { ip: dstIp, service });
   const viaGw = found !== null && found.target.startsWith('vpce:');
+  const gwNacl = service === 'dynamodb' ? 'gwep-nacl-ddb' : 'gwep-nacl';
 
   // Source side: security group, then the subnet network ACL.
-  pushSg(c, sn, sgDecision(w, sn, 'out', other, at.proto, at.port), 'out', `${c.portText} to ${dstName}`, { gw: viaGw && service !== null });
+  pushSg(c, sn, sgDecision(w, sn, 'out', other, at.proto, at.port), 'out', `${c.portText} to ${dstName}`, { gw: viaGw && service !== null, svc: service });
   if (sameSubnet) c.ok('nacl-boundary', `${sn.name} and ${dstName} share ${sn.subnet}, so no network ACL is checked.`);
-  else pushNacl(c, nacl, 'out', naclDecision(nacl, 'out', other, at.proto, portRange), `${c.portText} to ${dstName}`, `${subnet.id} outbound`, { pass: viaGw ? 'gwep-nacl' : undefined });
+  else pushNacl(c, nacl, 'out', naclDecision(nacl, 'out', other, at.proto, portRange), `${c.portText} to ${dstName}`, `${subnet.id} outbound`, { pass: viaGw ? gwNacl : undefined });
 
   if (!found) {
     let rule = 'igw-no-route';
@@ -929,9 +948,10 @@ function outbound(c: Ctx, sv: Vpc, sn: Node, dst: Endpoint, dn: Node | undefined
     natSubnet = subnetOf(sv, nat.subnet);
     const nrt = rtOf(sv, natSubnet);
     const nr = lookup(sv, nrt, { ip: dstIp, service }).route;
+    if (nr && nr.target === 'igw') c.ok('nat-public-subnet', `${nat.id} sits in ${natSubnet.id}, a public subnet.`);
     if (nr && nr.target === 'igw') c.ok('nat-to-igw', `${nrt.id} (the route table of ${natSubnet.id}, where ${nat.id} sits) sends internet traffic to the internet gateway.`);
     else {
-      c.bad('nat-public-subnet', `rt:${nrt.id}`, `${nrt.id} (the route table of ${natSubnet.id}, where ${nat.id} sits) has no route to the internet gateway, so ${nat.id} is not in a public subnet.`);
+      c.bad('nat-to-igw', `rt:${nrt.id}`, `${nrt.id} (the route table of ${natSubnet.id}, where ${nat.id} sits) has no route to the internet gateway, so ${nat.id} is not in a public subnet.`);
       return;
     }
     const nn = naclOf(sv, natSubnet);
@@ -985,18 +1005,19 @@ function outbound(c: Ctx, sv: Vpc, sn: Node, dst: Endpoint, dn: Node | undefined
     else if (back && back.target === `pcx:${id}`) c.ok('peer-routes', `${drt.id} sends ${sv.cidr} back through ${back.target}.`);
     else c.bad('peer-routes', `rt:${drt.id}`, `${drt.id} has no route that sends replies for ${sv.cidr} back through the peering connection.`);
     if (!sameSubnet) pushNacl(c, nacl, 'in', naclDecision(nacl, 'in', { ip: dstIp, service: null, node: dn }, at.proto, c.client), `reply from ${dstName} on ports ${c.clientText}`, `${subnet.id} inbound`, { reply: true });
+    c.ok('sg-stateful-reply', `The reply to ${sn.name}'s request is allowed in whatever its inbound rules say.`);
     return;
   }
 
   // Internet or service destination: the reply comes back the same way.
-  c.ok('sg-stateful', `The reply is allowed back into ${sn.name} whatever its inbound rules say.`);
+  c.ok('sg-stateful-reply', `The reply is allowed back into ${sn.name} whatever its inbound rules say.`);
   replyIntro(c);
   if (path === 'nat' && natSubnet) {
     const nn = naclOf(sv, natSubnet);
     pushNacl(c, nn, 'in', naclDecision(nn, 'in', other, at.proto, NAT_RANGE), `reply from ${dstName} on ports ${NAT_RANGE[0]}-${NAT_RANGE[1]}`, `${natSubnet.id} inbound`, { pass: 'nat-ports' });
     if (natSubnet.id !== subnet.id) pushNacl(c, nn, 'out', naclDecision(nn, 'out', srcOther, at.proto, c.client), `reply to ${sn.name} on ports ${c.clientText}`, `${natSubnet.id} outbound`, { reply: true });
   }
-  pushNacl(c, nacl, 'in', naclDecision(nacl, 'in', other, at.proto, c.client), `reply from ${dstName} on ports ${c.clientText}`, `${subnet.id} inbound`, { reply: true, pass: path === 'vpce' ? 'gwep-nacl' : undefined });
+  pushNacl(c, nacl, 'in', naclDecision(nacl, 'in', other, at.proto, c.client), `reply from ${dstName} on ports ${c.clientText}`, `${subnet.id} inbound`, { reply: true, pass: path === 'vpce' ? gwNacl : undefined });
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -1011,7 +1032,6 @@ function components(s: PacketScenario): { id: string; label: string }[] {
     for (const r of v.routeTables) out.push({ id: `rt:${r.id}`, label: `Route table ${r.id}${r.main ? ' (main)' : ''}` });
     if (v.igw) out.push({ id: `igw:${v.id}`, label: `Internet gateway of ${v.name}` });
     for (const n of v.nats ?? []) out.push({ id: `nat:${n.id}`, label: `NAT gateway ${n.id}` });
-    for (const g of v.gwEps ?? []) out.push({ id: `gwep:${g.id}`, label: `Gateway endpoint ${g.id}` });
   }
   for (const p of s.peerings ?? []) out.push({ id: `pcx:${p.id}`, label: `VPC peering connection ${p.id}` });
   const ends = [at.src, at.dst].filter((e) => e.kind === 'node') as { kind: 'node'; id: string }[];
@@ -1037,7 +1057,7 @@ function fields(s: PacketScenario): Field[] {
     },
     {
       id: 'blocker',
-      prompt: 'Which one component blocks it? Choose "Nothing blocks it" if the connection succeeds.',
+      prompt: 'Which one component blocks it? Name the first component on the packet\'s path that cannot carry it (for a route table, the one the subnet actually uses; for peering that cannot carry the traffic, the peering connection). Choose "Nothing blocks it" if the connection succeeds.',
       multi: false,
       options: [...components(s).map((c) => ({ id: c.id, label: c.label })), { id: 'none', label: 'Nothing blocks it' }],
     },
@@ -1109,14 +1129,14 @@ function exhibit(s: PacketScenario): Exhibit {
     if (e.kind === 'service') return e.service === 's3' ? 'Amazon S3 (public service endpoint)' : 'Amazon DynamoDB (public service endpoint)';
     const n = find(e.id);
     if (!n) return e.id;
-    return role === 'to' && e.via === 'public' ? `${n.name} at its public IPv4 address ${n.publicIp ?? '(none)'}` : `${n.name} at ${n.ip}`;
+    return role === 'to' && e.via === 'public' ? (n.publicIp ? `${n.name} at its public IPv4 address ${n.publicIp}` : `${n.name} by the address visitors expect to use (no public IPv4 address is assigned to it)`) : `${n.name} at ${n.ip}`;
   };
   const srcNode = at.src.kind === 'node' ? find(at.src.id) : undefined;
   const os = at.clientOs ?? srcNode?.os ?? 'linux';
   out.push({
     title: 'The connection attempt',
     kind: 'text',
-    text: `From: ${end(at.src, 'from')}. To: ${end(at.dst, 'to')}. ${at.proto.toUpperCase()} on port ${at.port}. The source opens the connection. The client runs ${os === 'linux' ? 'Amazon Linux' : 'Windows Server 2019'}. Assume the service or application at the destination accepts the connection and that IAM and bucket policies are not involved.`,
+    text: `From: ${end(at.src, 'from')}. To: ${end(at.dst, 'to')}. ${at.proto.toUpperCase()} on port ${at.port}. The source opens the connection. The client runs ${os === 'linux' ? 'Amazon Linux' : 'Windows Server 2019'}. Assume the service or application at the destination accepts the connection, that IAM and bucket policies are not involved, and that any endpoint policy is the default (full access).`,
   });
   return out;
 }

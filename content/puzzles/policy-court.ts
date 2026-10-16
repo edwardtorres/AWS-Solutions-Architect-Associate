@@ -393,7 +393,7 @@ const scenarios: S[] = [
       },
       policies: [
         pol('identity', 'identity', 'Policy on the user dev-pat', [allow('sts:AssumeRole', 'arn:aws:iam::ACCT_PROD:role/auditor')]),
-        pol('trust', 'resource', 'Trust policy of the role auditor', [allow('sts:AssumeRole', '*', { Principal: aws('arn:aws:iam::ACCT_DEV:root') })]),
+        pol('trust', 'resource', 'Trust policy of the role auditor', [{ Effect: 'Allow', Action: 'sts:AssumeRole', Principal: aws('arn:aws:iam::ACCT_DEV:root') }]),
       ],
     },
   },
@@ -411,7 +411,7 @@ const scenarios: S[] = [
       },
       policies: [
         pol('identity', 'identity', 'Policy on the user intern', [allow('sts:AssumeRole', '*')]),
-        pol('trust', 'resource', 'Trust policy of the role deployer', [allow('sts:AssumeRole', '*', { Principal: aws('arn:aws:iam::ACCT_PROD:user/release-manager') })]),
+        pol('trust', 'resource', 'Trust policy of the role deployer', [{ Effect: 'Allow', Action: 'sts:AssumeRole', Principal: aws('arn:aws:iam::ACCT_PROD:user/release-manager') }]),
       ],
     },
   },
@@ -437,7 +437,7 @@ const scenarios: S[] = [
   },
   // Source: IAM User Guide, "Permissions boundaries for IAM entities": a resource-based policy that names the session ARN grants directly to the session.
   {
-    ...base('policy-court', 'embassy-row', ['1.1-S3', '1.1-S5'], 2, 22),
+    ...base('policy-court', 'embassy-row', ['1.1-S3', '1.1-S5'], 3, 22),
     title: 'A bucket policy that names the session',
     story: 'An analyst assumed a role and passed a session policy that allows only s3:ListBucket. The bucket policy names this exact role session ARN and allows s3:GetObject. The role policy covers only Amazon EC2 reads.',
     data: {
@@ -498,7 +498,7 @@ const scenarios: S[] = [
   {
     ...base('policy-court', 'federation-bridge', ['1.1-K2', '1.1-S6'], 1, 25),
     title: 'Role and session policy agree',
-    story: 'A federated role session reads an object. The role policy allows reads in one bucket, and the session policy allows reads and listing in the same bucket. No policy denies anything.',
+    story: 'A federated role session reads an object. The role policy allows reads in one bucket, and the session policy allows reads and listing in the same bucket. No policy denies anything. Remember that a session policy never counts as a grant by itself.',
     data: {
       request: {
         principal: role('ACCT_MAIN', 'DirectoryReaders', 'carol'),

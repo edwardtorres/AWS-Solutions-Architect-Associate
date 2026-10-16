@@ -21,7 +21,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 1,
     title: 'The server nobody can find',
     story:
-      'A web server sits in a subnet that looks public: it has the right route and the right security group. Visitors on the internet try to open its HTTPS page.',
+      'A web server sits in a subnet that looks public: it has the right route and the right security group, but nobody assigned it a public IPv4 address. Visitors on the internet try to open its HTTPS page.',
     data: {
       vpcs: [
         {
@@ -266,7 +266,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 1,
     title: 'An endpoint for a different subnet',
     story:
-      'A gateway endpoint for Amazon S3 exists in the VPC and is wired into the data subnet. A worker in the app subnet, which has no internet gateway or NAT, tries to reach Amazon S3 over HTTPS.',
+      'A gateway endpoint for Amazon S3 is associated only with the data route table. A worker in the app subnet, which uses its own route table and has no internet gateway or NAT, tries to reach Amazon S3 over HTTPS.',
     data: {
       vpcs: [
         {
@@ -296,7 +296,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 2,
     title: 'The other managed service',
     story:
-      'A private subnet has no internet gateway and no NAT. Its route table uses the gateway endpoint for Amazon S3. A job in that subnet now tries to write to Amazon DynamoDB over HTTPS.',
+      'A VPC has no internet gateway and no NAT. Gateway endpoints exist for Amazon S3 and for DynamoDB. The DynamoDB endpoint is associated only with the data route table, while the job subnet uses a route table with the S3 endpoint route. A job tries to write to DynamoDB over HTTPS.',
     data: {
       vpcs: [
         {
@@ -304,12 +304,22 @@ const scenarios: Scenario<PacketScenario>[] = [
           name: 'Jobs VPC',
           cidr: '10.0.0.0/16',
           igw: false,
-          subnets: [{ id: 'priv-a', cidr: '10.0.1.0/24', rt: 'priv-rt' }],
-          routeTables: [mainRt(), { id: 'priv-rt', routes: [{ dest: 'pl:s3', target: 'vpce:vpce-s3' }] }],
+          subnets: [
+            { id: 'priv-a', cidr: '10.0.1.0/24', rt: 'priv-rt' },
+            { id: 'data-sub', cidr: '10.0.2.0/24', rt: 'data-rt' },
+          ],
+          routeTables: [
+            mainRt(),
+            { id: 'priv-rt', routes: [{ dest: 'pl:s3', target: 'vpce:vpce-s3' }] },
+            { id: 'data-rt', routes: [{ dest: 'pl:dynamodb', target: 'vpce:vpce-ddb' }] },
+          ],
           nacls: [defaultNacl()],
           sgs: [{ id: 'job-sg', inbound: [] }],
           nodes: [{ id: 'job-1', name: 'job-1', kind: 'instance', subnet: 'priv-a', ip: '10.0.1.10', sgs: ['job-sg'] }],
-          gwEps: [{ id: 'vpce-s3', service: 's3' }],
+          gwEps: [
+            { id: 'vpce-s3', service: 's3' },
+            { id: 'vpce-ddb', service: 'dynamodb' },
+          ],
         },
       ],
       attempt: { src: { kind: 'node', id: 'job-1' }, dst: { kind: 'service', service: 'dynamodb' }, proto: 'tcp', port: 443 },
@@ -481,7 +491,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 2,
     title: 'The route table that was never attached',
     story:
-      'The team builds a public route table with a default route to the internet gateway, but never associates it with the web subnet. Visitors try the web server, which has a public IPv4 address.',
+      'The team builds a public route table with a default route to the internet gateway, but never associates it with the web subnet, which has no explicit association at all. Visitors try the web server, which has a public IPv4 address.',
     data: {
       vpcs: [
         {
@@ -623,7 +633,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 2,
     title: 'A to C through B',
     story:
-      'VPC A is peered with VPC B, and VPC B is peered with VPC C. A has a route for the C range that points at the A-B peering connection. A server in A tries to reach a server in C.',
+      'VPC A is peered with VPC B, and VPC B is peered with VPC C. A has a route for the C range that points at the A-B peering connection. Every other route and rule shown is set correctly for the paths that exist. A server in A tries to reach a server in C.',
     data: {
       vpcs: [
         {
@@ -675,7 +685,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 2,
     title: 'Borrowing the hub NAT gateway',
     story:
-      'To avoid paying for a second NAT gateway, a spoke VPC sends its default route across a peering connection to the hub VPC, which has a NAT gateway and an internet gateway. A spoke server calls a public API.',
+      'A spoke VPC sends its default route across a peering connection to the hub VPC, which has a NAT gateway and an internet gateway, hoping to reuse them. A spoke server calls a public API.',
     data: {
       vpcs: [
         {
@@ -721,7 +731,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     difficulty: 3,
     title: 'Borrowing the hub endpoint',
     story:
-      'To save the cost of another endpoint, a spoke VPC sends its default route across a peering connection to a hub VPC that has a gateway endpoint for Amazon S3. A spoke server uploads an object over HTTPS.',
+      'To avoid creating another endpoint, a spoke VPC sends its default route across a peering connection to a hub VPC that has a gateway endpoint for Amazon S3. A spoke server uploads an object over HTTPS.',
     data: {
       vpcs: [
         {

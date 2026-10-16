@@ -6,6 +6,7 @@ export type Commit = 'none' | 'usd-per-hour' | 'instance-config' | 'either';
 export type Change = 'family' | 'size' | 'os' | 'tenancy' | 'region' | 'fargate' | 'lambda';
 export type Capacity = 'none' | 'az';
 export type Exchanges = 'accept' | 'avoid';
+export type Goal = 'none' | 'largest-saving' | 'most-flexible';
 
 /** A workload profile. Only documented properties are encoded; `extras` holds any other stated requirement and always causes a refusal. */
 export interface PurchaseScenario {
@@ -20,6 +21,8 @@ export interface PurchaseScenario {
   capacity: Capacity;
   /** Whether the team accepts exchanging or modifying commitments by hand. */
   exchanges: Exchanges;
+  /** What the team asks of the plan when several fit: no stated preference, the largest saving for a commitment that stays in one family and Region, or the most flexibility. */
+  goal: Goal;
   /** Anything else the profile states; no rule covers it, so the case is refused. */
   extras: string[];
 }
@@ -57,7 +60,7 @@ const rules: Rule[] = [
     id: 'spot-notice',
     text: 'A Spot Instance can be reclaimed; the interruption comes with a two-minute notice.',
     src: 'ec2-spot',
-    quote: 'This signal provides an opportunity to proactively rebalance your workloads across existing or new Spot Instances without having to wait for the two-minute Spot Instance interruption notice.',
+    quote: 'Amazon EC2 provides a Spot Instance interruption notice, which gives the instance a two-minute warning before it is interrupted.',
   },
   {
     id: 'sp-term-usage',
@@ -70,6 +73,12 @@ const rules: Rule[] = [
     text: 'Reserved Instances are a commitment to a consistent instance configuration, including instance type and Region, for 1 or 3 years.',
     src: 'ec2-purchasing',
     quote: 'Reserved Instances – Reduce your Amazon EC2 costs by making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.',
+  },
+  {
+    id: 'capacity-needs-ri',
+    text: 'A capacity reservation in an Availability Zone comes from Reserved Instances (or Capacity Reservations), not from Savings Plans.',
+    src: 'ec2-purchasing',
+    quote: 'If you require a capacity reservation, purchase Reserved Instances or Capacity Reservations for a specific Availability Zone.',
   },
   {
     id: 'ri-zonal-capacity',
@@ -118,6 +127,18 @@ const rules: Rule[] = [
     text: 'EC2 Instance Savings Plans are a commitment to one instance family in one Region.',
     src: 'savings-plans-vs-ri',
     quote: 'They also automatically save you money on any instance usage within a given EC2 instance family in your Region of choice.',
+  },
+  {
+    id: 'ec2-sp-saving',
+    text: 'EC2 Instance Savings Plans give a larger saving than Compute Savings Plans in exchange for the narrower commitment to one family in one Region.',
+    src: 'savings-plans-types',
+    quote: 'EC2 Instance Savings Plans provide savings up to 72% off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, m5 in Virginia).',
+  },
+  {
+    id: 'compute-sp-most-flexible',
+    text: 'Compute Savings Plans are the Savings Plans type with the most flexibility.',
+    src: 'savings-plans-types',
+    quote: 'Compute Savings Plans provide the most flexibility and prices that are up to 66% off of On-Demand rates.',
   },
   {
     id: 'ec2-sp-within-family',
@@ -171,7 +192,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     }
     return out('on-demand', [
       { rule: 'od-no-commitment', note: 'No commitment is wanted and On-Demand needs none.' },
-      { rule: 'od-short-term', note: 'The work cannot be interrupted, which rules out Spot.' },
+      ...(s.term === 'long' ? [] : [{ rule: 'od-short-term', note: 'The work is short-term or of unknown length and cannot be interrupted, which rules out Spot.' }]),
     ]);
   }
 
@@ -183,6 +204,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     if (s.commit === 'usd-per-hour' || s.changes.length > 0) return null;
     return out('ri', [
       { rule: 'ri-term-config', note: 'A fixed configuration for a year or more is a Reserved Instance commitment.' },
+      { rule: 'capacity-needs-ri', note: 'Reserving capacity in an Availability Zone needs Reserved Instances; a Savings Plan does not provide it.' },
       { rule: 'ri-zonal-capacity', note: 'Only a zonal Reserved Instance reserves capacity in the Availability Zone; a regional one does not.' },
     ]);
   }
@@ -215,17 +237,26 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
 
   // Family and Region stay fixed; only size, operating system or tenancy may change.
   const osOrTenancy = has(s, 'os', 'tenancy');
-  if (s.commit === 'usd-per-hour' || (s.commit === 'either' && osOrTenancy && s.exchanges === 'avoid')) {
-    return out('ec2-sp', [
-      { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
-      { rule: 'ec2-sp-family-region', note: 'The family and Region are fixed, so a plan for that family in that Region is enough.' },
-      { rule: 'ec2-sp-within-family', note: 'It applies across sizes, operating systems and tenancies within the family without exchanges.' },
-    ]);
-  }
-  if (s.commit === 'instance-config' && !osOrTenancy) {
+  if (s.commit === 'instance-config' && !osOrTenancy && s.goal === 'none') {
     return out('ri', [
       { rule: 'ri-term-config', note: 'The commitment is to one instance configuration, including type and Region.' },
       { rule: 'ri-standard-fixed', note: 'Nothing is expected to change, so a Standard Reserved Instance (not exchangeable) is enough.' },
+    ]);
+  }
+  // Family and Region fixed with a USD-per-hour commitment: Compute and EC2 Instance Savings Plans both fit, so the stated goal must decide.
+  const planOk = s.commit === 'usd-per-hour' || (s.commit === 'either' && osOrTenancy && s.exchanges === 'avoid');
+  if (planOk && s.goal === 'largest-saving') {
+    return out('ec2-sp', [
+      { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
+      { rule: 'ec2-sp-family-region', note: 'The family and Region are fixed, so a plan for that family in that Region is enough.' },
+      { rule: 'ec2-sp-saving', note: 'The larger saving of the narrower plan is the stated goal, and Compute Savings Plans trade it for flexibility.' },
+      { rule: 'ec2-sp-within-family', note: 'It still applies across sizes, operating systems and tenancies within the family without exchanges.' },
+    ]);
+  }
+  if (planOk && s.goal === 'most-flexible') {
+    return out('compute-sp', [
+      { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
+      { rule: 'compute-sp-most-flexible', note: 'Flexibility is the stated goal, and Compute Savings Plans offer the most.' },
     ]);
   }
   return null;
@@ -250,6 +281,7 @@ function exhibit(s: PurchaseScenario): Exhibit {
     ['Expected to change', s.changes.length > 0 ? s.changes.map((c) => CHANGE_LABEL[c]).join(', ') : 'Nothing'],
     ['Capacity need', s.capacity === 'az' ? 'Capacity must be reserved in one Availability Zone' : 'None'],
     ['Manual exchanges or modifications', s.exchanges === 'accept' ? 'Acceptable' : 'Should be avoided'],
+    ['Goal when several plans fit', s.goal === 'largest-saving' ? 'The largest saving for a commitment that stays in one family and Region' : s.goal === 'most-flexible' ? 'The most flexibility' : 'No stated preference'],
   ];
   for (const x of s.extras) rows.push(['Other requirement', x]);
   return [{ title: 'Workload profile', kind: 'table', head: ['Property', 'Value'], rows }];

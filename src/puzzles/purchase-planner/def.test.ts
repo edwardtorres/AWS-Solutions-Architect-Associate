@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { def, type PurchaseScenario } from './def';
 import { scenarios } from './index';
 
-const base: PurchaseScenario = { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: [], capacity: 'none', exchanges: 'accept', extras: [] };
+const base: PurchaseScenario = { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] };
 const run = (o: Partial<PurchaseScenario>) => def.evaluate({ ...base, ...o });
 const model = (o: Partial<PurchaseScenario>) => run(o)?.answer.model?.[0] ?? null;
 const rulesOf = (o: Partial<PurchaseScenario>) => run(o)?.trace.map((t) => t.rule) ?? [];
@@ -12,6 +12,7 @@ describe('purchase-planner rules', () => {
   it('On-Demand when nothing is committed and the work cannot be interrupted', () => {
     expect(model({ term: 'short', commit: 'none' })).toBe('on-demand');
     expect(rulesOf({ term: 'unknown', commit: 'none' })).toEqual(['od-no-commitment', 'od-short-term']);
+    expect(rulesOf({ term: 'long', commit: 'none' })).toEqual(['od-no-commitment']);
     expect(model({ term: 'long', commit: 'none' })).toBe('on-demand');
   });
 
@@ -25,7 +26,7 @@ describe('purchase-planner rules', () => {
   it('Reserved Instances (zonal) when capacity must be reserved in an Availability Zone', () => {
     expect(model({ commit: 'instance-config', capacity: 'az' })).toBe('ri');
     expect(model({ commit: 'either', capacity: 'az' })).toBe('ri');
-    expect(rulesOf({ commit: 'either', capacity: 'az' })).toContain('ri-zonal-capacity');
+    expect(rulesOf({ commit: 'either', capacity: 'az' })).toEqual(['ri-term-config', 'capacity-needs-ri', 'ri-zonal-capacity']);
   });
 
   // Savings Plans user guide, "Savings Plans types": Compute Savings Plans apply to Fargate and Lambda and across Regions.
@@ -46,11 +47,17 @@ describe('purchase-planner rules', () => {
   });
 
   // Savings Plans user guide, "Compute Savings Plans and Reserved Instances": EC2 Instance Savings Plans cover a family in a Region.
-  it('EC2 Instance Savings Plans when family and Region are fixed and the commitment is in USD per hour', () => {
-    expect(model({ changes: ['size'] })).toBe('ec2-sp');
-    expect(model({ changes: ['size', 'tenancy'] })).toBe('ec2-sp');
-    expect(model({ changes: ['os', 'tenancy'], commit: 'either', exchanges: 'avoid' })).toBe('ec2-sp');
-    expect(rulesOf({ changes: ['size'] })).toEqual(['sp-term-usage', 'ec2-sp-family-region', 'ec2-sp-within-family']);
+  // Savings Plans user guide, "Savings Plans types": EC2 Instance plans trade flexibility for a larger saving; Compute plans are the most flexible.
+  it('EC2 Instance Savings Plans when family and Region are fixed and the goal is the largest saving', () => {
+    expect(model({ changes: ['size'], goal: 'largest-saving' })).toBe('ec2-sp');
+    expect(model({ changes: ['size', 'tenancy'], goal: 'largest-saving' })).toBe('ec2-sp');
+    expect(model({ changes: ['os', 'tenancy'], commit: 'either', exchanges: 'avoid', goal: 'largest-saving' })).toBe('ec2-sp');
+    expect(rulesOf({ changes: ['size'], goal: 'largest-saving' })).toEqual(['sp-term-usage', 'ec2-sp-family-region', 'ec2-sp-saving', 'ec2-sp-within-family']);
+  });
+
+  it('Compute Savings Plans when family and Region are fixed and the goal is flexibility', () => {
+    expect(model({ changes: ['size'], goal: 'most-flexible' })).toBe('compute-sp');
+    expect(rulesOf({ changes: ['size'], goal: 'most-flexible' })).toContain('compute-sp-most-flexible');
   });
 
   it('Standard Reserved Instances when nothing changes and the commitment is an instance configuration', () => {
@@ -82,6 +89,8 @@ describe('purchase-planner refusals', () => {
     expect(run({ commit: 'instance-config', capacity: 'az', changes: ['size'] })).toBeNull();
   });
   it('refuses ties and contradictions', () => {
+    expect(run({ changes: ['size'] })).toBeNull(); // USD per hour, family and Region fixed, no goal: both plan types fit
+    expect(run({ changes: ['size'], commit: 'instance-config', goal: 'largest-saving' })).toBeNull();
     expect(run({ commit: 'either' })).toBeNull(); // steady, family and Region fixed: Reserved Instances and EC2 Instance Savings Plans both fit
     expect(run({ commit: 'either', changes: ['size'] })).toBeNull();
     expect(run({ commit: 'either', changes: ['os'], exchanges: 'accept' })).toBeNull();

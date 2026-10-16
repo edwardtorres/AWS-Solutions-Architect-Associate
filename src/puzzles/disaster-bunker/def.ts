@@ -30,7 +30,6 @@ export type BlockId =
   | 'cont-replication'
   | 'data-tier-on'
   | 'app-servers-off'
-  | 'dns-failover'
   | 'scaled-down-stack'
   | 'scale-up-failover'
   | 'reduced-capacity-traffic'
@@ -122,14 +121,6 @@ export const BLOCKS: readonly Block[] = [
     src: DRO,
     quote:
       'Unlike the backup and restore approach, your core infrastructure is always available and you always have the option to quickly provision a full scale production environment by switching on and scaling out your application servers.',
-  },
-  {
-    id: 'dns-failover',
-    label: 'Amazon Route 53 health checks with DNS failover to the recovery endpoint',
-    addedBy: 'pilot-light',
-    src: DRO,
-    quote:
-      'Using these health checks, you can configure automatically initiated DNS failover to ensure traffic is sent only to healthy endpoints, which is a highly reliable operation done on the data plane.',
   },
   {
     id: 'scaled-down-stack',

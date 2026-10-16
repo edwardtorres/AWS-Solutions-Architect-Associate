@@ -699,9 +699,9 @@ const sources: Source[] = [
   aws('ddb-global-tables', `${D}/amazondynamodb/latest/developerguide/GlobalTables.html`, 'DynamoDB global tables'),
   aws('kms-multi-region', `${D}/kms/latest/developerguide/multi-region-keys-overview.html`, 'Multi-Region keys in AWS KMS'),
   aws('rds-encryption', `${D}/AmazonRDS/latest/UserGuide/Overview.Encryption.html`, 'Encrypting Amazon RDS resources'),
-  aws('ddb-encryption', `${D}/amazondynamodb/latest/developerguide/EncryptionAtRest.html`, 'DynamoDB encryption at rest'),
   aws('efs-encryption', `${D}/efs/latest/ug/encryption.html`, 'Data encryption in Amazon EFS'),
   aws('vpc-subnet-route-tables', `${D}/vpc/latest/userguide/subnet-route-tables.html`, 'Subnet route tables'),
+  aws('vpc-example-private-nat', `${D}/vpc/latest/userguide/vpc-example-private-subnets-nat.html`, 'Example: VPC with servers in private subnets and NAT'),
 ];
 
 export default sources;

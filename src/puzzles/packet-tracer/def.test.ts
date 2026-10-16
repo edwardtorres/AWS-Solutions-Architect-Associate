@@ -157,7 +157,8 @@ describe('packet-tracer: rules', () => {
   it('NAT gateway outside a public subnet cannot reach the internet', () => {
     const s = out(vpc({ pubRoutes: [] }));
     expect(ans(s)).toEqual({ outcome: ['no'], blocker: ['rt:pub-rt'] });
-    expect(rulesOf(s)).toContain('nat-public-subnet');
+    expect(rulesOf(s)).toContain('nat-to-igw');
+    expect(rulesOf(out(vpc()))).toContain('nat-public-subnet');
   });
   it('NAT gateway subnet network ACL matters, with ports 1024-65535 on the way back', () => {
     const closed: Nacl = { id: 'nat-nacl', inbound: [{ n: 100, proto: 'tcp', from: 1024, to: 2000, cidr: any, action: 'allow' }], outbound: [{ n: 100, proto: 'tcp', from: 443, to: 443, cidr: any, action: 'allow' }] };
@@ -274,6 +275,31 @@ describe('packet-tracer: refusals', () => {
     const a = vpc();
     const b: Vpc = { ...vpc(), id: 'w', name: 'W', cidr: '10.9.0.0/16', subnets: [{ id: 'bs', cidr: '10.9.1.0/24' }], routeTables: [{ id: 'bm', main: true, routes: [] }], nacls: [{ id: 'bn', default: true }], sgs: [{ id: 'sg-e', inbound: [] }], nodes: [{ id: 'ep', name: 'ep', kind: 'interface-endpoint', subnet: 'bs', ip: '10.9.1.5', sgs: ['sg-e'] }], nats: [] };
     refused({ vpcs: [a, b], peerings: [{ id: 'p', a: 'v', b: 'w' }], attempt: { src: { kind: 'node', id: 'i1' }, dst: { kind: 'node', id: 'ep' }, proto: 'tcp', port: 443 } });
+  });
+});
+
+describe('packet-tracer: DynamoDB endpoint and wording', () => {
+  it('DynamoDB uses its own prefix-list and network ACL rules', () => {
+    const v = vpc({ privRoutes: [{ dest: 'pl:dynamodb', target: 'vpce:e' }], sgs: [{ id: 'sg-open', inbound: [], outbound: [tcp('pl:dynamodb', 443)] }] });
+    v.gwEps = [{ id: 'e', service: 'dynamodb' }];
+    const r = rulesOf({ ...out(v), attempt: { src: { kind: 'node', id: 'i1' }, dst: { kind: 'service', service: 'dynamodb' }, proto: 'tcp', port: 443 } });
+    expect(r).toContain('gwep-prefix-sg-ddb');
+    expect(r).toContain('gwep-nacl-ddb');
+    expect(r).toContain('sg-stateful-reply');
+  });
+  it('an S3-only endpoint does not cover DynamoDB', () => {
+    const v = vpc({ privRoutes: [{ dest: 'pl:s3', target: 'vpce:e' }] });
+    v.gwEps = [{ id: 'e', service: 's3' }];
+    const s: PacketScenario = { ...out(v), attempt: { src: { kind: 'node', id: 'i1' }, dst: { kind: 'service', service: 'dynamodb' }, proto: 'tcp', port: 443 } };
+    expect(ans(s)).toEqual({ outcome: ['no'], blocker: ['rt:priv-rt'] });
+    expect(rulesOf(s)).toContain('gwep-other-service');
+  });
+  it('the blocker prompt defines blame, and gateway endpoints are not offered as blockers', () => {
+    for (const s of scenarios) {
+      const f = def.fields(s.data)[1];
+      expect(f?.prompt).toContain('first component on the packet');
+      expect(f?.options.some((o) => o.id.startsWith('gwep:'))).toBe(false);
+    }
   });
 });
 

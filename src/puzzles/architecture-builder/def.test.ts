@@ -50,14 +50,28 @@ describe('architecture builder checks', () => {
     expect(pass(d, [p])).toEqual([false]);
     expect(pass(d, [p, { kind: 'db-standby', tier: 'public', az: 1 }])).toEqual([false]);
   });
-  it('db-private, cache-multi-az and queue-decouple', () => {
+  it('db-private: database instances are not in a public subnet', () => {
     expect(pass(data(['db-private']), [{ kind: 'db-primary', tier: 'public', az: 0 }])).toEqual([false]);
     expect(pass(data(['db-private']), [{ kind: 'db-primary', tier: 'private-data', az: 0 }])).toEqual([true]);
-    const c = (az: number): Placed => ({ kind: 'cache', tier: 'private-data', az });
-    expect(pass(data(['cache-multi-az']), [c(0), c(1)])).toEqual([true]);
-    expect(pass(data(['cache-multi-az']), [c(0), c(0)])).toEqual([false]);
-    expect(pass(data(['queue-decouple']), [{ kind: 'queue', tier: 'regional', az: -1 }])).toEqual([true]);
-    expect(pass(data(['queue-decouple']), [{ kind: 'queue', tier: 'public', az: 0 }])).toEqual([false]);
+    expect(pass(data(['db-private']), [{ kind: 'db-primary', tier: 'private-data', az: 0 }, { kind: 'db-standby', tier: 'public', az: 1 }])).toEqual([false]);
+    expect(pass(data(['db-private']), [])).toEqual([false]);
+  });
+  it('cache-multi-az: two or more cache nodes in different zones, none in a public subnet', () => {
+    const c = (az: number, tier: Placed['tier'] = 'private-data'): Placed => ({ kind: 'cache', tier, az });
+    const d = data(['cache-multi-az']);
+    expect(pass(d, [c(0), c(1)])).toEqual([true]);
+    expect(pass(d, [c(0), c(0)])).toEqual([false]);
+    expect(pass(d, [c(0)])).toEqual([false]);
+    expect(pass(d, [c(0), c(1, 'public')])).toEqual([false]);
+    expect(pass(d, [c(0), c(1), c(1, 'public')])).toEqual([false]);
+  });
+  it('queue-decouple: a queue in the regional row and at least one app instance in a private app subnet', () => {
+    const d = data(['queue-decouple']);
+    const q: Placed = { kind: 'queue', tier: 'regional', az: -1 };
+    expect(pass(d, [q, { kind: 'app', tier: 'private-app', az: 0 }])).toEqual([true]);
+    expect(pass(d, [q])).toEqual([false]); // nothing behind the queue
+    expect(pass(d, [q, { kind: 'app', tier: 'public', az: 0 }])).toEqual([false]);
+    expect(pass(d, [{ kind: 'queue', tier: 'public', az: 0 }, { kind: 'app', tier: 'private-app', az: 0 }])).toEqual([false]);
   });
   it('a placement is full credit only when every check passes', () => {
     const d = data(['app-private', 'db-multi-az']);
@@ -68,7 +82,7 @@ describe('architecture builder checks', () => {
 
 describe('architecture builder scenarios', () => {
   it('every scenario is solvable from its palette and the reference solution passes all of its checks', () => {
-    expect(scenarios.length).toBeGreaterThanOrEqual(8);
+    expect(scenarios.length).toBeGreaterThanOrEqual(9);
     for (const s of scenarios) {
       const ref = reference(s.data);
       expect(ref, s.id).not.toBeNull();

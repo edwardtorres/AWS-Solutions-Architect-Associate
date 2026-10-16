@@ -70,7 +70,7 @@ describe('AWS documentation examples', () => {
     expect(res(req(demo, 's3:PutObject', 'arn:aws:s3:::amzn-s3-demo-bucket-production/x', 'ACCT_PROD'), [demoIdentity, prodBucket])).toEqual({ decision: 'allow', decider: BOTH_SIDES });
   });
   it('Demo can create and edit but not delete', () => {
-    expect(res(req(demo, 's3:DeleteObject', 'arn:aws:s3:::amzn-s3-demo-bucket-production/x', 'ACCT_PROD'), [demoIdentity, prodBucket])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(req(demo, 's3:DeleteObject', 'arn:aws:s3:::amzn-s3-demo-bucket-production/x', 'ACCT_PROD'), [demoIdentity, prodBucket])).toEqual({ decision: 'deny', decider: 'bucket' });
   });
 
   // IAM User Guide, "Permissions boundaries for IAM entities" (access_policies_boundaries.html): Shirley and Nikhil
@@ -142,8 +142,8 @@ describe('AWS documentation examples', () => {
     const id = pol('identity', 'identity', [allow('s3:PutObject', '*')]);
     const r = (p: Req['principal']) => req(p, 's3:PutObject', `${BUCKET}/k`, 'ACCT_SHARED');
     expect(res(r(user('ACCT_DEV', 'u', { orgId: 'o-exampleorg' })), [id, bucket])).toEqual({ decision: 'allow', decider: BOTH_SIDES });
-    expect(res(r(user('ACCT_DEV', 'u', { orgId: 'o-other' })), [id, bucket])).toEqual({ decision: 'deny', decider: IMPLICIT });
-    expect(res(r(user('ACCT_OUT', 'u')), [id, bucket])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(r(user('ACCT_DEV', 'u', { orgId: 'o-other' })), [id, bucket])).toEqual({ decision: 'deny', decider: 'bucket' });
+    expect(res(r(user('ACCT_OUT', 'u')), [id, bucket])).toEqual({ decision: 'deny', decider: 'bucket' });
   });
 
   // IAM User Guide, "IAM JSON policy elements: Condition operators" (IP address example table)
@@ -196,14 +196,18 @@ describe('rules', () => {
     const id = pol('identity', 'identity', [allow('s3:GetObject', '*')]);
     const b = pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'A1' } })]);
     const r = req(user('A1', 'u'), 's3:GetObject', `${BUCKET}/k`, 'B1');
-    expect(res(r, [id])).toEqual({ decision: 'deny', decider: IMPLICIT });
-    expect(res(r, [b])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(r, [id, pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'C1' } })])])).toEqual({ decision: 'deny', decider: 'bucket' });
+    expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), b])).toEqual({ decision: 'deny', decider: 'identity' });
+    expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('bucket', 'resource', [allow('s3:Put*', '*', { Principal: { AWS: 'C1' } })])])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    // a failing side with no policy to point at is refused
+    expect(run(r, [id])).toBeNull();
+    expect(run(r, [b])).toBeNull();
     expect(res(r, [id, b])).toEqual({ decision: 'allow', decider: BOTH_SIDES });
   });
   it('cross-account: the resource policy of another account does not name this account', () => {
     const id = pol('identity', 'identity', [allow('s3:GetObject', '*')]);
     const b = pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'C1' } })]);
-    expect(res(req(user('A1', 'u'), 's3:GetObject', `${BUCKET}/k`, 'B1'), [id, b])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(req(user('A1', 'u'), 's3:GetObject', `${BUCKET}/k`, 'B1'), [id, b])).toEqual({ decision: 'deny', decider: 'bucket' });
   });
   it('cross-account: an explicit Deny in the resource policy wins', () => {
     const id = pol('identity', 'identity', [allow('s3:GetObject', '*')]);
@@ -299,19 +303,22 @@ describe('rules', () => {
     const target = 'arn:aws:iam::A1:role/deployer';
     const r = req(user('A1', 'u'), 'sts:AssumeRole', target, 'A1', {}, 'role-trust');
     const id = pol('identity', 'identity', [allow('sts:AssumeRole', '*')]);
-    const named = pol('trust', 'resource', [allow('sts:AssumeRole', '*', { Principal: { AWS: 'arn:aws:iam::A1:user/u' } })]);
-    const other = pol('trust', 'resource', [allow('sts:AssumeRole', '*', { Principal: { AWS: 'arn:aws:iam::A1:user/v' } })]);
-    expect(res(r, [id, other])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    const trust = (p: string): Policy => pol('trust', 'resource', [{ Effect: 'Allow', Action: 'sts:AssumeRole', Principal: { AWS: p } }]);
+    const named = trust('arn:aws:iam::A1:user/u');
+    const other = trust('arn:aws:iam::A1:user/v');
+    expect(res(r, [id, other])).toEqual({ decision: 'deny', decider: 'trust' });
+    // a trust policy has no Resource element
+    expect(run(r, [id, pol('trust', 'resource', [allow('sts:AssumeRole', '*', { Principal: { AWS: 'arn:aws:iam::A1:user/u' } })])])).toBeNull();
     expect(res(r, [id, named])).toEqual({ decision: 'allow', decider: 'trust' });
     // naming the whole account in a same-account trust policy is not settled by the cited pages
-    expect(run(r, [id, pol('trust', 'resource', [allow('sts:AssumeRole', '*', { Principal: { AWS: 'A1' } })])])).toBeNull();
+    expect(run(r, [id, trust('A1')])).toBeNull();
   });
   it('a key policy behaves like a trust policy', () => {
     tag('trust-exception');
     const r = req(user('A1', 'u'), 'kms:Decrypt', 'arn:aws:kms:us-east-1:A1:key/k1', 'A1', {}, 'key-policy');
     const id = pol('identity', 'identity', [allow('kms:*', '*')]);
     const key = pol('key', 'resource', [allow('kms:Decrypt', '*', { Principal: { AWS: 'arn:aws:iam::A1:user/other' } })]);
-    expect(res(r, [id, key])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(r, [id, key])).toEqual({ decision: 'deny', decider: 'key' });
   });
   it('conditions: missing key, IfExists, string equality, CIDR edges', () => {
     tag('cond-missing-key', 'cond-ifexists', 'cond-string', 'cond-ip');
@@ -337,6 +344,21 @@ describe('rules', () => {
     const bd = pol('boundary', 'boundary', [allow('s3:*', '*')]);
     const sp = pol('session', 'session', [allow('ec2:*', '*')]);
     expect(res(same(role('A1', 'r')), [id, bd, sp])).toEqual({ decision: 'deny', decider: 'session' });
+  });
+  it('G3: user and session notes only appear when a boundary or session policy exists', () => {
+    const b = pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'arn:aws:iam::A1:user/u' } })]);
+    const rules1 = run(same(user('A1', 'u')), [b])!.trace.map((t) => t.rule);
+    expect(rules1).not.toContain('boundary-user-resource');
+    expect(run(same(user('A1', 'u')), [b, pol('boundary', 'boundary', [FULL])])!.trace.map((t) => t.rule)).toContain('boundary-user-resource');
+  });
+  it('SCPs, wildcards and IP syntax', () => {
+    tag('scp-no-principal', 'resource-wildcard-colon', 'cond-cidr', 'cond-ip-operators');
+    expect(run(same(user('A1', 'u', { orgId: 'o' })), [pol('s', 'scp', [allow('*', '*', { Principal: '*' })], 'A1')])).toBeNull();
+    const id = (arn: string) => [pol('identity', 'identity', [allow('s3:GetObject', arn)])];
+    expect(res(same(user('A1', 'u'), 's3:GetObject', 'arn:aws:s3:::b/k'), id('arn:aws:s3:::b*'))?.decision).toBe('allow'); // last char of the segment may run on
+    expect(res(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:A1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*:A1:instance/*')])])?.decision).toBe('allow');
+    expect(res(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:B1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*:A1:instance/*')])])?.decision).toBe('deny');
+    expect(run(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:A1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*1:A1:instance/*')])])).toBeNull(); // * in the middle of a segment is refused
   });
   it('every listed rule is exercised by a test above', () => {
     const missing = rules.map((r) => r.id).filter((id) => !covered.has(id));

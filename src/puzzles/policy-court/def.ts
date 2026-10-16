@@ -18,8 +18,11 @@ import type { Answer, Evaluation, ExhibitSection, Field, PuzzleDef, Rule } from 
  * "Which policy decided it" is defined as follows:
  * - Deny by an explicit Deny: the policy holding that Deny (exactly one policy may hold a matching Deny).
  * - Deny without an explicit Deny: if removing exactly one limiting policy (a service control policy level that lacks an
- *   Allow, the boundary, or the session policy) would turn the result into Allow, that policy; if no policy grants the
- *   request even without the limiters, "No policy allows it (implicit deny)". Several limiters needed at once is refused.
+ *   Allow, the boundary, or the session policy) would turn the result into Allow, that policy. Otherwise the policy whose
+ *   missing Allow blocks the request: the trust or key policy (same account), or across accounts the identity-based policy
+ *   (principal side lacks the Allow) or the resource-based policy (resource side lacks it). "Nothing grants it" is keyed only
+ *   when no identity-based or resource-based policy has a matching Allow. Anything else (several limiters needed at once,
+ *   a failing side with no single policy) is refused.
  * - Allow: the single policy that grants it. If several policies grant it independently inside one account, the option
  *   "several"; across accounts the grant always needs both sides, so the option "both-sides".
  */
@@ -221,9 +224,15 @@ export const rules: Rule[] = [
   },
   {
     id: 'principal-identity',
-    text: 'Identity-based policies, boundaries, session policies and SCPs have no Principal element.',
+    text: 'Identity-based policies have no Principal element (a policy written otherwise is refused).',
     src: 'iam-el-principal',
     quote: 'You cannot use the Principal element in an identity-based policy.',
+  },
+  {
+    id: 'scp-no-principal',
+    text: 'SCPs have no Principal element (a policy written otherwise is refused).',
+    src: 'orgs-scp-syntax',
+    quote: "The following elements aren't supported in SCPs: NotPrincipal Principal",
   },
   {
     id: 'action-wildcard',
@@ -239,9 +248,15 @@ export const rules: Rule[] = [
   },
   {
     id: 'resource-wildcard',
-    text: 'In a Resource ARN, * stands for any run of characters, including / and :.',
+    text: 'In a Resource ARN, * stands for any run of characters, including /.',
     src: 'iam-el-resource',
     quote: 'The asterisk (*) character can expand to replace everything within a segment, including characters like a forward slash (/) that may otherwise appear to be a delimiter within a given service namespace.',
+  },
+  {
+    id: 'resource-wildcard-colon',
+    text: 'A * that is the last character of an ARN segment can also match beyond the colon. A * in the middle of a segment is not settled, so such a Resource is refused.',
+    src: 'iam-el-resource',
+    quote: 'If the * wildcard is the last character of a resource ARN segment, it can expand to match beyond the colon boundaries.',
   },
   {
     id: 'cond-missing-key',
@@ -257,9 +272,21 @@ export const rules: Rule[] = [
   },
   {
     id: 'cond-ip',
-    text: 'IpAddress matches when aws:SourceIp lies in the CIDR range; NotIpAddress matches when it does not.',
+    text: 'aws:SourceIp is the address the request comes from.',
     src: 'iam-cond-operators',
     quote: 'The aws:SourceIp condition key resolves to the IP address that the request originates from.',
+  },
+  {
+    id: 'cond-cidr',
+    text: 'IP ranges in a condition are written in CIDR format (IPv4 only here).',
+    src: 'iam-cond-operators',
+    quote: 'The value must be in the standard CIDR format (for example, 203.0.113.0/24 or 2001:DB8:1234:5678::/64).',
+  },
+  {
+    id: 'cond-ip-operators',
+    text: 'IpAddress matches an address inside the range; NotIpAddress matches every address outside it.',
+    src: 'iam-cond-operators',
+    quote: 'IpAddress The specified IP address or range NotIpAddress All IP addresses except the specified IP address or range',
   },
   {
     id: 'cond-mfa',
@@ -297,8 +324,15 @@ export const rules: Rule[] = [
 
 const list = (v: string | string[] | undefined): string[] | null => (v === undefined ? null : Array.isArray(v) ? v : [v]);
 
-const globToRegExp = (pattern: string, flags: string): RegExp =>
-  new RegExp(`^${pattern.replace(/[.+^${}()|[\]\\?]/g, '\\$&').replace(/\*/g, '.*')}$`, flags);
+const globToRegExp = (pattern: string, flags: string): RegExp => {
+  let out = '';
+  for (let i = 0; i < pattern.length; i++) {
+    const c = pattern[i]!;
+    if (c === '*') out += '.*';
+    else out += c.replace(/[.+^${}()|[\]\\?]/g, '\\$&');
+  }
+  return new RegExp(`^${out}$`, flags);
+};
 
 const ACTION_RE = /^(\*|[A-Za-z0-9-]+:[A-Za-z0-9*]+)$/;
 const ACCOUNT_RE = /^[A-Za-z0-9_-]+$/;
@@ -423,8 +457,16 @@ const STATEMENT_KEYS = new Set(['Sid', 'Effect', 'Principal', 'Action', 'Resourc
 function validPattern(p: unknown, isAction: boolean): boolean {
   if (typeof p !== 'string' || p.length === 0) return false;
   if (p.includes('?') || p.includes('$')) return false;
+  if (!isAction) {
+    // a * must end its ARN segment (or the ARN); a * inside a segment that is followed by more segments is not settled
+    for (let i = 0; i < p.length; i++) if (p[i] === '*' && i + 1 < p.length && p[i + 1] !== ':' && p.indexOf(':', i + 1) !== -1) return false;
+  }
   return isAction ? ACTION_RE.test(p) : true;
 }
+
+/** A role trust policy has no Resource element; its statements apply to the role itself. */
+const isTrust = (s: PolicyCourtScenario, p: Policy) => p.kind === 'resource' && (s.request.resource.kind ?? 'resource') === 'role-trust';
+const resourcesOf = (s: PolicyCourtScenario, p: Policy, st: Statement): string[] | null => (isTrust(s, p) ? (st.Resource === undefined ? ['*'] : null) : list(st.Resource));
 
 function validate(s: PolicyCourtScenario): boolean {
   const { request: r, policies } = s;
@@ -456,7 +498,7 @@ function validate(s: PolicyCourtScenario): boolean {
       if (st.Effect !== 'Allow' && st.Effect !== 'Deny') return false;
       if (Object.keys(st).some((k) => !STATEMENT_KEYS.has(k))) return false; // NotAction, NotResource, NotPrincipal, unknown elements
       const actions = list(st.Action);
-      const resources = list(st.Resource);
+      const resources = resourcesOf(s, p, st);
       if (!actions || !resources || actions.length === 0 || resources.length === 0) return false;
       if (!actions.every((a) => validPattern(a, true)) || !resources.every((x) => validPattern(x, false))) return false;
       if (p.kind === 'scp' && st.Effect === 'Allow' && !(resources.length === 1 && resources[0] === '*')) return false;
@@ -486,6 +528,8 @@ interface Core {
   limiters: string[];
   unsettled: boolean;
   notes: Note[];
+  identityAllow: string[];
+  resourceAllow: number;
 }
 
 type Mode = 'limited' | 'direct';
@@ -511,7 +555,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     if (p.kind === 'scp' && !scps.includes(p)) continue;
     for (const st of p.statements) {
       const actions = list(st.Action) ?? [];
-      const resources = list(st.Resource) ?? [];
+      const resources = resourcesOf(s, p, st) ?? [];
       if (!actions.some((a) => globToRegExp(a, 'i').test(r.action))) continue;
       if (!resources.some((x) => globToRegExp(x, '').test(r.resource.arn))) continue;
       let pm: PrincipalMatch | null = 'all';
@@ -535,7 +579,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     }
   }
 
-  const base: Omit<Core, 'decision'> = { explicit: [], grants: [], limiters: [], unsettled: false, notes };
+  const base: Omit<Core, 'decision'> = { explicit: [], grants: [], limiters: [], unsettled: false, notes, identityAllow: [], resourceAllow: 0 };
   if (denies.size > 0) {
     notes.push({ rule: 'explicit-deny', note: `Matching Deny in: ${[...denies].map(label).join('; ')}.` });
     if ([...denies].some((id) => policies.find((p) => p.id === id)?.kind === 'scp')) notes.push({ rule: 'scp-deny-any-level', note: 'A Deny in a service control policy denies the request at any level of the path.' });
@@ -556,6 +600,8 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
   const identityAllow = policies.filter((p) => p.kind === 'identity' && allowing.has(p.id)).map((p) => p.id);
   const resourcePolicy = policies.find((p) => p.kind === 'resource');
   const resourceMatches = resourcePolicy ? allowing.get(resourcePolicy.id) ?? [] : [];
+  base.identityAllow = identityAllow;
+  base.resourceAllow = resourceMatches.length;
   const hasLimit = !!boundary || !!session;
 
   let unsettled = false;
@@ -574,7 +620,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
       notes.push({ rule: 'cross-both', note: 'Both accounts allow it, so the request is allowed.' });
     }
   } else {
-    if (kind !== 'resource' && resourceMatches.some((m) => m === 'account' || m === 'all')) return null; // trust and key policies that delegate to an account are not settled for one account
+    if (kind !== 'resource' && resourceMatches.some((m) => m === 'account' || m === 'all' || (m === 'role' && hasLimit))) return null; // trust and key policies that delegate to an account are not settled for one account
     const identityCounts = kind === 'resource';
     const identityGrant = identityCounts && identityAllow.length > 0 && boundaryOk && sessionOk;
     if (identityGrant) notes.push({ rule: 'same-account-union', note: 'The identity-based policy allows it (and the boundary and session policy do not take it away).' });
@@ -583,10 +629,10 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     const effective: string[] = [];
     for (const m of resourceMatches) {
       if (m === 'user') {
-        notes.push({ rule: 'boundary-user-resource', note: 'The resource-based policy names the user ARN, so a boundary does not limit it.' });
+        if (boundary) notes.push({ rule: 'boundary-user-resource', note: 'The resource-based policy names the user ARN, so the boundary does not limit it.' });
         effective.push(resourcePolicy!.id);
       } else if (m === 'session') {
-        notes.push({ rule: 'session-direct', note: 'The resource-based policy names the role session ARN, so it is granted directly to the session.' });
+        if (boundary || session) notes.push({ rule: 'session-direct', note: 'The resource-based policy names the role session ARN, so it is granted directly to the session and the boundary and session policy do not limit it.' });
         effective.push(resourcePolicy!.id);
       } else if (m === 'role') {
         notes.push({ rule: 'principal-session', note: 'The role ARN in the resource-based policy matches the role session making the request.' });
@@ -646,7 +692,21 @@ function outcome(s: PolicyCourtScenario, mode: Mode): Outcome | null {
   const withoutLimiters = core(s, new Set(limiters), mode);
   if (!withoutLimiters) return null;
   if (withoutLimiters.decision === 'allow') return null; // several limiters are needed at once
-  return { decision: 'deny', decider: IMPLICIT, notes: base.notes };
+  // No limiter is to blame: the policy whose missing Allow blocks the request decides; "nothing grants it" only when no
+  // identity-based or resource-based policy has a matching Allow at all.
+  const out = (decider: string): Outcome => ({ decision: 'deny', decider, notes: base.notes });
+  const resPolicy = s.policies.find((p) => p.kind === 'resource');
+  const identityPolicies = s.policies.filter((p) => p.kind === 'identity');
+  const noIdentity = base.identityAllow.length === 0;
+  const noResource = base.resourceAllow === 0;
+  if (cross) {
+    if (noIdentity && noResource) return out(IMPLICIT);
+    if (noIdentity) return identityPolicies.length === 1 ? out(identityPolicies[0]!.id) : null;
+    if (noResource) return resPolicy ? out(resPolicy.id) : null;
+    return null;
+  }
+  if ((s.request.resource.kind ?? 'resource') !== 'resource') return resPolicy ? out(resPolicy.id) : null;
+  return noIdentity && noResource ? out(IMPLICIT) : null;
 }
 
 // ───────────────────────── exhibit and fields ─────────────────────────
@@ -703,7 +763,7 @@ function fields(s: PolicyCourtScenario): Field[] {
       ? { id: BOTH_SIDES, label: "Both sides together: the principal's identity-based policy and the resource-based policy" }
       : { id: SEVERAL, label: 'More than one policy allows it independently' },
   );
-  options.push({ id: IMPLICIT, label: 'No policy allows it (implicit deny)' });
+  options.push({ id: IMPLICIT, label: 'Nothing grants it: no identity-based or resource-based policy has a matching Allow' });
   return [
     {
       id: 'decision',
@@ -714,7 +774,8 @@ function fields(s: PolicyCourtScenario): Field[] {
         { id: 'deny', label: 'Deny' },
       ],
     },
-    { id: 'decider', prompt: 'Which policy decided it?', multi: false, options },
+    { id: 'decider', prompt:
+        'Which policy decided it? An explicit Deny: the policy that holds it. Otherwise a denial belongs to the policy whose missing Allow blocks the request: the one policy that, if it allowed the action, would turn the result into Allow (a boundary, a service control policy level, a session policy, a trust policy, or the identity-based or resource-based side that lacks the Allow). A session policy, boundary or service control policy never counts as a grant. Pick "Nothing grants it" only when no identity-based or resource-based policy has a matching Allow.', multi: false, options },
   ];
 }
 

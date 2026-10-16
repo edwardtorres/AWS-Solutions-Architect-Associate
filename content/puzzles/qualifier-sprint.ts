@@ -33,7 +33,7 @@ const scenarios: S[] = [
         { id: 'a', text: 'Lambda functions behind an API Gateway REST API' },
         { id: 'b', text: 'EC2 instances in an Auto Scaling group, with the steady usage covered by a Compute Savings Plan' },
         { id: 'c', text: 'Lambda functions behind an API Gateway private API, called only through an interface VPC endpoint' },
-        { id: 'd', text: 'EC2 instances in an Auto Scaling group across three Availability Zones behind an Application Load Balancer' },
+        { id: 'd', text: 'The Lambda and API Gateway stack deployed in two Regions, with Route 53 failover routing and health checks' },
       ],
       answers: { overhead: 'a', cost: 'b', secure: 'c', available: 'd' },
       facts: {
@@ -53,9 +53,9 @@ const scenarios: S[] = [
           quote: 'A private API endpoint is an API endpoint that can only be accessed from your Amazon Virtual Private Cloud (VPC) using an interface VPC endpoint, which is an endpoint network interface (ENI) that you create in your VPC.',
         },
         available: {
-          text: 'A load balancer spreads traffic over targets in several Availability Zones and sends requests only to healthy targets.',
-          src: 'elb-what-is',
-          quote: 'Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.',
+          text: 'Active-passive failover keeps a second copy of the whole stack on standby and sends users there when every primary resource is unavailable, which survives the loss of a Region.',
+          src: 'route53-failover-types',
+          quote: 'Use an active-passive failover configuration when you want a primary resource or group of resources to be available the majority of the time and you want a secondary resource or group of resources to be on standby in case all the primary resources become unavailable.',
         },
       },
     },
@@ -101,11 +101,11 @@ const scenarios: S[] = [
     3,
     2,
     'The orders database',
-    'A small online shop needs a MySQL-compatible relational database for its orders. Every design below stores the orders correctly; read the qualifier to see which one fits.',
+    'A small online shop needs a MySQL-compatible relational database for its orders. Traffic is spiky, and the team does not want to choose or resize instance sizes. Every design below stores the orders correctly; read the qualifier to see which one fits.',
     {
       options: [
         { id: 'a', text: 'RDS for MySQL, Multi-AZ DB instance deployment' },
-        { id: 'b', text: 'An Aurora Serverless DB cluster' },
+        { id: 'b', text: 'An Aurora Serverless v2 DB cluster' },
         { id: 'c', text: 'RDS for MySQL, single instance, with a reserved DB instance for its steady use' },
         { id: 'd', text: 'RDS for MySQL, single instance, in private subnets with storage encrypted using a KMS key' },
         { id: 'e', text: 'MySQL installed on an EC2 instance that your team patches and backs up' },
@@ -139,13 +139,13 @@ const scenarios: S[] = [
     4,
     2,
     'A key-value session store',
-    'A mobile game keeps player sessions in a key-value store that the backend reads and writes by key, at a rate the team knows well. Every design below works for that access pattern.',
+    'A mobile game keeps player sessions in a key-value store that the backend reads and writes by key, and finished sessions pile up if nobody removes them. Every design below works for that access pattern.',
     {
       options: [
-        { id: 'a', text: 'A DynamoDB table in provisioned mode, with a fixed request rate the team has planned for' },
+        { id: 'a', text: 'A DynamoDB table with Time to Live turned on, so finished sessions are deleted automatically' },
         { id: 'b', text: 'A DynamoDB global table that replicates to a second Region' },
         { id: 'c', text: 'A DynamoDB table in on-demand mode' },
-        { id: 'd', text: 'A DynamoDB table reached from private subnets through a gateway VPC endpoint, encrypted with a KMS key' },
+        { id: 'd', text: 'A DynamoDB table reached from private subnets through a gateway VPC endpoint' },
       ],
       answers: { overhead: 'c', cost: 'a', secure: 'd', available: 'b' },
       facts: {
@@ -155,14 +155,14 @@ const scenarios: S[] = [
           quote: 'On-demand simplifies the setup process, eliminates capacity management and monitoring, and provides fast, automatic scaling.',
         },
         cost: {
-          text: 'In provisioned mode the team sets the request rate the table may use, which keeps the bill from growing past what was planned.',
-          src: 'dynamodb-capacity',
-          quote: 'This helps you govern your DynamoDB use to stay at or below a defined request rate in order to obtain cost predictability.',
+          text: 'Time to Live is the documented cost-effective way to remove items that are no longer relevant, such as finished sessions, and it deletes them without consuming write throughput.',
+          src: 'dynamodb-ttl',
+          quote: 'Time To Live (TTL) for DynamoDB is a cost-effective method for deleting items that are no longer relevant.',
         },
         secure: {
-          text: 'Data in a DynamoDB table is encrypted at rest with keys held in AWS KMS, and a gateway endpoint keeps access on the private network.',
-          src: 'ddb-encryption',
-          quote: 'DynamoDB encryption at rest provides enhanced security by encrypting all your data at rest using encryption keys stored in AWS Key Management Service (AWS KMS).',
+          text: 'A gateway endpoint lets the VPC reach DynamoDB with no internet gateway or NAT device, so session traffic never needs a public path.',
+          src: 'vpce-gateway-ddb',
+          quote: 'With a gateway endpoint, you can access DynamoDB from your VPC, without requiring an internet gateway or NAT device for your VPC, and with no additional cost.',
         },
         available: {
           text: 'A global table is a multi-Region, multi-active table, so the game keeps working if a whole Region is lost.',
@@ -256,7 +256,7 @@ const scenarios: S[] = [
       options: [
         { id: 'a', text: 'A Secrets Manager secret that is replicated to a second Region' },
         { id: 'b', text: 'A Systems Manager Parameter Store standard parameter holding the password as a SecureString' },
-        { id: 'c', text: 'A Secrets Manager secret with automatic rotation turned on' },
+        { id: 'c', text: 'A Secrets Manager secret with automatic rotation turned on, read by a function that runs outside any VPC' },
         { id: 'd', text: 'A Secrets Manager secret read through an interface VPC endpoint from a function inside the VPC' },
       ],
       answers: { overhead: 'c', cost: 'b', secure: 'd', available: 'a' },
@@ -326,21 +326,21 @@ const scenarios: S[] = [
     9,
     2,
     'Private servers that need updates and S3',
-    'Application servers in private subnets in two Availability Zones must download operating system updates from the internet and read objects from S3. Every design below gives them both.',
+    'Application servers in private subnets in two Availability Zones must download operating system updates from the internet and read a heavy flow of objects from S3. Every design below gives them both.',
     {
       options: [
         { id: 'a', text: 'A NAT gateway in each Availability Zone, with each private subnet routed to the one in its own zone' },
         { id: 'b', text: 'One NAT gateway for the whole VPC' },
         { id: 'c', text: 'A NAT gateway for updates plus an S3 gateway endpoint, so S3 traffic skips the NAT gateway' },
-        { id: 'd', text: 'A NAT gateway for updates plus an S3 interface endpoint, with a bucket policy that allows only that endpoint' },
+        { id: 'd', text: 'A NAT gateway for updates plus an S3 interface endpoint with an endpoint policy, and a bucket policy that allows only that endpoint' },
         { id: 'e', text: 'A NAT instance that your team patches and fails over by hand' },
       ],
       answers: { overhead: 'b', cost: 'c', secure: 'd', available: 'a' },
       facts: {
         overhead: {
-          text: 'A NAT gateway is the managed choice: it needs less administration than running your own NAT instance, and one gateway is the least to set up.',
-          src: 'vpc-nat-comparison',
-          quote: 'We recommend that you use NAT gateways because they provide better availability and bandwidth and require less effort on your part to administer.',
+          text: 'Each subnet\'s route table decides where its traffic goes, so one shared NAT gateway needs one route target, while a gateway per zone, or an added endpoint, means more routes to build and keep correct.',
+          src: 'vpc-nat-scenarios',
+          quote: 'The route table for each subnet determines how traffic is routed.',
         },
         cost: {
           text: 'Gateway endpoints carry no additional charge, and they let S3 traffic leave the NAT gateway\'s path.',
@@ -405,7 +405,7 @@ const scenarios: S[] = [
     {
       options: [
         { id: 'a', text: 'ECS tasks on EC2 instances bought as Spot Instances' },
-        { id: 'b', text: 'ECS on Fargate in private subnets in three Availability Zones, with each task healthy-checked by the load balancer' },
+        { id: 'b', text: 'ECS on Fargate across three Availability Zones, with the load balancer health-checking each task' },
         { id: 'c', text: 'ECS on Fargate, where each task has its own IAM task role with only the permissions it needs' },
         { id: 'd', text: 'ECS on Fargate with the default setup' },
       ],
@@ -422,9 +422,9 @@ const scenarios: S[] = [
           quote: 'Spot Instances – Request unused EC2 instances, which can reduce your Amazon EC2 costs significantly.',
         },
         secure: {
-          text: 'A task role gives the containers of one task their own permissions, instead of sharing one broad role.',
+          text: 'A separate role per task definition with only the permissions its tasks need limits what a compromised container can reach.',
           src: 'ecs-task-role',
-          quote: 'The permissions granted in the IAM role are vended to containers running in the task.',
+          quote: 'If you have multiple task definitions or services that require IAM permissions, you should consider creating a role for each specific task definition or service with the minimum required permissions for the tasks to operate so that you can minimize the access that you provide for each task.',
         },
         available: {
           text: 'The load balancer sends traffic only to healthy targets, and tasks spread over several zones keep serving if one fails.',
@@ -438,12 +438,12 @@ const scenarios: S[] = [
     12,
     2,
     'A file share for Windows teams',
-    'A design studio moves a Windows file share to AWS. Users open it with SMB from Windows machines joined to Active Directory. Every design below provides the share.',
+    'A design studio moves a Windows file share to AWS. The share holds home directories and departmental shares, and users open it with SMB from Windows machines joined to Active Directory. Every design below provides the share.',
     {
       options: [
         { id: 'a', text: 'FSx for Windows File Server, Multi-AZ deployment' },
         { id: 'b', text: 'FSx for Windows File Server on HDD storage, with storage and throughput sized to what is needed' },
-        { id: 'c', text: 'FSx for Windows File Server with data encrypted by a KMS key you manage' },
+        { id: 'c', text: 'FSx for Windows File Server joined to the company\'s Active Directory, encrypted with a KMS key you manage, with API activity recorded in CloudTrail' },
         { id: 'd', text: 'FSx for Windows File Server, Single-AZ deployment with default settings' },
         { id: 'e', text: 'A Windows Server on EC2 that your team installs, patches and backs up' },
       ],
@@ -455,14 +455,14 @@ const scenarios: S[] = [
           quote: 'As a fully managed service, FSx for Windows File Server eliminates the administrative overhead of setting up and provisioning file servers and storage volumes.',
         },
         cost: {
-          text: 'Storage, IOPS and throughput can be set independently to match the need, so the team pays only for what it needs.',
+          text: 'HDD storage is the type FSx designs for home directories and departmental shares, the workload here, so the team does not buy SSD performance it does not need.',
           src: 'fsx-windows',
-          quote: 'You can modify your file system\'s storage, SSD IOPS, and throughput capacities to meet changing workload needs, so that you pay only for what you need.',
+          quote: 'HDD storage is designed for a broad spectrum of workloads, including home directories, user and departmental shares, and content management systems.',
         },
         secure: {
-          text: 'FSx encrypts the file system and its backups at rest with keys managed in AWS KMS.',
+          text: 'FSx integrates with Active Directory for user access control, KMS for the keys and CloudTrail for an audit record, which the other designs leave at defaults.',
           src: 'fsx-windows',
-          quote: 'It automatically encrypts data at rest (for both file systems and backups) using keys that you manage in AWS Key Management Service (AWS KMS).',
+          quote: 'It also provides rich integration with other AWS services like AWS IAM, AWS Directory Service for Microsoft Active Directory, Amazon WorkSpaces, AWS Key Management Service, and AWS CloudTrail.',
         },
         available: {
           text: 'A Multi-AZ file system keeps a standby file server in another zone and fails over to it.',
@@ -476,7 +476,7 @@ const scenarios: S[] = [
     13,
     3,
     'Linking an office to six VPCs',
-    'A manufacturer links its office network to six VPCs in one Region. It sends a large, steady flow of data to AWS every day. Every design below connects the office to the VPCs.',
+    'A manufacturer links its office network to six VPCs in one Region. It has no Direct Connect circuit yet and the link must run this week. It will send many terabytes of data a month to AWS, steadily. Every design below connects the office to the VPCs.',
     {
       options: [
         { id: 'a', text: 'A Site-to-Site VPN connection to a transit gateway that the six VPCs attach to' },
@@ -487,9 +487,9 @@ const scenarios: S[] = [
       answers: { overhead: 'a', cost: 'b', secure: 'd', available: 'c' },
       facts: {
         overhead: {
-          text: 'A transit gateway is a hub that interconnects many VPCs and on-premises networks, so the office needs one attachment instead of one connection per VPC.',
-          src: 'tgw-what-is',
-          quote: 'AWS Transit Gateway is a network transit hub used to interconnect virtual private clouds (VPCs) and on-premises networks.',
+          text: 'A Direct Connect circuit has to be requested and cabled at a location, with a Letter of Authorization step, before it can carry traffic; a VPN to the transit gateway needs none of that physical work.',
+          src: 'dx-dedicated',
+          quote: 'After you request the connection, we make a Letter of Authorization and Connecting Facility Assignment (LOA-CFA) available to you to download or email you with a request for more information.',
         },
         cost: {
           text: 'Direct Connect can reduce network costs for a large, steady flow compared with internet-based connections.',

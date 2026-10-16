@@ -10,7 +10,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 1,
     title: 'Three-week pilot',
     story: 'A product team runs a three-week pilot of a customer-facing web app on Amazon EC2. Traffic is irregular, the app cannot be interrupted, and finance will not sign any commitment.',
-    data: { term: 'short', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'short', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-002',
@@ -20,7 +20,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 1,
     title: 'Nightly render farm',
     story: 'A studio renders frames overnight. Each frame is independent, a failed frame is simply retried, and nobody commits to anything because the project length is unknown.',
-    data: { term: 'unknown', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'unknown', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-003',
@@ -30,7 +30,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Steady, but no promises',
     story: 'A production API runs around the clock and has done so for years. Company policy forbids any purchase commitment, and the API cannot be interrupted. The tempting answer is a plan, but the policy decides.',
-    data: { term: 'long', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-004',
@@ -40,7 +40,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Long-running queue workers',
     story: 'Workers pull jobs from a queue all year. Each job is safe to repeat, so a worker can stop at any moment. The owner will not commit to usage or to instances.',
-    data: { term: 'long', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-005',
@@ -50,7 +50,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Containers and functions join the fleet',
     story: 'A steady Amazon EC2 baseline will partly move to AWS Fargate and AWS Lambda over the next year. The team wants one commitment measured in dollars of usage per hour.',
-    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['fargate', 'lambda'], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['fargate', 'lambda'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-006',
@@ -60,7 +60,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Moving between Regions',
     story: 'A steady workload may be moved to another Region during the term, and its instance family will change with it. Either kind of commitment is acceptable.',
-    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['region', 'family'], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['region', 'family'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-007',
@@ -69,8 +69,8 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     bullets: ['4.2-K4'],
     difficulty: 2,
     title: 'One family, many sizes',
-    story: 'A fleet of one instance family in one Region runs around the clock for years. The sizes are adjusted often. The team commits in dollars of usage per hour.',
-    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size'], capacity: 'none', exchanges: 'accept', extras: [] },
+    story: 'A fleet of one instance family in one Region runs around the clock for years. The sizes are adjusted often. The team commits in dollars of usage per hour. The team wants the largest saving for a commitment that stays in one family and Region.',
+    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size'], capacity: 'none', exchanges: 'accept', goal: 'largest-saving', extras: [] },
   },
   {
     id: 'purchase-planner-008',
@@ -79,8 +79,8 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     bullets: ['4.2-K4'],
     difficulty: 3,
     title: 'Windows next year',
-    story: 'A steady fleet in one instance family and Region will move from Linux to Windows and from default to dedicated tenancy. Either commitment is fine, but the team wants no manual exchanges.',
-    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['os', 'tenancy'], capacity: 'none', exchanges: 'avoid', extras: [] },
+    story: 'A steady fleet in one instance family and Region will move from Linux to Windows and from default to dedicated tenancy. Either commitment is fine, but the team wants no manual exchanges. The team wants the largest saving for a commitment that stays in one family and Region.',
+    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['os', 'tenancy'], capacity: 'none', exchanges: 'avoid', goal: 'largest-saving', extras: [] },
   },
   {
     id: 'purchase-planner-009',
@@ -90,7 +90,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Capacity in one zone',
     story: 'A database tier must always be able to launch in one Availability Zone for the next year. The team will commit to a specific instance configuration.',
-    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'az', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'az', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-010',
@@ -100,7 +100,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 3,
     title: 'Capacity with a flexible commitment',
     story: 'A critical batch of instances must have capacity reserved in one Availability Zone for three years. Nothing about the configuration will change, and either kind of commitment is acceptable.',
-    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: [], capacity: 'az', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: [], capacity: 'az', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-011',
@@ -110,7 +110,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 3,
     title: 'Growing into a new family',
     story: 'A steady fleet will move to a newer instance family within the same Region next year. The team commits to an instance configuration and accepts exchanging by hand.',
-    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: ['family'], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: ['family'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-012',
@@ -120,7 +120,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 1,
     title: 'Fixed fleet, fixed configuration',
     story: 'A fleet of identical instances runs around the clock for three years in one Region. Nothing will change, and the team wants to commit to the instance configuration itself.',
-    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-013',
@@ -130,7 +130,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 3,
     title: 'Families come and go',
     story: 'A steady workload will change instance family several times. Either commitment is fine, but the team does not want to exchange or modify anything.',
-    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['family'], capacity: 'none', exchanges: 'avoid', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['family'], capacity: 'none', exchanges: 'avoid', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-014',
@@ -140,7 +140,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Region shift, USD per hour',
     story: 'A steady workload will run in a different Region during the second year. The team commits in dollars of usage per hour.',
-    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['region'], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['region'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-015',
@@ -150,7 +150,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Weekend analytics',
     story: "An analytics job runs on a few days' notice for an unknown time. It checkpoints its work, so losing an instance with a two-minute notice is acceptable.",
-    data: { term: 'short', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'short', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-016',
@@ -160,7 +160,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     difficulty: 2,
     title: 'Spiky internal tool',
     story: 'An internal tool is used irregularly, its lifetime is unknown, and it must not be interrupted while users are in it. No commitment is possible.',
-    data: { term: 'unknown', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', extras: [] },
+    data: { term: 'unknown', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
     id: 'purchase-planner-017',
@@ -169,8 +169,18 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     bullets: ['4.2-K4'],
     difficulty: 2,
     title: 'Resizing within a family',
-    story: 'One instance family in one Region will run for a year. Instance sizes and tenancy will change. The team commits in dollars of usage per hour.',
-    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size', 'tenancy'], capacity: 'none', exchanges: 'accept', extras: [] },
+    story: 'One instance family in one Region will run for a year. Instance sizes and tenancy will change. The team commits in dollars of usage per hour. The team wants the largest saving for a commitment that stays in one family and Region.',
+    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size', 'tenancy'], capacity: 'none', exchanges: 'accept', goal: 'largest-saving', extras: [] },
+  },
+  {
+    id: 'purchase-planner-018',
+    type: 'purchase-planner',
+    building: 'counting-house',
+    bullets: ['4.2-K4'],
+    difficulty: 3,
+    title: 'Same family for now',
+    story: 'A steady fleet stays in one instance family and Region today, but sizes change often. The team commits in dollars of usage per hour and wants the most flexibility a plan can give, even though today nothing leaves the family.',
+    data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size'], capacity: 'none', exchanges: 'accept', goal: 'most-flexible', extras: [] },
   },
 ];
 

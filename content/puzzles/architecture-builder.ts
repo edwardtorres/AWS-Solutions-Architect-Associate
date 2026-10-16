@@ -10,9 +10,9 @@ const NEED = {
   appAz: 'The stateless web tier must survive the loss of one Availability Zone: run instances in at least two zones.',
   nat: 'The instances download patches from the internet, and outbound access must survive the loss of one zone: give every zone that has instances its own NAT gateway in that zone.',
   db: 'The database must survive an Availability Zone failure with the least operational overhead: use a managed database with a standby in a different zone, in private data subnets.',
-  dbPrivate: 'The database must not be reachable from the internet: keep it in private data subnets.',
-  cache: 'Frequent product lookups must be served from a cache that survives a zone failure: put cache nodes in private data subnets in two zones.',
-  queue: 'Order submission must keep working when the processing tier is slow or down: decouple the tiers with a managed queue.',
+  dbPrivate: 'The database must not be publicly accessible: keep its instances out of the public subnets, in private subnets.',
+  cache: 'Frequent product lookups must be served from a cache that survives a zone failure: place at least two cache nodes in different zones, none in a public subnet.',
+  queue: 'Order submission must keep working when the processing tier is slow or down: decouple the tiers with a managed queue: put a queue in the regional row, with at least one app instance in a private app subnet as the worker behind it.',
 } as const;
 
 const palette = (azs: 2 | 3, extra: Partial<Record<'alb' | 'app' | 'nat' | 'cache' | 'queue', number>> = {}) => [
@@ -29,7 +29,7 @@ const scenarios: S[] = [
   {
     ...base('001'), building: 'blueprint-hall', bullets: ['2.1-K10', '2.1-S1'], difficulty: 1,
     title: 'A highly available two-tier site',
-    story: 'A company runs a stateless web site on Amazon EC2 behind a load balancer, with a relational database. The site must stay up if one Availability Zone fails. Place the components to meet the requirements.',
+    story: 'A company runs a stateless web site on Amazon EC2 behind a load balancer. The site must stay up if one Availability Zone fails. Place the components to meet the requirements.',
     data: { azs: 2, palette: palette(2), checks: [{ id: 'lb-public-multi-az', need: NEED.lb }, { id: 'app-private', need: NEED.appPrivate }, { id: 'app-multi-az', need: NEED.appAz }] },
   },
   {
@@ -59,7 +59,7 @@ const scenarios: S[] = [
   {
     ...base('006'), building: 'single-point-watch', bullets: ['2.2-S4', '2.2-K5'], difficulty: 2,
     title: 'No single database host',
-    story: 'The web tier already spans two zones, but the database is a single instance and the first thing to fail. Place the web tier and database so that no single instance or zone is a single point of failure.',
+    story: 'The database is a single instance and the first thing to fail. Rebuild the web tier across two zones and give the database a standby in the other zone, so that a zone failure does not take the site down.',
     data: { azs: 2, palette: palette(2), checks: [{ id: 'app-private', need: NEED.appPrivate }, { id: 'app-multi-az', need: NEED.appAz }, { id: 'db-multi-az', need: NEED.db }] },
   },
   {

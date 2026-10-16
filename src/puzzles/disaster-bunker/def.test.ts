@@ -41,7 +41,7 @@ describe('disaster-bunker evaluator', () => {
     const r = run({ rpo: 'seconds', rto: 'minutes' })!;
     expect(r.answer.blocks).toEqual(['scaled-down-stack', 'scale-up-failover', 'reduced-capacity-traffic']);
     expect(run({ rpo: 'hours', rto: '24 hours or less' })!.answer.blocks).toEqual(['pit-backups', 'backup-copy', 'iac-redeploy', 'ami-copy']);
-    expect(run({ rpo: 'minutes', rto: 'tens of minutes' })!.answer.blocks).toEqual(['cont-replication', 'data-tier-on', 'app-servers-off', 'dns-failover']);
+    expect(run({ rpo: 'minutes', rto: 'tens of minutes' })!.answer.blocks).toEqual(['cont-replication', 'data-tier-on', 'app-servers-off']);
     expect(run({ rpo: 'near zero', rto: 'potentially zero' })!.answer.blocks).toEqual(['all-regions-serve', 'user-routing-policies', 'multi-region-writes']);
   });
 
@@ -114,6 +114,13 @@ describe('disaster-bunker scenarios', () => {
   it('has at least 14 scenarios and none is refused', () => {
     expect(scenarios.length).toBeGreaterThanOrEqual(14);
     for (const s of scenarios) expect(def.evaluate(s.data), s.id).not.toBeNull();
+  });
+  it('uses contested blocks nowhere they could be argued: no DNS failover block, AMI copy only as a backup-and-restore key', () => {
+    expect(BLOCKS.some((b) => (b.id as string) === 'dns-failover')).toBe(false);
+    for (const s of scenarios) {
+      if (!s.data.pool.includes('ami-copy')) continue;
+      expect(def.evaluate(s.data)!.answer.strategy, s.id).toEqual(['backup-restore']);
+    }
   });
   it('spreads answers over all four strategies', () => {
     const got = new Set(scenarios.map((s) => def.evaluate(s.data)!.answer.strategy![0]));

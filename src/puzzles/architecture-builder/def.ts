@@ -41,15 +41,15 @@ export const TIERS: readonly Tier[] = ['public', 'private-app', 'private-data', 
 /** The sourced rules the checks apply. Each check cites its rule ids. */
 export const rules: Rule[] = [
   { id: 'lb-az-nodes', text: 'Enabling an Availability Zone for a load balancer creates a load balancer node there, so a load balancer in two or more zones keeps serving if one zone fails.', src: 'elb-how-it-works', quote: 'When you enable an Availability Zone for your load balancer, Elastic Load Balancing creates a load balancer node in the Availability Zone.' },
-  { id: 'lb-internet-facing', text: 'The nodes of an internet-facing load balancer have public IP addresses, so they sit in public subnets.', src: 'elb-how-it-works', quote: 'The nodes of an internet-facing load balancer have public IP addresses.' },
+  { id: 'lb-internet-facing', text: 'In the documented design for servers behind an Application Load Balancer, each public subnet holds a load balancer node and the servers run in private subnets.', src: 'vpc-example-private-nat', quote: 'Each public subnet contains a NAT gateway and a load balancer node.' },
   { id: 'targets-private-ip', text: 'The load balancer sends requests to its targets using their private IP addresses, so the instances can sit in private subnets.', src: 'elb-how-it-works', quote: 'The load balancer node that receives the request selects a healthy registered target and sends the request to the target using its private IP address.' },
   { id: 'asg-multi-az', text: 'An Auto Scaling group can span multiple Availability Zones and launches instances in another zone if one becomes unavailable.', src: 'asg-benefits', quote: 'If one Availability Zone becomes unavailable, Amazon EC2 Auto Scaling can launch instances in another one to compensate.' },
   { id: 'nat-public-subnet', text: 'A NAT gateway lives in a public subnet and private subnets route to it.', src: 'vpc-nat-scenarios', quote: 'In Availability Zone B, the public subnet contains a NAT gateway, and the instances in the private subnet can reach the internet through a route to the NAT gateway in the public subnet.' },
   { id: 'nat-per-az', text: 'Create a NAT gateway in each Availability Zone and route each zone to the gateway in its own zone.', src: 'vpc-nat-basics', quote: 'To improve resiliency, create a NAT gateway in each Availability Zone, and configure your routing to ensure that resources use the NAT gateway in the same Availability Zone.' },
   { id: 'rds-standby', text: 'A Multi-AZ DB instance deployment keeps a synchronous standby replica in a different Availability Zone.', src: 'rds-multi-az-instance', quote: 'In a Multi-AZ DB instance deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone.' },
-  { id: 'db-private-subnets', text: 'DB subnet groups are typically private subnets.', src: 'rds-working-vpc', quote: 'A DB subnet group is a collection of subnets (typically private) that you create in a VPC and that you then designate for your DB instances.' },
+  { id: 'db-private-subnets', text: 'A DB instance that is not publicly accessible is deployed in a private subnet, so it is not placed in a public subnet.', src: 'rds-working-vpc', quote: 'The DB instances are deployed in the private subnet.' },
   { id: 'cache-multi-az', text: 'Multi-AZ for a cache needs at least one replica in a different Availability Zone from the primary.', src: 'elasticache-autofailover', quote: 'Multi-AZ requires at least one replica in a different Availability Zone from the primary.' },
-  { id: 'sqs-decouples', text: 'Amazon SQS is a managed queue service that decouples components; it is a regional service, not placed in a subnet.', src: 'sqs-what-is', quote: 'Amazon SQS decouples and scales distributed software systems and components as a queue service.' },
+  { id: 'sqs-decouples', text: 'Amazon SQS is a managed queue service that decouples components; a queue sits between the components it decouples.', src: 'sqs-what-is', quote: 'Amazon SQS decouples and scales distributed software systems and components as a queue service.' },
 ];
 
 export interface CheckResult {
@@ -97,15 +97,18 @@ export function score(data: BuilderData, placed: readonly Placed[]): CheckResult
       }
       case 'db-private': {
         const db = [...of('db-primary'), ...of('db-standby')];
-        return r(db.length > 0 && db.every((d) => d.tier === 'private-data'), `Database instances: ${db.length}; in private data subnets: ${db.filter((d) => d.tier === 'private-data').length}.`, ['db-private-subnets']);
+        const priv = db.filter((d) => d.tier === 'private-data' || d.tier === 'private-app');
+        return r(db.length > 0 && priv.length === db.length, `Database instances: ${db.length}; in private subnets: ${priv.length}.`, ['db-private-subnets']);
       }
       case 'cache-multi-az': {
-        const c = of('cache', 'private-data');
-        return r(c.length >= 2 && azsOf(c).size >= 2, `Cache nodes in private data subnets: ${c.length}; zones: ${azsOf(c).size}.`, ['cache-multi-az']);
+        const all = of('cache');
+        const c = all.filter((n) => n.tier === 'private-data' || n.tier === 'private-app');
+        return r(all.length >= 2 && c.length === all.length && azsOf(c).size >= 2, `Cache nodes: ${all.length}; not in a public subnet: ${c.length}; zones: ${azsOf(c).size}.`, ['cache-multi-az']);
       }
       case 'queue-decouple': {
         const q = of('queue', 'regional');
-        return r(q.length >= 1 && of('queue').length === q.length, `Queues in the regional row: ${q.length}.`, ['sqs-decouples']);
+        const workers = of('app', 'private-app').length;
+        return r(q.length >= 1 && of('queue').length === q.length && workers >= 1, `Queues in the regional row: ${q.length}; app instances in private app subnets (the workers behind the queue): ${workers}.`, ['sqs-decouples']);
       }
     }
   });
@@ -117,7 +120,7 @@ export function reference(data: BuilderData): Placed[] | null {
   const want = new Set(data.checks.map((c) => c.id));
   const out: Placed[] = [];
   const zones = Array.from({ length: data.azs }, (_, i) => i);
-  const needApps = want.has('app-multi-az') || want.has('app-private') || want.has('nat-per-az');
+  const needApps = want.has('app-multi-az') || want.has('app-private') || want.has('nat-per-az') || want.has('queue-decouple');
   if (want.has('lb-public-multi-az')) {
     if (have('alb') < data.azs) return null;
     for (const az of zones) out.push({ kind: 'alb', tier: 'public', az });
@@ -153,6 +156,7 @@ export const def: PuzzleDef<BuilderData> = {
   exhibit(s): ExhibitSection[] {
     return [
       { title: 'Requirements', kind: 'text', text: s.checks.map((c, i) => `${i + 1}. ${c.need}`).join('\n') },
+      { title: 'How scoring works', kind: 'text', text: 'You do not have to use every component. The design is scored only against the requirements above, each by an explicit check; full credit needs every check to pass.' },
       { title: 'Components you can place', kind: 'table', head: ['Component', 'How many'], rows: s.palette.map((p) => [KIND_LABEL[p.kind], String(p.count)]) },
       { title: 'Zones', kind: 'text', text: `${s.azs} Availability Zones (${Array.from({ length: s.azs }, (_, i) => `Zone ${String.fromCharCode(65 + i)}`).join(', ')}).` },
     ];

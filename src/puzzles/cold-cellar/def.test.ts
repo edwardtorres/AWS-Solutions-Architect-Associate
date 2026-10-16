@@ -15,8 +15,8 @@ describe('cold-cellar rules', () => {
       expect(r.src).toMatch(/^s3-/);
     }
   });
-  it('marks the small-object default as newer than the exam guide', () => {
-    expect(rules.find((r) => r.id === 'small-no-move')?.newer).toEqual(['s3-lifecycle-default-min-size']);
+  it('encodes no rule that depends on the newer small-object default', () => {
+    expect(rules.some((r) => r.newer?.length)).toBe(false);
   });
 });
 
@@ -36,11 +36,11 @@ describe('class choice', () => {
   it('Glacier Instant Retrieval for quarterly or rare reads that must open in milliseconds', () => {
     expect(ans(sc([ph({ from: 0, access: 'quarterly' })]))).toEqual({ 'class-1': ['glacier-ir'] });
     expect(ans(sc([ph({ from: 0, access: 'less-than-yearly' })]))).toEqual({ 'class-1': ['glacier-ir'] });
-    expect(ans(sc([ph({ from: 0, access: 'few-per-year' })]))).toEqual({ 'class-1': ['glacier-ir'] });
+    expect(ans(sc([ph({ from: 0, access: 'twice-yearly' })]))).toEqual({ 'class-1': ['glacier-ir'] });
   });
-  it('Glacier Flexible Retrieval when minutes matter or reads are a few a year', () => {
+  it('Glacier Flexible Retrieval when minutes matter or reads are about twice a year', () => {
     expect(ans(sc([ph({ from: 0, access: 'less-than-yearly', wait: 'minutes' })]))).toEqual({ 'class-1': ['glacier-fr'] });
-    expect(ans(sc([ph({ from: 0, access: 'few-per-year', wait: 'hours' })]))).toEqual({ 'class-1': ['glacier-fr'] });
+    expect(ans(sc([ph({ from: 0, access: 'twice-yearly', wait: 'hours' })]))).toEqual({ 'class-1': ['glacier-fr'] });
   });
   it('Glacier Deep Archive only for reads under once a year when hours are fine', () => {
     const s = sc([ph({ from: 0, access: 'less-than-yearly', wait: 'hours' })]);
@@ -90,7 +90,7 @@ describe('timing and the waterfall', () => {
   });
   it('One Zone-IA to Flexible Retrieval is supported', () => {
     const s = sc(
-      [ph({ from: 0, access: 'frequent' }), ph({ from: 30, access: 'monthly', recreatable: true }), ph({ from: 45, access: 'few-per-year', wait: 'minutes' })],
+      [ph({ from: 0, access: 'frequent' }), ph({ from: 30, access: 'monthly', recreatable: true }), ph({ from: 45, access: 'twice-yearly', wait: 'minutes' })],
       [[30], [45, 60]],
     );
     expect(ans(s)).toMatchObject({ 'class-2': ['onezone-ia'], 'class-3': ['glacier-fr'], 'day-2': ['d60'] });
@@ -119,7 +119,7 @@ describe('refusals', () => {
   });
   it('refuses archive stages with no stated retrieval need', () => {
     expect(def.evaluate(sc([{ from: 0, access: 'less-than-yearly' }]))).toBeNull();
-    expect(def.evaluate(sc([{ from: 0, access: 'few-per-year' }]))).toBeNull();
+    expect(def.evaluate(sc([{ from: 0, access: 'twice-yearly' }]))).toBeNull();
   });
   it('refuses quarterly reads when milliseconds are not required (between documented classes)', () => {
     expect(def.evaluate(sc([ph({ from: 0, access: 'quarterly', wait: 'minutes' })]))).toBeNull();

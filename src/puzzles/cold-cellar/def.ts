@@ -1,7 +1,7 @@
 import type { Answer, Evaluation, Exhibit, Field, PuzzleDef, Rule } from '../types';
 
 /** How often a stage reads the objects. The labels follow the wording of the S3 storage class pages. */
-export type Access = 'frequent' | 'monthly' | 'quarterly' | 'few-per-year' | 'less-than-yearly' | 'unknown';
+export type Access = 'frequent' | 'monthly' | 'quarterly' | 'twice-yearly' | 'less-than-yearly' | 'unknown';
 /** How long a read may wait: immediately, a restore that finishes in minutes, or a restore that takes hours. */
 export type Wait = 'ms' | 'minutes' | 'hours';
 
@@ -80,7 +80,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'cls-standard-ia',
-    text: 'Long-lived data read about once a month with millisecond access fits S3 Standard-IA; per-GB retrieval fees apply to it.',
+    text: 'Long-lived data read about once a month with millisecond access fits S3 Standard-IA.',
     src: 's3-storage-classes',
     quote: 'Long-lived, infrequently accessed data (once a month) with millisecond access',
   },
@@ -212,7 +212,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'min-billable-size',
-    text: 'For objects under the minimum billable size, S3 Standard-IA, One Zone-IA and Glacier Instant Retrieval charge for the minimum, so those classes suit larger objects; S3 Standard has no minimum.',
+    text: 'For an object smaller than the minimum billable size, S3 Standard-IA and S3 One Zone-IA charge for that minimum size.',
     src: 's3-storage-classes',
     quote: 'If an object is less than 128 KB, Amazon S3 charges you for 128 KB.',
   },
@@ -222,19 +222,13 @@ export const rules: Rule[] = [
     src: 's3-storage-classes',
     quote: 'The S3 Standard-IA and S3 One Zone-IA storage classes are suitable for objects larger than 128 KB that you plan to store for at least 30 days.',
   },
-  {
-    id: 'small-no-move',
-    text: 'Newer default: Lifecycle rules do not move objects under 128 KB by default. No answer here depends on it, so scenarios with small objects and a later stage are refused.',
-    src: 's3-lifecycle-transitions',
-    quote: 'Starting September 2024, the default behavior prevents objects smaller than 128 KB from being transitioned to any storage class.',
-    newer: ['s3-lifecycle-default-min-size'],
-  },
 ];
 
 /** The storage class a stage needs, with the rules that decided it. Null when the rules do not settle it. */
 function classFor(p: Phase, sizeKB: number, stages: number): { cls: StorageClass; rules: string[]; note: string } | null {
   const small = sizeKB < SMALL_KB;
-  if (small && stages > 1) return null; // the answer would depend on the newer default for small objects
+  // Objects under 128 KB with a later stage are refused: a newer (2024) Lifecycle default for small objects would change the answer, and it is not encoded.
+  if (small && stages > 1) return null;
   if (small) {
     if (p.access === 'frequent') return { cls: 'standard', rules: ['cls-standard'], note: 'Read often with millisecond access: S3 Standard.' };
     if (p.access === 'monthly') return { cls: 'standard', rules: ['min-billable-size', 'ia-larger-objects'], note: 'Objects are under the minimum billable size, so the infrequent-access classes would charge for more than the data: S3 Standard.' };
@@ -253,9 +247,9 @@ function classFor(p: Phase, sizeKB: number, stages: number): { cls: StorageClass
     case 'quarterly':
       if (p.wait === 'ms') return { cls: 'glacier-ir', rules: ['cls-glacier-ir'], note: 'Read about quarterly and must open in milliseconds: S3 Glacier Instant Retrieval.' };
       return null;
-    case 'few-per-year':
+    case 'twice-yearly':
       if (p.wait === 'ms') return { cls: 'glacier-ir', rules: ['cls-glacier-ir-rare'], note: 'Rarely read but must open in milliseconds: S3 Glacier Instant Retrieval.' };
-      if (p.wait === 'minutes' || p.wait === 'hours') return { cls: 'glacier-fr', rules: ['cls-glacier-fr', 'restore-first'], note: 'Read a few times a year and a restore is acceptable: S3 Glacier Flexible Retrieval (S3 Glacier Deep Archive is for data read less than once a year).' };
+      if (p.wait === 'minutes' || p.wait === 'hours') return { cls: 'glacier-fr', rules: ['cls-glacier-fr', 'restore-first'], note: 'Read about twice a year and a restore is acceptable: S3 Glacier Flexible Retrieval (S3 Glacier Deep Archive is for data read less than once a year).' };
       return null;
     case 'less-than-yearly':
       if (p.wait === 'ms') return { cls: 'glacier-ir', rules: ['cls-glacier-ir-rare'], note: 'Rarely read but must open in milliseconds: S3 Glacier Instant Retrieval.' };
@@ -271,7 +265,7 @@ const ACCESS_LABEL: Record<Access, string> = {
   frequent: 'Read many times a month',
   monthly: 'Read about once a month',
   quarterly: 'Read about once a quarter',
-  'few-per-year': 'Read a few times a year',
+  'twice-yearly': 'Read about twice a year',
   'less-than-yearly': 'Read less than once a year',
   unknown: 'Unknown or changing pattern',
 };
@@ -293,7 +287,7 @@ function fields(s: ColdCellarScenario): Field[] {
   s.phases.forEach((_, i) => {
     out.push({
       id: `class-${i + 1}`,
-      prompt: i === 0 ? 'Storage class for stage 1 (set when the objects are uploaded)' : `Storage class for stage ${i + 1}`,
+      prompt: `${i === 0 ? 'Storage class for stage 1 (set when the objects are uploaded)' : `Storage class for stage ${i + 1}`}: the least expensive class whose documented use case fits`,
       multi: false,
       options: opts,
     });
