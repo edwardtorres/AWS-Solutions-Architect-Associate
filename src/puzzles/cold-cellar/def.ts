@@ -296,7 +296,7 @@ function fields(s: ColdCellarScenario): Field[] {
     if (i === 0) return;
     out.push({
       id: `day-${i}`,
-      prompt: `Day (counted from object creation) of the one Lifecycle rule that moves objects to stage ${i + 1}, with no early-move charge`,
+      prompt: `Day (counted from object creation) of the one Lifecycle rule that moves objects to stage ${i + 1}: the earliest day that is both at or after the stage start and free of any early-move charge`,
       multi: false,
       options: (s.dayOptions[i - 1] ?? []).map((d) => ({ id: `d${d}`, label: `Day ${d}` })),
     });

@@ -1,0 +1,298 @@
+[
+ {
+  "id": "puzzle-cold-cellar-001",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Day 2 is d60: Standard-IA has 30-day minimum, stage 3 start (45) would be early."
+ },
+ {
+  "id": "puzzle-cold-cellar-002",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-003",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "onezone-ia"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-004",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-005",
+  "answers": {
+   "class-1": [
+    "intelligent-tiering"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-006",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d120"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Glacier IR 90-day minimum from day 30."
+ },
+ {
+  "id": "puzzle-cold-cellar-007",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes = Glacier Flexible Retrieval (expedited); GIR is a defensible but pricier alternative."
+ },
+ {
+  "id": "puzzle-cold-cellar-008",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes = Flexible Retrieval expedited; GIR pricier."
+ },
+ {
+  "id": "puzzle-cold-cellar-009",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes not hours rules out Deep Archive; Flexible Retrieval expedited (1-5 min). Standard retrieval is hours, so relies on expedited."
+ },
+ {
+  "id": "puzzle-cold-cellar-010",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-011",
+  "answers": {
+   "class-1": [
+    "standard"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Standard vs Intelligent-Tiering tie for objects under 128 KB (no tiering, frequent-access rate); IA/Glacier IR bill 128 KB minimum. I chose standard."
+ },
+ {
+  "id": "puzzle-cold-cellar-012",
+  "answers": {
+   "class-1": [
+    "standard"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Same as 011: Standard vs Intelligent-Tiering tie below 128 KB."
+ },
+ {
+  "id": "puzzle-cold-cellar-013",
+  "answers": {
+   "class-1": [
+    "intelligent-tiering"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d180"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-014",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "onezone-ia"
+   ],
+   "class-3": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Re-creatable so One Zone-IA; day 2 d60 for 30-day minimum."
+ },
+ {
+  "id": "puzzle-cold-cellar-015",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-ir"
+   ],
+   "class-4": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d75"
+   ],
+   "day-3": [
+    "d165"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Day 2: IA minimum met at 60, stage starts 75; I chose 75 (match access pattern). d60 also charge-free, so choice rests on 'earliest vs stage start'."
+ },
+ {
+  "id": "puzzle-cold-cellar-016",
+  "answers": {
+   "class-1": [
+    "standard-ia"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d90"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-017",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-ir"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Stage 3 starts 40 but IA 30-day minimum pushes move to d60."
+ }
+]

@@ -222,7 +222,7 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Tiny files, monthly reads',
     story:
-      'An app stores small JSON documents of about 40 KB each. Each is read about once a month and must open instantly. The team is tempted by an infrequent-access class. The objects stay in one class for their whole life. Which class fits?',
+      'An app stores small JSON documents of about 40 KB each. Each is read about once a month and must open instantly. The team is tempted by an infrequent-access class. The access pattern is known and steady, and the objects stay in one class for their whole life. Which class fits?',
     data: {
       objects: 'Small JSON documents.',
       sizeKB: 40,
@@ -239,7 +239,7 @@ const scenarios: S[] = [
     difficulty: 2,
     title: 'Irreplaceable, but tiny',
     story:
-      'A note-taking app stores small notes of 100 KB each. Each note is read about once a month, and every note exists nowhere else. The team is tempted by an infrequent-access class, but these objects are smaller than the 128 KB those classes bill as a minimum. The objects stay in one class for their whole life. Which class fits?',
+      'A note-taking app stores small notes of 100 KB each. Each note is read about once a month, and every note exists nowhere else. The team is tempted by an infrequent-access class, but these objects are smaller than the 128 KB those classes bill as a minimum. The access pattern is known and steady, and the objects stay in one class for their whole life. Which class fits?',
     data: {
       objects: 'Small user notes, the only copy of each.',
       sizeKB: 100,
