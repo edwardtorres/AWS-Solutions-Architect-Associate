@@ -1,0 +1,282 @@
+[
+ {
+  "id": "architecture-builder-001",
+  "placement": [
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 1
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "db-primary",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "db-standby",
+    "tier": "private-data",
+    "az": 1
+   }
+  ],
+  "ambiguous": true
+ },
+ {
+  "id": "architecture-builder-002",
+  "placement": [
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 1
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "db-primary",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "db-standby",
+    "tier": "private-data",
+    "az": 1
+   }
+  ],
+  "ambiguous": true
+ },
+ {
+  "id": "architecture-builder-004",
+  "placement": [
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 2
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 1
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 2
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 2
+   },
+   {
+    "kind": "db-primary",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "db-standby",
+    "tier": "private-data",
+    "az": 1
+   }
+  ],
+  "ambiguous": true
+ },
+ {
+  "id": "architecture-builder-006",
+  "placement": [
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 1
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "db-primary",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "db-standby",
+    "tier": "private-data",
+    "az": 1
+   }
+  ],
+  "ambiguous": true
+ },
+ {
+  "id": "architecture-builder-008",
+  "placement": [
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "alb",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 0
+   },
+   {
+    "kind": "app",
+    "tier": "private-app",
+    "az": 1
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 0
+   },
+   {
+    "kind": "nat",
+    "tier": "public",
+    "az": 1
+   },
+   {
+    "kind": "db-primary",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "db-standby",
+    "tier": "private-data",
+    "az": 1
+   },
+   {
+    "kind": "cache",
+    "tier": "private-data",
+    "az": 0
+   },
+   {
+    "kind": "cache",
+    "tier": "private-data",
+    "az": 1
+   }
+  ],
+  "ambiguous": true
+ }
+]

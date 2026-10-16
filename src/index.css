@@ -287,3 +287,7 @@ button, a, summary {
 .board-cell { min-width: 0; border: 1px dashed var(--line); border-radius: 10px; padding: 6px; }
 .board-cell .btn { padding: 6px 4px; font-size: 0.8rem; }
 .board-cell .chip { min-height: 44px; justify-content: center; }
+
+/* Grid children may shrink below their content width, so wide tables and code scroll inside their own box, not the page. */
+@layer base { :where(main .grid > *) { min-width: 0; } }
+.scroll-box { min-width: 0; }

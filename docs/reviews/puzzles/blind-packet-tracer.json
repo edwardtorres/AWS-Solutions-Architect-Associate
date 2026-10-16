@@ -1,0 +1,287 @@
+[
+ {
+  "id": "packet-tracer-001",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "addr:web-1"
+   ]
+  },
+  "ambiguous": false,
+  "note": "No public IPv4 address, so the internet cannot reach it"
+ },
+ {
+  "id": "packet-tracer-002",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Outbound allows only 443, replies go to an ephemeral port"
+ },
+ {
+  "id": "packet-tracer-003",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:db-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": "db-sg admits web-sg only, source is in app-sg"
+ },
+ {
+  "id": "packet-tracer-004",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Rule 90 deny is evaluated before rule 100 allow"
+ },
+ {
+  "id": "packet-tracer-005",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Rule 100 allow matches first, deny at 110 is never reached"
+ },
+ {
+  "id": "packet-tracer-006",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": "NACLs do not filter traffic between instances in the same subnet; app-sg is the source group and cache-sg allows it"
+ },
+ {
+  "id": "packet-tracer-007",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:priv-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "priv-rt has no route to the internet gateway so the subnet is private and replies would leave via NAT"
+ },
+ {
+  "id": "packet-tracer-008",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:pub-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Windows Server 2019 uses ephemeral ports 49152-65535, outside 1024-49151"
+ },
+ {
+  "id": "packet-tracer-009",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:app-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "app-rt lacks the S3 prefix-list route to the endpoint"
+ },
+ {
+  "id": "packet-tracer-010",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:priv-rt"
+   ]
+  },
+  "ambiguous": true,
+  "note": "A gateway endpoint for S3 does not cover DynamoDB; no DynamoDB endpoint or route exists. Blocker could be defended as the route table (missing route) or as the endpoint (not covering DynamoDB, but vpce-s3 itself is not faulty)."
+ },
+ {
+  "id": "packet-tracer-011",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:ep-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": "ep-sg admits 443 only from 10.0.1.0/24, batch is 10.0.2.0/24"
+ },
+ {
+  "id": "packet-tracer-012",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "sg:worker-sg"
+   ]
+  },
+  "ambiguous": false,
+  "note": "worker-sg outbound has no rule for the S3 prefix list"
+ },
+ {
+  "id": "packet-tracer-013",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": "S3 prefix-list route is more specific than 0.0.0.0/0 and goes via the endpoint, so no public IP is needed"
+ },
+ {
+  "id": "packet-tracer-014",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "packet-tracer-015",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:main-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Subnet uses the main route table implicitly; pub-rt is not associated"
+ },
+ {
+  "id": "packet-tracer-016",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": "The /24 route to the NAT gateway wins by longest prefix; NAT is in a public subnet with an IGW route"
+ },
+ {
+  "id": "packet-tracer-017",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "nacl:db-nacl"
+   ]
+  },
+  "ambiguous": false,
+  "note": "db-nacl inbound allows 5432 only from 10.0.2.0/24, source is 10.0.1.10"
+ },
+ {
+  "id": "packet-tracer-018",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "rt:b-rt"
+   ]
+  },
+  "ambiguous": false,
+  "note": "b-rt has no return route to 10.0.0.0/16 via the peering"
+ },
+ {
+  "id": "packet-tracer-019",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-ab"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Peering is non-transitive, B will not forward to C. Blocker could also be argued as a-rt (the pointless route) but the peering connection is the documented limit."
+ },
+ {
+  "id": "packet-tracer-020",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-hs"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Edge-to-edge routing through a peering to the hub NAT/IGW is not supported"
+ },
+ {
+  "id": "packet-tracer-021",
+  "answers": {
+   "outcome": [
+    "no"
+   ],
+   "blocker": [
+    "pcx:pcx-hs"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Gateway endpoint cannot be used by a peered VPC"
+ },
+ {
+  "id": "packet-tracer-022",
+  "answers": {
+   "outcome": [
+    "yes"
+   ],
+   "blocker": [
+    "none"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Same-Region peering supports referencing the peer VPC security group; routes exist on both sides"
+ }
+]

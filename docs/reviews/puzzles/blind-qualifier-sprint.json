@@ -1,0 +1,135 @@
+[
+ {
+  "id": "qualifier-sprint-001",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "d"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Option ids differ from design letters. Availability: Lambda/API Gateway is also multi-AZ; cost depends on steady-rate assumption."
+ },
+ {
+  "id": "qualifier-sprint-003",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "c"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Overhead: Aurora Serverless vs plain RDS single instance both managed."
+ },
+ {
+  "id": "qualifier-sprint-005",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "e"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "qualifier-sprint-007",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Overhead: Parameter Store vs rotation-enabled secret; secure: rotation vs VPC endpoint both defensible."
+ },
+ {
+  "id": "qualifier-sprint-009",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "c"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Overhead: single NAT gateway vs gateway endpoint add-on is unclear."
+ },
+ {
+  "id": "qualifier-sprint-011",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "a"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "b"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Secure: private subnets (b) vs task role (c) both defensible."
+ },
+ {
+  "id": "qualifier-sprint-013",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "c"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Cost: VPN vs one DX with large steady flow; overhead: VPN vs DX."
+ }
+]

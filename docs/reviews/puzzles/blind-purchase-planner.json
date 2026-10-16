@@ -1,0 +1,92 @@
+[
+ {
+  "id": "purchase-planner-001",
+  "answers": {
+   "model": [
+    "on-demand"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-002",
+  "answers": {
+   "model": [
+    "spot"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-004",
+  "answers": {
+   "model": [
+    "spot"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-006",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-008",
+  "answers": {
+   "model": [
+    "ec2-sp"
+   ]
+  },
+  "ambiguous": true,
+  "note": "EC2 Instance SP and Compute SP both cover OS and tenancy changes; story gives no reason to prefer the more flexible one."
+ },
+ {
+  "id": "purchase-planner-010",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-012",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": true,
+  "note": "EC2 Instance Savings Plan is also a commitment to a family/Region; wording leans to RI."
+ },
+ {
+  "id": "purchase-planner-014",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "purchase-planner-016",
+  "answers": {
+   "model": [
+    "on-demand"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

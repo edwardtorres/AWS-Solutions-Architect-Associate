@@ -1,0 +1,152 @@
+[
+ {
+  "id": "cold-cellar-001",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Stage 3 'read less than once a year, hours fine' could be Deep Archive or Flexible Retrieval; also stage 3 nominally starts day 45 but Standard-IA needs 30 days (day 60) to avoid early-move charge."
+ },
+ {
+  "id": "cold-cellar-002",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "cold-cellar-004",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "cold-cellar-006",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d120"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Stage 3 Deep Archive vs Flexible Retrieval both defensible for <1/yr with hours restore; Deep Archive chosen."
+ },
+ {
+  "id": "cold-cellar-008",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "cold-cellar-010",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "cold-cellar-012",
+  "answers": {
+   "class-1": [
+    "onezone-ia"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "cold-cellar-014",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "onezone-ia"
+   ],
+   "class-3": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": true,
+  "note": "Stage 2 re-creatable monthly data: One Zone-IA vs Standard-IA both defensible; One Zone-IA to Glacier Flexible Retrieval is a supported transition."
+ },
+ {
+  "id": "cold-cellar-016",
+  "answers": {
+   "class-1": [
+    "standard-ia"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d90"
+   ]
+  },
+  "ambiguous": false
+ }
+]

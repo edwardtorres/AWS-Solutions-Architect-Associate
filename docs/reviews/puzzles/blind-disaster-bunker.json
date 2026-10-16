@@ -1,0 +1,224 @@
+[
+ {
+  "id": "disaster-bunker-001",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy",
+    "iac-redeploy"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-002",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-003",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-004",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-005",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-006",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-007",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-008",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-009",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-010",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on"
+   ]
+  },
+  "ambiguous": true,
+  "note": "ami-copy and dns-failover are also arguably pilot light building blocks (AWS paper mentions AMIs copied to DR Region and Route 53 failover); documentation does not settle which are 'added' over backup and restore."
+ },
+ {
+  "id": "disaster-bunker-011",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-012",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-013",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "scale-up-failover",
+    "reduced-capacity-traffic"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-014",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false
+ },
+ {
+  "id": "disaster-bunker-015",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy"
+   ]
+  },
+  "ambiguous": true,
+  "note": "ami-copy is arguably also a backup and restore block (copying AMIs to the DR Region); unclear if intended."
+ },
+ {
+  "id": "disaster-bunker-016",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy",
+    "iac-redeploy"
+   ]
+  },
+  "ambiguous": false
+ }
+]

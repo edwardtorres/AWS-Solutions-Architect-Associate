@@ -31,7 +31,8 @@ for (const p of puzzleDump()) {
     await noSidewaysScroll(page);
     if (p.reference) {
       for (const item of p.reference) {
-        await page.getByRole('button', { name: new RegExp(`^${item.short} \\(`) }).tap();
+        const pick = page.getByRole('button', { name: new RegExp(`^${item.short} \\(`) });
+        if ((await pick.getAttribute('aria-pressed')) !== 'true') await pick.tap();
         await page.getByRole('button', { name: `Place ${item.kindLabel} in ${item.cell}` }).tap();
       }
       await axeClean(page, `${p.type} board`);

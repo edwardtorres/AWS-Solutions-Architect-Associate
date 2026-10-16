@@ -65,7 +65,7 @@ export default function BuilderPuzzle({ module, scenario, shared, backHref, next
             put(tier, az);
           }}
         >
-          {tier === 'regional' ? 'Place here' : zoneName(az)}
+          {tier === 'regional' ? 'Regional' : zoneName(az)}
         </button>
         <ul className="mt-1 grid gap-1">
           {items.map(({ p, i }) => (
