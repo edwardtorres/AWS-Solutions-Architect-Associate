@@ -538,6 +538,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
   const base: Omit<Core, 'decision'> = { explicit: [], grants: [], limiters: [], unsettled: false, notes };
   if (denies.size > 0) {
     notes.push({ rule: 'explicit-deny', note: `Matching Deny in: ${[...denies].map(label).join('; ')}.` });
+    if ([...denies].some((id) => policies.find((p) => p.id === id)?.kind === 'scp')) notes.push({ rule: 'scp-deny-any-level', note: 'A Deny in a service control policy denies the request at any level of the path.' });
     return { ...base, decision: 'deny', explicit: [...denies] };
   }
 
@@ -577,6 +578,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     const identityCounts = kind === 'resource';
     const identityGrant = identityCounts && identityAllow.length > 0 && boundaryOk && sessionOk;
     if (identityGrant) notes.push({ rule: 'same-account-union', note: 'The identity-based policy allows it (and the boundary and session policy do not take it away).' });
+    if (identityGrant && boundary) notes.push({ rule: 'boundary-intersect', note: 'The identity-based policy and the boundary both allow it.' });
     if (!identityCounts && identityAllow.length > 0) notes.push({ rule: 'trust-exception', note: 'The identity-based Allow does not count here: a trust policy or key policy must itself allow the principal.' });
     const effective: string[] = [];
     for (const m of resourceMatches) {
@@ -605,6 +607,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     }
   }
   if (!allowed) {
+    if (scps.length > 0 && failingScps.length === 0) notes.push({ rule: 'scp-no-grant', note: 'The service control policies allow the action but never grant it.' });
     notes.push({ rule: 'implicit-deny', note: 'Nothing allows this request, so it is an implicit deny.' });
     return { ...base, decision: 'deny', limiters, unsettled };
   }

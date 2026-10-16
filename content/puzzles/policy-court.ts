@@ -164,7 +164,7 @@ const scenarios: S[] = [
   },
   // Same page: Allow with Bool aws:MultiFactorAuthPresent true does not allow long-term access key requests.
   {
-    ...base('policy-court', 'identity-keep', ['1.1-S1', '1.1-K4'], 3, 8),
+    ...base('policy-court', 'identity-keep', ['1.1-S1', '1.1-K4'], 2, 8),
     title: 'An MFA-only allow, called with access keys',
     story: 'A user policy allows deleting objects only when MFA was used. The user runs the same call from a script with long-term access keys. No other policy mentions this action.',
     data: {
@@ -249,7 +249,7 @@ const scenarios: S[] = [
       request: {
         principal: role('ACCT_PROD', 'deployer', 'pipeline', { orgId: 'o-exampleorg' }),
         action: 'ec2:RunInstances',
-        resource: { arn: 'arn:aws:ec2:us-east-1:ACCT_PROD:instance/*', account: 'ACCT_PROD' },
+        resource: { arn: 'arn:aws:ec2:us-east-1:ACCT_PROD:instance/i-0prod5678', account: 'ACCT_PROD' },
         context: ctx(),
       },
       policies: [
@@ -437,7 +437,7 @@ const scenarios: S[] = [
   },
   // Source: IAM User Guide, "Permissions boundaries for IAM entities": a resource-based policy that names the session ARN grants directly to the session.
   {
-    ...base('policy-court', 'embassy-row', ['1.1-S3', '1.1-S5'], 3, 22),
+    ...base('policy-court', 'embassy-row', ['1.1-S3', '1.1-S5'], 2, 22),
     title: 'A bucket policy that names the session',
     story: 'An analyst assumed a role and passed a session policy that allows only s3:ListBucket. The bucket policy names this exact role session ARN and allows s3:GetObject. The role policy covers only Amazon EC2 reads.',
     data: {
