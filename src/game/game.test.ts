@@ -15,6 +15,7 @@ import { computeReadiness, type QMeta } from './readiness';
 import { rankFor, RANKS } from './ranks';
 import { streakInfo, longestStreak } from './streak';
 import { xpForAnswer } from './xp';
+import { recordResult } from './history';
 
 // Synthetic city: sq (start) -> a -> b ; sq -> c (portfolio). Districts: square, citadel, harbor, express, treasury.
 const ids = ['sq', 'a', 'b', 'c', 'h1', 'e1', 't1'];
@@ -420,6 +421,35 @@ describe('scoring, XP and ranks', () => {
   });
 });
 
+describe('answer history', () => {
+  it('summarises every answer per item and feeds the readiness lists, with start-up checks left out', () => {
+    const { clock } = clockAt('2026-06-01T12:00:00Z');
+    const ctx = ctxOf(clock);
+    let s = markNotesOpened(freshSave(), 'sq', ctx);
+    s = run(s, 'startup', 'sq', ctx, [true, false]).save;
+    expect(Object.values(s.game.history)).toHaveLength(2);
+    expect(Object.values(s.game.history).map((h) => h.lastKind)).toEqual(['startup', 'startup']);
+    expect(s.game.recent).toEqual({}); // Foundations have no domain, and start-up checks never count
+    s = run(s, 'startup', 'sq', ctx, [true, true], 5).save;
+    s = run(s, 'inspection', 'sq', ctx, [true, true, true, true, true], 6).save;
+    const total = Object.values(s.game.history).reduce((n, h) => n + h.n, 0);
+    expect(total).toBe(s.game.log.length);
+    const repeated = Object.values(s.game.history).filter((h) => h.n > 1);
+    for (const h of repeated) expect(h.streak).toBeLessThanOrEqual(h.n);
+  });
+  it('keeps history and the domain lists when the answer log is trimmed', () => {
+    const { clock } = clockAt('2026-06-01T12:00:00Z');
+    const ctx = ctxOf(clock);
+    let s = markNotesOpened(freshSave(), 'a', ctx);
+    s = { ...s, buildings: { ...s.buildings, a: { state: 'under_construction', changedAt: 'x' } }, game: { ...s.game, log: Array.from({ length: 4000 }, (_, i) => [`old-${i}`, 1, 'x', 'inspection'] as Save['game']['log'][number]) } };
+    s = run(s, 'inspection', 'a', ctx, [true, true, true, true, true]).save;
+    expect(s.game.log).toHaveLength(4000);
+    expect(s.game.log.some((e) => e[0] === 'old-0')).toBe(false);
+    expect(Object.keys(s.game.history)).toHaveLength(5);
+    expect(s.game.recent['1']).toHaveLength(5);
+  });
+});
+
 describe('streaks', () => {
   const days = (map: Record<string, number>) => map;
   it('counts a day only at 10 questions', () => {
@@ -489,28 +519,59 @@ describe('readiness', () => {
   add('h1', 40, '2.1-K1');
   add('e1', 40, '3.1-K1');
   add('t1', 40, '4.1-K1');
-  const entry = (building: string, i: number, correct: boolean, kind: 'inspection' | 'startup' | 'placement' = 'inspection') => [`${building}-m${i}`, correct ? 1 : 0, '2026-06-01T00:00:00.000Z', kind] as Save['game']['log'][number];
+  type Kind = 'inspection' | 'startup' | 'placement' | 'puzzle';
+  const entry = (building: string, i: number, correct: boolean, kind: Kind = 'inspection') => ({ id: `${building}-m${i}`, ok: correct, kind, domain: env.domainOf(building) });
+  /** Builds the readiness lists the way the engine does: one recordResult per answer, in order. */
+  const recentOf = (entries: ReturnType<typeof entry>[]) => {
+    let g = freshSave().game;
+    for (const e of entries) g = { ...g, ...recordResult(g, { ...e, at: '2026-06-01T00:00:00.000Z' }) };
+    return g.recent;
+  };
   it('shows a dash until a domain has 10 counted answers and ignores start-up checks', () => {
     const log = [...Array.from({ length: 30 }, (_, i) => entry('a', i, true, 'startup')), ...Array.from({ length: 9 }, (_, i) => entry('a', i, true))];
-    const r = computeReadiness(log, meta, env);
+    const r = computeReadiness(recentOf(log), meta, env);
     expect(r.domains[0]).toMatchObject({ answers: 9, value: null });
     expect(r.overall).toBeNull();
-    const ten = computeReadiness([...log, entry('a', 9, true)], meta, env);
+    const ten = computeReadiness(recentOf([...log, entry('a', 9, true)]), meta, env);
     expect(ten.domains[0]?.value).not.toBeNull();
   });
   it('multiplies recent accuracy by bullet coverage and weights domains 30/26/24/20', () => {
     const full = (b: string) => Array.from({ length: 10 }, (_, i) => entry(b, i, true));
     const log = [...full('a'), ...full('h1'), ...full('e1'), ...full('t1')];
     // Domain 1 has 4 bullets (a, b, c) and only one is covered: coverage 0.25. The others have 1 bullet: coverage 1.
-    const r = computeReadiness(log, meta, env);
+    const r = computeReadiness(recentOf(log), meta, env);
     expect(r.domains.map((d) => d.value)).toEqual([0.25, 1, 1, 1]);
     expect(r.overall).toBeCloseTo(0.3 * 0.25 + 0.26 + 0.24 + 0.2, 10);
   });
   it('uses only the latest 30 answers for accuracy and counts placements', () => {
     const old = Array.from({ length: 40 }, (_, i) => entry('h1', i, false));
-    const recent = Array.from({ length: 30 }, (_, i) => entry('h1', i, true, 'placement'));
-    const r = computeReadiness([...old, ...recent], meta, env);
+    const latest = Array.from({ length: 30 }, (_, i) => entry('h1', i, true, 'placement'));
+    const r = computeReadiness(recentOf([...old, ...latest]), meta, env);
     expect(r.domains[1]?.accuracy).toBe(1);
+  });
+  it('lets at most the 8 most recent puzzle plays into a domain window', () => {
+    // 30 correct inspection answers, then 20 wrong puzzle plays: only 8 puzzle plays count, so 22 of the last 30 are right.
+    const good = Array.from({ length: 30 }, (_, i) => entry('h1', i, true));
+    const puzzles = Array.from({ length: 20 }, (_, i) => entry('h1', i, false, 'puzzle'));
+    const r = computeReadiness(recentOf([...good, ...puzzles]), meta, env);
+    expect(r.domains[1]?.answers).toBe(38);
+    expect(r.domains[1]?.accuracy).toBeCloseTo(22 / 30, 10);
+  });
+  it('keeps the older puzzle plays out even when they were good, and the newest 8 in', () => {
+    const old = Array.from({ length: 12 }, (_, i) => entry('h1', i, true, 'puzzle'));
+    const base = Array.from({ length: 30 }, (_, i) => entry('h1', i, false));
+    const recent = Array.from({ length: 8 }, (_, i) => entry('h1', i, true, 'puzzle'));
+    const r = computeReadiness(recentOf([...old, ...base, ...recent]), meta, env);
+    // Stream = 30 wrong inspection answers + the 8 newest puzzle plays; the last 30 = 22 wrong + 8 right puzzle plays.
+    expect(r.domains[1]?.answers).toBe(38);
+    expect(r.domains[1]?.accuracy).toBeCloseTo(8 / 30, 10);
+  });
+  it('never changes a readiness figure when the recent lists are pruned', () => {
+    const many = Array.from({ length: 400 }, (_, i) => entry('h1', i % 40, i % 3 !== 0, i % 7 === 0 ? 'puzzle' : 'inspection'));
+    const full = computeReadiness(recentOf(many), meta, env).domains[1];
+    const tail = computeReadiness(recentOf(many.slice(-130)), meta, env).domains[1];
+    expect(full?.accuracy).toBe(tail?.accuracy);
+    expect(full?.coverage).toBe(tail?.coverage);
   });
 });
 

@@ -3,6 +3,10 @@ import { CORRUPT_KEY, CURRENT_VERSION, STORAGE_KEY, freshSave } from './schema';
 import { MIGRATIONS, migrate, sanitize } from './migrate';
 import { createSaveStore, type KeyValueStorage } from './store';
 import { deriveState } from './state';
+import fixtureJson from './__fixtures__/save-v2-real.json';
+import { domainOfItem } from './migrate';
+import { computeReadiness } from '../game/readiness';
+import { DEFAULT_ENV } from '../game/env';
 import { BUILDINGS, GRAPH, START_IDS } from '../data';
 
 const known = new Set(BUILDINGS.map((b) => b.id));
@@ -229,7 +233,7 @@ describe('derived building state', () => {
   });
 });
 
-describe('v1 to v2 migration', () => {
+describe('v1 to current migration', () => {
   const v1 = {
     version: 1,
     updatedAt: '2025-12-01T00:00:00.000Z',
@@ -241,21 +245,21 @@ describe('v1 to v2 migration', () => {
     const r = migrate(v1, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(2);
+    expect(r.save.version).toBe(3);
     expect(r.save.buildings).toEqual({ 'identity-keep': v1.buildings['identity-keep'], gatehouse: v1.buildings.gatehouse });
     expect(r.save.ui).toEqual(v1.ui);
     expect(r.save.game).toEqual(freshSave(clock).game);
   });
 
-  it('loads a v1 export through the store, writes v2 back and keeps it', () => {
+  it('loads a v1 export through the store, writes the current version back and keeps it', () => {
     const storage = new MemoryStorage();
     storage.setItem(STORAGE_KEY, JSON.stringify(v1));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(2);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(3);
     const other = makeStore(null);
     expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: v1 })).ok).toBe(true);
-    expect(other.getSnapshot().save.version).toBe(2);
+    expect(other.getSnapshot().save.version).toBe(3);
     expect(Object.keys(other.getSnapshot().save.buildings)).toHaveLength(2);
   });
 
@@ -273,7 +277,7 @@ describe('v1 to v2 migration', () => {
   it('sanitizes a malformed game block field by field', () => {
     const r = sanitize(
       {
-        version: 2,
+        version: 3,
         buildings: {},
         ui: {},
         game: {
@@ -305,8 +309,88 @@ describe('v1 to v2 migration', () => {
 
   it('caps the answer log at 4000 newest entries', () => {
     const log = Array.from({ length: 4100 }, (_, i) => [`q-${i}`, 1, '2026-01-02T00:00:00Z', 'inspection']);
-    const r = sanitize({ version: 2, buildings: {}, ui: {}, game: { log } }, known, clock);
+    const r = sanitize({ version: 3, buildings: {}, ui: {}, game: { log } }, known, clock);
     expect(r.game.log).toHaveLength(4000);
     expect(r.game.log[0]?.[0]).toBe('q-100');
+  });
+});
+
+describe('v2 to v3 migration (answer history)', () => {
+  const fixture = fixtureJson as unknown as Record<string, unknown> & { game: { log: [string, 0 | 1, string, string][]; flags: unknown[]; xp: number } };
+
+  it('the fixture is a genuine v2 save from the app (played in Chromium)', () => {
+    expect(fixture.version).toBe(2);
+    expect(fixture.game.log.length).toBeGreaterThan(20);
+    expect(fixture.game.flags).toHaveLength(1);
+  });
+
+  it('builds a per-item summary from the log and keeps everything else', () => {
+    const r = migrate(fixture, known, clock);
+    expect(r.status).toBe('migrated');
+    if (r.status !== 'migrated') return;
+    const { game } = r.save;
+    expect(r.save.version).toBe(3);
+    // Every field of the old game block survives.
+    expect(game.xp).toBe(fixture.game.xp);
+    expect(game.flags).toHaveLength(1);
+    expect(game.log).toEqual(fixture.game.log);
+    expect(Object.keys(r.save.buildings)).toEqual(Object.keys(fixture.buildings as object));
+    // History equals a recount of the log, item by item.
+    const ids = new Set(fixture.game.log.map((e) => e[0]));
+    expect(new Set(Object.keys(game.history))).toEqual(ids);
+    for (const id of ids) {
+      const entries = fixture.game.log.filter((e) => e[0] === id);
+      const last = entries[entries.length - 1] as (typeof entries)[number];
+      let streak = 0;
+      for (const e of entries) streak = e[1] === 1 ? streak + 1 : 0;
+      expect(game.history[id]).toEqual({ n: entries.length, ok: entries.filter((e) => e[1] === 1).length, streak, last: last[2], lastOk: last[1], lastKind: last[3] });
+    }
+    const total = Object.values(game.history).reduce((n, h) => n + h.n, 0);
+    expect(total).toBe(fixture.game.log.length);
+  });
+
+  it('builds the per-domain recent lists from counted entries only (never start-up checks)', () => {
+    const r = migrate(fixture, known, clock);
+    if (r.status !== 'migrated') throw new Error('should migrate');
+    const counted = fixture.game.log.filter((e) => e[3] !== 'startup' && domainOfItem(e[0]) !== null);
+    const inRecent = Object.values(r.save.game.recent).flat();
+    expect(inRecent).toHaveLength(counted.length);
+    expect(inRecent.some((e) => e[2] === 'startup')).toBe(false);
+    for (const [d, list] of Object.entries(r.save.game.recent)) for (const e of list) expect(String(domainOfItem(e[0]))).toBe(d);
+  });
+
+  it('gives the same readiness before and after, computed from the log and from recent', () => {
+    const r = migrate(fixture, known, clock);
+    if (r.status !== 'migrated') throw new Error('should migrate');
+    const meta = new Map(fixture.game.log.map((e) => [e[0], { id: e[0], building: e[0].replace(/-\d{3}$/, ''), bullets: ['x'], difficulty: 2 as const }]));
+    const fromLog: Record<string, [string, 0 | 1, 'inspection'][]> = {};
+    for (const e of fixture.game.log) {
+      const d = domainOfItem(e[0]);
+      if (d !== null && e[3] !== 'startup') (fromLog[String(d)] ??= []).push([e[0], e[1], e[3] as 'inspection']);
+    }
+    const a = computeReadiness(r.save.game.recent, meta, DEFAULT_ENV);
+    const b = computeReadiness(fromLog, meta, DEFAULT_ENV);
+    expect(a).toEqual(b);
+  });
+
+  it('history stays complete when the answer log is trimmed, and is never trimmed itself', () => {
+    const log = Array.from({ length: 4100 }, (_, i) => [`gatehouse-${String((i % 50) + 1).padStart(3, '0')}`, i % 2, `2026-01-01T00:00:${String(i % 60).padStart(2, '0')}.000Z`, 'inspection']);
+    const r = migrate({ version: 2, buildings: {}, ui: {}, game: { log } }, known, clock);
+    if (r.status !== 'migrated') throw new Error('should migrate');
+    expect(r.save.game.log).toHaveLength(4000);
+    expect(Object.values(r.save.game.history).reduce((n, h) => n + h.n, 0)).toBe(4100);
+    expect(r.save.game.recent['1']).toHaveLength(100);
+  });
+
+  it('is idempotent on a v3 save and rejects malformed history', () => {
+    const once = migrate(fixture, known, clock);
+    if (once.status !== 'migrated') throw new Error('should migrate');
+    const twice = migrate(JSON.parse(JSON.stringify(once.save)), known, clock);
+    expect(twice).toMatchObject({ status: 'ok' });
+    if (twice.status === 'ok') expect(twice.save).toEqual(once.save);
+    const bad = sanitize({ version: 3, buildings: {}, ui: {}, game: { history: { 'gatehouse-001': { n: 0 }, 'gatehouse-002': { n: 3, ok: 9, streak: 8, last: 'x', lastOk: 1, lastKind: 'inspection' }, 'gatehouse-003': 'x' }, recent: { '1': [['gatehouse-001', 1, 'startup'], ['gatehouse-001', 1, 'inspection'], 'junk'], '7': [['a', 1, 'inspection']] } } }, known, clock);
+    expect(Object.keys(bad.game.history)).toEqual(['gatehouse-002']);
+    expect(bad.game.history['gatehouse-002']).toMatchObject({ ok: 3, streak: 3 });
+    expect(bad.game.recent).toEqual({ '1': [['gatehouse-001', 1, 'inspection']] });
   });
 });

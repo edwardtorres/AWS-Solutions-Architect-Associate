@@ -1,4 +1,5 @@
-import type { LogEntry, LogKind } from '../save/schema';
+import type { RecentEntry } from '../save/schema';
+import { pruneRecent } from './history';
 import type { GameEnv } from './env';
 
 /** Window sizes (recorded in CLAUDE.md). */
@@ -6,8 +7,7 @@ export const ACCURACY_WINDOW = 30;
 export const COVERAGE_WINDOW = 100;
 export const MIN_ANSWERS = 10;
 
-/** Answer kinds that count towards readiness. Start-up checks never do. */
-export const COUNTED_KINDS: ReadonlySet<LogKind> = new Set<LogKind>(['inspection', 'placement', 'review', 'puzzle', 'lab', 'mock']);
+export { COUNTED_KINDS } from './history';
 
 /** The few facts about a question readiness needs; generated into src/questions/meta.ts. */
 export interface QMeta {
@@ -32,22 +32,27 @@ export interface Readiness {
   overall: number | null;
 }
 
-export function computeReadiness(log: readonly LogEntry[], meta: ReadonlyMap<string, QMeta>, env: GameEnv): Readiness {
+/**
+ * Readiness from the per-domain `recent` lists (never from the capped answer log). The counted stream of a domain is its
+ * non-puzzle results plus its 8 most recent puzzle plays, in time order; accuracy looks at the last 30 of that stream
+ * and coverage at the last 100, so a domain never has more than 8 puzzle plays in its 30-answer window.
+ */
+export function computeReadiness(recent: Readonly<Record<string, readonly RecentEntry[]>>, meta: ReadonlyMap<string, QMeta>, env: GameEnv): Readiness {
   const domains: DomainReadiness[] = [];
   const domainNumbers = Object.keys(env.weights).map(Number).sort((a, b) => a - b);
   for (const d of domainNumbers) {
     const bulletsOfDomain = new Set(env.buildingIds.filter((b) => env.domainOf(b) === d).flatMap((b) => env.bulletsOf(b)));
-    const entries = log.filter((e) => COUNTED_KINDS.has(e[3])).flatMap((e) => {
+    const entries = pruneRecent(recent[String(d)] ?? []).flatMap((e) => {
       const m = meta.get(e[0]);
-      return m && env.domainOf(m.building) === d ? [{ m, correct: e[1] === 1 }] : [];
+      return m ? [{ m, correct: e[1] === 1 }] : [];
     });
     const answers = entries.length;
     if (answers < MIN_ANSWERS || bulletsOfDomain.size === 0) {
       domains.push({ domain: d, answers, accuracy: null, coverage: null, value: null });
       continue;
     }
-    const recent = entries.slice(-ACCURACY_WINDOW);
-    const accuracy = recent.filter((e) => e.correct).length / recent.length;
+    const last = entries.slice(-ACCURACY_WINDOW);
+    const accuracy = last.filter((e) => e.correct).length / last.length;
     const covered = new Set<string>();
     for (const e of entries.slice(-COVERAGE_WINDOW)) if (e.correct) for (const b of e.m.bullets) if (bulletsOfDomain.has(b)) covered.add(b);
     const coverage = covered.size / bulletsOfDomain.size;

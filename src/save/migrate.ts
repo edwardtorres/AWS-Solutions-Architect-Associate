@@ -1,4 +1,6 @@
-import { CURRENT_VERSION, LOG_CAP, freshGame, freshSave, type ActiveAttempt, type AttemptKind, type GameState, type LogEntry, type LogKind, type Save, type StoredState, type UiPrefs } from './schema';
+import { BUILDING_BY_ID, DISTRICT_BY_ID } from '../data';
+import { COUNTED_KINDS, nextHistory, pruneRecent } from '../game/history';
+import { CURRENT_VERSION, LOG_CAP, freshGame, freshSave, type ActiveAttempt, type AttemptKind, type GameState, type ItemHistory, type LogEntry, type LogKind, type RecentEntry, type Save, type StoredState, type UiPrefs } from './schema';
 
 type Migration = (old: Record<string, unknown>) => Record<string, unknown>;
 
@@ -19,7 +21,31 @@ export const MIGRATIONS: Record<number, Migration> = {
   },
   // Version 2 adds the game block (notes, inspections, placement, XP, streaks, badges, flags, answer log).
   1: (old) => ({ ...old, version: 2, game: {} }),
+  // Version 3 adds the per-item answer history and the per-domain recent lists, built from the answer log (the only
+  // record a v2 save has), so scheduling and readiness no longer depend on a log that trimming can shorten.
+  2: (old) => {
+    const game = isObject(old.game) ? old.game : {};
+    const log = Array.isArray(game.log) ? game.log : [];
+    const history: Record<string, ItemHistory> = {};
+    const recent: Record<string, RecentEntry[]> = {};
+    for (const e of log) {
+      if (!Array.isArray(e) || e.length !== 4) continue;
+      const [id, ok, at, kind] = e as unknown[];
+      if (!isStr(id) || (ok !== 0 && ok !== 1) || !isStr(at) || !KINDS.includes(kind as LogKind)) continue;
+      history[id] = nextHistory(history[id], ok === 1, kind as LogKind, at);
+      const domain = domainOfItem(id);
+      if (domain !== null && COUNTED_KINDS.has(kind as LogKind)) (recent[String(domain)] ??= []).push([id, ok, kind as LogKind]);
+    }
+    for (const k of Object.keys(recent)) recent[k] = pruneRecent(recent[k] as RecentEntry[]);
+    return { ...old, version: 3, game: { ...game, history, recent } };
+  },
 };
+
+/** Question ids are `<building>-NNN`; the exam domain follows from the building. Foundations and unknown ids have none. */
+export function domainOfItem(id: string): number | null {
+  const building = BUILDING_BY_ID.get(id.replace(/-\d{3,}$/, ''));
+  return building ? DISTRICT_BY_ID[building.district].domain : null;
+}
 
 export type MigrateResult =
   | { status: 'ok' | 'migrated'; save: Save }
@@ -72,7 +98,7 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
     if (typeof raw.ui.lastBuilding === 'string' && knownIds.has(raw.ui.lastBuilding)) ui.lastBuilding = raw.ui.lastBuilding;
   }
   return {
-    version: 2,
+    version: 3,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : base.updatedAt,
     buildings,
     ui,
@@ -119,7 +145,26 @@ export function sanitizeGame(raw: unknown, knownIds: ReadonlySet<string>, now: (
     bonus: recordOf(raw.bonus, (k, x) => (known(k) && x === true ? (true as const) : null)),
     flags: [],
     log: [],
+    history: recordOf(raw.history, (_k, x) =>
+      isObject(x) && typeof x.n === 'number' && x.n >= 1 && (x.lastOk === 0 || x.lastOk === 1) && isStr(x.last) && KINDS.includes(x.lastKind as LogKind)
+        ? { n: Math.floor(x.n), ok: Math.min(Math.floor(num(x.ok)), Math.floor(x.n)), streak: Math.min(Math.floor(num(x.streak)), Math.floor(x.n)), last: x.last, lastOk: x.lastOk, lastKind: x.lastKind as LogKind }
+        : null,
+    ),
+    recent: {},
   };
+  if (isObject(raw.recent)) {
+    for (const d of ['1', '2', '3', '4']) {
+      const list = raw.recent[d];
+      if (!Array.isArray(list)) continue;
+      const out: RecentEntry[] = [];
+      for (const e of list) {
+        if (!Array.isArray(e) || e.length !== 3) continue;
+        const [id, ok, kind] = e as unknown[];
+        if (isStr(id) && (ok === 0 || ok === 1) && COUNTED_KINDS.has(kind as LogKind)) out.push([id, ok, kind as LogKind]);
+      }
+      if (out.length > 0) game.recent[d] = pruneRecent(out);
+    }
+  }
   if (Array.isArray(raw.flags)) {
     for (const f of raw.flags) {
       if (!isObject(f) || !isStr(f.id) || !isStr(f.questionId)) continue;

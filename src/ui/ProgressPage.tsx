@@ -20,7 +20,7 @@ export default function ProgressPage() {
   const info = rankFor(g.xp);
   const today = todayKey(systemClock);
   const streak = streakInfo(g.days, today);
-  const readiness = useMemo(() => computeReadiness(g.log, QUESTION_META, DEFAULT_ENV), [g.log]);
+  const readiness = useMemo(() => computeReadiness(g.recent, QUESTION_META, DEFAULT_ENV), [g.recent]);
   const commissioned = BUILDINGS.filter((b) => states.get(b.id) === 'commissioned').length;
   const answeredToday = g.days[today] ?? 0;
 
