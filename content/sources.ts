@@ -698,7 +698,6 @@ const sources: Source[] = [
   aws('rds-working-vpc', `${D}/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html`, 'Working with a DB instance in a VPC'),
   aws('ddb-global-tables', `${D}/amazondynamodb/latest/developerguide/GlobalTables.html`, 'DynamoDB global tables'),
   aws('kms-multi-region', `${D}/kms/latest/developerguide/multi-region-keys-overview.html`, 'Multi-Region keys in AWS KMS'),
-  aws('s3-website', `${D}/AmazonS3/latest/userguide/WebsiteHosting.html`, 'Hosting a static website using Amazon S3'),
   aws('rds-encryption', `${D}/AmazonRDS/latest/UserGuide/Overview.Encryption.html`, 'Encrypting Amazon RDS resources'),
   aws('ddb-encryption', `${D}/amazondynamodb/latest/developerguide/EncryptionAtRest.html`, 'DynamoDB encryption at rest'),
   aws('efs-encryption', `${D}/efs/latest/ug/encryption.html`, 'Data encryption in Amazon EFS'),
