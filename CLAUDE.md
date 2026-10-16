@@ -96,6 +96,12 @@ The exam guide dates from August 2022. A feature AWS introduced on or after **20
 - **Save v2:** `game` block (notes opened, attempts in progress, XP, seen counts, days, badges, flags, compact answer log capped at 4,000); migration chain in `src/save/migrate.ts`. Flags are local, listed in Settings and exportable as text.
 - Engine in `src/game/` (pure functions over the save, injectable clock and city); UI in `src/ui/play/` and `src/ui/ProgressPage.tsx`.
 
+## Owner decisions on Step 4 (approved)
+- **Overall readiness stays strict:** "—" until all four domains have a value; it is not re-normalised over the domains that have data.
+- **The 18 post-guide keys with no exam-era option stay.** A newer feature may be the key when no option shows the established design; those questions are tagged `post-guide` and excluded from mocks.
+- **Leaving an unfinished inspection counts as a failed inspection** (it counts toward the same-day lock).
+- **Start-up checks keep XP and streak credit** but never count towards readiness.
+
 ## Layout
 `scripts/` official data + content/bundle/hygiene/layout checks · `content/` sources, glossary, don't-confuse pairs, renamed services, needs-verification queue, contradictions, notes per district · `src/data/` buildings, roads, districts, families, outline · `src/save/` save schema v1, migrations, store · `src/ui/` map, panel, atlas, save menu, `src/ui/notes/` notes, glossary and don't-confuse pages · `src/dev/` dev-only hooks · `src/lib/` graph, rng, routing.
 
