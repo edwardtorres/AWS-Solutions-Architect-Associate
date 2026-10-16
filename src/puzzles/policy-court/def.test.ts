@@ -133,7 +133,7 @@ describe('AWS documentation examples', () => {
   });
   it('Allow with Bool true needs MFA present', () => {
     const p = pol('identity', 'identity', [allow('*', '*', { Condition: { Bool: { 'aws:MultiFactorAuthPresent': 'true' } } })]);
-    expect(res(same(user('A1', 'u')), [p])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(same(user('A1', 'u')), [p])).toEqual({ decision: 'deny', decider: 'identity' });
     expect(res(req(user('A1', 'u'), 's3:GetObject', `${BUCKET}/k`, 'A1', { mfa: true }), [p])).toEqual({ decision: 'allow', decider: 'identity' });
   });
   it('bucket policy with Principal * and aws:PrincipalOrgID admits only that organization', () => {
@@ -153,7 +153,7 @@ describe('AWS documentation examples', () => {
     const r = (ip?: string) => req(user('A1', 'u'), 's3:GetObject', `${BUCKET}/k`, 'A1', ip ? { sourceIp: ip } : {});
     expect(res(r('203.0.113.1'), [p])?.decision).toBe('allow');
     expect(res(r('198.51.100.1'), [p])?.decision).toBe('deny');
-    expect(res(r(), [p])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(r(), [p])).toEqual({ decision: 'deny', decider: 'identity' });
   });
   // Same page: the Boolean example (Deny with aws:SecureTransport false)
   it('Deny with aws:SecureTransport false fires only without TLS', () => {
@@ -169,7 +169,7 @@ describe('AWS documentation examples', () => {
 describe('rules', () => {
   it('implicit deny: nothing allows', () => {
     tag('implicit-deny');
-    expect(res(same(user('A1', 'u')), [pol('identity', 'identity', [allow('ec2:*', '*')])])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(same(user('A1', 'u')), [pol('identity', 'identity', [allow('ec2:*', '*')])])).toEqual({ decision: 'deny', decider: 'identity' });
     expect(res(same(user('A1', 'u')), [])).toEqual({ decision: 'deny', decider: IMPLICIT });
   });
   it('explicit deny beats an allow in another policy, in a resource policy too', () => {
@@ -199,9 +199,9 @@ describe('rules', () => {
     expect(res(r, [id, pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'C1' } })])])).toEqual({ decision: 'deny', decider: 'bucket' });
     expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), b])).toEqual({ decision: 'deny', decider: 'identity' });
     expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('bucket', 'resource', [allow('s3:Put*', '*', { Principal: { AWS: 'C1' } })])])).toEqual({ decision: 'deny', decider: IMPLICIT });
-    // a failing side with no policy to point at is refused
-    expect(run(r, [id])).toBeNull();
-    expect(run(r, [b])).toBeNull();
+    // a failing side with no policy to point at: no single policy
+    expect(res(r, [id])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(r, [b])).toEqual({ decision: 'deny', decider: IMPLICIT });
     expect(res(r, [id, b])).toEqual({ decision: 'allow', decider: BOTH_SIDES });
   });
   it('cross-account: the resource policy of another account does not name this account', () => {
@@ -250,7 +250,7 @@ describe('rules', () => {
     tag('session-limits');
     const id = pol('identity', 'identity', [allow('s3:*', '*')]);
     expect(res(same(role('A1', 'r')), [id, pol('session', 'session', [allow('s3:ListBucket', '*')])])).toEqual({ decision: 'deny', decider: 'session' });
-    expect(res(same(role('A1', 'r')), [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('session', 'session', [allow('s3:*', '*')])])).toEqual({ decision: 'deny', decider: IMPLICIT });
+    expect(res(same(role('A1', 'r')), [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('session', 'session', [allow('s3:*', '*')])])).toEqual({ decision: 'deny', decider: 'identity' });
     expect(res(same(role('A1', 'r')), [id, pol('session', 'session', [allow('s3:GetObject', '*')])])).toEqual({ decision: 'allow', decider: 'identity' });
   });
   it('an explicit Deny in a session policy wins', () => {
@@ -359,6 +359,16 @@ describe('rules', () => {
     expect(res(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:A1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*:A1:instance/*')])])?.decision).toBe('allow');
     expect(res(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:B1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*:A1:instance/*')])])?.decision).toBe('deny');
     expect(run(same(user('A1', 'u'), 'ec2:StartInstances', 'arn:aws:ec2:us-east-1:A1:instance/i-1'), [pol('identity', 'identity', [allow('ec2:*', 'arn:aws:ec2:*1:A1:instance/*')])])).toBeNull(); // * in the middle of a segment is refused
+  });
+  it('decider = the single policy whose Allow, if it applied, would flip the result', () => {
+    const r = same(user('A1', 'u'));
+    const idEc2 = pol('identity', 'identity', [allow('ec2:*', '*')]);
+    const idCond = pol('identity', 'identity', [allow('s3:*', '*', { Condition: { Bool: { 'aws:SecureTransport': 'false' } } })]);
+    const bucketOther = pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'arn:aws:iam::A1:user/v' } })]);
+    expect(res(r, [idEc2])).toEqual({ decision: 'deny', decider: 'identity' }); // action missing
+    expect(res(r, [idCond])).toEqual({ decision: 'deny', decider: 'identity' }); // condition fails
+    expect(res(r, [idEc2, bucketOther])).toEqual({ decision: 'deny', decider: IMPLICIT }); // either side could fix it
+    expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('identity2', 'identity', [allow('sqs:*', '*')])])).toEqual({ decision: 'deny', decider: IMPLICIT });
   });
   it('every listed rule is exercised by a test above', () => {
     const missing = rules.map((r) => r.id).filter((id) => !covered.has(id));

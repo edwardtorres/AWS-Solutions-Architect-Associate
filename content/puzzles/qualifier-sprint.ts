@@ -19,7 +19,7 @@ const sc = (n: number, difficulty: 1 | 2 | 3, title: string, story: string, data
 /** Display order of the options per set (option ids), so the answers do not follow a pattern. */
 const ORDER: Record<number, string> = {
   1: 'dbac', 2: 'cdab', 3: 'edbac', 4: 'bdca', 5: 'cbeda', 6: 'dacb', 7: 'bdac',
-  8: 'ecabd', 9: 'dacbe', 10: 'cadb', 11: 'bdac', 12: 'dbeac', 13: 'cdab', 14: 'bcda',
+  8: 'ecabd', 9: 'dacbe', 10: 'cadb', 11: 'bdac', 12: 'dbeac', 13: 'dbeca', 14: 'bcda',
 };
 
 const scenarios: S[] = [
@@ -27,11 +27,11 @@ const scenarios: S[] = [
     1,
     2,
     'The steady internal API',
-    'A ticketing company needs an HTTP API for its internal booking tools. Calls arrive all day at a steady, forecastable rate. Every design below serves the API correctly; they differ in what they optimise.',
+    'A ticketing company needs an HTTP API for its internal booking tools. Calls arrive at the same constant rate day and night, and the company will run the API for at least three years. Every design below serves the API correctly; they differ in what they optimise.',
     {
       options: [
         { id: 'a', text: 'Lambda functions behind an API Gateway REST API' },
-        { id: 'b', text: 'EC2 instances in an Auto Scaling group, with the steady usage covered by a Compute Savings Plan' },
+        { id: 'b', text: 'The same Lambda functions behind API Gateway, with their constant usage covered by a Compute Savings Plan' },
         { id: 'c', text: 'Lambda functions behind an API Gateway private API, called only through an interface VPC endpoint' },
         { id: 'd', text: 'The Lambda and API Gateway stack deployed in two Regions, with Route 53 failover routing and health checks' },
       ],
@@ -43,9 +43,9 @@ const scenarios: S[] = [
           quote: 'With Lambda, you can run code without provisioning or managing servers.',
         },
         cost: {
-          text: 'A Savings Plan lowers the cost of usage that is committed to at a steady rate, which fits an always-on, forecastable load.',
+          text: 'A Compute Savings Plan trades a commitment to a steady amount of compute for rates below On-Demand, and it also covers Lambda usage, so a constant load costs less than the same functions without it.',
           src: 'savings-plans',
-          quote: 'Savings Plans provide savings beyond On-Demand rates in exchange for a commitment of using a specified amount of compute power (measured per hour) for a one or three year period.',
+          quote: 'This also applies to AWS Fargate and AWS Lambda usage.',
         },
         secure: {
           text: 'A private API can be reached only from inside your VPC, so the API is never exposed to the public internet.',
@@ -63,24 +63,24 @@ const scenarios: S[] = [
   sc(
     2,
     1,
-    'Resizing uploaded photos',
-    'A photo-sharing app puts one message on a queue for every uploaded picture. Workers resize the picture and can safely retry if a job is lost. Each design below reads the queue and finishes the job.',
+    'Transcoding uploaded videos',
+    'A photo-sharing app creates one job for every uploaded video. Each job runs for several hours, far longer than a Lambda function may run, and can safely be retried if it is lost. Each design below runs the jobs.',
     {
       options: [
-        { id: 'a', text: 'Worker instances in an Auto Scaling group across three Availability Zones, On-Demand' },
-        { id: 'b', text: 'A Lambda function that is triggered by the queue' },
-        { id: 'c', text: 'Worker instances in private subnets that reach the queue through an interface VPC endpoint' },
-        { id: 'd', text: 'Worker instances in an Auto Scaling group using Spot Instances' },
+        { id: 'a', text: 'Worker instances pulling jobs from an SQS queue, in an On-Demand Auto Scaling group across three Availability Zones' },
+        { id: 'b', text: 'An AWS Batch job queue with a managed compute environment in one subnet' },
+        { id: 'c', text: 'Worker instances pulling jobs from an SQS queue, in private subnets that reach it through an interface VPC endpoint' },
+        { id: 'd', text: 'Worker instances pulling jobs from an SQS queue, in an Auto Scaling group that uses Spot Instances' },
       ],
       answers: { overhead: 'b', cost: 'd', secure: 'c', available: 'a' },
       facts: {
         overhead: {
-          text: 'With Lambda reading the queue, Lambda itself adds and removes pollers as the message volume changes, so there is no fleet to size.',
-          src: 'lambda-sqs-scaling',
-          quote: 'By default, Lambda automatically scales event pollers based on message volume.',
+          text: 'Batch provisions and scales the compute for submitted jobs, so the team runs no worker fleet, queue consumer or scaling rules.',
+          src: 'batch-what-is',
+          quote: 'As a fully managed service, AWS Batch helps you to run batch computing workloads of any scale.',
         },
         cost: {
-          text: 'Spot Instances suit work that can be interrupted and retried, and a retryable queue job is exactly that.',
+          text: 'Spot Instances suit work that can be interrupted and retried, and a retryable job is exactly that.',
           src: 'ec2-spot',
           quote: 'Spot Instances are a cost-effective choice if you can be flexible about when your applications run and if your applications can be interrupted.',
         },
@@ -101,12 +101,12 @@ const scenarios: S[] = [
     3,
     2,
     'The orders database',
-    'A small online shop needs a MySQL-compatible relational database for its orders. Traffic is spiky, and the team does not want to choose or resize instance sizes. Every design below stores the orders correctly; read the qualifier to see which one fits.',
+    'A small online shop needs a MySQL-compatible relational database for its orders. The load is flat around the clock and will stay that way for years, and the team prefers not to size or resize instances by hand. Every design below stores the orders correctly; read the qualifier to see which one fits.',
     {
       options: [
         { id: 'a', text: 'RDS for MySQL, Multi-AZ DB instance deployment' },
         { id: 'b', text: 'An Aurora Serverless v2 DB cluster' },
-        { id: 'c', text: 'RDS for MySQL, single instance, with a reserved DB instance for its steady use' },
+        { id: 'c', text: 'RDS for MySQL, single instance, with a reserved DB instance covering its constant use' },
         { id: 'd', text: 'RDS for MySQL, single instance, in private subnets with storage encrypted using a KMS key' },
         { id: 'e', text: 'MySQL installed on an EC2 instance that your team patches and backs up' },
       ],
@@ -142,7 +142,7 @@ const scenarios: S[] = [
     'A mobile game keeps player sessions in a key-value store that the backend reads and writes by key, and finished sessions pile up if nobody removes them. Every design below works for that access pattern.',
     {
       options: [
-        { id: 'a', text: 'A DynamoDB table with Time to Live turned on, so finished sessions are deleted automatically' },
+        { id: 'a', text: 'A DynamoDB table in provisioned mode whose throughput the team sets and reviews each month, with Time to Live to delete finished sessions' },
         { id: 'b', text: 'A DynamoDB global table that replicates to a second Region' },
         { id: 'c', text: 'A DynamoDB table in on-demand mode' },
         { id: 'd', text: 'A DynamoDB table reached from private subnets through a gateway VPC endpoint' },
@@ -251,7 +251,7 @@ const scenarios: S[] = [
     7,
     2,
     'A database password for a function',
-    'A Lambda function needs the password of its database. The team does not want the password in the function code. Every design below keeps it out of the code.',
+    'A Lambda function needs the password of its database. The password must not be in the function code, and the security team wants secret reads to avoid any public network path where the design allows it. Every design below keeps it out of the code.',
     {
       options: [
         { id: 'a', text: 'A Secrets Manager secret that is replicated to a second Region' },
@@ -476,23 +476,24 @@ const scenarios: S[] = [
     13,
     3,
     'Linking an office to six VPCs',
-    'A manufacturer links its office network to six VPCs in one Region. It has no Direct Connect circuit yet and the link must run this week. It will send many terabytes of data a month to AWS, steadily. Every design below connects the office to the VPCs.',
+    'A manufacturer links its office network to six VPCs in one Region. The company has never used Direct Connect and has a small network team. The link will carry a large, constant flow of data, many terabytes a month, for years. Every design below connects the office to the VPCs.',
     {
       options: [
-        { id: 'a', text: 'A Site-to-Site VPN connection to a transit gateway that the six VPCs attach to' },
-        { id: 'b', text: 'One Direct Connect connection to a transit gateway' },
-        { id: 'c', text: 'Two Direct Connect connections at separate locations, ending on different devices' },
+        { id: 'a', text: 'A separate Site-to-Site VPN connection to each of the six VPCs' },
+        { id: 'b', text: 'One Site-to-Site VPN connection to a transit gateway that the six VPCs attach to' },
+        { id: 'c', text: 'One Direct Connect connection to the VPCs' },
         { id: 'd', text: 'A Direct Connect connection with an IPsec VPN running over it' },
+        { id: 'e', text: 'Two Direct Connect connections at separate locations, ending on different devices' },
       ],
-      answers: { overhead: 'a', cost: 'b', secure: 'd', available: 'c' },
+      answers: { overhead: 'b', cost: 'c', secure: 'd', available: 'e' },
       facts: {
         overhead: {
-          text: 'A Direct Connect circuit has to be requested and cabled at a location, with a Letter of Authorization step, before it can carry traffic; a VPN to the transit gateway needs none of that physical work.',
-          src: 'dx-dedicated',
-          quote: 'After you request the connection, we make a Letter of Authorization and Connecting Facility Assignment (LOA-CFA) available to you to download or email you with a request for more information.',
+          text: 'A transit gateway is a hub that interconnects many VPCs and on-premises networks, so the office needs one attachment instead of one connection per VPC, and no Direct Connect circuit to order.',
+          src: 'tgw-what-is',
+          quote: 'AWS Transit Gateway is a network transit hub used to interconnect virtual private clouds (VPCs) and on-premises networks.',
         },
         cost: {
-          text: 'Direct Connect can reduce network costs for a large, steady flow compared with internet-based connections.',
+          text: 'Direct Connect can reduce network costs for a large, constant flow compared with internet-based connections.',
           src: 'connectivity-dx',
           quote: 'Direct Connect can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.',
         },

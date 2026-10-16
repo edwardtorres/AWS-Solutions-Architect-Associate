@@ -1,0 +1,242 @@
+[
+ {
+  "id": "puzzle-disaster-bunker-001",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy",
+    "iac-redeploy"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Backup-and-restore block set taken as backups, cross-Region backup copies and IaC redeploy; AMI copy appears only where offered."
+ },
+ {
+  "id": "puzzle-disaster-bunker-002",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-003",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-004",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-005",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-006",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-007",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-008",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-009",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-010",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-011",
+  "answers": {
+   "strategy": [
+    "pilot-light"
+   ],
+   "blocks": [
+    "cont-replication",
+    "data-tier-on",
+    "app-servers-off"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-012",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-013",
+  "answers": {
+   "strategy": [
+    "warm-standby"
+   ],
+   "blocks": [
+    "scaled-down-stack",
+    "reduced-capacity-traffic",
+    "scale-up-failover"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-014",
+  "answers": {
+   "strategy": [
+    "active-active"
+   ],
+   "blocks": [
+    "all-regions-serve",
+    "user-routing-policies",
+    "multi-region-writes"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-disaster-bunker-015",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy",
+    "ami-copy"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Backup-and-restore block set taken as backups, cross-Region backup copies and IaC redeploy; AMI copy appears only where offered."
+ },
+ {
+  "id": "puzzle-disaster-bunker-016",
+  "answers": {
+   "strategy": [
+    "backup-restore"
+   ],
+   "blocks": [
+    "pit-backups",
+    "backup-copy",
+    "iac-redeploy"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Backup-and-restore block set taken as backups, cross-Region backup copies and IaC redeploy; AMI copy appears only where offered."
+ }
+]

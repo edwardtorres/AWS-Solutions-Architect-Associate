@@ -1,0 +1,327 @@
+[
+ {
+  "id": "puzzle-policy-court-001",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-002",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "several"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-003",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "boundary"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-004",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "boundary"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-005",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "secret"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-006",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "boundary"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-007",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-008",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-009",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-010",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-011",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "scp-ou"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-012",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "scp-ou"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-013",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-014",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "both-sides"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-015",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-016",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "both-sides"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-017",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "bucket"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-018",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "both-sides"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-019",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "both-sides"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-020",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "trust"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-021",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "bucket"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-022",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "bucket"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-023",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "session"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-024",
+  "answers": {
+   "decision": [
+    "deny"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-policy-court-025",
+  "answers": {
+   "decision": [
+    "allow"
+   ],
+   "decider": [
+    "identity"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

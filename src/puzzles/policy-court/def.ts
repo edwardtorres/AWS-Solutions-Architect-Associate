@@ -17,12 +17,11 @@ import type { Answer, Evaluation, ExhibitSection, Field, PuzzleDef, Rule } from 
  *
  * "Which policy decided it" is defined as follows:
  * - Deny by an explicit Deny: the policy holding that Deny (exactly one policy may hold a matching Deny).
- * - Deny without an explicit Deny: if removing exactly one limiting policy (a service control policy level that lacks an
- *   Allow, the boundary, or the session policy) would turn the result into Allow, that policy. Otherwise the policy whose
- *   missing Allow blocks the request: the trust or key policy (same account), or across accounts the identity-based policy
- *   (principal side lacks the Allow) or the resource-based policy (resource side lacks it). "Nothing grants it" is keyed only
- *   when no identity-based or resource-based policy has a matching Allow. Anything else (several limiters needed at once,
- *   a failing side with no single policy) is refused.
+ * - Deny without an explicit Deny: the single policy that, if its Allow applied (condition met, action added, principal
+ *   named), would by itself turn the result into Allow: a limiter (SCP level, boundary, session policy) lacking its Allow,
+ *   the trust or key policy, across accounts the one identity-based or resource-based policy of the failing side, or inside
+ *   one account the only identity-based or resource-based policy there is. Otherwise "no single policy" (no such policy,
+ *   several equally able, or two changes needed). Several limiters needed at once is refused.
  * - Allow: the single policy that grants it. If several policies grant it independently inside one account, the option
  *   "several"; across accounts the grant always needs both sides, so the option "both-sides".
  */
@@ -654,7 +653,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
   }
   if (!allowed) {
     if (scps.length > 0 && failingScps.length === 0) notes.push({ rule: 'scp-no-grant', note: 'The service control policies allow the action but never grant it.' });
-    notes.push({ rule: 'implicit-deny', note: 'Nothing allows this request, so it is an implicit deny.' });
+    notes.push({ rule: 'implicit-deny', note: 'No Allow applies to this request, so it is an implicit deny.' });
     return { ...base, decision: 'deny', limiters, unsettled };
   }
   return { ...base, decision: 'allow', grants: [...new Set(grants)], limiters: [], unsettled };
@@ -692,21 +691,24 @@ function outcome(s: PolicyCourtScenario, mode: Mode): Outcome | null {
   const withoutLimiters = core(s, new Set(limiters), mode);
   if (!withoutLimiters) return null;
   if (withoutLimiters.decision === 'allow') return null; // several limiters are needed at once
-  // No limiter is to blame: the policy whose missing Allow blocks the request decides; "nothing grants it" only when no
-  // identity-based or resource-based policy has a matching Allow at all.
+  // No limiter is to blame: the decider is the single identity-based or resource-based policy whose Allow, if it applied
+  // (condition met, action added, principal named), would turn the result into Allow. Otherwise "no single policy".
   const out = (decider: string): Outcome => ({ decision: 'deny', decider, notes: base.notes });
   const resPolicy = s.policies.find((p) => p.kind === 'resource');
   const identityPolicies = s.policies.filter((p) => p.kind === 'identity');
+  if (limiters.length > 0) return out(IMPLICIT); // a limiter lacks its Allow and a grant is missing too: two changes needed
   const noIdentity = base.identityAllow.length === 0;
   const noResource = base.resourceAllow === 0;
+  const single = (ps: Policy[]) => (ps.length === 1 ? out(ps[0]!.id) : out(IMPLICIT));
   if (cross) {
-    if (noIdentity && noResource) return out(IMPLICIT);
-    if (noIdentity) return identityPolicies.length === 1 ? out(identityPolicies[0]!.id) : null;
-    if (noResource) return resPolicy ? out(resPolicy.id) : null;
-    return null;
+    if (noIdentity && noResource) return out(IMPLICIT); // both sides would have to change
+    if (noIdentity) return single(identityPolicies);
+    return single(resPolicy ? [resPolicy] : []);
   }
-  if ((s.request.resource.kind ?? 'resource') !== 'resource') return resPolicy ? out(resPolicy.id) : null;
-  return noIdentity && noResource ? out(IMPLICIT) : null;
+  if ((s.request.resource.kind ?? 'resource') !== 'resource') return single(resPolicy ? [resPolicy] : []);
+  if (!noIdentity || !noResource) return null;
+  // inside one account either side alone would be enough, so a single candidate exists only when there is one policy to change
+  return single([...identityPolicies, ...(resPolicy ? [resPolicy] : [])]);
 }
 
 // ───────────────────────── exhibit and fields ─────────────────────────
@@ -763,7 +765,7 @@ function fields(s: PolicyCourtScenario): Field[] {
       ? { id: BOTH_SIDES, label: "Both sides together: the principal's identity-based policy and the resource-based policy" }
       : { id: SEVERAL, label: 'More than one policy allows it independently' },
   );
-  options.push({ id: IMPLICIT, label: 'Nothing grants it: no identity-based or resource-based policy has a matching Allow' });
+  options.push({ id: IMPLICIT, label: 'No single policy: none could allow it alone, or two would have to change' });
   return [
     {
       id: 'decision',
@@ -775,7 +777,7 @@ function fields(s: PolicyCourtScenario): Field[] {
       ],
     },
     { id: 'decider', prompt:
-        'Which policy decided it? An explicit Deny: the policy that holds it. Otherwise a denial belongs to the policy whose missing Allow blocks the request: the one policy that, if it allowed the action, would turn the result into Allow (a boundary, a service control policy level, a session policy, a trust policy, or the identity-based or resource-based side that lacks the Allow). A session policy, boundary or service control policy never counts as a grant. Pick "Nothing grants it" only when no identity-based or resource-based policy has a matching Allow.', multi: false, options },
+        'Which policy decided it? An explicit Deny: the policy that holds it. Otherwise: the single policy that, if its Allow applied (its condition met, the missing action added, the principal named), would by itself turn the result into Allow. A boundary, a service control policy level or a session policy counts when it is the one lacking the Allow, but none of them ever grants. Pick "No single policy" when no one policy could do it alone (for example two sides would both have to change, or several policies are equally able) or none exists.', multi: false, options },
   ];
 }
 

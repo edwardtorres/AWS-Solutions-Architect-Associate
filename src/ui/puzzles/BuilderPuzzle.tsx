@@ -70,8 +70,9 @@ export default function BuilderPuzzle({ module, scenario, shared, backHref, next
         <ul className="mt-1 grid gap-1">
           {items.map(({ p, i }) => (
             <li key={i}>
-              <button type="button" className="chip w-full" disabled={result !== null} aria-label={`Remove ${KIND_LABEL[p.kind]} from ${cellLabel(tier, az)}`} onClick={() => { remove(i); }}>
-                {SHORT[p.kind]} ✕
+              <button type="button" className="chip remove-chip w-full" disabled={result !== null} onClick={() => { remove(i); }}>
+                {SHORT[p.kind]}
+                <span className="visually-hidden"> (tap to remove from {cellLabel(tier, az)})</span>
               </button>
             </li>
           ))}

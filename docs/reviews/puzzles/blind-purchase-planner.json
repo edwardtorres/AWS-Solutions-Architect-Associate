@@ -1,0 +1,182 @@
+[
+ {
+  "id": "puzzle-purchase-planner-001",
+  "answers": {
+   "model": [
+    "on-demand"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-002",
+  "answers": {
+   "model": [
+    "spot"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-003",
+  "answers": {
+   "model": [
+    "on-demand"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-004",
+  "answers": {
+   "model": [
+    "spot"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-005",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-006",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-007",
+  "answers": {
+   "model": [
+    "ec2-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-008",
+  "answers": {
+   "model": [
+    "ec2-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-009",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-010",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-011",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-012",
+  "answers": {
+   "model": [
+    "ri"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-013",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-014",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-015",
+  "answers": {
+   "model": [
+    "spot"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-016",
+  "answers": {
+   "model": [
+    "on-demand"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-017",
+  "answers": {
+   "model": [
+    "ec2-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-purchase-planner-018",
+  "answers": {
+   "model": [
+    "compute-sp"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

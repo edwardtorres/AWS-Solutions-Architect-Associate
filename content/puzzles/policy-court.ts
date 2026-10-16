@@ -512,6 +512,24 @@ const scenarios: S[] = [
       ],
     },
   },
+  // Source: IAM User Guide, "Cross-account policy evaluation logic": both accounts must allow, so with neither side allowing no single policy fixes it.
+  {
+    ...base('policy-court', 'embassy-row', ['1.1-K1', '1.1-S3', '1.1-S5'], 3, 26),
+    title: 'Neither account allows the read',
+    story: 'A developer in the development account reads an object from a bucket in the production account. The developer has only an Amazon EC2 read-only policy. The bucket policy allows a different partner account.',
+    data: {
+      request: {
+        principal: user('ACCT_DEV', 'dev-quinn'),
+        action: 's3:GetObject',
+        resource: { arn: 'arn:aws:s3:::amzn-s3-demo-prod-data/report.csv', account: 'ACCT_PROD' },
+        context: ctx(),
+      },
+      policies: [
+        pol('identity', 'identity', 'Policy on the user dev-quinn', [allow('ec2:Describe*', '*')]),
+        pol('bucket', 'resource', 'Bucket policy on amzn-s3-demo-prod-data', [allow('s3:GetObject', 'arn:aws:s3:::amzn-s3-demo-prod-data/*', { Principal: aws('arn:aws:iam::ACCT_PARTNER:root') })]),
+      ],
+    },
+  },
 ];
 
 export default scenarios;

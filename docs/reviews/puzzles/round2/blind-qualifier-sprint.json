@@ -1,0 +1,268 @@
+[
+ {
+  "id": "puzzle-qualifier-sprint-001",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "d"
+   ]
+  },
+  "ambiguous": true,
+  "note": "cost: Lambda may be cheaper than EC2 even for steady load; story hints SP"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-002",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "d"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "available: Lambda+SQS is also multi-AZ; ASG across 3 AZs intended"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-003",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "cost: spiky traffic favors serverless, but single RDS instance is cheapest in price"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-004",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "a"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "b"
+   ]
+  },
+  "ambiguous": true,
+  "note": "overhead: TTL vs on-demand mode both reduce overhead; story stresses cleanup"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-005",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "e"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-006",
+  "answers": {
+   "overhead": [
+    "c"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "a"
+   ],
+   "available": [
+    "d"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-007",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": true,
+  "note": "secure: rotation vs private VPC endpoint both defensible"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-008",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "a"
+   ],
+   "secure": [
+    "b"
+   ],
+   "available": [
+    "c"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-009",
+  "answers": {
+   "overhead": [
+    "b"
+   ],
+   "cost": [
+    "c"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-010",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "d"
+   ],
+   "secure": [
+    "b"
+   ],
+   "available": [
+    "c"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-011",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "a"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "b"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-012",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "a"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-qualifier-sprint-013",
+  "answers": {
+   "overhead": [
+    "a"
+   ],
+   "cost": [
+    "b"
+   ],
+   "secure": [
+    "d"
+   ],
+   "available": [
+    "c"
+   ]
+  },
+  "ambiguous": true,
+  "note": "overhead: VPN vs DX given 'this week'; cost: DX cheaper for steady TB but cannot run this week"
+ },
+ {
+  "id": "puzzle-qualifier-sprint-014",
+  "answers": {
+   "overhead": [
+    "d"
+   ],
+   "cost": [
+    "a"
+   ],
+   "secure": [
+    "c"
+   ],
+   "available": [
+    "b"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

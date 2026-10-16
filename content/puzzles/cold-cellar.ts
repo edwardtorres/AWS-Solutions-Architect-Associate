@@ -160,15 +160,15 @@ const scenarios: S[] = [
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
     difficulty: 2,
-    title: 'Twice a year, hours allowed',
+    title: 'Twice a year, back in minutes',
     story:
-      'A research lab stores finished experiment data. It is read daily for a month, and afterwards about twice a year. The lab can wait hours for a restore.',
+      'A research lab stores finished experiment data. It is read daily for a month, and afterwards about twice a year. When someone asks for a result, the restore must finish within minutes, not hours. Choose the classes and the day of the move.',
     data: {
       objects: 'Experiment result archives.',
       sizeKB: 102400,
       phases: [
         { from: 0, access: 'frequent', wait: 'ms' },
-        { from: 30, access: 'twice-yearly', wait: 'hours' },
+        { from: 30, access: 'twice-yearly', wait: 'minutes' },
       ],
       dayOptions: [[14, 30, 60, 90]],
       rot: 2,
@@ -237,13 +237,13 @@ const scenarios: S[] = [
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
     difficulty: 2,
-    title: 'Re-creatable, but tiny',
+    title: 'Irreplaceable, but tiny',
     story:
-      'A build system stores small cache files of 100 KB each. They can be rebuilt at any time, and each is read about once a month. These objects are smaller than the 128 KB that the infrequent-access classes bill as a minimum, and the team is tempted to save money with a one-Availability-Zone class. The objects stay in one class for their whole life. Which class fits?',
+      'A note-taking app stores small notes of 100 KB each. Each note is read about once a month, and every note exists nowhere else. The team is tempted by an infrequent-access class, but these objects are smaller than the 128 KB those classes bill as a minimum. The objects stay in one class for their whole life. Which class fits?',
     data: {
-      objects: 'Small build cache files.',
+      objects: 'Small user notes, the only copy of each.',
       sizeKB: 100,
-      phases: [{ from: 0, access: 'monthly', wait: 'ms', recreatable: true }],
+      phases: [{ from: 0, access: 'monthly', wait: 'ms', recreatable: false }],
       dayOptions: [],
       rot: 1,
     },
