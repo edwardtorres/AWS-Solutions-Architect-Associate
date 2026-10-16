@@ -52,6 +52,8 @@ export interface Rule {
   /** Source id in content/sources.ts (AWS pages only). */
   src: string;
   quote: string;
+  /** Post-guide registry ids this rule depends on (content/post-guide.json). A rule that matches a registry feature must declare it here; no scenario's answer may depend on such a rule. */
+  newer?: string[];
 }
 
 /** One thing the player answers. Options are shown in the given order for puzzles; ids are what the evaluator returns. */

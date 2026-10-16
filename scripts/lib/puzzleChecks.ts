@@ -150,11 +150,11 @@ export function checkPuzzles(input: PuzzleCheckInput): string[] {
       }
     }
     for (const r of mod.def.rules) {
-      const t = `${r.text}\n${r.quote}`;
       for (const f of input.postGuide.features) {
-        if (f.patterns.some((pat) => new RegExp(pat, 'i').test(r.text))) p.push(`puzzles ${type} rule ${r.id}: matches the post-guide feature "${f.id}" (label it explicitly or drop it)`);
+        const hit = f.patterns.some((pat) => new RegExp(pat, 'i').test(r.text));
+        if (hit && !(r.newer ?? []).includes(f.id)) p.push(`puzzles ${type} rule ${r.id}: matches the post-guide feature "${f.id}" and must declare newer: ['${f.id}']`);
       }
-      void t;
+      for (const id of r.newer ?? []) if (!input.postGuide.features.some((f) => f.id === id)) p.push(`puzzles ${type} rule ${r.id}: unknown post-guide feature ${id}`);
     }
   }
   return p;
