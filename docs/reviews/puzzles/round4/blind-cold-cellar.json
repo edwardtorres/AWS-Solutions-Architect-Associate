@@ -1,0 +1,298 @@
+[
+ {
+  "id": "puzzle-cold-cellar-001",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-002",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-003",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "onezone-ia"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-004",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-005",
+  "answers": {
+   "class-1": [
+    "intelligent-tiering"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-006",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "class-3": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d120"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-007",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
+ },
+ {
+  "id": "puzzle-cold-cellar-008",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
+ },
+ {
+  "id": "puzzle-cold-cellar-009",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
+ },
+ {
+  "id": "puzzle-cold-cellar-010",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "glacier-ir"
+   ],
+   "day-1": [
+    "d30"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-011",
+  "answers": {
+   "class-1": [
+    "standard"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-012",
+  "answers": {
+   "class-1": [
+    "standard"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-013",
+  "answers": {
+   "class-1": [
+    "intelligent-tiering"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d180"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-014",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "onezone-ia"
+   ],
+   "class-3": [
+    "glacier-fr"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": "Minutes-restore read as Glacier Flexible Retrieval (expedited)."
+ },
+ {
+  "id": "puzzle-cold-cellar-015",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-ir"
+   ],
+   "class-4": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d75"
+   ],
+   "day-3": [
+    "d165"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-016",
+  "answers": {
+   "class-1": [
+    "standard-ia"
+   ],
+   "class-2": [
+    "glacier-da"
+   ],
+   "day-1": [
+    "d90"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ },
+ {
+  "id": "puzzle-cold-cellar-017",
+  "answers": {
+   "class-1": [
+    "standard"
+   ],
+   "class-2": [
+    "standard-ia"
+   ],
+   "class-3": [
+    "glacier-ir"
+   ],
+   "day-1": [
+    "d30"
+   ],
+   "day-2": [
+    "d60"
+   ]
+  },
+  "ambiguous": false,
+  "note": ""
+ }
+]

@@ -11,7 +11,7 @@ Reviewers did not write the content. Blind reviewers saw only a keyless export (
 | Cold Cellar | 5 of 9 | 15 of 17 | 14 of 17 (answers matched, 3 wording flags) | 17 of 17 |
 | Purchase Planner | 7 of 9 | 18 of 18 | n/a | 18 of 18 (round 2 kept) |
 | Architecture Builder | 0 of 5 (placements passed; all flagged "which components are needed?") | 9 of 9 | n/a | 9 of 9 (round 2 kept) |
-| Qualifier Sprint | 1 of 7 | 8 of 14 | 11 of 14 (answers matched, 3 flags) | 13 of 14; the last flag (009) was fixed by wording and not re-run blind |
+| Qualifier Sprint | 1 of 7 | 8 of 14 | 11 of 14 (answers matched, 3 flags) | round 4: 13 of 14; round 5 (after rewording 009): all 14 answers match the keys, 11 of 14 unflagged; flags on 003 (overhead), 005 (cost), 007 (cost) |
 
 Round 1 sampled at least 30% of each type and all of Policy Court, Packet Tracer and Disaster Bunker. Rounds 2 to 4 re-solved every scenario of each type they cover. Types that were already fully clean in round 2 were not re-run after that (their later edits were limited to wording).
 
@@ -55,3 +55,5 @@ All 77 rule quotes in the first pass, and every changed quote since, were machin
 
 **Qualifier Sprint**
 - Sets 001, 003, 004, 007, 009, 011, 012, 013 were reworked (stated deciding constraints, better-separating quotes); three sets (007, 009, 013) were replaced twice. Residual judgement calls: 013's overhead winner (S3 static hosting vs fewer CloudFront parts) rests on a "fewer parts" reading; set 013 has only three distinct answers; 007's overhead quote does not separate versioning-only from the options that add to it in words. These are recorded in the audit.
+
+**Qualifier Sprint, final state.** In round 5 the blind reviewer's answer matched the key in all 14 sets, but flagged three qualifier calls as still arguable: 003 overhead (Aurora Serverless v2 vs a plain RDS instance, both managed), 005 cost (snapshot archive tier vs a plain backup plan) and 007 cost (a lifecycle rule on noncurrent versions vs keeping every version). Each round of rewording moved the flags to different sets, which indicates the "best for this qualifier" judgement is inherently softer than the rule-computed puzzles. I stopped iterating there and list them as open judgement calls in the audit rather than keep rewriting; say if you want Sprint sets replaced or the type dropped.
