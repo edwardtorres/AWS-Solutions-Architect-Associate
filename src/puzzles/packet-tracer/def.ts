@@ -903,7 +903,11 @@ function outbound(c: Ctx, sv: Vpc, sn: Node, dst: Endpoint, dn: Node | undefined
   let path: 'igw' | 'nat' | 'vpce' | null = null;
   let natSubnet: Subnet | null = null;
 
-  if (kind === 'igw') {
+  if (kind === 'local') {
+    if (!dn) refuse('a local route for a destination outside the VPC is not settled');
+    c.ok('route-local', `${via}.`);
+    reachedNode = true;
+  } else if (kind === 'igw') {
     if (dn) {
       c.bad('peer-routes', `rt:${rt.id}`, `${via}, but ${dn.name} has a private VPC address and ${rt.id} has no route to its VPC.`);
       return;
