@@ -820,7 +820,7 @@ const ROWS: readonly (readonly [string, string, string, 1 | 2 | 3])[] = [
   ["puzzle-qualifier-sprint-010","town-charter","",2],
   ["puzzle-qualifier-sprint-011","town-charter","",3],
   ["puzzle-qualifier-sprint-012","town-charter","",2],
-  ["puzzle-qualifier-sprint-013","town-charter","",3],
+  ["puzzle-qualifier-sprint-013","town-charter","",2],
   ["puzzle-qualifier-sprint-014","town-charter","",2],
   ["read-replica-annex-001","read-replica-annex","3.3-K7",1],
   ["read-replica-annex-002","read-replica-annex","3.3-S1",1],

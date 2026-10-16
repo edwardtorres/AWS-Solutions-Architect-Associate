@@ -702,6 +702,9 @@ const sources: Source[] = [
   aws('efs-encryption', `${D}/efs/latest/ug/encryption.html`, 'Data encryption in Amazon EFS'),
   aws('vpc-subnet-route-tables', `${D}/vpc/latest/userguide/subnet-route-tables.html`, 'Subnet route tables'),
   aws('vpc-example-private-nat', `${D}/vpc/latest/userguide/vpc-example-private-subnets-nat.html`, 'Example: VPC with servers in private subnets and NAT'),
+  aws('ec2-dedicated-instances', `${D}/AWSEC2/latest/UserGuide/dedicated-instance.html`, 'Amazon EC2 Dedicated Instances'),
+  aws('s3-mfa-delete', `${D}/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html`, 'Configuring MFA delete'),
+  aws('s3-website', `${D}/AmazonS3/latest/userguide/WebsiteHosting.html`, 'Hosting a static website using Amazon S3'),
 ];
 
 export default sources;

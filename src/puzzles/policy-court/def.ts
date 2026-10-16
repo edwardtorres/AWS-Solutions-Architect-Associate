@@ -652,6 +652,8 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
     }
   }
   if (!allowed) {
+    if (session && sessionOk && !ignore.has(session.id) && allowing.has(session.id) && identityAllow.length === 0) notes.push({ rule: 'session-limits', note: `The session policy "${session.label}" allows the action but only limits; it cannot grant it.` });
+    if (boundary && boundaryOk && !ignore.has(boundary.id) && allowing.has(boundary.id) && identityAllow.length === 0) notes.push({ rule: 'boundary-limits', note: `The boundary "${boundary.label}" allows the action but only limits; it cannot grant it.` });
     if (scps.length > 0 && failingScps.length === 0) notes.push({ rule: 'scp-no-grant', note: 'The service control policies allow the action but never grant it.' });
     notes.push({ rule: 'implicit-deny', note: 'No Allow applies to this request, so it is an implicit deny.' });
     return { ...base, decision: 'deny', limiters, unsettled };
@@ -693,7 +695,11 @@ function outcome(s: PolicyCourtScenario, mode: Mode): Outcome | null {
   if (withoutLimiters.decision === 'allow') return null; // several limiters are needed at once
   // No limiter is to blame: the decider is the single identity-based or resource-based policy whose Allow, if it applied
   // (condition met, action added, principal named), would turn the result into Allow. Otherwise "no single policy".
-  const out = (decider: string): Outcome => ({ decision: 'deny', decider, notes: base.notes });
+  const out = (decider: string): Outcome => {
+    const lacking = s.policies.find((p) => p.id === decider);
+    const notes = lacking ? [...base.notes, { rule: 'implicit-deny', note: `"${lacking.label}" has no applicable Allow for this request (action missing, condition not met or principal not named); it is the policy that decides.` }] : base.notes;
+    return { decision: 'deny', decider, notes };
+  };
   const resPolicy = s.policies.find((p) => p.kind === 'resource');
   const identityPolicies = s.policies.filter((p) => p.kind === 'identity');
   if (limiters.length > 0) return out(IMPLICIT); // a limiter lacks its Allow and a grant is missing too: two changes needed

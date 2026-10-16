@@ -370,6 +370,12 @@ describe('rules', () => {
     expect(res(r, [idEc2, bucketOther])).toEqual({ decision: 'deny', decider: IMPLICIT }); // either side could fix it
     expect(res(r, [pol('identity', 'identity', [allow('ec2:*', '*')]), pol('identity2', 'identity', [allow('sqs:*', '*')])])).toEqual({ decision: 'deny', decider: IMPLICIT });
   });
+  it('trace for a missing identity Allow names the limiter that cannot grant and the policy that lacks the Allow', () => {
+    const ok = run(req(role('A1', 'r'), 'dynamodb:GetItem', 'arn:aws:dynamodb:us-east-1:A1:table/T', 'A1'), [pol('identity', 'identity', [allow('s3:*', '*')]), pol('session', 'session', [allow('dynamodb:*', '*')])])!;
+    expect(ok.trace.map((t) => t.rule)).toEqual(expect.arrayContaining(['session-limits', 'implicit-deny']));
+    expect(ok.trace.some((t) => /cannot grant/.test(t.note))).toBe(true);
+    expect(ok.trace.some((t) => /has no applicable Allow/.test(t.note))).toBe(true);
+  });
   it('every listed rule is exercised by a test above', () => {
     const missing = rules.map((r) => r.id).filter((id) => !covered.has(id));
     expect(missing).toEqual([]);
