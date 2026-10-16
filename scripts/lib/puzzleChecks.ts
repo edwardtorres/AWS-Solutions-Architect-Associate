@@ -81,7 +81,7 @@ export function checkPuzzles(input: PuzzleCheckInput): string[] {
 
     for (const s of mod.scenarios) {
       const w = `puzzle ${s.id}`;
-      if (!new RegExp(`^${type}-\\d{3}$`).test(s.id)) p.push(`${w}: id must be ${type}-NNN`);
+      if (!new RegExp(`^puzzle-${type}-\\d{3}$`).test(s.id)) p.push(`${w}: id must be puzzle-${type}-NNN`);
       if (ids.has(s.id)) p.push(`${w}: duplicate id`);
       ids.add(s.id);
       if (s.type !== type) p.push(`${w}: type is ${s.type}, expected ${type}`);

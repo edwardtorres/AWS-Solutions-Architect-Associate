@@ -3,7 +3,7 @@ import type { PurchaseScenario } from '../../src/puzzles/purchase-planner/def';
 
 const scenarios: Scenario<PurchaseScenario>[] = [
   {
-    id: 'purchase-planner-001',
+    id: 'puzzle-purchase-planner-001',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -13,7 +13,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'short', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-002',
+    id: 'puzzle-purchase-planner-002',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -23,7 +23,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'unknown', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-003',
+    id: 'puzzle-purchase-planner-003',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -33,7 +33,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-004',
+    id: 'puzzle-purchase-planner-004',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -43,7 +43,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-005',
+    id: 'puzzle-purchase-planner-005',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -53,7 +53,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['fargate', 'lambda'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-006',
+    id: 'puzzle-purchase-planner-006',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -63,7 +63,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['region', 'family'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-007',
+    id: 'puzzle-purchase-planner-007',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -73,7 +73,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size'], capacity: 'none', exchanges: 'accept', goal: 'largest-saving', extras: [] },
   },
   {
-    id: 'purchase-planner-008',
+    id: 'puzzle-purchase-planner-008',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -83,7 +83,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['os', 'tenancy'], capacity: 'none', exchanges: 'avoid', goal: 'largest-saving', extras: [] },
   },
   {
-    id: 'purchase-planner-009',
+    id: 'puzzle-purchase-planner-009',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -93,7 +93,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'az', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-010',
+    id: 'puzzle-purchase-planner-010',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -103,7 +103,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'either', changes: [], capacity: 'az', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-011',
+    id: 'puzzle-purchase-planner-011',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -113,7 +113,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: ['family'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-012',
+    id: 'puzzle-purchase-planner-012',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -123,7 +123,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'instance-config', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-013',
+    id: 'puzzle-purchase-planner-013',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -133,7 +133,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'either', changes: ['family'], capacity: 'none', exchanges: 'avoid', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-014',
+    id: 'puzzle-purchase-planner-014',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -143,7 +143,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['region'], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-015',
+    id: 'puzzle-purchase-planner-015',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -153,7 +153,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'short', interruption: 'tolerates', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-016',
+    id: 'puzzle-purchase-planner-016',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -163,7 +163,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'unknown', interruption: 'cannot', commit: 'none', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] },
   },
   {
-    id: 'purchase-planner-017',
+    id: 'puzzle-purchase-planner-017',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],
@@ -173,7 +173,7 @@ const scenarios: Scenario<PurchaseScenario>[] = [
     data: { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: ['size', 'tenancy'], capacity: 'none', exchanges: 'accept', goal: 'largest-saving', extras: [] },
   },
   {
-    id: 'purchase-planner-018',
+    id: 'puzzle-purchase-planner-018',
     type: 'purchase-planner',
     building: 'counting-house',
     bullets: ['4.2-K4'],

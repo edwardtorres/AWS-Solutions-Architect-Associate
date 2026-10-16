@@ -3,9 +3,9 @@ import { PUZZLE_TYPES, type PuzzleModule, type PuzzleType, type Scenario } from 
 // Lazy: each puzzle type is its own chunk, loaded only when a Workbench or puzzle page opens.
 const loaders = import.meta.glob<PuzzleModule>('./*/index.ts');
 
-/** `policy-court-004` becomes `policy-court`; anything that is not a puzzle id (a question id) gives null. */
+/** `puzzle-policy-court-004` becomes `policy-court`; anything that is not a puzzle id (a question id) gives null. Puzzle ids carry the `puzzle-` prefix because some puzzle types share a name with a building (`cold-cellar`, `disaster-bunker`), whose question ids look the same. */
 export function puzzleTypeOf(id: string): PuzzleType | null {
-  const m = /^(.*)-\d{3}$/.exec(id);
+  const m = /^puzzle-(.*)-\d{3}$/.exec(id);
   return PUZZLE_TYPES.find((t) => t === m?.[1]) ?? null;
 }
 

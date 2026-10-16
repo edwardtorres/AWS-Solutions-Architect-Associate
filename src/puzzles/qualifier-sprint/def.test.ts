@@ -6,7 +6,7 @@ describe('qualifier-sprint scenarios', () => {
   it('has enough sets with sequential ids', () => {
     expect(scenarios.length).toBeGreaterThanOrEqual(13);
     scenarios.forEach((s, i) => {
-      expect(s.id).toBe(`qualifier-sprint-${String(i + 1).padStart(3, '0')}`);
+      expect(s.id).toBe(`puzzle-qualifier-sprint-${String(i + 1).padStart(3, '0')}`);
       expect(s.type).toBe('qualifier-sprint');
       expect(s.building).toBe('town-charter');
       expect(s.bullets).toEqual([]);

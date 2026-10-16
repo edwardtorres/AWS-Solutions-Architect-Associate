@@ -14,7 +14,7 @@ const pt = 'packet-tracer' as const;
 const scenarios: Scenario<PacketScenario>[] = [
   // ------------------------------------------------------------------ Gatehouse (domain 1)
   {
-    id: 'packet-tracer-001',
+    id: 'puzzle-packet-tracer-001',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-S1', '1.2-S2'],
@@ -40,7 +40,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-002',
+    id: 'puzzle-packet-tracer-002',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-K3', '1.2-S1'],
@@ -69,7 +69,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-003',
+    id: 'puzzle-packet-tracer-003',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-S1', '1.2-S2'],
@@ -107,7 +107,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-004',
+    id: 'puzzle-packet-tracer-004',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-K3', '1.2-S1'],
@@ -136,7 +136,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-005',
+    id: 'puzzle-packet-tracer-005',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-K3', '1.2-S1'],
@@ -165,7 +165,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-006',
+    id: 'puzzle-packet-tracer-006',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-K3', '1.2-S1'],
@@ -197,7 +197,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-007',
+    id: 'puzzle-packet-tracer-007',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-S2'],
@@ -231,7 +231,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-008',
+    id: 'puzzle-packet-tracer-008',
     type: pt,
     building: 'gatehouse',
     bullets: ['1.2-K3'],
@@ -259,7 +259,7 @@ const scenarios: Scenario<PacketScenario>[] = [
 
   // ------------------------------------------------------------------ Customs House (domain 1)
   {
-    id: 'packet-tracer-009',
+    id: 'puzzle-packet-tracer-009',
     type: pt,
     building: 'customs-house',
     bullets: ['1.2-K2'],
@@ -289,7 +289,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-010',
+    id: 'puzzle-packet-tracer-010',
     type: pt,
     building: 'customs-house',
     bullets: ['1.2-K2'],
@@ -326,7 +326,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-011',
+    id: 'puzzle-packet-tracer-011',
     type: pt,
     building: 'customs-house',
     bullets: ['1.2-K2'],
@@ -364,7 +364,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-012',
+    id: 'puzzle-packet-tracer-012',
     type: pt,
     building: 'customs-house',
     bullets: ['1.2-K2'],
@@ -412,7 +412,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-013',
+    id: 'puzzle-packet-tracer-013',
     type: pt,
     building: 'customs-house',
     bullets: ['1.2-K2'],
@@ -450,7 +450,7 @@ const scenarios: Scenario<PacketScenario>[] = [
 
   // ------------------------------------------------------------------ Grid Planning Office (domain 3)
   {
-    id: 'packet-tracer-014',
+    id: 'puzzle-packet-tracer-014',
     type: pt,
     building: 'grid-planning-office',
     bullets: ['3.4-K2', '3.4-S1'],
@@ -484,7 +484,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-015',
+    id: 'puzzle-packet-tracer-015',
     type: pt,
     building: 'grid-planning-office',
     bullets: ['3.4-K2', '3.4-S1'],
@@ -510,7 +510,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-016',
+    id: 'puzzle-packet-tracer-016',
     type: pt,
     building: 'grid-planning-office',
     bullets: ['3.4-K2'],
@@ -550,7 +550,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-017',
+    id: 'puzzle-packet-tracer-017',
     type: pt,
     building: 'grid-planning-office',
     bullets: ['3.4-K2', '3.4-S1'],
@@ -588,7 +588,7 @@ const scenarios: Scenario<PacketScenario>[] = [
 
   // ------------------------------------------------------------------ Route Tariff (domain 4)
   {
-    id: 'packet-tracer-018',
+    id: 'puzzle-packet-tracer-018',
     type: pt,
     building: 'route-tariff',
     bullets: ['4.4-K6'],
@@ -626,7 +626,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-019',
+    id: 'puzzle-packet-tracer-019',
     type: pt,
     building: 'route-tariff',
     bullets: ['4.4-K6'],
@@ -678,7 +678,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-020',
+    id: 'puzzle-packet-tracer-020',
     type: pt,
     building: 'route-tariff',
     bullets: ['4.4-K6', '4.4-S3'],
@@ -724,7 +724,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-021',
+    id: 'puzzle-packet-tracer-021',
     type: pt,
     building: 'route-tariff',
     bullets: ['4.4-S3'],
@@ -766,7 +766,7 @@ const scenarios: Scenario<PacketScenario>[] = [
     },
   },
   {
-    id: 'packet-tracer-022',
+    id: 'puzzle-packet-tracer-022',
     type: pt,
     building: 'route-tariff',
     bullets: ['4.4-K6'],

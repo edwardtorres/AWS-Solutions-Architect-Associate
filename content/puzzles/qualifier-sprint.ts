@@ -6,7 +6,7 @@ const T = 'qualifier-sprint' as const;
 const BUILDING = 'town-charter';
 
 const sc = (n: number, difficulty: 1 | 2 | 3, title: string, story: string, data: SprintData): S => ({
-  id: `qualifier-sprint-${String(n).padStart(3, '0')}`,
+  id: `puzzle-qualifier-sprint-${String(n).padStart(3, '0')}`,
   type: T,
   building: BUILDING,
   bullets: [],

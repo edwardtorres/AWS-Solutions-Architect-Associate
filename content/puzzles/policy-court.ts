@@ -7,7 +7,7 @@ const allow = (Action: string | string[], Resource: string | string[], extra: Pa
 const deny = (Action: string | string[], Resource: string | string[], extra: Partial<Statement> = {}): Statement => ({ Effect: 'Deny', Action, Resource, ...extra });
 const pol = (id: string, kind: Policy['kind'], label: string, statements: Statement[], account?: string): Policy => ({ id, kind, label, statements, ...(account ? { account } : {}) });
 const aws = (...p: string[]): { AWS: string | string[] } => ({ AWS: p.length === 1 ? p[0]! : p });
-const base = (type: S['type'], building: string, bullets: string[], difficulty: 1 | 2 | 3, n: number) => ({ id: `${type}-${String(n).padStart(3, '0')}`, type, building, bullets, difficulty });
+const base = (type: S['type'], building: string, bullets: string[], difficulty: 1 | 2 | 3, n: number) => ({ id: `puzzle-${type}-${String(n).padStart(3, '0')}`, type, building, bullets, difficulty });
 
 const user = (account: string, name: string, extra: Partial<Req['principal']> = {}): Req['principal'] => ({ type: 'user', account, name, ...extra });
 const role = (account: string, name: string, session: string, extra: Partial<Req['principal']> = {}): Req['principal'] => ({ type: 'role', account, name, session, ...extra });

@@ -23,7 +23,7 @@ describe('Workbench and puzzle pages', () => {
 
   it('locks the Workbench and the puzzle while the building is planned', async () => {
     const store = createSaveStore({ knownIds: known, storage: null });
-    show(store, <PuzzlePage scenarioId="purchase-planner-001" />);
+    show(store, <PuzzlePage scenarioId="puzzle-purchase-planner-001" />);
     expect(await screen.findByTestId('workbench-locked')).toBeInTheDocument();
     expect(store.getSnapshot().save.game.xp).toBe(0);
   });
@@ -37,12 +37,12 @@ describe('Workbench and puzzle pages', () => {
   it('solving a puzzle with the computed answer raises XP and leaves every building state alone', async () => {
     const store = storeAround('counting-house');
     const before = JSON.stringify(store.getSnapshot().save.buildings);
-    const found = await loadScenario('purchase-planner-001');
+    const found = await loadScenario('puzzle-purchase-planner-001');
     if (!found) throw new Error('scenario missing');
     const ev = found.module.def.evaluate(found.scenario.data);
     if (!ev) throw new Error('refused');
     const fields = found.module.def.fields(found.scenario.data);
-    show(store, <PuzzlePage scenarioId="purchase-planner-001" />);
+    show(store, <PuzzlePage scenarioId="puzzle-purchase-planner-001" />);
     await screen.findByText(found.scenario.title);
     for (const f of fields) {
       for (const id of ev.answer[f.id] ?? []) {
@@ -59,11 +59,11 @@ describe('Workbench and puzzle pages', () => {
 
   it('a wrong answer earns nothing but is still logged', async () => {
     const store = storeAround('counting-house');
-    const found = await loadScenario('purchase-planner-001');
+    const found = await loadScenario('puzzle-purchase-planner-001');
     if (!found) throw new Error('scenario missing');
     const ev = found.module.def.evaluate(found.scenario.data);
     const fields = found.module.def.fields(found.scenario.data);
-    show(store, <PuzzlePage scenarioId="purchase-planner-001" />);
+    show(store, <PuzzlePage scenarioId="puzzle-purchase-planner-001" />);
     await screen.findByText(found.scenario.title);
     const f = fields[0] as (typeof fields)[number];
     const wrong = f.options.find((o) => !(ev?.answer[f.id] ?? []).includes(o.id)) as (typeof f.options)[number];
@@ -76,7 +76,7 @@ describe('Workbench and puzzle pages', () => {
 
   it('Submit stays disabled until every field has an answer', async () => {
     const store = storeAround('counting-house');
-    show(store, <PuzzlePage scenarioId="purchase-planner-001" />);
+    show(store, <PuzzlePage scenarioId="puzzle-purchase-planner-001" />);
     const btn = await screen.findByRole('button', { name: 'Check my answer' });
     expect(btn).toBeDisabled();
   });

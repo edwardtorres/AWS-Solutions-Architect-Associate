@@ -93,7 +93,7 @@ export interface PuzzleDef<S> {
 }
 
 export interface ScenarioHeader {
-  /** `<type>-NNN`, for example `policy-court-001`. */
+  /** `puzzle-<type>-NNN`, for example `puzzle-policy-court-001` (the prefix keeps puzzle ids apart from question ids). */
   id: string;
   type: PuzzleType;
   /** Building whose Workbench lists it. */

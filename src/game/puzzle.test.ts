@@ -22,7 +22,7 @@ describe('puzzle plays', () => {
     const s = freshSave();
     expect(stateOf(s, 'identity-keep', DEFAULT_ENV)).toBe('planned');
     expect(workbenchAvailability(s, 'identity-keep', ctx())).toMatchObject({ ok: false });
-    expect(playPuzzle(s, { id: 'policy-court-001', building: 'identity-keep', difficulty: 2, correct: true }, ctx())).toBeNull();
+    expect(playPuzzle(s, { id: 'puzzle-policy-court-001', building: 'identity-keep', difficulty: 2, correct: true }, ctx())).toBeNull();
   });
 
   it('open once the building is surveyed, under construction or commissioned', () => {
@@ -38,11 +38,11 @@ describe('puzzle plays', () => {
   it('earn XP by difficulty, a quarter on repeats, and never change any building state', () => {
     const s = around('gatehouse');
     const before = JSON.stringify(s.buildings);
-    const r1 = playPuzzle(s, { id: 'packet-tracer-001', building: 'gatehouse', difficulty: 3, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
+    const r1 = playPuzzle(s, { id: 'puzzle-packet-tracer-001', building: 'gatehouse', difficulty: 3, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
     expect(r1.xp).toBe(40);
-    const r2 = playPuzzle(r1.save, { id: 'packet-tracer-001', building: 'gatehouse', difficulty: 3, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
+    const r2 = playPuzzle(r1.save, { id: 'puzzle-packet-tracer-001', building: 'gatehouse', difficulty: 3, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
     expect(r2.xp).toBe(10);
-    const r3 = playPuzzle(r2.save, { id: 'packet-tracer-002', building: 'gatehouse', difficulty: 2, correct: false }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
+    const r3 = playPuzzle(r2.save, { id: 'puzzle-packet-tracer-002', building: 'gatehouse', difficulty: 2, correct: false }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
     expect(r3.xp).toBe(0);
     expect(r3.save.game.xp).toBe(50);
     expect(JSON.stringify(r3.save.buildings)).toBe(before);
@@ -51,10 +51,10 @@ describe('puzzle plays', () => {
 
   it('are logged with the puzzle attempt type and update the per-item history', () => {
     const s = around('gatehouse');
-    const r = playPuzzle(s, { id: 'packet-tracer-001', building: 'gatehouse', difficulty: 2, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
-    expect(r.save.game.log.at(-1)).toEqual(['packet-tracer-001', 1, '2026-06-01T12:00:00.000Z', 'puzzle']);
-    expect(r.save.game.history['packet-tracer-001']).toMatchObject({ n: 1, ok: 1, streak: 1, lastKind: 'puzzle' });
-    expect(r.save.game.recent['1']).toEqual([['packet-tracer-001', 1, 'puzzle']]);
+    const r = playPuzzle(s, { id: 'puzzle-packet-tracer-001', building: 'gatehouse', difficulty: 2, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
+    expect(r.save.game.log.at(-1)).toEqual(['puzzle-packet-tracer-001', 1, '2026-06-01T12:00:00.000Z', 'puzzle']);
+    expect(r.save.game.history['puzzle-packet-tracer-001']).toMatchObject({ n: 1, ok: 1, streak: 1, lastKind: 'puzzle' });
+    expect(r.save.game.recent['1']).toEqual([['puzzle-packet-tracer-001', 1, 'puzzle']]);
   });
 
   it('count towards the daily streak at ten plays and can earn a streak badge', () => {
@@ -70,7 +70,7 @@ describe('puzzle plays', () => {
 
   it('on a Foundation earn XP but are not part of any domain, so readiness ignores them', () => {
     const s = around('town-charter');
-    const r = playPuzzle(s, { id: 'qualifier-sprint-001', building: 'town-charter', difficulty: 2, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
+    const r = playPuzzle(s, { id: 'puzzle-qualifier-sprint-001', building: 'town-charter', difficulty: 2, correct: true }, ctx()) as NonNullable<ReturnType<typeof playPuzzle>>;
     expect(r.xp).toBe(20);
     expect(r.save.game.recent).toEqual({});
   });

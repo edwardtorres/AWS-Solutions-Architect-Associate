@@ -6,7 +6,7 @@ const T = 'cold-cellar' as const;
 
 const scenarios: S[] = [
   {
-    id: 'cold-cellar-001',
+    id: 'puzzle-cold-cellar-001',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S5', '4.1-S9'],
@@ -30,7 +30,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-002',
+    id: 'puzzle-cold-cellar-002',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -50,7 +50,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-003',
+    id: 'puzzle-cold-cellar-003',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -70,7 +70,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-004',
+    id: 'puzzle-cold-cellar-004',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -90,7 +90,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-005',
+    id: 'puzzle-cold-cellar-005',
     type: T,
     building: 'storage-market',
     bullets: ['4.1-K9'],
@@ -107,7 +107,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-006',
+    id: 'puzzle-cold-cellar-006',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S5', '4.1-S9'],
@@ -131,7 +131,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-007',
+    id: 'puzzle-cold-cellar-007',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S9', '4.1-S5'],
@@ -155,7 +155,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-008',
+    id: 'puzzle-cold-cellar-008',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -175,7 +175,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-009',
+    id: 'puzzle-cold-cellar-009',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-S9'],
@@ -195,7 +195,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-010',
+    id: 'puzzle-cold-cellar-010',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -215,7 +215,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-011',
+    id: 'puzzle-cold-cellar-011',
     type: T,
     building: 'storage-market',
     bullets: ['4.1-K9'],
@@ -232,7 +232,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-012',
+    id: 'puzzle-cold-cellar-012',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-S8', '4.1-K10'],
@@ -249,7 +249,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-013',
+    id: 'puzzle-cold-cellar-013',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-K10', '4.1-S9'],
@@ -269,7 +269,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-014',
+    id: 'puzzle-cold-cellar-014',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S5', '4.1-S9'],
@@ -293,7 +293,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-015',
+    id: 'puzzle-cold-cellar-015',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-K10', '4.1-S5', '4.1-S9'],
@@ -319,7 +319,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-016',
+    id: 'puzzle-cold-cellar-016',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S9'],
@@ -339,7 +339,7 @@ const scenarios: S[] = [
     },
   },
   {
-    id: 'cold-cellar-017',
+    id: 'puzzle-cold-cellar-017',
     type: T,
     building: 'cold-cellar',
     bullets: ['4.1-K7', '4.1-S5', '4.1-S9'],

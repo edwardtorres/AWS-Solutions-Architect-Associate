@@ -2,7 +2,7 @@ import type { BuilderData } from '../../src/puzzles/architecture-builder/def.ts'
 import type { Scenario } from '../../src/puzzles/types.ts';
 
 type S = Scenario<BuilderData>;
-const base = (id: string): Pick<S, 'id' | 'type'> => ({ id: `architecture-builder-${id}`, type: 'architecture-builder' });
+const base = (id: string): Pick<S, 'id' | 'type'> => ({ id: `puzzle-architecture-builder-${id}`, type: 'architecture-builder' });
 
 const NEED = {
   lb: 'The load balancer must keep accepting internet traffic if one Availability Zone fails: put its nodes in public subnets in at least two zones.',

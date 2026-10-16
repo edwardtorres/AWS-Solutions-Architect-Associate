@@ -13,7 +13,7 @@ const sc = (
   workload: string,
   o: Opts,
 ): Scenario<BunkerData> => ({
-  id: `disaster-bunker-${String(n).padStart(3, '0')}`,
+  id: `puzzle-disaster-bunker-${String(n).padStart(3, '0')}`,
   type: 'disaster-bunker',
   building,
   bullets,
