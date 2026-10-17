@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lab 04 optional - one public NAT gateway with an Elastic IP address and a default route for one private route table. BILLS WHILE IT EXISTS - delete this stack when done.
+
+Parameters:
+  PublicSubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: The PublicSubnetAId output of the lab 04 VPC stack.
+  PrivateRouteTableId:
+    Type: String
+    Description: The PrivateRouteTableAId output of the lab 04 VPC stack.
+
+Resources:
+  NatEip:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      Tags:
+        - Key: Name
+          Value: lab-04-nat-eip
+
+  NatGateway:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      SubnetId: !Ref PublicSubnetId
+      AllocationId: !GetAtt NatEip.AllocationId
+      ConnectivityType: public
+      Tags:
+        - Key: Name
+          Value: lab-04-nat
+
+  PrivateDefaultRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      RouteTableId: !Ref PrivateRouteTableId
+      DestinationCidrBlock: 0.0.0.0/0
+      NatGatewayId: !Ref NatGateway

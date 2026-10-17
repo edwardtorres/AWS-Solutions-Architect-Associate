@@ -1,0 +1,183 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Lab 07 - HTTP API, producer Lambda, SQS work queue with a dead-letter queue, consumer Lambda, SNS fan-out to two queues.
+
+Resources:
+  DeadLetterQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      MessageRetentionPeriod: 345600
+
+  WorkQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      VisibilityTimeout: 30
+      RedrivePolicy:
+        deadLetterTargetArn: !GetAtt DeadLetterQueue.Arn
+        maxReceiveCount: 3
+
+  EventsTopic:
+    Type: AWS::SNS::Topic
+
+  AuditQueue:
+    Type: AWS::SQS::Queue
+
+  ReportQueue:
+    Type: AWS::SQS::Queue
+
+  FanoutQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref AuditQueue
+        - !Ref ReportQueue
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: sns.amazonaws.com
+            Action: sqs:SendMessage
+            Resource:
+              - !GetAtt AuditQueue.Arn
+              - !GetAtt ReportQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Ref EventsTopic
+
+  AuditSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref EventsTopic
+      Protocol: sqs
+      Endpoint: !GetAtt AuditQueue.Arn
+
+  ReportSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref EventsTopic
+      Protocol: sqs
+      Endpoint: !GetAtt ReportQueue.Arn
+
+  ProducerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: send-to-work-queue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: sqs:SendMessage
+                Resource: !GetAtt WorkQueue.Arn
+
+  ConsumerRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaSQSQueueExecutionRole
+      Policies:
+        - PolicyName: publish-to-topic
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action: sns:Publish
+                Resource: !Ref EventsTopic
+
+  ProducerFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.13
+      Handler: index.handler
+      Timeout: 5
+      Role: !GetAtt ProducerRole.Arn
+      Environment:
+        Variables:
+          QUEUE_URL: !Ref WorkQueue
+      Code:
+        ZipFile: |
+          import json
+          import os
+          import boto3
+
+          sqs = boto3.client("sqs")
+
+          def handler(event, context):
+              body = event.get("body") or "{}"
+              sqs.send_message(QueueUrl=os.environ["QUEUE_URL"], MessageBody=body)
+              return {"statusCode": 202, "body": json.dumps({"queued": True})}
+
+  ConsumerFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.13
+      Handler: index.handler
+      Timeout: 5
+      Role: !GetAtt ConsumerRole.Arn
+      Environment:
+        Variables:
+          TOPIC_ARN: !Ref EventsTopic
+      Code:
+        ZipFile: |
+          import os
+          import boto3
+
+          sns = boto3.client("sns")
+
+          def handler(event, context):
+              for record in event["Records"]:
+                  body = record["body"]
+                  if "poison" in body:
+                      raise Exception("this message always fails")
+                  sns.publish(TopicArn=os.environ["TOPIC_ARN"], Message=body)
+              return {"processed": len(event["Records"])}
+
+  ConsumerMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      FunctionName: !Ref ConsumerFunction
+      EventSourceArn: !GetAtt WorkQueue.Arn
+      BatchSize: 1
+
+  Api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Sub ${AWS::StackName}-api
+      ProtocolType: HTTP
+      Target: !GetAtt ProducerFunction.Arn
+
+  ApiInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref ProducerFunction
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub arn:${AWS::Partition}:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*/*
+
+Outputs:
+  ApiUrl:
+    Value: !GetAtt Api.ApiEndpoint
+  WorkQueueUrl:
+    Value: !Ref WorkQueue
+  DeadLetterQueueUrl:
+    Value: !Ref DeadLetterQueue
+  AuditQueueUrl:
+    Value: !Ref AuditQueue
+  ReportQueueUrl:
+    Value: !Ref ReportQueue

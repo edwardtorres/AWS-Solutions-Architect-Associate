@@ -1,0 +1,110 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Lab 10 optional RDS scaffolding. A small VPC with two private subnets in two Availability Zones, a DB subnet group
+  and one encrypted RDS for MySQL DB instance. The DB instance bills while it exists, and backups and snapshots bill
+  while they are stored. DeletionPolicy is Delete on purpose: no final snapshot is kept when the stack is deleted
+  (the CloudFormation default for a DB instance would be Snapshot, which leaves a billable snapshot behind).
+  Delete the stack when done, then remove any manual snapshots and retained automated backups.
+
+Metadata:
+  cfn-lint:
+    config:
+      ignore_checks:
+        - W1011
+
+Parameters:
+  MasterUserPassword:
+    Type: String
+    NoEcho: true
+    MinLength: 12
+    MaxLength: 40
+    AllowedPattern: '[A-Za-z0-9]*'
+    ConstraintDescription: Use 12 to 40 letters and digits only.
+    Description: Password for the database administrator. Make one up and do not reuse a real password.
+  MultiAz:
+    Type: String
+    Default: 'false'
+    AllowedValues:
+      - 'false'
+      - 'true'
+    Description: Leave false for the smallest setup. true adds a synchronous standby in a second Availability Zone and doubles the instance cost.
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.91.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+  SubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.91.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs '']
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+  SubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.91.2.0/24
+      AvailabilityZone: !Select [1, !GetAZs '']
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+  DbSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Lab 10 private subnets in two Availability Zones
+      SubnetIds:
+        - !Ref SubnetA
+        - !Ref SubnetB
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+  DbSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Lab 10 database, no inbound rules (nothing connects to it in this lab)
+      VpcId: !Ref Vpc
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Delete
+    UpdateReplacePolicy: Delete
+    Properties:
+      DBInstanceIdentifier: lab-10-rds
+      Engine: mysql
+      DBInstanceClass: db.t3.micro
+      AllocatedStorage: '20'
+      StorageType: gp3
+      StorageEncrypted: true
+      MasterUsername: labadmin
+      MasterUserPassword: !Ref MasterUserPassword
+      MultiAZ: !Ref MultiAz
+      BackupRetentionPeriod: 1
+      PubliclyAccessible: false
+      DeletionProtection: false
+      DBSubnetGroupName: !Ref DbSubnetGroup
+      VPCSecurityGroups:
+        - !Ref DbSecurityGroup
+      Tags:
+        - Key: Lab
+          Value: lab-10-rds
+
+Outputs:
+  DatabaseIdentifier:
+    Description: Identifier of the DB instance (used by the cleanup and verification commands).
+    Value: !Ref Database
