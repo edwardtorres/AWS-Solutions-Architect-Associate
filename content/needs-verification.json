@@ -223,5 +223,13 @@
     "resolution": "No allowed page states a minimum time in S3 Standard before a lifecycle rule can transition objects into Standard-IA or One Zone-IA, and the storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to those classes. The claim is not used.",
     "resolutionSource": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
     "resolved": "2026-10-09"
+  },
+  {
+    "id": "nv-free-plan-service-list",
+    "building": "safe-harbor-account",
+    "claim": "Amazon EC2, Amazon S3, Amazon RDS and Amazon Aurora are available on the Free plan.",
+    "reason": "Seen as 'Available on both plans' in a rendered view of aws.amazon.com/free on 2026-10-17, but that page builds its offer list with scripts, so scripts/check-links cannot fetch or re-verify it. The Billing guide only says the list of eligible services is on that page.",
+    "status": "open",
+    "added": "2026-10-17"
   }
 ]

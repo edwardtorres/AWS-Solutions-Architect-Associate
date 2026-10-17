@@ -11,6 +11,8 @@ export const ALLOWED_URL_HOSTS = new Set([
   'docs.aws.amazon.com',
   'aws.amazon.com',
   'learn.microsoft.com',
+  // The EC2 instance metadata address appears only as text inside a lab's CloudFormation template (shown, never fetched by the app); it is link-local and not an external origin.
+  '169.254.169.254',
 ]);
 
 /** Strings that only exist in dev-only modules. Production bundles must not contain any of them. */
