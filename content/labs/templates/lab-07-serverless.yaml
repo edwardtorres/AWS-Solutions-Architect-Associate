@@ -148,6 +148,18 @@ Resources:
                   sns.publish(TopicArn=os.environ["TOPIC_ARN"], Message=body)
               return {"processed": len(event["Records"])}
 
+  ProducerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ProducerFunction}
+      RetentionInDays: 7
+
+  ConsumerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /aws/lambda/${ConsumerFunction}
+      RetentionInDays: 7
+
   ConsumerMapping:
     Type: AWS::Lambda::EventSourceMapping
     Properties:

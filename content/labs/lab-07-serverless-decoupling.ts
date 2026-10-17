@@ -6,7 +6,7 @@ const lab: Lab = {
   id: 'lab-07-serverless-decoupling',
   n: 7,
   title: 'Serverless and decoupling',
-  goal: 'Send a request through API Gateway and Lambda into an SQS queue, watch a second Lambda consume it, fan the result out through SNS, and see a failing message land in the dead-letter queue. One stack holds everything, so deleting it is the cleanup.',
+  goal: 'Send a request through API Gateway and Lambda into an SQS queue, watch a second Lambda consume it, fan the result out through SNS, and see a failing message land in the dead-letter queue. One stack holds everything, so deleting it is the cleanup. The resources are usage-based and tiny, and the API address is open to anyone while the stack exists: finish in one sitting and delete the stack.',
   minutes: 60,
   buildings: ['message-quay', 'serverless-mill'],
   bullets: ['2.1-K1', '2.1-K5', '2.1-K11', '2.1-K12', '2.1-S3', '2.1-S5'],
@@ -32,7 +32,7 @@ const lab: Lab = {
     },
     {
       id: 's3',
-      text: 'Upload the lab template to CloudShell (Actions menu, Upload file), then create the stack named lab07. The template creates IAM roles for the functions, so the command must acknowledge that.',
+      text: 'Save the lab template (shown with this lab in the app) as lab-07-serverless.yaml in CloudShell, for example with the Actions menu, Upload file. Then create the stack named lab07. The template creates IAM roles for the functions, so the command must acknowledge that.',
       src: 'cfn-iam-capabilities',
       quote: 'In the AWS CLI, when you use the create-stack and update-stack commands, specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for the --capabilities option.',
       code: 'aws cloudformation create-stack --stack-name lab07 --template-body file://lab-07-serverless.yaml --capabilities CAPABILITY_IAM',
@@ -60,7 +60,7 @@ const lab: Lab = {
     {
       id: 's6',
       kind: 'check',
-      text: 'Compare the function timeout with the queue visibility timeout in the template. Lambda needs the queue timeout to be at least as long as the function timeout; the page advises a larger margin.',
+      text: 'Compare the function timeout with the queue visibility timeout in the template. The page says to set the queue timeout to at least six times the function timeout.',
       src: 'lambda-sqs-configure',
       quote: "To allow your function time to process each batch of records, set the source queue's visibility timeout to at least six times the configuration timeout on your function.",
       checkpoint: 'You can name both timeouts in the template and explain why the queue value is larger.',
@@ -78,8 +78,9 @@ const lab: Lab = {
       text: 'Read from both fan-out queues. The consumer function published the processed order to the topic, and each subscribed queue got its own copy.',
       src: 'sns-sqs-fanout',
       quote: 'When you subscribe an Amazon SQS queue to an Amazon SNS topic, you can publish a message to the topic and Amazon SNS sends an Amazon SQS message to the subscribed queue.',
-      code: `${OUT}\nsleep 10\nfor Q in AuditQueueUrl ReportQueueUrl; do aws sqs receive-message --queue-url "$(OUT $Q)" --wait-time-seconds 10 --query "Messages[].Body" --output text; done`,
+      code: `${OUT}\nsleep 10\nfor Q in AuditQueueUrl ReportQueueUrl; do aws sqs receive-message --queue-url "$(OUT $Q)" --wait-time-seconds 10 --visibility-timeout 0 --query "Messages[].Body" --output text; done`,
       checkpoint: 'Both queues show a copy of the same order, wrapped in a topic notification.',
+      sensitive: true,
     },
     {
       id: 's9',
@@ -99,11 +100,12 @@ const lab: Lab = {
     },
     {
       id: 's11',
-      text: 'Confirm the poison message never reached the fan-out queues: read the audit queue again.',
+      text: 'Confirm the poison message never reached the fan-out queues: read the audit queue again. You may see the earlier good order again, but never poison.',
       src: 'sns-sqs-fanout',
       quote: 'The messages also persist in an Amazon SQS queue for other applications to process later.',
-      code: `${OUT}\naws sqs receive-message --queue-url "$(OUT AuditQueueUrl)" --wait-time-seconds 5 --query "Messages[].Body" --output text`,
+      code: `${OUT}\naws sqs receive-message --queue-url "$(OUT AuditQueueUrl)" --wait-time-seconds 5 --visibility-timeout 0 --query "Messages[].Body" --output text`,
       checkpoint: 'No message mentions poison.',
+      sensitive: true,
     },
     {
       id: 's12',
@@ -116,7 +118,7 @@ const lab: Lab = {
     {
       id: 'c1',
       kind: 'cleanup',
-      text: 'Delete the stack lab07. This removes the API, both functions, all queues, the topic and the roles.',
+      text: 'Delete the stack lab07. This removes the API, both functions and their log groups (the template sets a retention period on them), all queues, the topic and the roles.',
       src: 'cfn-delete-stack',
       quote: 'If you no longer need the resources in a stack, you can delete the entire stack.',
       code: 'aws cloudformation delete-stack --stack-name lab07 && aws cloudformation wait stack-delete-complete --stack-name lab07',
@@ -139,6 +141,15 @@ const lab: Lab = {
       quote: 'When deleting a stack, CloudFormation deletes all resources in that stack',
       code: 'aws sqs list-queues --queue-name-prefix lab07',
       checkpoint: 'The command prints nothing.',
+    },
+    {
+      id: 'v3',
+      kind: 'verify',
+      text: 'Confirm no function, API, log group or failed stack deletion remains.',
+      src: 'cfn-delete-stack',
+      quote: 'When deleting a stack, CloudFormation deletes all resources in that stack',
+      code: 'aws lambda list-functions --query "Functions[?starts_with(FunctionName,\'lab07\')].FunctionName"\naws apigatewayv2 get-apis --query "Items[?starts_with(Name,\'lab07\')].Name"\naws logs describe-log-groups --log-group-name-prefix /aws/lambda/lab07 --query "logGroups[].logGroupName"\naws cloudformation list-stacks --stack-status-filter DELETE_FAILED --query "StackSummaries[?StackName==\'lab07\'].StackName"',
+      checkpoint: 'All four lists are empty.',
     },
   ],
   traps: [

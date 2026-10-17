@@ -808,6 +808,13 @@ const sources: Source[] = [
   aws('co-requirements', `${D}/compute-optimizer/latest/ug/requirements.html`, 'Resource requirements (Compute Optimizer)'),
   aws('sp-recommendations', `${D}/savingsplans/latest/userguide/sp-recommendations.html`, 'Understanding Savings Plans recommendations'),
   aws('ec2-spot-history', `${D}/AWSEC2/latest/UserGuide/using-spot-instances-history.html`, 'View Spot Instance pricing history'),
+  aws('s3-upload-objects', `${D}/AmazonS3/latest/userguide/upload-objects.html`, 'Uploading objects'),
+  aws('cloudwatch-pricing', 'https://aws.amazon.com/cloudwatch/pricing/', 'Amazon CloudWatch pricing'),
+  aws('glue-pricing', 'https://aws.amazon.com/glue/pricing/', 'AWS Glue pricing'),
+  aws('athena-pricing', 'https://aws.amazon.com/athena/pricing/', 'Amazon Athena pricing'),
+  aws('co-opt-out', `${D}/compute-optimizer/latest/ug/account-opt-out.html`, 'Opting out of Compute Optimizer'),
+  aws('config-getting-started', `${D}/config/latest/developerguide/getting-started.html`, 'Getting started with AWS Config'),
+  aws('config-concepts', `${D}/config/latest/developerguide/config-concepts.html`, 'AWS Config terminology and concepts'),
 ];
 
 export default sources;
