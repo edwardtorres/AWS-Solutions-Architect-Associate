@@ -1,4 +1,4 @@
-import type { Answer, Evaluation, Exhibit, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Answer, type Evaluation, type Exhibit, type Field, type PuzzleDef, type Rule } from '../types';
 
 /** How often a stage reads the objects. The labels follow the wording of the S3 storage class pages. */
 export type Access = 'frequent' | 'monthly' | 'quarterly' | 'twice-yearly' | 'less-than-yearly' | 'unknown';
@@ -380,5 +380,5 @@ export const def: PuzzleDef<ColdCellarScenario> = {
   rules,
   fields,
   exhibit,
-  evaluate,
+  evaluate: (s) => dedupeTrace(evaluate(s)),
 };

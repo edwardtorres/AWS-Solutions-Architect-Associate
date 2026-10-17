@@ -173,28 +173,30 @@ function FieldPuzzle({ module, scenario, shared, backHref, nextId }: { module: P
           </dl>
           <h3 className="mt-4 text-xl font-semibold">Why (rules applied, in order)</h3>
           <ol className="mt-2 grid gap-2">
-            {result.ev.trace.map((t, i) => {
-              const rule = ruleOf(t.rule);
-              const src = rule ? shared?.sources.get(rule.src) : undefined;
-              return (
-                <li key={i} className="rounded-lg border border-[var(--line)] p-2 text-sm">
-                  <p>{t.note}</p>
-                  {rule && (
-                    <p className="mt-1 text-[var(--fg-muted)]">
-                      Rule: {rule.text}
-                      {src && (
-                        <>
-                          {' '}
-                          <a className="inline-flex min-h-11 items-center underline underline-offset-4" href={src.url} target="_blank" rel="noreferrer noopener">
-                            {src.title}
-                          </a>
-                        </>
-                      )}
-                    </p>
-                  )}
-                </li>
-              );
-            })}
+            {result.ev.trace.map((t, i) => (
+              <li key={i} className="rounded-lg border border-[var(--line)] p-2 text-sm">
+                <p>{t.note}</p>
+                {[t.rule, ...(t.also ?? [])].map((id) => {
+                  const rule = ruleOf(id);
+                  const src = rule ? shared?.sources.get(rule.src) : undefined;
+                  return (
+                    rule && (
+                      <p key={id} className="mt-1 text-[var(--fg-muted)]">
+                        Rule: {rule.text}
+                        {src && (
+                          <>
+                            {' '}
+                            <a className="inline-flex min-h-11 items-center underline underline-offset-4" href={src.url} target="_blank" rel="noreferrer noopener">
+                              {src.title}
+                            </a>
+                          </>
+                        )}
+                      </p>
+                    )
+                  );
+                })}
+              </li>
+            ))}
           </ol>
           <div className="mt-4 flex flex-wrap gap-2">
             <button

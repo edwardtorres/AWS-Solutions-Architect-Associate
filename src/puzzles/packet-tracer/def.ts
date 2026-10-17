@@ -1,4 +1,4 @@
-import type { Evaluation, Exhibit, ExhibitSection, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Evaluation, type Exhibit, type ExhibitSection, type Field, type PuzzleDef, type Rule } from '../types';
 
 /**
  * Packet Tracer: one connection attempt across a small VPC layout. The evaluator walks the packet hop by hop with
@@ -1146,5 +1146,5 @@ export const def: PuzzleDef<PacketScenario> = {
   rules,
   fields,
   exhibit,
-  evaluate,
+  evaluate: (s) => dedupeTrace(evaluate(s)),
 };

@@ -1,4 +1,4 @@
-import type { Answer, Evaluation, ExhibitSection, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Answer, type Evaluation, type ExhibitSection, type Field, type PuzzleDef, type Rule } from '../types';
 
 /**
  * Policy Court: predict whether an IAM request is allowed and which policy decided it.
@@ -806,5 +806,5 @@ export const def: PuzzleDef<PolicyCourtScenario> = {
   rules,
   fields,
   exhibit,
-  evaluate,
+  evaluate: (s) => dedupeTrace(evaluate(s)),
 };

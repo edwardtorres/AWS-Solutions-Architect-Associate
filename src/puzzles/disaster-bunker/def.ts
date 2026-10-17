@@ -1,4 +1,4 @@
-import type { Evaluation, Exhibit, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Evaluation, type Exhibit, type Field, type PuzzleDef, type Rule } from '../types';
 
 /**
  * Disaster Bunker drill. The player picks the cheapest DR strategy whose documented RPO and RTO classes meet both
@@ -339,4 +339,4 @@ function evaluate(s: BunkerData): Evaluation | null {
   return { answer: { strategy: [strategy], blocks: right.map((b) => b.id) }, trace };
 }
 
-export const def: PuzzleDef<BunkerData> = { type: 'disaster-bunker', rules, fields, exhibit, evaluate };
+export const def: PuzzleDef<BunkerData> = { type: 'disaster-bunker', rules, fields, exhibit, evaluate: (s) => dedupeTrace(evaluate(s)) };

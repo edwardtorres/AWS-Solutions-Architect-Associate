@@ -1,4 +1,4 @@
-import type { Evaluation, ExhibitSection, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Evaluation, type ExhibitSection, type PuzzleDef, type Rule } from '../types';
 
 export type Kind = 'alb' | 'app' | 'nat' | 'db-primary' | 'db-standby' | 'cache' | 'queue';
 export type Tier = 'public' | 'private-app' | 'private-data' | 'regional';
@@ -165,6 +165,6 @@ export const def: PuzzleDef<BuilderData> = {
     const ref = reference(s);
     if (!ref) return null;
     const results = score(s, ref);
-    return { answer: {}, trace: results.map((r) => ({ rule: r.rules[r.rules.length - 1] as string, note: `${r.need} ${r.detail}` })) };
+    return dedupeTrace({ answer: {}, trace: results.map((r) => ({ rule: r.rules[r.rules.length - 1] as string, note: `${r.need} ${r.detail}` })) });
   },
 };

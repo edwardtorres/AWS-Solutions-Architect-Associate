@@ -132,7 +132,7 @@ export function checkPuzzles(input: PuzzleCheckInput): string[] {
         }
         for (const k of Object.keys(ev.answer)) if (!fieldIds.has(k)) p.push(`${w}: answer for unknown field ${k}`);
         const scenarioRuleIds = new Set((mod.def.scenarioRules?.(s.data) ?? []).map((r) => r.id));
-        for (const t of ev.trace) if (!ruleIds.has(t.rule) && !scenarioRuleIds.has(t.rule)) p.push(`${w}: trace cites unknown rule ${t.rule}`);
+        for (const t of ev.trace) for (const r of [t.rule, ...(t.also ?? [])]) if (!ruleIds.has(r) && !scenarioRuleIds.has(r)) p.push(`${w}: trace cites unknown rule ${r}`);
         if (ev.trace.length === 0) p.push(`${w}: the evaluation has no trace`);
       }
 

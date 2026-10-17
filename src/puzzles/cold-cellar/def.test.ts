@@ -5,7 +5,7 @@ import { scenarios } from './index';
 const ph = (p: Partial<Phase> & Pick<Phase, 'from' | 'access'>): Phase => ({ wait: 'ms', recreatable: false, ...p });
 const sc = (phases: Phase[], dayOptions: number[][] = [], sizeKB = 10240): ColdCellarScenario => ({ objects: 'Test objects.', sizeKB, phases, dayOptions });
 const ans = (s: ColdCellarScenario) => def.evaluate(s)?.answer;
-const used = (s: ColdCellarScenario) => new Set(def.evaluate(s)?.trace.map((t) => t.rule));
+const used = (s: ColdCellarScenario) => new Set(def.evaluate(s)?.trace.flatMap((t) => [t.rule, ...(t.also ?? [])]));
 
 describe('cold-cellar rules', () => {
   it('every rule has a unique id, an AWS source and a quote', () => {
@@ -156,7 +156,7 @@ describe('content', () => {
       const a = def.evaluate(s.data as ColdCellarScenario);
       expect(a, s.id).not.toBeNull();
       expect(def.evaluate(s.data as ColdCellarScenario)).toEqual(a);
-      for (const t of a?.trace ?? []) expect(ids.has(t.rule), `${s.id} ${t.rule}`).toBe(true);
+      for (const t of a?.trace ?? []) for (const r of [t.rule, ...(t.also ?? [])]) expect(ids.has(r), `${s.id} ${r}`).toBe(true);
       for (const f of def.fields(s.data as ColdCellarScenario)) expect(a?.answer[f.id]?.length, `${s.id} ${f.id}`).toBe(1);
     }
   });

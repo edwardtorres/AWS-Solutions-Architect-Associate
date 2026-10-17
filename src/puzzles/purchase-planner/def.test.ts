@@ -5,7 +5,7 @@ import { scenarios } from './index';
 const base: PurchaseScenario = { term: 'long', interruption: 'cannot', commit: 'usd-per-hour', changes: [], capacity: 'none', exchanges: 'accept', goal: 'none', extras: [] };
 const run = (o: Partial<PurchaseScenario>) => def.evaluate({ ...base, ...o });
 const model = (o: Partial<PurchaseScenario>) => run(o)?.answer.model?.[0] ?? null;
-const rulesOf = (o: Partial<PurchaseScenario>) => run(o)?.trace.map((t) => t.rule) ?? [];
+const rulesOf = (o: Partial<PurchaseScenario>) => run(o)?.trace.flatMap((t) => [t.rule, ...(t.also ?? [])]) ?? [];
 
 describe('purchase-planner rules', () => {
   // Amazon EC2 User Guide, "Purchasing On-Demand Instances for Amazon EC2": no long-term commitment, short-term irregular workloads.
@@ -66,7 +66,7 @@ describe('purchase-planner rules', () => {
   });
 
   it('every rule is exercised by at least one scenario', () => {
-    const used = new Set(scenarios.flatMap((s) => def.evaluate(s.data)?.trace.map((t) => t.rule) ?? []));
+    const used = new Set(scenarios.flatMap((s) => def.evaluate(s.data)?.trace.flatMap((t) => [t.rule, ...(t.also ?? [])]) ?? []));
     for (const r of def.rules) if (r.id !== 'ri-regional-no-capacity') expect(used.has(r.id), r.id).toBe(true);
   });
 });

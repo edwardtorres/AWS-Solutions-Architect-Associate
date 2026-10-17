@@ -78,7 +78,29 @@ export type Answer = Record<string, string[]>;
 export interface Evaluation {
   answer: Answer;
   /** Which rules decided it and what each concluded, in order. Rule ids refer to `PuzzleDef.rules`. */
-  trace: { rule: string; note: string }[];
+  trace: TraceLine[];
+}
+
+/** One line of the explanation. `also` lists further rules that support the same line (lines with the same note are merged, so no line is printed twice). */
+export interface TraceLine {
+  rule: string;
+  note: string;
+  also?: string[];
+}
+
+/** Merges trace lines that share a note into one line; the later rules move to `also`. */
+export function dedupeTrace(ev: Evaluation | null): Evaluation | null {
+  if (!ev) return ev;
+  const trace: TraceLine[] = [];
+  for (const t of ev.trace) {
+    const prev = trace.find((x) => x.note === t.note);
+    if (!prev) {
+      trace.push({ ...t });
+      continue;
+    }
+    for (const r of [t.rule, ...(t.also ?? [])]) if (r !== prev.rule && !(prev.also ?? []).includes(r)) prev.also = [...(prev.also ?? []), r];
+  }
+  return { ...ev, trace };
 }
 
 export interface PuzzleDef<S> {

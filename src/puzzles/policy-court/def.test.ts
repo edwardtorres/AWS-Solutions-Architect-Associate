@@ -347,9 +347,9 @@ describe('rules', () => {
   });
   it('G3: user and session notes only appear when a boundary or session policy exists', () => {
     const b = pol('bucket', 'resource', [allow('s3:GetObject', `${BUCKET}/*`, { Principal: { AWS: 'arn:aws:iam::A1:user/u' } })]);
-    const rules1 = run(same(user('A1', 'u')), [b])!.trace.map((t) => t.rule);
+    const rules1 = run(same(user('A1', 'u')), [b])!.trace.flatMap((t) => [t.rule, ...(t.also ?? [])]);
     expect(rules1).not.toContain('boundary-user-resource');
-    expect(run(same(user('A1', 'u')), [b, pol('boundary', 'boundary', [FULL])])!.trace.map((t) => t.rule)).toContain('boundary-user-resource');
+    expect(run(same(user('A1', 'u')), [b, pol('boundary', 'boundary', [FULL])])!.trace.flatMap((t) => [t.rule, ...(t.also ?? [])])).toContain('boundary-user-resource');
   });
   it('SCPs, wildcards and IP syntax', () => {
     tag('scp-no-principal', 'resource-wildcard-colon', 'cond-cidr', 'cond-ip-operators');
@@ -372,7 +372,7 @@ describe('rules', () => {
   });
   it('trace for a missing identity Allow names the limiter that cannot grant and the policy that lacks the Allow', () => {
     const ok = run(req(role('A1', 'r'), 'dynamodb:GetItem', 'arn:aws:dynamodb:us-east-1:A1:table/T', 'A1'), [pol('identity', 'identity', [allow('s3:*', '*')]), pol('session', 'session', [allow('dynamodb:*', '*')])])!;
-    expect(ok.trace.map((t) => t.rule)).toEqual(expect.arrayContaining(['session-limits', 'implicit-deny']));
+    expect(ok.trace.flatMap((t) => [t.rule, ...(t.also ?? [])])).toEqual(expect.arrayContaining(['session-limits', 'implicit-deny']));
     expect(ok.trace.some((t) => /cannot grant/.test(t.note))).toBe(true);
     expect(ok.trace.some((t) => /has no applicable Allow/.test(t.note))).toBe(true);
   });

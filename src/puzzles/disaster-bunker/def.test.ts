@@ -46,12 +46,12 @@ describe('disaster-bunker evaluator', () => {
   });
 
   it('trace cites the class rules, the trade-off and the cumulative rule where it applies', () => {
-    const t = run({ rpo: 'seconds', rto: 'minutes' })!.trace.map((x) => x.rule);
+    const t = run({ rpo: 'seconds', rto: 'minutes' })!.trace.flatMap((x) => [x.rule, ...(x.also ?? [])]);
     expect(t).toContain('cost-order');
     expect(t).toContain('class-warm-standby');
     expect(t).toContain('tradeoff');
     expect(t).toContain('blocks-cumulative-warm');
-    expect(run({ rpo: 'near zero', rto: 'potentially zero' })!.trace.map((x) => x.rule)).toContain('blocks-cumulative-active');
+    expect(run({ rpo: 'near zero', rto: 'potentially zero' })!.trace.flatMap((x) => [x.rule, ...(x.also ?? [])])).toContain('blocks-cumulative-active');
   });
 
   describe('refusals', () => {
@@ -85,7 +85,7 @@ describe('disaster-bunker evaluator', () => {
     const used = new Set<string>();
     for (const rpo of RPO_CLASSES) {
       for (const rto of RTO_CLASSES) {
-        for (const x of run({ rpo, rto })?.trace ?? []) used.add(x.rule);
+        for (const x of run({ rpo, rto })?.trace ?? []) for (const r of [x.rule, ...(x.also ?? [])]) used.add(r);
       }
     }
     for (const r of def.rules) {

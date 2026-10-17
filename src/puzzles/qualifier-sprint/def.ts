@@ -1,4 +1,4 @@
-import type { Evaluation, ExhibitSection, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Evaluation, type ExhibitSection, type Field, type PuzzleDef, type Rule } from '../types';
 
 export type QualifierId = 'overhead' | 'cost' | 'secure' | 'available';
 
@@ -45,6 +45,6 @@ export const def: PuzzleDef<SprintData> = {
       if (!a || !ids.has(a)) return null;
       answer[q.id] = [a];
     }
-    return { answer, trace: QUALIFIERS.map((q) => ({ rule: `fact-${q.id}`, note: `${q.label}: ${s.options.find((o) => o.id === s.answers[q.id])?.text ?? ''}` })) };
+    return dedupeTrace({ answer, trace: QUALIFIERS.map((q) => ({ rule: `fact-${q.id}`, note: `${q.label}: ${s.options.find((o) => o.id === s.answers[q.id])?.text ?? ''}` })) });
   },
 };

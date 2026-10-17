@@ -34,11 +34,11 @@ const out = (v: Vpc, extra: Partial<Attempt> = {}): PacketScenario => ({
 const seen = new Set<string>();
 const run = (s: PacketScenario) => {
   const e = def.evaluate(s);
-  for (const x of e?.trace ?? []) seen.add(x.rule);
+  for (const x of e?.trace ?? []) for (const r of [x.rule, ...(x.also ?? [])]) seen.add(r);
   return e;
 };
 const ans = (s: PacketScenario) => run(s)?.answer;
-const rulesOf = (s: PacketScenario) => run(s)?.trace.map((t) => t.rule) ?? [];
+const rulesOf = (s: PacketScenario) => run(s)?.trace.flatMap((t) => [t.rule, ...(t.also ?? [])]) ?? [];
 
 describe('packet-tracer: scenarios', () => {
   it('every scenario is settled and deterministic', () => {

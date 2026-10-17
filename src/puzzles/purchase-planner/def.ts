@@ -1,4 +1,4 @@
-import type { Evaluation, Exhibit, Field, PuzzleDef, Rule } from '../types';
+import { dedupeTrace, type Evaluation, type Exhibit, type Field, type PuzzleDef, type Rule } from '../types';
 
 export type Term = 'short' | 'unknown' | 'long';
 export type Interruption = 'cannot' | 'tolerates';
@@ -287,4 +287,4 @@ function exhibit(s: PurchaseScenario): Exhibit {
   return [{ title: 'Workload profile', kind: 'table', head: ['Property', 'Value'], rows }];
 }
 
-export const def: PuzzleDef<PurchaseScenario> = { type: 'purchase-planner', rules, fields, exhibit, evaluate };
+export const def: PuzzleDef<PurchaseScenario> = { type: 'purchase-planner', rules, fields, exhibit, evaluate: (s) => dedupeTrace(evaluate(s)) };
