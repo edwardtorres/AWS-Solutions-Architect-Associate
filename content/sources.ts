@@ -821,6 +821,7 @@ const sources: Source[] = [
   aws('lab-orgs-ou-delete', `${D}/organizations/latest/userguide/delete-ou.html`, 'Deleting an OU'),
   aws('ebs-pricing', 'https://aws.amazon.com/ebs/pricing/', 'Amazon EBS pricing'),
   aws('kms-pricing', 'https://aws.amazon.com/kms/pricing/', 'AWS KMS pricing'),
+  aws('ddb-ondemand-backup', `${D}/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html`, 'Using on-demand DynamoDB backup and restore'),
 ];
 
 export default sources;

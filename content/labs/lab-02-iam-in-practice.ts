@@ -18,7 +18,7 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'Create a customer managed policy named lab2-boundary from the JSON editor. It allows only reading: s3:GetObject and s3:ListBucket on all resources. It will be the permissions boundary, not a grant.',
+      text: 'Work as the IAM administrator you made in lab 1, not as root. Create a customer managed policy named lab2-boundary from the JSON editor. It allows only reading: s3:GetObject and s3:ListBucket on all resources. It will be the permissions boundary, not a grant.',
       src: 'lab-iam-policy-create',
       quote: 'You can use the AWS Management Console to create customer managed policies in IAM.',
       code: '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:GetObject","s3:ListBucket"],"Resource":"*"}]}',
