@@ -25,7 +25,7 @@ const lab: Lab = {
       text: 'Turn on multi-factor authentication (MFA) for the root user. Prefer a passkey or security key.',
       sensitive: true,
       src: 'lab-iam-root-mfa',
-      quote: 'AWS recommends that you use a passkey or security key for MFA to AWS, wherever possible.',
+      quote: 'AWS recommends that you use a passkey or security key for MFA to AWS, wherever possible as they are more resistant to attacks such as phishing.',
       checkpoint: 'The root user\'s Security credentials page lists an MFA device.',
     },
     {
@@ -77,11 +77,11 @@ const lab: Lab = {
     {
       id: 's9',
       kind: 'check',
-      text: 'Sign out and sign in again as the IAM user, with the account ID or alias, your user name and password. The sign-in then asks for the MFA code.',
+      text: 'Sign out and sign in again as the IAM user, with the account ID or alias, your user name and password, to prove the new identity works.',
       sensitive: true,
-      src: 'lab-iam-user-create',
-      quote: 'MFA requires the user to provide a one-time-use code each time he or she signs into the AWS Management Console.',
-      checkpoint: 'After the password, the sign-in asks for an MFA code, and then the console opens under your IAM user name.',
+      src: 'lab-signin-iam-user',
+      quote: 'IAM users sign-in using their account ID or alias, their user name, and a password.',
+      checkpoint: 'The console opens under your IAM user name.',
     },
     {
       id: 's10',

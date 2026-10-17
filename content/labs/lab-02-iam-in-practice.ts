@@ -13,7 +13,7 @@ const lab: Lab = {
   buildings: ['identity-keep', 'embassy-row', 'charter-hall'],
   bullets: ['1.1-S2', '1.1-S3', '1.1-S5', '1.1-K4'],
   needs: ['lab-01-safe-account'],
-  services: ['AWS IAM', 'Amazon S3'],
+  services: ['AWS IAM', 'Amazon S3', 'AWS CloudShell'],
   costs: [],
   steps: [
     {
@@ -26,7 +26,7 @@ const lab: Lab = {
     },
     {
       id: 's2',
-      text: 'Create an empty S3 bucket in your chosen Region. Start its name with lab2- and keep the default settings, including Block Public Access.',
+      text: 'Create an empty S3 bucket in your chosen Region. Start its name with lab2- followed by random letters (bucket names are global; do not use your name) and keep the default settings, including Block Public Access.',
       src: 'lab-s3-create-bucket',
       quote: 'When you create a bucket, you must choose a bucket name and Region.',
       checkpoint: 'The bucket is listed, empty, in your chosen Region.',
@@ -34,6 +34,7 @@ const lab: Lab = {
     {
       id: 's3',
       text: 'Create a role named lab2-role. As the trusted entity choose This account, and attach the AWS managed policy AmazonS3FullAccess as its permissions. The trusted-entity choice writes the role\'s trust policy.',
+      sensitive: true,
       src: 'iam-cross-account-role',
       quote: 'To create a role for your account, choose This account.',
       checkpoint: 'The role lab2-role exists and lists AmazonS3FullAccess under its permissions.',
@@ -49,14 +50,15 @@ const lab: Lab = {
     },
     {
       id: 's5',
-      text: 'Set lab2-boundary as the permissions boundary of lab2-role, from the role or from the policy\'s Entities attached tab.',
+      text: 'Set lab2-boundary as the permissions boundary of lab2-role, from the policy\'s Entities attached tab.',
+      sensitive: true,
       src: 'lab-iam-boundary-set',
       quote: 'On the policy details page, choose the Entities attached tab, and then, if necessary, open the Attached as a permissions boundaries section and choose Set this policy as a permissions boundary.',
       checkpoint: 'The role\'s Permissions boundary section names lab2-boundary.',
     },
     {
       id: 's6',
-      text: 'Open the IAM policy simulator in Principal mode and select lab2-role. Test s3:GetObject, s3:ListBucket and s3:PutObject against your bucket and run the simulation.',
+      text: 'Open the IAM policy simulator in Principal mode and select lab2-role. Test s3:GetObject, s3:ListBucket and s3:PutObject and run the simulation. Enter the bucket ARN for ListBucket and the object ARN (the bucket ARN plus a slash and a star) for the other two.',
       src: 'lab-iam-simulator-howto',
       quote: 'You can select IAM users, roles, or groups in that account.',
       sensitive: true,
@@ -88,16 +90,16 @@ const lab: Lab = {
     },
     {
       id: 's10',
-      text: 'Run the simulation for lab2-role again, with PutObject against the bucket objects. A grant to a role ARN in a resource policy is still capped by the boundary.',
+      text: 'Run the simulation for lab2-role again, with PutObject against the object ARN of the bucket. A grant to a role ARN in a resource policy is still capped by the boundary.',
       src: 'iam-boundaries',
       quote: 'IAM role – Resource-based policies that grant permissions to an IAM role ARN are limited by an implicit deny in a permissions boundary or session policy.',
       sensitive: true,
-      checkpoint: 'PutObject for lab2-role still shows as denied, even though the bucket policy names the role.',
+      checkpoint: 'PutObject for lab2-role still shows as denied, even though the bucket policy names the role. If the simulator does not pick up the bucket policy, trust the cited sentence, which describes real evaluation.',
     },
     {
       id: 's11',
       kind: 'check',
-      text: 'Simulator results can differ from the live account. Confirm that the trust policy works for real: as your IAM administrator, switch to lab2-role in the console, then switch back.',
+      text: 'Simulator results can differ from the live account. Confirm that the trust policy works for real: as the IAM administrator you made in lab 1 (the root user cannot switch roles), switch to lab2-role in the console, then switch back.',
       src: 'iam-switch-role',
       quote: 'However, you don\'t sign in to a role, but once signed in as an IAM user you can switch to an IAM role.',
       sensitive: true,
@@ -106,7 +108,7 @@ const lab: Lab = {
     {
       id: 'c1',
       kind: 'cleanup',
-      text: 'Delete the bucket policy and then delete the empty lab2- bucket.',
+      text: 'Delete the empty lab2- bucket; its bucket policy goes with it.',
       src: 's3-delete-bucket',
       quote: 'You can delete an empty Amazon S3 general purpose bucket.',
     },

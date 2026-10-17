@@ -1,17 +1,11 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: Lab 04 - VPC with public and private subnets in two Availability Zones, an S3 gateway endpoint, a security group and a network ACL. Nothing in this stack bills while it exists.
 
-Parameters:
-  VpcCidr:
-    Type: String
-    Default: 10.0.0.0/16
-    Description: IPv4 CIDR block of the lab VPC (private range).
-
 Resources:
   Vpc:
     Type: AWS::EC2::VPC
     Properties:
-      CidrBlock: !Ref VpcCidr
+      CidrBlock: 10.0.0.0/16
       EnableDnsSupport: true
       EnableDnsHostnames: true
       Tags:
@@ -148,13 +142,13 @@ Resources:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
-          CidrIp: !Ref VpcCidr
+          CidrIp: 10.0.0.0/16
           Description: HTTPS from inside the VPC
       SecurityGroupEgress:
         - IpProtocol: tcp
           FromPort: 443
           ToPort: 443
-          CidrIp: !Ref VpcCidr
+          CidrIp: 10.0.0.0/16
           Description: HTTPS to inside the VPC
       Tags:
         - Key: Name
@@ -176,7 +170,7 @@ Resources:
       Protocol: 6
       RuleAction: allow
       Egress: false
-      CidrBlock: !Ref VpcCidr
+      CidrBlock: 10.0.0.0/16
       PortRange:
         From: 443
         To: 443
@@ -189,7 +183,7 @@ Resources:
       Protocol: 6
       RuleAction: allow
       Egress: true
-      CidrBlock: !Ref VpcCidr
+      CidrBlock: 10.0.0.0/16
       PortRange:
         From: 1024
         To: 65535

@@ -29,7 +29,7 @@ if (labs.length === 0) {
   console.error('no labs matched');
   process.exit(1);
 }
-const problems = checkLabs({ labs, templates: all.templates, sources: bundle.sources, buildings: BUILDINGS, bulletIds, confuse: bundle.confuse, banned: BANNED_TERMS, debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')), complete: false });
+const problems = checkLabs({ labs, allLabs: all.labs, templates: all.templates, sources: bundle.sources, buildings: BUILDINGS, bulletIds, confuse: bundle.confuse, banned: BANNED_TERMS, debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')), complete: false });
 
 // Templates of the chosen labs through cfn-lint.
 const files = [...new Set(labs.flatMap((l) => l.templates ?? []))];

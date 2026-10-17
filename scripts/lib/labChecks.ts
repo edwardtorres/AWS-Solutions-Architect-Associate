@@ -29,6 +29,8 @@ const KEY = /\b(AKIA|ASIA)[A-Z0-9]{16}\b/;
 
 export interface LabCheckInput {
   labs: readonly Lab[];
+  /** Every lab, when `labs` is a subset (a writer's partial run), so prerequisites resolve. */
+  allLabs?: readonly Lab[];
   templates: ReadonlyMap<string, string>;
   sources: readonly Source[];
   buildings: readonly Building[];
@@ -55,7 +57,8 @@ export function checkLabs(input: LabCheckInput): string[] {
   const p: string[] = [];
   const srcById = new Map(input.sources.map((s) => [s.id, s]));
   const buildingById = new Map(input.buildings.map((b) => [b.id, b]));
-  const labIds = new Set(input.labs.map((l) => l.id));
+  const everyLab = input.allLabs ?? input.labs;
+  const labIds = new Set(everyLab.map((l) => l.id));
   const confuseIds = new Set(input.confuse.map((c) => c.id));
   const usedTemplates = new Set<string>();
   const seenN = new Set<number>();
@@ -83,7 +86,7 @@ export function checkLabs(input: LabCheckInput): string[] {
     if (pool < DEBRIEF_SIZE * 3) p.push(`${w}: only ${pool} live questions cover its bullets (need ${DEBRIEF_SIZE * 3} so debriefs can vary)`);
 
     for (const n of lab.needs) {
-      const other = input.labs.find((l) => l.id === n);
+      const other = everyLab.find((l) => l.id === n);
       if (!labIds.has(n)) p.push(`${w}: unknown prerequisite ${n}`);
       else if (other && other.n >= lab.n) p.push(`${w}: prerequisite ${n} must come earlier in the recommended order`);
     }
