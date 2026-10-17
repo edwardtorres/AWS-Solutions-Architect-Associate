@@ -16,7 +16,17 @@ export interface PuzzleDump {
   fields: { id: string; multi: boolean; correct: string[] }[];
   reference: { short: string; kindLabel: string; cell: string }[] | null;
 }
+export interface LabDump {
+  id: string;
+  n: number;
+  title: string;
+  building: string;
+  stepIds: string[];
+  required: string[];
+  sensitiveStep: string | null;
+}
 interface Dump {
+  labs: LabDump[];
   puzzles: PuzzleDump[];
   buildingIds: string[];
   chain: { start: string; dependent: string };
@@ -32,6 +42,7 @@ const data = (): Dump => {
 };
 export const questions = (): Q[] => data().questions;
 export const buildingName = (id: string): string => data().names[id] as string;
+export const labDump = (): LabDump[] => data().labs;
 export const puzzleDump = (): PuzzleDump[] => data().puzzles;
 export const allBuildingIds = (): string[] => data().buildingIds;
 export const pickChain = (): { start: string; dependent: string } => data().chain;

@@ -3,6 +3,7 @@ import { BUILDINGS } from '../src/data/buildings.ts';
 import { GRAPH, START_IDS } from '../src/data/index.ts';
 import { loadQuestionsBundle } from '../scripts/lib/loadNotes.ts';
 import { loadPuzzles } from '../scripts/lib/loadPuzzles.ts';
+import { loadLabs } from '../scripts/lib/loadLabs.ts';
 import { KIND_LABEL, TIER_LABEL, reference, type BuilderData } from '../src/puzzles/architecture-builder/def.ts';
 
 const { questions } = await loadQuestionsBundle();
@@ -35,8 +36,18 @@ const puzzles = [...(await loadPuzzles()).entries()].map(([type, mod]) => {
         : null,
   };
 });
+const labs = (await loadLabs()).labs.map((l) => ({
+  id: l.id,
+  n: l.n,
+  title: l.title,
+  building: l.buildings[0] as string,
+  stepIds: l.steps.map((s) => s.id),
+  required: l.steps.filter((s) => s.kind === 'cleanup' || s.kind === 'verify').map((s) => s.id),
+  sensitiveStep: l.steps.find((s) => s.sensitive)?.id ?? null,
+}));
 console.log(
   JSON.stringify({
+    labs,
     puzzles,
     buildingIds: BUILDINGS.map((b) => b.id),
     chain,
