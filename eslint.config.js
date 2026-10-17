@@ -23,7 +23,7 @@ export const EFFECT_BLOCK_BODY_RULE = [
 ];
 
 export default tseslint.config(
-  { ignores: ['dist', 'coverage', 'node_modules', 'test-results', 'src/**/__fixtures__/**'] },
+  { ignores: ['dist', '.cache', 'coverage', 'node_modules', 'test-results', 'src/**/__fixtures__/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
