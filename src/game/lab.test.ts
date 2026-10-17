@@ -5,7 +5,8 @@ import { freshSave, type Save } from '../save/schema';
 import { addDays } from './day';
 import { DEFAULT_ENV } from './env';
 import type { Ctx } from './engine';
-import { accountClock, addMonths, completeLab, drawDebrief, setAccountCreated, setNote, setStep, startDebrief, submitDebriefAnswer, suggestSchedule, type LabRef } from './lab';
+import { accountClock, addMonths, completeLab, setAccountCreated, setNote, setStep, submitDebriefAnswer, suggestSchedule, type LabRef } from './lab';
+import { drawDebrief, startDebrief } from './labDebrief';
 import { stateOf } from './lifecycle';
 import { LAB_XP } from '../labs/types';
 

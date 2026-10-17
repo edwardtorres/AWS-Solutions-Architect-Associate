@@ -23,12 +23,25 @@ const RULES: { rule: string; re: RegExp }[] = [
   { rule: 'slack or API token', re: new RegExp(j('\\b(?:xo', 'x[abp]-|s', 'k-ant-|s', 'k-[A-Za-z0-9]{32})[A-Za-z0-9-]*')) },
 ];
 
+/** Extra rules for lab content (content/labs and the lab review notes): no email addresses and no 12-digit numbers (account IDs). */
+const LAB_RULES: { rule: string; re: RegExp }[] = [
+  { rule: 'email address in lab content', re: new RegExp(j('[A-Za-z0-9._%+-]+', '@', '[A-Za-z0-9.-]+\\.[A-Za-z]{2,}')) },
+  { rule: '12-digit number in lab content (account id?)', re: /(?<![\d.])\d{12}(?![\d.])/ },
+];
+export const isLabContent = (path: string): boolean => /^content\/labs\/|^docs\/reviews\/labs/.test(path);
+
 export function scanText(where: string, text: string): Finding[] {
   const out: Finding[] = [];
   text.split('\n').forEach((line, i) => {
     for (const { rule, re } of RULES) {
       const m = re.exec(line);
       if (m) out.push({ where: `${where}:${i + 1}`, rule, excerpt: m[0].slice(0, 60) });
+    }
+    if (isLabContent(where)) {
+      for (const { rule, re } of LAB_RULES) {
+        const m = re.exec(line);
+        if (m) out.push({ where: `${where}:${i + 1}`, rule, excerpt: m[0].slice(0, 60) });
+      }
     }
   });
   return out;

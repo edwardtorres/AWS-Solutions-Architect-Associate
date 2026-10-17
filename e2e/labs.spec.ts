@@ -111,3 +111,15 @@ test('open a lab, tick steps, report and export a problem, complete it, answer t
   expect(s.labs.progress[lab.id]?.notes[lab.stepIds[0] as string]).toContain('did not match');
   expect(allBuildingIds().length).toBeGreaterThan(0);
 });
+
+test('every lab page has no sideways scroll and passes axe', async ({ page }) => {
+  test.setTimeout(240_000);
+  await load(page, '#/labs');
+  for (const lab of labDump()) {
+    await page.goto('/#/labs');
+    await page.goto(`/#/lab/${lab.id}`);
+    await expect(page.getByRole('heading', { level: 2, name: lab.title })).toBeVisible();
+    await axeClean(page, lab.id);
+    await noSidewaysScroll(page);
+  }
+});

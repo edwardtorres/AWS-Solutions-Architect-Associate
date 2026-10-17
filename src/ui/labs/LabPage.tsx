@@ -72,7 +72,7 @@ function Step({ lab, step, index, shared }: { lab: Lab; step: LabStep; index: nu
         )}
         {step.code && (
           <div className="mt-1">
-            <pre className="overflow-x-auto rounded-lg border border-[var(--line)] bg-[rgba(0,0,0,0.3)] p-2 text-sm"><code>{step.code}</code></pre>
+            <pre tabIndex={0} aria-label="CloudShell command" className="overflow-x-auto whitespace-pre-wrap break-words rounded-lg border border-[var(--line)] bg-[rgba(0,0,0,0.3)] p-2 text-sm"><code>{step.code}</code></pre>
             <button
               type="button"
               className="btn mt-1"
@@ -198,9 +198,9 @@ function Debrief({ lab, shared }: { lab: Lab; shared: Shared | null }) {
           className="btn"
           data-testid="start-debrief"
           onClick={() => {
-            const r = store.startDebrief(ref, bank);
-            if (!r.ok) setProblem(r.message);
-            else setProblem(null);
+            void store.startDebrief(ref, bank).then((r) => {
+              setProblem(r.ok ? null : r.message);
+            });
           }}
         >
           {d?.finishedAt ? 'Take another debrief' : `Start the ${DEBRIEF_SIZE}-question debrief`}

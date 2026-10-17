@@ -6,7 +6,7 @@ import { DEFAULT_ENV, type GameEnv } from '../game/env';
 import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
 import type { StartResult } from '../game/start';
 import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
-import { completeLab, setAccountCreated, setNote, setStep, startDebrief, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
+import { completeLab, setAccountCreated, setNote, setStep, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
 import type { Difficulty } from '../content/types';
 import type { AttemptKind } from './schema';
 
@@ -180,8 +180,9 @@ export function createSaveStore(opts: StoreOptions) {
       if (r.ok && r.save !== snapshot.save) commit(r.save);
       return r;
     },
-    startDebrief(lab: LabRef, bank: readonly Question[]): DebriefStart {
+    async startDebrief(lab: LabRef, bank: readonly Question[]): Promise<DebriefStart> {
       if (snapshot.readOnly) return { ok: false, message: 'This save is read-only (it is from a newer version of the app).' };
+      const { startDebrief } = await import('../game/labDebrief');
       const r = startDebrief(snapshot.save, lab, bank, ctxFor(), random);
       if (r.ok && !r.resumed) commit(r.save);
       return r;
