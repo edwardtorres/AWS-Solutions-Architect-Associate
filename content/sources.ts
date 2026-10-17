@@ -698,12 +698,10 @@ const sources: Source[] = [
   aws('rds-working-vpc', `${D}/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html`, 'Working with a DB instance in a VPC'),
   aws('ddb-global-tables', `${D}/amazondynamodb/latest/developerguide/GlobalTables.html`, 'DynamoDB global tables'),
   aws('kms-multi-region', `${D}/kms/latest/developerguide/multi-region-keys-overview.html`, 'Multi-Region keys in AWS KMS'),
-  aws('rds-encryption', `${D}/AmazonRDS/latest/UserGuide/Overview.Encryption.html`, 'Encrypting Amazon RDS resources'),
   aws('efs-encryption', `${D}/efs/latest/ug/encryption.html`, 'Data encryption in Amazon EFS'),
   aws('vpc-subnet-route-tables', `${D}/vpc/latest/userguide/subnet-route-tables.html`, 'Subnet route tables'),
   aws('vpc-example-private-nat', `${D}/vpc/latest/userguide/vpc-example-private-subnets-nat.html`, 'Example: VPC with servers in private subnets and NAT'),
   aws('ec2-dedicated-instances', `${D}/AWSEC2/latest/UserGuide/dedicated-instance.html`, 'Amazon EC2 Dedicated Instances'),
-  aws('s3-mfa-delete', `${D}/AmazonS3/latest/userguide/MultiFactorAuthenticationDelete.html`, 'Configuring MFA delete'),
   aws('s3-website', `${D}/AmazonS3/latest/userguide/WebsiteHosting.html`, 'Hosting a static website using Amazon S3'),
 ];
 

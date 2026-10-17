@@ -3,10 +3,15 @@ import scenarios from '../../../content/puzzles/qualifier-sprint';
 import { QUALIFIERS, def } from './def';
 
 describe('qualifier-sprint scenarios', () => {
-  it('has enough sets with sequential ids', () => {
-    expect(scenarios.length).toBeGreaterThanOrEqual(13);
-    scenarios.forEach((s, i) => {
-      expect(s.id).toBe(`puzzle-qualifier-sprint-${String(i + 1).padStart(3, '0')}`);
+  it('has enough sets with ascending unique ids (003, 005 and 007 were dropped in Step 6; ids are never reused)', () => {
+    expect(scenarios.length).toBeGreaterThanOrEqual(11);
+    const nums = scenarios.map((s) => Number(s.id.slice(-3)));
+    expect(nums).toEqual([...new Set(nums)].sort((a, b) => a - b));
+    expect(nums).not.toContain(3);
+    expect(nums).not.toContain(5);
+    expect(nums).not.toContain(7);
+    scenarios.forEach((s) => {
+      expect(s.id).toMatch(/^puzzle-qualifier-sprint-\d{3}$/);
       expect(s.type).toBe('qualifier-sprint');
       expect(s.building).toBe('town-charter');
       expect(s.bullets).toEqual([]);

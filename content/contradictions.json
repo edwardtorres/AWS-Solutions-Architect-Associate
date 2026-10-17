@@ -83,5 +83,26 @@
     ],
     "handling": "The storage classes page says Flexible Retrieval is for data accessed once a year and Deep Archive less than once a year; the Glacier classes page says semi-annually and annually. The Cold Cellar planner avoids the overlap: it uses 'a few times a year' and 'less than once a year' and refuses the 'once a year, hours are fine' case. Kept out of questions.",
     "added": "2026-10-16"
+  },
+  {
+    "id": "c-free-credit-expiry",
+    "building": "safe-harbor-account",
+    "topic": "How long Free Tier credits last after account creation",
+    "readings": [
+      {
+        "source": "https://aws.amazon.com/free/free-tier-faqs/",
+        "says": "Free Tier credits expire 6 months from the date you create your AWS account."
+      },
+      {
+        "source": "https://aws.amazon.com/free/free-tier-faqs/",
+        "says": "Free Tier credits expire 12 months after you create your account."
+      },
+      {
+        "source": "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans.html",
+        "says": "Your free account plan ends after six months or when your credits are fully used - whichever occurs first."
+      }
+    ],
+    "handling": "The FAQ gives 6 months in its Free plan answer and 12 months in its Paid plan answer; the Billing guide ties the Free plan to six months or the credits. Labs plan on the shorter, 6-month window for a Free-plan account and tell the owner to read the real date and balance in the Billing and Cost Management console. Kept out of questions.",
+    "added": "2026-10-17"
   }
 ]

@@ -18,7 +18,7 @@ const sc = (n: number, difficulty: 1 | 2 | 3, title: string, story: string, data
 
 /** Display order of the options per set (option ids), so the answers do not follow a pattern. */
 const ORDER: Record<number, string> = {
-  1: 'dbac', 2: 'cdab', 3: 'edbac', 4: 'bdca', 5: 'cbeda', 6: 'dacb', 7: 'caebd',
+  1: 'dbac', 2: 'cdab', 4: 'bdca', 6: 'dacb',
   8: 'ecabd', 9: 'dacb', 10: 'cadb', 11: 'bdac', 12: 'dbeac', 13: 'cdeab', 14: 'bcda',
 };
 
@@ -98,44 +98,6 @@ const scenarios: S[] = [
     },
   ),
   sc(
-    3,
-    2,
-    'The orders database',
-    'A small online shop needs a MySQL-compatible relational database for its orders. The load is flat around the clock and will stay that way for years, and the team prefers not to size or resize instances by hand. Every design below stores the orders correctly; read the qualifier to see which one fits.',
-    {
-      options: [
-        { id: 'a', text: 'RDS for MySQL, Multi-AZ DB instance deployment' },
-        { id: 'b', text: 'An Aurora Serverless v2 DB cluster' },
-        { id: 'c', text: 'RDS for MySQL, single instance, with a reserved DB instance covering its constant use' },
-        { id: 'd', text: 'RDS for MySQL, single instance, in private subnets with storage encrypted using a KMS key' },
-        { id: 'e', text: 'MySQL installed on an EC2 instance that your team patches and backs up' },
-      ],
-      answers: { overhead: 'b', cost: 'c', secure: 'd', available: 'a' },
-      facts: {
-        overhead: {
-          text: 'Aurora Serverless watches the workload and adjusts capacity for you, which removes sizing work that other options leave to the team.',
-          src: 'aurora-serverless',
-          quote: 'Aurora serverless helps to automate the processes of monitoring the workload and adjusting the capacity for your databases.',
-        },
-        cost: {
-          text: 'Reserving a DB instance for steady use gives a billing discount compared with on-demand instance pricing.',
-          src: 'rds-reserved',
-          quote: 'Reserved DB instances provide you with a significant discount compared to on-demand DB instance pricing.',
-        },
-        secure: {
-          text: 'An encrypted DB instance protects its storage, logs, backups, replicas and snapshots at rest.',
-          src: 'rds-encryption',
-          quote: 'Data that is encrypted at rest includes the underlying storage for DB instances, its logs, automated backups, read replicas, and snapshots.',
-        },
-        available: {
-          text: 'A Multi-AZ DB instance deployment keeps a standby in another zone that takes over if the primary fails.',
-          src: 'rds-multi-az',
-          quote: 'A Multi-AZ DB instance deployment has one standby DB instance that provides failover support, but doesn\'t serve read traffic.',
-        },
-      },
-    },
-  ),
-  sc(
     4,
     2,
     'A key-value session store',
@@ -173,44 +135,6 @@ const scenarios: S[] = [
     },
   ),
   sc(
-    5,
-    2,
-    'Server backups that last for years',
-    'A clinic backs up the EBS volumes of its servers nightly and must keep the backups for many years. Every design below creates the backups on schedule.',
-    {
-      options: [
-        { id: 'a', text: 'A backup plan that copies each backup to a second Region' },
-        { id: 'b', text: 'A cron job on each server that calls the CLI to create snapshots' },
-        { id: 'c', text: 'A backup plan that stores backups in a vault protected by Vault Lock' },
-        { id: 'd', text: 'A backup plan with a schedule and a retention rule' },
-        { id: 'e', text: 'EBS snapshots that are moved to the Snapshots Archive tier' },
-      ],
-      answers: { overhead: 'd', cost: 'e', secure: 'c', available: 'a' },
-      facts: {
-        overhead: {
-          text: 'The backup service replaces service-by-service backup tasks and the custom scripts that go with them with one policy.',
-          src: 'backup-what-is',
-          quote: 'It allows you to automate and consolidate backup tasks that were previously performed service-by-service, and removes the need to create custom scripts and manual processes.',
-        },
-        cost: {
-          text: 'The snapshot archive tier is a low-cost tier meant for rarely accessed snapshots that are kept for a long time.',
-          src: 'ebs-snapshot-archive',
-          quote: 'Amazon EBS Snapshots Archive is a storage tier that you can use for low-cost, long-term storage of your rarely-accessed snapshots that do not need frequent or fast retrieval.',
-        },
-        secure: {
-          text: 'Vault Lock makes the backups write-once and protects them from inadvertent or malicious deletion, even by privileged users.',
-          src: 'backup-vault-lock',
-          quote: 'An additional layer of defense that protects backups (recovery points) in your backup vaults from inadvertent or malicious deletions.',
-        },
-        available: {
-          text: 'A backup plan can copy each backup to another Region, so the backups stay available if a whole Region is lost.',
-          src: 'aws-backup-plan-options',
-          quote: 'As part of your backup plan, you can optionally create a backup copy in the same or another AWS Region.',
-        },
-      },
-    },
-  ),
-  sc(
     6,
     3,
     'KMS keys for a bucket of reports',
@@ -243,44 +167,6 @@ const scenarios: S[] = [
           text: 'Related multi-Region keys let data encrypted in one Region be decrypted in another Region without a cross-Region call to KMS.',
           src: 'kms-multi-region',
           quote: 'Each set of related multi-Region keys has the same key material and key ID, so you can encrypt data in one AWS Region and decrypt it in a different AWS Region without re-encrypting or making a cross-Region call to AWS KMS.',
-        },
-      },
-    },
-  ),
-  sc(
-    7,
-    2,
-    'Contracts that must not be lost',
-    'A law firm keeps signed contracts in S3. People sometimes overwrite or delete a file by mistake, and every earlier copy must be recoverable. Every design below keeps earlier versions.',
-    {
-      options: [
-        { id: 'a', text: 'S3 Versioning turned on, with nothing else configured' },
-        { id: 'b', text: 'S3 Versioning plus a Lifecycle rule that handles old noncurrent versions' },
-        { id: 'c', text: 'S3 Versioning with MFA delete required to remove a version' },
-        { id: 'd', text: 'S3 Versioning plus replication to a bucket in another Region' },
-        { id: 'e', text: 'No versioning, with a script that copies the bucket to a second bucket every night' },
-      ],
-      answers: { overhead: 'a', cost: 'b', secure: 'c', available: 'd' },
-      facts: {
-        overhead: {
-          text: 'One setting preserves and restores every version, so the other designs only add rules, devices or buckets the team would then have to run, and the script design needs its own code.',
-          src: 's3-versioning',
-          quote: 'You can use the S3 Versioning feature to preserve, retrieve, and restore every version of every object stored in your buckets.',
-        },
-        cost: {
-          text: 'Old versions keep accumulating in a versioned bucket; combining versioning with Lifecycle is the documented way to control the storage cost of retained versions.',
-          src: 's3-versioning',
-          quote: 'To customize your data retention approach and control storage costs, use object versioning with S3 Lifecycle.',
-        },
-        secure: {
-          text: 'MFA delete means nobody can remove a version, or change the versioning state, without a second form of authentication.',
-          src: 's3-mfa-delete',
-          quote: 'When you do this, the bucket owner must include two forms of authentication in any request to delete a version or change the versioning state of the bucket.',
-        },
-        available: {
-          text: 'Replication can put a copy in a bucket in a different Region, so the contracts stay readable if the source Region is lost.',
-          src: 's3-replication',
-          quote: 'The destination buckets can be in different AWS Regions or within the same Region as the source bucket.',
         },
       },
     },
