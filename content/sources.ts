@@ -703,6 +703,8 @@ const sources: Source[] = [
   aws('vpc-example-private-nat', `${D}/vpc/latest/userguide/vpc-example-private-subnets-nat.html`, 'Example: VPC with servers in private subnets and NAT'),
   aws('ec2-dedicated-instances', `${D}/AWSEC2/latest/UserGuide/dedicated-instance.html`, 'Amazon EC2 Dedicated Instances'),
   aws('s3-website', `${D}/AmazonS3/latest/userguide/WebsiteHosting.html`, 'Hosting a static website using Amazon S3'),
+  aws('free-tier-plans', `${D}/awsaccountbilling/latest/aboutv2/free-tier-plans.html`, 'Choosing a plan (AWS Billing)'),
+  aws('free-tier-usage', `${D}/awsaccountbilling/latest/aboutv2/tracking-free-tier-usage.html#free-tier-services`, 'Tracking your AWS Free Tier usage'),
 ];
 
 export default sources;

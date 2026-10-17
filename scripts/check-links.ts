@@ -6,6 +6,8 @@
  */
 import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
 import { loadPuzzles } from './lib/loadPuzzles.ts';
+import { loadLabs } from './lib/loadLabs.ts';
+import { SERVICE_PLANS } from '../content/labs/services.ts';
 import { everyBlock } from './lib/notesChecks.ts';
 import { fetchPage, hasText, stripFragment, type PageInfo } from './lib/pageCache.ts';
 
@@ -115,6 +117,25 @@ async function main() {
         if (!page || page instanceof Error) continue;
         if (!hasText(page, r.quote)) problems.push(`${where} rule ${r.id}: quote not found on ${src.id}: "${r.quote.slice(0, 90)}"${closest(page, r.quote)}`);
       }
+    }
+    // Lab steps, cost badges, traps and the Free plan service table each carry a verbatim AWS quote.
+    const labCites: { where: string; src: string; quote: string }[] = [];
+    for (const lab of (await loadLabs()).labs) {
+      for (const s of lab.steps) labCites.push({ where: `${lab.id} step ${s.id}`, src: s.src, quote: s.quote });
+      for (const c of lab.costs) labCites.push({ where: `${lab.id} cost ${c.id}`, src: c.src, quote: c.quote });
+      for (const t of lab.traps) labCites.push({ where: `${lab.id} trap ${t.pair}`, src: t.src, quote: t.quote });
+    }
+    for (const [name, sp] of Object.entries(SERVICE_PLANS)) if (sp.src && sp.quote) labCites.push({ where: `services ${name}`, src: sp.src, quote: sp.quote });
+    for (const c of labCites) {
+      quoteCount += 1;
+      const src = byId.get(c.src);
+      if (!src) {
+        problems.push(`${c.where}: unknown source ${c.src}`);
+        continue;
+      }
+      const page = pages.get(stripFragment(src.url));
+      if (!page || page instanceof Error) continue;
+      if (!hasText(page, c.quote)) problems.push(`${c.where}: quote not found on ${src.id}: "${c.quote.slice(0, 90)}"${closest(page, c.quote)}`);
     }
     // The post-guide registry dates each feature with a quote from an AWS page.
     for (const f of [...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])]) {

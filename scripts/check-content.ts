@@ -16,6 +16,8 @@ import { checkNotes } from './lib/notesChecks.ts';
 import { buildMetaSource } from './lib/questionMeta.ts';
 import { loadPuzzles } from './lib/loadPuzzles.ts';
 import { checkPuzzles } from './lib/puzzleChecks.ts';
+import { loadLabs } from './lib/loadLabs.ts';
+import { checkLabs } from './lib/labChecks.ts';
 import { PUZZLE_TYPES } from '../src/puzzles/types.ts';
 import {
   diffOutline,
@@ -45,7 +47,7 @@ async function main() {
   const puzzles = await loadPuzzles();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...[...puzzles.values()].flatMap((m) => [...m.def.rules.map((r) => r.src), ...m.scenarios.flatMap((sc) => (m.def.scenarioRules?.(sc.data) ?? []).map((r) => r.src))]), ...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...(await loadLabs()).labs.flatMap((l) => [...l.steps.map((s) => s.src), ...l.costs.map((c) => c.src), ...l.traps.map((t) => t.src)]), 'free-tier-plans', 'free-tier-usage', ...[...puzzles.values()].flatMap((m) => [...m.def.rules.map((r) => r.src), ...m.scenarios.flatMap((sc) => (m.def.scenarioRules?.(sc.data) ?? []).map((r) => r.src))]), ...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
   );
 
   const repoRoot = here('../');
@@ -86,6 +88,21 @@ async function main() {
       postGuide: qb.postGuide,
       require: puzzleRequired ? PUZZLE_TYPES : [],
     }).map((x) => `puzzles: ${x}`),
+  );
+
+  const labData = await loadLabs();
+  problems.push(
+    ...checkLabs({
+      labs: labData.labs,
+      templates: labData.templates,
+      sources: bundle.sources,
+      buildings: BUILDINGS,
+      bulletIds,
+      confuse: bundle.confuse,
+      banned: BANNED_TERMS,
+      debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')),
+      complete: !process.argv.includes('--no-lab-minimums'),
+    }).map((x) => `labs: ${x}`),
   );
 
   const metaPath = join(repoRoot, 'src/questions/meta.ts');
