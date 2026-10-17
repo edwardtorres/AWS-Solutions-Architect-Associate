@@ -1,7 +1,7 @@
 export const STORAGE_KEY = 'saa-region-builder:save';
 export const CORRUPT_KEY = 'saa-region-builder:save:corrupt';
 export const APP_ID = 'saa-region-builder';
-export const CURRENT_VERSION = 3;
+export const CURRENT_VERSION = 4;
 
 /** Only progress states are stored. planned/surveyed are derived from the roads. */
 export type StoredState = 'under_construction' | 'commissioned';
@@ -121,6 +121,35 @@ export interface SaveV1 {
   ui: UiPrefs;
 }
 
+/** A lab debrief: three questions drawn from the lab's bullets, answered once; logged as the attempt type `lab`. */
+export interface LabDebrief {
+  questionIds: string[];
+  seed: number;
+  startedAt: string;
+  answers: Record<string, ActiveAnswer>;
+  /** Set when every question is answered. */
+  finishedAt?: string;
+  correct?: number;
+}
+
+/** Self-reported progress through one lab. Labs never change a building's state. */
+export interface LabProgress {
+  /** Ticked step ids. */
+  steps: Record<string, true>;
+  /** Per-step "Report a problem" notes (the owner's words; never auto-filled). */
+  notes: Record<string, string>;
+  /** Set when the owner marks the lab complete (pays the fixed lab XP once). */
+  completedAt?: string;
+  /** The current or most recent debrief. */
+  debrief?: LabDebrief;
+}
+
+export interface LabsState {
+  /** Local calendar date (YYYY-MM-DD) the lab AWS account was created, or null while unset. A date only. */
+  accountCreated: string | null;
+  progress: Record<string, LabProgress>;
+}
+
 export interface SaveV3 {
   version: 3;
   updatedAt: string;
@@ -129,7 +158,18 @@ export interface SaveV3 {
   game: GameState;
 }
 
-export type Save = SaveV3;
+export interface SaveV4 {
+  version: 4;
+  updatedAt: string;
+  buildings: Record<string, BuildingProgress>;
+  ui: UiPrefs;
+  game: GameState;
+  labs: LabsState;
+}
+
+export type Save = SaveV4;
+
+export const NOTE_CAP = 1000;
 
 export const LOG_CAP = 4000;
 /** The largest readiness window (coverage) and the puzzle cap inside the accuracy window. */
@@ -156,6 +196,10 @@ export function freshGame(): GameState {
   };
 }
 
+export function freshLabs(): LabsState {
+  return { accountCreated: null, progress: {} };
+}
+
 export function freshSave(now: () => string = () => new Date().toISOString()): Save {
   return {
     version: CURRENT_VERSION,
@@ -163,5 +207,6 @@ export function freshSave(now: () => string = () => new Date().toISOString()): S
     buildings: {},
     ui: { view: 'map', lastBuilding: null, roads: 'selected' },
     game: freshGame(),
+    labs: freshLabs(),
   };
 }

@@ -1,6 +1,6 @@
 import { BUILDING_BY_ID, DISTRICT_BY_ID } from '../data';
 import { COUNTED_KINDS, nextHistory, pruneRecent } from '../game/history';
-import { CURRENT_VERSION, LOG_CAP, freshGame, freshSave, type ActiveAttempt, type AttemptKind, type GameState, type ItemHistory, type LogEntry, type LogKind, type RecentEntry, type Save, type StoredState, type UiPrefs } from './schema';
+import { CURRENT_VERSION, LOG_CAP, NOTE_CAP, freshGame, freshLabs, freshSave, type ActiveAnswer, type ActiveAttempt, type LabDebrief, type LabProgress, type LabsState, type AttemptKind, type GameState, type ItemHistory, type LogEntry, type LogKind, type RecentEntry, type Save, type StoredState, type UiPrefs } from './schema';
 
 type Migration = (old: Record<string, unknown>) => Record<string, unknown>;
 
@@ -39,6 +39,8 @@ export const MIGRATIONS: Record<number, Migration> = {
     for (const k of Object.keys(recent)) recent[k] = pruneRecent(recent[k] as RecentEntry[]);
     return { ...old, version: 3, game: { ...game, history, recent } };
   },
+  // Version 4 adds the labs block (step ticks, problem notes, completion, debriefs, the lab account's creation date).
+  3: (old) => ({ ...old, version: 4, labs: {} }),
 };
 
 /** Question ids are `<building>-NNN`; the exam domain follows from the building. Foundations and unknown ids have none. */
@@ -98,11 +100,12 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
     if (typeof raw.ui.lastBuilding === 'string' && knownIds.has(raw.ui.lastBuilding)) ui.lastBuilding = raw.ui.lastBuilding;
   }
   return {
-    version: 3,
+    version: 4,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : base.updatedAt,
     buildings,
     ui,
     game: sanitizeGame(raw.game, knownIds, now),
+    labs: sanitizeLabs(raw.labs),
   };
 }
 
@@ -191,4 +194,40 @@ function sanitizeActive(raw: unknown, knownIds: ReadonlySet<string>): ActiveAtte
     questionIds.includes(k) && isObject(x) && typeof x.correct === 'boolean' ? { chosen: ints(x.chosen), correct: x.correct, xp: Math.floor(num(x.xp)) } : null,
   );
   return { id: raw.id, kind: raw.kind as AttemptKind, building: raw.building, questionIds, seed: Math.floor(num(raw.seed)), startedAt: raw.startedAt, day: raw.day, answers };
+}
+
+const LAB_ID = /^lab-\d{2}-[a-z0-9-]{1,40}$/;
+const STEP_ID = /^[a-z0-9-]{1,40}$/;
+
+/** Validates the labs block. Lab and step ids are checked by shape only (lab content loads lazily). */
+export function sanitizeLabs(raw: unknown): LabsState {
+  const base = freshLabs();
+  if (!isObject(raw)) return base;
+  const accountCreated = isStr(raw.accountCreated) && DAY.test(raw.accountCreated) ? raw.accountCreated : null;
+  const progress = recordOf<LabProgress>(raw.progress, (k, x) => {
+    if (!LAB_ID.test(k) || !isObject(x)) return null;
+    const steps = recordOf<true>(x.steps, (sk, sv) => (STEP_ID.test(sk) && sv === true ? true : null));
+    const notes = recordOf<string>(x.notes, (nk, nv) => (STEP_ID.test(nk) && isStr(nv) && nv.trim() !== '' ? nv.slice(0, NOTE_CAP) : null));
+    const out: LabProgress = { steps, notes };
+    if (isStr(x.completedAt)) out.completedAt = x.completedAt;
+    const debrief = sanitizeDebrief(x.debrief);
+    if (debrief) out.debrief = debrief;
+    return out;
+  });
+  return { accountCreated, progress };
+}
+
+function sanitizeDebrief(raw: unknown): LabDebrief | undefined {
+  if (!isObject(raw)) return undefined;
+  const questionIds = strings(raw.questionIds);
+  if (questionIds.length === 0 || !isStr(raw.startedAt)) return undefined;
+  const answers = recordOf<ActiveAnswer>(raw.answers, (k, x) =>
+    questionIds.includes(k) && isObject(x) && typeof x.correct === 'boolean' ? { chosen: ints(x.chosen), correct: x.correct, xp: Math.floor(num(x.xp)) } : null,
+  );
+  const out: LabDebrief = { questionIds, seed: Math.floor(num(raw.seed)), startedAt: raw.startedAt, answers };
+  if (isStr(raw.finishedAt) && questionIds.every((id) => answers[id])) {
+    out.finishedAt = raw.finishedAt;
+    out.correct = Object.values(answers).filter((a) => a.correct).length;
+  }
+  return out;
 }

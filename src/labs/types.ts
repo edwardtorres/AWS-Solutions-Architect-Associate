@@ -85,3 +85,23 @@ export interface Lab {
 /** Fixed XP for marking a lab complete (once per lab). The debrief earns question XP separately. */
 export const LAB_XP = 100;
 export const DEBRIEF_SIZE = 3;
+
+/** What the Labs page, the Workshop section and the engine need without loading the lab text (generated: src/labs/meta.ts). */
+export interface LabMeta {
+  id: string;
+  n: number;
+  title: string;
+  goal: string;
+  minutes: number;
+  buildings: readonly string[];
+  bullets: readonly string[];
+  needs: readonly string[];
+  services: readonly string[];
+  plan: PlanFit;
+  /** Names of the resources that bill while they exist. */
+  billable: readonly string[];
+  steps: number;
+  /** Step ids that must be ticked before completion: the cleanup checklist and the verification. */
+  required: readonly string[];
+  templates: number;
+}

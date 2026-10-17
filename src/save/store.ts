@@ -6,6 +6,7 @@ import { DEFAULT_ENV, type GameEnv } from '../game/env';
 import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
 import type { StartResult } from '../game/start';
 import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
+import { completeLab, setAccountCreated, setNote, setStep, startDebrief, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
 import type { Difficulty } from '../content/types';
 import type { AttemptKind } from './schema';
 
@@ -162,6 +163,32 @@ export function createSaveStore(opts: StoreOptions) {
     playPuzzle(play: { id: string; building: string; difficulty: Difficulty; correct: boolean }): PuzzlePlayResult | null {
       const r = playPuzzle(snapshot.save, play, ctxFor());
       if (r) commit(r.save);
+      return r;
+    },
+    setLabStep(labId: string, stepId: string, on: boolean): void {
+      commit(setStep(snapshot.save, labId, stepId, on));
+    },
+    setLabNote(labId: string, stepId: string, text: string): void {
+      commit(setNote(snapshot.save, labId, stepId, text));
+    },
+    setLabAccountCreated(day: string | null): void {
+      commit(setAccountCreated(snapshot.save, day));
+    },
+    /** Self-reported completion: needs the cleanup checklist and verification ticked; fixed XP once; never changes a building. */
+    completeLab(lab: LabRef): CompleteResult {
+      const r = completeLab(snapshot.save, lab, ctxFor());
+      if (r.ok && r.save !== snapshot.save) commit(r.save);
+      return r;
+    },
+    startDebrief(lab: LabRef, bank: readonly Question[]): DebriefStart {
+      if (snapshot.readOnly) return { ok: false, message: 'This save is read-only (it is from a newer version of the app).' };
+      const r = startDebrief(snapshot.save, lab, bank, ctxFor(), random);
+      if (r.ok && !r.resumed) commit(r.save);
+      return r;
+    },
+    submitDebriefAnswer(labId: string, questionId: string, chosen: readonly number[], lookup: (id: string) => Question | undefined): DebriefAnswer | null {
+      const r = submitDebriefAnswer(snapshot.save, labId, questionId, chosen, ctxFor(lookup));
+      if (r && r.save !== snapshot.save) commit(r.save);
       return r;
     },
     addFlag(questionId: string, note: string, myAnswer: readonly number[]): void {

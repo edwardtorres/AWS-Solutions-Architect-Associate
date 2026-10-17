@@ -18,6 +18,7 @@ import { loadPuzzles } from './lib/loadPuzzles.ts';
 import { checkPuzzles } from './lib/puzzleChecks.ts';
 import { loadLabs } from './lib/loadLabs.ts';
 import { checkLabs } from './lib/labChecks.ts';
+import { buildLabMetaSource } from './lib/labMeta.ts';
 import { PUZZLE_TYPES } from '../src/puzzles/types.ts';
 import {
   diffOutline,
@@ -113,6 +114,14 @@ async function main() {
     metaNow = '';
   }
   if (metaNow !== buildMetaSource(qb.questions, [...puzzles.values()].flatMap((m) => m.scenarios.map((sc) => ({ id: sc.id, building: sc.building, bullets: sc.bullets, difficulty: sc.difficulty }))))) problems.push('questions: src/questions/meta.ts is stale; run `npm run gen:meta`');
+
+  let labMetaNow: string;
+  try {
+    labMetaNow = readFileSync(join(repoRoot, 'src/labs/meta.ts'), 'utf8');
+  } catch {
+    labMetaNow = '';
+  }
+  if (labMetaNow !== buildLabMetaSource(labData.labs)) problems.push('labs: src/labs/meta.ts is stale; run `npm run gen:meta`');
 
   let liveNote = '';
   if (live) {

@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-export type View = 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse' | 'startup' | 'inspect' | 'place' | 'progress' | 'workbench' | 'puzzle';
+export type View = 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse' | 'startup' | 'inspect' | 'place' | 'progress' | 'workbench' | 'puzzle' | 'labs' | 'lab';
 /** Views that can open a building's detail panel. */
 export type PanelView = 'map' | 'atlas';
 
@@ -12,13 +12,13 @@ export interface Route {
   param?: string | null;
 }
 
-const VIEWS: readonly View[] = ['map', 'atlas', 'notes', 'glossary', 'confuse', 'startup', 'inspect', 'place', 'progress', 'workbench', 'puzzle'];
+const VIEWS: readonly View[] = ['map', 'atlas', 'notes', 'glossary', 'confuse', 'startup', 'inspect', 'place', 'progress', 'workbench', 'puzzle', 'labs', 'lab'];
 
 /**
  * Hash routes work on any static host without rewrite rules:
  * #/map, #/atlas, #/map/<id>, #/atlas/<id>, #/notes/<id>, #/glossary[/<term>], #/confuse[/<pair>],
  * #/startup/<id>, #/inspect/<id>, #/place/<id> (an attempt on a building), #/workbench/<building>,
- * #/puzzle/<scenario> and #/progress.
+ * #/puzzle/<scenario>, #/labs, #/lab/<lab-id> and #/progress.
  * No route shows an answer key outside a finished attempt.
  */
 export function parseHash(hash: string): Route {
@@ -38,6 +38,7 @@ export const hrefNotes = (buildingId: string): string => hrefFor({ view: 'notes'
 export const hrefAttempt = (kind: 'startup' | 'inspect' | 'place', buildingId: string): string => hrefFor({ view: kind, building: null, param: buildingId });
 export const hrefWorkbench = (buildingId: string): string => hrefFor({ view: 'workbench', building: null, param: buildingId });
 export const hrefPuzzle = (scenarioId: string): string => hrefFor({ view: 'puzzle', building: null, param: scenarioId });
+export const hrefLab = (labId: string): string => hrefFor({ view: 'lab', building: null, param: labId });
 export const hrefProgress = (): string => '#/progress';
 export const hrefGlossary = (termId?: string): string => hrefFor({ view: 'glossary', building: null, param: termId ?? null });
 export const hrefConfuse = (pairId?: string): string => hrefFor({ view: 'confuse', building: null, param: pairId ?? null });

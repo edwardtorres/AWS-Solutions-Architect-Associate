@@ -17,11 +17,12 @@ import { deriveAll, STATE_HELP, STATE_LABEL } from '../save/state';
 import { useSaveStore, useSnapshot } from '../save/context';
 import { DEFAULT_ENV } from '../game/env';
 import { inspectionLockedUntil, nextAction, placementAvailability } from '../game/lifecycle';
-import { hrefAttempt, hrefFor, hrefNotes, hrefWorkbench, type PanelView } from '../lib/route';
+import { hrefAttempt, hrefFor, hrefLab, hrefNotes, hrefWorkbench, type PanelView } from '../lib/route';
 import { QUESTION_META } from '../questions/meta';
 import { puzzleTypeOf } from '../puzzles/load';
 import { PUZZLE_TYPE_NAME } from '../puzzles/types';
 import { workbenchAvailability } from '../game/puzzle';
+import { LAB_META } from '../labs/meta';
 import { CloseIcon, RoadIcon, StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -112,6 +113,8 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
     const t = m.building === building.id ? puzzleTypeOf(m.id) : null;
     if (t) puzzleCounts.set(PUZZLE_TYPE_NAME[t], (puzzleCounts.get(PUZZLE_TYPE_NAME[t]) ?? 0) + 1);
   }
+
+  const labsHere = LAB_META.filter((l) => l.buildings.includes(building.id));
 
   const roadItem = (id: string, reason: string) => {
     const other = BUILDING_BY_ID.get(id);
@@ -410,6 +413,28 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
                 {workbench.message}
               </p>
             )}
+          </section>
+        )}
+
+        {labsHere.length > 0 && (
+          <section className="mt-4" aria-labelledby="p-workshop" data-testid="workshop-section">
+            <h3 id="p-workshop" className="text-lg font-semibold">
+              Workshop
+            </h3>
+            <p className="mt-1 text-sm text-[var(--fg-muted)]">
+              Hands-on labs for your own AWS account. Finishing one earns fixed XP and a short debrief; it never commissions a building.
+            </p>
+            <ul className="mt-1 grid gap-1">
+              {labsHere.map((l) => (
+                <li key={l.id}>
+                  <a className="flex min-h-11 flex-wrap items-center gap-2 underline underline-offset-4" href={hrefLab(l.id)} data-testid="workshop-link">
+                    Lab {l.n}: {l.title}
+                    <span className="text-sm text-[var(--fg-muted)]">{l.minutes} min</span>
+                    {save.labs.progress[l.id]?.completedAt && <span className="chip">Complete</span>}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </section>
         )}
 

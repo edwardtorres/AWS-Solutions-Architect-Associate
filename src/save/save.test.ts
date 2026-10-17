@@ -4,6 +4,7 @@ import { MIGRATIONS, migrate, sanitize } from './migrate';
 import { createSaveStore, type KeyValueStorage } from './store';
 import { deriveState } from './state';
 import fixtureJson from './__fixtures__/save-v2-real.json';
+import v3Json from './__fixtures__/save-v3-real.json';
 import { domainOfItem } from './migrate';
 import { computeReadiness } from '../game/readiness';
 import { DEFAULT_ENV } from '../game/env';
@@ -245,7 +246,7 @@ describe('v1 to current migration', () => {
     const r = migrate(v1, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(3);
+    expect(r.save.version).toBe(4);
     expect(r.save.buildings).toEqual({ 'identity-keep': v1.buildings['identity-keep'], gatehouse: v1.buildings.gatehouse });
     expect(r.save.ui).toEqual(v1.ui);
     expect(r.save.game).toEqual(freshSave(clock).game);
@@ -256,10 +257,10 @@ describe('v1 to current migration', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(v1));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(3);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(4);
     const other = makeStore(null);
     expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: v1 })).ok).toBe(true);
-    expect(other.getSnapshot().save.version).toBe(3);
+    expect(other.getSnapshot().save.version).toBe(4);
     expect(Object.keys(other.getSnapshot().save.buildings)).toHaveLength(2);
   });
 
@@ -329,7 +330,7 @@ describe('v2 to v3 migration (answer history)', () => {
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
     const { game } = r.save;
-    expect(r.save.version).toBe(3);
+    expect(r.save.version).toBe(4);
     // Every field of the old game block survives.
     expect(game.xp).toBe(fixture.game.xp);
     expect(game.flags).toHaveLength(1);
@@ -392,5 +393,79 @@ describe('v2 to v3 migration (answer history)', () => {
     expect(Object.keys(bad.game.history)).toEqual(['gatehouse-002']);
     expect(bad.game.history['gatehouse-002']).toMatchObject({ ok: 3, streak: 3 });
     expect(bad.game.recent).toEqual({ '1': [['gatehouse-001', 1, 'inspection']] });
+  });
+});
+
+describe('v3 to v4 migration on a real v3 save', () => {
+  const fixture = v3Json as unknown as { version: number; buildings: Record<string, unknown>; ui: unknown; game: { log: unknown[]; xp: number; history: Record<string, unknown>; recent: Record<string, unknown[]>; flags: unknown[] } };
+
+  it('is a genuine v3 save captured from the production build', () => {
+    expect(fixture.version).toBe(3);
+    expect(fixture.game.log.length).toBeGreaterThan(10);
+    expect(Object.keys(fixture.game.history).length).toBeGreaterThan(5);
+  });
+
+  it('adds an empty labs block and changes nothing else', () => {
+    const r = migrate(fixture, known, clock);
+    expect(r.status).toBe('migrated');
+    if (r.status !== 'migrated') return;
+    expect(r.save.version).toBe(4);
+    expect(r.save.labs).toEqual({ accountCreated: null, progress: {} });
+    expect(r.save.game.xp).toBe(fixture.game.xp);
+    expect(r.save.game.history).toEqual(fixture.game.history);
+    expect(r.save.game.recent).toEqual(fixture.game.recent);
+    expect(r.save.game.log).toHaveLength(fixture.game.log.length);
+    expect(r.save.buildings).toEqual(fixture.buildings);
+    expect(r.save.ui).toEqual(fixture.ui);
+  });
+
+  it('readiness is the same before and after', () => {
+    const r = migrate(fixture, known, clock);
+    if (r.status !== 'migrated') throw new Error('not migrated');
+    const meta = new Map(fixture.game.log.map((e) => [String((e as unknown[])[0]), { id: String((e as unknown[])[0]), building: String((e as unknown[])[0]).replace(/-\d{3}$/, ''), bullets: ['x'], difficulty: 2 as const }]));
+    const before = computeReadiness(fixture.game.recent as never, meta, DEFAULT_ENV);
+    expect(computeReadiness(r.save.game.recent, meta, DEFAULT_ENV)).toEqual(before);
+  });
+
+  it('loads through the store, writes v4 back and keeps the labs block through export and import', () => {
+    const storage = new MemoryStorage();
+    storage.setItem(STORAGE_KEY, JSON.stringify(fixture));
+    const store = makeStore(storage);
+    expect(store.getSnapshot().status).toBe('migrated');
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(4);
+    store.setLabStep('lab-01-safe-account', 's1', true);
+    store.setLabNote('lab-01-safe-account', 's1', 'the page looked different');
+    store.setLabAccountCreated('2026-09-01');
+    const other = makeStore(null);
+    expect(other.importJson(store.exportJson()).ok).toBe(true);
+    expect(other.getSnapshot().save.labs).toEqual({ accountCreated: '2026-09-01', progress: { 'lab-01-safe-account': { steps: { s1: true }, notes: { s1: 'the page looked different' } } } });
+  });
+
+  it('sanitizes a malformed labs block field by field', () => {
+    const r = sanitize(
+      {
+        version: 4,
+        buildings: {},
+        ui: {},
+        game: {},
+        labs: {
+          accountCreated: 'last week',
+          progress: {
+            'lab-01-safe-account': { steps: { s1: true, 'BAD ID': true, s2: false }, notes: { s1: '  ', s3: 'x'.repeat(5000), s4: 7 }, completedAt: '2026-01-01T00:00:00Z', debrief: { questionIds: ['a-001', 'a-002', 'a-003'], seed: 3, startedAt: 'x', answers: { 'a-001': { chosen: [0], correct: true, xp: 10 }, 'zzz': { chosen: [], correct: true, xp: 1 } }, finishedAt: 'y' } },
+            'not a lab': { steps: {} },
+          },
+        },
+      },
+      known,
+      clock,
+    );
+    expect(r.labs.accountCreated).toBeNull();
+    expect(Object.keys(r.labs.progress)).toEqual(['lab-01-safe-account']);
+    const p = r.labs.progress['lab-01-safe-account'];
+    expect(p?.steps).toEqual({ s1: true });
+    expect(Object.keys(p?.notes ?? {})).toEqual(['s3']);
+    expect(p?.notes.s3).toHaveLength(1000);
+    expect(p?.debrief?.finishedAt).toBeUndefined(); // not every question answered
+    expect(Object.keys(p?.debrief?.answers ?? {})).toEqual(['a-001']);
   });
 });

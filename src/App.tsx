@@ -16,6 +16,8 @@ const AttemptPage = lazy(() => import('./ui/play/AttemptPage'));
 const ProgressPage = lazy(() => import('./ui/ProgressPage'));
 const WorkbenchPage = lazy(() => import('./ui/puzzles/WorkbenchPage'));
 const PuzzlePage = lazy(() => import('./ui/puzzles/PuzzlePage'));
+const LabsPage = lazy(() => import('./ui/labs/LabsPage'));
+const LabPage = lazy(() => import('./ui/labs/LabPage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
 const NOTICE: Record<string, string | undefined> = {
@@ -68,6 +70,9 @@ export default function App() {
             <a href="#/progress" className="btn" aria-current={route.view === 'progress' ? 'page' : undefined} data-testid="rank-chip">
               {rank.rank.name} · {snapshot.save.game.xp.toLocaleString('en-US')} XP
             </a>
+            <a href="#/labs" className="btn" aria-current={route.view === 'labs' || route.view === 'lab' ? 'page' : undefined}>
+              Labs
+            </a>
             <a href="#/glossary" className="btn" aria-current={route.view === 'glossary' ? 'page' : undefined}>
               Glossary
             </a>
@@ -98,6 +103,8 @@ export default function App() {
           {route.view === 'place' && <AttemptPage key={`p-${route.param}`} kind="placement" buildingId={route.param ?? null} />}
           {route.view === 'progress' && <ProgressPage />}
           {route.view === 'workbench' && <WorkbenchPage key={route.param} buildingId={route.param ?? null} />}
+          {route.view === 'labs' && <LabsPage />}
+          {route.view === 'lab' && <LabPage key={route.param} labId={route.param ?? null} />}
           {route.view === 'puzzle' && <PuzzlePage key={route.param} scenarioId={route.param ?? null} />}
         </Suspense>
         <Suspense fallback={null}>
@@ -105,7 +112,7 @@ export default function App() {
           <Settings />
         </Suspense>
         <footer className="mt-8 pb-8 text-xs text-[var(--fg-muted)]">
-          Outline source: the official AWS exam guide for SAA-C03 (docs.aws.amazon.com). Puzzles, labs, spaced review and the mock exam arrive in later steps.
+          Outline source: the official AWS exam guide for SAA-C03 (docs.aws.amazon.com). Spaced review and the mock exam arrive in later steps.
         </footer>
       </main>
 

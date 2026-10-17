@@ -1,0 +1,504 @@
+{
+ "version": 3,
+ "updatedAt": "2026-10-17T00:17:20.422Z",
+ "buildings": {
+  "pillar-plaza": {
+   "state": "commissioned",
+   "changedAt": "2026-10-17T00:17:18.095Z",
+   "via": "inspection"
+  },
+  "charter-hall": {
+   "state": "under_construction",
+   "changedAt": "2026-10-17T00:17:18.713Z"
+  }
+ },
+ "ui": {
+  "view": "map",
+  "lastBuilding": null,
+  "roads": "selected"
+ },
+ "game": {
+  "notesOpened": {
+   "pillar-plaza": "2026-10-17T00:17:14.639Z",
+   "charter-hall": "2026-10-17T00:17:18.177Z"
+  },
+  "startups": {
+   "pillar-plaza": {
+    "prevIds": [
+     "pillar-plaza-001",
+     "pillar-plaza-010"
+    ]
+   },
+   "charter-hall": {
+    "prevIds": [
+     "charter-hall-015",
+     "charter-hall-002"
+    ]
+   }
+  },
+  "inspections": {
+   "pillar-plaza": {
+    "day": "2026-10-17",
+    "fails": 1,
+    "prevIds": [
+     "pillar-plaza-008",
+     "pillar-plaza-001",
+     "pillar-plaza-005",
+     "pillar-plaza-010",
+     "pillar-plaza-003"
+    ]
+   },
+   "charter-hall": {
+    "day": "2026-10-17",
+    "fails": 1,
+    "prevIds": [
+     "charter-hall-012",
+     "charter-hall-011",
+     "charter-hall-001",
+     "charter-hall-013",
+     "charter-hall-009"
+    ]
+   }
+  },
+  "placements": {
+   "identity-keep": {
+    "lastStartDay": "2026-10-17"
+   }
+  },
+  "active": null,
+  "xp": 468,
+  "seen": {
+   "pillar-plaza-003": 2,
+   "pillar-plaza-008": 2,
+   "pillar-plaza-001": 2,
+   "pillar-plaza-010": 2,
+   "pillar-plaza-006": 1,
+   "pillar-plaza-004": 1,
+   "pillar-plaza-007": 1,
+   "pillar-plaza-002": 1,
+   "pillar-plaza-009": 1,
+   "pillar-plaza-005": 1,
+   "charter-hall-015": 1,
+   "charter-hall-002": 1,
+   "charter-hall-012": 1,
+   "charter-hall-011": 1,
+   "charter-hall-001": 1,
+   "charter-hall-013": 1,
+   "charter-hall-009": 1,
+   "identity-keep-021": 1,
+   "identity-keep-016": 1,
+   "identity-keep-019": 1,
+   "identity-keep-018": 1,
+   "identity-keep-017": 1
+  },
+  "days": {
+   "2026-10-17": 26
+  },
+  "bestStreak": 1,
+  "badges": {},
+  "bonus": {
+   "pillar-plaza": true
+  },
+  "flags": [
+   {
+    "id": "identity-keep-021@2026-10-17T00:17:20.422Z",
+    "questionId": "identity-keep-021",
+    "note": "Wording check",
+    "myAnswer": [
+     3
+    ],
+    "at": "2026-10-17T00:17:20.422Z"
+   }
+  ],
+  "log": [
+   [
+    "pillar-plaza-003",
+    1,
+    "2026-10-17T00:17:15.831Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-008",
+    0,
+    "2026-10-17T00:17:15.945Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-001",
+    1,
+    "2026-10-17T00:17:16.212Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-010",
+    1,
+    "2026-10-17T00:17:16.345Z",
+    "startup"
+   ],
+   [
+    "pillar-plaza-006",
+    1,
+    "2026-10-17T00:17:16.644Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-004",
+    0,
+    "2026-10-17T00:17:16.813Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-007",
+    1,
+    "2026-10-17T00:17:16.963Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-002",
+    0,
+    "2026-10-17T00:17:17.078Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-009",
+    1,
+    "2026-10-17T00:17:17.261Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-008",
+    1,
+    "2026-10-17T00:17:17.595Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-001",
+    1,
+    "2026-10-17T00:17:17.711Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-005",
+    1,
+    "2026-10-17T00:17:17.845Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-010",
+    1,
+    "2026-10-17T00:17:17.961Z",
+    "inspection"
+   ],
+   [
+    "pillar-plaza-003",
+    0,
+    "2026-10-17T00:17:18.094Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-015",
+    1,
+    "2026-10-17T00:17:18.594Z",
+    "startup"
+   ],
+   [
+    "charter-hall-002",
+    1,
+    "2026-10-17T00:17:18.712Z",
+    "startup"
+   ],
+   [
+    "charter-hall-012",
+    0,
+    "2026-10-17T00:17:18.994Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-011",
+    0,
+    "2026-10-17T00:17:19.111Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-001",
+    0,
+    "2026-10-17T00:17:19.227Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-013",
+    1,
+    "2026-10-17T00:17:19.346Z",
+    "inspection"
+   ],
+   [
+    "charter-hall-009",
+    1,
+    "2026-10-17T00:17:19.529Z",
+    "inspection"
+   ],
+   [
+    "identity-keep-021",
+    1,
+    "2026-10-17T00:17:19.760Z",
+    "placement"
+   ],
+   [
+    "identity-keep-016",
+    1,
+    "2026-10-17T00:17:19.877Z",
+    "placement"
+   ],
+   [
+    "identity-keep-019",
+    1,
+    "2026-10-17T00:17:20.065Z",
+    "placement"
+   ],
+   [
+    "identity-keep-018",
+    1,
+    "2026-10-17T00:17:20.178Z",
+    "placement"
+   ],
+   [
+    "identity-keep-017",
+    0,
+    "2026-10-17T00:17:20.294Z",
+    "placement"
+   ]
+  ],
+  "history": {
+   "pillar-plaza-003": {
+    "n": 2,
+    "ok": 1,
+    "streak": 0,
+    "last": "2026-10-17T00:17:18.094Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-008": {
+    "n": 2,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:17.595Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-001": {
+    "n": 2,
+    "ok": 2,
+    "streak": 2,
+    "last": "2026-10-17T00:17:17.711Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-010": {
+    "n": 2,
+    "ok": 2,
+    "streak": 2,
+    "last": "2026-10-17T00:17:17.961Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-006": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:16.644Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-004": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:16.813Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-007": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:16.963Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-002": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:17.078Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-009": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:17.261Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "pillar-plaza-005": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:17.845Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "charter-hall-015": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:18.594Z",
+    "lastOk": 1,
+    "lastKind": "startup"
+   },
+   "charter-hall-002": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:18.712Z",
+    "lastOk": 1,
+    "lastKind": "startup"
+   },
+   "charter-hall-012": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:18.994Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "charter-hall-011": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:19.111Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "charter-hall-001": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:19.227Z",
+    "lastOk": 0,
+    "lastKind": "inspection"
+   },
+   "charter-hall-013": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:19.346Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "charter-hall-009": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:19.529Z",
+    "lastOk": 1,
+    "lastKind": "inspection"
+   },
+   "identity-keep-021": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:19.760Z",
+    "lastOk": 1,
+    "lastKind": "placement"
+   },
+   "identity-keep-016": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:19.877Z",
+    "lastOk": 1,
+    "lastKind": "placement"
+   },
+   "identity-keep-019": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:20.065Z",
+    "lastOk": 1,
+    "lastKind": "placement"
+   },
+   "identity-keep-018": {
+    "n": 1,
+    "ok": 1,
+    "streak": 1,
+    "last": "2026-10-17T00:17:20.178Z",
+    "lastOk": 1,
+    "lastKind": "placement"
+   },
+   "identity-keep-017": {
+    "n": 1,
+    "ok": 0,
+    "streak": 0,
+    "last": "2026-10-17T00:17:20.294Z",
+    "lastOk": 0,
+    "lastKind": "placement"
+   }
+  },
+  "recent": {
+   "1": [
+    [
+     "charter-hall-012",
+     0,
+     "inspection"
+    ],
+    [
+     "charter-hall-011",
+     0,
+     "inspection"
+    ],
+    [
+     "charter-hall-001",
+     0,
+     "inspection"
+    ],
+    [
+     "charter-hall-013",
+     1,
+     "inspection"
+    ],
+    [
+     "charter-hall-009",
+     1,
+     "inspection"
+    ],
+    [
+     "identity-keep-021",
+     1,
+     "placement"
+    ],
+    [
+     "identity-keep-016",
+     1,
+     "placement"
+    ],
+    [
+     "identity-keep-019",
+     1,
+     "placement"
+    ],
+    [
+     "identity-keep-018",
+     1,
+     "placement"
+    ],
+    [
+     "identity-keep-017",
+     0,
+     "placement"
+    ]
+   ]
+  }
+ }
+}
