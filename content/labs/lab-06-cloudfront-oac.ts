@@ -15,7 +15,7 @@ const lab: Lab = {
   steps: [
     {
       id: 'bucket',
-      text: 'Create a general purpose S3 bucket with a globally unique name in your chosen Region. Keep Block Public Access fully on and do not turn on static website hosting: OAC needs a regular bucket origin. In CloudShell, set a variable with the name.',
+      text: 'Create a general purpose S3 bucket with a globally unique name in your chosen Region. Keep Block Public Access fully on and do not turn on static website hosting: OAC needs a regular bucket origin. In CloudShell, set a variable with the name (a new CloudShell session loses it, so later commands set it again).',
       src: 'cf-oac',
       quote: 'This origin must be a regular S3 bucket, not a bucket configured as a website endpoint.',
       code: 'BUCKET=<your-bucket-name>',
@@ -24,8 +24,8 @@ const lab: Lab = {
     {
       id: 'upload',
       text: 'Create a small file named index.html on your computer (any text inside) and upload it to the bucket.',
-      src: 'cf-get-started',
-      quote: 'Access your content through CloudFront To access your content through CloudFront, combine the domain name for your CloudFront distribution with the main page for your content.',
+      src: 's3-upload-objects',
+      quote: 'You can upload any file type—images, backups, data, movies, and so on—into an S3 bucket.',
       checkpoint: 'index.html is listed in the bucket.',
     },
     {
@@ -33,15 +33,31 @@ const lab: Lab = {
       text: 'Before any distribution exists, request the object straight from S3. Replace the Region placeholder with your Region code.',
       src: 's3-block-public-access',
       quote: 'By default, new buckets, access points, and objects don\'t allow public access.',
-      code: 'curl -sI "https://$BUCKET.s3.<your-region>.amazonaws.com/index.html" | head -n 1',
+      code: 'BUCKET=<your-bucket-name>; curl -sI "https://$BUCKET.s3.<your-region>.amazonaws.com/index.html" | head -n 1',
       checkpoint: 'The first line reports a Forbidden status: the bucket is private.',
     },
     {
       id: 'distribution',
-      text: 'Create a CloudFront standard distribution with the bucket as its origin. Choose origin access control with "Sign requests (recommended)", set the default root object to index.html, and keep the default CloudFront domain name (no custom domain).',
+      text: 'Create a CloudFront standard distribution with the bucket as its origin. Choose origin access control and keep the default CloudFront domain name (no custom domain). Leave other settings at the wizard\'s recommended values.',
       src: 'cf-get-started',
       quote: 'Uses origin access control (OAC) to send authenticated requests to your Amazon S3 origin.',
+      sensitive: true,
       checkpoint: 'The distribution is listed with a domain name that ends in cloudfront.net, and its status shows Deploying.',
+    },
+    {
+      id: 'waf',
+      kind: 'check',
+      text: 'On the wizard\'s "Enable security protections" page, decline the optional AWS WAF protections. This lab does not need them, and AWS WAF is a separate service that is billed on its own basis (web ACLs, rules and requests).',
+      src: 'waf-pricing',
+      quote: 'You will be charged for each web ACL that you create and each rule that you create per web ACL.',
+      checkpoint: 'The distribution has no web ACL attached.',
+    },
+    {
+      id: 'root',
+      text: 'Set the distribution\'s default root object to index.html so that the bare domain name returns your page.',
+      src: 'cf-default-root',
+      quote: 'You can use a default root object to avoid exposing the contents of your distribution.',
+      checkpoint: 'The General settings of the distribution show index.html as the default root object.',
     },
     {
       id: 'oac-check',
@@ -53,11 +69,11 @@ const lab: Lab = {
     },
     {
       id: 'bucket-policy',
-      text: 'Add the bucket policy that lets only the CloudFront service principal read objects, limited to your distribution. The distribution settings offer a copy of the policy; paste it into the bucket\'s Permissions tab and save.',
-      src: 'cf-oac',
-      quote: 'Use an S3 bucket policy to allow the CloudFront service principal (cloudfront.amazonaws.com) to access the bucket.',
+      text: 'Open the bucket\'s Permissions tab and read the bucket policy first. If it already names the CloudFront service principal and your distribution (the wizard writes it), do nothing. If not, add the example policy from the OAC page, edited for your bucket and distribution.',
+      src: 'cf-get-started',
+      quote: 'CloudFront updates the S3 bucket policy for you.',
       sensitive: true,
-      checkpoint: 'The policy is saved on the bucket, and Block Public Access still blocks all public access.',
+      checkpoint: 'The bucket policy names the CloudFront service principal, and Block Public Access still blocks all public access.',
     },
     {
       id: 'deployed',
@@ -72,7 +88,7 @@ const lab: Lab = {
       text: 'Request the object directly from S3 again, then through CloudFront. Set the variable DOMAIN to the distribution domain name first.',
       src: 'cf-get-started',
       quote: 'OAC sends requests through CloudFront to prevent viewers from accessing your S3 bucket directly.',
-      code: 'DOMAIN=<your-distribution-domain>; curl -sI "https://$BUCKET.s3.<your-region>.amazonaws.com/index.html" | head -n 1; curl -sI "https://$DOMAIN/index.html" | head -n 1',
+      code: 'BUCKET=<your-bucket-name>; DOMAIN=<your-distribution-domain>; curl -sI "https://$BUCKET.s3.<your-region>.amazonaws.com/index.html" | head -n 1; curl -sI "https://$DOMAIN/index.html" | head -n 1',
       checkpoint: 'The S3 address still answers Forbidden, while the CloudFront address answers with a success status.',
     },
     {
@@ -86,7 +102,7 @@ const lab: Lab = {
     {
       id: 'acm',
       optional: true,
-      text: 'Optional, only if you control a domain: request a public ACM certificate for a name in that domain, and do it in the Region the docs require for CloudFront. Validate it with DNS.',
+      text: 'Optional, only if you control a domain: request a public ACM certificate for a name in that domain, and do it in the Region the docs require for CloudFront. Validate it with DNS. Return to your chosen Region afterwards.',
       alt: 'Skip it. The default CloudFront domain already serves HTTPS; read the alternate domain name requirements to see what a custom name adds.',
       src: 'cf-https-requirements',
       quote: 'To use an ACM certificate with a CloudFront distribution, make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1).',
@@ -110,6 +126,14 @@ const lab: Lab = {
       checkpoint: 'The distribution no longer appears in the list.',
     },
     {
+      id: 'c-oac',
+      kind: 'cleanup',
+      text: 'Delete the origin access control that the distribution used; it stays after the distribution is gone. It is under the Origin access settings in the CloudFront console.',
+      src: 'cf-oac',
+      quote: 'OAC helps you secure your origins, such as Amazon S3.',
+      checkpoint: 'The origin access control list no longer shows the lab\'s entry.',
+    },
+    {
       id: 'c-bucket',
       kind: 'cleanup',
       text: 'Only now empty and delete the bucket. Deleting the distribution before the bucket is the documented order for an OAC origin.',
@@ -120,7 +144,7 @@ const lab: Lab = {
     {
       id: 'c-cert',
       kind: 'cleanup',
-      text: 'If you made the optional certificate, delete it in ACM (in the same Region you requested it). Skip otherwise.',
+      text: 'If you made the optional certificate, delete it in ACM (in the same Region you requested it), and remove the DNS validation record and any hosted zone you created only for this lab. Skip otherwise.',
       src: 'acm-overview',
       quote: 'AWS Certificate Manager (ACM) handles the complexity of creating, storing, and renewing public and private SSL/TLS X.509 certificates and keys that protect your AWS websites and applications.',
       checkpoint: 'No lab certificate remains, or none was created.',
@@ -132,7 +156,16 @@ const lab: Lab = {
       src: 'cf-get-started',
       quote: 'Clean up If you created your distribution and S3 bucket only as a learning exercise, delete them so that you no longer accrue charges.',
       code: 'aws cloudfront list-distributions --query "DistributionList.Items[].DomainName" --output text',
-      checkpoint: 'The output is empty or lists only distributions that are not from this lab.',
+      checkpoint: 'The output is empty or says None, or lists only distributions that are not from this lab.',
+    },
+    {
+      id: 'v-cert',
+      kind: 'verify',
+      text: 'Check that no lab certificate remains in the Region ACM required for CloudFront.',
+      src: 'cf-https-requirements',
+      quote: 'To use an ACM certificate with a CloudFront distribution, make sure you request (or import) the certificate in the US East (N. Virginia) Region (us-east-1).',
+      code: 'aws acm list-certificates --region us-east-1 --query "CertificateSummaryList[].DomainName" --output text',
+      checkpoint: 'The output is empty or says None, or lists only certificates from other work.',
     },
     {
       id: 'v-bucket',
@@ -140,7 +173,7 @@ const lab: Lab = {
       text: 'Check that the bucket no longer exists.',
       src: 'cf-get-started',
       quote: 'Clean up If you created your distribution and S3 bucket only as a learning exercise, delete them so that you no longer accrue charges.',
-      code: 'aws s3api head-bucket --bucket "$BUCKET"',
+      code: 'BUCKET=<your-bucket-name>; aws s3api head-bucket --bucket "$BUCKET"',
       checkpoint: 'The command fails with a Not Found error.',
     },
   ],
@@ -148,7 +181,7 @@ const lab: Lab = {
     {
       pair: 'cloudfront-vs-global-accelerator',
       step: 'cache',
-      text: 'CloudFront cached your file at an edge location (content delivery, caching). Global Accelerator would not cache it: it gives static IP addresses at the edge and forwards traffic to your endpoints over the AWS network.',
+      text: 'CloudFront cached your file at an edge location (content delivery and caching). Global Accelerator is a different tool: its documented feature is static IP addresses at the edge that carry traffic over the AWS network to your endpoints.',
       src: 'ga-how',
       quote: 'The static IP addresses accept incoming traffic onto the AWS global network from the edge location that is closest to your users.',
     },

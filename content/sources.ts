@@ -815,6 +815,12 @@ const sources: Source[] = [
   aws('co-opt-out', `${D}/compute-optimizer/latest/ug/account-opt-out.html`, 'Opting out of Compute Optimizer'),
   aws('config-getting-started', `${D}/config/latest/developerguide/getting-started.html`, 'Getting started with AWS Config'),
   aws('config-concepts', `${D}/config/latest/developerguide/config-concepts.html`, 'AWS Config terminology and concepts'),
+  aws('waf-pricing', 'https://aws.amazon.com/waf/pricing/', 'AWS WAF pricing'),
+  aws('cf-default-root', `${D}/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html`, 'Specify a default root object'),
+  aws('lab-orgs-move-account', `${D}/organizations/latest/userguide/move_account_to_ou.html`, 'Moving an account to an OU'),
+  aws('lab-orgs-ou-delete', `${D}/organizations/latest/userguide/delete-ou.html`, 'Deleting an OU'),
+  aws('ebs-pricing', 'https://aws.amazon.com/ebs/pricing/', 'Amazon EBS pricing'),
+  aws('kms-pricing', 'https://aws.amazon.com/kms/pricing/', 'AWS KMS pricing'),
 ];
 
 export default sources;

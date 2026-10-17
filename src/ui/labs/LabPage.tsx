@@ -4,7 +4,7 @@ import { loadShared, type Shared } from '../../content/store';
 import { SERVICE_PLANS } from '../../../content/labs/services';
 import { DEBRIEF_SIZE, LAB_XP, type Lab, type LabStep } from '../../labs/types';
 import { EXPORT_WARNING, exportLabNotes } from '../../labs/export';
-import { loadLab } from '../../labs/load';
+import { loadLab, loadTemplate } from '../../labs/load';
 import { LAB_META_BY_ID } from '../../labs/meta';
 import { attemptRandom } from '../../lib/rng';
 import { hrefConfuse, hrefLab, hrefFor } from '../../lib/route';
@@ -148,6 +148,56 @@ function Step({ lab, step, index, shared }: { lab: Lab; step: LabStep; index: nu
         </div>
       </div>
     </li>
+  );
+}
+
+function TemplateView({ name }: { name: string }) {
+  const [text, setText] = useState<string | null>(null);
+  useEffect(() => {
+    let live = true;
+    void loadTemplate(name).then((t) => {
+      if (live) setText(t);
+    });
+    return () => {
+      live = false;
+    };
+  }, [name]);
+  return (
+    <details className="mt-2 rounded-xl border-2 border-[var(--line)] p-2" data-testid="template">
+      <summary className="min-h-11 cursor-pointer py-2 font-semibold">Template: {name}</summary>
+      {text === null ? (
+        <p role="status">Loading the template…</p>
+      ) : (
+        <>
+          <div className="mt-1 flex flex-wrap gap-2">
+            <button
+              type="button"
+              className="btn"
+              onClick={() => {
+                try {
+                  void navigator.clipboard.writeText(text);
+                } catch {
+                  /* clipboard blocked: select the text by hand */
+                }
+              }}
+            >
+              Copy the template
+            </button>
+            <button
+              type="button"
+              className="btn"
+              data-testid="download-template"
+              onClick={() => {
+                downloadText(name, text);
+              }}
+            >
+              Download {name}
+            </button>
+          </div>
+          <pre tabIndex={0} aria-label={`Template ${name}`} className="mt-2 max-h-96 overflow-auto whitespace-pre-wrap break-words rounded-lg border border-[var(--line)] bg-[rgba(0,0,0,0.3)] p-2 text-xs"><code>{text}</code></pre>
+        </>
+      )}
+    </details>
   );
 }
 
@@ -333,6 +383,18 @@ export default function LabPage({ labId }: { labId: string | null }) {
           <li>Nothing here states prices. Anything marked “bills while running” keeps billing until you delete it.</li>
         </ul>
       </section>
+
+      {(lab.templates ?? []).length > 0 && (
+        <section className="mt-4" aria-labelledby="lab-templates">
+          <h3 id="lab-templates" className="text-xl font-semibold">
+            CloudFormation templates
+          </h3>
+          <p className="mt-1 max-w-prose text-sm">Copy or download the template, then create the stack as the steps say. Deleting the stack is the cleanup. Read the template before you use it.</p>
+          {(lab.templates ?? []).map((t) => (
+            <TemplateView key={t} name={t} />
+          ))}
+        </section>
+      )}
 
       <h3 className="mt-6 text-2xl font-semibold">Steps</h3>
       <ol className="mt-2 grid gap-3" data-testid="lab-steps">

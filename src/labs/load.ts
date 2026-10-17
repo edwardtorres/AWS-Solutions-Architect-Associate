@@ -15,3 +15,12 @@ export async function loadAllLabs(): Promise<Lab[]> {
   const mods = await Promise.all(Object.values(loaders).map((l) => l()));
   return mods.map((m) => m.default).sort((a, b) => a.n - b.n);
 }
+
+// Templates are plain text beside the labs; the lab page shows them with copy and download buttons.
+const templateLoaders = import.meta.glob<string>('../../content/labs/templates/*', { query: '?raw', import: 'default' });
+
+export async function loadTemplate(name: string): Promise<string | null> {
+  const key = Object.keys(templateLoaders).find((k) => k.endsWith(`/${name}`));
+  const load = key ? templateLoaders[key] : undefined;
+  return load ? load() : null;
+}

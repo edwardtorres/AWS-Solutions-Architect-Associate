@@ -2,7 +2,7 @@ AWSTemplateFormatVersion: '2010-09-09'
 Description: >-
   Lab 9 scalable web tier. A VPC with two public subnets in two Availability Zones, an Application Load Balancer,
   a target group, a launch template, an Auto Scaling group and a target tracking scaling policy.
-  The load balancer, the instances and their public IPv4 addresses bill while the stack exists. Delete the stack when done.
+  The load balancer, the instances, their root volumes and public IPv4 addresses bill while the stack exists. Delete the stack when done.
 
 Parameters:
   InstanceType:
@@ -10,8 +10,7 @@ Parameters:
     Default: t3.micro
     AllowedValues:
       - t3.micro
-      - t3.small
-    Description: Smallest sensible size for a demo web page.
+    Description: Smallest sensible size for a demo web page; the only size the lab allows.
   LatestAmiId:
     Type: AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>
     Default: /aws/service/ami-amazon-linux-latest/al2023-ami-kernel-default-x86_64

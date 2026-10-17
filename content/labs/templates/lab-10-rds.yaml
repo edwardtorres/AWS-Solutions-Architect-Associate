@@ -21,13 +21,6 @@ Parameters:
     AllowedPattern: '[A-Za-z0-9]*'
     ConstraintDescription: Use 12 to 40 letters and digits only.
     Description: Password for the database administrator. Make one up and do not reuse a real password.
-  MultiAz:
-    Type: String
-    Default: 'false'
-    AllowedValues:
-      - 'false'
-      - 'true'
-    Description: Leave false for the smallest setup. true adds a synchronous standby in a second Availability Zone and doubles the instance cost.
 
 Resources:
   Vpc:
@@ -85,7 +78,6 @@ Resources:
     DeletionPolicy: Delete
     UpdateReplacePolicy: Delete
     Properties:
-      DBInstanceIdentifier: lab-10-rds
       Engine: mysql
       DBInstanceClass: db.t3.micro
       AllocatedStorage: '20'
@@ -93,7 +85,7 @@ Resources:
       StorageEncrypted: true
       MasterUsername: labadmin
       MasterUserPassword: !Ref MasterUserPassword
-      MultiAZ: !Ref MultiAz
+      MultiAZ: false
       BackupRetentionPeriod: 1
       PubliclyAccessible: false
       DeletionProtection: false
