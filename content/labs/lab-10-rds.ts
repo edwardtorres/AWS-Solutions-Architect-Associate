@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 75,
   buildings: ['read-replica-annex', 'single-point-watch', 'db-cost-desk', 'rebuild-yard'],
   bullets: ['2.2-S1', '2.2-S4', '3.3-K1', '3.3-K7', '3.3-S1'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon RDS', 'AWS CloudFormation', 'Amazon VPC', 'AWS CloudShell'],
   costs: [
     {

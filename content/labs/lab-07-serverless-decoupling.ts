@@ -10,7 +10,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['message-quay', 'serverless-mill'],
   bullets: ['2.1-K1', '2.1-K5', '2.1-K11', '2.1-K12', '2.1-S3', '2.1-S5'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS CloudFormation', 'AWS CloudShell', 'AWS IAM', 'AWS Lambda', 'Amazon API Gateway', 'Amazon SNS', 'Amazon SQS'],
   templates: ['lab-07-serverless.yaml'],
   costs: [],

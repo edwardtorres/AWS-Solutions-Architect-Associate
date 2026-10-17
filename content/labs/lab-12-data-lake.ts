@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 75,
   buildings: ['data-lake-reservoir', 'refinery', 'ingestion-gate'],
   bullets: ['3.5-K1', '3.5-S1', '3.5-K4', '3.5-S7'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon S3', 'AWS Glue', 'Amazon Athena', 'AWS CloudShell', 'AWS IAM'],
   costs: [],
   steps: [

@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['database-registry', 'tuning-bay'],
   bullets: ['3.3-K3', '3.3-K4', '3.3-K8', '3.3-S2'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon DynamoDB', 'AWS CloudShell'],
   costs: [
     {

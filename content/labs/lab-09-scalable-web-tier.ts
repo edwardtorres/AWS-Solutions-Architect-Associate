@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 50,
   buildings: ['scaling-floodgate', 'blueprint-hall', 'single-point-watch', 'throttle-lb-gate'],
   bullets: ['2.1-K6', '2.1-K9', '2.1-K10', '2.1-S2', '2.2-K8', '2.2-S4', '4.4-K3'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS CloudFormation', 'Amazon EC2', 'Amazon EC2 Auto Scaling', 'Elastic Load Balancing', 'Amazon VPC', 'AWS CloudShell'],
   costs: [
     {

@@ -9,7 +9,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['key-vault', 'archive-annex', 'cold-cellar'],
   bullets: ['1.3-K4', '1.3-S2', '1.3-K2', '4.1-K7', '4.1-S5', '4.1-K10'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon S3', 'AWS KMS', 'AWS CloudShell'],
   costs: [
     {

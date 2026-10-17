@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['ledger-office', 'capacity-meter', 'counting-house', 'service-selection-bureau'],
   bullets: ['4.1-K2', '4.1-K3', '4.2-K2', '4.2-K4'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS Budgets', 'AWS Cost Explorer', 'AWS Trusted Advisor', 'AWS Compute Optimizer', 'Amazon S3', 'AWS CloudShell'],
   costs: [],
   steps: [

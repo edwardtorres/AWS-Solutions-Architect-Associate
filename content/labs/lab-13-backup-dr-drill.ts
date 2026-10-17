@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 90,
   buildings: ['backup-archive', 'disaster-bunker', 'durable-dock'],
   bullets: ['4.1-K5', '4.1-S6', '2.2-K4', '2.2-S6', '2.2-S5'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS Backup', 'Amazon DynamoDB', 'AWS CloudShell', 'AWS IAM'],
   costs: [
     {

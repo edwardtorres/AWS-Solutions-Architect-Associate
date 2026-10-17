@@ -9,7 +9,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['gatehouse', 'watchtower', 'customs-house', 'nat-toll'],
   bullets: ['1.2-K3', '1.2-S1', '1.2-S2', '1.2-K2', '4.4-K4', '4.4-S1'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon VPC', 'AWS CloudFormation', 'AWS CloudShell'],
   templates: ['lab-04-vpc.yaml', 'lab-04-nat.yaml'],
   costs: [

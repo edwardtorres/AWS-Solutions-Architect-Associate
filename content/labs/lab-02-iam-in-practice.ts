@@ -12,7 +12,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['identity-keep', 'embassy-row', 'charter-hall'],
   bullets: ['1.1-S2', '1.1-S3', '1.1-S5', '1.1-K4'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS IAM', 'Amazon S3'],
   costs: [],
   steps: [

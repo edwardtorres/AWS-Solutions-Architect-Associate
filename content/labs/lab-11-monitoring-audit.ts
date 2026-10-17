@@ -8,7 +8,7 @@ const lab: Lab = {
   minutes: 75,
   buildings: ['compliance-registry', 'tide-gauges', 'watchtower'],
   bullets: ['1.3-K1', '1.3-S1', '2.2-S3', '2.2-K12'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon CloudWatch', 'Amazon SNS', 'AWS CloudTrail', 'AWS Config', 'AWS CloudShell', 'Amazon S3'],
   costs: [
     {

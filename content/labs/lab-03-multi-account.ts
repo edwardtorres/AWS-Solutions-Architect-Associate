@@ -11,7 +11,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['embassy-row'],
   bullets: ['1.1-K1', '1.1-S4'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['AWS Organizations', 'AWS IAM'],
   costs: [],
   steps: [

@@ -9,7 +9,7 @@ const lab: Lab = {
   minutes: 60,
   buildings: ['certificate-office', 'cache-edge-breakwater', 'edge-link-terminal'],
   bullets: ['1.3-S3', '2.1-K3', '2.1-K7', '3.4-K1', '3.4-S3'],
-  needs: [],
+  needs: ['lab-01-safe-account'],
   services: ['Amazon CloudFront', 'Amazon S3', 'AWS CloudShell', 'AWS Certificate Manager'],
   costs: [],
   steps: [
