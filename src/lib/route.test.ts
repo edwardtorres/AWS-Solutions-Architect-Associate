@@ -35,3 +35,13 @@ describe('hash routes', () => {
     }
   });
 });
+
+describe('mock routes', () => {
+  it('parses a third segment for a question number or a result id and round-trips it', () => {
+    expect(parseHash('#/mock')).toEqual({ view: 'mock', building: null, param: null });
+    expect(parseHash('#/mock/run/12')).toEqual({ view: 'mock', building: null, param: 'run', extra: '12' });
+    expect(parseHash('#/mock/result/mock-2026')).toMatchObject({ param: 'result', extra: 'mock-2026' });
+    expect(hrefFor(parseHash('#/mock/run/12'))).toBe('#/mock/run/12');
+    expect(hrefFor(parseHash('#/mock/review'))).toBe('#/mock/review');
+  });
+});

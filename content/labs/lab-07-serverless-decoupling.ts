@@ -32,7 +32,7 @@ const lab: Lab = {
     },
     {
       id: 's3',
-      text: 'Save the lab template (shown with this lab in the app) as lab-07-serverless.yaml in CloudShell, for example with the Actions menu, Upload file. Then create the stack named lab07. The template creates IAM roles for the functions, so the command must acknowledge that.',
+      text: 'Download the template from the page of this lab as lab-07-serverless.yaml, then upload it to CloudShell (Actions menu, Upload file). Then create the stack named lab07. The template creates IAM roles for the functions, so the command must acknowledge that.',
       src: 'cfn-iam-capabilities',
       quote: 'In the AWS CLI, when you use the create-stack and update-stack commands, specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for the --capabilities option.',
       code: 'aws cloudformation create-stack --stack-name lab07 --template-body file://lab-07-serverless.yaml --capabilities CAPABILITY_IAM',
@@ -149,7 +149,7 @@ const lab: Lab = {
       src: 'cfn-delete-stack',
       quote: 'When deleting a stack, CloudFormation deletes all resources in that stack',
       code: 'aws lambda list-functions --query "Functions[?starts_with(FunctionName,\'lab07\')].FunctionName"\naws apigatewayv2 get-apis --query "Items[?starts_with(Name,\'lab07\')].Name"\naws logs describe-log-groups --log-group-name-prefix /aws/lambda/lab07 --query "logGroups[].logGroupName"\naws cloudformation list-stacks --stack-status-filter DELETE_FAILED --query "StackSummaries[?StackName==\'lab07\'].StackName"',
-      checkpoint: 'All four lists are empty.',
+      checkpoint: 'All four lists are empty. If a log group is listed (a late invocation can recreate it), delete it with aws logs delete-log-group.',
     },
   ],
   traps: [

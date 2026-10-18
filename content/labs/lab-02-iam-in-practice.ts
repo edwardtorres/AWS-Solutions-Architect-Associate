@@ -90,11 +90,11 @@ const lab: Lab = {
     },
     {
       id: 's10',
-      text: 'Run the simulation for lab2-role again, with PutObject against the object ARN of the bucket. A grant to a role ARN in a resource policy is still capped by the boundary.',
+      text: 'Run the simulation for lab2-role again, with PutObject against the object ARN of the bucket, and choose the option to include the resource\'s policy if the simulator offers it. This does not prove more than step 6 did, since the boundary already denied PutObject there; it only confirms the result is unchanged. The proof that a role ARN grant is capped by the boundary is the cited sentence.',
       src: 'iam-boundaries',
       quote: 'IAM role – Resource-based policies that grant permissions to an IAM role ARN are limited by an implicit deny in a permissions boundary or session policy.',
       sensitive: true,
-      checkpoint: 'PutObject for lab2-role still shows as denied, even though the bucket policy names the role. If the simulator does not pick up the bucket policy, trust the cited sentence, which describes real evaluation.',
+      checkpoint: 'PutObject for lab2-role still shows as denied, as in the earlier run. The simulator may not support resource policies for roles; if so, rely on the cited sentence, which describes real evaluation.',
     },
     {
       id: 's11',

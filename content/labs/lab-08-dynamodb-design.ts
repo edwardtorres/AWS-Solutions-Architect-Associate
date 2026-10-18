@@ -151,6 +151,7 @@ const lab: Lab = {
       quote: "When you issue a DeleteTable request, the table's status changes from ACTIVE to DELETING.",
       code: 'aws dynamodb delete-table --table-name LabOrdersProv',
       checkpoint: 'The table status reads DELETING, or the command reports the table does not exist.',
+      sensitive: true,
     },
     {
       id: 'c2',
@@ -161,6 +162,7 @@ const lab: Lab = {
       quote: 'When you delete a table that has point-in-time recovery enabled, DynamoDB automatically creates a backup snapshot called a system backup and retains it for up to 35 days (at no additional cost).',
       code: 'aws dynamodb delete-table --table-name LabOrders',
       checkpoint: 'The table status reads DELETING.',
+      sensitive: true,
     },
     {
       id: 'v1',

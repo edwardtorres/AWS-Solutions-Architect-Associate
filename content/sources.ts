@@ -809,7 +809,6 @@ const sources: Source[] = [
   aws('glue-pricing', 'https://aws.amazon.com/glue/pricing/', 'AWS Glue pricing'),
   aws('athena-pricing', 'https://aws.amazon.com/athena/pricing/', 'Amazon Athena pricing'),
   aws('co-opt-out', `${D}/compute-optimizer/latest/ug/account-opt-out.html`, 'Opting out of Compute Optimizer'),
-  aws('config-getting-started', `${D}/config/latest/developerguide/getting-started.html`, 'Getting started with AWS Config'),
   aws('waf-pricing', 'https://aws.amazon.com/waf/pricing/', 'AWS WAF pricing'),
   aws('cf-default-root', `${D}/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html`, 'Specify a default root object'),
   aws('lab-orgs-move-account', `${D}/organizations/latest/userguide/move_account_to_ou.html`, 'Moving an account to an OU'),
@@ -818,6 +817,8 @@ const sources: Source[] = [
   aws('kms-pricing', 'https://aws.amazon.com/kms/pricing/', 'AWS KMS pricing'),
   aws('ddb-ondemand-backup', `${D}/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html`, 'Using on-demand DynamoDB backup and restore'),
   aws('free-tier-faq', 'https://aws.amazon.com/free/free-tier-faqs/', 'AWS Free Tier FAQs'),
+  aws('acm-delete', `${D}/acm/latest/userguide/gs-acm-delete.html`, 'Delete certificates managed by AWS Certificate Manager'),
+  aws('config-concepts', `${D}/config/latest/developerguide/config-concepts.html`, 'AWS Config terminology and concepts'),
 ];
 
 export default sources;

@@ -149,7 +149,7 @@ const lab: Lab = {
       src: 's3-delete-bucket',
       quote: 'Before you can delete a general purpose bucket, you must empty it.',
       code: 'BUCKET=<your-bucket-name>; aws s3api head-bucket --bucket "$BUCKET"',
-      checkpoint: 'The command fails with a Not Found error.',
+      checkpoint: 'The command fails with a Not Found error (a Forbidden error also means the bucket is no longer yours).',
     },
     {
       id: 'v-key',

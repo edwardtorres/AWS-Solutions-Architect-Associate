@@ -49,7 +49,7 @@ const lab: Lab = {
     {
       id: 's5',
       kind: 'check',
-      text: 'Open Cost Explorer in the Billing and Cost Management console. The first time you open it, this enables it for your account, and AWS also sets up Cost Anomaly Detection for you (a services monitor and a daily summary alert subscription). Data for a new account is prepared in the background, so charts may be empty or say that data is being prepared.',
+      text: 'Open Cost Explorer in the Billing and Cost Management console. The first time you open it, this enables it for your account (AWS does not let you turn it off again), and AWS also sets up Cost Anomaly Detection for you (a services monitor and a daily summary alert subscription). Data for a new account is prepared in the background, so charts may be empty or say that data is being prepared.',
       src: 'ce-enable',
       quote: 'You can enable Cost Explorer for your account by opening Cost Explorer for the first time in the AWS Cost Management console.',
       checkpoint: 'Cost Explorer opens with either charts or a message that your data is being prepared.',
@@ -163,6 +163,7 @@ const lab: Lab = {
     {
       id: 'c5',
       kind: 'cleanup',
+      optional: true,
       text: 'Cost Explorer stays enabled: AWS does not let you turn it off again. Leave it.',
       src: 'ce-what-is',
       quote: "You can't disable Cost Explorer after you enable it.",
@@ -170,6 +171,7 @@ const lab: Lab = {
     {
       id: 'c6',
       kind: 'cleanup',
+      optional: true,
       text: 'Enabling Cost Explorer also set up Cost Anomaly Detection (a services monitor and a daily summary alert subscription). Keep it, or opt out of it in the Cost Anomaly Detection console.',
       src: 'ce-enable',
       quote: 'You can opt out of Cost Anomaly Detection at any time.',

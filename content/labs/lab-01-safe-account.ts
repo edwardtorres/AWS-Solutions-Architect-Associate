@@ -69,7 +69,7 @@ const lab: Lab = {
     },
     {
       id: 's8',
-      text: 'Sign out of root and sign in as the new IAM user. Then add a virtual MFA device to this user on its Security credentials page. Keep the root password and root MFA device somewhere safe; from now on use root only for tasks that require it.',
+      text: 'Sign out of root and sign in as the new IAM user, using the console sign-in URL you noted in the previous step. Then add a virtual MFA device to this user on its Security credentials page. Keep the root password and root MFA device somewhere safe; from now on use root only for tasks that require it.',
       sensitive: true,
       src: 'lab-iam-mfa-virtual',
       quote: 'You can use a phone or other device as a virtual multi-factor authentication (MFA) device.',
@@ -128,7 +128,7 @@ const lab: Lab = {
     {
       id: 'v1',
       kind: 'verify',
-      text: 'In CloudShell, read the account summary and list the MFA devices of your IAM user; compare with what you set up. Also check in the Budgets console that your budget is still listed.',
+      text: 'In CloudShell, read the account summary and list the MFA devices of your IAM user (skip the second command if you deleted the user in the cleanup step); compare with what you set up. Also check in the Budgets console that your budget is still listed.',
       sensitive: true,
       code: 'aws iam get-account-summary --query "SummaryMap.{RootMfa:AccountMFAEnabled,RootAccessKeys:AccountAccessKeysPresent}"\naws iam list-mfa-devices --user-name <your-user-name>',
       src: 'lab-iam-getaccountsummary',

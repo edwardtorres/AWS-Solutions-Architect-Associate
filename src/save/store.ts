@@ -8,6 +8,7 @@ import type { StartResult } from '../game/start';
 import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
 import { abandonReview, completeReview, openSession, submitReviewAnswer, type ReviewSummary } from '../game/reviewSession';
 import { backfillByBullet } from '../game/weak';
+import { discardMock, finishMock, openMock, setMockAnswer, setMockFlag, MOCK_QUESTIONS, type MockOutcome } from '../game/mock';
 import type { QMeta } from '../game/readiness';
 import { completeLab, setAccountCreated, setAck, setNote, setStep, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
 import type { Difficulty } from '../content/types';
@@ -206,6 +207,50 @@ export function createSaveStore(opts: StoreOptions) {
     },
     abandonReview(): void {
       const next = abandonReview(snapshot.save);
+      if (next !== snapshot.save) commit(next);
+    },
+    /**
+     * Draws and opens a mock exam (65 questions, 130 minutes). `short` is the development-only 10-question mock: it never counts.
+     * Refused while another mock is open.
+     */
+    async startMock(bank: readonly Question[], short = false): Promise<{ ok: true } | { ok: false; message: string }> {
+      if (snapshot.readOnly) return { ok: false, message: 'This save is read-only (it is from a newer version of the app).' };
+      if (snapshot.save.game.mock.active) return { ok: true };
+      const { drawMock } = await import('../game/mockDraw');
+      const total = short ? 10 : MOCK_QUESTIONS;
+      const drawn = drawMock({
+        bank,
+        history: snapshot.save.game.history,
+        seen: snapshot.save.game.seen,
+        startDay: todayKey(clock),
+        timeZone: clock.timeZone,
+        total,
+        weights: env.weights,
+        domainOf: env.domainOf,
+        lastMockIds: snapshot.save.game.mock.history.at(-1)?.questionIds ?? [],
+        random,
+      });
+      if (drawn.questions.length < total) return { ok: false, message: `Only ${drawn.questions.length} questions are available for a mock of ${total}.` };
+      commit(openMock(snapshot.save, { questionIds: drawn.questions.map((q) => q.id), reserveUsed: drawn.reserveUsed, seed: Math.floor(random() * 2 ** 31), short }, ctxFor()));
+      return { ok: true };
+    },
+    setMockAnswer(questionId: string, chosen: readonly number[]): void {
+      const next = setMockAnswer(snapshot.save, questionId, chosen);
+      if (next !== snapshot.save) commit(next);
+    },
+    setMockFlag(questionId: string, on: boolean): void {
+      const next = setMockFlag(snapshot.save, questionId, on);
+      if (next !== snapshot.save) commit(next);
+    },
+    /** Grades the open mock (unanswered questions are wrong) and records every answer. `expired` marks one the timer submitted. */
+    finishMock(lookup: (id: string) => Question | undefined, expired: boolean): MockOutcome | null {
+      const r = finishMock(snapshot.save, ctxFor(lookup), expired);
+      if (!r) return null;
+      commit(r.save);
+      return r;
+    },
+    discardMock(): void {
+      const next = discardMock(snapshot.save);
       if (next !== snapshot.save) commit(next);
     },
     /** One-time fill of the per-bullet figures from the saved results (saves from before version 5). */

@@ -36,7 +36,7 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'Open AWS CloudShell in your chosen Region and stay in that Region for the whole lab. Glue, Athena and S3 must all be in the same Region.',
+      text: 'This lab needs a Paid plan account: the AWS Free Tier page labels Amazon Athena as Paid plan exclusive (recorded in this app\'s Free Tier snapshot). Open AWS CloudShell in your chosen Region and stay in that Region for the whole lab. Glue, Athena and S3 must all be in the same Region.',
       src: 'cloudshell-what',
       quote: 'AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.',
       checkpoint: 'A terminal prompt opens in the browser.',
@@ -45,7 +45,7 @@ const lab: Lab = {
       id: 's2',
       kind: 'check',
       costs: ['lab12-s3'],
-      text: 'Create the lake bucket. Bucket names are unique, so pick your own name that starts with lab12- and write it down; the later commands read it from the variable BUCKET (set it again if CloudShell restarts).',
+      text: 'Create the lake bucket. Bucket names are unique, so the command picks a name that starts with lab12-; copy it from the echo and write it down. Later commands find it again by that prefix.',
       code: 'BUCKET=lab12-$(date +%s)-$RANDOM\necho $BUCKET\naws s3 mb s3://$BUCKET',
       src: 'lab-s3-create-bucket',
       quote: 'To upload your data to Amazon S3, you must first create an Amazon S3 general purpose bucket in one of the AWS Regions.',
@@ -187,7 +187,7 @@ const lab: Lab = {
       code: 'aws glue get-databases --query "DatabaseList[?starts_with(Name,\'lab12\')].Name"\naws glue get-crawlers --query "Crawlers[?starts_with(Name,\'lab12\')].Name"\naws iam list-roles --query "Roles[?starts_with(RoleName,\'AWSGlueServiceRole\')].RoleName"\naws s3 ls | grep -E "lab12-|aws-athena-query-results"',
       src: 'glue-define-database',
       quote: 'When you delete a database from the AWS Glue Data Catalog, all the tables in the database are also deleted.',
-      checkpoint: 'The first two and the last list are empty, and the role you wrote down in s6 is not in the role list.',
+      checkpoint: 'The database and crawler lists are empty, no lab12- bucket is listed (an aws-athena-query-results bucket from earlier Athena use is not part of this lab), and the role you wrote down in s6 is not in the role list.',
       sensitive: true,
     },
   ],
