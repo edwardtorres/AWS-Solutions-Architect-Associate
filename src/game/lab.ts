@@ -45,6 +45,15 @@ export function setNote(save: Save, labId: string, stepId: string, text: string)
   return withProgress(save, labId, { ...p, notes });
 }
 
+/** The owner acknowledged a gated lab's warning. */
+export function setAck(save: Save, labId: string, on: boolean): Save {
+  const p = progressOf(save, labId);
+  const next: LabProgress = { ...p };
+  if (on) next.ack = true;
+  else delete next.ack;
+  return withProgress(save, labId, next);
+}
+
 export function setAccountCreated(save: Save, day: DayKey | null): Save {
   if (day !== null && !/^\d{4}-\d{2}-\d{2}$/.test(day)) return save;
   return { ...save, labs: { ...save.labs, accountCreated: day } };

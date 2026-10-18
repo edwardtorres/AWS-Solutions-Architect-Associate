@@ -16,7 +16,7 @@ async function load(page: Page, hash: string): Promise<void> {
 }
 const xp = async (page: Page) => Number(/(\d[\d,]*) XP/.exec(await page.getByTestId('rank-chip').innerText())?.[1]?.replace(/,/g, '') ?? '0');
 const stored = (page: Page) =>
-  page.evaluate(() => JSON.parse(localStorage.getItem('saa-region-builder:save') ?? '{}') as { buildings: unknown; labs: { accountCreated: string | null; progress: Record<string, { steps: Record<string, true>; notes: Record<string, string>; completedAt?: string; debrief?: { finishedAt?: string } }> } });
+  page.evaluate(() => JSON.parse(localStorage.getItem('saa-region-builder:save') ?? '{}') as { buildings: unknown; labs: { accountCreated: string | null; progress: Record<string, { steps: Record<string, true>; notes: Record<string, string>; ack?: true; completedAt?: string; debrief?: { finishedAt?: string } }> } });
 
 test('the Labs page lists every lab in order, has no sideways scroll and passes axe', async ({ page }) => {
   await load(page, '#/labs');
@@ -122,4 +122,30 @@ test('every lab page has no sideways scroll and passes axe', async ({ page }) =>
     await axeClean(page, lab.id);
     await noSidewaysScroll(page);
   }
+});
+
+test('Lab 3 is listed last, hides its steps behind an acknowledgement and offers a read-only walkthrough', async ({ page }) => {
+  await load(page, '#/labs');
+  const items = page.getByTestId('lab-item');
+  await expect(items.last()).toContainText('Multi-account basics');
+  await expect(items.last()).toContainText('Scheduled last');
+  await page.goto('/#/lab/lab-03-multi-account');
+  await expect(page.getByTestId('lab-gate')).toContainText('ends the Free plan');
+  await expect(page.getByTestId('lab-steps')).toHaveCount(0);
+  await expect(page.getByTestId('complete-lab')).toHaveCount(0);
+  await axeClean(page, 'lab 3 gate');
+  await noSidewaysScroll(page);
+  // The read-only walkthrough shows the steps with nothing to tick.
+  await page.getByTestId('gate-read').tap();
+  await expect(page.getByTestId('lab-step').first()).toBeVisible();
+  await expect(page.getByTestId('lab-step').first().getByRole('checkbox')).toHaveCount(0);
+  await expect(page.getByTestId('complete-lab')).toHaveCount(0);
+  await axeClean(page, 'lab 3 walkthrough');
+  // Acknowledging unlocks the real lab.
+  await page.getByTestId('gate-ack').tap();
+  await expect(page.getByTestId('gate-acknowledged')).toBeVisible();
+  await expect(page.getByTestId('lab-step').first().getByRole('checkbox')).toBeVisible();
+  await expect(page.getByTestId('complete-lab')).toBeVisible();
+  expect((await stored(page)).labs.progress['lab-03-multi-account']).toMatchObject({ ack: true });
+  await axeClean(page, 'lab 3 unlocked');
 });

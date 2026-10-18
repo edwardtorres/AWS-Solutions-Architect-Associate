@@ -123,6 +123,7 @@ async function main() {
     for (const lab of (await loadLabs()).labs) {
       for (const s of lab.steps) labCites.push({ where: `${lab.id} step ${s.id}`, src: s.src, quote: s.quote });
       for (const c of lab.costs) labCites.push({ where: `${lab.id} cost ${c.id}`, src: c.src, quote: c.quote });
+      for (const [i, c] of (lab.gate?.cites ?? []).entries()) labCites.push({ where: `${lab.id} gate cite ${i + 1}`, src: c.src, quote: c.quote });
       for (const t of lab.traps) labCites.push({ where: `${lab.id} trap ${t.pair}`, src: t.src, quote: t.quote });
     }
     for (const [name, sp] of Object.entries(SERVICE_PLANS)) if (sp.src && sp.quote) labCites.push({ where: `services ${name}`, src: sp.src, quote: sp.quote });

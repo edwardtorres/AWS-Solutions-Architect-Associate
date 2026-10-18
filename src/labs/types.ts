@@ -59,6 +59,18 @@ export interface LabTrap {
   step: string;
 }
 
+/** A warning the owner must acknowledge before a lab's steps appear. A read-only walkthrough is offered instead. */
+export interface LabGate {
+  title: string;
+  /** The warning, written only from the cited sentences. */
+  text: string;
+  /** The label of the acknowledgement checkbox. */
+  ack: string;
+  /** What to do instead of running the lab. */
+  alternative: string;
+  cites: { src: string; quote: string }[];
+}
+
 export interface Lab {
   /** `lab-NN-slug`. */
   id: string;
@@ -73,6 +85,10 @@ export interface Lab {
   bullets: string[];
   /** Lab ids to finish first. */
   needs: string[];
+  /** Shown first on the Labs page's order: the lab is scheduled last (its id and number stay stable). */
+  last?: true;
+  /** A warning to acknowledge before the steps appear. */
+  gate?: LabGate;
   /** Service names as keyed in content/labs/services.ts; the plan badge is derived from them. */
   services: string[];
   costs: LabCost[];
@@ -81,6 +97,9 @@ export interface Lab {
   /** CloudFormation templates in content/labs/templates (file names). Deleting the stack is the cleanup. */
   templates?: string[];
 }
+
+/** Display and schedule order: the number, except labs marked `last`, which go to the end. */
+export const labOrder = <T extends { n: number; last?: boolean }>(labs: readonly T[]): T[] => [...labs].sort((a, b) => Number(!!a.last) - Number(!!b.last) || a.n - b.n);
 
 /** Fixed XP for marking a lab complete (once per lab). The debrief earns question XP separately. */
 export const LAB_XP = 100;
@@ -98,6 +117,10 @@ export interface LabMeta {
   needs: readonly string[];
   services: readonly string[];
   plan: PlanFit;
+  /** Scheduled last on the Labs page. */
+  last: boolean;
+  /** Its steps stay hidden until a warning is acknowledged. */
+  gated: boolean;
   /** Names of the resources that bill while they exist. */
   billable: readonly string[];
   steps: number;

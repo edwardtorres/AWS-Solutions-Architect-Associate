@@ -12,6 +12,21 @@ const lab: Lab = {
   buildings: ['embassy-row'],
   bullets: ['1.1-K1', '1.1-S4'],
   needs: ['lab-01-safe-account'],
+  last: true,
+  gate: {
+    title: 'Running this lab ends the Free plan’s no-charge guarantee for the lab account',
+    text: 'A Free plan account upgrades itself to the Paid plan when it joins AWS Organizations. The Free plan is the plan that ensures you will not incur charges, and AWS states that a Paid plan cannot be downgraded to the Free plan. Run this lab only in a throwaway account, never in the account you rely on for the Free plan.',
+    ack: 'I understand that creating the organization upgrades the lab account to the Paid plan, ends the Free plan’s no-charge guarantee for it, and cannot be undone. I accept that for a throwaway account.',
+    alternative: 'Read the walkthrough instead: the same steps and sources, with nothing to create and nothing to tick.',
+    cites: [
+      {
+        src: 'free-tier-plans',
+        quote: 'Free account plans will automatically upgrade to paid plan if you join AWS Organizations, set up an AWS Control Tower landing zone, join AWS Partner Network, create a Professional Services contract, enroll in an Enterprise Agreement with AWS, purchase an AWS Skill Builder Team subscription, or designate the AWS account as HIPAA or SEC compliant.',
+      },
+      { src: 'free-tier-plans', quote: "The Free account plan ensures you won't incur any charges while you explore AWS services and build your applications." },
+      { src: 'free-tier-faq', quote: 'No, you cannot downgrade your Paid plan to the Free plan.' },
+    ],
+  },
   services: ['AWS Organizations', 'AWS IAM', 'AWS CloudShell', 'Amazon S3'],
   costs: [],
   steps: [

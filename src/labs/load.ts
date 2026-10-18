@@ -1,5 +1,5 @@
 import { LAB_META_BY_ID } from './meta';
-import type { Lab } from './types';
+import { labOrder, type Lab } from './types';
 
 // Lazy: lab text (steps, quotes, templates' descriptions) is its own chunk, loaded only when a lab or the export opens.
 const loaders = import.meta.glob<{ default: Lab }>('../../content/labs/lab-*.ts');
@@ -13,7 +13,7 @@ export async function loadLab(id: string): Promise<Lab | null> {
 
 export async function loadAllLabs(): Promise<Lab[]> {
   const mods = await Promise.all(Object.values(loaders).map((l) => l()));
-  return mods.map((m) => m.default).sort((a, b) => a.n - b.n);
+  return labOrder(mods.map((m) => m.default));
 }
 
 // Templates are plain text beside the labs; the lab page shows them with copy and download buttons.

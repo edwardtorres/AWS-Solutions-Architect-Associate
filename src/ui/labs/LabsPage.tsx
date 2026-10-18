@@ -122,6 +122,8 @@ export default function LabsPage() {
                   {l.title}
                 </a>
                 {p?.completedAt && <span className="chip border-2 border-[#4ade80]">Complete</span>}
+                {l.gated && <span className="chip border-2 border-[#f87171]">Warning to acknowledge first</span>}
+                {l.last && <span className="chip">Scheduled last</span>}
               </div>
               <p className="mt-1 max-w-prose">{l.goal}</p>
               <div className="mt-2 flex flex-wrap gap-2 text-sm">

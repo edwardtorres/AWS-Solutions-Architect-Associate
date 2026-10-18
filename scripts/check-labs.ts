@@ -46,6 +46,7 @@ if (quotesOn) {
     ...l.steps.map((s) => ({ where: `${l.id} step ${s.id}`, src: s.src, quote: s.quote })),
     ...l.costs.map((c) => ({ where: `${l.id} cost ${c.id}`, src: c.src, quote: c.quote })),
     ...l.traps.map((t) => ({ where: `${l.id} trap ${t.pair}`, src: t.src, quote: t.quote })),
+    ...(l.gate?.cites ?? []).map((c, i) => ({ where: `${l.id} gate cite ${i + 1}`, src: c.src, quote: c.quote })),
   ]);
   const pages = new Map<string, PageInfo | Error>();
   for (const u of new Set(cites.map((c) => byId.get(c.src)?.url).filter((x): x is string => !!x).map(stripFragment))) {

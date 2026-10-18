@@ -1,6 +1,6 @@
 import type { Building } from '../../src/data/types.ts';
 import type { ConfusePair, Source } from '../../src/content/types.ts';
-import { DEBRIEF_SIZE, type Lab, type LabStep } from '../../src/labs/types.ts';
+import { DEBRIEF_SIZE, labOrder, type Lab, type LabStep } from '../../src/labs/types.ts';
 import { SERVICE_PLANS, planOf, type ServicePlan } from '../../content/labs/services.ts';
 import type { BannedTerm } from '../banned-terms.ts';
 
@@ -45,6 +45,7 @@ export interface LabCheckInput {
 
 export function labTextOf(lab: Lab): string {
   const out: string[] = [lab.title, lab.goal];
+  if (lab.gate) out.push(lab.gate.title, lab.gate.text, lab.gate.ack, lab.gate.alternative, ...lab.gate.cites.map((c) => c.quote));
   for (const c of lab.costs) out.push(c.resource, c.basis, c.quote);
   for (const s of lab.steps) out.push(s.text, s.quote, s.alt ?? '', s.checkpoint ?? '', s.code ?? '');
   for (const t of lab.traps) out.push(t.text, t.quote);
@@ -58,6 +59,7 @@ export function checkLabs(input: LabCheckInput): string[] {
   const srcById = new Map(input.sources.map((s) => [s.id, s]));
   const buildingById = new Map(input.buildings.map((b) => [b.id, b]));
   const everyLab = input.allLabs ?? input.labs;
+  const order = labOrder(everyLab).map((l) => l.id);
   const labIds = new Set(everyLab.map((l) => l.id));
   const confuseIds = new Set(input.confuse.map((c) => c.id));
   const usedTemplates = new Set<string>();
@@ -88,7 +90,16 @@ export function checkLabs(input: LabCheckInput): string[] {
     for (const n of lab.needs) {
       const other = everyLab.find((l) => l.id === n);
       if (!labIds.has(n)) p.push(`${w}: unknown prerequisite ${n}`);
-      else if (other && other.n >= lab.n) p.push(`${w}: prerequisite ${n} must come earlier in the recommended order`);
+      else if (other && order.indexOf(other.id) >= order.indexOf(lab.id)) p.push(`${w}: prerequisite ${n} must come earlier in the recommended order`);
+      if (other?.last) p.push(`${w}: prerequisite ${n} is scheduled last, so nothing may depend on it`);
+    }
+
+    // Gate (a warning to acknowledge before the steps appear).
+    if (lab.gate) {
+      const g = lab.gate;
+      if (!g.title.trim() || !g.text.trim() || !g.ack.trim() || !g.alternative.trim()) p.push(`${w}: gate needs a title, text, acknowledgement and an alternative`);
+      if (g.cites.length === 0) p.push(`${w}: gate cites no sentence`);
+      g.cites.forEach((c, i) => p.push(...checkCite(`${w} gate cite ${i + 1}`, c.src, c.quote, srcById)));
     }
 
     // Services and plan.

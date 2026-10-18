@@ -6,7 +6,7 @@ import { DEFAULT_ENV, type GameEnv } from '../game/env';
 import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
 import type { StartResult } from '../game/start';
 import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
-import { completeLab, setAccountCreated, setNote, setStep, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
+import { completeLab, setAccountCreated, setAck, setNote, setStep, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
 import type { Difficulty } from '../content/types';
 import type { AttemptKind } from './schema';
 
@@ -167,6 +167,9 @@ export function createSaveStore(opts: StoreOptions) {
     },
     setLabStep(labId: string, stepId: string, on: boolean): void {
       commit(setStep(snapshot.save, labId, stepId, on));
+    },
+    setLabAck(labId: string, on: boolean): void {
+      commit(setAck(snapshot.save, labId, on));
     },
     setLabNote(labId: string, stepId: string, text: string): void {
       commit(setNote(snapshot.save, labId, stepId, text));
