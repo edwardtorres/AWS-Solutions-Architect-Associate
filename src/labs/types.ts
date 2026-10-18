@@ -46,6 +46,10 @@ export interface LabStep {
   checkpoint?: string;
   /** A CloudShell command (verification or tooling). Never contains an account ID, ARN with digits, key or email. */
   code?: string;
+  /** Registry ids (content/post-guide.json) of features newer than the exam guide that this step uses or discusses. Required wherever the text matches a registry pattern. */
+  newer?: string[];
+  /** A note for exam day or for choosing between designs, with its own cited sentence. */
+  callout?: { text: string; src: string; quote: string };
 }
 
 /** A "don't confuse" pair the lab lets the owner see for themselves. */
@@ -85,6 +89,8 @@ export interface Lab {
   bullets: string[];
   /** Lab ids to finish first. */
   needs: string[];
+  /** Post-guide features named in the title, goal or cost text (steps carry their own `newer`). */
+  newer?: string[];
   /** Shown first on the Labs page's order: the lab is scheduled last (its id and number stay stable). */
   last?: true;
   /** A warning to acknowledge before the steps appear. */
@@ -119,6 +125,8 @@ export interface LabMeta {
   plan: PlanFit;
   /** Scheduled last on the Labs page. */
   last: boolean;
+  /** Registry ids of the post-guide features any step (or the lab text) uses: the lab is labelled "newer than the exam guide". */
+  newer: readonly string[];
   /** Its steps stay hidden until a warning is acknowledged. */
   gated: boolean;
   /** Names of the resources that bill while they exist. */

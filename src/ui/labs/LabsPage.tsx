@@ -5,7 +5,7 @@ import { LAB_META } from '../../labs/meta';
 import { accountClock, suggestSchedule } from '../../game/lab';
 import { hrefLab } from '../../lib/route';
 import { useSaveStore, useSnapshot } from '../../save/context';
-import { BillsBadge, PlanBadge } from './badges';
+import { BillsBadge, NewerBadge, PlanBadge } from './badges';
 import { downloadText } from './download';
 
 const hours = (min: number) => `${(min / 60).toFixed(1)} h`;
@@ -24,7 +24,8 @@ function AccountClock() {
         Account clock
       </h3>
       <p className="mt-1 max-w-prose text-sm text-[var(--fg-muted)]">
-        A Free plan account closes six months after it is created, or when its credits run out, whichever comes first. Enter the date you created your lab account (a date only, nothing else) to see how much of the window is left. The Billing and Cost Management console shows the real date and credit balance; trust it over this estimate.
+        A Free plan account closes six months after it is created, or when its credits run out, whichever comes first. Enter the date you created your lab account (a date only, nothing else) to see
+        how much of the window is left. The Billing and Cost Management console shows the real date and credit balance; trust it over this estimate.
       </p>
       <div className="mt-2 flex flex-wrap items-end gap-3">
         <label className="grid gap-1 text-sm font-semibold">
@@ -54,7 +55,9 @@ function AccountClock() {
       {clock && (
         <div className="mt-3" data-testid="clock-status">
           <p className="font-semibold">
-            {clock.expired ? 'The 6-month window is over: check the Billing console for what happened to the account.' : `${clock.daysLeft} day${clock.daysLeft === 1 ? '' : 's'} left of the 6-month window (ends ${clock.ends}).`}
+            {clock.expired
+              ? 'The 6-month window is over: check the Billing console for what happened to the account.'
+              : `${clock.daysLeft} day${clock.daysLeft === 1 ? '' : 's'} left of the 6-month window (ends ${clock.ends}).`}
           </p>
           <progress className="mt-1 h-3 w-full max-w-md" max={100} value={Math.round(clock.used * 100)} aria-label="Share of the 6-month window used" />
           {!clock.expired && plan === null && <p className="mt-2 text-sm">Less than a week is left: do only the labs you need, and clean up first.</p>}
@@ -87,7 +90,16 @@ export default function LabsPage() {
   const exportAll = () => {
     setBusy(true);
     void loadAllLabs().then((labs) => {
-      downloadText('region-builder-lab-notes.txt', exportLabNotes(labs.map((lab) => ({ lab, progress: store.getSnapshot().save.labs.progress[lab.id] })), store.today()));
+      downloadText(
+        'region-builder-lab-notes.txt',
+        exportLabNotes(
+          labs.map((lab) => ({
+            lab,
+            progress: store.getSnapshot().save.labs.progress[lab.id],
+          })),
+          store.today(),
+        ),
+      );
       setBusy(false);
     });
   };
@@ -98,10 +110,13 @@ export default function LabsPage() {
         Hands-on labs
       </h2>
       <p className="mt-2 max-w-prose">
-        {LAB_META.length} labs for your own AWS account, in the recommended order ({hours(total)} in all; {done} complete). Labs are self-reported practice: finishing one earns fixed XP and a 3-question debrief, but never commissions a building. Use a dedicated lab account, separate from your portfolio account, and finish each lab&rsquo;s cleanup and verification before you move on.
+        {LAB_META.length} labs for your own AWS account, in the recommended order ({hours(total)} in all; {done} complete). Labs are self-reported practice: finishing one earns fixed XP and a
+        3-question debrief, but never commissions a building. Use a dedicated lab account, separate from your portfolio account, and finish each lab&rsquo;s cleanup and verification before you move
+        on.
       </p>
       <p className="mt-2 max-w-prose text-sm text-[var(--fg-muted)]">
-        Claude Code could not run these labs for you: they were written from AWS documentation and checked against it, not tested in an account. If a step does not match your screen, use <strong>Report a problem</strong> on that step.
+        Claude Code could not run these labs for you: they were written from AWS documentation and checked against it, not tested in an account. If a step does not match your screen, use{' '}
+        <strong>Report a problem</strong> on that step.
       </p>
       <AccountClock />
       <div className="mt-4 flex flex-wrap gap-2">
@@ -132,15 +147,12 @@ export default function LabsPage() {
                   <BillsBadge key={b} resource={b} />
                 ))}
                 <span className="chip">{l.minutes} min</span>
+                {l.newer.length > 0 && <NewerBadge />}
                 <span className="chip">
                   {ticked} of {l.steps} steps ticked
                 </span>
               </div>
-              {needs.length > 0 && (
-                <p className="mt-2 text-sm text-[var(--fg-muted)]">
-                  Do first: {needs.map((n) => `Lab ${n.n}`).join(', ')}.
-                </p>
-              )}
+              {needs.length > 0 && <p className="mt-2 text-sm text-[var(--fg-muted)]">Do first: {needs.map((n) => `Lab ${n.n}`).join(', ')}.</p>}
             </li>
           );
         })}

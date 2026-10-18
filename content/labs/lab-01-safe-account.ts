@@ -22,6 +22,7 @@ const lab: Lab = {
     },
     {
       id: 's2',
+      newer: ['iam-passkey-mfa'],
       text: 'Turn on multi-factor authentication (MFA) for the root user. Prefer a passkey or security key.',
       sensitive: true,
       src: 'lab-iam-root-mfa',

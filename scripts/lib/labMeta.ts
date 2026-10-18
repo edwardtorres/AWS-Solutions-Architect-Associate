@@ -14,6 +14,7 @@ export function labMetaOf(lab: Lab): LabMeta {
     services: lab.services,
     plan: planOf(lab.services),
     last: lab.last === true,
+    newer: [...new Set([...(lab.newer ?? []), ...lab.steps.flatMap((s) => s.newer ?? [])])].sort(),
     gated: lab.gate !== undefined,
     billable: lab.costs.map((c) => c.resource),
     steps: lab.steps.length,

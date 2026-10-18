@@ -10,11 +10,13 @@ const lab: Lab = {
   buildings: ['certificate-office', 'cache-edge-breakwater', 'edge-link-terminal'],
   bullets: ['1.3-S3', '2.1-K3', '2.1-K7', '3.4-K1', '3.4-S3'],
   needs: ['lab-01-safe-account'],
+  newer: ['cloudfront-oac'],
   services: ['Amazon CloudFront', 'Amazon S3', 'AWS CloudShell', 'AWS Certificate Manager'],
   costs: [],
   steps: [
     {
       id: 'bucket',
+      newer: ['cloudfront-oac'],
       text: 'Create a general purpose S3 bucket with a globally unique name in your chosen Region. Keep Block Public Access fully on and do not turn on static website hosting: OAC needs a regular bucket origin. In CloudShell, set a variable with the name (a new CloudShell session loses it, so later commands set it again).',
       src: 'cf-oac',
       quote: 'This origin must be a regular S3 bucket, not a bucket configured as a website endpoint.',
@@ -38,6 +40,12 @@ const lab: Lab = {
     },
     {
       id: 'distribution',
+      newer: ['cloudfront-oac'],
+      callout: {
+        text: 'Exam note: the exam guide dates from August 2022, so a question may offer origin access identity (OAI) as the way to keep an S3 bucket private behind CloudFront. AWS now recommends origin access control (OAC) and calls OAI legacy. Read what the scenario needs (for example SSE-KMS, other Regions, PUT or DELETE requests) before you choose.',
+        src: 'cf-oac',
+        quote: 'We recommend that you use OAC instead because it supports the following features',
+      },
       text: 'Create a CloudFront standard distribution with the bucket as its origin. Choose origin access control and keep the default CloudFront domain name (no custom domain). Leave other settings at the wizard\'s recommended values.',
       src: 'cf-get-started',
       quote: 'Uses origin access control (OAC) to send authenticated requests to your Amazon S3 origin.',
@@ -61,6 +69,7 @@ const lab: Lab = {
     },
     {
       id: 'oac-check',
+      newer: ['cloudfront-oac'],
       kind: 'check',
       text: 'Open the origin access control used by the origin and read its signing setting. Note why "always sign" matters.',
       src: 'cf-oac',
@@ -69,6 +78,7 @@ const lab: Lab = {
     },
     {
       id: 'bucket-policy',
+      newer: ['cloudfront-oac'],
       text: 'Open the bucket\'s Permissions tab and read the bucket policy first. If it already names the CloudFront service principal and your distribution (the wizard writes it), do nothing. If not, add the example policy from the OAC page, edited for your bucket and distribution.',
       src: 'cf-get-started',
       quote: 'CloudFront updates the S3 bucket policy for you.',
@@ -127,6 +137,7 @@ const lab: Lab = {
     },
     {
       id: 'c-oac',
+      newer: ['cloudfront-oac'],
       kind: 'cleanup',
       text: 'Delete the origin access control that the distribution used; it stays after the distribution is gone. It is under the Origin access settings in the CloudFront console.',
       src: 'cf-oac',
@@ -135,6 +146,7 @@ const lab: Lab = {
     },
     {
       id: 'c-bucket',
+      newer: ['cloudfront-oac'],
       kind: 'cleanup',
       text: 'Only now empty and delete the bucket. Deleting the distribution before the bucket is the documented order for an OAC origin.',
       src: 'cf-oac',

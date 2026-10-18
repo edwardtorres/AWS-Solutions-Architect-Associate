@@ -3,6 +3,7 @@ import type { ConfusePair, Source } from '../../src/content/types.ts';
 import { DEBRIEF_SIZE, labOrder, type Lab, type LabStep } from '../../src/labs/types.ts';
 import { SERVICE_PLANS, planOf, type ServicePlan } from '../../content/labs/services.ts';
 import type { BannedTerm } from '../banned-terms.ts';
+import type { PostGuideRegistry } from './questionChecks.ts';
 
 export const LAB_COUNT = 14;
 export const MIN_STEP_QUOTE = 25;
@@ -39,6 +40,8 @@ export interface LabCheckInput {
   banned: readonly BannedTerm[];
   /** Live, non-reserve questions: their bullets, for the debrief. */
   debriefPool: readonly { bullets: readonly string[] }[];
+  /** The post-guide registry: steps and lab text that match a feature must declare it. */
+  postGuide?: PostGuideRegistry;
   /** Require the full set (14 labs). A partial run passes false. */
   complete?: boolean;
 }
@@ -47,7 +50,7 @@ export function labTextOf(lab: Lab): string {
   const out: string[] = [lab.title, lab.goal];
   if (lab.gate) out.push(lab.gate.title, lab.gate.text, lab.gate.ack, lab.gate.alternative, ...lab.gate.cites.map((c) => c.quote));
   for (const c of lab.costs) out.push(c.resource, c.basis, c.quote);
-  for (const s of lab.steps) out.push(s.text, s.quote, s.alt ?? '', s.checkpoint ?? '', s.code ?? '');
+  for (const s of lab.steps) out.push(s.text, s.quote, s.alt ?? '', s.checkpoint ?? '', s.code ?? '', s.callout?.text ?? '', s.callout?.quote ?? '');
   for (const t of lab.traps) out.push(t.text, t.quote);
   return out.join('\n');
 }
@@ -166,6 +169,21 @@ export function checkLabs(input: LabCheckInput): string[] {
       usedTemplates.add(t);
       if (!input.templates.has(t)) p.push(`${w}: template ${t} not found in content/labs/templates`);
     }
+
+    // Post-guide features (newer than the exam guide) must be declared.
+    if (input.postGuide) {
+      const known = new Set(input.postGuide.features.map((f) => f.id));
+      const check = (where: string, body: string, declared: readonly string[] | undefined) => {
+        for (const id of declared ?? []) if (!known.has(id)) p.push(`${where}: unknown post-guide feature "${id}"`);
+        for (const f of input.postGuide?.features ?? []) {
+          if (f.patterns.some((pat) => new RegExp(pat, 'i').test(body)) && !(declared ?? []).includes(f.id)) p.push(`${where}: uses the post-guide feature "${f.id}" (${f.name}) and needs newer: ['${f.id}']`);
+        }
+      };
+      check(`${w} (title, goal, costs)`, [lab.title, lab.goal, ...lab.costs.map((c) => `${c.resource} ${c.basis}`)].join('\n'), lab.newer);
+      for (const s of lab.steps) check(`${w} step ${s.id}`, [s.text, s.alt ?? '', s.checkpoint ?? '', s.code ?? '', s.callout?.text ?? ''].join('\n'), s.newer);
+      for (const t of lab.traps) check(`${w} trap ${t.pair}`, t.text, [...(lab.newer ?? []), ...lab.steps.flatMap((s) => s.newer ?? [])]);
+    }
+    for (const s of lab.steps) if (s.callout) p.push(...checkCite(`${w} step ${s.id} callout`, s.callout.src, s.callout.quote, srcById));
 
     // Text rules.
     const text = labTextOf(lab);

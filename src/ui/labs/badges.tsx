@@ -23,8 +23,18 @@ export function PlanExplain({ plan, services }: { plan: PlanFit; services: reado
     <p className="mt-1 max-w-prose text-sm text-[var(--fg-muted)]">
       {plan === 'free' && 'Every service this lab uses is confirmed on the Free plan by what AWS publishes.'}
       {plan === 'paid' && `Needs a Paid plan: ${paid.join(', ')} is not available on the Free plan (a Free plan account upgrades itself when it uses it). Use a throwaway account.`}
-      {plan === 'unconfirmed' && `AWS’s published Free plan information does not confirm ${unconfirmed.join(', ')}. Check the Free Tier page for your account before you start; the app does not guess.`}
+      {plan === 'unconfirmed' &&
+        `AWS’s published Free plan information does not confirm ${unconfirmed.join(', ')}. Check the Free Tier page for your account before you start; the app does not guess.`}
     </p>
+  );
+}
+
+/** Labels something that uses a feature newer than the SAA-C03 exam guide (August 2022). */
+export function NewerBadge() {
+  return (
+    <span className="chip" data-kind="newer" data-testid="newer-badge" title="This feature was introduced after the SAA-C03 exam guide was written, so the exam may still expect the older answer.">
+      Newer than the exam guide
+    </span>
   );
 }
 

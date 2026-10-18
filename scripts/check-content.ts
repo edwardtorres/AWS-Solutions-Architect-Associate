@@ -102,6 +102,7 @@ async function main() {
       confuse: bundle.confuse,
       banned: BANNED_TERMS,
       debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')),
+      postGuide: qb.postGuide,
       complete: !process.argv.includes('--no-lab-minimums'),
     }).map((x) => `labs: ${x}`),
   );

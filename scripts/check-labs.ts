@@ -29,7 +29,7 @@ if (labs.length === 0) {
   console.error('no labs matched');
   process.exit(1);
 }
-const problems = checkLabs({ labs, allLabs: all.labs, templates: all.templates, sources: bundle.sources, buildings: BUILDINGS, bulletIds, confuse: bundle.confuse, banned: BANNED_TERMS, debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')), complete: false });
+const problems = checkLabs({ labs, allLabs: all.labs, templates: all.templates, sources: bundle.sources, buildings: BUILDINGS, bulletIds, confuse: bundle.confuse, banned: BANNED_TERMS, debriefPool: qb.questions.filter((q) => !q.tags.includes('mock-reserve')), postGuide: qb.postGuide, complete: false });
 
 // Templates of the chosen labs through cfn-lint.
 const files = [...new Set(labs.flatMap((l) => l.templates ?? []))];
@@ -46,6 +46,7 @@ if (quotesOn) {
     ...l.steps.map((s) => ({ where: `${l.id} step ${s.id}`, src: s.src, quote: s.quote })),
     ...l.costs.map((c) => ({ where: `${l.id} cost ${c.id}`, src: c.src, quote: c.quote })),
     ...l.traps.map((t) => ({ where: `${l.id} trap ${t.pair}`, src: t.src, quote: t.quote })),
+    ...l.steps.flatMap((s) => (s.callout ? [{ where: `${l.id} step ${s.id} callout`, src: s.callout.src, quote: s.callout.quote }] : [])),
     ...(l.gate?.cites ?? []).map((c, i) => ({ where: `${l.id} gate cite ${i + 1}`, src: c.src, quote: c.quote })),
   ]);
   const pages = new Map<string, PageInfo | Error>();
