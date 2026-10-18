@@ -16,7 +16,7 @@ export const ALLOWED_URL_HOSTS = new Set([
 ]);
 
 /** Strings that only exist in dev-only modules. Production bundles must not contain any of them. */
-export const DEV_MARKERS = ['SAA_DEV_HOOKS_SENTINEL', '__saaDev', '__SAA_SEED__', 'DEV ONLY', 'Developer toolbar', 'Developer controls'];
+export const DEV_MARKERS = ['SAA_DEV_HOOKS_SENTINEL', '__saaDev', '__SAA_SEED__', 'DEV ONLY', 'Developer toolbar', 'Developer controls', 'SAA_DEV_MOCK_SHORT'];
 
 /** Strings that identify question data and the pool; the entry chunk must not contain them. */
 export const QUESTION_MARKERS = ['mock-reserve', 'placement-eligible'];

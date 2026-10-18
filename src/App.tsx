@@ -19,6 +19,8 @@ const PuzzlePage = lazy(() => import('./ui/puzzles/PuzzlePage'));
 const LabsPage = lazy(() => import('./ui/labs/LabsPage'));
 const ReviewPage = lazy(() => import('./ui/review/ReviewPage'));
 const WeakSpotsPage = lazy(() => import('./ui/review/WeakSpotsPage'));
+const MockPage = lazy(() => import('./ui/mock/MockPage'));
+const MockGuard = lazy(() => import('./ui/mock/MockGuard'));
 const LabPage = lazy(() => import('./ui/labs/LabPage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
@@ -78,6 +80,9 @@ export default function App() {
             <a href="#/weak" className="btn" aria-current={route.view === 'weak' ? 'page' : undefined}>
               Weak Spots
             </a>
+            <a href="#/mock" className="btn" aria-current={route.view === 'mock' ? 'page' : undefined} data-testid="nav-mock">
+              Mock exam
+            </a>
             <a href="#/labs" className="btn" aria-current={route.view === 'labs' || route.view === 'lab' ? 'page' : undefined}>
               Labs
             </a>
@@ -115,9 +120,15 @@ export default function App() {
           {route.view === 'review' && <ReviewPage key="daily" buildingId={null} />}
           {route.view === 'maintenance' && <ReviewPage key={`m-${route.param}`} buildingId={route.param ?? null} />}
           {route.view === 'weak' && <WeakSpotsPage />}
+          {route.view === 'mock' && <MockPage />}
           {route.view === 'lab' && <LabPage key={route.param} labId={route.param ?? null} />}
           {route.view === 'puzzle' && <PuzzlePage key={route.param} scenarioId={route.param ?? null} />}
         </Suspense>
+        {snapshot.save.game.mock.active && (
+          <Suspense fallback={null}>
+            <MockGuard />
+          </Suspense>
+        )}
         <Suspense fallback={null}>
           <SaveMenu />
           <Settings />
