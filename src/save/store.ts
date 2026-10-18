@@ -6,6 +6,9 @@ import { DEFAULT_ENV, type GameEnv } from '../game/env';
 import { abandonAttempt, addFlag, completeAttempt, markNotesOpened, removeFlag, submitAnswer, type AnswerResult, type AttemptSummary, type Ctx } from '../game/engine';
 import type { StartResult } from '../game/start';
 import { playPuzzle, type PuzzlePlayResult } from '../game/puzzle';
+import { abandonReview, completeReview, openSession, submitReviewAnswer, type ReviewSummary } from '../game/reviewSession';
+import { backfillByBullet } from '../game/weak';
+import type { QMeta } from '../game/readiness';
 import { completeLab, setAccountCreated, setAck, setNote, setStep, submitDebriefAnswer, type CompleteResult, type DebriefAnswer, type DebriefStart, type LabRef } from '../game/lab';
 import type { Difficulty } from '../content/types';
 import type { AttemptKind } from './schema';
@@ -164,6 +167,51 @@ export function createSaveStore(opts: StoreOptions) {
       const r = playPuzzle(snapshot.save, play, ctxFor());
       if (r) commit(r.save);
       return r;
+    },
+    /** Opens today's review (due questions, then a top-up from the weakest bullets) or resumes the open one. Null when nothing is available. */
+    async startReview(bank: readonly Question[]): Promise<{ ok: true; resumed: boolean; due: number; dueTotal: number } | { ok: false; message: string }> {
+      if (snapshot.readOnly) return { ok: false, message: 'This save is read-only (it is from a newer version of the app).' };
+      const open = snapshot.save.game.review;
+      if (open && open.kind === 'review') return { ok: true, resumed: true, due: open.questionIds.length, dueTotal: open.questionIds.length };
+      if (open) return { ok: false, message: 'A maintenance set is open. Finish or leave it first.' };
+      const { planReview } = await import('../game/reviewDraw');
+      const plan = planReview(snapshot.save, bank, todayKey(clock), { env, clock }, random);
+      if (plan.remaining === 0) return { ok: false, message: 'Today’s review cap is reached. Come back tomorrow.' };
+      if (plan.questions.length === 0) return { ok: false, message: 'Nothing to review yet: answer some questions in inspections first.' };
+      commit(openSession(snapshot.save, 'review', null, plan.questions, ctxFor(), random));
+      return { ok: true, resumed: false, due: plan.due, dueTotal: plan.dueTotal };
+    },
+    async startMaintenance(building: string, bank: readonly Question[]): Promise<{ ok: true } | { ok: false; message: string }> {
+      if (snapshot.readOnly) return { ok: false, message: 'This save is read-only (it is from a newer version of the app).' };
+      if (!opts.knownIds.has(building)) return { ok: false, message: 'Unknown building.' };
+      const open = snapshot.save.game.review;
+      if (open && open.kind === 'maintenance' && open.building === building) return { ok: true };
+      if (open) return { ok: false, message: 'Another review session is open. Finish or leave it first.' };
+      const { planMaintenance } = await import('../game/reviewDraw');
+      const questions = planMaintenance(snapshot.save, building, bank, random);
+      if (questions.length === 0) return { ok: false, message: 'This building has no questions to review yet.' };
+      commit(openSession(snapshot.save, 'maintenance', building, questions, ctxFor(), random));
+      return { ok: true };
+    },
+    submitReviewAnswer(questionId: string, chosen: readonly number[], lookup: (id: string) => Question | undefined): { correct: boolean; xp: number } | null {
+      const r = submitReviewAnswer(snapshot.save, questionId, chosen, ctxFor(lookup));
+      if (r && r.save !== snapshot.save) commit(r.save);
+      return r ? { correct: r.correct, xp: r.xp } : null;
+    },
+    completeReview(): ReviewSummary | null {
+      const r = completeReview(snapshot.save, ctxFor());
+      if (!r) return null;
+      commit(r.save);
+      return r.summary;
+    },
+    abandonReview(): void {
+      const next = abandonReview(snapshot.save);
+      if (next !== snapshot.save) commit(next);
+    },
+    /** One-time fill of the per-bullet figures from the saved results (saves from before version 5). */
+    backfillStats(meta: ReadonlyMap<string, QMeta>): void {
+      const next = backfillByBullet(snapshot.save, meta);
+      if (next !== snapshot.save) commit(next);
     },
     setLabStep(labId: string, stepId: string, on: boolean): void {
       commit(setStep(snapshot.save, labId, stepId, on));
