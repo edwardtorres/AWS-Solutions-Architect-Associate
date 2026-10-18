@@ -14,6 +14,7 @@ import { deriveAll } from '../save/state';
 import { useSaveStore, useSnapshot } from '../save/context';
 import { navigate, type PanelView } from '../lib/route';
 import { BuildingCard } from './BuildingCard';
+import { buildingsNeedingMaintenance } from '../game/maintenance';
 import { RoadsOverlay, useIsDesktop } from './RoadsOverlay';
 
 const STARTS = new Set(START_IDS);
@@ -66,6 +67,7 @@ export function CityMap({ view, activeId }: Props) {
     else cardRefs.current.delete(id);
   }, []);
 
+  const maintenanceSet = useMemo(() => new Set(buildingsNeedingMaintenance(snapshot.save, states)), [snapshot.save, states]);
   const roadsMode = snapshot.save.ui.roads;
   const counts = useMemo(() => {
     const c: Record<BuildingState, number> = { planned: 0, surveyed: 0, under_construction: 0, commissioned: 0 };
@@ -161,6 +163,7 @@ export function CityMap({ view, activeId }: Props) {
                             key={b.id}
                             building={b}
                             state={states.get(b.id) ?? 'planned'}
+                            maintenance={maintenanceSet.has(b.id)}
                             active={activeId === b.id}
                             related={related.has(b.id)}
                             onOpen={onOpen}

@@ -17,7 +17,8 @@ import { deriveAll, STATE_HELP, STATE_LABEL } from '../save/state';
 import { useSaveStore, useSnapshot } from '../save/context';
 import { DEFAULT_ENV } from '../game/env';
 import { inspectionLockedUntil, nextAction, placementAvailability } from '../game/lifecycle';
-import { hrefAttempt, hrefFor, hrefLab, hrefNotes, hrefWorkbench, type PanelView } from '../lib/route';
+import { hrefAttempt, hrefFor, hrefLab, hrefMaintenance, hrefNotes, hrefWorkbench, type PanelView } from '../lib/route';
+import { maintenanceStatus } from '../game/maintenance';
 import { QUESTION_META } from '../questions/meta';
 import { puzzleTypeOf } from '../puzzles/load';
 import { PUZZLE_TYPE_NAME } from '../puzzles/types';
@@ -114,6 +115,7 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
     if (t) puzzleCounts.set(PUZZLE_TYPE_NAME[t], (puzzleCounts.get(PUZZLE_TYPE_NAME[t]) ?? 0) + 1);
   }
 
+  const maint = maintenanceStatus(save, building.id, state);
   const labsHere = LAB_META.filter((l) => l.buildings.includes(building.id));
 
   const roadItem = (id: string, reason: string) => {
@@ -413,6 +415,20 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
                 {workbench.message}
               </p>
             )}
+          </section>
+        )}
+
+        {maint.needed && (
+          <section className="mt-4 rounded-xl border-2 border-[var(--accent)] p-3" aria-labelledby="p-maint" data-testid="maintenance-section">
+            <h3 id="p-maint" className="text-lg font-semibold">
+              Needs maintenance
+            </h3>
+            <p className="mt-1 text-sm">
+              Your recent review and mock accuracy here is {maint.correct} of {maint.n} (under 60%). A 5-question set, recent misses first, brings it back. It never removes this building&rsquo;s commissioning.
+            </p>
+            <a className="btn mt-1" href={hrefMaintenance(building.id)} data-testid="maintenance-link">
+              Start the maintenance set
+            </a>
           </section>
         )}
 

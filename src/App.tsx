@@ -17,6 +17,8 @@ const ProgressPage = lazy(() => import('./ui/ProgressPage'));
 const WorkbenchPage = lazy(() => import('./ui/puzzles/WorkbenchPage'));
 const PuzzlePage = lazy(() => import('./ui/puzzles/PuzzlePage'));
 const LabsPage = lazy(() => import('./ui/labs/LabsPage'));
+const ReviewPage = lazy(() => import('./ui/review/ReviewPage'));
+const WeakSpotsPage = lazy(() => import('./ui/review/WeakSpotsPage'));
 const LabPage = lazy(() => import('./ui/labs/LabPage'));
 const DevToolbar = import.meta.env.DEV ? lazy(() => import('./dev/DevToolbar')) : null;
 
@@ -70,6 +72,12 @@ export default function App() {
             <a href="#/progress" className="btn" aria-current={route.view === 'progress' ? 'page' : undefined} data-testid="rank-chip">
               {rank.rank.name} · {snapshot.save.game.xp.toLocaleString('en-US')} XP
             </a>
+            <a href="#/review" className="btn" aria-current={route.view === 'review' || route.view === 'maintenance' ? 'page' : undefined} data-testid="nav-review">
+              Review
+            </a>
+            <a href="#/weak" className="btn" aria-current={route.view === 'weak' ? 'page' : undefined}>
+              Weak Spots
+            </a>
             <a href="#/labs" className="btn" aria-current={route.view === 'labs' || route.view === 'lab' ? 'page' : undefined}>
               Labs
             </a>
@@ -104,6 +112,9 @@ export default function App() {
           {route.view === 'progress' && <ProgressPage />}
           {route.view === 'workbench' && <WorkbenchPage key={route.param} buildingId={route.param ?? null} />}
           {route.view === 'labs' && <LabsPage />}
+          {route.view === 'review' && <ReviewPage key="daily" buildingId={null} />}
+          {route.view === 'maintenance' && <ReviewPage key={`m-${route.param}`} buildingId={route.param ?? null} />}
+          {route.view === 'weak' && <WeakSpotsPage />}
           {route.view === 'lab' && <LabPage key={route.param} labId={route.param ?? null} />}
           {route.view === 'puzzle' && <PuzzlePage key={route.param} scenarioId={route.param ?? null} />}
         </Suspense>

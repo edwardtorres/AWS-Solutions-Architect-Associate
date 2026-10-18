@@ -53,6 +53,6 @@ console.log(
     chain,
     portfolio,
     names: Object.fromEntries(BUILDINGS.map((b) => [b.id, b.name])),
-    questions: questions.map((q) => ({ id: q.id, stem: q.stem, select: q.select, options: q.options.map((o) => ({ text: o.text, correct: o.correct })) })),
+    questions: questions.map((q) => ({ id: q.id, building: q.building, bullets: q.bullets, tags: q.tags, stem: q.stem, select: q.select, options: q.options.map((o) => ({ text: o.text, correct: o.correct })) })),
   }),
 );

@@ -6,6 +6,8 @@ import { StateIcon } from './icons';
 interface Props {
   building: Building;
   state: BuildingState;
+  /** Review and mock accuracy on this commissioned building has dropped (the mark never removes commissioning). */
+  maintenance?: boolean;
   /** The building whose panel is open (or null). */
   active: boolean;
   /** Prerequisite or dependent of the highlighted building. */
@@ -15,7 +17,7 @@ interface Props {
   registerRef?: (id: string, el: HTMLButtonElement | null) => void;
 }
 
-function BuildingCardImpl({ building, state, active, related, onOpen, onHover, registerRef }: Props) {
+function BuildingCardImpl({ building, state, maintenance = false, active, related, onOpen, onHover, registerRef }: Props) {
   // Locked cards say what unlocks them.
   const needs = state === 'planned' ? prerequisitesOf(building.id).map((r) => BUILDING_BY_ID.get(r.from)?.name ?? r.from) : [];
   const district = DISTRICT_BY_ID[building.district];
@@ -49,6 +51,11 @@ function BuildingCardImpl({ building, state, active, related, onOpen, onHover, r
         <span className="chip" data-kind="state">
           {STATE_LABEL[state]}
         </span>
+        {maintenance && (
+          <span className="chip border-2 border-[var(--accent)]" data-kind="maintenance">
+            Needs maintenance
+          </span>
+        )}
         {building.task ? <span className="chip">Task {building.task}</span> : <span className="chip">Foundation</span>}
         {building.portfolio && (
           <span className="chip" data-kind="portfolio">

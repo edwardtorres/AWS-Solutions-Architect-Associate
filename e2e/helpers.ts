@@ -4,6 +4,9 @@ import { execFileSync } from 'node:child_process';
 
 interface Q {
   id: string;
+  building: string;
+  bullets: string[];
+  tags: string[];
   stem: string;
   select: number;
   options: { text: string; correct: boolean }[];

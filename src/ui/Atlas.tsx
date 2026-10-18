@@ -13,6 +13,7 @@ import {
 import { deriveAll, STATE_LABEL } from '../save/state';
 import { useSnapshot } from '../save/context';
 import { hrefFor, type PanelView } from '../lib/route';
+import { familyStats } from '../game/weak';
 import { StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -29,6 +30,8 @@ export default function Atlas({ view, activeId }: { view: PanelView; activeId: s
       ),
     [snapshot.save],
   );
+
+  const weakFamilies = useMemo(() => new Set(familyStats(snapshot.save.game.byBullet, BUILDINGS).filter((f) => f.weak).map((f) => f.family)), [snapshot.save.game.byBullet]);
 
   const scrollTo = (id: FamilyId) => {
     const el = document.getElementById(`family-${id}`);
@@ -48,6 +51,7 @@ export default function Atlas({ view, activeId }: { view: PanelView; activeId: s
         {FAMILIES.map((f) => (
           <button key={f.id} type="button" className="btn shrink-0 text-sm" onClick={() => scrollTo(f.id)}>
             {f.name}
+            {weakFamilies.has(f.id) && <span className="chip ml-1.5 border-2 border-[var(--accent)]" data-kind="weak-family">Weak</span>}
           </button>
         ))}
       </nav>
@@ -69,6 +73,11 @@ export default function Atlas({ view, activeId }: { view: PanelView; activeId: s
             >
               <h2 id={`fh-${family.id}`} className="text-2xl font-semibold">
                 {family.name}
+                {weakFamilies.has(family.id) && (
+                  <span className="chip ml-2 align-middle border-2 border-[var(--accent)]" data-kind="weak-family">
+                    Weak: <a href="#/weak" className="underline">see Weak Spots</a>
+                  </span>
+                )}
               </h2>
               <p className="text-sm text-[var(--fg-muted)]">
                 {inFamily.length} building{inFamily.length === 1 ? '' : 's'} across {spread} district{spread === 1 ? '' : 's'}
