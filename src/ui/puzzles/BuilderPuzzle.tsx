@@ -42,7 +42,7 @@ export default function BuilderPuzzle({ module, scenario, shared, backHref, next
   const check = () => {
     const checks = score(data, placed);
     const ok = checks.every((c) => c.pass);
-    const r = store.playPuzzle({ id: scenario.id, building: scenario.building, difficulty: scenario.difficulty, correct: ok });
+    const r = store.playPuzzle({ id: scenario.id, building: scenario.building, difficulty: scenario.difficulty, correct: ok, bullets: scenario.bullets });
     setResult({ checks, ok, xp: r?.xp ?? 0 });
   };
   const reset = () => {

@@ -183,7 +183,7 @@ async function phone(browser: Browser): Promise<void> {
     });
   });
   const exported = JSON.parse(text) as { app: string; save: { version: number; buildings: Record<string, unknown> } };
-  check(exported.app === 'saa-region-builder' && exported.save.version === 4 && Object.keys(exported.save.buildings).length === 3, 'export downloads a valid v4 backup (a v1 save migrated on load)');
+  check(exported.app === 'saa-region-builder' && exported.save.version === 5 && Object.keys(exported.save.buildings).length === 3, 'export downloads a valid v5 backup (a v1 save migrated on load)');
 
   check(errors.length === 0, 'no console errors, warnings or CSP violations on phone', errors.slice(0, 3).join(' | '));
   await ctx.close();

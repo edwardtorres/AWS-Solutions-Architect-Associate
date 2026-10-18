@@ -1,6 +1,6 @@
 import { BUILDING_BY_ID, DISTRICT_BY_ID } from '../data';
 import { COUNTED_KINDS, nextHistory, pruneRecent } from '../game/history';
-import { CURRENT_VERSION, LOG_CAP, NOTE_CAP, freshGame, freshLabs, freshSave, type ActiveAnswer, type ActiveAttempt, type LabDebrief, type LabProgress, type LabsState, type AttemptKind, type GameState, type ItemHistory, type LogEntry, type LogKind, type RecentEntry, type Save, type StoredState, type UiPrefs } from './schema';
+import { BULLET_WINDOW, CURRENT_VERSION, LOG_CAP, MAINT_WINDOW, MOCK_HISTORY_CAP, NOTE_CAP, freshGame, freshLabs, freshSave, type MockActive, type MockRecord, type MockState, type ReviewSession, type ActiveAnswer, type ActiveAttempt, type LabDebrief, type LabProgress, type LabsState, type AttemptKind, type GameState, type ItemHistory, type LogEntry, type LogKind, type RecentEntry, type Save, type StoredState, type UiPrefs } from './schema';
 
 type Migration = (old: Record<string, unknown>) => Record<string, unknown>;
 
@@ -41,6 +41,9 @@ export const MIGRATIONS: Record<number, Migration> = {
   },
   // Version 4 adds the labs block (step ticks, problem notes, completion, debriefs, the lab account's creation date).
   3: (old) => ({ ...old, version: 4, labs: {} }),
+  // Version 5 adds the review, bullet, maintenance and trap stores, the review session, the mock state and the lab acknowledgement.
+  // Nothing is derived here: the per-bullet figures are backfilled once from `recent` when the Weak Spots page first loads.
+  4: (old) => ({ ...old, version: 5 }),
 };
 
 /** Question ids are `<building>-NNN`; the exam domain follows from the building. Foundations and unknown ids have none. */
@@ -100,7 +103,7 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
     if (typeof raw.ui.lastBuilding === 'string' && knownIds.has(raw.ui.lastBuilding)) ui.lastBuilding = raw.ui.lastBuilding;
   }
   return {
-    version: 4,
+    version: 5,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : base.updatedAt,
     buildings,
     ui,
@@ -154,6 +157,13 @@ export function sanitizeGame(raw: unknown, knownIds: ReadonlySet<string>, now: (
         : null,
     ),
     recent: {},
+    byBullet: recordOf(raw.byBullet, (k, x) => (BULLET_ID.test(k) && isStr(x) && /^[01]+$/.test(x) ? x.slice(-BULLET_WINDOW) : null)),
+    maint: recordOf(raw.maint, (k, x) => (known(k) && isStr(x) && /^[01]+$/.test(x) ? x.slice(-MAINT_WINDOW) : null)),
+    traps: recordOf(raw.traps, (k, x) => (/^[a-z0-9-]{1,60}$/.test(k) && isObject(x) && typeof x.n === 'number' && x.n >= 1 ? { n: Math.floor(x.n), miss: Math.min(Math.floor(num(x.miss)), Math.floor(x.n)) } : null)),
+    reviewDay: isObject(raw.reviewDay) && isStr(raw.reviewDay.day) && DAY.test(raw.reviewDay.day) ? { day: raw.reviewDay.day, done: Math.floor(num(raw.reviewDay.done)) } : { day: '', done: 0 },
+    review: sanitizeReview(raw.review, knownIds),
+    mock: sanitizeMock(raw.mock),
+    statsBackfilled: raw.statsBackfilled === true,
   };
   if (isObject(raw.recent)) {
     for (const d of ['1', '2', '3', '4']) {
@@ -185,6 +195,82 @@ export function sanitizeGame(raw: unknown, knownIds: ReadonlySet<string>, now: (
   return game;
 }
 
+const BULLET_ID = /^\d\.\d-[KS]\d+$/;
+const ID = /^[A-Za-z0-9._:@-]{1,80}$/;
+
+function answersOf(raw: unknown, questionIds: readonly string[]): Record<string, ActiveAnswer> {
+  return recordOf(raw, (k, x) => (questionIds.includes(k) && isObject(x) && typeof x.correct === 'boolean' ? { chosen: ints(x.chosen), correct: x.correct, xp: Math.floor(num(x.xp)) } : null));
+}
+
+function sanitizeReview(raw: unknown, knownIds: ReadonlySet<string>): ReviewSession | null {
+  if (!isObject(raw) || !isStr(raw.id) || (raw.kind !== 'review' && raw.kind !== 'maintenance')) return null;
+  const building = isStr(raw.building) && knownIds.has(raw.building) ? raw.building : null;
+  if (raw.kind === 'maintenance' && building === null) return null;
+  const questionIds = strings(raw.questionIds);
+  if (questionIds.length === 0 || !isStr(raw.startedAt) || !isStr(raw.day) || !DAY.test(raw.day)) return null;
+  return { id: raw.id, kind: raw.kind, building, questionIds, seed: Math.floor(num(raw.seed)), startedAt: raw.startedAt, day: raw.day, answers: answersOf(raw.answers, questionIds) };
+}
+
+const chosenOf = (v: unknown, questionIds: readonly string[]): Record<string, number[]> => recordOf(v, (k, x) => (questionIds.includes(k) && Array.isArray(x) ? ints(x) : null));
+
+function sanitizeMockActive(raw: unknown): MockActive | null {
+  if (!isObject(raw) || !isStr(raw.id) || !isStr(raw.startedAt) || Number.isNaN(Date.parse(raw.startedAt))) return null;
+  const questionIds = strings(raw.questionIds);
+  if (questionIds.length === 0 || typeof raw.durationMs !== 'number' || raw.durationMs <= 0) return null;
+  return {
+    id: raw.id,
+    startedAt: raw.startedAt,
+    durationMs: Math.floor(raw.durationMs),
+    short: raw.short === true,
+    questionIds,
+    seed: Math.floor(num(raw.seed)),
+    answers: chosenOf(raw.answers, questionIds),
+    flags: strings(raw.flags).filter((f) => questionIds.includes(f)),
+    fresh: Math.min(Math.floor(num(raw.fresh)), questionIds.length),
+    counts: raw.counts === true,
+    reserveUsed: Math.min(Math.floor(num(raw.reserveUsed)), questionIds.length),
+  };
+}
+
+function sanitizeMockRecord(raw: unknown): MockRecord | null {
+  if (!isObject(raw) || !isStr(raw.id) || !isStr(raw.startedAt) || !isStr(raw.finishedAt)) return null;
+  const questionIds = strings(raw.questionIds);
+  if (questionIds.length === 0) return null;
+  const domains: Record<string, [number, number]> = {};
+  if (isObject(raw.domains)) {
+    for (const d of ['1', '2', '3', '4']) {
+      const v = raw.domains[d];
+      if (Array.isArray(v) && v.length === 2 && typeof v[0] === 'number' && typeof v[1] === 'number' && v[1] >= 0 && v[0] >= 0 && v[0] <= v[1]) domains[d] = [Math.floor(v[0]), Math.floor(v[1])];
+    }
+  }
+  const total = questionIds.length;
+  return {
+    id: raw.id,
+    startedAt: raw.startedAt,
+    finishedAt: raw.finishedAt,
+    short: raw.short === true,
+    expired: raw.expired === true,
+    total,
+    correct: Math.min(Math.floor(num(raw.correct)), total),
+    domains,
+    questionIds,
+    seed: Math.floor(num(raw.seed)),
+    chosen: chosenOf(raw.chosen, questionIds),
+    flags: strings(raw.flags).filter((f) => questionIds.includes(f)),
+    fresh: Math.min(Math.floor(num(raw.fresh)), total),
+    counts: raw.counts === true,
+    reserveUsed: Math.min(Math.floor(num(raw.reserveUsed)), total),
+    trapMisses: recordOf(raw.trapMisses, (k, x) => (ID.test(k) && typeof x === 'number' && x >= 1 ? Math.floor(x) : null)),
+  };
+}
+
+function sanitizeMock(raw: unknown): MockState {
+  const base: MockState = { started: 0, active: null, history: [] };
+  if (!isObject(raw)) return base;
+  const history = Array.isArray(raw.history) ? raw.history.flatMap((r) => sanitizeMockRecord(r) ?? []) : [];
+  return { started: Math.max(Math.floor(num(raw.started)), history.length), active: sanitizeMockActive(raw.active), history: history.slice(-MOCK_HISTORY_CAP) };
+}
+
 function sanitizeActive(raw: unknown, knownIds: ReadonlySet<string>): ActiveAttempt | null {
   if (!isObject(raw)) return null;
   if (!isStr(raw.id) || !ATTEMPTS.includes(raw.kind as AttemptKind) || !isStr(raw.building) || !knownIds.has(raw.building)) return null;
@@ -209,6 +295,7 @@ export function sanitizeLabs(raw: unknown): LabsState {
     const steps = recordOf<true>(x.steps, (sk, sv) => (STEP_ID.test(sk) && sv === true ? true : null));
     const notes = recordOf<string>(x.notes, (nk, nv) => (STEP_ID.test(nk) && isStr(nv) && nv.trim() !== '' ? nv.slice(0, NOTE_CAP) : null));
     const out: LabProgress = { steps, notes };
+    if (x.ack === true) out.ack = true;
     if (isStr(x.completedAt)) out.completedAt = x.completedAt;
     const debrief = sanitizeDebrief(x.debrief);
     if (debrief) out.debrief = debrief;

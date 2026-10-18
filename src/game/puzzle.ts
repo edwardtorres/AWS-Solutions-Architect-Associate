@@ -29,7 +29,7 @@ export interface PuzzlePlayResult {
  * the daily streak, are logged with the attempt type `puzzle` and feed readiness (subject to the per-domain cap of 8 puzzle
  * plays in a window), but they never change a building's state. Returns null when the Workbench is not available.
  */
-export function playPuzzle(save: Save, play: { id: string; building: string; difficulty: Difficulty; correct: boolean }, ctx: Ctx): PuzzlePlayResult | null {
+export function playPuzzle(save: Save, play: { id: string; building: string; difficulty: Difficulty; correct: boolean; bullets?: readonly string[] }, ctx: Ctx): PuzzlePlayResult | null {
   if (!workbenchAvailability(save, play.building, ctx).ok) return null;
   const g = save.game;
   const at = ctx.clock.now().toISOString();
@@ -44,7 +44,7 @@ export function playPuzzle(save: Save, play: { id: string; building: string; dif
     days,
     bestStreak: Math.max(g.bestStreak, longestStreak(days)),
     log: [...g.log, [play.id, play.correct ? 1 : 0, at, 'puzzle'] as Save['game']['log'][number]].slice(-LOG_CAP),
-    ...recordResult(g, { id: play.id, ok: play.correct, kind: 'puzzle', at, domain: ctx.env.domainOf(play.building) }),
+    ...recordResult(g, { id: play.id, ok: play.correct, kind: 'puzzle', at, domain: ctx.env.domainOf(play.building), bullets: play.bullets }),
   };
   let next: Save = { ...save, game };
   const have = new Set(Object.keys(next.game.badges));

@@ -818,6 +818,7 @@ const sources: Source[] = [
   aws('ebs-pricing', 'https://aws.amazon.com/ebs/pricing/', 'Amazon EBS pricing'),
   aws('kms-pricing', 'https://aws.amazon.com/kms/pricing/', 'AWS KMS pricing'),
   aws('ddb-ondemand-backup', `${D}/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html`, 'Using on-demand DynamoDB backup and restore'),
+  aws('free-tier-faq', 'https://aws.amazon.com/free/free-tier-faqs/', 'AWS Free Tier FAQs'),
 ];
 
 export default sources;

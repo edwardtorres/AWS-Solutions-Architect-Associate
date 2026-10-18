@@ -115,7 +115,7 @@ function FieldPuzzle({ module, scenario, shared, backHref, nextId }: { module: P
     const ev = module.def.evaluate(scenario.data);
     if (!ev) return;
     const ok = fields.every((f) => same(chosen[f.id] ?? [], ev.answer[f.id] ?? []));
-    const r = store.playPuzzle({ id: scenario.id, building: scenario.building, difficulty: scenario.difficulty, correct: ok });
+    const r = store.playPuzzle({ id: scenario.id, building: scenario.building, difficulty: scenario.difficulty, correct: ok, bullets: scenario.bullets });
     setResult({ ok, xp: r?.xp ?? 0, ev, mine: chosen, badges: r?.newBadges ?? [] });
   };
   const ruleOf = (id: string): Rule | undefined => module.def.rules.find((r) => r.id === id) ?? module.def.scenarioRules?.(scenario.data).find((r) => r.id === id);

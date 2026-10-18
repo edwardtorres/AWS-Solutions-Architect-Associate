@@ -26,9 +26,9 @@ const lab: Lab = {
     {
       id: 's1b',
       kind: 'check',
-      text: 'Treat the upgrade as permanent. Free tier credits expire on the upgrade, and no AWS page says that deleting the organization returns the account to the Free plan. Run this lab last among the labs, only in a throwaway account, and work as the IAM administrator from lab 1 (root cannot switch roles later).',
-      src: 'lab-idc-enable',
-      quote: 'Your free tier credits expire immediately.',
+      text: 'After the upgrade the lab account is a Paid plan account, and AWS states that a Paid plan cannot be downgraded to the Free plan. So run this lab last among the labs, only in a throwaway account, and work as the IAM administrator from lab 1 (root cannot switch roles later).',
+      src: 'free-tier-faq',
+      quote: 'No, you cannot downgrade your Paid plan to the Free plan.',
       checkpoint: 'You accept that this account stays on the Paid plan.',
     },
     {

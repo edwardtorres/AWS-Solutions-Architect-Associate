@@ -5,6 +5,7 @@ import { createSaveStore, type KeyValueStorage } from './store';
 import { deriveState } from './state';
 import fixtureJson from './__fixtures__/save-v2-real.json';
 import v3Json from './__fixtures__/save-v3-real.json';
+import v4Json from './__fixtures__/save-v4-real.json';
 import { domainOfItem } from './migrate';
 import { computeReadiness } from '../game/readiness';
 import { DEFAULT_ENV } from '../game/env';
@@ -246,7 +247,7 @@ describe('v1 to current migration', () => {
     const r = migrate(v1, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(4);
+    expect(r.save.version).toBe(5);
     expect(r.save.buildings).toEqual({ 'identity-keep': v1.buildings['identity-keep'], gatehouse: v1.buildings.gatehouse });
     expect(r.save.ui).toEqual(v1.ui);
     expect(r.save.game).toEqual(freshSave(clock).game);
@@ -257,10 +258,10 @@ describe('v1 to current migration', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(v1));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(4);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
     const other = makeStore(null);
     expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: v1 })).ok).toBe(true);
-    expect(other.getSnapshot().save.version).toBe(4);
+    expect(other.getSnapshot().save.version).toBe(5);
     expect(Object.keys(other.getSnapshot().save.buildings)).toHaveLength(2);
   });
 
@@ -330,7 +331,7 @@ describe('v2 to v3 migration (answer history)', () => {
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
     const { game } = r.save;
-    expect(r.save.version).toBe(4);
+    expect(r.save.version).toBe(5);
     // Every field of the old game block survives.
     expect(game.xp).toBe(fixture.game.xp);
     expect(game.flags).toHaveLength(1);
@@ -409,7 +410,7 @@ describe('v3 to v4 migration on a real v3 save', () => {
     const r = migrate(fixture, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(4);
+    expect(r.save.version).toBe(5);
     expect(r.save.labs).toEqual({ accountCreated: null, progress: {} });
     expect(r.save.game.xp).toBe(fixture.game.xp);
     expect(r.save.game.history).toEqual(fixture.game.history);
@@ -432,7 +433,7 @@ describe('v3 to v4 migration on a real v3 save', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(fixture));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(4);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
     store.setLabStep('lab-01-safe-account', 's1', true);
     store.setLabNote('lab-01-safe-account', 's1', 'the page looked different');
     store.setLabAccountCreated('2026-09-01');
@@ -467,5 +468,103 @@ describe('v3 to v4 migration on a real v3 save', () => {
     expect(p?.notes.s3).toHaveLength(1000);
     expect(p?.debrief?.finishedAt).toBeUndefined(); // not every question answered
     expect(Object.keys(p?.debrief?.answers ?? {})).toEqual(['a-001']);
+  });
+});
+
+describe('v4 to v5 migration on a real v4 save', () => {
+  const fixture = v4Json as unknown as { version: number; buildings: Record<string, unknown>; ui: unknown; labs: unknown; game: { log: unknown[]; xp: number; history: Record<string, unknown>; recent: Record<string, unknown[]> } };
+
+  it('is a genuine v4 save captured from the production build', () => {
+    expect(fixture.version).toBe(4);
+    expect(fixture.labs).toBeDefined();
+    expect(fixture.game.log.length).toBeGreaterThan(10);
+  });
+
+  it('adds the empty review, bullet, maintenance, trap and mock stores and changes nothing else', () => {
+    const r = migrate(fixture, known, clock);
+    expect(r.status).toBe('migrated');
+    if (r.status !== 'migrated') return;
+    expect(r.save.version).toBe(5);
+    const g = r.save.game;
+    expect(g.byBullet).toEqual({});
+    expect(g.maint).toEqual({});
+    expect(g.traps).toEqual({});
+    expect(g.reviewDay).toEqual({ day: '', done: 0 });
+    expect(g.review).toBeNull();
+    expect(g.mock).toEqual({ started: 0, active: null, history: [] });
+    expect(g.statsBackfilled).toBe(false);
+    expect(g.xp).toBe(fixture.game.xp);
+    expect(g.history).toEqual(fixture.game.history);
+    expect(g.recent).toEqual(fixture.game.recent);
+    expect(g.log).toHaveLength(fixture.game.log.length);
+    expect(r.save.buildings).toEqual(fixture.buildings);
+    expect(r.save.labs).toEqual(fixture.labs);
+  });
+
+  it('loads through the store, writes v5 back and keeps every new store through export and import', () => {
+    const storage = new MemoryStorage();
+    storage.setItem(STORAGE_KEY, JSON.stringify(fixture));
+    const store = makeStore(storage);
+    expect(store.getSnapshot().status).toBe('migrated');
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
+    const a = store.getSnapshot().save;
+    const full = {
+      ...a,
+      game: {
+        ...a.game,
+        byBullet: { '1.2-S1': '1101' },
+        maint: { gatehouse: '10110' },
+        traps: { 'sg-vs-nacl': { n: 4, miss: 1 } },
+        reviewDay: { day: '2026-06-01', done: 7 },
+        mock: {
+          started: 2,
+          active: { id: 'm2', startedAt: '2026-06-02T10:00:00.000Z', durationMs: 7_800_000, short: false, questionIds: ['gatehouse-001', 'gatehouse-002'], seed: 5, answers: { 'gatehouse-001': [1] }, flags: ['gatehouse-002'], fresh: 2, counts: true, reserveUsed: 0 },
+          history: [{ id: 'm1', startedAt: '2026-06-01T10:00:00.000Z', finishedAt: '2026-06-01T11:00:00.000Z', short: false, expired: false, total: 2, correct: 1, domains: { '1': [1, 2] }, questionIds: ['gatehouse-001', 'gatehouse-002'], seed: 1, chosen: { 'gatehouse-001': [0] }, flags: [], fresh: 2, counts: true, reserveUsed: 1, trapMisses: { 'sg-vs-nacl': 1 } }],
+        },
+        statsBackfilled: true,
+      },
+      labs: { ...a.labs, progress: { 'lab-03-multi-account': { steps: {}, notes: {}, ack: true as const } } },
+    };
+    const other = makeStore(null);
+    expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: full })).ok).toBe(true);
+    const b = other.getSnapshot().save;
+    expect(b.game.byBullet).toEqual(full.game.byBullet);
+    expect(b.game.maint).toEqual(full.game.maint);
+    expect(b.game.traps).toEqual(full.game.traps);
+    expect(b.game.reviewDay).toEqual(full.game.reviewDay);
+    expect(b.game.mock).toEqual(full.game.mock);
+    expect(b.game.statsBackfilled).toBe(true);
+    expect(b.labs.progress['lab-03-multi-account']?.ack).toBe(true);
+  });
+
+  it('sanitizes malformed stores field by field', () => {
+    const r = sanitize(
+      {
+        version: 5,
+        buildings: {},
+        ui: {},
+        labs: {},
+        game: {
+          byBullet: { '1.2-S1': '1x1', 'nope': '11', '1.2-S2': '11111111111111' },
+          maint: { gatehouse: '110', ghost: '1', 'key-vault': 5 },
+          traps: { 'sg-vs-nacl': { n: 2, miss: 9 }, 'bad id!': { n: 1, miss: 0 }, x: { n: 0 } },
+          reviewDay: { day: 'today', done: 3 },
+          review: { id: 'r', kind: 'maintenance', building: null, questionIds: ['a-001'], seed: 1, startedAt: 'x', day: '2026-06-01', answers: {} },
+          mock: { started: 'many', active: { id: 'm', startedAt: 'not a date', durationMs: 1, questionIds: ['a-001'] }, history: [{ id: 'h', startedAt: 'a', finishedAt: 'b', questionIds: ['q-1', 'q-2'], correct: 9, domains: { '1': [5, 2], '2': [1, 2] }, chosen: { 'q-1': [0], zzz: [1] }, trapMisses: { p: 2, q: 0 } }] },
+        },
+      },
+      known,
+      clock,
+    );
+    const g = r.game;
+    expect(g.byBullet).toEqual({ '1.2-S2': '1111111111' });
+    expect(g.maint).toEqual({ gatehouse: '110' });
+    expect(g.traps).toEqual({ 'sg-vs-nacl': { n: 2, miss: 2 } });
+    expect(g.reviewDay).toEqual({ day: '', done: 0 });
+    expect(g.review).toBeNull(); // a maintenance session needs a known building
+    expect(g.mock.active).toBeNull();
+    expect(g.mock.history).toHaveLength(1);
+    expect(g.mock.history[0]).toMatchObject({ total: 2, correct: 2, domains: { '2': [1, 2] }, chosen: { 'q-1': [0] }, trapMisses: { p: 2 } });
+    expect(g.mock.started).toBe(1);
   });
 });

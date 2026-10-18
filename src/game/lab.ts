@@ -4,7 +4,7 @@ import { LOG_CAP, NOTE_CAP } from '../save/schema';
 import { addDays, dayDiff, today, type DayKey } from './day';
 import { earnedBadges } from './badges';
 import type { Ctx } from './engine';
-import { recordResult } from './history';
+import { recordResult, trapPairs } from './history';
 import { isCorrect } from './scoring';
 import { longestStreak } from './streak';
 import { xpForAnswer } from './xp';
@@ -101,7 +101,7 @@ export function submitDebriefAnswer(save: Save, labId: string, questionId: strin
     days,
     bestStreak: Math.max(g.bestStreak, longestStreak(days)),
     log: [...g.log, [questionId, correct ? 1 : 0, at, 'lab'] as Save['game']['log'][number]].slice(-LOG_CAP),
-    ...recordResult(g, { id: questionId, ok: correct, kind: 'lab', at, domain: ctx.env.domainOf(q.building) }),
+    ...recordResult(g, { id: questionId, ok: correct, kind: 'lab', at, domain: ctx.env.domainOf(q.building), bullets: q.bullets, traps: trapPairs(q.tags), building: q.building }),
   };
   let next = withProgress({ ...save, game }, labId, { ...p, debrief });
   const have = new Set(Object.keys(next.game.badges));

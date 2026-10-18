@@ -1,7 +1,7 @@
 export const STORAGE_KEY = 'saa-region-builder:save';
 export const CORRUPT_KEY = 'saa-region-builder:save:corrupt';
 export const APP_ID = 'saa-region-builder';
-export const CURRENT_VERSION = 4;
+export const CURRENT_VERSION = 5;
 
 /** Only progress states are stored. planned/surveyed are derived from the roads. */
 export type StoredState = 'under_construction' | 'commissioned';
@@ -85,6 +85,73 @@ export interface ItemHistory {
 /** A counted result kept for readiness: item id, correct, attempt type. */
 export type RecentEntry = [itemId: string, correct: 0 | 1, kind: LogKind];
 
+/** A review or maintenance session in progress (separate from `active`, which belongs to building attempts). Answers are logged as kind `review`. */
+export interface ReviewSession {
+  id: string;
+  kind: 'review' | 'maintenance';
+  /** The building a maintenance set is for; null for the daily review. */
+  building: string | null;
+  questionIds: string[];
+  seed: number;
+  startedAt: string;
+  day: string;
+  answers: Record<string, ActiveAnswer>;
+}
+
+/** Answers and misses on questions tagged `trap:<pair>`, counted kinds only. */
+export interface TrapRecord {
+  n: number;
+  miss: number;
+}
+
+/** A mock exam in progress. Answers stay hidden until it is submitted. */
+export interface MockActive {
+  id: string;
+  startedAt: string;
+  durationMs: number;
+  /** Dev-only short mock (never counts towards "ready to book"). */
+  short: boolean;
+  questionIds: string[];
+  seed: number;
+  /** Authored option indices chosen so far. */
+  answers: Record<string, number[]>;
+  flags: string[];
+  /** Questions not answered in the 14 calendar days before the start, and the freshness verdict fixed at the start. */
+  fresh: number;
+  counts: boolean;
+  reserveUsed: number;
+}
+
+/** A finished mock. Keeps what the results page needs; the latest MOCK_HISTORY_CAP are kept. */
+export interface MockRecord {
+  id: string;
+  startedAt: string;
+  finishedAt: string;
+  short: boolean;
+  /** True when the timer ran out and the mock was submitted automatically. */
+  expired: boolean;
+  total: number;
+  correct: number;
+  /** Per exam domain "1" to "4": [correct, total]. */
+  domains: Record<string, [number, number]>;
+  questionIds: string[];
+  seed: number;
+  chosen: Record<string, number[]>;
+  flags: string[];
+  fresh: number;
+  counts: boolean;
+  reserveUsed: number;
+  /** Don't-confuse pairs fallen for in this mock: pair id to misses. */
+  trapMisses: Record<string, number>;
+}
+
+export interface MockState {
+  /** Mocks started so far (the first two draw from the reserve). */
+  started: number;
+  active: MockActive | null;
+  history: MockRecord[];
+}
+
 export interface GameState {
   notesOpened: Record<string, string>;
   startups: Record<string, { prevIds: string[] }>;
@@ -112,6 +179,17 @@ export interface GameState {
    * windows can ever look at, so pruning never changes a readiness figure.
    */
   recent: Record<string, RecentEntry[]>;
+  /** Last BULLET_WINDOW counted results per outline bullet, oldest first, as a string of "1" and "0". */
+  byBullet: Record<string, string>;
+  /** Last MAINT_WINDOW review, maintenance and mock results per building, oldest first ("1"/"0"). */
+  maint: Record<string, string>;
+  traps: Record<string, TrapRecord>;
+  /** Review answers given on one local day (the daily cap). */
+  reviewDay: { day: string; done: number };
+  review: ReviewSession | null;
+  mock: MockState;
+  /** True once byBullet was filled from `recent` (a one-time backfill for saves made before version 5). */
+  statsBackfilled: boolean;
 }
 
 export interface SaveV1 {
@@ -138,6 +216,8 @@ export interface LabProgress {
   steps: Record<string, true>;
   /** Per-step "Report a problem" notes (the owner's words; never auto-filled). */
   notes: Record<string, string>;
+  /** The owner ticked the acknowledgement of a gated lab's warning (its steps stay hidden until then). */
+  ack?: true;
   /** Set when the owner marks the lab complete (pays the fixed lab XP once). */
   completedAt?: string;
   /** The current or most recent debrief. */
@@ -150,6 +230,15 @@ export interface LabsState {
   progress: Record<string, LabProgress>;
 }
 
+export interface SaveV4 {
+  version: 4;
+  updatedAt: string;
+  buildings: Record<string, BuildingProgress>;
+  ui: UiPrefs;
+  game: Omit<GameState, 'byBullet' | 'maint' | 'traps' | 'reviewDay' | 'review' | 'mock' | 'statsBackfilled'>;
+  labs: LabsState;
+}
+
 export interface SaveV3 {
   version: 3;
   updatedAt: string;
@@ -158,8 +247,9 @@ export interface SaveV3 {
   game: GameState;
 }
 
-export interface SaveV4 {
-  version: 4;
+
+export interface SaveV5 {
+  version: 5;
   updatedAt: string;
   buildings: Record<string, BuildingProgress>;
   ui: UiPrefs;
@@ -167,11 +257,14 @@ export interface SaveV4 {
   labs: LabsState;
 }
 
-export type Save = SaveV4;
+export type Save = SaveV5;
 
 export const NOTE_CAP = 1000;
 
 export const LOG_CAP = 4000;
+export const BULLET_WINDOW = 10;
+export const MAINT_WINDOW = 8;
+export const MOCK_HISTORY_CAP = 30;
 /** The largest readiness window (coverage) and the puzzle cap inside the accuracy window. */
 export const RECENT_NONPUZZLE_CAP = 100;
 export const RECENT_PUZZLE_CAP = 8;
@@ -193,6 +286,13 @@ export function freshGame(): GameState {
     log: [],
     history: {},
     recent: {},
+    byBullet: {},
+    maint: {},
+    traps: {},
+    reviewDay: { day: '', done: 0 },
+    review: null,
+    mock: { started: 0, active: null, history: [] },
+    statsBackfilled: false,
   };
 }
 

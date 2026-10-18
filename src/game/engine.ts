@@ -8,7 +8,7 @@ import { isCorrect, RULES } from './scoring';
 import { earnedBadges } from './badges';
 import { COMMISSION_BONUS, xpForAnswer } from './xp';
 import { longestStreak } from './streak';
-import { recordResult } from './history';
+import { recordResult, trapPairs } from './history';
 
 /** Everything the pure functions need besides the save. */
 export interface Ctx {
@@ -54,7 +54,7 @@ export function submitAnswer(save: Save, questionId: string, chosen: readonly nu
     days,
     bestStreak: Math.max(g.bestStreak, longestStreak(days)),
     log,
-    ...recordResult(g, { id: questionId, ok: correct, kind: a.kind, at, domain: ctx.env.domainOf(q.building) }),
+    ...recordResult(g, { id: questionId, ok: correct, kind: a.kind, at, domain: ctx.env.domainOf(q.building), bullets: q.bullets, traps: trapPairs(q.tags), building: q.building }),
     active: { ...a, answers: { ...a.answers, [questionId]: { chosen: [...chosen], correct, xp } } },
   };
   return { save: { ...save, game }, correct, xp };

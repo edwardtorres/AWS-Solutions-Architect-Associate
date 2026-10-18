@@ -160,7 +160,7 @@ export function createSaveStore(opts: StoreOptions) {
       if (next !== snapshot.save) commit(next);
     },
     /** Records a puzzle play (practice: XP, history and readiness, never a building state). Null while the Workbench is locked. */
-    playPuzzle(play: { id: string; building: string; difficulty: Difficulty; correct: boolean }): PuzzlePlayResult | null {
+    playPuzzle(play: { id: string; building: string; difficulty: Difficulty; correct: boolean; bullets?: readonly string[] }): PuzzlePlayResult | null {
       const r = playPuzzle(snapshot.save, play, ctxFor());
       if (r) commit(r.save);
       return r;
