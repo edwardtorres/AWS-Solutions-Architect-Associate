@@ -229,7 +229,8 @@
     "building": "safe-harbor-account",
     "claim": "Amazon EC2, Amazon S3, Amazon RDS and Amazon Aurora are available on the Free plan.",
     "reason": "Seen as 'Available on both plans' in a rendered view of aws.amazon.com/free on 2026-10-17, but that page builds its offer list with scripts, so scripts/check-links cannot fetch or re-verify it. The Billing guide only says the list of eligible services is on that page.",
-    "status": "open",
-    "added": "2026-10-17"
+    "status": "resolved",
+    "added": "2026-10-17",
+    "resolution": "Resolved 2026-10-18: scripts/free-plan-snapshot.ts renders the page with Chromium and saves every offer card (185) to content/labs/free-plan-snapshot.json; `npm run check:freeplan` re-checks it. EC2, S3, RDS, Aurora, Lambda, API Gateway, CloudFront and others are labelled 'Available on both plans'; Athena and AWS Organizations are 'Paid plan exclusive'. IAM, IAM Identity Center, Trusted Advisor and EC2 Auto Scaling have no card, so labs using them stay 'not confirmed'."
   }
 ]

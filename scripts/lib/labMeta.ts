@@ -1,4 +1,4 @@
-import { planOf } from '../../content/labs/services.ts';
+import { planOf, unmatchedServices } from '../../content/labs/services.ts';
 import { labOrder, type Lab, type LabMeta } from '../../src/labs/types.ts';
 
 export function labMetaOf(lab: Lab): LabMeta {
@@ -13,6 +13,7 @@ export function labMetaOf(lab: Lab): LabMeta {
     needs: lab.needs,
     services: lab.services,
     plan: planOf(lab.services),
+    unmatched: unmatchedServices(lab.services),
     last: lab.last === true,
     newer: [...new Set([...(lab.newer ?? []), ...lab.steps.flatMap((s) => s.newer ?? [])])].sort(),
     gated: lab.gate !== undefined,

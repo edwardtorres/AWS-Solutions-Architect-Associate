@@ -1,0 +1,932 @@
+{
+ "capturedAt": "2026-10-18",
+ "url": "https://aws.amazon.com/free/",
+ "total": 185,
+ "offers": [
+  {
+   "category": "Mobile",
+   "label": "Available on both plans",
+   "name": "Amazon API Gateway"
+  },
+  {
+   "category": "Analytics",
+   "label": "Available on both plans",
+   "name": "Amazon AppFlow"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Athena"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "Amazon Augmented AI"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "Amazon Aurora"
+  },
+  {
+   "category": "AI",
+   "label": "Available on both plans",
+   "name": "Amazon Bedrock"
+  },
+  {
+   "category": "Agentic AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Bedrock AgentCore"
+  },
+  {
+   "category": "Quantum-Technologies",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Braket"
+  },
+  {
+   "category": "Network",
+   "label": "Available on both plans",
+   "name": "Amazon CloudFront"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "Amazon CloudWatch"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Available on both plans",
+   "name": "Amazon CodeCatalyst"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "Amazon Cognito"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Comprehend"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Comprehend Medical"
+  },
+  {
+   "category": "Customer-Engage",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Connect"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Data Firehose"
+  },
+  {
+   "category": "Analytics",
+   "label": "Available on both plans",
+   "name": "Amazon DataZone"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Deadline Cloud"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Detective"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon DevOps Guru"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon DocumentDB (with MongoDB compatibility)"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "Amazon DynamoDB"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon DynamoDB Accelerator (DAX)"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "Amazon EC2"
+  },
+  {
+   "category": "Storage",
+   "label": "Available on both plans",
+   "name": "Amazon ECS Anywhere"
+  },
+  {
+   "category": "Storage",
+   "label": "Available on both plans",
+   "name": "Amazon EFS"
+  },
+  {
+   "category": "Containers",
+   "label": "Paid plan exclusive",
+   "name": "Amazon EKS Anywhere"
+  },
+  {
+   "category": "Storage",
+   "label": "Available on both plans",
+   "name": "Amazon Elastic Block Storage"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "Amazon Elastic Container Registry"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "Amazon Elastic Container Service"
+  },
+  {
+   "category": "Containers",
+   "label": "Available on both plans",
+   "name": "Amazon Elastic Kubernetes Service (EKS)"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Elastic Map Reduce (EMR)"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Elastic Transcoder"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "Amazon ElastiCache"
+  },
+  {
+   "category": "Serverless",
+   "label": "Available on both plans",
+   "name": "Amazon EventBridge"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon FinSpace"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Fraud Detector"
+  },
+  {
+   "category": "Storage",
+   "label": "Paid plan exclusive",
+   "name": "Amazon FSx"
+  },
+  {
+   "category": "Gaming",
+   "label": "Paid plan exclusive",
+   "name": "Amazon GameLift"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon GuardDuty"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Inspector"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Available on both plans",
+   "name": "Amazon Interactive Video Service"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Kendra"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Keyspaces (for Apache Cassandra)"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Kinesis Video Streams"
+  },
+  {
+   "category": "AI",
+   "label": "Available on both plans",
+   "name": "Amazon Lex"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "Amazon Lightsail"
+  },
+  {
+   "category": "Mobile",
+   "label": "Available on both plans",
+   "name": "Amazon Location Service"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Lookout for Equipment"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Lookout for Vision"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Macie"
+  },
+  {
+   "category": "Blockchain",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Managed Blockchain"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Managed Grafana"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Managed Service for Apache Flink"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "Amazon Managed Service for Prometheus"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Managed Streaming for Apache Kafka (MSK)"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Managed Workflows for Apache Airflow (MWAA)"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon MemoryDB"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Available on both plans",
+   "name": "Amazon MQ"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Neptune"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon OpenSearch Service"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Personalize"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Personalize"
+  },
+  {
+   "category": "AI",
+   "label": "Available on both plans",
+   "name": "Amazon Polly"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "Amazon Q Business"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "Amazon Q Developer"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon QuickSight"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "Amazon RDS"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Redshift"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "Amazon Rekognition"
+  },
+  {
+   "category": "Network",
+   "label": "Available on both plans",
+   "name": "Amazon Route 53"
+  },
+  {
+   "category": "Storage",
+   "label": "Available on both plans",
+   "name": "Amazon S3"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "Amazon SageMaker AI"
+  },
+  {
+   "category": "Analytics",
+   "label": "Available on both plans",
+   "name": "Amazon SageMaker Data Processing"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "Amazon SageMaker Ground Truth"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Security Lake"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Security Lake"
+  },
+  {
+   "category": "Customer-Engage",
+   "label": "Available on both plans",
+   "name": "Amazon SES"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "Amazon SimpleDB"
+  },
+  {
+   "category": "Business-Productivity",
+   "label": "Available on both plans",
+   "name": "Amazon SNS"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Available on both plans",
+   "name": "Amazon SQS"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Available on both plans",
+   "name": "Amazon SWF"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Textract"
+  },
+  {
+   "category": "Databases",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Timestream"
+  },
+  {
+   "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Transcribe"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Verified Permissions"
+  },
+  {
+   "category": "Network",
+   "label": "Available on both plans",
+   "name": "Amazon Virtual Private Cloud"
+  },
+  {
+   "category": "Business-Productivity",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkMail"
+  },
+  {
+   "category": "EUC",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkSpaces Applications"
+  },
+  {
+   "category": "EUC",
+   "label": "Available on both plans",
+   "name": "Amazon WorkSpaces Personal"
+  },
+  {
+   "category": "EUC",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkSpaces Pools"
+  },
+  {
+   "category": "EUC",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkSpaces Secure Browser"
+  },
+  {
+   "category": "EUC",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkSpaces Thin Client"
+  },
+  {
+   "category": "Mobile",
+   "label": "Available on both plans",
+   "name": "AWS Amplify Hosting"
+  },
+  {
+   "category": "AI",
+   "label": "Available on both plans",
+   "name": "AWS App Studio"
+  },
+  {
+   "category": "AI",
+   "label": "Available on both plans",
+   "name": "AWS App Studio"
+  },
+  {
+   "category": "Business-Productivity",
+   "label": "Paid plan exclusive",
+   "name": "AWS AppFabric"
+  },
+  {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "AWS Application Migration Service"
+  },
+  {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "AWS Application Migration Service"
+  },
+  {
+   "category": "Mobile",
+   "label": "Available on both plans",
+   "name": "AWS AppSync"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Audit Manager"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "AWS B2B Data Interchange"
+  },
+  {
+   "category": "Storage",
+   "label": "Available on both plans",
+   "name": "AWS Backup"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "AWS Batch"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "AWS Billing Conductor"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Budgets"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Budgets"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Certificate Manager"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "AWS Clean Rooms"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "AWS Cloud Control API"
+  },
+  {
+   "category": "Network",
+   "label": "Available on both plans",
+   "name": "AWS Cloud Map"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "AWS Cloud WAN"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS CloudFormation"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS CloudHSM"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "AWS CloudShell"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS CloudTrail"
+  },
+  {
+   "category": "DevTools",
+   "label": "Paid plan exclusive",
+   "name": "AWS CodeArtifact"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "AWS CodeBuild"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "AWS CodePipeline"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Compute Optimizer"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Config"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "AWS Control Tower"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Cost Explorer"
+  },
+  {
+   "category": "Analytics",
+   "label": "Paid plan exclusive",
+   "name": "AWS Data Exchange"
+  },
+  {
+   "category": "Databases",
+   "label": "Available on both plans",
+   "name": "AWS Database Migration Service"
+  },
+  {
+   "category": "Migration",
+   "label": "Paid Plan exclusive",
+   "name": "AWS DataSync"
+  },
+  {
+   "category": "Mobile",
+   "label": "Paid plan exclusive",
+   "name": "AWS Device Farm"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "AWS Direct Connect"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "AWS Elastic Beanstalk"
+  },
+  {
+   "category": "Storage",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elastic Disaster Recovery"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elemental MediaConnect"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elemental MediaConvert"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elemental MediaLive"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Available on both plans",
+   "name": "AWS Elemental MediaPackage"
+  },
+  {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elemental MediaStore"
+  },
+  {
+   "category": "Business-Productivity",
+   "label": "Paid Plan exclusive",
+   "name": "AWS End User Messaging"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "AWS Entity Resolution"
+  },
+  {
+   "category": "DevTools",
+   "label": "Paid plan exclusive",
+   "name": "AWS Fault Injection Service (FIS)"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Firewall Manager"
+  },
+  {
+   "category": "Analytics",
+   "label": "Available on both plans",
+   "name": "AWS Glue"
+  },
+  {
+   "category": "Satellite",
+   "label": "Paid plan exclusive",
+   "name": "AWS Ground Station"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "AWS HealthImaging"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "AWS HealthLake"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Available on both plans",
+   "name": "AWS HealthOmics"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "AWS HealthScribe"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS IAM Access Analyzer"
+  },
+  {
+   "category": "IOT",
+   "label": "Available on both plans",
+   "name": "AWS IoT Core"
+  },
+  {
+   "category": "IOT",
+   "label": "Available on both plans",
+   "name": "AWS IoT Device Defender"
+  },
+  {
+   "category": "IOT",
+   "label": "Available on both plans",
+   "name": "AWS IoT Device Management"
+  },
+  {
+   "category": "IOT",
+   "label": "Available on both plans",
+   "name": "AWS IoT Events"
+  },
+  {
+   "category": "IOT",
+   "label": "Paid plan exclusive",
+   "name": "AWS IoT FleetWise"
+  },
+  {
+   "category": "IOT",
+   "label": "Paid plan exclusive",
+   "name": "AWS IoT Greengrass"
+  },
+  {
+   "category": "IOT",
+   "label": "Paid plan exclusive",
+   "name": "AWS IoT SiteWise"
+  },
+  {
+   "category": "IOT",
+   "label": "Available on both plans",
+   "name": "AWS IoT TwinMaker"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Key Management Service"
+  },
+  {
+   "category": "Analytics",
+   "label": "Available on both plans",
+   "name": "AWS Lake Formation"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "AWS Lambda"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS License Manager"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Network Firewall"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid Plan exclusive",
+   "name": "AWS Organizations"
+  },
+  {
+   "category": "Compute",
+   "label": "Paid plan exclusive",
+   "name": "AWS Outposts Family"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Payment Cryptography"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Private Certificate Authority"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "AWS Resilience Hub"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Resource Access Manager"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Resource Explorer"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Secrets Manager"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Security Hub CSPM"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Security Incident Response"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Service Catalog"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Shield"
+  },
+  {
+   "category": "Compute",
+   "label": "Paid plan exclusive",
+   "name": "AWS SimSpace Weaver"
+  },
+  {
+   "category": "App-Integration",
+   "label": "Available on both plans",
+   "name": "AWS Step Functions"
+  },
+  {
+   "category": "Storage",
+   "label": "Paid plan exclusive",
+   "name": "AWS Storage Gateway"
+  },
+  {
+   "category": "AI-ML",
+   "label": "Paid plan exclusive",
+   "name": "AWS Supply Chain"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Systems Manager"
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "AWS Telco Network Builder"
+  },
+  {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "AWS Transfer Family"
+  },
+  {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "AWS Transform"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS WAF"
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS WAF Bot Control"
+  },
+  {
+   "category": "Business-Productivity",
+   "label": "Available on both plans",
+   "name": "AWS Wickr"
+  },
+  {
+   "category": "DevTools",
+   "label": "Available on both plans",
+   "name": "AWS X-Ray"
+  },
+  {
+   "category": "Compute",
+   "label": "Available on both plans",
+   "name": "Elastic Load Balancing"
+  },
+  {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "Migration Evaluator"
+  }
+ ]
+}

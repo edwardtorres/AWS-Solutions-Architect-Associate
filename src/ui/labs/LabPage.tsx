@@ -397,7 +397,7 @@ export default function LabPage({ labId }: { labId: string | null }) {
           <BillsBadge key={c.id} resource={c.resource} basis={c.basis} />
         ))}
       </div>
-      <PlanExplain plan={meta.plan} services={lab.services} />
+      <PlanExplain plan={meta.plan} services={lab.services} billable={lab.costs.length > 0} />
 
       {lab.gate && (
         <section className="mt-4 rounded-2xl border-4 border-[#f87171] bg-[rgba(248,113,113,0.1)] p-3 sm:p-4" aria-labelledby="lab-gate" data-testid="lab-gate">
@@ -491,7 +491,7 @@ export default function LabPage({ labId }: { labId: string | null }) {
             <li>
               Services:{' '}
               {lab.services
-                .map((s) => `${s}${SERVICE_PLANS[s]?.plan === 'free' ? ' (Free plan: confirmed)' : SERVICE_PLANS[s]?.plan === 'paid' ? ' (Paid plan only)' : ' (Free plan: not confirmed)'}`)
+                .map((s) => `${s}${SERVICE_PLANS[s]?.plan === 'free' ? ' (Free plan: available)' : SERVICE_PLANS[s]?.plan === 'paid' ? ' (Paid plan exclusive)' : ' (no card on the Free Tier page: not confirmed)'}`)
                 .join('; ')}
               .
             </li>

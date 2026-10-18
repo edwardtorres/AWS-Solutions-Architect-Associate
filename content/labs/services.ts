@@ -1,74 +1,96 @@
 import type { PlanFit } from '../../src/labs/types';
+import snapshot from './free-plan-snapshot.json';
 
 /**
- * Plan availability per service, checked against what AWS publishes. The plan badge of a lab is derived from the
- * services it uses: Paid plan only if any is `paid`, Free plan compatible if all are `free`, otherwise not confirmed.
- *
- * - `docs-table`: the service has an "Always Free" offering in the Billing guide's "Trackable AWS Free Tier services" table,
- *   and "Free account plan accounts only have Always Free offerings active" (verified by check:links).
- * - `rendered-page`: the service shows "Available on both plans" on the rendered AWS Free Tier page. That page builds its offer
- *   list with scripts, so the offline checker cannot fetch it; recorded in content/needs-verification.json.
- * - `rule`: a documented rule excludes the service from the Free plan (verified by check:links).
- * - `none`: no published statement found; the lab says the availability is not confirmed rather than guessing.
+ * Plan availability per service, taken from the dated snapshot of https://aws.amazon.com/free/ (content/labs/free-plan-snapshot.json,
+ * written by `npx tsx scripts/free-plan-snapshot.ts`; `npm run check:freeplan` reports changes). Each card on that page carries
+ * "Available on both plans" or "Paid plan exclusive". A service is matched to its card through the alias table below; a service with
+ * no card stays "not confirmed" (never guessed). The plan badge of a lab is derived from its services: Paid plan only if any is
+ * paid, Free plan compatible if all are free, otherwise not confirmed, with the unmatched services listed.
  */
-export type Evidence = 'docs-table' | 'rendered-page' | 'rule' | 'none';
+export type Evidence = 'snapshot' | 'none';
 
 export interface ServicePlan {
   plan: PlanFit;
   evidence: Evidence;
-  /** Source id and verbatim quote for `docs-table` and `rule`. */
-  src?: string;
-  quote?: string;
+  /** The card's name on the Free Tier page, when matched. */
+  alias: string | null;
+  /** The card's label, verbatim. */
+  label: string | null;
 }
 
-const TABLE = { src: 'free-tier-usage', quote: 'Free account plan accounts only have Always Free offerings active.' };
-const docs = (): ServicePlan => ({ plan: 'free', evidence: 'docs-table', ...TABLE });
-const rendered: ServicePlan = { plan: 'free', evidence: 'rendered-page' };
-const unknown: ServicePlan = { plan: 'unconfirmed', evidence: 'none' };
-
-export const SERVICE_PLANS: Record<string, ServicePlan> = {
-  'AWS Budgets': docs(),
-  'AWS CloudFormation': docs(),
-  'AWS Glue': docs(),
-  'AWS KMS': docs(),
-  'AWS Lambda': docs(),
-  'Amazon CloudFront': docs(),
-  'Amazon CloudWatch': docs(),
-  'Amazon DynamoDB': docs(),
-  'Amazon EventBridge': docs(),
-  'Amazon Route 53': docs(),
-  'Amazon SNS': docs(),
-  'Amazon SQS': docs(),
-  'AWS Systems Manager': docs(),
-  'Amazon EC2': rendered,
-  'Amazon S3': rendered,
-  'Amazon RDS': rendered,
-  'Amazon Aurora': rendered,
-  'AWS Organizations': {
-    plan: 'paid',
-    evidence: 'rule',
-    src: 'free-tier-plans',
-    quote: 'Free account plans will automatically upgrade to paid plan if you join AWS Organizations, set up an AWS Control Tower landing zone, join AWS Partner Network, create a Professional Services contract, enroll in an Enterprise Agreement with AWS, purchase an AWS Skill Builder Team subscription, or designate the AWS account as HIPAA or SEC compliant.',
-  },
-  'AWS Backup': unknown,
-  'AWS CloudShell': unknown,
-  'AWS CloudTrail': unknown,
-  'AWS Compute Optimizer': unknown,
-  'AWS Config': unknown,
-  'AWS Cost Explorer': unknown,
-  'AWS Certificate Manager': unknown,
-  'AWS IAM': unknown,
-  'AWS IAM Identity Center': unknown,
-  'AWS Trusted Advisor': unknown,
-  'Amazon API Gateway': unknown,
-  'Amazon Athena': unknown,
-  'Amazon EC2 Auto Scaling': unknown,
-  'Amazon VPC': unknown,
-  'Elastic Load Balancing': unknown,
+/** Our service name to the name of its card on the Free Tier page; null when the page has no card for it. */
+export const SERVICE_ALIAS: Record<string, string | null> = {
+  'AWS Backup': 'AWS Backup',
+  'AWS Budgets': 'AWS Budgets',
+  'AWS Certificate Manager': 'AWS Certificate Manager',
+  'AWS CloudFormation': 'AWS CloudFormation',
+  'AWS CloudShell': 'AWS CloudShell',
+  'AWS CloudTrail': 'AWS CloudTrail',
+  'AWS Compute Optimizer': 'AWS Compute Optimizer',
+  'AWS Config': 'AWS Config',
+  'AWS Cost Explorer': 'AWS Cost Explorer',
+  'AWS Glue': 'AWS Glue',
+  'AWS IAM': null,
+  'AWS IAM Identity Center': null,
+  'AWS KMS': 'AWS Key Management Service',
+  'AWS Lambda': 'AWS Lambda',
+  'AWS Organizations': 'AWS Organizations',
+  'AWS Systems Manager': 'AWS Systems Manager',
+  'AWS Trusted Advisor': null,
+  'Amazon API Gateway': 'Amazon API Gateway',
+  'Amazon Athena': 'Amazon Athena',
+  'Amazon Aurora': 'Amazon Aurora',
+  'Amazon CloudFront': 'Amazon CloudFront',
+  'Amazon CloudWatch': 'Amazon CloudWatch',
+  'Amazon DynamoDB': 'Amazon DynamoDB',
+  'Amazon EC2': 'Amazon EC2',
+  'Amazon EC2 Auto Scaling': null,
+  'Amazon EventBridge': 'Amazon EventBridge',
+  'Amazon RDS': 'Amazon RDS',
+  'Amazon Route 53': 'Amazon Route 53',
+  'Amazon S3': 'Amazon S3',
+  'Amazon SNS': 'Amazon SNS',
+  'Amazon SQS': 'Amazon SQS',
+  'Amazon VPC': 'Amazon Virtual Private Cloud',
+  'Elastic Load Balancing': 'Elastic Load Balancing',
 };
+
+export const aliasFor = (service: string): string | null => SERVICE_ALIAS[service] ?? null;
+
+export const SNAPSHOT_DATE: string = snapshot.capturedAt;
+export const SNAPSHOT_OFFERS: readonly { name: string; category: string; label: string }[] = snapshot.offers;
+
+const normLabel = (label: string): PlanFit => {
+  const l = label.toLowerCase();
+  if (l.includes('paid plan exclusive')) return 'paid';
+  if (l.includes('available on both plans')) return 'free';
+  return 'unconfirmed';
+};
+
+/** Plan of one card by name (case-insensitive); "unconfirmed" when absent or labelled in a way this code does not know. */
+export function planOfOffer(name: string): { plan: PlanFit; label: string | null } {
+  const offers = SNAPSHOT_OFFERS.filter((o) => o.name.toLowerCase() === name.toLowerCase());
+  if (offers.length === 0) return { plan: 'unconfirmed', label: null };
+  const plans = new Set(offers.map((o) => normLabel(o.label)));
+  // Duplicated cards that disagree are not guessed at.
+  if (plans.size !== 1) return { plan: 'unconfirmed', label: offers.map((o) => o.label).join(' / ') };
+  return { plan: [...plans][0] as PlanFit, label: (offers[0] as { label: string }).label };
+}
+
+export const SERVICE_PLANS: Record<string, ServicePlan> = Object.fromEntries(
+  Object.entries(SERVICE_ALIAS).map(([service, alias]) => {
+    if (alias === null) return [service, { plan: 'unconfirmed', evidence: 'none', alias: null, label: null } satisfies ServicePlan];
+    const { plan, label } = planOfOffer(alias);
+    return [service, { plan, evidence: plan === 'unconfirmed' ? 'none' : 'snapshot', alias, label } satisfies ServicePlan];
+  }),
+);
 
 export function planOf(services: readonly string[]): PlanFit {
   const plans = services.map((s) => SERVICE_PLANS[s]?.plan ?? 'unconfirmed');
   if (plans.includes('paid')) return 'paid';
   return plans.length > 0 && plans.every((p) => p === 'free') ? 'free' : 'unconfirmed';
 }
+
+/** The services of a lab that have no matching card (or no clear label) on the Free Tier page. */
+export const unmatchedServices = (services: readonly string[]): string[] => services.filter((s) => (SERVICE_PLANS[s]?.plan ?? 'unconfirmed') === 'unconfirmed');

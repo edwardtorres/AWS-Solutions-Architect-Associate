@@ -24,7 +24,8 @@
     "page": "tsx scripts/page.ts",
     "q": "tsx scripts/q.ts",
     "gen:meta": "tsx scripts/gen-question-meta.ts",
-    "check:cfn": "tsx scripts/check-cfn.ts"
+    "check:cfn": "tsx scripts/check-cfn.ts",
+    "check:freeplan": "tsx scripts/check-freeplan.ts"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",

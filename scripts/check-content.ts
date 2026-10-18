@@ -48,7 +48,7 @@ async function main() {
   const puzzles = await loadPuzzles();
   const bulletIds = new Set(outline.domains.flatMap((d) => d.tasks.flatMap((t) => t.bullets.map((b) => b.id))));
   problems.push(
-    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...(await loadLabs()).labs.flatMap((l) => [...l.steps.map((s) => s.src), ...l.costs.map((c) => c.src), ...l.traps.map((t) => t.src)]), 'free-tier-plans', 'free-tier-usage', ...[...puzzles.values()].flatMap((m) => [...m.def.rules.map((r) => r.src), ...m.scenarios.flatMap((sc) => (m.def.scenarioRules?.(sc.data) ?? []).map((r) => r.src))]), ...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
+    ...checkNotes({ buildings: BUILDINGS, bulletIds, ...bundle, citedElsewhere: new Set([...(await loadLabs()).labs.flatMap((l) => [...l.steps.map((s) => s.src), ...l.costs.map((c) => c.src), ...l.traps.map((t) => t.src)]), 'free-tier-plans', ...[...puzzles.values()].flatMap((m) => [...m.def.rules.map((r) => r.src), ...m.scenarios.flatMap((sc) => (m.def.scenarioRules?.(sc.data) ?? []).map((r) => r.src))]), ...qb.questions.flatMap((q) => q.evidence.map((e) => e.src)), ...[...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])].flatMap((f) => (f.source ? [f.source] : []))]), postGuide: qb.postGuide }).map((x) => `notes: ${x}`),
   );
 
   const repoRoot = here('../');

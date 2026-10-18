@@ -1,7 +1,7 @@
 import type { Building } from '../../src/data/types.ts';
 import type { ConfusePair, Source } from '../../src/content/types.ts';
 import { DEBRIEF_SIZE, labOrder, type Lab, type LabStep } from '../../src/labs/types.ts';
-import { SERVICE_PLANS, planOf, type ServicePlan } from '../../content/labs/services.ts';
+import { SERVICE_PLANS, type ServicePlan } from '../../content/labs/services.ts';
 import type { BannedTerm } from '../banned-terms.ts';
 import type { PostGuideRegistry } from './questionChecks.ts';
 
@@ -108,8 +108,6 @@ export function checkLabs(input: LabCheckInput): string[] {
     // Services and plan.
     if (lab.services.length === 0) p.push(`${w}: lists no services (the plan badge is derived from them)`);
     for (const s of lab.services) if (!(s in SERVICE_PLANS)) p.push(`${w}: service "${s}" is not in content/labs/services.ts`);
-    const plan = planOf(lab.services);
-    if (plan === 'free' && lab.costs.length > 0) p.push(`${w}: derived plan is "Free plan compatible" but the lab has billable resources; mark those services unconfirmed or remove the resources`);
 
     // Costs.
     const costIds = new Set<string>();
@@ -204,18 +202,14 @@ export function checkLabs(input: LabCheckInput): string[] {
   }
 
   // Services table consistency.
-  for (const [name, sp] of Object.entries(SERVICE_PLANS)) p.push(...checkServicePlan(name, sp, srcById));
+  for (const [name, sp] of Object.entries(SERVICE_PLANS)) p.push(...checkServicePlan(name, sp));
   return p;
 }
 
-function checkServicePlan(name: string, sp: ServicePlan, srcById: ReadonlyMap<string, Source>): string[] {
+function checkServicePlan(name: string, sp: ServicePlan): string[] {
   const p: string[] = [];
-  if (sp.evidence === 'docs-table' || sp.evidence === 'rule') {
-    if (!sp.src || !sp.quote) p.push(`services ${name}: evidence "${sp.evidence}" needs src and quote`);
-    else p.push(...checkCite(`services ${name}`, sp.src, sp.quote, srcById));
-  }
-  if (sp.plan === 'unconfirmed' && sp.evidence !== 'none') p.push(`services ${name}: an unconfirmed service must have evidence "none"`);
-  if (sp.plan !== 'unconfirmed' && sp.evidence === 'none') p.push(`services ${name}: ${sp.plan} needs published evidence`);
+  if (sp.alias === null && sp.plan !== 'unconfirmed') p.push(`services ${name}: a service without a card on the Free Tier page must stay unconfirmed`);
+  if (sp.alias !== null && sp.plan === 'unconfirmed' && sp.label === null) p.push(`services ${name}: no card named "${sp.alias}" in the snapshot (update the alias or the snapshot)`);
   return p;
 }
 

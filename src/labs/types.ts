@@ -123,6 +123,8 @@ export interface LabMeta {
   needs: readonly string[];
   services: readonly string[];
   plan: PlanFit;
+  /** Services with no matching card (or no clear label) on the Free Tier page: why the badge may read "not confirmed". */
+  unmatched: readonly string[];
   /** Scheduled last on the Labs page. */
   last: boolean;
   /** Registry ids of the post-guide features any step (or the lab text) uses: the lab is labelled "newer than the exam guide". */

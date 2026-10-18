@@ -704,7 +704,6 @@ const sources: Source[] = [
   aws('ec2-dedicated-instances', `${D}/AWSEC2/latest/UserGuide/dedicated-instance.html`, 'Amazon EC2 Dedicated Instances'),
   aws('s3-website', `${D}/AmazonS3/latest/userguide/WebsiteHosting.html`, 'Hosting a static website using Amazon S3'),
   aws('free-tier-plans', `${D}/awsaccountbilling/latest/aboutv2/free-tier-plans.html`, 'Choosing a plan (AWS Billing)'),
-  aws('free-tier-usage', `${D}/awsaccountbilling/latest/aboutv2/tracking-free-tier-usage.html#free-tier-services`, 'Tracking your AWS Free Tier usage'),
   aws('vpc-nat-working', `${D}/vpc/latest/userguide/nat-gateway-working-with.html`, 'Work with NAT gateways'),
   aws('vpc-ip-addressing', `${D}/vpc/latest/userguide/vpc-ip-addressing.html`, 'Amazon VPC IP addressing'),
   aws('cfn-delete-stack', `${D}/AWSCloudFormation/latest/UserGuide/cfn-console-delete-stack.html`, 'Delete a stack from the CloudFormation console'),

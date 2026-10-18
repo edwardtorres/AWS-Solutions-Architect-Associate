@@ -7,7 +7,6 @@
 import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
 import { loadPuzzles } from './lib/loadPuzzles.ts';
 import { loadLabs } from './lib/loadLabs.ts';
-import { SERVICE_PLANS } from '../content/labs/services.ts';
 import { everyBlock } from './lib/notesChecks.ts';
 import { fetchPage, hasText, stripFragment, type PageInfo } from './lib/pageCache.ts';
 
@@ -127,7 +126,6 @@ async function main() {
       for (const [i, c] of (lab.gate?.cites ?? []).entries()) labCites.push({ where: `${lab.id} gate cite ${i + 1}`, src: c.src, quote: c.quote });
       for (const t of lab.traps) labCites.push({ where: `${lab.id} trap ${t.pair}`, src: t.src, quote: t.quote });
     }
-    for (const [name, sp] of Object.entries(SERVICE_PLANS)) if (sp.src && sp.quote) labCites.push({ where: `services ${name}`, src: sp.src, quote: sp.quote });
     for (const c of labCites) {
       quoteCount += 1;
       const src = byId.get(c.src);
