@@ -7,6 +7,8 @@ export interface Offer {
   category: string;
   /** The label on the card, verbatim ("Available on both plans", "Paid plan exclusive", ...). */
   label: string;
+  /** The card's one-line description, verbatim (lets a reviewer see that an alias is the same service, not a neighbour). */
+  description?: string;
 }
 
 export interface Snapshot {
@@ -31,7 +33,7 @@ export function parseOffers(text: string): Offer[] {
     if (/^learn more$/i.test(line)) {
       if (chunk.length >= 3) {
         const li = chunk.findIndex((l) => LABEL.test(l) && l.length < 60);
-        if (li >= 1 && chunk[li + 1]) out.push({ category: chunk[li - 1] as string, label: chunk[li] as string, name: chunk[li + 1] as string });
+        if (li >= 1 && chunk[li + 1]) out.push({ category: chunk[li - 1] as string, label: chunk[li] as string, name: chunk[li + 1] as string, description: chunk.slice(li + 2).join(' ') });
       }
       chunk = [];
     } else chunk.push(line);
@@ -73,11 +75,17 @@ export async function renderOffers(): Promise<Snapshot> {
   try {
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     await page.goto(FREE_URL, { waitUntil: 'networkidle', timeout: 90_000 });
+    // The offer list fills in after the network goes quiet; reading the page before the first button appears gives only the first 8 cards.
+    await page.getByText(/^Show \d+ more$/).first().waitFor({ timeout: 30_000 });
+    // The button can vanish for a moment while the list re-renders, so it only counts as gone after a second look.
     for (let i = 0; i < 80; i += 1) {
       const more = page.getByText(/^Show \d+ more$/).first();
-      if ((await more.count()) === 0) break;
+      if ((await more.count()) === 0) {
+        await page.waitForTimeout(1500);
+        if ((await more.count()) === 0) break;
+      }
       await more.click({ timeout: 10_000 });
-      await page.waitForTimeout(300);
+      await page.waitForTimeout(500);
     }
     const text = await page.evaluate(() => document.body.innerText);
     const start = text.indexOf('Explore our offers');

@@ -1,932 +1,1117 @@
 {
- "capturedAt": "2026-10-18",
+ "capturedAt": "2026-10-19",
  "url": "https://aws.amazon.com/free/",
  "total": 185,
  "offers": [
   {
    "category": "Mobile",
    "label": "Available on both plans",
-   "name": "Amazon API Gateway"
+   "name": "Amazon API Gateway",
+   "description": "Publish, maintain, monitor, and secure APIs at any scale."
   },
   {
    "category": "Analytics",
    "label": "Available on both plans",
-   "name": "Amazon AppFlow"
+   "name": "Amazon AppFlow",
+   "description": "Automate data flows between software as a service (SaaS) and AWS services"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Application Recovery Controller",
+   "description": "Simplify and automate recovery for highly available applications"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Application Recovery Controller",
+   "description": "Simplify and automate recovery for highly available applications"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Athena"
+   "name": "Amazon Athena",
+   "description": "Analyze petabyte-scale data where it lives with ease and flexibility"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "Amazon Augmented AI"
+   "name": "Amazon Augmented AI",
+   "description": "Amazon Augmented AI (Amazon A2I) makes it easy to build the workflows required for human review of ML predictions."
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "Amazon Aurora"
+   "name": "Amazon Aurora",
+   "description": "Serverless relational database with unparalleled high performance and availability at global scale."
   },
   {
    "category": "AI",
    "label": "Available on both plans",
-   "name": "Amazon Bedrock"
+   "name": "Amazon Bedrock",
+   "description": "The easiest way to build and scale generative AI applications with foundation models"
   },
   {
    "category": "Agentic AI",
    "label": "Paid plan exclusive",
-   "name": "Amazon Bedrock AgentCore"
+   "name": "Amazon Bedrock AgentCore",
+   "description": "Build, deploy, and operate highly effective agents securely, at scale using any framework and model – no infrastructure management required."
   },
   {
    "category": "Quantum-Technologies",
    "label": "Paid plan exclusive",
-   "name": "Amazon Braket"
+   "name": "Amazon Braket",
+   "description": "Amazon Braket is a fully managed quantum computing service that offers access to different types of quantum computing hardware."
   },
   {
    "category": "Network",
    "label": "Available on both plans",
-   "name": "Amazon CloudFront"
+   "name": "Amazon CloudFront",
+   "description": "Web service to distribute content to end users with low latency and high transfer speeds."
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "Amazon CloudWatch"
+   "name": "Amazon CloudWatch",
+   "description": "Monitoring for AWS cloud resources and applications."
   },
   {
    "category": "App-Integration",
    "label": "Available on both plans",
-   "name": "Amazon CodeCatalyst"
+   "name": "Amazon CodeCatalyst",
+   "description": "Quickly build and deliver apps at scale on AWS"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "Amazon Cognito"
+   "name": "Amazon Cognito",
+   "description": "Simple and Secure User Sign-Up, Sign-In, and Access Control."
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "Amazon Comprehend"
+   "name": "Amazon Comprehend",
+   "description": "Continuously trained and fully managed natural language processing (NLP)."
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "Amazon Comprehend Medical"
+   "name": "Amazon Comprehend Medical",
+   "description": "A natural language processing service that makes it easy to use machine learning to extract relevant medical information from unstructured text ."
   },
   {
    "category": "Customer-Engage",
    "label": "Paid plan exclusive",
-   "name": "Amazon Connect"
+   "name": "Amazon Connect",
+   "description": "Transform your customer experience (CX) at scale with Amazon Connect, AWS’s AI-powered contact center"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Data Firehose"
+   "name": "Amazon Data Firehose",
+   "description": "Reliably load real-time streams into data lakes, warehouses, and analytics services"
   },
   {
    "category": "Analytics",
    "label": "Available on both plans",
-   "name": "Amazon DataZone"
+   "name": "Amazon DataZone",
+   "description": "Unlock data across organizational boundaries with built-in governance capabilities"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "Amazon Deadline Cloud"
+   "name": "Amazon Deadline Cloud",
+   "description": "Set up, deploy, and scale a fully managed cloud render farm in minutes"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon Detective"
+   "name": "Amazon Detective",
+   "description": "Analyze and visualize security data to rapidly get to the root cause of potential security issues"
   },
   {
    "category": "AI",
    "label": "Paid plan exclusive",
-   "name": "Amazon DevOps Guru"
+   "name": "Amazon DevOps Guru",
+   "description": "ML-powered cloud operations service to improve application availability"
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon DocumentDB (with MongoDB compatibility)"
+   "name": "Amazon DocumentDB (with MongoDB compatibility)",
+   "description": "Amazon DocumentDB is a scalable, highly durable, and fully managed database service for operating mission-critical MongoDB workloads."
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "Amazon DynamoDB"
+   "name": "Amazon DynamoDB",
+   "description": "Serverless, NoSQL, fully managed database with single-digit millisecond performance at any scale."
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon DynamoDB Accelerator (DAX)"
+   "name": "Amazon DynamoDB Accelerator (DAX)",
+   "description": "Caching service purpose-built for DynamoDB compatibility"
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "Amazon EC2"
+   "name": "Amazon EC2",
+   "description": "Resizable compute capacity in the Cloud."
   },
   {
    "category": "Storage",
    "label": "Available on both plans",
-   "name": "Amazon ECS Anywhere"
+   "name": "Amazon ECS Anywhere",
+   "description": "Easily run and manage containers on any customer-managed infrastructure"
   },
   {
    "category": "Storage",
    "label": "Available on both plans",
-   "name": "Amazon EFS"
+   "name": "Amazon EFS",
+   "description": "Simple, scalable, shared file storage service for Amazon EC2 instances."
   },
   {
    "category": "Containers",
    "label": "Paid plan exclusive",
-   "name": "Amazon EKS Anywhere"
+   "name": "Amazon EKS Anywhere",
+   "description": "Create and operate Kubernetes clusters on your own infrastructure"
   },
   {
    "category": "Storage",
    "label": "Available on both plans",
-   "name": "Amazon Elastic Block Storage"
+   "name": "Amazon Elastic Block Storage",
+   "description": "Persistent, durable, low-latency block-level storage volumes for EC2 instances."
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "Amazon Elastic Container Registry"
+   "name": "Amazon Elastic Container Registry",
+   "description": "Store and retrieve Docker images."
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "Amazon Elastic Container Service"
+   "name": "Amazon Elastic Container Service",
+   "description": "Run highly secure, reliable, and scalable containers"
   },
   {
    "category": "Containers",
    "label": "Available on both plans",
-   "name": "Amazon Elastic Kubernetes Service (EKS)"
+   "name": "Amazon Elastic Kubernetes Service (EKS)",
+   "description": "Start, run, and scale Kubernetes without thinking about cluster management"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Elastic Map Reduce (EMR)"
+   "name": "Amazon Elastic Map Reduce (EMR)",
+   "description": "Easily run and scale Apache Spark, Trino, and other big data workloads"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "Amazon Elastic Transcoder"
+   "name": "Amazon Elastic Transcoder",
+   "description": "Fully managed media transcoding service"
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "Amazon ElastiCache"
+   "name": "Amazon ElastiCache",
+   "description": "Real-time performance for real-time applications"
   },
   {
    "category": "Serverless",
    "label": "Available on both plans",
-   "name": "Amazon EventBridge"
+   "name": "Amazon EventBridge",
+   "description": "Build event-driven applications at scale across AWS, existing systems, or SaaS applications"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon FinSpace"
+   "name": "Amazon FinSpace",
+   "description": "Easy to manage high-performance time-series database and analytics for Capital Markets"
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "Amazon Fraud Detector"
+   "name": "Amazon Fraud Detector",
+   "description": "Detect online fraud faster with machine learning"
   },
   {
    "category": "Storage",
    "label": "Paid plan exclusive",
-   "name": "Amazon FSx"
+   "name": "Amazon FSx",
+   "description": "Launch, run, and scale feature-rich and highly-performant file systems with just a few clicks"
   },
   {
    "category": "Gaming",
    "label": "Paid plan exclusive",
-   "name": "Amazon GameLift"
+   "name": "Amazon GameLift",
+   "description": "Simple, fast, cost-effective dedicated game server hosting."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon GuardDuty"
+   "name": "Amazon GuardDuty",
+   "description": "Intelligent threat detection and continuous monitoring to protect your AWS accounts and workloads."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon Inspector"
+   "name": "Amazon Inspector",
+   "description": "Automatically discover and scan workloads for vulnerabilities."
   },
   {
    "category": "Media-Services",
    "label": "Available on both plans",
-   "name": "Amazon Interactive Video Service"
+   "name": "Amazon Interactive Video Service",
+   "description": "Fully managed service that makes it easy to set up live, interactive video streams in just a few minutes."
   },
   {
    "category": "AI",
    "label": "Paid plan exclusive",
-   "name": "Amazon Kendra"
+   "name": "Amazon Kendra",
+   "description": "Intelligent search service powered by machine learning"
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon Keyspaces (for Apache Cassandra)"
+   "name": "Amazon Keyspaces (for Apache Cassandra)",
+   "description": "A scalable, highly available, and managed Apache Cassandra–compatible database service"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Kinesis Video Streams"
+   "name": "Amazon Kinesis Video Streams",
+   "description": "Capture, process, and store media streams for playback, analytics, and machine learning"
   },
   {
    "category": "AI",
    "label": "Available on both plans",
-   "name": "Amazon Lex"
+   "name": "Amazon Lex",
+   "description": "Build bots with Conversational AI."
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "Amazon Lightsail"
+   "name": "Amazon Lightsail",
+   "description": "Virtual Private Servers made easy! Everything you need to jumpstart your project on AWS with compute, storage, and networking."
   },
   {
    "category": "Mobile",
    "label": "Available on both plans",
-   "name": "Amazon Location Service"
+   "name": "Amazon Location Service",
+   "description": "Securely and easily add location data to applications"
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "Amazon Lookout for Equipment"
+   "name": "Amazon Lookout for Equipment",
+   "description": "Avoid unplanned downtime by automatically detecting abnormal equipment behavior"
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "Amazon Lookout for Vision"
+   "name": "Amazon Lookout for Vision",
+   "description": "Spot product defects using computer vision to automate quality inspection"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon Macie"
+   "name": "Amazon Macie",
+   "description": "Automated sensitive data discovery and evaluation of your Amazon S3 security posture."
   },
   {
    "category": "Blockchain",
    "label": "Paid plan exclusive",
-   "name": "Amazon Managed Blockchain"
+   "name": "Amazon Managed Blockchain",
+   "description": "Build on blockchain with reliable APIs and without specialized infrastructure"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Paid plan exclusive",
-   "name": "Amazon Managed Grafana"
+   "name": "Amazon Managed Grafana",
+   "description": "Scalable and secure data visualization for your operational metrics, logs, and traces"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Managed Service for Apache Flink"
+   "name": "Amazon Managed Service for Apache Flink",
+   "description": "Build and run fully managed Apache Flink applications"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "Amazon Managed Service for Prometheus"
+   "name": "Amazon Managed Service for Prometheus",
+   "description": "Amazon Managed Service for Prometheus is a Prometheus-compatible service that monitors and provides alerts on containerized applications."
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Managed Streaming for Apache Kafka (MSK)"
+   "name": "Amazon Managed Streaming for Apache Kafka (MSK)",
+   "description": "Securely stream data with a fully managed, highly available Apache Kafka service"
   },
   {
    "category": "App-Integration",
    "label": "Paid plan exclusive",
-   "name": "Amazon Managed Workflows for Apache Airflow (MWAA)"
+   "name": "Amazon Managed Workflows for Apache Airflow (MWAA)",
+   "description": "Secure and highly available managed workflow orchestration for Apache Airflow"
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon MemoryDB"
+   "name": "Amazon MemoryDB",
+   "description": "Valkey- and Redis OSS-compatible, durable, in-memory database service for ultra-fast performance."
   },
   {
    "category": "App-Integration",
    "label": "Available on both plans",
-   "name": "Amazon MQ"
+   "name": "Amazon MQ",
+   "description": "Amazon MQ is a fully managed service for open source message brokers."
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon Neptune"
+   "name": "Amazon Neptune",
+   "description": "High-performance graph analytics and serverless database for superior scalability and availability"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon OpenSearch Service"
-  },
-  {
-   "category": "AI",
-   "label": "Paid plan exclusive",
-   "name": "Amazon Personalize"
-  },
-  {
-   "category": "AI",
-   "label": "Paid plan exclusive",
-   "name": "Amazon Personalize"
+   "name": "Amazon OpenSearch Service",
+   "description": "Simplify AI-powered search, observability, and vector database operations with a secure, cost-effective managed service."
   },
   {
    "category": "AI",
    "label": "Available on both plans",
-   "name": "Amazon Polly"
+   "name": "Amazon Polly",
+   "description": "Turn text into lifelike speech."
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "Amazon Q Business"
+   "name": "Amazon Q Business",
+   "description": "Unleash the power of generative AI in the workplace with Amazon Q Business"
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "Amazon Q Developer"
+   "name": "Amazon Q Developer",
+   "description": "The most capable generative AI–powered assistant for software development"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon QuickSight"
+   "name": "Amazon QuickSight",
+   "description": "Unified business intelligence at hyperscale."
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "Amazon RDS"
+   "name": "Amazon RDS",
+   "description": "Managed Relational Database Service for MySQL, PostgreSQL, MariaDB, or SQL Server."
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "Amazon Redshift"
+   "name": "Amazon Redshift",
+   "description": "Power data driven decisions with the best price-performance cloud data warehouse"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "Amazon Rekognition"
+   "name": "Amazon Rekognition",
+   "description": "Deep learning-based image recognition service."
   },
   {
    "category": "Network",
    "label": "Available on both plans",
-   "name": "Amazon Route 53"
+   "name": "Amazon Route 53",
+   "description": "Amazon Route 53 is a highly available and scalable cloud Domain Name System (DNS) web service."
   },
   {
    "category": "Storage",
    "label": "Available on both plans",
-   "name": "Amazon S3"
+   "name": "Amazon S3",
+   "description": "Secure, durable, and scalable object storage infrastructure."
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "Amazon SageMaker AI"
+   "name": "Amazon SageMaker AI",
+   "description": "Machine learning for every data scientist and developer."
   },
   {
    "category": "Analytics",
    "label": "Available on both plans",
-   "name": "Amazon SageMaker Data Processing"
+   "name": "Amazon SageMaker Data Processing",
+   "description": "Analyze, prepare, and integrate data for analytics and AI at any scale"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "Amazon SageMaker Ground Truth"
+   "name": "Amazon SageMaker Ground Truth",
+   "description": "Build highly-accurate training datasets quickly, while reducing data labeling costs by up to 70% ."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon Security Lake"
-  },
-  {
-   "category": "Security-Identity-Compliance",
-   "label": "Paid plan exclusive",
-   "name": "Amazon Security Lake"
+   "name": "Amazon Security Lake",
+   "description": "Automatically centralize your security data in a few steps."
   },
   {
    "category": "Customer-Engage",
    "label": "Available on both plans",
-   "name": "Amazon SES"
+   "name": "Amazon SES",
+   "description": "Cost-effective email service in the Cloud"
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "Amazon SimpleDB"
+   "name": "Amazon SimpleDB",
+   "description": "Amazon SimpleDB is a highly available NoSQL data store that offloads the work of database administration."
   },
   {
    "category": "Business-Productivity",
    "label": "Available on both plans",
-   "name": "Amazon SNS"
+   "name": "Amazon SNS",
+   "description": "Fast, flexible, fully managed push messaging service."
   },
   {
    "category": "App-Integration",
    "label": "Available on both plans",
-   "name": "Amazon SQS"
+   "name": "Amazon SQS",
+   "description": "Scalable queue for storing messages as they travel between computers."
   },
   {
    "category": "App-Integration",
    "label": "Available on both plans",
-   "name": "Amazon SWF"
+   "name": "Amazon SWF",
+   "description": "Task coordination and state management service for Cloud applications."
   },
   {
    "category": "AI",
    "label": "Paid plan exclusive",
-   "name": "Amazon Textract"
+   "name": "Amazon Textract",
+   "description": "Textract automatically extracts text and data from scanned documents, forms, and tables."
   },
   {
    "category": "Databases",
    "label": "Paid plan exclusive",
-   "name": "Amazon Timestream"
+   "name": "Amazon Timestream",
+   "description": "Easy-to-manage time-series databases optimized for security, performance, availability, and scalability"
   },
   {
    "category": "AI",
    "label": "Paid plan exclusive",
-   "name": "Amazon Transcribe"
+   "name": "Amazon Transcribe",
+   "description": "Add speech-to-text capability to your applications with automatic speech recognition."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "Amazon Verified Permissions"
+   "name": "Amazon Verified Permissions",
+   "description": "Fully managed Cedar service for fine grained authorization"
   },
   {
    "category": "Network",
    "label": "Available on both plans",
-   "name": "Amazon Virtual Private Cloud"
+   "name": "Amazon Virtual Private Cloud",
+   "description": "Define and launch AWS resources in a logically isolated virtual network"
   },
   {
    "category": "Business-Productivity",
    "label": "Paid plan exclusive",
-   "name": "Amazon WorkMail"
+   "name": "Amazon WorkMail",
+   "description": "Secure, managed business email and calendar service with support for existing desktop and mobile email client applications"
   },
   {
    "category": "EUC",
    "label": "Paid plan exclusive",
-   "name": "Amazon WorkSpaces Applications"
+   "name": "Amazon WorkSpaces Applications",
+   "description": "Secure, reliable, and scalable application streaming"
+  },
+  {
+   "category": "EUC",
+   "label": "Paid plan exclusive",
+   "name": "Amazon WorkSpaces Core",
+   "description": "Cost-effective, simple, flexible cloud desktop infrastructure and APIs for VDI software from Citrix, Omnissa, Workspot, and Leostream"
   },
   {
    "category": "EUC",
    "label": "Available on both plans",
-   "name": "Amazon WorkSpaces Personal"
+   "name": "Amazon WorkSpaces Personal",
+   "description": "Optimize costs and deliver a configurable, personalized end-user experience"
   },
   {
    "category": "EUC",
    "label": "Paid plan exclusive",
-   "name": "Amazon WorkSpaces Pools"
+   "name": "Amazon WorkSpaces Pools",
+   "description": "Create pools of virtual desktops to simplify management and reduce cost"
   },
   {
    "category": "EUC",
    "label": "Paid plan exclusive",
-   "name": "Amazon WorkSpaces Secure Browser"
+   "name": "Amazon WorkSpaces Secure Browser",
+   "description": "Fully managed, remote enterprise browser"
   },
   {
    "category": "EUC",
    "label": "Paid plan exclusive",
-   "name": "Amazon WorkSpaces Thin Client"
+   "name": "Amazon WorkSpaces Thin Client",
+   "description": "Reduces end-user computing costs and simplifies device logistics by shipping directly from Amazon fulfillment centers"
   },
   {
    "category": "Mobile",
    "label": "Available on both plans",
-   "name": "AWS Amplify Hosting"
+   "name": "AWS Amplify Hosting",
+   "description": "Fast, secure, and reliable hosting for modern web apps, powered by AWS Amplify."
   },
   {
    "category": "AI",
    "label": "Available on both plans",
-   "name": "AWS App Studio"
-  },
-  {
-   "category": "AI",
-   "label": "Available on both plans",
-   "name": "AWS App Studio"
+   "name": "AWS App Studio",
+   "description": "The fastest and easiest way to build enterprise-grade applications."
   },
   {
    "category": "Business-Productivity",
    "label": "Paid plan exclusive",
-   "name": "AWS AppFabric"
-  },
-  {
-   "category": "Migration",
-   "label": "Available on both plans",
-   "name": "AWS Application Migration Service"
-  },
-  {
-   "category": "Migration",
-   "label": "Available on both plans",
-   "name": "AWS Application Migration Service"
+   "name": "AWS AppFabric",
+   "description": "AWS AppFabric connects SaaS applications for better productivity and security."
   },
   {
    "category": "Mobile",
    "label": "Available on both plans",
-   "name": "AWS AppSync"
+   "name": "AWS AppSync",
+   "description": "Connect apps to data and events with secure, serverless, and performant GraphQL and Pub/Sub APIs"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "AWS Audit Manager"
+   "name": "AWS Audit Manager",
+   "description": "Continuously audit your AWS usage to simplify how you assess risk and compliance"
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "AWS B2B Data Interchange"
+   "name": "AWS B2B Data Interchange",
+   "description": "Automate the transformation of electronic data interchange (EDI) documents"
   },
   {
    "category": "Storage",
    "label": "Available on both plans",
-   "name": "AWS Backup"
+   "name": "AWS Backup",
+   "description": "Centrally manage and automate data protection"
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "AWS Batch"
+   "name": "AWS Batch",
+   "description": "Batch processing for Machine Learning model training, simulation, and analysis at any scale"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Paid plan exclusive",
-   "name": "AWS Billing Conductor"
+   "name": "AWS Billing Conductor",
+   "description": "Simplify billing and reporting with customizable pricing and cost visibility"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Budgets"
+   "name": "AWS Budgets",
+   "description": "Improve planning and cost control with flexible budgeting and forecasting"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Budgets"
+   "name": "AWS Budgets",
+   "description": "Improve planning and cost control with flexible budgeting and forecasting"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS Certificate Manager"
+   "name": "AWS Certificate Manager",
+   "description": "Provision and manage SSL/TLS certificates for use with AWS, hybrid, and multicloud workloads"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "AWS Clean Rooms"
+   "name": "AWS Clean Rooms",
+   "description": "Create clean rooms in minutes. Collaborate with your partners without sharing raw data"
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "AWS Cloud Control API"
+   "name": "AWS Cloud Control API",
+   "description": "Manage cloud infrastructure with a consistent set of APIs"
   },
   {
    "category": "Network",
    "label": "Available on both plans",
-   "name": "AWS Cloud Map"
+   "name": "AWS Cloud Map",
+   "description": "Service discovery for cloud resources"
   },
   {
    "category": "Network",
    "label": "Paid plan exclusive",
-   "name": "AWS Cloud WAN"
+   "name": "AWS Cloud WAN",
+   "description": "Build, manage, and monitor global wide area networks"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS CloudFormation"
+   "name": "AWS CloudFormation",
+   "description": "Model and provision all your cloud infrastructure resources with code to enable configuration compliance and faster troubleshooting."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS CloudHSM"
+   "name": "AWS CloudHSM",
+   "description": "Manage single-tenant hardware security modules (HSMs) on AWS"
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "AWS CloudShell"
+   "name": "AWS CloudShell",
+   "description": "Explore and manage AWS resources from a terminal in your browser"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS CloudTrail"
+   "name": "AWS CloudTrail",
+   "description": "Log, continuously monitor, and retain account activity related to actions across your AWS infrastructure."
   },
   {
    "category": "DevTools",
    "label": "Paid plan exclusive",
-   "name": "AWS CodeArtifact"
+   "name": "AWS CodeArtifact",
+   "description": "Secure, scalable, and cost-effective package management for software development"
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "AWS CodeBuild"
+   "name": "AWS CodeBuild",
+   "description": "Fully managed build service that builds and tests code in the cloud."
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "AWS CodePipeline"
+   "name": "AWS CodePipeline",
+   "description": "Continuous delivery service for fast and reliable application updates."
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Compute Optimizer"
+   "name": "AWS Compute Optimizer",
+   "description": "Get recommendations to optimize the performance and cost of your AWS resources"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Config"
+   "name": "AWS Config",
+   "description": "Assess, audit, and evaluate configurations of your resources"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Paid plan exclusive",
-   "name": "AWS Control Tower"
+   "name": "AWS Control Tower",
+   "description": "The easiest way to set up and govern a new, secure multi-account AWS environment."
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Cost Explorer"
+   "name": "AWS Cost Explorer",
+   "description": "Visualize, understand, and manage your AWS costs and usage over time"
   },
   {
    "category": "Analytics",
    "label": "Paid plan exclusive",
-   "name": "AWS Data Exchange"
+   "name": "AWS Data Exchange",
+   "description": "Easily find and use third-party data sets delivered via APIs, files, or Amazon Redshift tables."
   },
   {
    "category": "Databases",
    "label": "Available on both plans",
-   "name": "AWS Database Migration Service"
+   "name": "AWS Database Migration Service",
+   "description": "Migrate databases with minimal downtime."
   },
   {
    "category": "Migration",
    "label": "Paid Plan exclusive",
-   "name": "AWS DataSync"
+   "name": "AWS DataSync",
+   "description": "Simplify and accelerate secure data migrations"
   },
   {
    "category": "Mobile",
    "label": "Paid plan exclusive",
-   "name": "AWS Device Farm"
+   "name": "AWS Device Farm",
+   "description": "Test your iOS, Android and FireOS apps on real devices in the AWS cloud."
   },
   {
    "category": "Network",
    "label": "Paid plan exclusive",
-   "name": "AWS Direct Connect"
+   "name": "AWS Direct Connect",
+   "description": "Create a dedicated network connection to AWS"
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "AWS Elastic Beanstalk"
+   "name": "AWS Elastic Beanstalk",
+   "description": "Easily migrate, deploy, and scale full-stack applications on AWS"
   },
   {
    "category": "Storage",
    "label": "Paid plan exclusive",
-   "name": "AWS Elastic Disaster Recovery"
+   "name": "AWS Elastic Disaster Recovery",
+   "description": "Scalable, cost-effective application recovery to AWS"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "AWS Elemental MediaConnect"
+   "name": "AWS Elemental MediaConnect",
+   "description": "Secure, reliable live video transport"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "AWS Elemental MediaConvert"
+   "name": "AWS Elemental MediaConvert",
+   "description": "Process video files to prepare on-demand content for distribution or archiving"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "AWS Elemental MediaLive"
+   "name": "AWS Elemental MediaLive",
+   "description": "Encode live video for broadcast and streaming to any device"
   },
   {
    "category": "Media-Services",
    "label": "Available on both plans",
-   "name": "AWS Elemental MediaPackage"
+   "name": "AWS Elemental MediaPackage",
+   "description": "Prepare and protect video for internet delivery"
   },
   {
    "category": "Media-Services",
    "label": "Paid plan exclusive",
-   "name": "AWS Elemental MediaStore"
+   "name": "AWS Elemental MediaStore",
+   "description": "Store and deliver video assets for live streaming media workflows"
   },
   {
    "category": "Business-Productivity",
    "label": "Paid Plan exclusive",
-   "name": "AWS End User Messaging"
+   "name": "AWS End User Messaging",
+   "description": "Dependable, cost-effective messaging without compromising safety, security, or results"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "AWS Entity Resolution"
+   "name": "AWS Entity Resolution",
+   "description": "Easy-to-configure, Machine Learning-powered entity resolution service"
   },
   {
    "category": "DevTools",
    "label": "Paid plan exclusive",
-   "name": "AWS Fault Injection Service (FIS)"
+   "name": "AWS Fault Injection Service (FIS)",
+   "description": "Improve resilience and performance with controlled experiments"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "AWS Firewall Manager"
+   "name": "AWS Firewall Manager",
+   "description": "Centrally configure and manage firewall rules across your accounts"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "AWS Global Accelerator",
+   "description": "Improve application availability, performance, and security using the AWS global network"
+  },
+  {
+   "category": "Network",
+   "label": "Paid plan exclusive",
+   "name": "AWS Global Accelerator",
+   "description": "Improve application availability, performance, and security using the AWS global network"
   },
   {
    "category": "Analytics",
    "label": "Available on both plans",
-   "name": "AWS Glue"
+   "name": "AWS Glue",
+   "description": "Simple, flexible, and cost-effective extract, transform, and load (ETL) service."
   },
   {
    "category": "Satellite",
    "label": "Paid plan exclusive",
-   "name": "AWS Ground Station"
+   "name": "AWS Ground Station",
+   "description": "Easily control satellites and ingest data with fully managed Ground Station as a service"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "AWS HealthImaging"
+   "name": "AWS HealthImaging",
+   "description": "AWS HealthImaging is designed for builders who are developing cloud-native medical imaging applications. HealthImaging ingests data in the DICOM P10 format, provides APIs for low-latency retrieval, and purpose-built storage."
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "AWS HealthLake"
+   "name": "AWS HealthLake",
+   "description": "Securely store, transform, transact, and analyze health data in minutes"
   },
   {
    "category": "AI-ML",
    "label": "Available on both plans",
-   "name": "AWS HealthOmics"
+   "name": "AWS HealthOmics",
+   "description": "Transform genomic, transcriptomic, and other omics data into insights."
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "AWS HealthScribe"
+   "name": "AWS HealthScribe",
+   "description": "AWS HealthScribe is a HIPAA-eligible service empowering healthcare software vendors to build clinical applications that automatically generate clinical notes by analyzing patient-clinician conversations."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS IAM Access Analyzer"
+   "name": "AWS IAM Access Analyzer",
+   "description": "Streamline your journey toward least privilege"
   },
   {
    "category": "IOT",
    "label": "Available on both plans",
-   "name": "AWS IoT Core"
+   "name": "AWS IoT Core",
+   "description": "Connect devices to the cloud."
   },
   {
    "category": "IOT",
    "label": "Available on both plans",
-   "name": "AWS IoT Device Defender"
+   "name": "AWS IoT Device Defender",
+   "description": "Security management across your IoT devices and fleets"
   },
   {
    "category": "IOT",
    "label": "Available on both plans",
-   "name": "AWS IoT Device Management"
+   "name": "AWS IoT Device Management",
+   "description": "Onboard, organize, monitor, and remotely manage connected devices at scale."
   },
   {
    "category": "IOT",
    "label": "Available on both plans",
-   "name": "AWS IoT Events"
+   "name": "AWS IoT Events",
+   "description": "AWS IoT Events is a fully managed IoT service that makes it easy to detect and respond to events from IoT sensors and applications."
   },
   {
    "category": "IOT",
    "label": "Paid plan exclusive",
-   "name": "AWS IoT FleetWise"
+   "name": "AWS IoT FleetWise",
+   "description": "Unlock the value of vehicle data"
   },
   {
    "category": "IOT",
    "label": "Paid plan exclusive",
-   "name": "AWS IoT Greengrass"
+   "name": "AWS IoT Greengrass",
+   "description": "Local compute, messaging, data caching, and sync capabilities for connected devices."
   },
   {
    "category": "IOT",
    "label": "Paid plan exclusive",
-   "name": "AWS IoT SiteWise"
+   "name": "AWS IoT SiteWise",
+   "description": "Collect, organize, and analyze data from industrial equipment at scale"
   },
   {
    "category": "IOT",
    "label": "Available on both plans",
-   "name": "AWS IoT TwinMaker"
+   "name": "AWS IoT TwinMaker",
+   "description": "Optimize operations by easily creating digital twins of real-world systems"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS Key Management Service"
+   "name": "AWS Key Management Service",
+   "description": "AWS Key Management Service is a managed service that provides easy encryption with administrative controls."
   },
   {
    "category": "Analytics",
    "label": "Available on both plans",
-   "name": "AWS Lake Formation"
+   "name": "AWS Lake Formation",
+   "description": "Centrally govern, secure, and share data for analytics and machine learning"
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "AWS Lambda"
+   "name": "AWS Lambda",
+   "description": "Run code without thinking about servers or clusters"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS License Manager"
+   "name": "AWS License Manager",
+   "description": "Set rules to manage, discover, and report third-party license usage proactively."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "AWS Network Firewall"
+   "name": "AWS Network Firewall",
+   "description": "Deploy advanced network firewall security across your VPCs"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Paid Plan exclusive",
-   "name": "AWS Organizations"
+   "name": "AWS Organizations",
+   "description": "Centrally manage billing; control access, compliance and security; and share resources across your AWS accounts."
   },
   {
    "category": "Compute",
    "label": "Paid plan exclusive",
-   "name": "AWS Outposts Family"
+   "name": "AWS Outposts Family",
+   "description": "Run AWS infrastructure and services on premises for a truly consistent hybrid experience"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS Payment Cryptography"
+   "name": "AWS Payment Cryptography",
+   "description": "Simplify cryptography operations in your cloud-hosted payment applications"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Paid plan exclusive",
-   "name": "AWS Private Certificate Authority"
-  },
-  {
-   "category": "Mgmt-Govern",
-   "label": "Paid plan exclusive",
-   "name": "AWS Resilience Hub"
-  },
-  {
-   "category": "Security-Identity-Compliance",
-   "label": "Available on both plans",
-   "name": "AWS Resource Access Manager"
+   "name": "AWS Private Certificate Authority",
+   "description": "Create private certificates to identify resources and protect data."
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Resource Explorer"
+   "name": "AWS re:Post",
+   "description": "A community-driven, questions-and-answers service to help AWS customers remove technical roadblocks."
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Paid plan exclusive",
+   "name": "AWS Resilience Hub",
+   "description": "A central place to define, validate, and track the resilience of applications."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS Secrets Manager"
-  },
-  {
-   "category": "Security-Identity-Compliance",
-   "label": "Paid plan exclusive",
-   "name": "AWS Security Hub CSPM"
-  },
-  {
-   "category": "Security-Identity-Compliance",
-   "label": "Paid plan exclusive",
-   "name": "AWS Security Incident Response"
+   "name": "AWS Resource Access Manager",
+   "description": "Securely share your resources across AWS accounts or within your organization."
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Service Catalog"
+   "name": "AWS Resource Explorer",
+   "description": "Use AWS Resource Explorer to easily search for and discover your resources across AWS Regions."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS Shield"
+   "name": "AWS Secrets Manager",
+   "description": "Easily rotate, manage, and retrieve secrets through their lifecycle."
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Security Hub CSPM",
+   "description": "Automate AWS security checks and centralize security alerts."
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Paid plan exclusive",
+   "name": "AWS Security Incident Response",
+   "description": "Automated security incident response with AWS expert guidance."
+  },
+  {
+   "category": "Mgmt-Govern",
+   "label": "Available on both plans",
+   "name": "AWS Service Catalog",
+   "description": "Create and manage catalogs of IT services that are approved for use on AWS."
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Shield",
+   "description": "Protects networks and applications by analyzing network security configurations and providing managed DDoS protection"
   },
   {
    "category": "Compute",
    "label": "Paid plan exclusive",
-   "name": "AWS SimSpace Weaver"
+   "name": "AWS SimSpace Weaver",
+   "description": "Build dynamic, large-scale spatial simulations on AWS managed infrastructure"
   },
   {
    "category": "App-Integration",
    "label": "Available on both plans",
-   "name": "AWS Step Functions"
+   "name": "AWS Step Functions",
+   "description": "Coordinate components of distributed applications."
   },
   {
    "category": "Storage",
    "label": "Paid plan exclusive",
-   "name": "AWS Storage Gateway"
+   "name": "AWS Storage Gateway",
+   "description": "Hybrid cloud storage with seamless local integration and optimized data transfer."
   },
   {
    "category": "AI-ML",
    "label": "Paid plan exclusive",
-   "name": "AWS Supply Chain"
+   "name": "AWS Supply Chain",
+   "description": "Mitigate risks and lower costs with an ML-powered supply chain application"
   },
   {
    "category": "Mgmt-Govern",
    "label": "Available on both plans",
-   "name": "AWS Systems Manager"
+   "name": "AWS Systems Manager",
+   "description": "Centralize operational data from multiple AWS services and automate tasks across your AWS resources."
   },
   {
    "category": "Mgmt-Govern",
    "label": "Paid plan exclusive",
-   "name": "AWS Telco Network Builder"
+   "name": "AWS Telco Network Builder",
+   "description": "Automate the deployment and management of your telco networks on AWS"
   },
   {
    "category": "Migration",
    "label": "Available on both plans",
-   "name": "AWS Transfer Family"
+   "name": "AWS Transfer Family",
+   "description": "Easily manage and share data with simple, secure, and scalable file transfers"
   },
   {
    "category": "Migration",
    "label": "Available on both plans",
-   "name": "AWS Transform"
+   "name": "AWS Transform",
+   "description": "The first agentic AI service to accelerate the transformation of Windows, mainframe, VMware, and more."
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS WAF"
+   "name": "AWS WAF",
+   "description": "Create security rules that control bot traffic and block common attack patterns such as SQL injection or cross-site scripting (XSS)"
   },
   {
    "category": "Security-Identity-Compliance",
    "label": "Available on both plans",
-   "name": "AWS WAF Bot Control"
+   "name": "AWS WAF Bot Control",
+   "description": "Protect your web applications from common and pervasive web bots"
   },
   {
    "category": "Business-Productivity",
    "label": "Available on both plans",
-   "name": "AWS Wickr"
+   "name": "AWS Wickr",
+   "description": "Secure communication with end-to-end encryption"
   },
   {
    "category": "DevTools",
    "label": "Available on both plans",
-   "name": "AWS X-Ray"
+   "name": "AWS X-Ray",
+   "description": "Analyze and debug your applications."
   },
   {
    "category": "Compute",
    "label": "Available on both plans",
-   "name": "Elastic Load Balancing"
+   "name": "Elastic Load Balancing",
+   "description": "Automatic distribution of incoming application traffic across multiple Amazon EC2 instances."
   },
   {
    "category": "Migration",
    "label": "Available on both plans",
-   "name": "Migration Evaluator"
+   "name": "Migration Evaluator",
+   "description": "Migration Evaluator helps customers rapidly see projected costs of running their on-premises estate in AWS."
   }
  ]
 }

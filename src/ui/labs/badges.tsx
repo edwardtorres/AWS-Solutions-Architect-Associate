@@ -22,7 +22,7 @@ export function PlanExplain({ plan, services, billable = false }: { plan: PlanFi
   return (
     <p className="mt-1 max-w-prose text-sm text-[var(--fg-muted)]">
       {plan === 'free' &&
-        `Every service this lab uses is labelled “Available on both plans” on the AWS Free Tier page (checked ${SNAPSHOT_DATE}).${billable ? ' Its “bills while running” steps use your credits, and a Free plan account closes when its credits are used, so keep them optional and clean up.' : ''}`}
+        `Every service this lab uses is labelled “Available on both plans” on the AWS Free Tier page (checked ${SNAPSHOT_DATE}). The page labels whole services; it does not say which features of a service stay inside the plan.${billable ? ' Its “bills while running” steps use your credits, and a Free plan account closes when its credits are used, so keep them optional and clean up.' : ''}`}
       {plan === 'paid' &&
         `Needs a Paid plan: ${paid.join(', ')} ${paid.length === 1 ? 'is' : 'are'} labelled “Paid plan exclusive” on the AWS Free Tier page (checked ${SNAPSHOT_DATE}). Use a throwaway account.${unconfirmed.length > 0 ? ` Also not on the page: ${unconfirmed.join(', ')}.` : ''}`}
       {plan === 'unconfirmed' &&

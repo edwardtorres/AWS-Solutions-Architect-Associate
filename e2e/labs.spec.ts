@@ -149,3 +149,18 @@ test('Lab 3 is listed last, hides its steps behind an acknowledgement and offers
   expect((await stored(page)).labs.progress['lab-03-multi-account']).toMatchObject({ ack: true });
   await axeClean(page, 'lab 3 unlocked');
 });
+
+test('Lab 12 says at the top that it needs a Paid plan, hides its steps until acknowledged and offers a read-only walkthrough', async ({ page }) => {
+  await load(page, '#/lab/lab-12-data-lake');
+  await expect(page.getByTestId('lab-gate')).toContainText('needs a Paid plan');
+  await expect(page.getByTestId('lab-steps')).toHaveCount(0);
+  await axeClean(page, 'lab 12 gate');
+  await noSidewaysScroll(page);
+  await page.getByTestId('gate-read').tap();
+  await expect(page.getByTestId('lab-step').first()).toBeVisible();
+  await expect(page.getByTestId('lab-step').first().getByRole('checkbox')).toHaveCount(0);
+  await expect(page.getByTestId('complete-lab')).toHaveCount(0);
+  await page.getByTestId('gate-ack').tap();
+  await expect(page.getByTestId('complete-lab')).toBeVisible();
+  expect((await stored(page)).labs.progress['lab-12-data-lake']).toMatchObject({ ack: true });
+});

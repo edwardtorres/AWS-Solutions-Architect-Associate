@@ -56,10 +56,20 @@ export const SERVICE_ALIAS: Record<string, string | null> = {
   'Elastic Load Balancing': 'Elastic Load Balancing',
 };
 
+/**
+ * The only aliases that differ from our service name, each the full name of the same service (the card description confirms it).
+ * Anything else must match its service name exactly; `scripts/lib/freePlan.test.ts` enforces this, so a neighbouring service's card
+ * (for example the EC2 card for a VPC lab) can never count as evidence.
+ */
+export const FULL_NAMES: Record<string, string> = {
+  'AWS KMS': 'AWS Key Management Service',
+  'Amazon VPC': 'Amazon Virtual Private Cloud',
+};
+
 export const aliasFor = (service: string): string | null => SERVICE_ALIAS[service] ?? null;
 
 export const SNAPSHOT_DATE: string = snapshot.capturedAt;
-export const SNAPSHOT_OFFERS: readonly { name: string; category: string; label: string }[] = snapshot.offers;
+export const SNAPSHOT_OFFERS: readonly { name: string; category: string; label: string; description?: string }[] = snapshot.offers;
 
 const normLabel = (label: string): PlanFit => {
   const l = label.toLowerCase();

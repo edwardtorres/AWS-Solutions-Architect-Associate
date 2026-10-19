@@ -12,7 +12,15 @@ const lab: Lab = {
   needs: ['lab-01-safe-account'],
   newer: ['cloudfront-oac'],
   services: ['Amazon CloudFront', 'Amazon S3', 'AWS CloudShell', 'AWS Certificate Manager'],
-  costs: [],
+  costs: [
+    {
+      id: 'cf-paid-plan',
+      resource: 'A paid CloudFront pricing plan, if you subscribe the distribution to one',
+      basis: 'A plan is charged monthly, and a disabled distribution that is still subscribed keeps incurring the plan’s charges until the plan is cancelled (page wording).',
+      src: 'cf-pricing-plans',
+      quote: 'You can disable a distribution that is subscribed to a pricing plan, but you will still incur charges for that plan.',
+    },
+  ],
   steps: [
     {
       id: 'bucket',
@@ -39,6 +47,16 @@ const lab: Lab = {
       checkpoint: 'The first line reports a Forbidden status: the bucket is private.',
     },
     {
+      id: 'plan',
+      kind: 'check',
+      costs: ['cf-paid-plan'],
+      text: 'When you create a distribution, the wizard may offer to subscribe it to a flat-rate pricing plan. A plan is optional: choose pay-as-you-go (no plan) to match this lab. If you consider a plan, read the CloudFront pricing page first, because a paid plan is charged monthly until you cancel it, and any plan needs an AWS WAF web ACL on the distribution, so the “no web ACL” check later would not apply. The documentation does not show your exact screen, so read the plan screen before you confirm.',
+      src: 'cf-pricing-plans',
+      quote: 'When you create a new distribution, you can subscribe to a pricing plan.',
+      callout: { text: 'A pricing plan needs an AWS WAF web ACL on the distribution.', src: 'cf-pricing-plans', quote: 'You must have a AWS WAF Web ACL associated with your distribution if you\'re using a pricing plan.' },
+      checkpoint: 'You know which plan option the wizard shows and chose pay-as-you-go, or a plan you have read the price of.',
+    },
+    {
       id: 'distribution',
       newer: ['cloudfront-oac'],
       callout: {
@@ -46,7 +64,7 @@ const lab: Lab = {
         src: 'cf-oac',
         quote: 'We recommend that you use OAC instead because it supports the following features',
       },
-      text: 'Create a CloudFront standard distribution with the bucket as its origin. Choose origin access control and keep the default CloudFront domain name (no custom domain). On the security protections page, decline the optional AWS WAF protections: AWS WAF is billed separately and this lab does not need it. Leave other settings at the wizard\'s recommended values, and read the first wizard page and do not subscribe to a flat-rate pricing plan.',
+      text: 'Create a CloudFront standard distribution with the bucket as its origin. Choose origin access control and keep the default CloudFront domain name (no custom domain). On the security protections page, decline the optional AWS WAF protections: AWS WAF is billed separately and this lab does not need it. Leave other settings at the wizard\'s recommended values, and read the first wizard page and keep the pricing choice you made in the previous step.',
       src: 'cf-get-started',
       quote: 'Uses origin access control (OAC) to send authenticated requests to your Amazon S3 origin.',
       sensitive: true,
@@ -55,7 +73,7 @@ const lab: Lab = {
     {
       id: 'waf',
       kind: 'check',
-      text: 'Open the distribution and confirm that no AWS WAF web ACL is attached, since AWS WAF is billed on its own basis (web ACLs, rules and requests).',
+      text: 'Open the distribution and confirm that no AWS WAF web ACL is attached, since AWS WAF is billed on its own basis (web ACLs, rules and requests). If you chose the Free plan instead of pay-as-you-go, the plan itself requires a web ACL: skip this check.',
       src: 'cf-get-started',
       quote: 'On the Enable security protections page, choose whether to enable AWS WAF security protections.',
       callout: { text: 'AWS WAF is billed per web ACL, per rule and per request processed; this lab uses none.', src: 'waf-pricing', quote: 'You will be charged for each web ACL that you create and each rule that you create per web ACL.' },
@@ -131,9 +149,11 @@ const lab: Lab = {
     {
       id: 'c-dist',
       kind: 'cleanup',
-      text: 'Delete the distribution first: disable it, wait until it finishes deploying, then delete it. If you added a custom domain, remove the CNAME record at your DNS provider as well.',
+      costs: ['cf-paid-plan'],
+      text: 'Delete the distribution first: disable it, wait until it finishes deploying, then delete it. If you subscribed it to a pricing plan, cancel the plan first: a subscribed distribution cannot be deleted. If you added a custom domain, also remove the record you created for it, wherever you created it.',
       src: 'cf-delete-distribution',
       quote: 'Warning Before you can delete a distribution, you must disable it, which requires permission to update the distribution.',
+      callout: { text: 'A plan must be cancelled before the distribution can be deleted; a paid plan keeps billing until its cancellation takes effect.', src: 'cf-pricing-plans', quote: 'You can\'t delete a distribution that is subscribed to a pricing plan. You must first cancel the pricing plan. Paid pricing plan cancellations take effect after the current billing cycle. Free plans are cancelled immediately.' },
       checkpoint: 'The distribution no longer appears in the list.',
     },
     {
@@ -159,10 +179,22 @@ const lab: Lab = {
     {
       id: 'c-cert',
       kind: 'cleanup',
-      text: 'If you made the optional certificate, delete it in ACM (in the same Region you requested it), and remove the DNS validation record and any hosted zone you created only for this lab. Skip otherwise.',
+      text: 'If you made the optional certificate, delete it in ACM (in the same Region you requested it) after the distribution is gone. Skip otherwise.',
       src: 'acm-delete',
       quote: 'You can use the ACM console or the AWS CLI to delete a certificate.',
+      callout: { text: 'A certificate that a distribution still uses cannot be deleted, which is why the distribution goes first.', src: 'acm-delete', quote: 'You cannot delete an ACM certificate that is being used by another AWS service.' },
       checkpoint: 'No lab certificate remains, or none was created.',
+    },
+    {
+      id: 'c-zone',
+      kind: 'cleanup',
+      optional: true,
+      alt: 'Leave it. Only do this for a hosted zone you created for this lab and nothing else uses.',
+      text: 'Optional: if you created a Route 53 hosted zone only for this lab, delete the records you added in it (including the certificate validation record), then delete the zone. Deleting a hosted zone cannot be undone.',
+      src: 'r53-delete-zone',
+      quote: 'You can delete a hosted zone only if it has no records other than the default SOA and NS records.',
+      callout: { text: 'A deleted hosted zone cannot be restored.', src: 'r53-delete-zone', quote: 'If you delete a hosted zone, you can\'t undo it.' },
+      checkpoint: 'The lab hosted zone is gone, or you never created one.',
     },
     {
       id: 'v-dist',

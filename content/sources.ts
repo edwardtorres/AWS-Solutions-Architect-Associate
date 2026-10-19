@@ -819,6 +819,9 @@ const sources: Source[] = [
   aws('free-tier-faq', 'https://aws.amazon.com/free/free-tier-faqs/', 'AWS Free Tier FAQs'),
   aws('acm-delete', `${D}/acm/latest/userguide/gs-acm-delete.html`, 'Delete certificates managed by AWS Certificate Manager'),
   aws('config-concepts', `${D}/config/latest/developerguide/config-concepts.html`, 'AWS Config terminology and concepts'),
+  aws('cf-pricing-plans', `${D}/AmazonCloudFront/latest/DeveloperGuide/flat-rate-pricing-plan.html`, 'CloudFront flat-rate pricing plans'),
+  aws('r53-delete-zone', `${D}/Route53/latest/DeveloperGuide/DeleteHostedZone.html`, 'Deleting a public hosted zone'),
+  aws('lab-orgs-account-close', `${D}/organizations/latest/userguide/orgs_manage_accounts_close.html`, 'Closing a member account in your organization'),
 ];
 
 export default sources;

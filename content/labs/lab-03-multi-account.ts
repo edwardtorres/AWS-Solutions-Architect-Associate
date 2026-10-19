@@ -153,7 +153,7 @@ const lab: Lab = {
     {
       id: 'c3',
       kind: 'cleanup',
-      text: 'Move any member account back to the root, then delete the OU lab3-test. Do this before closing any account. If the OU still cannot be deleted, leave it; I found no page saying whether a closed account can be moved.',
+      text: 'Move any member account back to the root, then delete the OU lab3-test. Do this before closing any account. If the OU still cannot be deleted, leave it: the AWS pages used here do not say whether a closed account can still be moved, so move accounts before closing them.',
       src: 'lab-orgs-ou-delete',
       quote: 'You must first move all accounts out of the OU and any child OUs, and then you can delete the child OUs.',
     },
@@ -164,6 +164,7 @@ const lab: Lab = {
       text: 'If you created a member account, close it. A closed account can take a long time to finish closing, and that blocks deleting the organization, so close it only if you accept the wait.',
       src: 'lab-orgs-delete',
       quote: 'This can take up to 90 days and can prevent you from deleting the organization until all member accounts are completely closed.',
+      callout: { text: 'A closed member account stays listed, labelled CLOSED, for a while.', src: 'lab-orgs-account-close', quote: 'Any member account that you close will display a CLOSED label next to its account name in the AWS Organizations console for up to 90 days after the original closure date.' },
     },
     {
       id: 'c4',

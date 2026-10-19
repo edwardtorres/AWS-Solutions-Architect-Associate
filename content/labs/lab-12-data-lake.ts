@@ -9,6 +9,18 @@ const lab: Lab = {
   buildings: ['data-lake-reservoir', 'refinery', 'ingestion-gate'],
   bullets: ['3.5-K1', '3.5-S1', '3.5-K4', '3.5-S7'],
   needs: ['lab-01-safe-account'],
+  gate: {
+    title: 'This lab needs a Paid plan account',
+    text: 'Amazon Athena is labelled “Paid plan exclusive” on the AWS Free Tier page (recorded in this app’s Free Tier snapshot), and AWS says Free plan accounts do not include services that could deplete their credits. On a Free plan account the Athena steps will not work. Run this lab only in a throwaway account that is on the Paid plan, where the steps that bill are listed on each step, or read the walkthrough instead.',
+    ack: 'I am using a Paid plan account that I can afford to leave running for an hour, and I know the Athena, Glue and S3 steps bill while they exist.',
+    alternative: 'Read the walkthrough instead: the same steps and sources, with nothing to create and nothing to tick.',
+    cites: [
+      {
+        src: 'free-tier-plans',
+        quote: "Free account plans don't include access to AWS services and features that could possibly deplete your credits, or hardware purchases.",
+      },
+    ],
+  },
   services: ['Amazon S3', 'AWS Glue', 'Amazon Athena', 'AWS CloudShell', 'AWS IAM'],
   costs: [
     {
