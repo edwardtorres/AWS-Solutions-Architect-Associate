@@ -14,7 +14,10 @@
       }
     ],
     "handling": "Notes cite the dedicated Azure Storage redundancy page (asynchronous) and do not repeat the comparison page's wording. Kept out of questions.",
-    "added": "2026-10-08"
+    "added": "2026-10-08",
+    "verdict": "still-contradictory",
+    "verdictNote": "Re-fetched 2026-10-19: both pages still say what they said. The comparison page says \"GRS and GZRS synchronously replicate data to a secondary region without requiring a replication configuration.\"; the Azure Storage redundancy page says GRS \"copies your data synchronously within one or more Azure availability zones in the primary region by using LRS. It then copies your data asynchronously to the secondary region.\" Both readings are shown in the durable-dock notes (\"Where the sources disagree\"); no question or puzzle rests on it.",
+    "checked": "2026-10-19"
   },
   {
     "id": "c-s3-express-request-cost",
@@ -26,12 +29,23 @@
         "says": "S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speeds up to 10x faster and with request costs 80 percent lower than S3 Standard."
       },
       {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-bucket-high-performance.html",
+        "says": "S3 Express One Zone is the lowest latency cloud-object storage class available today, with data access speeds up to 10x faster and with request costs 80 percent lower than S3 Standard."
+      },
+      {
+        "source": "https://aws.amazon.com/s3/storage-classes/express-one-zone/",
+        "says": "S3 Express One Zone delivers data access speed up to 10x faster and request costs up to 80% lower than S3 Standard."
+      },
+      {
         "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
         "says": "S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speed up to 10x faster and with request costs 50 percent lower than S3 Standard."
       }
     ],
     "handling": "Notes state no percentage for S3 Express One Zone request costs; the class is described only by the shared facts (single Availability Zone, lowest latency). Kept out of questions.",
-    "added": "2026-10-08"
+    "added": "2026-10-08",
+    "verdict": "still-contradictory",
+    "verdictNote": "Re-fetched 2026-10-19: \"What is Amazon S3?\" and the directory-bucket performance page say request costs 80 percent lower than S3 Standard; the S3 Express One Zone product page says \"up to 80%\"; the storage classes page still says 50 percent lower. The notes show the two AWS documentation readings in the cold-cellar notes; no figure is used anywhere else and no question rests on it.",
+    "checked": "2026-10-19"
   },
   {
     "id": "c-azure-nat-single-ip",
@@ -48,7 +62,10 @@
       }
     ],
     "handling": "The AWS page is the authority for AWS behaviour. The notes show the Azure comparison row as written on Learn and the AWS reading beside it, and teach only the AWS statement. The single-IP claim is kept out of questions.",
-    "added": "2026-10-09"
+    "added": "2026-10-09",
+    "verdict": "resolved",
+    "verdictNote": "Re-fetched 2026-10-19. The AWS NAT gateway basics page is the authority for AWS behaviour: \"You are limited to associating 2 Elastic IP addresses to your public NAT gateway by default.\" and \"You can increase this limit by associating up to 8 IPv4 addresses to your NAT gateways (1 primary IPv4 address and 7 secondary IPv4 addresses).\" So the Learn row \"AWS NAT gateways can be associated with only a single public IP\" does not match AWS documentation. The notes show the Learn row as written and the AWS statement beside it; the single-IP claim stays banned. The multi-address capability is newer than the exam guide (registry id nat-gateway-secondary-ips, introduced 2023-02), so the Learn row describes the earlier state of the service; questions that rest on it are tagged post-guide (nat-toll-010).",
+    "checked": "2026-10-19"
   },
   {
     "id": "c-alb-cross-zone-always-on",
@@ -65,7 +82,10 @@
       }
     ],
     "handling": "The FAQ says always on; the User Guide treats it as a target group attribute that can be turned off, with on as the default at the load balancer level. Questions say it is on by default, never always on, and do not rest a key on the difference.",
-    "added": "2026-10-15"
+    "added": "2026-10-15",
+    "verdict": "resolved",
+    "verdictNote": "Re-fetched 2026-10-19. Both readings are true at different levels. How Elastic Load Balancing works: \"With Application Load Balancers, cross-zone load balancing is always enabled at the load balancer level. At the target group level, cross-zone load balancing can be disabled.\" The ALB User Guide: \"cross-zone load balancing is always turned on at the load balancer level, and cannot be turned off. For target groups, the default is to use the load balancer setting, but you can override the default by explicitly turning cross-zone load balancing off at the target group level.\" The FAQ says \"Since cross-zone load balancing is always on with Application Load Balancer, you are not charged for this type of regional data transfer.\" (and, in another answer, \"already enabled by default\"). Questions may say it is always on at the load balancer level and can be turned off per target group.",
+    "checked": "2026-10-19"
   },
   {
     "id": "c-glacier-access-frequency",
@@ -82,7 +102,10 @@
       }
     ],
     "handling": "The storage classes page says Flexible Retrieval is for data accessed once a year and Deep Archive less than once a year; the Glacier classes page says semi-annually and annually. The Cold Cellar planner avoids the overlap: it uses 'a few times a year' and 'less than once a year' and refuses the 'once a year, hours are fine' case. Kept out of questions.",
-    "added": "2026-10-16"
+    "added": "2026-10-16",
+    "verdict": "resolved",
+    "verdictNote": "Re-fetched 2026-10-19. The storage classes page no longer gives an access frequency for Flexible Retrieval (\"Use for archives where portions of the data might need to be retrieved in minutes.\"), so the old conflict is gone. The Glacier storage classes page lists Flexible Retrieval as \"Semi-annually\" and Deep Archive as \"Annually\", and recommends Deep Archive \"for archive data that's accessed less than once a year\"; the S3 Glacier product page says Flexible Retrieval is for \"archive data that is accessed 1-2 times per year\" and Deep Archive for data \"accessed less than once per year\". Flexible Retrieval: about once or twice a year. Deep Archive: about once a year or less. The Cold Cellar planner keeps its wording (a few times a year / less than once a year) and no question rests on the one-versus-two difference.",
+    "checked": "2026-10-19"
   },
   {
     "id": "c-free-credit-expiry",
@@ -103,6 +126,9 @@
       }
     ],
     "handling": "The FAQ gives 6 months in its Free plan answer and 12 months in its Paid plan answer; the Billing guide ties the Free plan to six months or the credits. Labs plan on the shorter, 6-month window for a Free-plan account and tell the owner to read the real date and balance in the Billing and Cost Management console. Kept out of questions.",
-    "added": "2026-10-17"
+    "added": "2026-10-17",
+    "verdict": "still-contradictory",
+    "verdictNote": "Re-fetched 2026-10-19. The Free Tier FAQ: \"Free Tier credits expire 6 months from the date you create your AWS account.\" (Free plan answer); \"Free Tier credits expire 12 months after you create your account.\" (answer about upgrading to the Paid plan); activity credits \"expire 12 months from the date you create your AWS account\"; another answer says 6 months after you activate advanced features. The Billing guide: \"Your free account plan ends after six months or when your credits are fully used - whichever occurs first.\" Shown both ways in the safe-harbor-account notes. The FAQ adds that accounts created before the new sign-up experience (October 2026) should read the Credits page in the Billing console.",
+    "checked": "2026-10-19"
   }
 ]

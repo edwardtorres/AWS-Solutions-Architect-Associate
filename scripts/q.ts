@@ -1,7 +1,7 @@
 /**
  * Research helper: npm run q -- <url> <regex> [<regex> ...]
  * Prints the sentences of the page that match each pattern, in the page's own capitalisation,
- * ready to paste into a quote. Pages are cached in .cache/.
+ * ready to paste into a quote. Pages are cached in .cache/; FRESH=1 refetches the page first.
  */
 process.stdout.on('error', () => process.exit(0));
 import { fetchPage } from './lib/pageCache.ts';
@@ -11,7 +11,7 @@ if (!url || patterns.length === 0) {
   console.error('usage: npm run q -- <url> <regex> [<regex> ...]');
   process.exit(2);
 }
-const page = await fetchPage(url);
+const page = await fetchPage(url, { fresh: process.env.FRESH === '1' });
 let text = page.display;
 if (!text) {
   const again = await fetchPage(url, { fresh: true });

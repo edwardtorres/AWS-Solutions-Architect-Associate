@@ -156,6 +156,13 @@ const notes: BuildingNotes = {
       ],
     },
   ],
+  disagreements: [
+    b('Two AWS pages give different figures for how much lower the request costs of S3 Express One Zone are than S3 Standard: the "What is Amazon S3?" page says 80 percent and the storage classes page says 50 percent. This app states no figure, and no question depends on one; check the current S3 pricing page before you rely on either.',
+      ['s3-what-is', 's3-storage-classes'],
+      ['s3-what-is|S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speeds up to 10x faster and with request costs 80 percent lower than S3 Standard.',
+       's3-storage-classes|S3 Express One Zone is the lowest latency cloud object storage class available today, with data access speed up to 10x faster and with request costs 50 percent lower than S3 Standard.'],
+      { disputed: 'c-s3-express-request-cost', allow: ['two'], newer: ['s3-express-one-zone'] }),
+  ],
   cues: [
     cue('unknown or changing access pattern, no retrieval fees', 'S3 Intelligent-Tiering',
       b('Intelligent-Tiering suits unknown or changing access patterns and has no retrieval fees.', 's3-storage-classes',

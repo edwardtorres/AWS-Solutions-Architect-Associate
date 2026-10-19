@@ -31,22 +31,30 @@
     "building": "data-lake-reservoir",
     "claim": "Amazon Quick (named in the exam guide, task 3.5) is the product the Learn comparison page calls Amazon QuickSight.",
     "reason": "The two allowed sources use different names. Confirm the current product name in AWS docs before writing Step 2 notes; keep the guide's wording in questions.",
-    "status": "open",
+    "status": "resolved",
     "added": "2026-10-08",
     "keywords": [
       "QuickSight"
-    ]
+    ],
+    "verdict": "confirmed",
+    "resolved": "2026-10-19",
+    "resolutionSource": "quick-what-is",
+    "resolution": "Re-fetched 2026-10-19. AWS documentation: \"Amazon Quick evolved from Amazon QuickSight.\" and \"QuickSight continues as Amazon Quick Sight, a feature within Quick.\" The exam guide in-scope list names Amazon Quick. The Microsoft Learn analytics comparison page no longer mentions QuickSight (it lists Power BI inside Microsoft Fabric), so the original premise that Learn calls the product QuickSight no longer holds; the notes use the renamed-services entry (Amazon Quick, with QuickSight as the older name)."
   },
   {
     "id": "nv-ams-label",
     "building": "legacy-wharf",
     "claim": "The exam guide labels 2.2-K2 'AWS Managed Services (AMS)' but gives Amazon Comprehend and Amazon Polly as examples.",
     "reason": "Comprehend and Polly are pre-built AI services, while AWS Managed Services (AMS) is a separate operations offering that is not on the guide's in-scope list. The notes treat the bullet as 'managed AWS services with appropriate use cases' and teach Comprehend and Polly; no AWS page confirms the intended meaning of 'AMS' here.",
-    "status": "open",
+    "status": "resolved",
     "added": "2026-10-09",
     "keywords": [
       "AWS Managed Services"
-    ]
+    ],
+    "verdict": "dropped",
+    "resolved": "2026-10-19",
+    "resolutionSource": "exam-guide",
+    "resolution": "Re-fetched 2026-10-19. The exam guide bullet reads \"AWS Managed Services (AMS) with appropriate use cases (for example, Amazon Comprehend, Amazon Polly)\". The AWS Managed Services documentation describes AMS as \"infrastructure operations management for Amazon Web Services (AWS)\", an operations offering, not an AI service, and no AWS page says how the bullet's label relates to its examples. The unsupported reading is dropped: the notes teach Comprehend, Polly and the other pre-built AI services without claiming what \"AMS\" means in the bullet, and AWS Managed Services is banned from questions (scripts/banned-terms.ts)."
   },
   {
     "id": "nv-aws-auto-scaling-plans",
@@ -110,11 +118,15 @@
     "building": "streaming-canal",
     "claim": "Amazon Data Firehose delivery corresponds to Azure Event Hubs Capture.",
     "reason": "The Microsoft Learn analytics comparison has no Firehose row and does not mention Event Hubs Capture, so the notes say only that Learn lists no Firehose counterpart. No allowed page confirms the mapping.",
-    "status": "open",
+    "status": "resolved",
     "added": "2026-10-09",
     "keywords": [
       "Event Hubs"
-    ]
+    ],
+    "verdict": "dropped",
+    "resolved": "2026-10-19",
+    "resolutionSource": "learn-analytics",
+    "resolution": "Re-fetched 2026-10-19. The Microsoft Learn AWS-to-Azure analytics comparison page has no Firehose row and does not mention Event Hubs Capture. The Azure Event Hubs Capture page describes capture to Blob Storage or Data Lake Storage and the AWS page describes Firehose delivery to destinations such as Amazon S3, but no allowed page pairs the two, so the pairing is dropped: the notes say only that Learn lists no Firehose counterpart, and Event Hubs Capture is banned from questions."
   },
   {
     "id": "nv-multiaz-failover-endpoint",

@@ -26,6 +26,8 @@ export interface NotesInput {
   citedElsewhere?: ReadonlySet<string>;
   /** The post-guide registry: blocks that discuss a registry feature must carry the label. */
   postGuide?: PostGuideRegistry;
+  /** content/contradictions.json: each still-contradictory entry must be shown in its building's notes. */
+  contradictions?: readonly { id: string; building: string; verdict?: string }[];
 }
 
 /** Pairs the brief requires. `members` must each be named by an item of the pair. */
@@ -90,6 +92,7 @@ export function allBlocks(n: BuildingNotes): { where: string; block: Block }[] {
     bn.design.forEach((b, i) => out.push({ where: `${bn.id}.design[${i}]`, block: b }));
   });
   n.cues.forEach((c, i) => out.push({ where: `cues[${i}]`, block: c.fact }));
+  n.disagreements?.forEach((b, i) => out.push({ where: `disagreements[${i}]`, block: b }));
   n.examples.forEach((e, i) => e.explanation.forEach((b, j) => out.push({ where: `examples[${i}].explanation[${j}]`, block: b })));
   return out;
 }
@@ -138,7 +141,7 @@ interface Ctx {
   postGuide?: PostGuideRegistry;
 }
 
-function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-note', used: { sources: Set<string>; terms: Set<string> }): string[] {
+function checkBlock(where: string, block: Block, ctx: Ctx, kind: 'aws' | 'azure-note' | 'disputed', used: { sources: Set<string>; terms: Set<string> }): string[] {
   const p: string[] = [];
   if (!block.text.trim()) p.push(`${where}: empty text`);
   if (block.sources.length === 0) p.push(`${where}: no source`);
@@ -249,7 +252,15 @@ export function checkNotes(input: NotesInput): string[] {
     }
     for (const id of n.confuse) if (!input.confuse.some((c) => c.id === id)) p.push(`${b.id}: references unknown don't-confuse "${id}"`);
 
-    for (const { where, block } of allBlocks(n)) p.push(...checkBlock(`${b.id} ${where}`, block, ctx, 'aws', used));
+    for (const { where, block } of allBlocks(n)) {
+      // A disagreement block quotes both pages, so it may cite Microsoft Learn pages (both readings can be Learn pages).
+      const kind = block.disputed ? 'disputed' : 'aws';
+      p.push(...checkBlock(`${b.id} ${where}`, block, ctx, kind, used));
+      if (block.disputed && !(input.contradictions ?? []).some((c) => c.id === block.disputed && c.building === b.id)) p.push(`${b.id} ${where}: disputed "${block.disputed}" is not a contradiction of this building`);
+    }
+    for (const c of input.contradictions ?? []) {
+      if (c.building === b.id && c.verdict === 'still-contradictory' && !(n.disagreements ?? []).some((x) => x.disputed === c.id)) p.push(`${b.id}: contradiction ${c.id} is still open but the notes do not show both readings (disagreements)`);
+    }
     for (const { where, block } of azureBlocks(n)) p.push(...checkBlock(`${b.id} ${where}`, block, ctx, 'azure-note', used));
   }
 

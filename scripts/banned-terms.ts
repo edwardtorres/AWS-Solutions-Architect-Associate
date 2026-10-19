@@ -14,4 +14,6 @@ export const BANNED_TERMS: readonly BannedTerm[] = [
   { term: 'request costs 80 percent', reason: 'AWS pages disagree on the S3 Express One Zone request-cost reduction (content/contradictions.json: c-s3-express-request-cost).' },
   { term: 'request costs 50 percent', reason: 'AWS pages disagree on the S3 Express One Zone request-cost reduction (content/contradictions.json: c-s3-express-request-cost).' },
   { term: 'associated with only a single public IP', reason: 'The Learn comparison and the AWS NAT gateway basics page disagree on how many IP addresses a NAT gateway can use (content/contradictions.json: c-azure-nat-single-ip).' },
+  { term: 'AWS Managed Services', reason: 'No AWS page says how the exam guide label "AWS Managed Services (AMS)" relates to its Comprehend and Polly examples (content/needs-verification.json: nv-ams-label, dropped).' },
+  { term: 'Event Hubs Capture', reason: 'No allowed page pairs Amazon Data Firehose with Azure Event Hubs Capture (content/needs-verification.json: nv-firehose-eventhubs-capture, dropped).' },
 ];

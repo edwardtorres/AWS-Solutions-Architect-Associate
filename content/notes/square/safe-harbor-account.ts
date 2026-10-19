@@ -24,6 +24,14 @@ const notes: BuildingNotes = {
        'RI utilization budgets: Define a utilization threshold for your RIs and receive alerts when usage falls below this level']),
   ],
   bullets: [],
+  disagreements: [
+    b('The AWS Free Tier FAQ answers "when do Free Tier credits expire?" two ways: 6 months from the date you create the account in one answer, and 12 months after you create the account in the answer about upgrading to the Paid plan. The Billing guide says a Free plan ends after six months or when the credits are used up, whichever comes first. Plan on the shorter window for a Free plan account and read the real date and balance in the Billing and Cost Management console. No question depends on this.',
+      ['free-tier-faq', 'free-tier-plans'],
+      ['free-tier-faq|Free Tier credits expire 6 months from the date you create your AWS account.',
+       'free-tier-faq|Free Tier credits expire 12 months after you create your account.',
+       'free-tier-plans|Your free account plan ends after six months or when your credits are fully used - whichever occurs first.'],
+      { disputed: 'c-free-credit-expiry', allow: ['two'] }),
+  ],
   cues: [
     cue('the account root user', 'protect it with MFA and avoid using it',
       b('The root user has complete access to the account, and AWS says to use it only for tasks that need root-level permissions.',

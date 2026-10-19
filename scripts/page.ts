@@ -6,7 +6,7 @@ if (!url) {
   console.error('usage: npm run page -- <url> [regex] [max]');
   process.exit(2);
 }
-const page = await fetchPage(url);
+const page = await fetchPage(url, { fresh: process.env.FRESH === "1" });
 console.log(`${page.status} ${page.finalUrl} (${page.text.length} chars, ${page.ids.length} ids)`);
 if (pattern) {
   const re = new RegExp(pattern, 'ig');

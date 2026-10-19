@@ -669,6 +669,8 @@ const ROWS: readonly (readonly [string, string, string, 1 | 2 | 3])[] = [
   ["nat-toll-007","nat-toll","4.4-S1",2],
   ["nat-toll-008","nat-toll","4.4-S1",3],
   ["nat-toll-009","nat-toll","4.4-S1",2],
+  ["nat-toll-010","nat-toll","4.4-S1",3],
+  ["nat-toll-011","nat-toll","4.4-S1",3],
   ["network-cost-audit-001","network-cost-audit","4.4-K1",1],
   ["network-cost-audit-002","network-cost-audit","4.4-K1",2],
   ["network-cost-audit-003","network-cost-audit","4.4-K1 4.4-K2",2],

@@ -78,6 +78,13 @@ const notes: BuildingNotes = {
       ],
     },
   ],
+  disagreements: [
+    b('Two Microsoft Learn pages describe Azure geo-redundant storage (GRS) differently. The comparison page says GRS and GZRS replicate data synchronously to a secondary region; the Azure Storage redundancy page says the data is copied synchronously within the primary region and then asynchronously to the secondary region. The notes above follow the dedicated redundancy page, and no question depends on the difference.',
+      ['learn-storage', 'learn-storage-redundancy'],
+      ['learn-storage|GRS and GZRS synchronously replicate data to a secondary region without requiring a replication configuration.',
+       'learn-storage-redundancy|It then copies your data asynchronously to the secondary region.'],
+      { disputed: 'c-azure-grs-sync-async', allow: ['two'] }),
+  ],
   cues: [
     cue('objects must survive the loss of an Availability Zone', 'S3 Standard or other multi-AZ classes (not One Zone)',
       b('Most S3 classes store objects across a minimum of three Availability Zones.', 's3-durability',

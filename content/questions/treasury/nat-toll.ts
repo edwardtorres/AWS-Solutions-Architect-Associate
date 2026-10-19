@@ -187,6 +187,51 @@ const questions: Question[] = [
       'vpc-egress-only-igw|An egress-only internet gateway is for use with IPv6 traffic only.',
     ],
   }),
+  mc({
+    id: 'nat-toll-010',
+    building: 'nat-toll',
+    bullets: ['4.4-S1'],
+    d: 3,
+    tags: [],
+    postGuide: ['nat-gateway-secondary-ips'],
+    postGuideKey: ['nat-gateway-secondary-ips'],
+    stem: 'Application servers in private subnets send a very large number of simultaneous connections through one public NAT gateway to the same partner API endpoint, which is a single destination IP address and port. Connection attempts start to fail at peak load, while the gateway\'s bandwidth stays far below its limit. The servers must stay in private subnets. Which change raises the number of simultaneous connections to that one destination?',
+    correct: ['Associate additional IPv4 addresses with the NAT gateway', 'Each IPv4 address supports a fixed number of simultaneous connections to each unique destination, and the limit can be raised by associating more IPv4 addresses with the NAT gateway.'],
+    wrong: [
+      ['Choose a larger size for the NAT gateway so that it has more bandwidth', 'A NAT gateway has no sizes and already scales its bandwidth automatically; bandwidth is not the limit that is being reached.'],
+      ['Attach a security group to the NAT gateway that allows more connections', 'Security groups cannot be associated with NAT gateways, and they do not set a connection limit.'],
+      ['Replace the public NAT gateway with a private NAT gateway', 'A private NAT gateway is for communication with on-premises or overlapping networks, so the servers would lose internet access to the partner API.'],
+    ],
+    slot: 3,
+    evidence: [
+      'vpc-nat-basics|Each IPv4 address can support up to 55,000 simultaneous connections to each unique destination.',
+      'vpc-nat-basics|You can increase this limit by associating up to 8 IPv4 addresses to your NAT gateways (1 primary IPv4 address and 7 secondary IPv4 addresses).',
+      'vpc-nat-basics|A NAT gateway supports 5 Gbps of bandwidth and automatically scales up to 100 Gbps.',
+      'vpc-nat-comparison|You cannot associate security groups with NAT gateways.',
+      'vpc-nat-scenarios|You can use a private NAT gateway to enable communication from your VPCs to your on-premises network using a pool of allow-listed addresses.',
+    ],
+  }),
+  mc({
+    id: 'nat-toll-011',
+    building: 'nat-toll',
+    bullets: ['4.4-S1'],
+    d: 3,
+    tags: [],
+    stem: 'A VPC has one public NAT gateway in a single subnet that carries the outbound traffic of thousands of instances. Monitoring shows dropped packets during traffic peaks, while connection counts to each destination are low. The instances must stay in private subnets and must keep using NAT. Which design change prevents the packet loss?',
+    correct: ['Split the instances into multiple subnets and create a separate NAT gateway for each subnet', 'A NAT gateway drops packets beyond its packet-rate limit, and splitting the resources into multiple subnets with a NAT gateway in each subnet is the documented way to prevent the loss.'],
+    wrong: [
+      ['Choose a larger size for the existing NAT gateway', 'A NAT gateway has no sizes; it scales automatically up to a limit, and beyond that limit it drops packets.'],
+      ['Attach a security group to the NAT gateway with rules that allow more traffic', 'Security groups cannot be associated with NAT gateways, and they do not raise any packet limit.'],
+      ['Move the instances to public subnets with public IP addresses so that they bypass the NAT gateway', 'The instances must stay in private subnets, and moving them to public subnets gives up that requirement.'],
+    ],
+    slot: 0,
+    evidence: [
+      'vpc-nat-basics|A NAT gateway can process one million packets per second and automatically scales up to 10 million packets per second.',
+      'vpc-nat-basics|Beyond this limit, a NAT gateway will drop packets.',
+      'vpc-nat-basics|To prevent packet loss, split your resources into multiple subnets and create a separate NAT gateway for each subnet.',
+      'vpc-nat-comparison|You cannot associate security groups with NAT gateways.',
+    ],
+  }),
 ];
 
 export default questions;

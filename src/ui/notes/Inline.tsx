@@ -80,6 +80,11 @@ export function BlockView({ block, as: Tag = 'p' }: { block: Block; as?: 'p' | '
           {STATUS_LABEL[block.status]}
         </span>
       )}
+      {block.disputed && (
+        <span className="chip mr-1.5" data-kind="disputed" title="Two pages give different readings of this fact. This app shows both and does not rely on either in its questions.">
+          Sources disagree
+        </span>
+      )}
       {block.newer && block.newer.length > 0 && (
         <span className="chip mr-1.5" data-kind="newer" title="This feature was introduced after the SAA-C03 exam guide was written, so the exam may still expect the older answer.">
           Newer than the exam guide

@@ -5,6 +5,8 @@ export interface BlockOpts {
   status?: Status;
   /** Post-guide feature ids discussed in this block. */
   newer?: string[];
+  /** Contradiction id (content/contradictions.json): the block shows two readings that pages give of one fact. */
+  disputed?: string;
 }
 
 /**
@@ -24,6 +26,7 @@ export function b(text: string, sources: string | string[], quotes: string[] = [
   if (opts.allow) block.allow = opts.allow;
   if (opts.status) block.status = opts.status;
   if (opts.newer) block.newer = opts.newer;
+  if (opts.disputed) block.disputed = opts.disputed;
   return block;
 }
 

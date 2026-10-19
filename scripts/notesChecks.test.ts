@@ -166,4 +166,21 @@ describe('notes checks', () => {
   it('normalises quote characters and whitespace', () => {
     expect(normalise('It’s  a “test” — ok')).toBe('it\'s a "test" - ok');
   });
+  it('requires a still-contradictory item to be shown as both readings, and a disputed block to belong to a contradiction of its building', () => {
+    const contradictions = [{ id: 'c-x', building: 'gatehouse', verdict: 'still-contradictory' }];
+    expect(run(notes(), { contradictions }).join()).toMatch(/do not show both readings/);
+    const shown = notes({ disagreements: [blk('Two pages differ.', { disputed: 'c-x', allow: ['two'] })] });
+    expect(run(shown, { contradictions })).toEqual([]);
+    expect(run(shown, { contradictions: [{ id: 'c-y', building: 'gatehouse', verdict: 'still-contradictory' }] }).join()).toMatch(/not a contradiction of this building/);
+    // A resolved item needs no disagreement block.
+    expect(run(notes(), { contradictions: [{ id: 'c-x', building: 'gatehouse', verdict: 'resolved' }] })).toEqual([]);
+  });
+  it('lets a disagreement block cite Microsoft Learn pages on both sides, while an ordinary AWS block may not', () => {
+    const learn = blk('Two Learn pages differ.', { sources: ['az1'], quotes: [{ src: 'az1', text: 'A sufficiently long verbatim quote from the page.' }], disputed: 'c-x', allow: ['two'] });
+    const contradictions = [{ id: 'c-x', building: 'gatehouse', verdict: 'still-contradictory' }];
+    expect(checkNotes(base(notes({ disagreements: [learn] }), { sources: [AWS, AZ], contradictions })).join()).not.toMatch(/only allowed in Azure notes/);
+    const plain = { ...learn };
+    delete plain.disputed;
+    expect(checkNotes(base(notes({ disagreements: [plain] }), { sources: [AWS, AZ] })).join()).toMatch(/only allowed in Azure notes/);
+  });
 });

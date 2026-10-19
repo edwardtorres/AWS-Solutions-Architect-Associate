@@ -140,6 +140,17 @@ function NotesBody({ building: id, notes, shared }: { building: string; notes: B
           );
         })}
 
+        {notes.disagreements && notes.disagreements.length > 0 && (
+          <Section id="disagreements" title="Where the sources disagree">
+            <p className="text-sm text-[var(--fg-muted)]" data-kind="guidance">
+              Two pages give different readings of these facts. Both are shown; the questions do not rest on either.
+            </p>
+            {notes.disagreements.map((b, i) => (
+              <BlockView key={i} block={b} />
+            ))}
+          </Section>
+        )}
+
         {notes.cues.length > 0 && (
           <Section id="cues" title="Scenario cues">
             <p className="text-sm text-[var(--fg-muted)]" data-kind="guidance">

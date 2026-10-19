@@ -20,6 +20,8 @@ export interface Block {
   status?: Status;
   /** Registry ids (content/post-guide.json) of features newer than the exam guide that this block discusses; shown as a small label. */
   newer?: string[];
+  /** Id in content/contradictions.json when this block shows two readings that AWS or Microsoft pages give for the same fact; shown as "Sources disagree". */
+  disputed?: string;
   /** Number tokens that are structural rather than factual claims (e.g. "four" strategies). */
   allow?: string[];
 }
@@ -75,6 +77,8 @@ export interface BuildingNotes {
   /** "What SAA adds beyond your project": portfolio buildings only. */
   beyondProject?: Block[];
   bullets: BulletNote[];
+  /** Facts on which two allowed pages disagree and that remain unresolved: both readings are shown, and no question rests on them. */
+  disagreements?: Block[];
   cues: Cue[];
   examples: Example[];
   /** Ids from content/dont-confuse.json shown on this building's page. */
