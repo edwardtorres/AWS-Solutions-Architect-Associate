@@ -24,6 +24,7 @@ import { puzzleTypeOf } from '../puzzles/load';
 import { PUZZLE_TYPE_NAME } from '../puzzles/types';
 import { workbenchAvailability } from '../game/puzzle';
 import { LAB_META } from '../labs/meta';
+import { BUILDING_VERIFIED } from '../content/verified';
 import { CloseIcon, RoadIcon, StateIcon } from './icons';
 
 const STARTS = new Set(START_IDS);
@@ -461,6 +462,9 @@ export default function DetailPanel({ buildingId, view, onClose }: Props) {
           <a className="btn mt-1" href={hrefNotes(building.id)}>
             Open the study notes
           </a>
+          <p className="mt-1 text-sm text-[var(--fg-muted)]" data-testid="verified-on">
+            {BUILDING_VERIFIED[building.id] ? `Last checked on AWS docs: ${BUILDING_VERIFIED[building.id]}` : 'Not yet checked against AWS docs.'}
+          </p>
         </section>
 
         {DevBuildingControls && (

@@ -76,7 +76,7 @@ const rules: Rule[] = [
   },
   {
     id: 'capacity-needs-ri',
-    text: 'A capacity reservation in an Availability Zone comes from Reserved Instances (or Capacity Reservations), not from Savings Plans.',
+    text: 'A capacity reservation in an Availability Zone comes from Reserved Instances or Capacity Reservations.',
     src: 'ec2-purchasing',
     quote: 'If you require a capacity reservation, purchase Reserved Instances or Capacity Reservations for a specific Availability Zone.',
   },
@@ -125,12 +125,12 @@ const rules: Rule[] = [
   {
     id: 'ec2-sp-family-region',
     text: 'EC2 Instance Savings Plans are a commitment to one instance family in one Region.',
-    src: 'savings-plans-vs-ri',
-    quote: 'They also automatically save you money on any instance usage within a given EC2 instance family in your Region of choice.',
+    src: 'savings-plans-types',
+    quote: 'EC2 Instance Savings Plans provide savings up to 72% off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, m5 in Virginia).',
   },
   {
     id: 'ec2-sp-saving',
-    text: 'EC2 Instance Savings Plans give a larger saving than Compute Savings Plans in exchange for the narrower commitment to one family in one Region.',
+    text: 'EC2 Instance Savings Plans offer savings of up to 72% off On-Demand in exchange for a commitment to one instance family in one Region.',
     src: 'savings-plans-types',
     quote: 'EC2 Instance Savings Plans provide savings up to 72% off On-Demand, in exchange for a commitment to a specific instance family in a chosen AWS Region (for example, m5 in Virginia).',
   },

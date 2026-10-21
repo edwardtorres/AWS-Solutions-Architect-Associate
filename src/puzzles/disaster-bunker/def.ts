@@ -202,9 +202,9 @@ export const rules: Rule[] = [
   },
   {
     id: 'tradeoff',
-    text: 'Choosing a strategy trades lower downtime and data loss against cost and complexity, so the pick is the least costly strategy whose RPO and RTO classes both meet the targets.',
+    text: 'A strategy more stringent than it needs to be incurs unnecessary costs, so the pick is the least costly strategy whose RPO and RTO classes both meet the targets.',
     src: REL,
-    quote: 'Choosing a DR strategy is a trade-off between reducing downtime and data loss (RTO and RPO) and the cost and complexity of implementing the strategy.',
+    quote: 'You should avoid implementing a strategy that is more stringent than it needs to be, as this incurs unnecessary costs.',
   },
   {
     id: 'pitr-backups',

@@ -2,11 +2,14 @@
  * npm run check:content            offline: app structure vs the recorded official outline
  * npm run check:content -- --live  also re-fetches the live exam guide and diffs it
  */
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { BUILDINGS } from '../src/data/buildings.ts';
 import { ROADS } from '../src/data/roads.ts';
 import { BANNED_TERMS } from './banned-terms.ts';
+import { buildCitations } from './lib/citations.ts';
+import { buildingDates, buildVerifiedSource } from './lib/verifiedMeta.ts';
+import type { HashFile } from './lib/freshness.ts';
 import { buildDocuments, fetchAll, structuralProblems } from './fetch-official.ts';
 import { readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
@@ -123,6 +126,21 @@ async function main() {
     labMetaNow = '';
   }
   if (labMetaNow !== buildLabMetaSource(labData.labs)) problems.push('labs: src/labs/meta.ts is stale; run `npm run gen:meta`');
+
+  // Building check dates are derived from content/page-hashes.json.
+  {
+    const hashPath = join(repoRoot, 'content/page-hashes.json');
+    const hashes: HashFile = existsSync(hashPath) ? (JSON.parse(readFileSync(hashPath, 'utf8')) as HashFile) : { generated: '', pages: {} };
+    const urlOf = new Map(bundle.sources.map((x) => [x.id, x.url.split('#')[0] as string]));
+    const expected = buildVerifiedSource(buildingDates(hashes, await buildCitations(), BUILDINGS.map((b) => b.id), urlOf), hashes.generated);
+    let now = '';
+    try {
+      now = readFileSync(join(repoRoot, 'src/content/verified.ts'), 'utf8');
+    } catch {
+      now = '';
+    }
+    if (now !== expected) problems.push('src/content/verified.ts is stale; run `npm run gen:meta`');
+  }
 
   let liveNote = '';
   if (live) {

@@ -98,7 +98,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'cls-onezone-loss',
-    text: 'S3 One Zone-IA is not resilient to the loss of the Availability Zone, so data that cannot be re-created goes in S3 Standard-IA.',
+    text: 'S3 One Zone-IA is not resilient to the loss of the Availability Zone.',
     src: 's3-storage-classes',
     quote: 'Not resilient to the loss of the Availability Zone.',
   },
@@ -182,7 +182,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'wf-intelligent-tiering',
-    text: 'From S3 Intelligent-Tiering a rule can move objects to S3 One Zone-IA or a Glacier class.',
+    text: 'From the S3 Intelligent-Tiering Frequent Access or Infrequent Access tier a rule can move objects to S3 One Zone-IA or a Glacier class.',
     src: 's3-lifecycle-transitions',
     quote: 'Frequent Access tier or Infrequent Access tier to S3 One Zone-IA, S3 Glacier Instant Retrieval, S3 Glacier Flexible Retrieval, or S3 Glacier Deep Archive storage classes.',
   },

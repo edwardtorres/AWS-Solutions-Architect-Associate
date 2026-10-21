@@ -39,7 +39,7 @@
     "verdict": "confirmed",
     "resolved": "2026-10-19",
     "resolutionSource": "quick-what-is",
-    "resolution": "Re-fetched 2026-10-19. AWS documentation: \"Amazon Quick evolved from Amazon QuickSight.\" and \"QuickSight continues as Amazon Quick Sight, a feature within Quick.\" The exam guide in-scope list names Amazon Quick. The Microsoft Learn analytics comparison page no longer mentions QuickSight (it lists Power BI inside Microsoft Fabric), so the original premise that Learn calls the product QuickSight no longer holds; the notes use the renamed-services entry (Amazon Quick, with QuickSight as the older name)."
+    "resolution": "Re-fetched 2026-10-19. AWS documentation: \"Amazon Quick evolved from Amazon QuickSight.\" and \"QuickSight continues as Amazon Quick Sight, a feature within Quick.\" The exam guide in-scope list names Amazon Quick. The Microsoft Learn analytics comparison page still lists the row \"Amazon QuickSight / Power BI\". So the two allowed sources use different names for the same product line, and the AWS documentation settles the relation: the notes use the renamed-services entry (Amazon Quick, with QuickSight as the older name and the name the Learn page still uses)."
   },
   {
     "id": "nv-ams-label",

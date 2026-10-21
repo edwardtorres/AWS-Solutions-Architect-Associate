@@ -199,9 +199,9 @@ export const rules: Rule[] = [
   },
   {
     id: 'principal-session',
-    text: 'The requester in a role session is the session ARN; a policy naming the role ARN matches that role session.',
-    src: 'iam-boundaries',
-    quote: 'When you assume a role and make a request, the principal making the request is the IAM role session ARN and not the ARN of the role itself.',
+    text: 'A role ARN named as the principal of a resource-based policy applies to that role\'s sessions; the effective permissions are limited by session policies and permissions boundaries.',
+    src: 'iam-el-principal',
+    quote: 'When you specify a role principal in a resource-based policy, the effective permissions for the principal are limited by any policy types that limit permissions for the role.',
   },
   {
     id: 'principal-account',
@@ -307,7 +307,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'cond-orgid',
-    text: 'aws:PrincipalOrgID is present only for principals in an organization member account; StringEquals compares it exactly.',
+    text: 'aws:PrincipalOrgID is present only for principals in an organization member account.',
     src: 'iam-global-condition-keys',
     quote: 'This key is included in the request context only if the principal is a member of an organization.',
   },
