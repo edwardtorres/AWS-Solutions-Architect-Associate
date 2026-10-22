@@ -115,7 +115,8 @@ const notes: BuildingNotes = {
         b('Cue: connection exhaustion from Lambda or many app servers → RDS Proxy; unpredictable surges in database traffic → RDS Proxy.',
           ['rds-proxy-planning', 'rds-proxy'],
           ['rds-proxy-planning|AWS Lambda functions can also be good candidates for using a proxy.',
-           'rds-proxy|Using RDS Proxy, you can handle unpredictable surges in database traffic.']),
+           'rds-proxy|Using RDS Proxy, you can handle unpredictable surges in database traffic.',
+           'rds-proxy-planning|Any DB instance that encounters "too many connections" errors is a good candidate for associating with a proxy.']),
       ],
     },
     {

@@ -17,9 +17,10 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'Open AWS CloudShell in your chosen Region; it is already authenticated, so you need no credentials. Stay in that Region for the whole lab so every command finds the same stack.',
+      text: 'Open AWS CloudShell in your chosen Region; it is already authenticated, so you need no credentials. Stay in that Region for the whole lab (lab design: every command in this lab must find the same stack).',
       src: 'cloudshell-what',
       quote: "Because AWS CloudShell users are pre-authenticated, you don't need to configure credentials when interacting with AWS services using AWS CLI version 2.",
+      callout: { text: 'CloudShell provides persistent storage for each AWS Region.', src: 'cloudshell-what', quote: 'you can use up to 1 GB of persistent storage in each AWS Region' },
       checkpoint: 'A shell prompt opens in the browser.',
     },
     {
@@ -41,9 +42,10 @@ const lab: Lab = {
     },
     {
       id: 's4',
-      text: 'Wait for the stack, then list its outputs: the API address and four queue addresses.',
+      text: 'Wait for the stack to finish creating, then list its outputs: the API address and four queue addresses.',
       src: 'cfn-cli-wait-create',
       quote: 'Wait until stack status is CREATE_COMPLETE.',
+      callout: { text: 'describe-stacks returns the stack description, which includes its outputs.', src: 'cfn-cli-describe-stacks', quote: 'Outputs -> (list) A list of output structures.' },
       code: 'aws cloudformation wait stack-create-complete --stack-name lab07 && aws cloudformation describe-stacks --stack-name lab07 --query "Stacks[0].Outputs[].OutputKey"',
       checkpoint: 'The wait returns without an error and the list names ApiUrl and four queue outputs.',
     },
@@ -95,6 +97,7 @@ const lab: Lab = {
       text: 'Wait about two minutes (lab design: the template sets a short visibility timeout and a small maxReceiveCount, so a few failed receives fit in that time), then read the dead-letter queue and its receive count.',
       src: 'sqs-dlq',
       quote: 'The maxReceiveCount is the number of times a consumer can receive a message from a source queue before it is moved to a dead-letter queue.',
+      callout: { text: 'The receive count is the ApproximateReceiveCount attribute, which the read below asks for.', src: 'sqs-api-receive-message', quote: 'Returns the number of times a message has been received across all queues but not deleted.' },
       code: `${OUT}\nsleep 120\naws sqs receive-message --queue-url "$(OUT DeadLetterQueueUrl)" --wait-time-seconds 20 --attribute-names ApproximateReceiveCount --query "Messages[].[Body,Attributes.ApproximateReceiveCount]" --output text`,
       checkpoint: 'The dead-letter queue holds the poison message. If it is empty, wait another minute and run the command again.',
     },
@@ -103,6 +106,7 @@ const lab: Lab = {
       text: 'Confirm the poison message never reached the fan-out queues (lab design: the consumer fails before it publishes): read the audit queue again. This read uses a visibility timeout of 0, so the earlier good order stays visible and may appear again, but never poison.',
       src: 'sqs-visibility',
       quote: 'When you receive a message from an Amazon SQS queue, it remains in the queue but becomes temporarily invisible to other consumers.',
+      callout: { text: 'A visibility timeout of 0 seconds hides the message for no time, so it stays visible to later reads.', src: 'sqs-cli-receive-message', quote: 'The duration (in seconds) that the received messages are hidden from subsequent retrieve requests after being retrieved by a ReceiveMessage request.' },
       code: `${OUT}\naws sqs receive-message --queue-url "$(OUT AuditQueueUrl)" --wait-time-seconds 5 --visibility-timeout 0 --query "Messages[].Body" --output text`,
       checkpoint: 'No message mentions poison.',
       sensitive: true,
@@ -110,10 +114,10 @@ const lab: Lab = {
     {
       id: 's12',
       kind: 'check',
-      text: 'Read what EventBridge does with events, then decide which service fits each need: one consumer pulling at its own pace, one message pushed to many subscribers, routing by rules on event content, an ordered stream you can replay. The matching is your own study guidance, not one AWS statement.',
+      text: 'Read what EventBridge does with events. Then match the queue, the topic and EventBridge to the needs they fit: the queue that one consumer pulls from, the topic that sends a copy to each subscribed queue, and filtering events by their content. The matching is study guidance, not one AWS statement.',
       src: 'eventbridge-what-is',
       quote: 'EventBridge provides simple and consistent ways to ingest, filter, transform, and deliver events so you can build applications quickly.',
-      checkpoint: 'You can match each need to SQS, SNS, EventBridge or Kinesis Data Streams and say why.',
+      checkpoint: 'You can match the queue, the topic and EventBridge to their needs and say why.',
     },
     {
       id: 'c1',
@@ -156,7 +160,7 @@ const lab: Lab = {
     {
       pair: 'sqs-sns-eventbridge-kinesis',
       step: 's8',
-      text: 'One order went to a topic and both queues received it (push to many), while the work queue held it for one consumer to pull. That is the SNS-versus-SQS difference. Compare EventBridge and Kinesis Data Streams in the last check.',
+      text: 'One order went to a topic and each subscribed queue received a copy, while the work queue held its order for one consumer to pull (SQS uses a polling model). That is the SNS-versus-SQS difference. Compare EventBridge and Kinesis Data Streams on their own pages.',
       src: 'sns-sqs-fanout',
       quote: 'Amazon SQS is a message queue service that distributed applications use to exchange messages through a polling model.',
     },

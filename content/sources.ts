@@ -718,7 +718,6 @@ const sources: Source[] = [
   aws('lambda-sqs-configure', `${D}/lambda/latest/dg/services-sqs-configure.html`, 'Configuring queue and event source mapping for SQS'),
   aws('lambda-with-sqs', `${D}/lambda/latest/dg/with-sqs.html`, 'Using Lambda with Amazon SQS'),
   aws('cfn-iam-capabilities', `${D}/AWSCloudFormation/latest/UserGuide/using-iam-template.html`, 'Acknowledging IAM resources in CloudFormation templates'),
-  aws('cfn-cli-create', `${D}/AWSCloudFormation/latest/UserGuide/using-cfn-cli-creating-stack.html`, 'Create a stack from the AWS CLI'),
   aws('apigw-http-lambda', `${D}/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html`, 'Lambda proxy integrations for HTTP APIs'),
   aws('cloudtrail-event-history', `${D}/awscloudtrail/latest/userguide/view-cloudtrail-events.html`, 'Working with CloudTrail event history'),
   aws('cloudtrail-create-trail', `${D}/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html`, 'Creating a trail for your AWS account'),
@@ -827,6 +826,11 @@ const sources: Source[] = [
   aws('cfn-cli-wait-create', `${D}/cli/latest/reference/cloudformation/wait/stack-create-complete.html`, 'AWS CLI reference: cloudformation wait stack-create-complete'),
   aws('pg-lambda-managed-instances', 'https://aws.amazon.com/about-aws/whats-new/2025/11/aws-lambda-managed-instances/', 'Announcing AWS Lambda Managed Instances, a capability to run functions on your Amazon EC2 instances'),
   aws('pg-lambda-mi-90min', 'https://aws.amazon.com/blogs/compute/announcing-90-minute-function-timeout-on-aws-lambda-managed-instances/', 'Announcing 90-minute function timeout on AWS Lambda Managed Instances'),
+  azure('learn-messaging', `${L}/architecture/aws-professional/messaging`, 'Messaging services on Azure and AWS'),
+  aws('cfn-cli-describe-stacks', `${D}/cli/latest/reference/cloudformation/describe-stacks.html`, 'AWS CLI reference: cloudformation describe-stacks'),
+  aws('sqs-cli-receive-message', `${D}/cli/latest/reference/sqs/receive-message.html`, 'AWS CLI reference: sqs receive-message'),
+  aws('sqs-api-receive-message', `${D}/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html`, 'Amazon SQS API reference: ReceiveMessage'),
+  aws('cli-filter-output', `${D}/cli/latest/userguide/cli-usage-filter.html`, 'Filtering output in the AWS CLI'),
 ];
 
 export default sources;

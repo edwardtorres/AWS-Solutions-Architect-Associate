@@ -4,11 +4,12 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'data-lake-reservoir',
   overview: [
-    b('A {{term:data-lake}} keeps raw data in one place and lets many tools analyse it. On AWS the usual pattern is Amazon S3 for storage, AWS Glue Data Catalog for metadata, AWS Lake Formation for governance, Amazon Athena for SQL queries and {{rename:quick}} for dashboards.',
-      ['what-is-data-lake', 'lake-formation', 'athena-what-is'],
+    b('A {{term:data-lake}} keeps raw data in one place and lets many tools analyse it. One combination on AWS is Amazon S3 for storage, AWS Glue Data Catalog for metadata, AWS Lake Formation for governance, Amazon Athena for SQL queries and {{rename:quick}} for dashboards.',
+      ['what-is-data-lake', 'lake-formation', 'athena-what-is', 'quick-what-is'],
       ['what-is-data-lake|You can store your data as-is, without having to first structure the data, and run different types of analytics—from dashboards and visualizations to big data processing, real-time analytics, and machine learning to guide better decisions.',
        'lake-formation|With Lake Formation, you can manage fine-grained access control for your data lake data on Amazon Simple Storage Service (Amazon S3) and its metadata in AWS Glue Data Catalog.',
-       'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.']),
+       'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.',
+       'quick-what-is|Connect to data sources, build dashboards, and embed analytics in applications.']),
   ],
   bullets: [
     {
@@ -45,9 +46,10 @@ const notes: BuildingNotes = {
     {
       id: '3.5-S1',
       concepts: [
-        b('Building a data lake: store data as-is in S3 without structuring it first, then catalogue it so tools can query it. S3 is the usual storage layer for data lakes; AWS lists data lakes among its use cases.',
+        b('Building a data lake: you can store your data as-is, without first structuring it, and then understand what is in the lake through crawling, cataloging and indexing. Amazon S3 can be used to store data for data lakes, and AWS lists data lakes among its use cases.',
           ['what-is-data-lake', 's3-what-is'],
-          ['what-is-data-lake|A data lake is different, because it stores relational data from line of business applications, and non-relational data from mobile apps, IoT devices, and social media.',
+          ['what-is-data-lake|You can store your data as-is, without having to first structure the data',
+           'what-is-data-lake|They also give you the ability to understand what data is in the lake through crawling, cataloging, and indexing of data.',
            's3-what-is|Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a range of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.']),
         b('Securing it: Lake Formation manages fine-grained access to data lake data in S3 and its metadata in the Glue Data Catalog with a simple grant or revoke mechanism, much like a relational database, and can share data across AWS accounts and organizations. Layer S3 Block Public Access underneath: its settings override bucket policies and permissions so that you can limit public access.',
           ['lake-formation', 's3-block-public-access'],
@@ -64,10 +66,13 @@ const notes: BuildingNotes = {
       services: ['Amazon S3', 'AWS Lake Formation', 'Amazon Athena'],
       design: [
         b('Reference design: raw data lands in S3, Glue crawlers or jobs catalogue and transform it (Refinery), Lake Formation governs access, Athena queries it, Quick visualises it.',
-          ['glue-what-is', 'lake-formation', 'athena-what-is'],
-          ['glue-what-is|AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources.',
+          ['glue-what-is', 'lake-formation', 'athena-what-is', 's3-what-is', 'quick-what-is'],
+          ['s3-what-is|Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a range of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.',
+           'glue-what-is|Use AWS Glue crawlers to automatically infer schema information and integrate it into your AWS Glue Data Catalog.',
+           'glue-what-is|These include data discovery, modern ETL, cleansing, transforming, and centralized cataloging.',
            'lake-formation|AWS Lake Formation helps you centrally govern, secure, and globally share data for analytics and machine learning.',
-           'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.']),
+           'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.',
+           'quick-what-is|Amazon Quick Sight – Interactive data visualization and business intelligence.']),
       ],
     },
     {
@@ -84,9 +89,10 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon Quick'],
       design: [
-        b('Cue: business users need dashboards and shareable reports on lake data → Quick Sight; they need row-level restrictions on the lake data → Lake Formation, whose permissions are enforced at the row level across services such as Athena and Quick.',
+        b('Cue: business users need dashboards and embedded analytics on lake data → Quick Sight; they need row-level restrictions on the lake data → Lake Formation, whose permissions are enforced at the row level across services such as Athena and Quick.',
           ['quick-what-is', 'lake-formation'],
-          ['quick-what-is|Amazon Quick Sight – Interactive data visualization and business intelligence.',
+          ['quick-what-is|Connect to data sources, build dashboards, and embed analytics in applications.',
+           'quick-what-is|Amazon Quick Sight – Interactive data visualization and business intelligence.',
            'lake-formation|Lake Formation permissions are enforced using granular controls at the column, row, and cell-levels across AWS analytics and machine learning services, including Amazon Athena, Amazon Quick, Amazon Redshift Spectrum, Amazon EMR, and AWS Glue.']),
       ],
     },
@@ -99,8 +105,9 @@ const notes: BuildingNotes = {
       b('Lake Formation enforces column, row and cell-level permissions.', 'lake-formation',
         ['Lake Formation permissions are enforced using granular controls at the column, row, and cell-levels across AWS analytics and machine learning services, including Amazon Athena, Amazon Quick, Amazon Redshift Spectrum, Amazon EMR, and AWS Glue.'])),
     cue('reduce the amount of data Athena scans', 'Partition the data and store it in a columnar format such as Parquet',
-      b('Partitioning restricts the data scanned, and columnar formats let queries fetch only the blocks they need.', 'athena-partitions',
-        ['By partitioning your data, you can restrict the amount of data scanned by each query, thus improving performance and reducing cost.'])),
+      b('Partitioning restricts the data scanned, and columnar formats let queries fetch only the blocks they need.', ['athena-partitions', 'athena-columnar'],
+        ['athena-partitions|By partitioning your data, you can restrict the amount of data scanned by each query, thus improving performance and reducing cost.',
+         'athena-columnar|Predicate pushdown in Parquet and ORC enables Athena queries to fetch only the blocks it needs, improving query performance.'])),
     cue('interactive dashboards and BI over data sources', 'Amazon Quick (Quick Sight)',
       b('Quick Sight provides interactive visualisation and business intelligence.', 'quick-what-is',
         ['Amazon Quick Sight – Interactive data visualization and business intelligence.'])),

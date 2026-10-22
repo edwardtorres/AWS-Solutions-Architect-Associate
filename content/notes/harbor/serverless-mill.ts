@@ -100,10 +100,11 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Lambda', 'AWS Fargate', 'Amazon API Gateway'],
       design: [
-        b('Typical serverless pattern: API Gateway receives the request, Lambda runs the logic, and a managed data store (for example DynamoDB) holds state. Because the function is stateless and managed by AWS, every layer scales without servers to patch.',
-          ['apigw-welcome', 'lambda-welcome'],
+        b('Typical serverless pattern: API Gateway receives the request, Lambda runs the logic, and a managed data store such as DynamoDB holds state. API Gateway and Lambda form the app-facing serverless part, and each Lambda invocation runs independently with no shared state, scaling horizontally.',
+          ['apigw-welcome', 'lambda-welcome', 'dynamodb-what-is'],
           ['apigw-welcome|Together with AWS Lambda, API Gateway forms the app-facing part of the AWS serverless infrastructure.',
-           'lambda-welcome|Each invocation runs independently with no shared state, scaling horizontally to match demand.']),
+           'lambda-welcome|Each invocation runs independently with no shared state, scaling horizontally to match demand.',
+           'dynamodb-what-is|Amazon DynamoDB is a serverless, fully managed, distributed NoSQL database with single-digit millisecond performance at any scale.']),
       ],
     },
     {

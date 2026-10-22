@@ -82,6 +82,7 @@ const notes: BuildingNotes = {
           ['kinesis-concepts', 'firehose'],
           ['kinesis-concepts|A stream’s retention period is set to a default of 24 hours after creation.',
            'kinesis-concepts|With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.',
+           'kinesis-concepts|You can increase the retention period up to 8760 hours (365 days) using the IncreaseStreamRetentionPeriod operation',
            'firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.']),
       ],
     },

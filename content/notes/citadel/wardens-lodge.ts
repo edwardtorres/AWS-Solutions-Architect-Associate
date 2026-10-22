@@ -24,6 +24,7 @@ const notes: BuildingNotes = {
         b('Rotation is the process of periodically updating a secret: when you rotate it, you update the credentials in both the secret and the database or service. Secrets Manager can rotate secrets automatically, in one of two ways: managed rotation, where the service configures and manages rotation for you without a Lambda function, or rotation by a Lambda function for other types of secrets.',
           'secrets-rotation',
           ['In Secrets Manager, you can set up automatic rotation for your secrets.', 'Rotation is the process of periodically updating a secret.', 'When you rotate a secret, you update the credentials in both the secret and the database or service.',
+           "Managed rotation doesn't use a Lambda function.",
            'There are two forms of rotation: Managed rotation – For most managed secrets, you use managed rotation, where the service configures and manages rotation for you.',
            'Rotation by Lambda function – For other types of secrets, Secrets Manager rotation uses a Lambda function to update the secret and the database or service.'],
           { allow: ['two'] }),

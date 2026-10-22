@@ -4,12 +4,15 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'legacy-wharf',
   overview: [
-    b('Some applications cannot be changed: they keep state on the server, assume one database and were never built for the cloud. This building covers pre-built AI services and infrastructure-level reliability. Pre-built AWS AI services such as Amazon Comprehend and Amazon Polly give an application a capability through an API, so you do not have to build the model yourself. And several AWS features raise the reliability of an unchanged application by working around it, such as load balancing with sticky sessions, automatic instance recovery, Multi-AZ databases and DNS failover.',
-      ['comprehend-what-is', 'polly-what-is', 'alb-target-attrs', 'ec2-recover'],
-      ['comprehend-what-is|Amazon Comprehend uses natural language processing (NLP) to extract insights about the content of documents.',
+    b('Pre-built AWS AI services such as Amazon Comprehend and Amazon Polly give an application a capability through an API, using pre-trained models. This building also covers reliability features for keeping an application available: load balancing with sticky sessions, automatic instance recovery, Multi-AZ databases and DNS failover.',
+      ['comprehend-what-is', 'polly-what-is', 'alb-target-attrs', 'ec2-recover', 'rds-multi-az-instance', 'route53-failover'],
+      ['comprehend-what-is|You can use the pre-trained models that Amazon Comprehend provides, or you can train your own custom models for classification and entity recognition.',
+       'comprehend-what-is|You can access Amazon Comprehend document analysis capabilities using the Amazon Comprehend console or using the Amazon Comprehend APIs.',
        'polly-what-is|Amazon Polly is a cloud service that converts text into lifelike speech.',
        'alb-target-attrs|This feature is useful for servers that maintain state information in order to provide a continuous experience to clients.',
-       'ec2-recover|These recovery mechanisms are designed to restore instance availability when AWS detects an underlying hardware or software issue that causes a system status check to fail.']),
+       'ec2-recover|These recovery mechanisms are designed to restore instance availability when AWS detects an underlying hardware or software issue that causes a system status check to fail.',
+       'rds-multi-az-instance|In a Multi-AZ DB instance deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone.',
+       'route53-failover|Configuring DNS failover If you have multiple resources that perform the same function, you can configure DNS failover so that Route 53 routes your traffic from an unhealthy resource to a healthy resource.']),
   ],
   bullets: [
     {
@@ -53,7 +56,7 @@ const notes: BuildingNotes = {
     {
       id: '2.2-S7',
       concepts: [
-        b('{{term:sticky-sessions|Sticky sessions}} let an Application Load Balancer bind a user\'s {{term:session}} to a specific target so all requests in the session go to the same target. AWS says this is useful for servers that maintain state information. It needs client cookie support, and is enabled at the target group level. Prefer externalising state (see Blueprint Hall), but sticky sessions help when the application cannot be changed.',
+        b('{{term:sticky-sessions|Sticky sessions}} let an Application Load Balancer bind a user\'s {{term:session}} to a specific target so all requests in the session go to the same target. AWS says this is useful for servers that maintain state information. It needs client cookie support, and is enabled at the target group level.',
           'alb-target-attrs',
           ['you can use the sticky session feature (also known as session affinity) to enable the load balancer to bind a user\'s session to a specific target.',
            'This feature is useful for servers that maintain state information in order to provide a continuous experience to clients.',
@@ -64,14 +67,15 @@ const notes: BuildingNotes = {
           ['These recovery mechanisms are designed to restore instance availability when AWS detects an underlying hardware or software issue that causes a system status check to fail.',
            'During the instance recovery process, AWS will attempt to move your instance from the host with the underlying hardware or software issue to a different host.',
            'Preserved elements: Instance ID Public, private, and Elastic IP addresses Instance metadata Placement group Attached EBS volumes Availability Zone Lost elements: Data stored in volatile memory (RAM) Data stored on instance store volumes (applicable to CloudWatch action based recovery only) Operating system uptime resets to zero']),
-        b('A Multi-AZ RDS deployment gives a database high availability without application changes: RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone to provide data redundancy and failover support.',
+        b('A Multi-AZ RDS deployment gives a database high availability and failover support: RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone.',
           'rds-multi-az-instance',
           ['In a Multi-AZ DB instance deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone.',
            'Amazon RDS provides high availability and failover support for DB instances using Multi-AZ deployments with a single standby DB instance.']),
-        b('A load balancer plus an Auto Scaling group replaces failed instances and spreads traffic, and Route 53 health checks with failover routing can switch DNS to a standby when the primary fails; both work in front of an application without code changes.',
-          ['asg-what-is', 'route53-failover-types'],
-          ['asg-what-is|Amazon EC2 Auto Scaling automatically monitors the health and availability of your instances using EC2 health checks and replaces terminated or impaired instances to maintain your desired capacity.',
-           'route53-failover-types|You configure active-active failover using any routing policy (or combination of routing policies) other than failover, and you configure active-passive failover using the failover routing policy.']),
+        b('A load balancer plus an Auto Scaling group spreads traffic and replaces failed instances, and Route 53 failover with health checks can route traffic from an unhealthy resource to a healthy one.',
+          ['elb-what-is', 'asg-what-is', 'route53-failover'],
+          ['elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.',
+           'asg-what-is|Amazon EC2 Auto Scaling automatically monitors the health and availability of your instances using EC2 health checks and replaces terminated or impaired instances to maintain your desired capacity.',
+           'route53-failover|Configuring DNS failover If you have multiple resources that perform the same function, you can configure DNS failover so that Route 53 routes your traffic from an unhealthy resource to a healthy resource.']),
       ],
       services: ['Elastic Load Balancing (ELB)', 'Amazon Route 53', 'Amazon RDS'],
       design: [
@@ -87,7 +91,7 @@ const notes: BuildingNotes = {
     {
       id: '2.2-S8',
       concepts: [
-        b('Use purpose-built services for the workload instead of generic infrastructure: AWS describes a growing set of database models and services, each built for a data shape, and managed AI services built for tasks like text analysis and speech. See Purpose-Built Workshop for the database matching.',
+        b('Use purpose-built services for the workload: AWS offers a growing number of database options with diverse data models. See Purpose-Built Workshop for the database matching.',
           'database-decision',
           ['AWS offers a growing number of database options (15+) with diverse data models to support a variety of workloads.',
            'This might involve migrating your applications to use purpose-built cloud databases.']),

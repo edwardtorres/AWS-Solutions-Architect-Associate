@@ -29,9 +29,10 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'Open AWS CloudShell in your chosen Region; it is already authenticated, so you need no credentials. Stay in that Region for the whole lab so every command finds the same table.',
+      text: 'Open AWS CloudShell in your chosen Region; it is already authenticated, so you need no credentials. Stay in that Region for the whole lab (lab design: every command in this lab must find the same table).',
       src: 'cloudshell-what',
       quote: "Because AWS CloudShell users are pre-authenticated, you don't need to configure credentials when interacting with AWS services using AWS CLI version 2.",
+      callout: { text: 'CloudShell provides persistent storage for each AWS Region.', src: 'cloudshell-what', quote: 'you can use up to 1 GB of persistent storage in each AWS Region' },
       checkpoint: 'A shell prompt opens in the browser.',
     },
     {

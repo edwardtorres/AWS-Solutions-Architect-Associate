@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'compliance-registry',
   overview: [
-    b('Compliance questions ask you to prove or enforce that data and resources meet a rule. AWS gives you evidence (compliance documents in AWS Artifact), continuous checking (AWS Config rules) and data-level governance (Lake Formation); the concepts below add S3 settings that protect data. The Lookout Tower primer introduced CloudTrail and Config; this building uses them for compliance.',
+    b('Compliance questions ask you to prove or enforce that data and resources meet a rule. AWS gives you evidence (compliance documents in AWS Artifact), continuous checking (AWS Config rules) and data-level governance (Lake Formation). The concepts below add S3 settings that protect data.',
       ['artifact', 'config-rules', 'lake-formation'],
       ['artifact|AWS Artifact provides on-demand downloads of AWS security and compliance documents.',
        'config-rules|Use AWS Config to evaluate the configuration settings of your AWS resources.',

@@ -62,7 +62,8 @@ const notes: BuildingNotes = {
       design: [
         b('Read the replication word: synchronous standby for availability (Multi-AZ); asynchronous copy for read scaling or another Region (read replica); built-in Aurora Replicas for both reads and failover within a cluster; a read replica can also reside in a different Region.',
           ['rds-multi-az-instance', 'rds-read-replicas', 'aurora-replication'],
-          ['aurora-replication|Aurora Replicas also help to increase availability.',
+          ['aurora-replication|That way, Aurora can spread the load for read-only connections across as many Aurora Replicas as you have in the cluster.',
+           'aurora-replication|Aurora Replicas also help to increase availability.',
            'aurora-replication|If the writer instance in a cluster becomes unavailable, Aurora automatically promotes one of the reader instances to take its place as the new writer.',
            'rds-read-replicas|In some cases, a read replica resides in a different AWS Region from its primary DB instance.',
            'rds-multi-az-instance|The primary DB instance is synchronously replicated across Availability Zones to a standby replica to provide data redundancy and minimize latency spikes during system backups.',

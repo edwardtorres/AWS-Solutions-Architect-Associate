@@ -27,15 +27,15 @@ const lab: Lab = {
     },
     {
       id: 'ipv4',
-      resource: 'Public IPv4 addresses on the load balancer nodes and the instances',
+      resource: 'Public IPv4 addresses of the stack\'s instances',
       basis: 'AWS charges for all public IPv4 addresses, including those associated with running instances (page wording).',
       src: 'ec2-addressing',
       quote: 'AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses.',
     },
     {
       id: 'ebs',
-      resource: 'EBS root volumes of the instances',
-      basis: 'Volume storage is charged by the amount provisioned until the storage is released (page wording); each instance has a root volume.',
+      resource: 'EBS volumes attached to the instances',
+      basis: 'Volume storage is charged by the amount provisioned until the storage is released (page wording).',
       src: 'ebs-pricing',
       quote: 'Volume storage for all EBS volume types is charged by the amount of GB you provision per month until you release the storage.',
     },
@@ -47,7 +47,7 @@ const lab: Lab = {
       text: 'Read the billing basis of the load balancer before you create anything. Plan to have the stack for under an hour and to delete it in this same sitting.',
       src: 'elb-pricing',
       quote: 'You are charged for each hour or partial hour that an Application Load Balancer is running.',
-      checkpoint: 'You can name the three things in this lab that bill while they exist: the balancer, the running instances and their public IPv4 addresses.',
+      checkpoint: 'You can name the things in this lab that bill while they exist: the balancer, the running instances, their EBS volumes and their public IPv4 addresses.',
     },
     {
       id: 'template',
@@ -142,10 +142,10 @@ const lab: Lab = {
     {
       id: 'wizard',
       kind: 'check',
-      text: 'Open the create wizard for a load balancer in the console, read the load balancer types it offers, then leave without creating anything.',
+      text: 'Open the create wizard for a load balancer in the console, compare its choices with the current-generation types the guide names (Application, Network and Gateway), then leave without creating anything.',
       src: 'elb-what-is',
       quote: 'For more information about the current generation load balancers, see the following documentation: User Guide for Application Load Balancers User Guide for Network Load Balancers User Guide for Gateway Load Balancers',
-      checkpoint: 'You saw the type choices and closed the wizard; no new balancer appears in the list.',
+      checkpoint: 'You compared the wizard with the three current-generation types and closed it; no new balancer appears in the list.',
     },
     {
       id: 'attach',
@@ -184,11 +184,11 @@ const lab: Lab = {
     {
       id: 'v-asg',
       kind: 'verify',
-      text: 'List any instances and Auto Scaling groups of this lab that remain, and any scaling alarms still named for it. Expect nothing.',
+      text: 'List any running instances and Auto Scaling groups of this lab that remain, and any scaling alarms still named for it. Expect nothing, and remove anything the lists show.',
       code: 'aws ec2 describe-instances --filters "Name=tag:Lab,Values=lab-09-web-tier" "Name=instance-state-name,Values=pending,running,stopping,stopped" --query "Reservations[].Instances[].InstanceId" --output text; aws autoscaling describe-auto-scaling-groups --query "AutoScalingGroups[?Tags[?Value==\'lab-09-web-tier\']].AutoScalingGroupName" --output text; aws cloudwatch describe-alarms --alarm-name-prefix TargetTracking-lab-09-web-tier --query "MetricAlarms[].AlarmName" --output text',
       src: 'ec2-lifecycle',
       quote: 'After you terminate an instance, it remains visible in the console for a short while, and then the entry is automatically deleted.',
-      checkpoint: 'Nothing is printed for this lab (a terminated instance may still be listed briefly by the console, but not by this command).',
+      checkpoint: 'Nothing is printed for this lab. A terminated instance can still appear in the console for a short while, as the step cites.',
     },
     {
       id: 'v-stack',
@@ -196,7 +196,8 @@ const lab: Lab = {
       text: 'Check that no stack is stuck in a failed deletion and that the lab\'s network is gone.',
       code: 'aws cloudformation list-stacks --stack-status-filter DELETE_FAILED --query "StackSummaries[].StackName" --output text; aws ec2 describe-vpcs --filters "Name=tag:Lab,Values=lab-09-web-tier" --query "Vpcs[].VpcId" --output text',
       src: 'cfn-delete-stack',
-      quote: 'After the stack deletion is complete, the stack will be in the DELETE_COMPLETE state.',
+      quote: 'If the deletion fails and returns a DELETE_FAILED state, you can choose to retry using one of two methods.',
+      callout: { text: 'Deleting a stack deletes the resources in it, and the template creates a VPC.', src: 'cfn-delete-stack', quote: 'When deleting a stack, CloudFormation deletes all resources in that stack unless you used a deletion policy to retain specific resources.' },
       checkpoint: 'Both commands print nothing. If a stack is listed, open its events, delete the resource they name, and delete the stack again.',
     },
     {
@@ -213,7 +214,7 @@ const lab: Lab = {
     {
       pair: 'alb-nlb-gwlb',
       step: 'wizard',
-      text: 'The create wizard offers the balancer types side by side. Your stack used the Application type, which works at the application layer, because the web tier is an HTTP workload (study guidance). Read the Network and Gateway types in the wizard and compare.',
+      text: 'Your stack used the Application type, which works at the application layer. Because the web tier is an HTTP workload, that choice is study guidance, not a rule. Compare the Network and Gateway types on their own pages before you choose.',
       src: 'alb-intro',
       quote: 'An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model.',
     },

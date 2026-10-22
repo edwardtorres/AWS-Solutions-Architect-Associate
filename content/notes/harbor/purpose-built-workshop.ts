@@ -37,9 +37,10 @@ const notes: BuildingNotes = {
     {
       id: '2.1-S7',
       concepts: [
-        b('AWS describes the purpose-built idea for data: use Amazon Aurora or purpose-built NoSQL databases such as Amazon DynamoDB, Amazon Neptune or Amazon DocumentDB instead of one general database for everything. The database models it lists are relational, key-value, document, in-memory, graph, time series, vector and wide-column.',
+        b('After a re-platform to a managed database, AWS suggests you might refactor the workload to be cloud focused: you could use Amazon Aurora or purpose-built NoSQL databases such as Amazon DynamoDB, Amazon Neptune or Amazon DocumentDB. The database models it lists are relational, key-value, document, in-memory, graph, time series, vector and wide-column.',
           'database-decision',
-          ['For example, you could use Amazon Aurora or purpose-built NoSQL databases such as Amazon DynamoDB, Amazon Neptune, or Amazon DocumentDB (with MongoDB compatibility).',
+          ['You might consider this an opportunity to refactor your workload to be cloud focused.',
+           'For example, you could use Amazon Aurora or purpose-built NoSQL databases such as Amazon DynamoDB, Amazon Neptune, or Amazon DocumentDB (with MongoDB compatibility).',
            'These include relational, key-value, document, in-memory, graph, time series, vector, and wide-column.']),
         b('Key-value: Amazon DynamoDB is a serverless, fully managed, distributed NoSQL database with single-digit millisecond performance at any scale. AWS suggests it for workloads such as session stores or shopping carts.',
           ['dynamodb-what-is', 'database-decision'],

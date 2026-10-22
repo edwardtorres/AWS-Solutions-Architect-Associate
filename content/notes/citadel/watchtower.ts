@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'watchtower',
   overview: [
-    b('Threats come from outside AWS too: flooding a site with traffic (a {{term:ddos}} attack), injecting malicious SQL into a web request, leaked credentials, or sensitive data sitting in a public bucket. This building is the set of AWS services that block or detect those things: AWS Shield and AWS WAF, Amazon GuardDuty, Amazon Macie and Amazon Inspector for detection and assessment, AWS Security Hub CSPM to receive findings from other services, and Amazon Detective to investigate them.',
+    b('Threats to a workload include flooding a site with traffic (a {{term:ddos}} attack), injecting malicious SQL into a web request, leaked credentials, or sensitive data sitting in a public bucket. This building is the set of AWS services that block or detect those things: AWS Shield and AWS WAF, Amazon GuardDuty, Amazon Macie and Amazon Inspector for detection and assessment, AWS Security Hub CSPM to receive findings from other services, and Amazon Detective to investigate them.',
       ['shield-overview', 'waf-sqli', 'waf-what-is', 'guardduty', 'macie', 'inspector', 'security-hub', 'detective'],
       ['shield-overview|A DDoS attack is an attack in which multiple compromised systems try to flood a target with traffic.',
        'waf-sqli|Attackers insert malicious SQL code into web requests in order to do things like modify your database or extract data from it.',

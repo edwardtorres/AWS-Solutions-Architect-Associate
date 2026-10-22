@@ -41,11 +41,12 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon ElastiCache', 'Amazon DynamoDB'],
       design: [
-        b('Cue to service: microsecond reads from a cache alongside your database → ElastiCache; DynamoDB reads that need microsecond latency with only minimal functional changes → DAX; a Valkey- or Redis OSS-compatible database that must be durable → MemoryDB.',
+        b('Cue to service: microsecond reads from a cache alongside your database → ElastiCache; eventually consistent DynamoDB reads that need microsecond latency, with only minimal functional changes → DAX; a Valkey- or Redis OSS-compatible database that must be durable → MemoryDB.',
           ['database-decision', 'dax', 'memorydb'],
-          ['dax|Therefore, it requires only minimal functional changes to use with an existing application.',
+          ['dax|DAX addresses three core scenarios: As an in-memory cache, DAX reduces the response times of eventually consistent read workloads by an order of magnitude from single-digit milliseconds to microseconds.',
+           'dax|Therefore, it requires only minimal functional changes to use with an existing application.',
            'memorydb|Amazon MemoryDB is compatible with the popular open source data stores Valkey and Redis OSS, enabling you to quickly build applications using the same flexible and friendly data structures, APIs, and commands that they already use.',
-           'database-decision|If your workload requires extremely high read performance with a response time measured in microseconds (rather than single-digit milliseconds), you might want to consider using in- memory caching solutions such as Amazon ElastiCache alongside your database, or a fully durable, persistent in-memory database such as Amazon MemoryDB.']),
+           'database-decision|If your workload requires extremely high read performance with a response time measured in microseconds (rather than single-digit milliseconds), you might want to consider using in- memory caching solutions such as Amazon ElastiCache alongside your database, or a fully durable, persistent in-memory database such as Amazon MemoryDB.'], { newer: ['elasticache-valkey'] }),
       ],
     },
     {

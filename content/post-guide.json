@@ -884,7 +884,7 @@
       "introduced": "2023-02",
       "certainty": "confirmed",
       "source": "pg-nat-secondary-ips",
-      "quote": "This feature allows you to associate up to a total of eight IP addresses to further increase this limit by eight times to 440,000 concurrent connections to a single destination.",
+      "quote": "Feb 1, 2023 Starting today, you can configure your NAT Gateway to support up to 440,000 concurrent connections to a unique destination by adding multiple IP addresses to same NAT Gateway.",
       "patterns": [
         "nat gateway[\\s\\S]{0,200}(secondary|additional)[\\s\\S]{0,40}(ip|address)",
         "(secondary|additional)[\\s\\S]{0,40}(ip|address)[\\s\\S]{0,200}nat gateway",
@@ -973,7 +973,7 @@
     {
       "id": "backup-hourly-frequency",
       "name": "AWS Backup hourly backup frequency",
-      "introduced": "unknown (AWS Backup launched 2019-01; hourly undated)",
+      "introduced": "unknown",
       "certainty": "unconfirmed",
       "patterns": [
         "\\b(AWS Backup|backup plan|backup rule)[\\s\\S]{0,200}\\bhourly\\b",
@@ -987,18 +987,18 @@
         "\\bonce a day\\b",
         "\\bevery 12 hours\\b"
       ],
-      "note": "Moved from preGuide: no AWS page found that dates hourly frequency (doc history lists launches since 2019-01 but not this; the plan-options page and FAQ state it without a date). Undatable, so treated as post-guide."
+      "note": "Undated: no AWS page found dates hourly frequency. The backup plan options page states it without a date (\"Using the console, you can choose a frequency of every hour, 12 hours, daily, weekly, or monthly.\"), and the AWS Backup document history has no hourly entry. Undatable, so treated as post-guide."
     },
     {
       "id": "ecs-min-capacity-0",
       "name": "ECS service auto scaling minimum capacity 0",
-      "introduced": "unknown (ECS service auto scaling itself 2016-09-01)",
+      "introduced": "unknown",
       "certainty": "unconfirmed",
-      "note": "Moved from preGuide: ECS developer guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' with no date, and Application Auto Scaling doc history (ECS support 2016-09-01) does not mention it. Undatable, so treated as post-guide. Predictive scaling for ECS is registered separately as ecs-predictive-scaling.",
+      "note": "Undated: the ECS service auto scaling guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' with no date, and no dated AWS announcement was found. Undatable, so treated as post-guide. Predictive scaling for ECS is registered separately as ecs-predictive-scaling.",
       "patterns": [
-        "\\b(minimum capacity|min(imum)? (task )?count|MinCapacity)\\b[^\\n]{0,60}\\b(of |to |=|:)?\\s*(0|zero)\\b",
-        "\\bscale (the )?(ECS )?(service|tasks?)[^\\n]{0,40}\\bto zero\\b",
-        "\\bscale to zero\\b[^\\n]{0,60}\\b(ECS|task|service)"
+        "^(?=[\\s\\S]*\\bECS\\b)[\\s\\S]*\\b(minimum capacity|min(imum)? (task )?count|MinCapacity)\\b[^\\n]{0,60}\\b(of |to |=|:)?\\s*(0|zero)\\b",
+        "^(?=[\\s\\S]*\\bECS\\b)[\\s\\S]*\\bscale (the )?(service|tasks?)[^\\n]{0,40}\\bto zero\\b",
+        "^(?=[\\s\\S]*\\bECS\\b)[\\s\\S]*\\bscale to zero\\b"
       ],
       "predecessor": "ECS service auto scaling with a minimum of at least one task",
       "predecessorPatterns": [
@@ -1011,7 +1011,7 @@
       "introduced": "2025-11-30",
       "certainty": "confirmed",
       "source": "pg-lambda-managed-instances",
-      "quote": "Lambda Managed Instances fully manages all infrastructure tasks, including instance lifecycle, OS and runtime patching, built-in routing, load balancing, and auto-scaling based on configurable parameters - so you can focus on writing code.",
+      "quote": "Nov 30, 2025 AWS Lambda Managed Instances lets you run Lambda functions on your Amazon EC2 instances",
       "patterns": [
         "\\bLambda Managed Instances?\\b",
         "\\bcapacity provider\\b[\\s\\S]{0,150}\\bLambda\\b",
@@ -1029,7 +1029,7 @@
       "introduced": "2026-09-09",
       "certainty": "confirmed",
       "source": "pg-lambda-mi-90min",
-      "quote": "Today, we are extending the function timeout on Lambda Managed Instances to 90 minutes for asynchronous and ESM invocations.",
+      "quote": "09 SEP 2026 in Announcements, AWS Lambda, Foundational (100) Permalink Share AWS Lambda now supports a 90-minute function timeout",
       "patterns": [
         "\\b90[- ]minutes?\\b[\\s\\S]{0,100}\\b(Lambda|timeout)",
         "\\b(Lambda|timeout)[\\s\\S]{0,100}\\b90[- ]minutes?\\b",
