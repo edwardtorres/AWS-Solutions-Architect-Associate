@@ -3,11 +3,14 @@
  *   0  nothing changed
  *   1  a real change, or a failure the content must answer (a page that now 404s, a changed guide, a bug)
  *   2  a network-class failure: no connection, a timeout, a rate limit or a server error. It says nothing about the content.
+ *   3  an unstable read: the source was still changing when it was read. Reported as a warning, not retried.
  * The weekly watch (scripts/freshness-watch.ts) retries 2 and reports it as a warning, never as an issue.
  */
 export const EXIT_OK = 0;
 export const EXIT_CHANGED = 1;
 export const EXIT_NETWORK = 2;
+/** The page's content was still changing when it was read, or two reads disagree: a warning ("unstable read"), never a finding. */
+export const EXIT_UNSTABLE = 3;
 
 /**
  * True for a failure that is not evidence of a change. A plain HTTP 404 or a page with no main content is not one of these,

@@ -9,8 +9,8 @@
 import { spawnSync } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { CLEAN, ISSUE_LABEL, ISSUE_TITLE, decideIssueAction, findingsHash, markerOf, reportMarkdown, type CheckResult, type HeldReport, type Outcome } from './lib/freshnessWatch.ts';
-import { EXIT_CHANGED, EXIT_NETWORK, EXIT_OK } from './lib/network.ts';
+import { CLEAN, ISSUE_LABEL, ISSUE_TITLE, decideIssueAction, findingsHash, markerOf, outcomeOf, reportMarkdown, type CheckResult, type HeldReport } from './lib/freshnessWatch.ts';
+import { EXIT_NETWORK } from './lib/network.ts';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const BACKOFF_MS = [2_000, 4_000, 8_000];
@@ -37,11 +37,10 @@ async function runCheck(check: { name: string; args: string[] }): Promise<CheckR
       await sleep(BACKOFF_MS[attempt]!);
       continue;
     }
-    const outcomes: Record<number, Outcome> = { [EXIT_OK]: 'ok', [EXIT_CHANGED]: 'changed', [EXIT_NETWORK]: 'warning' };
-    const outcome: Outcome = run.status !== null && run.status in outcomes ? outcomes[run.status]! : 'error';
+    const { outcome, label } = outcomeOf(run.status);
     const output = `${run.stdout ?? ''}${run.stderr ?? ''}`.trim();
-    console.log(`${check.name}: ${outcome}${attempt > 0 ? ` (after ${attempt} retr${attempt === 1 ? 'y' : 'ies'})` : ''}`);
-    return { name: check.name, outcome, output: output || '(no output)' };
+    console.log(`${check.name}: ${label}${attempt > 0 ? ` (after ${attempt} retr${attempt === 1 ? 'y' : 'ies'})` : ''}`);
+    return { name: check.name, outcome, output: output || '(no output)', label };
   }
 }
 

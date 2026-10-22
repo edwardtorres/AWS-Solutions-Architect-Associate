@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { EXIT_CHANGED, EXIT_NETWORK, EXIT_OK, EXIT_UNSTABLE } from './network.ts';
 
 /** The label the watch puts on its issues. It must exist before the first issue is created. */
 export const ISSUE_LABEL = 'content-freshness';
@@ -15,6 +16,17 @@ export interface CheckResult {
   outcome: Outcome;
   /** The check's own output, with the lines that name what changed. */
   output: string;
+  /** For a warning: why it is not a change ("network warning", "unstable read"). */
+  label?: string;
+}
+
+/** How a check's exit code is reported. Only a network-class failure is retried; an unstable read is reported as it is. */
+export function outcomeOf(status: number | null): { outcome: Outcome; label: string } {
+  if (status === EXIT_OK) return { outcome: 'ok', label: 'ok' };
+  if (status === EXIT_CHANGED) return { outcome: 'changed', label: 'changed' };
+  if (status === EXIT_NETWORK) return { outcome: 'warning', label: 'network warning' };
+  if (status === EXIT_UNSTABLE) return { outcome: 'warning', label: 'unstable read' };
+  return { outcome: 'error', label: 'error' };
 }
 
 /** A hash of the findings only, so the same findings give the same hash on every run. Null when nothing changed. */
@@ -28,7 +40,7 @@ export function findingsHash(results: readonly CheckResult[]): string | null {
 /** The Markdown body of the issue or comment: one section per check that reported something, then the hidden marker. */
 export function reportMarkdown(results: readonly CheckResult[], hash: string, runDate: string, commit: string): string {
   const sections = results.filter((r) => r.outcome === 'changed');
-  const warnings = results.filter((r) => r.outcome === 'warning').map((r) => `- ${r.name}`);
+  const warnings = results.filter((r) => r.outcome === 'warning').map((r) => `- ${r.name}: ${r.label ?? 'warning'}`);
   const lines = [`Checked on ${runDate} at ${commit}.`, ''];
   if (sections.length === 0) {
     lines.push('No change was found by the checks that ran this week.', '');

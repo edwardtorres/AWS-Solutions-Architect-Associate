@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { FULL_NAMES, SERVICE_ALIAS, SERVICE_PLANS, SNAPSHOT_OFFERS, planOf, planOfOffer, unmatchedServices } from '../../content/labs/services';
-import { diffOffers, isEmptyDiff, parseOffers, totalOf } from './freePlan';
+import { confirmDiffs, diffOffers, isEmptyDiff, mergeConfirmed, parseOffers, totalOf, type Offer } from './freePlan';
 
 const FIXTURE = `Explore our offers
 Filter
@@ -86,5 +86,81 @@ describe('alias table', () => {
     for (const [service, alias] of Object.entries(SERVICE_ALIAS)) {
       if (alias !== null) expect(SNAPSHOT_OFFERS.some((o) => o.name.toLowerCase() === alias.toLowerCase()), service).toBe(true);
     }
+  });
+});
+
+describe('an offer counts only when two consecutive renders agree', () => {
+  const offer = (name: string, label = 'Available on both plans'): Offer => ({ name, category: 'Test', label });
+  const base = [offer('Alpha'), offer('Beta'), offer('Gamma')];
+
+  it('confirms an addition both renders report', () => {
+    const d = diffOffers(base, [...base, offer('Delta')]);
+    const c = confirmDiffs(d, d);
+    expect(c.diff.added.map((o) => o.name)).toEqual(['Delta']);
+    expect(c.unstable).toEqual([]);
+  });
+
+  it('does not count an addition only one render reports, and names it as unstable', () => {
+    const first = diffOffers(base, [...base, offer('Neptune')]);
+    const second = diffOffers(base, [...base, offer('Re:Post')]);
+    const c = confirmDiffs(first, second);
+    expect(isEmptyDiff(c.diff)).toBe(true);
+    expect(c.unstable.sort()).toEqual(['Neptune', 'Re:Post']);
+  });
+
+  it('confirms a removal only when both renders lack the offer', () => {
+    const both = diffOffers(base, base.slice(0, 2));
+    expect(confirmDiffs(both, both).diff.removed.map((o) => o.name)).toEqual(['Gamma']);
+    const oneOnly = diffOffers(base, base.slice(0, 2));
+    const other = diffOffers(base, base);
+    expect(isEmptyDiff(confirmDiffs(oneOnly, other).diff)).toBe(true);
+    expect(confirmDiffs(oneOnly, other).unstable).toEqual(['Gamma']);
+  });
+
+  it('confirms a relabel only when both renders give the same new label', () => {
+    const relabel = (label: string) => diffOffers(base, base.map((o) => (o.name === 'Beta' ? { ...o, label } : o)));
+    expect(confirmDiffs(relabel('Paid plan exclusive'), relabel('Paid plan exclusive')).diff.changed).toHaveLength(1);
+    const split = confirmDiffs(relabel('Paid plan exclusive'), relabel('Available on both plans'));
+    expect(split.diff.changed).toEqual([]);
+    expect(split.unstable).toEqual(['Beta']);
+  });
+});
+
+describe('the snapshot keeps what the renders agree on', () => {
+  const offer = (name: string, label = 'Available on both plans'): Offer => ({ name, category: 'Test', label });
+
+  it('takes the agreed list: a removal both renders show is dropped', () => {
+    const snap = [offer('Alpha'), offer('Gamma')];
+    const agreed = [offer('Alpha')];
+    expect(mergeConfirmed(snap, agreed, agreed)).toEqual({ offers: [offer('Alpha')], unstable: [] });
+  });
+
+  it('takes a relabel both renders agree on', () => {
+    const snap = [offer('Alpha', 'Paid plan exclusive')];
+    const agreed = [offer('Alpha', 'Available on both plans')];
+    expect(mergeConfirmed(snap, agreed, agreed).offers).toEqual([offer('Alpha', 'Available on both plans')]);
+  });
+
+  it('keeps the previous entry for an offer the renders disagree about, and names it', () => {
+    const snap = [offer('Neptune', 'Paid plan exclusive')];
+    const first = [offer('Neptune', 'Paid plan exclusive')];
+    const second: Offer[] = [];
+    const merged = mergeConfirmed(snap, first, second);
+    expect(merged.offers).toEqual([offer('Neptune', 'Paid plan exclusive')]);
+    expect(merged.unstable).toEqual(['Neptune']);
+  });
+
+  it('keeps every copy of a card the page shows twice', () => {
+    const copy = offer('Budgets');
+    const both = [copy, { ...copy }];
+    const merged = mergeConfirmed([...both], both, both);
+    expect(merged.offers).toHaveLength(2);
+    expect(merged.unstable).toEqual([]);
+  });
+
+  it('leaves out an addition only one render shows', () => {
+    const merged = mergeConfirmed([], [offer('Re:Post')], []);
+    expect(merged.offers).toEqual([]);
+    expect(merged.unstable).toEqual(['Re:Post']);
   });
 });

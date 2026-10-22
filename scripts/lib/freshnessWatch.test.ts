@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CLEAN, decideIssueAction, findingsHash, markerOf, reportMarkdown, type CheckResult } from './freshnessWatch';
+import { CLEAN, decideIssueAction, findingsHash, markerOf, outcomeOf, reportMarkdown, type CheckResult } from './freshnessWatch';
 
 const ok: CheckResult = { name: 'Exam guide', outcome: 'ok', output: 'check:content OK' };
 const changed: CheckResult = { name: 'Cited AWS pages', outcome: 'changed', output: '- [changed] https://docs.aws.amazon.com/a.html\n    hash moved' };
@@ -70,5 +70,23 @@ describe('the report', () => {
   it('the latest marker in a thread wins', () => {
     expect(markerOf('<!-- content-freshness:aaaaaaaaaaaa -->\nlater\n<!-- content-freshness:clean -->')).toBe('clean');
     expect(markerOf('no marker here')).toBeNull();
+  });
+});
+
+describe('exit codes become outcomes', () => {
+  it('an unstable read is a warning, labelled as such, and a network failure is a warning too', () => {
+    expect(outcomeOf(3)).toEqual({ outcome: 'warning', label: 'unstable read' });
+    expect(outcomeOf(2)).toEqual({ outcome: 'warning', label: 'network warning' });
+    expect(outcomeOf(1).outcome).toBe('changed');
+    expect(outcomeOf(0).outcome).toBe('ok');
+    expect(outcomeOf(9).outcome).toBe('error');
+  });
+
+  it('an unstable read appears in the report as a warning, never as a finding', () => {
+    const unstable: CheckResult = { name: 'Free Tier offers (check:freeplan)', outcome: 'warning', output: 'unstable read', label: 'unstable read' };
+    const body = reportMarkdown([unstable], CLEAN, '2026-10-29', 'a1b2c3d');
+    expect(body).toContain('unstable read');
+    expect(body).not.toContain('### Free Tier offers');
+    expect(body).toContain('No change was found');
   });
 });

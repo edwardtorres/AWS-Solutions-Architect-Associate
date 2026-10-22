@@ -19,6 +19,11 @@ export interface Snapshot {
   offers: Offer[];
 }
 
+/** One browser read of the page. `settled` is false when the list was still changing when it was read. */
+export interface Render extends Snapshot {
+  settled: boolean;
+}
+
 const LABEL = /\bplans?\b/i;
 
 /**
@@ -46,6 +51,13 @@ export const totalOf = (text: string): number | null => {
   return m ? Number(m[1]) : null;
 };
 
+/** The part of the page's text that holds the offers. */
+export function sectionOf(text: string): string {
+  const start = text.indexOf('Explore our offers');
+  const end = text.search(/\nFAQs\n/);
+  return text.slice(start < 0 ? 0 : start, end < 0 ? undefined : end);
+}
+
 export interface Diff {
   added: Offer[];
   removed: Offer[];
@@ -65,8 +77,73 @@ export function diffOffers(before: readonly Offer[], after: readonly Offer[]): D
 
 export const isEmptyDiff = (d: Diff): boolean => d.added.length + d.removed.length + d.changed.length === 0;
 
-/** Renders the Free Tier page with Chromium, clicks every "Show N more" button and returns the offers. Needs Playwright's Chromium. */
-export async function renderOffers(): Promise<Snapshot> {
+/** One line per change, so two diffs can be compared change by change. */
+function signatures(d: Diff): Map<string, Offer | { name: string; from: string; to: string }> {
+  const key = (name: string) => name.toLowerCase();
+  const out = new Map<string, Offer | { name: string; from: string; to: string }>();
+  for (const o of d.added) out.set(`added|${key(o.name)}|${o.label}`, o);
+  for (const o of d.removed) out.set(`removed|${key(o.name)}|${o.label}`, o);
+  for (const c of d.changed) out.set(`changed|${key(c.name)}|${c.to}`, c);
+  return out;
+}
+
+export interface Confirmed {
+  /** Changes that both renders report in the same way. Only these count. */
+  diff: Diff;
+  /** Names of offers the two renders disagree about. They are reported as an unstable read and not counted. */
+  unstable: string[];
+}
+
+/** Counts a change only when two consecutive renders report it the same way. */
+export function confirmDiffs(first: Diff, second: Diff): Confirmed {
+  const a = signatures(first);
+  const b = signatures(second);
+  const agreed = (kind: string) => [...a].filter(([sig]) => sig.startsWith(`${kind}|`) && b.has(sig)).map(([, v]) => v);
+  const diff: Diff = {
+    added: agreed('added') as Offer[],
+    removed: agreed('removed') as Offer[],
+    changed: agreed('changed') as Diff['changed'],
+  };
+  // A change only one render reports is disputed: it is named, and not counted.
+  const disputed = [...a].filter(([sig]) => !b.has(sig)).concat([...b].filter(([sig]) => !a.has(sig)));
+  const unstable = [...new Set(disputed.map(([, v]) => (v as { name: string }).name))];
+  return { diff, unstable };
+}
+
+/**
+ * The offers to keep as the snapshot once two renders are compared. An offer both renders report the same way takes that
+ * report (an addition, a relabel, or a removal when both renders lack it). An offer the renders disagree about keeps its
+ * snapshot entry, unchanged, and is returned in `unstable`.
+ */
+export function mergeConfirmed(snapshot: readonly Offer[], first: readonly Offer[], second: readonly Offer[]): { offers: Offer[]; unstable: string[] } {
+  // The page can show the same card twice (identical copies), so each name keeps all its copies and they are compared as a set.
+  const group = (list: readonly Offer[]) => {
+    const m = new Map<string, Offer[]>();
+    for (const o of list) m.set(o.name.toLowerCase(), [...(m.get(o.name.toLowerCase()) ?? []), o]);
+    return m;
+  };
+  const shape = (list: readonly Offer[]) => list.map((o) => `${o.label}|${o.category}`).sort().join('\n');
+  const a = group(first);
+  const b = group(second);
+  const s = group(snapshot);
+  const offers: Offer[] = [];
+  const unstable: string[] = [];
+  for (const k of new Set([...a.keys(), ...b.keys(), ...s.keys()])) {
+    const la = a.get(k) ?? [];
+    const lb = b.get(k) ?? [];
+    if (la.length > 0 && lb.length > 0 && shape(la) === shape(lb)) {
+      offers.push(...la);
+      continue;
+    }
+    if (la.length === 0 && lb.length === 0) continue; // absent from both renders: a confirmed removal
+    unstable.push((la[0] ?? lb[0] ?? s.get(k)?.[0])?.name ?? k);
+    offers.push(...(s.get(k) ?? []));
+  }
+  return { offers, unstable };
+}
+
+/** Renders the Free Tier page with Chromium, clicks every "Show N more" button, and waits until the list stops changing. */
+export async function renderOffers(): Promise<Render> {
   const { chromium } = await import('@playwright/test');
   const fallback = '/opt/pw-browsers/chromium';
   const executablePath = process.env.CHROMIUM_PATH ?? (existsSync(fallback) && statSync(fallback).isFile() ? fallback : undefined);
@@ -87,11 +164,28 @@ export async function renderOffers(): Promise<Snapshot> {
       await more.click({ timeout: 10_000 });
       await page.waitForTimeout(500);
     }
-    const text = await page.evaluate(() => document.body.innerText);
-    const start = text.indexOf('Explore our offers');
-    const end = text.search(/\nFAQs\n/);
-    const section = text.slice(start < 0 ? 0 : start, end < 0 ? undefined : end);
-    return { capturedAt: new Date().toISOString().slice(0, 10), url: FREE_URL, total: totalOf(section), offers: parseOffers(section) };
+    // Settled: no "Show N more" button is left and the number of offers is the same on two reads three seconds apart.
+    let previous = -1;
+    let settled = false;
+    let section = '';
+    for (let i = 0; i < 12; i += 1) {
+      const more = page.getByText(/^Show \d+ more$/).first();
+      if ((await more.count()) > 0) {
+        await more.click({ timeout: 10_000 });
+        await page.waitForTimeout(500);
+        continue;
+      }
+      section = sectionOf(await page.evaluate(() => document.body.innerText));
+      const count = parseOffers(section).length;
+      if (count === previous) {
+        settled = true;
+        break;
+      }
+      previous = count;
+      await page.waitForTimeout(3000);
+    }
+    if (!section) section = sectionOf(await page.evaluate(() => document.body.innerText));
+    return { capturedAt: new Date().toISOString().slice(0, 10), url: FREE_URL, total: totalOf(section), offers: parseOffers(section), settled };
   } finally {
     await browser.close();
   }

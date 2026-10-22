@@ -1,7 +1,7 @@
 {
- "capturedAt": "2026-10-19",
+ "capturedAt": "2026-10-22",
  "url": "https://aws.amazon.com/free/",
- "total": 185,
+ "total": 186,
  "offers": [
   {
    "category": "Mobile",
@@ -14,12 +14,6 @@
    "label": "Available on both plans",
    "name": "Amazon AppFlow",
    "description": "Automate data flows between software as a service (SaaS) and AWS services"
-  },
-  {
-   "category": "Network",
-   "label": "Paid plan exclusive",
-   "name": "Amazon Application Recovery Controller",
-   "description": "Simplify and automate recovery for highly available applications"
   },
   {
    "category": "Network",
@@ -383,6 +377,12 @@
   },
   {
    "category": "AI",
+   "label": "Paid plan exclusive",
+   "name": "Amazon Personalize",
+   "description": "Elevate the customer experience with ML-powered personalization"
+  },
+  {
+   "category": "AI",
    "label": "Available on both plans",
    "name": "Amazon Polly",
    "description": "Turn text into lifelike speech."
@@ -580,6 +580,12 @@
    "description": "AWS AppFabric connects SaaS applications for better productivity and security."
   },
   {
+   "category": "Migration",
+   "label": "Available on both plans",
+   "name": "AWS Application Migration Service",
+   "description": "Simplify and expedite migrations while reducing cost."
+  },
+  {
    "category": "Mobile",
    "label": "Available on both plans",
    "name": "AWS AppSync",
@@ -614,12 +620,6 @@
    "label": "Paid plan exclusive",
    "name": "AWS Billing Conductor",
    "description": "Simplify billing and reporting with customizable pricing and cost visibility"
-  },
-  {
-   "category": "Mgmt-Govern",
-   "label": "Available on both plans",
-   "name": "AWS Budgets",
-   "description": "Improve planning and cost control with flexible budgeting and forecasting"
   },
   {
    "category": "Mgmt-Govern",
@@ -796,6 +796,12 @@
    "description": "Store and deliver video assets for live streaming media workflows"
   },
   {
+   "category": "Media-Services",
+   "label": "Paid plan exclusive",
+   "name": "AWS Elemental MediaTailor",
+   "description": "Linear channel assembly and personalized ad-insertion service"
+  },
+  {
    "category": "Business-Productivity",
    "label": "Paid Plan exclusive",
    "name": "AWS End User Messaging",
@@ -818,12 +824,6 @@
    "label": "Paid plan exclusive",
    "name": "AWS Firewall Manager",
    "description": "Centrally configure and manage firewall rules across your accounts"
-  },
-  {
-   "category": "Network",
-   "label": "Paid plan exclusive",
-   "name": "AWS Global Accelerator",
-   "description": "Improve application availability, performance, and security using the AWS global network"
   },
   {
    "category": "Network",
@@ -1004,6 +1004,12 @@
    "label": "Available on both plans",
    "name": "AWS Secrets Manager",
    "description": "Easily rotate, manage, and retrieve secrets through their lifecycle."
+  },
+  {
+   "category": "Security-Identity-Compliance",
+   "label": "Available on both plans",
+   "name": "AWS Security Hub",
+   "description": "Unifies security operations so you can prioritize your critical security issues and respond at scale"
   },
   {
    "category": "Security-Identity-Compliance",
