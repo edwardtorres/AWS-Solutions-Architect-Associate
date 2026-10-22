@@ -182,7 +182,7 @@ Sources: AWS Billing guide "Choosing a plan" (`docs.aws.amazon.com/awsaccountbil
 5. **Done (awaiting approval):** puzzles (audit in `docs/step-5-audit.md`). Puzzles with computed answers: IAM policy evaluator (explicit deny, SCPs, permission boundaries, resource policies), VPC traffic tracer (security groups, NACLs, route tables), DR strategy picker by RTO/RPO, S3 lifecycle planner, architecture builder, cost-choice scenarios with no hardcoded prices.
 6. **Done (awaiting approval):** hands-on labs in a real AWS account with cost guardrails (audit in `docs/step-6-audit.md`).
 7. **Done (awaiting approval):** spaced review, Weak Spots and a mock exam (audit in `docs/step-7-audit.md`).
-8. Full claim fact-check against AWS docs, `verifiedAt` dates, `check:freshness` (compare content hashes where pages publish no dates).
+8. **Done (awaiting approval):** claim fact-check against AWS docs (audit in `docs/step-8-audit.md`, full report `docs/reviews/step-8-fact-check.md`): claim audit, adjudication gate, note coverage, owner decisions, per-page `verifiedAt` dates in `content/page-hashes.json`, `npm run check:freshness`.
 9. Deploy to `saa.edwardtorres.dev`: S3 + CloudFront with Origin Access Control, infrastructure as code, GitHub Actions via an OIDC role (no long-lived keys), Cloudflare DNS; weekly freshness workflow; portfolio README.
 
 Also deferred: an optional DP-600/PL-300 carryover for the analytics buildings (tags currently marked `PL-300/DP-600`).
