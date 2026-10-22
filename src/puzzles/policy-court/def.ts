@@ -199,7 +199,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'principal-session',
-    text: 'A role ARN named as the principal of a resource-based policy applies to that role\'s sessions; the effective permissions are limited by session policies and permissions boundaries.',
+    text: 'When a resource-based policy names a role as the principal, the effective permissions for that principal are limited by any session policy or permissions boundary on the role.',
     src: 'iam-el-principal',
     quote: 'When you specify a role principal in a resource-based policy, the effective permissions for the principal are limited by any policy types that limit permissions for the role.',
   },
@@ -634,7 +634,7 @@ function core(s: PolicyCourtScenario, ignore: ReadonlySet<string>, mode: Mode): 
         if (boundary || session) notes.push({ rule: 'session-direct', note: 'The resource-based policy names the role session ARN, so it is granted directly to the session and the boundary and session policy do not limit it.' });
         effective.push(resourcePolicy!.id);
       } else if (m === 'role') {
-        notes.push({ rule: 'principal-session', note: 'The role ARN in the resource-based policy matches the role session making the request.' });
+        notes.push({ rule: 'principal-session', note: 'The resource-based policy names the role, so the effective permissions are limited by any session policy or permissions boundary on the role.' });
         if (boundaryOk && sessionOk) effective.push(resourcePolicy!.id);
         else notes.push({ rule: 'boundary-role-resource', note: 'A resource-based Allow for the role ARN is limited by the boundary or session policy, which have no Allow here.' });
       } else {

@@ -182,7 +182,7 @@ const glossary: GlossaryTerm[] = [
     b('A load balancer feature that binds a user\'s session to a specific target so all requests from the user during the session go to the same target.', 'alb-target-attrs',
       ['you can use the sticky session feature (also known as session affinity) to enable the load balancer to bind a user\'s session to a specific target.']), ['session affinity']),
   t('iops', 'IOPS (input/output operations per second)',
-    b('One of the dimensions, with latency and throughput, by which storage performance is typically measured.', 'efs-performance',
+    b('One of the dimensions, with latency and throughput, by which file system performance is typically measured (Input/Output operations per second).', 'efs-performance',
       ['File system performance is typically measured by using the dimensions of latency, throughput, and Input/Output operations per second (IOPS).']), ['IOPS']),
   t('visibility-timeout', 'Visibility timeout (SQS)',
     b('When a consumer receives an SQS message it stays in the queue but becomes temporarily invisible to other consumers, so no one else processes it while you work on it.', 'sqs-visibility',

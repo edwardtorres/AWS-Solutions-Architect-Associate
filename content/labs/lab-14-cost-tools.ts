@@ -14,14 +14,14 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'Open AWS CloudShell in your chosen Region. This lab creates no running resource. NEVER buy a Savings Plan or a Reserved Instance in this lab: the purchase pages are for viewing only.',
+      text: 'Open AWS CloudShell in your chosen Region. NEVER buy a Savings Plan or a Reserved Instance in this lab: the purchase pages are for viewing only.',
       src: 'cloudshell-what',
       quote: 'AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.',
       checkpoint: 'A terminal prompt opens in the browser.',
     },
     {
       id: 's2',
-      text: 'Create an empty S3 bucket and give it a cost allocation tag, key lab14-project and value cost-tools. The bucket is just something to tag; a bucket name must be unique, so the command builds one. Write the bucket name down: you will clean up after a day of waiting.',
+      text: 'Create an empty S3 bucket and give it a cost allocation tag, key lab14-project and value cost-tools. The bucket is just something to tag; the command builds a name for it. Write the bucket name down: you will clean up after a day of waiting.',
       code: 'BUCKET=lab14-$(date +%s)-$RANDOM\naws s3 mb s3://$BUCKET\naws s3api put-bucket-tagging --bucket $BUCKET --tagging \'TagSet=[{Key=lab14-project,Value=cost-tools}]\'\naws s3api get-bucket-tagging --bucket $BUCKET',
       src: 's3-cost-alloc-tags',
       quote: 'A cost allocation tag is a key-value pair that you associate with an S3 bucket.',
@@ -49,7 +49,7 @@ const lab: Lab = {
     {
       id: 's5',
       kind: 'check',
-      text: 'Open Cost Explorer in the Billing and Cost Management console. The first time you open it, this enables it for your account (AWS does not let you turn it off again), and AWS also sets up Cost Anomaly Detection for you (a services monitor and a daily summary alert subscription). Data for a new account is prepared in the background, so charts may be empty or say that data is being prepared.',
+      text: 'Open Cost Explorer in the Billing and Cost Management console. The first time you open it, this enables it for your account, and AWS also sets up Cost Anomaly Detection for you (a services monitor and a daily summary alert subscription). Data for a new account is prepared in the background, so charts may be empty or say that data is being prepared.',
       src: 'ce-enable',
       quote: 'You can enable Cost Explorer for your account by opening Cost Explorer for the first time in the AWS Cost Management console.',
       checkpoint: 'Cost Explorer opens with either charts or a message that your data is being prepared.',
@@ -92,7 +92,7 @@ const lab: Lab = {
       id: 's10',
       kind: 'do',
       optional: true,
-      text: 'Compute Optimizer: availability on the Free plan not confirmed, so optional. Open the Compute Optimizer console and read the opt-in screen. Opting in lets it analyze your resources; you may see no recommendations yet.',
+      text: 'Compute Optimizer: availability on the Free plan not confirmed, so optional. Open the Compute Optimizer console and read the opt-in screen. You may see no recommendations yet.',
       alt: 'Skip it: read the page cited here and note that it needs enough utilization metrics before recommendations appear.',
       src: 'co-requirements',
       quote: "If your resources don't have enough metric data, allow for more time before the recommendations start appearing in the Compute Optimizer console.",
@@ -117,7 +117,7 @@ const lab: Lab = {
     {
       id: 's13',
       kind: 'check',
-      text: 'Open the Spot pricing history view in the EC2 console and pick any instance type. Spot has no commitment; the prices follow supply and demand.',
+      text: 'Open the Spot pricing history view in the EC2 console and pick any instance type. The prices follow supply and demand.',
       src: 'ec2-spot-history',
       quote: 'Spot Instance prices are set by Amazon EC2 and adjust gradually based on long-term trends in supply and demand for Spot Instance capacity.',
       checkpoint: 'A price history chart is shown. You launched nothing.',
@@ -125,7 +125,7 @@ const lab: Lab = {
     {
       id: 's14',
       kind: 'check',
-      text: 'Write one line each: which workload fits a commitment you can flex across instance families (Savings Plans), which fits a fixed instance configuration (Reserved Instances), and which fits flexible work that could stop and restart (Spot).',
+      text: 'Write one line each: one workload you would run under Savings Plans, one under Reserved Instances and one on Spot, based on the pages you have just read.',
       src: 'savings-plans-vs-ri',
       quote: 'Savings Plans give you the flexibility to use the compute option that best suits your needs at low prices, without having to perform exchanges or modifications.',
       checkpoint: 'You have three lines written, one per option, each naming a workload type.',
@@ -179,10 +179,10 @@ const lab: Lab = {
     {
       id: 'v1',
       kind: 'verify',
-      text: 'Prove the lab left nothing behind. Also confirm in the console that no Savings Plan or Reserved Instance purchase is listed.',
+      text: 'Prove the lab left nothing behind. Also open the Savings Plans and Reserved Instances pages in the console and confirm you made no purchase.',
       code: 'aws budgets describe-budgets --account-id "$(aws sts get-caller-identity --query Account --output text)" --query "Budgets[?starts_with(BudgetName,\'lab14\')].BudgetName"\naws s3 ls | grep lab14-\naws compute-optimizer get-enrollment-status --query status',
       src: 'budgets-delete',
-      quote: "However, you can't recover a budget after you delete it.",
+      quote: "You can delete your budgets and the associated email and Amazon SNS notifications at any time.",
       checkpoint: 'The budget and bucket lists are empty, the Compute Optimizer status is Inactive (or you never opted in), the Cost allocation tags page shows no active lab14 tag, and the Savings Plans and Reserved Instances pages list no purchase.',
       sensitive: true,
     },

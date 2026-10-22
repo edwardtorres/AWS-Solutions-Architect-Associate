@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'cache-pavilion',
   overview: [
-    b('A database cache keeps frequently read data in memory so the database answers fewer queries. Cache & Edge Breakwater explained where caches sit and the lazy-loading and write-through strategies. This building is about picking the caching service for a database: ElastiCache for general database caching, DAX for DynamoDB, and MemoryDB when the in-memory store must itself be the durable database.',
+    b('ElastiCache is a distributed in-memory data store or cache, DAX is a caching service for DynamoDB and MemoryDB is a durable in-memory database. Cache & Edge Breakwater explained where caches sit and the lazy-loading and write-through strategies. This building is about picking the caching service for a database: ElastiCache for general database caching, DAX for DynamoDB, and MemoryDB when the in-memory store must itself be the durable database.',
       ['elasticache-what-is', 'dax', 'memorydb'],
       ['elasticache-what-is|Amazon ElastiCache is a web service that makes it easy to set up, manage, and scale a distributed in-memory data store or cache environment in the cloud.',
        'dax|DAX is a DynamoDB-compatible caching service that enables you to benefit from fast in-memory performance for demanding applications.',
@@ -41,9 +41,11 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon ElastiCache', 'Amazon DynamoDB'],
       design: [
-        b('Cue to service: cache in front of RDS or Aurora, session store → ElastiCache; DynamoDB reads need microsecond latency with little code change → DAX; Redis-compatible data that must not be lost → MemoryDB.',
-          'database-decision',
-          ['If your workload requires extremely high read performance with a response time measured in microseconds (rather than single-digit milliseconds), you might want to consider using in- memory caching solutions such as Amazon ElastiCache alongside your database, or a fully durable, persistent in-memory database such as Amazon MemoryDB.']),
+        b('Cue to service: microsecond reads from a cache alongside your database → ElastiCache; DynamoDB reads that need microsecond latency with only minimal functional changes → DAX; a Valkey- or Redis OSS-compatible database that must be durable → MemoryDB.',
+          ['database-decision', 'dax', 'memorydb'],
+          ['dax|Therefore, it requires only minimal functional changes to use with an existing application.',
+           'memorydb|Amazon MemoryDB is compatible with the popular open source data stores Valkey and Redis OSS, enabling you to quickly build applications using the same flexible and friendly data structures, APIs, and commands that they already use.',
+           'database-decision|If your workload requires extremely high read performance with a response time measured in microseconds (rather than single-digit milliseconds), you might want to consider using in- memory caching solutions such as Amazon ElastiCache alongside your database, or a fully durable, persistent in-memory database such as Amazon MemoryDB.']),
       ],
     },
     {
@@ -68,9 +70,10 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon ElastiCache', 'Amazon DynamoDB'],
       design: [
-        b('Cue: read-heavy database, results rarely change → cache with a TTL; data must never be stale → write-through; cache must survive restarts as the system of record → MemoryDB rather than a cache.',
+        b('Cue: cached data that would otherwise waste space → add a TTL; data must never be stale → write-through; cache must survive restarts as the system of record → MemoryDB rather than a cache.',
           ['elasticache-strategies', 'memorydb'],
-          ['elasticache-strategies|The advantages of write-through are as follows: Data in the cache is never stale.',
+          ['elasticache-strategies|By adding a time to live (TTL) value, you can minimize wasted space.',
+           'elasticache-strategies|The advantages of write-through are as follows: Data in the cache is never stale.',
            'memorydb|Amazon MemoryDB is a durable, in-memory database service that delivers ultra-fast performance.']),
       ],
     },

@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'compliance-registry',
   overview: [
-    b('Compliance questions ask you to prove or enforce that data and resources meet a rule. AWS gives you evidence (reports and agreements in AWS Artifact), continuous checking (AWS Config rules and conformance packs), data-level governance (Lake Formation, Macie) and protective settings (Object Lock, Block Public Access, lifecycle rules). The Lookout Tower primer introduced CloudTrail and Config; this building uses them for compliance.',
+    b('Compliance questions ask you to prove or enforce that data and resources meet a rule. AWS gives you evidence (compliance documents in AWS Artifact), continuous checking (AWS Config rules) and data-level governance (Lake Formation); the concepts below add S3 settings that protect data. The Lookout Tower primer introduced CloudTrail and Config; this building uses them for compliance.',
       ['artifact', 'config-rules', 'lake-formation'],
       ['artifact|AWS Artifact provides on-demand downloads of AWS security and compliance documents.',
        'config-rules|Use AWS Config to evaluate the configuration settings of your AWS resources.',
@@ -19,9 +19,9 @@ const notes: BuildingNotes = {
           ['AWS Lake Formation helps you centrally govern, secure, and globally share data for analytics and machine learning.',
            'Lake Formation provides its own permissions model that augments the IAM permissions model.',
            'Lake Formation permissions are enforced using granular controls at the column, row, and cell-levels']),
-        b('For S3, access is governed by IAM and bucket policies, and S3 Block Public Access settings override policies and permissions that would otherwise allow public access. New buckets, access points and objects do not allow public access by default.',
+        b('For S3, bucket policies, access point policies and object permissions can allow public access, and S3 Block Public Access settings override those policies and permissions. New buckets, access points and objects do not allow public access by default.',
           's3-block-public-access',
-          ["By default, new buckets, access points, and objects don't allow public access.",
+          ["However, users can modify bucket policies, access point policies, or object permissions to allow public access.", "By default, new buckets, access points, and objects don't allow public access.",
            'S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources.']),
       ],
       services: ['AWS Lake Formation', 'Amazon S3', 'Amazon Macie'],
@@ -60,9 +60,10 @@ const notes: BuildingNotes = {
     {
       id: '1.3-S6',
       concepts: [
-        b('Access policy: IAM and bucket policies decide who can touch objects, and Block Public Access limits public exposure. Lifecycle: an S3 Lifecycle configuration is a set of rules that define actions S3 applies to a group of objects, such as transitioning them to another storage class or deleting expired objects. Protection: S3 Object Lock uses a write-once-read-many model to help meet regulatory requirements, and it works only in buckets that have S3 Versioning enabled.',
+        b('Public access: S3 Block Public Access settings override policies and permissions that allow public access. Lifecycle: an S3 Lifecycle configuration is a set of rules that define actions S3 applies to a group of objects, such as transitioning them to another storage class or deleting expired objects. Protection: S3 Object Lock uses a write-once-read-many model to help meet regulatory requirements, and it works only in buckets that have S3 Versioning enabled.',
           ['s3-lifecycle', 's3-object-lock', 's3-block-public-access'],
-          ['s3-lifecycle|An S3 Lifecycle configuration is a set of rules that define actions that Amazon S3 applies to a group of objects.',
+          ['s3-block-public-access|S3 Block Public Access settings override these policies and permissions so that you can limit public access to these resources.',
+           's3-lifecycle|An S3 Lifecycle configuration is a set of rules that define actions that Amazon S3 applies to a group of objects.',
            's3-lifecycle|Transition actions – These actions define when objects transition to another storage class.',
            's3-object-lock|You can use Object Lock to help meet regulatory requirements that require WORM storage, or to add another layer of protection against object changes or deletion.',
            's3-object-lock|Object Lock works only in buckets that have S3 Versioning enabled.']),

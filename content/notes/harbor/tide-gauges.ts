@@ -87,7 +87,7 @@ const notes: BuildingNotes = {
     {
       id: '2.2-S3',
       concepts: [
-        b('Availability is the percentage of time that a workload is available for use, calculated over a period such as a month or year; "five nines" is shorthand for 99.999% available. Pick metrics that show the business requirement being met, then alarm on them.',
+        b('Availability is the percentage of time that a workload is available for use, calculated over a period such as a month or year; "five nines" is shorthand for 99.999% available.',
           'waf-availability',
           ['Availability is the percentage of time that a workload is available for use.',
            'This percentage is calculated over a period of time, such as a month, year, or trailing three years.',
@@ -97,7 +97,7 @@ const notes: BuildingNotes = {
           'alb-metrics',
           ['Dimensions TargetGroup, LoadBalancer TargetGroup, AvailabilityZone, LoadBalancer HealthyHostCount The number of targets that are considered healthy.',
            'We recommend you monitor for non-zero UnHealthyHostCount in the Minimum statistic, and alarm on non-zero value for more than one data point.']),
-        b('Alarms turn metrics into notifications: configure relevant alarms based on service and application metrics so operational events get a rapid response.',
+        b('Alarms turn metrics into actions: define key metrics and set thresholds for invoking corresponding alarm events.',
           'waf-monitor-components',
           ['Define key metrics, describe how to extract them from logs (if necessary), and set thresholds for invoking corresponding alarm events.']),
       ],

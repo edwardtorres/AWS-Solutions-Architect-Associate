@@ -192,7 +192,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     }
     return out('on-demand', [
       { rule: 'od-no-commitment', note: 'No commitment is wanted and On-Demand needs none.' },
-      ...(s.term === 'long' ? [] : [{ rule: 'od-short-term', note: 'The work is short-term or of unknown length and cannot be interrupted, which rules out Spot.' }]),
+      ...(s.term === 'long' ? [] : [{ rule: 'od-short-term', note: 'The work is short-term, irregular and cannot be interrupted, which rules out Spot.' }]),
     ]);
   }
 
@@ -204,8 +204,8 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     if (s.commit === 'usd-per-hour' || s.changes.length > 0) return null;
     return out('ri', [
       { rule: 'ri-term-config', note: 'A fixed configuration for a year or more is a Reserved Instance commitment.' },
-      { rule: 'capacity-needs-ri', note: 'Reserving capacity in an Availability Zone needs Reserved Instances; a Savings Plan does not provide it.' },
-      { rule: 'ri-zonal-capacity', note: 'Only a zonal Reserved Instance reserves capacity in the Availability Zone; a regional one does not.' },
+      { rule: 'capacity-needs-ri', note: 'Reserving capacity in a specific Availability Zone is done with Reserved Instances or Capacity Reservations.' },
+      { rule: 'ri-zonal-capacity', note: 'A zonal Reserved Instance reserves capacity in its Availability Zone.' },
     ]);
   }
 
@@ -214,7 +214,8 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     const rule = has(s, 'fargate', 'lambda') ? 'compute-sp-serverless' : 'compute-sp-flex';
     return out('compute-sp', [
       { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
-      { rule, note: has(s, 'fargate', 'lambda') ? 'Only Compute Savings Plans also apply to AWS Fargate and AWS Lambda usage.' : 'Only Compute Savings Plans apply across Regions.' },
+      { rule, note: has(s, 'fargate', 'lambda') ? 'Compute Savings Plans also apply to AWS Fargate and AWS Lambda usage.' : 'Compute Savings Plans apply regardless of Region.' },
+      ...(has(s, 'fargate', 'lambda') ? [] : [{ rule: 'ri-term-config', note: 'A Reserved Instance commitment is to a configuration that includes the Region.' }]),
     ]);
   }
 
@@ -222,14 +223,15 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     if (s.commit === 'usd-per-hour' || (s.commit === 'either' && s.exchanges === 'avoid')) {
       return out('compute-sp', [
         { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
-        { rule: 'compute-sp-flex', note: 'Only Compute Savings Plans follow a change of instance family automatically.' },
+        { rule: 'compute-sp-flex', note: 'Compute Savings Plans apply automatically regardless of instance family.' },
+        { rule: 'ec2-sp-family-region', note: 'An EC2 Instance Savings Plan is a commitment to one instance family, so it would not follow the change.' },
         ...(s.exchanges === 'avoid' ? [{ rule: 'sp-no-exchanges', note: 'No exchanges or modifications are needed.' }] : []),
       ]);
     }
     if (s.commit === 'instance-config' && s.exchanges === 'accept') {
       return out('ri', [
         { rule: 'ri-term-config', note: 'The commitment is to an instance configuration.' },
-        { rule: 'ri-convertible', note: 'A Convertible Reserved Instance can be exchanged when the family changes.' },
+        { rule: 'ri-convertible', note: 'Convertible Reserved Instances can be exchanged, so the commitment can follow changed needs.' },
       ]);
     }
     return null;
@@ -237,7 +239,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
 
   // Family and Region stay fixed; only size, operating system or tenancy may change.
   const osOrTenancy = has(s, 'os', 'tenancy');
-  if (s.commit === 'instance-config' && !osOrTenancy && s.goal === 'none') {
+  if (s.commit === 'instance-config' && !osOrTenancy && !has(s, 'size') && s.goal === 'none') {
     return out('ri', [
       { rule: 'ri-term-config', note: 'The commitment is to one instance configuration, including type and Region.' },
       { rule: 'ri-standard-fixed', note: 'Nothing is expected to change, so a Standard Reserved Instance (not exchangeable) is enough.' },
@@ -249,7 +251,8 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     return out('ec2-sp', [
       { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
       { rule: 'ec2-sp-family-region', note: 'The family and Region are fixed, so a plan for that family in that Region is enough.' },
-      { rule: 'ec2-sp-saving', note: 'The larger saving of the narrower plan is the stated goal, and Compute Savings Plans trade it for flexibility.' },
+      { rule: 'ec2-sp-saving', note: 'The stated goal is the largest saving for a commitment that stays in one family and Region: up to 72% off On-Demand for this plan.' },
+      { rule: 'compute-sp-most-flexible', note: 'Compute Savings Plans offer the most flexibility, at savings of up to 66% off On-Demand.' },
       { rule: 'ec2-sp-within-family', note: 'It still applies across sizes, operating systems and tenancies within the family without exchanges.' },
     ]);
   }

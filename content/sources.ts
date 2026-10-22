@@ -822,6 +822,11 @@ const sources: Source[] = [
   aws('cf-pricing-plans', `${D}/AmazonCloudFront/latest/DeveloperGuide/flat-rate-pricing-plan.html`, 'CloudFront flat-rate pricing plans'),
   aws('r53-delete-zone', `${D}/Route53/latest/DeveloperGuide/DeleteHostedZone.html`, 'Deleting a public hosted zone'),
   aws('lab-orgs-account-close', `${D}/organizations/latest/userguide/orgs_manage_accounts_close.html`, 'Closing a member account in your organization'),
+  aws('asg-scaling-overview', `${D}/autoscaling/ec2/userguide/scaling-overview.html`, 'Scaling the size of your EC2 Auto Scaling group'),
+  aws('lab-cli-iam-list-roles', `${D}/cli/latest/reference/iam/list-roles.html`, 'AWS CLI reference: iam list-roles'),
+  aws('cfn-cli-wait-create', `${D}/cli/latest/reference/cloudformation/wait/stack-create-complete.html`, 'AWS CLI reference: cloudformation wait stack-create-complete'),
+  aws('pg-lambda-managed-instances', 'https://aws.amazon.com/about-aws/whats-new/2025/11/aws-lambda-managed-instances/', 'Announcing AWS Lambda Managed Instances, a capability to run functions on your Amazon EC2 instances'),
+  aws('pg-lambda-mi-90min', 'https://aws.amazon.com/blogs/compute/announcing-90-minute-function-timeout-on-aws-lambda-managed-instances/', 'Announcing 90-minute function timeout on AWS Lambda Managed Instances'),
 ];
 
 export default sources;

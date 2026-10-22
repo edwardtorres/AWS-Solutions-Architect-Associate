@@ -156,7 +156,7 @@ export const def: PuzzleDef<BuilderData> = {
   exhibit(s): ExhibitSection[] {
     return [
       { title: 'Requirements', kind: 'text', text: s.checks.map((c, i) => `${i + 1}. ${c.need}`).join('\n') },
-      { title: 'How scoring works', kind: 'text', text: 'You do not have to use every component. The design is scored only against the requirements above, each by an explicit check; full credit needs every check to pass.' },
+      { title: 'How scoring works', kind: 'text', text: 'You do not have to use every component. The design is scored only against the requirements above, each by an explicit check; full credit needs every check to pass. The checks apply the cited AWS sentences to a typical layered design; the choice of subnet tier (public, private app, private data) is study guidance, not an AWS requirement, and routing between components is not modelled.' },
       { title: 'Components you can place', kind: 'table', head: ['Component', 'How many'], rows: s.palette.map((p) => [KIND_LABEL[p.kind], String(p.count)]) },
       { title: 'Zones', kind: 'text', text: `${s.azs} Availability Zones (${Array.from({ length: s.azs }, (_, i) => `Zone ${String.fromCharCode(65 + i)}`).join(', ')}).` },
     ];
@@ -165,6 +165,6 @@ export const def: PuzzleDef<BuilderData> = {
     const ref = reference(s);
     if (!ref) return null;
     const results = score(s, ref);
-    return dedupeTrace({ answer: {}, trace: results.map((r) => ({ rule: r.rules[r.rules.length - 1] as string, note: `${r.need} ${r.detail}` })) });
+    return dedupeTrace({ answer: {}, trace: results.map((r) => ({ rule: r.rules[0] as string, note: `${r.need} ${r.detail}`, ...(r.rules.length > 1 ? { also: r.rules.slice(1) } : {}) })) });
   },
 };

@@ -27,7 +27,7 @@
       "introduced": "2023-11-26",
       "certainty": "confirmed",
       "source": "pg-efs-archive",
-      "quote": "With EFS Archive, you now have a cost-effective way to retain even your coldest data so that it\u2019s always available to power new business insights.",
+      "quote": "With EFS Archive, you now have a cost-effective way to retain even your coldest data so that it’s always available to power new business insights.",
       "patterns": [
         "\\bEFS Archive\\b",
         "\\bEFS\\b[^\\n]{0,160}(?<!Deep )(?<!Glacier )\\bArchive storage class\\b",
@@ -300,7 +300,7 @@
       "introduced": "2022-11-28",
       "certainty": "confirmed",
       "source": "pg-snapstart",
-      "quote": "Lambda SnapStart offers improved startup times by initializing the function\u2019s code ahead of time, taking a snapshot of the initialized execution environment, and caching it.",
+      "quote": "Lambda SnapStart offers improved startup times by initializing the function’s code ahead of time, taking a snapshot of the initialized execution environment, and caching it.",
       "patterns": [
         "\\bSnapStart\\b"
       ],
@@ -353,7 +353,7 @@
       "introduced": "2023-02-10",
       "certainty": "confirmed",
       "source": "pg-asg-refresh-rollback",
-      "quote": "With today\u2019s launch, you can use rollback to undo changes an instance refresh made when it fails.",
+      "quote": "With today’s launch, you can use rollback to undo changes an instance refresh made when it fails.",
       "patterns": [
         "\\binstance refresh\\b[^\\n]{0,150}\\b(roll\\s?back|rolls? back|revert)",
         "\\b(roll\\s?back|revert)[^\\n]{0,150}\\binstance refresh\\b",
@@ -432,7 +432,7 @@
       "introduced": "2025-11-19",
       "certainty": "confirmed",
       "source": "pg-secrets-external",
-      "quote": "At launch, managed external secrets feature is available for 3 listed partners \u2014 Salesforce, BigID and Snowflake.",
+      "quote": "At launch, managed external secrets feature is available for 3 listed partners — Salesforce, BigID and Snowflake.",
       "patterns": [
         "\\bmanaged external secrets?\\b",
         "\\bexternal secrets?\\b[^\\n]{0,80}\\bSecrets Manager\\b",
@@ -492,7 +492,7 @@
       "introduced": "2023-11-27",
       "certainty": "confirmed",
       "source": "pg-backup-ebs-archive",
-      "quote": "You can now use AWS Backup to transition your EBS Snapshots to EBS Snapshots Archive and manage their lifecycle, alongside AWS Backup\u2019s other supported resources.",
+      "quote": "You can now use AWS Backup to transition your EBS Snapshots to EBS Snapshots Archive and manage their lifecycle, alongside AWS Backup’s other supported resources.",
       "patterns": [
         "\\b(EBS|Elastic Block Store)\\b[\\s\\S]{0,900}\\bcold storage\\b",
         "\\bcold storage\\b[\\s\\S]{0,900}\\b(EBS|Elastic Block Store)\\b",
@@ -583,7 +583,7 @@
       "introduced": "2024-11",
       "certainty": "confirmed",
       "source": "pg-ddb-warm-throughput",
-      "quote": "You can now check your tables\u2019 warm throughput value to assess if your table can handle large traffic spikes for peak events.",
+      "quote": "You can now check your tables’ warm throughput value to assess if your table can handle large traffic spikes for peak events.",
       "patterns": [
         "warm throughput",
         "pre-?warm\\w*[\\s\\S]{0,60}(table|dynamodb)",
@@ -619,7 +619,7 @@
       "introduced": "2023-05",
       "certainty": "confirmed",
       "source": "pg-aurora-io-optimized",
-      "quote": "With Aurora I/O-Optimized, there are zero charges for read and write I/O operations\u2014you only pay for your database instances and storage usage, making it easy to predict your database spend up front.",
+      "quote": "With Aurora I/O-Optimized, there are zero charges for read and write I/O operations—you only pay for your database instances and storage usage, making it easy to predict your database spend up front.",
       "patterns": [
         "i/o-optimized",
         "io-optimized",
@@ -865,7 +865,7 @@
       "introduced": "2023-08",
       "certainty": "approximate",
       "source": "pg-aurora-global-switchover",
-      "quote": "Starting today, we are also renaming \u201cManaged Planned Failover\u201d to \u201cGlobal Database Switchover\u201d, which is a fully managed cross-region database failover experience meant for planned events such as regional rotations.",
+      "quote": "Starting today, we are also renaming “Managed Planned Failover” to “Global Database Switchover”, which is a fully managed cross-region database failover experience meant for planned events such as regional rotations.",
       "patterns": [
         "global (database|cluster)[\\s\\S]{0,200}switchover",
         "switchover[\\s\\S]{0,200}global (database|cluster)",
@@ -969,6 +969,77 @@
         "reserved capacity"
       ],
       "predecessor": "Provisioned capacity (with reserved capacity) as the lowest-cost mode for steady, forecastable traffic"
+    },
+    {
+      "id": "backup-hourly-frequency",
+      "name": "AWS Backup hourly backup frequency",
+      "introduced": "unknown (AWS Backup launched 2019-01; hourly undated)",
+      "certainty": "unconfirmed",
+      "patterns": [
+        "\\b(AWS Backup|backup plan|backup rule)[\\s\\S]{0,200}\\bhourly\\b",
+        "\\bhourly\\b[\\s\\S]{0,100}\\b(AWS Backup|backup plan|backup rule)",
+        "\\bevery hour\\b[\\s\\S]{0,100}\\bAWS Backup\\b",
+        "\\bAWS Backup\\b[\\s\\S]{0,100}\\bevery hour\\b"
+      ],
+      "predecessor": "Daily or 12-hour backup schedules",
+      "predecessorPatterns": [
+        "\\bdaily\\b",
+        "\\bonce a day\\b",
+        "\\bevery 12 hours\\b"
+      ],
+      "note": "Moved from preGuide: no AWS page found that dates hourly frequency (doc history lists launches since 2019-01 but not this; the plan-options page and FAQ state it without a date). Undatable, so treated as post-guide."
+    },
+    {
+      "id": "ecs-min-capacity-0",
+      "name": "ECS service auto scaling minimum capacity 0",
+      "introduced": "unknown (ECS service auto scaling itself 2016-09-01)",
+      "certainty": "unconfirmed",
+      "note": "Moved from preGuide: ECS developer guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' with no date, and Application Auto Scaling doc history (ECS support 2016-09-01) does not mention it. Undatable, so treated as post-guide. Predictive scaling for ECS is registered separately as ecs-predictive-scaling.",
+      "patterns": [
+        "\\b(minimum capacity|min(imum)? (task )?count|MinCapacity)\\b[^\\n]{0,60}\\b(of |to |=|:)?\\s*(0|zero)\\b",
+        "\\bscale (the )?(ECS )?(service|tasks?)[^\\n]{0,40}\\bto zero\\b",
+        "\\bscale to zero\\b[^\\n]{0,60}\\b(ECS|task|service)"
+      ],
+      "predecessor": "ECS service auto scaling with a minimum of at least one task",
+      "predecessorPatterns": [
+        "\\bminimum (capacity|task count) of (1|one)\\b"
+      ]
+    },
+    {
+      "id": "lambda-managed-instances",
+      "name": "AWS Lambda Managed Instances",
+      "introduced": "2025-11-30",
+      "certainty": "confirmed",
+      "source": "pg-lambda-managed-instances",
+      "quote": "Lambda Managed Instances fully manages all infrastructure tasks, including instance lifecycle, OS and runtime patching, built-in routing, load balancing, and auto-scaling based on configurable parameters - so you can focus on writing code.",
+      "patterns": [
+        "\\bLambda Managed Instances?\\b",
+        "\\bcapacity provider\\b[\\s\\S]{0,150}\\bLambda\\b",
+        "\\bLambda\\b[\\s\\S]{0,150}\\bcapacity provider\\b"
+      ],
+      "predecessor": "Standard Lambda functions on Lambda-managed infrastructure (15-minute maximum timeout), or containers/EC2 for longer work",
+      "predecessorPatterns": [
+        "\\b15 minutes?\\b",
+        "\\b900 seconds\\b"
+      ]
+    },
+    {
+      "id": "lambda-managed-instances-90min",
+      "name": "Lambda Managed Instances 90-minute timeout for asynchronous and event source mapping invocations",
+      "introduced": "2026-09-09",
+      "certainty": "confirmed",
+      "source": "pg-lambda-mi-90min",
+      "quote": "Today, we are extending the function timeout on Lambda Managed Instances to 90 minutes for asynchronous and ESM invocations.",
+      "patterns": [
+        "\\b90[- ]minutes?\\b[\\s\\S]{0,100}\\b(Lambda|timeout)",
+        "\\b(Lambda|timeout)[\\s\\S]{0,100}\\b90[- ]minutes?\\b",
+        "\\b5,?400 seconds\\b"
+      ],
+      "predecessor": "Lambda 15-minute maximum function timeout",
+      "predecessorPatterns": [
+        "\\b15[- ]minutes?\\b",
+        "\\b900 seconds\\b"
+      ]
     }
   ],
   "preGuide": [
@@ -1010,24 +1081,6 @@
       ]
     },
     {
-      "id": "backup-hourly-frequency",
-      "name": "AWS Backup hourly backup frequency",
-      "introduced": "2019-01",
-      "certainty": "unconfirmed",
-      "patterns": [
-        "\\b(AWS Backup|backup plan|backup rule)[\\s\\S]{0,200}\\bhourly\\b",
-        "\\bhourly\\b[\\s\\S]{0,100}\\b(AWS Backup|backup plan|backup rule)",
-        "\\bevery hour\\b[\\s\\S]{0,100}\\bAWS Backup\\b",
-        "\\bAWS Backup\\b[\\s\\S]{0,100}\\bevery hour\\b"
-      ],
-      "predecessor": "Daily or 12-hour backup schedules",
-      "predecessorPatterns": [
-        "\\bdaily\\b",
-        "\\bonce a day\\b",
-        "\\bevery 12 hours\\b"
-      ]
-    },
-    {
       "id": "glue-sensitive-data-detection",
       "name": "AWS Glue sensitive data detection",
       "introduced": "2022-04",
@@ -1053,13 +1106,6 @@
       "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/07/general-availability-aws-cloud-wan/",
       "quote": "Cloud WAN automatically creates a global network across AWS Regions by using Border Gateway Protocol (BGP) so that you can easily exchange routes around the world.",
       "note": "GA 2022-07 (day from search summary of the preview blog update), before the cutoff. Post-guide additions: Service Insertion 2024-06, Direct Connect attachment 2024-11, Routing Policy 2025-11."
-    },
-    {
-      "id": "ecs-min-capacity-0",
-      "name": "ECS service auto scaling minimum capacity 0",
-      "introduced": "unknown (ECS service auto scaling itself 2016-09-01)",
-      "certainty": "unconfirmed",
-      "note": "The ECS developer guide says 'If you want your task count to scale to zero when there's no work to be done, set a minimum capacity of 0.' but gives no date. Application Auto Scaling doc history lists ECS support on 2016-09-01 and nothing about a minimum of 0. Best judgement: pre-guide and not a registry feature. Predictive scaling for ECS (2024-11-21) is registered separately as ecs-predictive-scaling."
     }
   ]
 }

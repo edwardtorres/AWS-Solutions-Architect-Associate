@@ -61,7 +61,7 @@ const lab: Lab = {
     },
     {
       id: 's7',
-      text: 'Create an IAM user for yourself with console access and add it to the Administrators group. Do not create access keys for it. Note the console sign-in URL or account alias it shows; the URL contains your account ID, so keep it private.',
+      text: 'Create an IAM user for yourself with console access and add it to the Administrators group. Do not create access keys for it. Note the console sign-in URL or account alias it shows and keep it private.',
       sensitive: true,
       src: 'lab-iam-user-create',
       quote: 'We recommend that you put your IAM users in groups and manage permissions through policies that are attached to those groups.',
@@ -104,9 +104,9 @@ const lab: Lab = {
     {
       id: 's12',
       kind: 'check',
-      text: 'Open CloudTrail Event history. Look up the events you caused in this lab, such as creating the group or the user. Event history needs no trail and no setup.',
-      src: 'cloudtrail-event-history',
-      quote: 'The event history provides a viewable, searchable, downloadable, and immutable record of the past 90 days of management events in an AWS Region.',
+      text: 'Open CloudTrail Event history in the US East (N. Virginia) Region, where IAM events are recorded, whatever Region you chose for the lab. Look up the events you caused in this lab, such as creating the group or the user. Event history needs no trail and no setup.',
+      src: 'cloudtrail-concepts',
+      quote: 'events created by Amazon CloudFront, AWS Identity and Access Management, and AWS STS are recorded in the Region in which they were created, the US East (N. Virginia) Region, us-east-1.',
       checkpoint: 'Event history lists management events, including actions you took earlier in this lab.',
     },
     {

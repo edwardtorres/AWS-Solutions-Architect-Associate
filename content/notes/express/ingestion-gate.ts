@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'ingestion-gate',
   overview: [
-    b('An ingestion access point is where producers send data into AWS: a Kinesis data stream, a Firehose stream, a Kafka cluster or a file transfer endpoint. Securing it means answering: who may send (IAM or equivalent), over which network path (public internet or private through a VPC endpoint), and how the data is protected (encryption in transit and at rest). Streaming Canal explains the services; this building is about locking the door.',
+    b('An ingestion access point is where producers send data into AWS, for example a Kinesis data stream. Securing it means answering: who may send (IAM), over which network path (the public internet or private through an interface VPC endpoint), and how the data is protected at rest (server-side encryption with AWS KMS keys). Streaming Canal explains the services; this building is about locking the door.',
       ['kinesis-iam', 'kinesis-vpc', 'kinesis-sse'],
       ['kinesis-iam|AWS Identity and Access Management (IAM) enables you to do the following: Create users and groups under your AWS account',
        'kinesis-vpc|You can use an interface VPC endpoint to prevent traffic between your Amazon VPC and Kinesis Data Streams from leaving the Amazon network.',
@@ -14,7 +14,7 @@ const notes: BuildingNotes = {
     {
       id: '3.5-K5',
       concepts: [
-        b('Who may write: access to Kinesis Data Streams is controlled with IAM, so producers and consumers get permissions through users, groups and roles, including roles that other accounts can assume.',
+        b('Who may write: access to Kinesis Data Streams is controlled with IAM, so permissions are granted through users, groups and roles. Roles define the users or services that can assume them, and users in another AWS account can be allowed to share your resources.',
           'kinesis-iam',
           ['Create users and groups under your AWS account Assign unique security credentials to each user under your AWS account Control each user\'s permissions to perform tasks using AWS resources Allow the users in another AWS account to share your AWS resources Create roles for your AWS account and define the users or services that can assume them']),
         b('Which path: an interface VPC endpoint, powered by AWS PrivateLink, keeps traffic between your VPC and Kinesis Data Streams (and likewise Firehose) on the Amazon network, with no internet gateway, NAT device, VPN connection or Direct Connect connection needed.',
@@ -45,8 +45,9 @@ const notes: BuildingNotes = {
       services: ['Amazon Kinesis', 'Amazon Data Firehose', 'Amazon MSK', 'AWS PrivateLink', 'AWS Transfer Family'],
       design: [
         b('Cue: producers in a private subnet must send to the stream without internet access → interface VPC endpoint (PrivateLink); "restrict which accounts or roles can put records" → IAM policy or role; "encrypt data in the stream" → KMS server-side encryption.',
-          ['kinesis-vpc', 'kinesis-sse'],
-          ['kinesis-vpc|You can use an interface VPC endpoint to prevent traffic between your Amazon VPC and Kinesis Data Streams from leaving the Amazon network.',
+          ['kinesis-iam', 'kinesis-vpc', 'kinesis-sse'],
+          ['kinesis-iam|Create users and groups under your AWS account Assign unique security credentials to each user under your AWS account Control each user\'s permissions to perform tasks using AWS resources Allow the users in another AWS account to share your AWS resources Create roles for your AWS account and define the users or services that can assume them',
+           'kinesis-vpc|You can use an interface VPC endpoint to prevent traffic between your Amazon VPC and Kinesis Data Streams from leaving the Amazon network.',
            'kinesis-sse|Server-side encryption using AWS Key Management Service (AWS KMS) keys makes it easy for you to meet strict data management requirements by encrypting your data at rest within Amazon Kinesis Data Streams.']),
       ],
     },
@@ -69,10 +70,9 @@ const notes: BuildingNotes = {
           ['msk-provisioned', 'msk-what-is'],
           ['msk-provisioned|With MSK Provisioned, you can choose the instance types, storage volumes (Standard brokers), and number of broker nodes that make up your Kafka clusters.',
            'msk-what-is|Run Apache Kafka without having to manage and scale cluster capacity with MSK Serverless.']),
-        b('For file ingestion, DataSync agents and Transfer Family servers are the configured access points; DataSync accesses your AWS storage through IAM roles and supports VPC endpoints, and Transfer Family server endpoints can be hosted inside a VPC (Transfer Dock).',
-          ['datasync-how', 'datasync-what-is', 'transfer-vpc'],
-          ['datasync-how|Data moving into AWS, encrypted using Transport Layer Security (TLS).',
-           'datasync-what-is|DataSync accesses your AWS storage through built-in AWS security mechanisms, such as AWS Identity and Access Management (IAM) roles.',
+        b('For file ingestion, DataSync accesses your AWS storage through IAM roles and supports VPC endpoints, and Transfer Family server endpoints can be hosted inside a VPC (Transfer Dock).',
+          ['datasync-what-is', 'transfer-vpc'],
+          ['datasync-what-is|DataSync accesses your AWS storage through built-in AWS security mechanisms, such as AWS Identity and Access Management (IAM) roles.',
            'datasync-what-is|It also supports virtual private cloud (VPC) endpoints, giving you the option to transfer data without traversing the public internet and further increasing the security of data copied online.',
            'transfer-vpc|You can host your server\'s endpoint inside a virtual private cloud (VPC) to use for transferring data to and from an Amazon S3 bucket or Amazon EFS file system without going over the public internet.']),
       ],
@@ -80,7 +80,8 @@ const notes: BuildingNotes = {
       design: [
         b('Cue: "unpredictable producer volume, no capacity planning" → Kinesis on-demand capacity mode; "deliver in larger, less frequent batches" → raise Firehose buffer size or interval; "keep records longer for reprocessing" → raise Kinesis retention.',
           ['kinesis-concepts', 'firehose'],
-          ['kinesis-concepts|With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.',
+          ['kinesis-concepts|A stream’s retention period is set to a default of 24 hours after creation.',
+           'kinesis-concepts|With the on-demand mode, Kinesis Data Streams automatically manages the shards in order to provide the necessary throughput.',
            'firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.']),
       ],
     },

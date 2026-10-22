@@ -33,7 +33,7 @@ const lab: Lab = {
     {
       id: 's1',
       kind: 'check',
-      text: 'Paid plan only. Creating an organization upgrades a Free plan account to the Paid plan, so run this lab only in a throwaway account, and only if you accept that. It is optional: you can skip it and read the pages instead.',
+      text: 'Paid plan only. Joining AWS Organizations upgrades a Free plan account to the Paid plan, so run this lab only in a throwaway account, and only if you accept that. It is optional: you can skip it and read the pages instead.',
       src: 'free-tier-plans',
       quote: 'Free account plans will automatically upgrade to paid plan if you join AWS Organizations, set up an AWS Control Tower landing zone, join AWS Partner Network, create a Professional Services contract, enroll in an Enterprise Agreement with AWS, purchase an AWS Skill Builder Team subscription, or designate the AWS account as HIPAA or SEC compliant.',
       checkpoint: 'You have decided to run the lab in a throwaway account, or to stop here.',
@@ -63,7 +63,7 @@ const lab: Lab = {
     },
     {
       id: 's4',
-      text: 'Open the Policies page and confirm that the service control policy type is already enabled, as it is for an organization created in the console. If it shows disabled, enable it.',
+      text: 'Open the Policies page and confirm that the service control policy type is enabled. If it shows disabled, enable it first: a policy type must be enabled before you can create and attach policies of that type.',
       src: 'lab-orgs-enable-policy-type',
       quote: 'Before you can create and attach a policy to your organization, you must enable that policy type for use.',
       checkpoint: 'The Policies page shows service control policies as enabled.',
@@ -71,9 +71,9 @@ const lab: Lab = {
     {
       id: 's4b',
       kind: 'check',
-      text: 'A console-created organization also attaches a default SCP to the root. Leave it alone; it stays while the organization exists.',
+      text: 'A console-created organization also attaches a default SCP to the root. Keep it attached.',
       src: 'lab-orgs-create',
-      quote: 'Organizations turns on service control policies (SCPs) and attaches an SCP to the root with the following controls: Prevents member accounts from leaving the organization.',
+      quote: 'We recommend keeping this SCP attached at the root to protect all member accounts.',
       checkpoint: 'The root lists a default SCP and FullAWSAccess among its policies.',
     },
     {
@@ -94,9 +94,9 @@ const lab: Lab = {
     {
       id: 's7',
       kind: 'check',
-      text: 'Leave FullAWSAccess attached. An SCP deny only works on top of an allow, and a deny anywhere on the path from the root down to the account wins.',
+      text: 'Leave FullAWSAccess attached so every other action stays allowed and only S3 bucket creation is denied. A deny anywhere on the path from the root down to the account wins.',
       src: 'orgs-scp-eval',
-      quote: 'For a permission to be denied for a specific account, any SCP from the root through each OU in the direct path to the account (including the target account itself) can deny that permission.',
+      quote: 'This is why when you enable SCPs, AWS Organizations attaches an AWS managed SCP policy named FullAWSAccess which allows all services and actions.',
       checkpoint: 'The OU lists both FullAWSAccess and your deny SCP, or inherits FullAWSAccess from the root.',
     },
     {
@@ -114,7 +114,7 @@ const lab: Lab = {
       alt: 'Skip it: read the SCP evaluation page and trace the deny by hand. Nothing else in the lab needs a member account.',
       sensitive: true,
       src: 'lab-orgs-account-create',
-      quote: 'When you create a member account in your organization, Organizations automatically creates the IAM role OrganizationAccountAccessRole in the member account that enables users and roles in the management account to exercise full administrative control over the member account.',
+      quote: 'Member accounts in an organization can only be created in the root of an organization.',
       checkpoint: 'The new account is listed under the root.',
     },
     {
@@ -170,18 +170,18 @@ const lab: Lab = {
       id: 'c4',
       kind: 'cleanup',
       optional: true,
-      text: 'Your choice: keep the organization, or delete it once it has no member accounts. Deleting removes the management account from the organization and does not close the account; you cannot recover a deleted organization, and no step here undoes the Paid plan upgrade (see s1b). The default root SCP stays while the organization exists.',
+      text: 'Your choice: keep the organization, or delete it once it has no member accounts. Deleting removes the management account from the organization and does not close the account; no step here undoes the Paid plan upgrade (see s1b).',
       src: 'lab-orgs-delete',
       quote: 'Deleting an organization does not close the management account, instead it removes the management account from the organization and deletes the organization itself.',
     },
     {
       id: 'v1',
       kind: 'verify',
-      text: 'In CloudShell, confirm the SCP is gone and list the accounts left in the organization. If you deleted the organization, the commands instead report that your account is not in an organization. Also check in the console that the OU lab3-test is gone.',
+      text: 'In CloudShell, confirm the SCP is gone and list the accounts left in the organization. If you deleted the organization, skip the commands. Also check in the console that the OU lab3-test is gone.',
       code: 'aws organizations list-policies --filter SERVICE_CONTROL_POLICY --query "Policies[?Name==\'lab3-deny-s3-create-bucket\'].Name"\naws organizations list-accounts --query "Accounts[].Status"',
-      src: 'lab-orgs-policy-delete',
-      quote: 'Before you can delete a policy, you must first detach it from all attached entities.',
-      checkpoint: 'The policy list is empty and the account list shows only the accounts you meant to keep, or the commands say the account is not in an organization. A closed member account can still be listed as suspended for a long time; that is expected.',
+      src: 'lab-orgs-account-close',
+      quote: 'Any member account that you close will display a CLOSED label next to its account name in the AWS Organizations console for up to 90 days after the original closure date.',
+      checkpoint: 'The policy list is empty and the account list shows only the accounts you meant to keep. A closed member account can still be listed, with the CLOSED label, for up to 90 days; that is expected.',
     },
   ],
   traps: [

@@ -40,7 +40,7 @@ const notes: BuildingNotes = {
     {
       id: '3.4-S1',
       concepts: [
-        b('Multi-tier topology: web tier in public subnets, application and data tiers in private subnets, one set per Availability Zone, with a load balancer in front. (Blueprint Hall covers the tiers; Gatehouse covers the controls between them.)',
+        b('Subnet topology: a public subnet has a direct route to an internet gateway, and the common layout gives each Availability Zone a public subnet and a private subnet. (Blueprint Hall covers the tiers; Gatehouse covers the controls between them.)',
           'vpc-subnets',
           ['Public subnet – The subnet has a direct route to an internet gateway.',
            'Each Availability Zone has a public subnet and a private subnet.']),
@@ -85,9 +85,10 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon VPC', 'AWS Transit Gateway'],
       design: [
-        b('Cue: "dozens of VPCs will be added" → Transit Gateway rather than a mesh of peering connections; "the VPC is running out of addresses" → add a CIDR block.',
-          ['tgw-how', 'vpc-cidr-blocks'],
+        b('Cue: "dozens of VPCs will be added" → Transit Gateway rather than a mesh of peering connections; "the VPC needs more address space" → add a CIDR block.',
+          ['tgw-how', 'connectivity-tgw', 'vpc-cidr-blocks'],
           ['tgw-how|A transit gateway scales elastically based on the volume of network traffic.',
+           'connectivity-tgw|With a large number of VPCs, Transit Gateway provides simpler VPC-to-VPC communication management over VPC Peering',
            'vpc-cidr-blocks|After you\'ve created your VPC, you can associate additional IPv4 CIDR blocks with the VPC.']),
       ],
     },
@@ -127,7 +128,7 @@ const notes: BuildingNotes = {
         ['learn-networking', 'vpc-subnets'],
         ['learn-networking|In AWS, each subnet is bound to a single Availability Zone, so achieving zonal redundancy requires creating one subnet per Availability Zone.',
          'learn-networking|In Azure, a subnet is a regional construct that spans all availability zones in the region.',
-         'vpc-subnets|Each Availability Zone has a public subnet and a private subnet.']),
+         'vpc-subnets|Each subnet must reside entirely within one Availability Zone and cannot span zones.']),
     },
     {
       concept: 'Virtual network peering and Azure Virtual WAN',
@@ -140,6 +141,7 @@ const notes: BuildingNotes = {
       breaks: b('Learn also lists Azure Private Link as similar to AWS PrivateLink, providing private connectivity from a virtual network to an Azure platform service, a customer-owned service or a partner service. On the AWS side, PrivateLink lets you control the specific services and resources reachable from your VPC, whereas VPC peering needs non-overlapping CIDR blocks and is not transitive.',
         ['privatelink-what-is', 'peering-basics', 'learn-networking'],
         ['privatelink-what-is|Therefore, you control the specific API endpoints, sites, services, and resources that are reachable from your VPC.',
+         'peering-basics|You cannot create a VPC peering connection between VPCs that have matching or overlapping IPv4 or IPv6 CIDR blocks.',
          'peering-basics|VPC peering does not support transitive peering relationships.',
          'learn-networking|Private Link is similar to AWS PrivateLink.',
          'learn-networking|Azure Private Link provides private connectivity from a virtual network to an Azure platform as a service (PaaS) solution, a customer-owned service, or a Microsoft partner service.']),

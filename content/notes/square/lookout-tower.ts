@@ -76,9 +76,10 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Policy and Change Analysis',
       aws: 'AWS Config',
-      mapping: b('The Learn comparison pairs AWS Config with Azure Policy and Change Analysis. All of them are about knowing how resources are configured and whether that matches your intent.',
+      mapping: b('The Learn comparison pairs AWS Config with Azure Policy and Change Analysis.',
         ['learn-hub', 'config-what-is'],
-        ['learn-hub|Azure Policy helps you implement governance for resource consistency, regulatory compliance, security, cost, and management.',
+        ['learn-hub|AWS Config Azure PolicyChange Analysis',
+         'learn-hub|Azure Policy helps you implement governance for resource consistency, regulatory compliance, security, cost, and management.',
          'config-what-is|AWS Config provides a detailed view of the configuration of AWS resources in your AWS account.']),
       breaks: b('One AWS service is listed against two Azure features here. Learn says: "You typically use AWS Config to monitor for configuration changes or to identify and remediate noncompliant resources." AWS Config both records how configurations change over time and evaluates resources against rules.',
         ['learn-hub', 'config-what-is', 'config-rules'],
