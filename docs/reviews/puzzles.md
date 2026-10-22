@@ -64,3 +64,7 @@ All 77 rule quotes in the first pass, and every changed quote since, were machin
 - 005 (image-resizing service: Fargate / Spot / Session Manager / multi-AZ Auto Scaling group): blind reviewer matched all four keys (overhead, cost, secure, available) and flagged only "most secure" as arguable (Fargate's isolation). Dropped under the "drop, don't iterate" rule. The source pass was not run on a dropped set.
 - 007: no candidate found whose sentences separate all four qualifiers without ties (for example, S3 docs list Glacier Instant Retrieval at a lower availability than S3 Standard while a product page lists both at the same figure).
 - Result: 11 sets remain; minimum lowered from 13 to 11; decision recorded in CLAUDE.md.
+
+## Step 8: Qualifier Sprint set 013 removed
+
+Owner decision, no reason recorded. Set 013 ("A brochure site": S3 static hosting against CloudFront designs) is dropped; its id is retired and never reused. Ten sets remain: 001, 002, 004, 006, 008 to 012 and 014. `MIN_SCENARIOS['qualifier-sprint']` is 10 (was 11). The scenario count is 118 (was 119). Its two sources, `s3-website` and `s3-website-endpoints`, were used nowhere else and were removed from `content/sources.ts`. No other scenario, key or evaluator rule changed; 0 of the 118 computed answers changed. Log: `docs/reviews/step-8-fact-check.md`, section 4.

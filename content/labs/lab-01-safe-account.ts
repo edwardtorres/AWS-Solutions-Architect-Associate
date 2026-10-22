@@ -133,7 +133,7 @@ const lab: Lab = {
       code: 'aws iam get-account-summary --query "SummaryMap.{RootMfa:AccountMFAEnabled,RootAccessKeys:AccountAccessKeysPresent}"\naws iam list-mfa-devices --user-name <your-user-name>',
       src: 'lab-iam-getaccountsummary',
       quote: 'MFADevicesInUse | AccountMFAEnabled | AccountAccessKeysPresent | AccountPasswordPresent',
-      checkpoint: 'The output matches your setup: root MFA on, no root access keys, and one MFA device for your IAM user. Nothing billable was created.',
+      checkpoint: 'The output has the AccountMFAEnabled and AccountAccessKeysPresent values, and compare them with your setup: root MFA on, no root access keys. The MFA list shows one device for your IAM user. Nothing billable was created.',
     },
   ],
   traps: [],

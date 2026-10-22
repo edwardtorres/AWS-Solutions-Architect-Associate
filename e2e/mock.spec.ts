@@ -5,6 +5,18 @@ import { allBuildingIds, axeClean, noSidewaysScroll, questions } from './helpers
  * Runs against the Vite dev server (see playwright.config.ts), because the 10-question short mock (?mock=short) exists only in
  * development builds. `npm run check:bundle` proves it is absent from production.
  */
+// A freshly started dev server pre-bundles dependencies on the first page load of a run and reloads that page once. Load the
+// mock page once before the tests so no test is interrupted by that reload.
+test.beforeAll(async ({ browser }, testInfo) => {
+  const context = await browser.newContext({ baseURL: testInfo.project.use.baseURL });
+  const page = await context.newPage();
+  await page.goto('/?mock=short#/mock');
+  await page.waitForLoadState('networkidle');
+  await page.reload();
+  await page.waitForLoadState('networkidle');
+  await context.close();
+});
+
 const norm = (s: string) => s.replace(/\s+/g, ' ').trim();
 const live = () => questions().filter((q) => !q.tags.includes('mock-reserve') && !q.tags.includes('post-guide'));
 
@@ -13,9 +25,20 @@ const seed = (game: Record<string, unknown> = {}) =>
 
 async function load(page: Page, save: string, url: string): Promise<void> {
   await page.goto('/');
-  await page.evaluate((s) => {
-    localStorage.setItem('saa-region-builder:save', s);
-  }, save);
+  // On a freshly started dev server the first load can reload once while Vite pre-bundles dependencies; retry the write then.
+  await expect
+    .poll(async () => {
+      try {
+        await page.evaluate((s) => {
+          localStorage.setItem('saa-region-builder:save', s);
+        }, save);
+        return true;
+      } catch {
+        await page.waitForLoadState('load');
+        return false;
+      }
+    })
+    .toBe(true);
   await page.goto('/#/map');
   await page.goto(url);
   await page.reload();
@@ -38,7 +61,11 @@ async function choose(page: Page, right: boolean): Promise<string> {
   const rows = page.locator('.option-row');
   const texts = (await rows.allInnerTexts()).map((t) => norm(t).replace(/^[A-H]\.\s*/, ''));
   const want = right ? q.options.filter((o) => o.correct) : q.options.filter((o) => !o.correct).slice(0, q.select);
-  for (const o of want) await rows.nth(texts.indexOf(norm(o.text))).tap();
+  for (const o of want) {
+    const i = texts.indexOf(norm(o.text));
+    if (i < 0) throw new Error(`option not on screen: ${o.text.slice(0, 50)}`);
+    await rows.nth(i).tap();
+  }
   return q.id;
 }
 
@@ -91,6 +118,7 @@ test('a short mock: answers saved as you go, flags, a review screen, a reload mi
   await expect(page.getByTestId('mock-position')).toContainText('Question 2 of 10');
   await choose(page, true);
   await page.getByTestId('mock-next').tap();
+  await expect(page.getByTestId('mock-position')).toContainText('Question 3 of 10');
   await choose(page, false);
 
   // The review screen lists every question with jump links.

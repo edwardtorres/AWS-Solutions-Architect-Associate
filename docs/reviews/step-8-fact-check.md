@@ -1,6 +1,6 @@
 # Step 8 fact check (final report)
 
-Status: **complete, awaiting owner approval.** The claim audit, the adjudication gate, note coverage, the owner decisions, the sweeps, the freshness baseline and the final checks are done. Two things are not fully done and are called out in section 9: one wording edit was not re-checked by a fresh checker, and one Lab 1 quote is weak.
+Status: **complete, awaiting owner approval.** The claim audit, the adjudication gate, note coverage, the owner decisions, the sweeps, the freshness baseline and the final checks are done. One thing is not fully done (section 9): the last wording edit on `q:blueprint-hall-010` was not re-checked by a fresh checker. The audit document with the 42-row adjudication table is `docs/step-8-audit.md`.
 
 ## 1. Headline
 
@@ -17,7 +17,7 @@ Status: **complete, awaiting owner approval.** The claim audit, the adjudication
 
 ## 2. Adjudication of the 42 overturned claims
 
-Each claim was judged by a fresh adjudicator against the current text and its page, without the spot-check verdicts or the ledger. The adjudicators' reasoning and AWS sentences are in the adjudication files (not committed). Summary by category:
+Each claim was judged by a fresh adjudicator against the current text and its page, without the spot-check verdicts or the ledger. The 42 rows, each with the reasoning and the AWS sentence relied on, are in `docs/step-8-audit.md`, section 2. Summary by category:
 
 - **(a) answer key wrong: 0.** No keyed option is wrong per the documentation.
 - **(b) claim false or outdated: 1.** `q:refinery-008`: the Athena distractor said Spark code would be rewritten; current Athena documentation says Athena runs submitted Spark code. The distractor reason was corrected. The key (EMR) stands, because only EMR's page names S3 and DynamoDB data movement.
@@ -52,7 +52,7 @@ Each claim was judged by a fresh adjudicator against the current text and its pa
   - Lab 13 step: "The default service role stays in IAM; you may keep it." → "If AWS Backup created a default service role for you, you may keep it."
   - Lab 3 s8 and the scp-boundary-identity step: removed "grants nothing"; the text now matches the page-supported quote ("SCPs don't affect users or roles in the management account").
   - Lab 3 v1 "SUSPENDED" status: already absent (removed in Step 8 Part A); verified not present.
-  - **Lab 1 v1 quote: kept.** It is a verbatim key list from the GetAccountSummary reference. It supports the key names only. Not softened; the owner may decide.
+  - **Lab 1 v1 verify step: resolved in the final pass.** The quote is a verbatim key list from the GetAccountSummary reference and supports the key names only, so it stays. The checkpoint no longer asserts what the values mean; it names `AccountMFAEnabled` and `AccountAccessKeysPresent` and asks the learner to compare the values with their setup.
 - **database-registry 3.3-K8.design[0]:** "massive scale" → "large amounts of data" (the page's wording).
 - **counting-house azure[0].breaks:** the absence claim ("have no Learn pairing") removed.
 - **cold-cellar storage-class wording:** added `c-s3-ia-minimum-duration` to `content/contradictions.json` (three readings: the storage decision guide, the storage classes page, the lifecycle page). The note's disagreements block carries the reading, and the disputed sentence was removed from the concepts. No question states the disputed transition minimum; the early-deletion charge, which all three pages state, is undisputed and remains in questions.
@@ -110,7 +110,7 @@ No lab uses any of these services, so no lab badge changes. The snapshot was not
 ## 9. Not fully done, and unsure
 
 - **`q:blueprint-hall-010`:** the last edit (the Auto Scaling sentence and source) was checked by quote and by reading the page, but not by a fresh checker.
-- **Lab 1 v1 quote** is a verbatim key list. It supports the key names only (see section 4).
+- **Lab 1 v1 checkpoint** was reworded to what the key-list quote supports (section 4). The quote itself is unchanged.
 - **Owner review requested:** `service-selection-bureau-010` stem ("can lower"), `rebuild-yard-012` stem, `storage-market-009` stem, `ingestion-gate-006` key wording.
 - **Spot-check batch files were overwritten.** A re-run of the sampler (which has since been made to refuse to overwrite) rewrote the `.cache/audit/spot` batch files, because the frame had grown with coverage verdicts. The 172 spot ids and their verdicts are preserved in the spot verdict files, and every claim's text is in the untouched `.cache/audit/batches` files. The 42 overturned claims' text is in the adjudication inputs. The sample itself is not redrawn.
 - **Adjudicators and checkers are fresh agents of the same model family,** so independence is partial.
@@ -122,18 +122,18 @@ No lab uses any of these services, so no lab badge changes. The snapshot was not
 
 | Check | Result |
 | --- | --- |
-| `typecheck` | pass |
-| `lint` | pass |
+| `npm run typecheck` | pass. An earlier report said pass; that was wrong. The final run found five implicit-any errors in `scripts/audit/spot-sample.ts` (covered by `tsconfig.node.json`). Types were added; logic unchanged. |
+| `npm run lint` | pass |
 | `npm test` | pass: 33 files, 496 tests |
-| `check:content` | pass: 1013 questions, 69 buildings |
-| `check:content -- --live` | pass |
-| `check:links --fresh` | pass: 807 sources, 807 pages, 7,989 quotes verified |
-| `check:cfn` | pass: 5 templates |
-| `build` + `check:bundle` | pass: 85 files, dev hooks absent, no external origins, strict CSP |
-| `check:hygiene` | pass: 705 files, 193 commits |
-| `check:freshness` | pass: 807 pages unchanged |
-| `check:freeplan` | changes reported (section 8) |
-| `test:layout` | see the final run below |
-| `e2e` | see the final run below |
+| `npm run check:content` | pass: 1,013 questions, 69 buildings |
+| `npm run check:content -- --live` | pass |
+| `npm run check:links -- --fresh` | pass: 807 sources, 807 pages, 7,989 quotes verified; 27 redirect notes |
+| `npm run check:cfn` | pass: 5 templates |
+| `npm run build` + `check:bundle` | pass: 85 files, dev hooks absent, no external origins, strict CSP |
+| `npm run check:hygiene` | pass: 706 files, 195 commits |
+| `npm run check:freshness` | pass: 807 pages unchanged |
+| `npm run check:freeplan` | changes reported (section 8) |
+| `npm run test:layout` | pass: 74 checks at 390 px (touch) and 1,280 px (keyboard) |
+| `npm run e2e` | pass: 60 of 60 (desktop, phone, mock-desktop, mock-phone) |
 
-The layout and e2e results are recorded in the audit document (`docs/step-8-audit.md`), which is written after those runs finish.
+The final-pass fixes behind these results (the spot-sampler types, the mock e2e helper and the Lab 1 checkpoint) are listed in `docs/step-8-audit.md`, section 10.

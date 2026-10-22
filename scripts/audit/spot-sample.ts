@@ -10,17 +10,17 @@ if (fs.existsSync(path.join(root, '.cache/audit/spot/sample.json'))) {
   process.exit(1);
 }
 const SEED = 20261022;
-function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function rng(seed: number) { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const rand = rng(SEED);
 const ledgerDir = path.join(root, 'docs/reviews/step-8/ledger');
 const batchDir = path.join(root, '.cache/audit/batches');
-const claimById = new Map();
+const claimById = new Map<string, Record<string, unknown>>();
 for (const f of fs.readdirSync(batchDir)) {
   const b = JSON.parse(fs.readFileSync(path.join(batchDir, f), 'utf8'));
   for (const c of (b.claims || b)) if (!claimById.has(c.id)) claimById.set(c.id, c);
 }
-const frame = { key: [], other: [] };
-const frameCount = {};
+const frame: { key: { group: string; id: string }[]; other: { group: string; id: string }[] } = { key: [], other: [] };
+const frameCount: Record<string, number> = {};
 for (const f of fs.readdirSync(ledgerDir).filter((x) => x.endsWith('.jsonl'))) {
   const g = f.replace('.jsonl', '');
   let total = 0;
@@ -33,7 +33,7 @@ for (const f of fs.readdirSync(ledgerDir).filter((x) => x.endsWith('.jsonl'))) {
   }
   frameCount[g] = total;
 }
-const pick = (pool, n) => { const p = pool.slice(); const out = []; while (out.length < n && p.length) out.push(p.splice(Math.floor(rand() * p.length), 1)[0]); return out; };
+const pick = <T,>(pool: T[], n: number): T[] => { const p = pool.slice(); const out = []; while (out.length < n && p.length) out.push(p.splice(Math.floor(rand() * p.length), 1)[0] as T); return out; };
 const chosen = [...pick(frame.key, 86).map((x) => ({ ...x, kind: 'key' })), ...pick(frame.other, 86).map((x) => ({ ...x, kind: 'other' }))];
 const batches = [];
 for (let i = 0; i < chosen.length; i += 25) batches.push(chosen.slice(i, i + 25));
