@@ -9,7 +9,7 @@ Status: **stopped at the spot-check gate.** The spot-check overturned well over 
 | Claim audit (ledger) | Recorded: 3,547 verdicts across seven groups (section 1) |
 | Fix phase (notes, don't-confuse, glossary, labs 1–14, puzzles, questions, post-guide, sources) | Applied and committed; see section 2 |
 | Blind re-review of changed questions | 20 reviewed: 19 agree, 1 wording change (refinery-003) not re-reviewed after reword |
-| Spot-check of confirmed verdicts (5% gate) | **Stopped.** 15 of 72 overturned (21%) across batches 05–07; batches 01–04 still running. Limit is 3%. |
+| Spot-check of confirmed verdicts (5% gate) | **Stopped.** 42 of 172 overturned (24%): key-dependent 23 of 86, other 19 of 86. Limit is 3%. |
 | `typecheck` | pass |
 | `lint` | pass |
 | `npm test` | pass: 33 files, 497 tests |
@@ -67,16 +67,18 @@ Twenty worklist questions were answered by a fresh reviewer who never saw keys (
 Plan: a fresh agent re-judges a seeded 5% sample of confirmed verdicts, at least half key-dependent. If more than 3% are overturned, stop and tell the owner.
 
 - **Sample:** 172 claims (86 key-dependent, 86 other), drawn with seed 20261022 (`scripts/audit/spot-sample.cjs`). Frame: 819 of 1,192 key-dependent confirmed verdicts had claim text in the batch files, and 1,426 of the other confirmed verdicts did.
-- **Reported so far (batches 05, 06, 07; 72 claims):**
-  - batch 05: 3 of 25 overturned
-  - batch 06: 6 of 25 overturned
-  - batch 07: 6 of 22 overturned
-  - total: 15 of 72 (21%)
-- **Batches 01–04:** still running at the time of writing.
+- **Final result (all seven batches, 172 claims):** 42 overturned, 24.4%. Key-dependent: 23 of 86 (26.7%). Other: 19 of 86 (22.1%).
+  - batch 01: 10 of 25 overturned (minor: uncited distractor reasons, and one "by tag" targeting claim)
+  - batch 02: 3 of 25
+  - batch 03: 3 of 25
+  - batch 04: 11 of 25 (includes two q: items on blind-reviewed questions: throttle-lb-gate-012, refinery-008, refinery-013, legacy-wharf-014, blueprint-hall-010, service-selection-bureau-008)
+  - batch 05: 3 of 25
+  - batch 06: 6 of 25
+  - batch 07: 6 of 22
 
 The stop is in effect. The overturns are not yet adjudicated. Some may be over-strict checkers, and some may already be fixed in section 2 (the sample used the pre-fix text). Owner options: (1) have a second independent checker adjudicate every overturned claim against the current text, then decide which side is right; (2) re-audit all note claims at the stricter standard; (3) accept the overturns, fix the listed items, and move on.
 
-Overturned claims reported so far (not re-checked against the current text):
+Overturned claims (not re-checked against the current text; see the batch files and verdicts under scratchpad/spot for the full reasons):
 - batch 05: `note:gatehouse:examples[2].explanation[0]`, `confuse:direct-connect-vs-vpn:choose[1]` ("encrypted" not on the page), `note:service-selection-bureau:azure[0].breaks` (version condition missing).
 - batch 06: `note:instance-foundry:azure[0].mapping`, `note:turbine-hall:3.2-K2.concepts[0]`, `note:gatehouse:examples[2].explanation[3]` (203.0.113.0/24 is not on an allowed source), `pg-pre:rds-multi-az-db-cluster` (2022-03 date uncited), `note:counting-house:4.2-K1.concepts[0]`, `note:capacity-meter:4.3-K6.design[0]`.
 - batch 07: `note:ledger-office:azure[2].breaks`, `glossary:homogeneous-migration`, `note:streaming-canal:3.5-K2.concepts[0]`, `note:tide-gauges:2.2-K10.concepts[1]`, `note:instance-foundry:4.2-K7.concepts[1]`, `note:block-warehouse:cues[4]`.
