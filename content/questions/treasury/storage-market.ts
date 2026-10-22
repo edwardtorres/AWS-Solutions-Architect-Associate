@@ -175,13 +175,14 @@ const questions: Question[] = [
       ['Turn on EFS lifecycle management to move unused files to the Infrequent Access (IA) storage class', 'Files that are not accessed move to the lower-cost IA class, which is cost-optimized for data that is accessed only a few times each quarter.'],
     ],
     wrong: [
-      ['Use Provisioned throughput set to the peak the team expects', 'You are charged for the throughput enabled for the file system, even when bursts are rare.'],
-      ['Keep every file in the Standard storage class so that all reads are served from one class', 'Rarely read files would stay in the most expensive class instead of moving to a cheaper one.'],
-      ['Move the files to Amazon S3 and have the applications call the S3 API', 'The applications must not change, and S3 is not mounted over NFS.'],
+      ['Use Provisioned throughput set to the peak the team expects', 'You are charged for the throughput enabled for the file system, even when the peak is rarely reached.'],
+      ['Keep every file in the Standard storage class so that all reads are served from one class', 'Rarely read files would stay in the Standard class instead of moving to the IA class, which is cost-optimized for data accessed only a few times each quarter.'],
+      ['Move the files to Amazon S3 and have the applications call the S3 API', 'The applications must not change, and calling the Amazon S3 API would change them.'],
     ],
     slots: [2, 4],
     evidence: [
       'efs-performance|Bursting throughput – Use Bursting throughput when you want throughput that scales with the amount of storage in your file system.',
+      'efs-performance|Bursting throughput is recommended for workloads that require throughput that scales with the amount of storage in your file system.',
       'efs-performance|For file systems using Provisioned throughput, you are charged for the amount of throughput enabled for the file system.',
       'efs-lifecycle|Transition into IA – Instructs lifecycle management when to move files in to the Infrequent Access (IA) storage class, which is cost-optimized for data that is accessed only a few times each quarter.',
     ],

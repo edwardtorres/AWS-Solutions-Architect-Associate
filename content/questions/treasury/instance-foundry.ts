@@ -165,12 +165,14 @@ const questions: Question[] = [
     wrong: [
       ['Change the instance type of the running x86 instances to a Graviton type', 'The new type must have the same processor architecture as the current type, so an x86 instance cannot be changed to an Arm type.'],
       ['Keep the existing x86 AMI and select a Graviton-based instance type at launch', 'The x86 AMI is specific to its processor architecture and cannot be used with an Arm-based type.'],
-      ['Move the application to Spot Instances of the same x86 instance family', 'Spot Instances do not use Graviton processors and can be interrupted, so they do not meet the goal.'],
+      ['Move the application to Spot Instances of the same x86 instance family', 'The x86 instance family runs on Intel or AMD processors rather than Graviton, so Spot Instances of it do not meet the goal.'],
     ],
     slots: [1, 4],
     evidence: [
       'graviton|AWS Graviton is a family of processors designed to deliver the best price performance for your cloud workloads running in Amazon Elastic Compute Cloud (Amazon EC2).',
       'ec2-resize-compat|Architecture AMIs are specific to the architecture of the processor, so you must select an instance type with the same processor architecture as the current instance type.',
+      'ec2-type-names|i – Intel processors',
+      'ec2-type-names|a – AMD processors',
     ],
   }),
 ];
