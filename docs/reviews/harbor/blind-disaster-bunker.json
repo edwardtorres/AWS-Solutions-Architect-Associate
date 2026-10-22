@@ -1,19 +1,10 @@
 [
-{"id":"disaster-bunker-001","picks":["C"],"ambiguous":false},
-{"id":"disaster-bunker-002","picks":["B"],"ambiguous":false},
-{"id":"disaster-bunker-003","picks":["B"],"ambiguous":false},
-{"id":"disaster-bunker-004","picks":["C","D"],"ambiguous":false},
-{"id":"disaster-bunker-005","picks":["B"],"ambiguous":false},
-{"id":"disaster-bunker-006","picks":["C"],"ambiguous":false},
-{"id":"disaster-bunker-007","picks":["C"],"ambiguous":false},
-{"id":"disaster-bunker-008","picks":["C","D"],"ambiguous":false},
-{"id":"disaster-bunker-009","picks":["B"],"ambiguous":false},
-{"id":"disaster-bunker-010","picks":["C"],"ambiguous":false,"note":"Assumes Multi-AZ already covers data-center loss, so cheapest strategy is backup and restore."},
-{"id":"disaster-bunker-011","picks":["C"],"ambiguous":false},
-{"id":"disaster-bunker-012","picks":["A"],"ambiguous":false},
-{"id":"disaster-bunker-013","picks":["A","C"],"ambiguous":false,"note":"A and C are the clear pair; C alone does not protect against stolen credentials in DR account, A does."},
-{"id":"disaster-bunker-014","picks":["D"],"ambiguous":false},
-{"id":"disaster-bunker-015","picks":["B"],"ambiguous":false},
-{"id":"disaster-bunker-016","picks":["A"],"ambiguous":false,"note":"Relies on delete-marker replication being off by default."},
-{"id":"disaster-bunker-017","picks":["B"],"ambiguous":false}
+ {
+  "id": "disaster-bunker-002",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Backup and restore is the low-cost, low-complexity option, and the achievable recovery point follows backup frequency (DR options whitepaper), so hourly copied backups meet RPO 1 hour. C (warm standby) and D (active/active) cost more; A stays in one Region."
+ }
 ]

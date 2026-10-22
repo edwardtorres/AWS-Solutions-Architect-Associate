@@ -1,11 +1,11 @@
 [
-{"id":"instance-foundry-001","picks":["C"],"ambiguous":false},
-{"id":"instance-foundry-002","picks":["B"],"ambiguous":false},
-{"id":"instance-foundry-003","picks":["A"],"ambiguous":false},
-{"id":"instance-foundry-004","picks":["C"],"ambiguous":false},
-{"id":"instance-foundry-005","picks":["A"],"ambiguous":false},
-{"id":"instance-foundry-006","picks":["C"],"ambiguous":false,"note":"Instance store-backed instances cannot be stopped, so type cannot be changed."},
-{"id":"instance-foundry-007","picks":["A","C"],"ambiguous":false},
-{"id":"instance-foundry-008","picks":["C"],"ambiguous":false},
-{"id":"instance-foundry-009","picks":["B","D"],"ambiguous":false,"note":"E is wrong because x86 AMI cannot run on Graviton."}
+ {
+  "id": "instance-foundry-009",
+  "picks": [
+   "B",
+   "D"
+  ],
+  "ambiguous": false,
+  "note": "An AMI is specific to its processor architecture (AMIs), so an Arm AMI is required and the app runs on a new Graviton instance. E (x86 AMI on Graviton) is impossible; C (changing a running x86 instance to Graviton) is rejected by inference from the AMI architecture rule, not a quoted sentence."
+ }
 ]

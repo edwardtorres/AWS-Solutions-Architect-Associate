@@ -1,19 +1,18 @@
 [
-{"id":"database-registry-001","picks":["B"],"ambiguous":false},
-{"id":"database-registry-002","picks":["A"],"ambiguous":false},
-{"id":"database-registry-003","picks":["B","C"],"ambiguous":false},
-{"id":"database-registry-004","picks":["D"],"ambiguous":false},
-{"id":"database-registry-005","picks":["C"],"ambiguous":false},
-{"id":"database-registry-006","picks":["B"],"ambiguous":false},
-{"id":"database-registry-007","picks":["D"],"ambiguous":false},
-{"id":"database-registry-008","picks":["C"],"ambiguous":false},
-{"id":"database-registry-009","picks":["A"],"ambiguous":false},
-{"id":"database-registry-010","picks":["B"],"ambiguous":false},
-{"id":"database-registry-011","picks":["C"],"ambiguous":false},
-{"id":"database-registry-012","picks":["B"],"ambiguous":false},
-{"id":"database-registry-013","picks":["C","D"],"ambiguous":false},
-{"id":"database-registry-014","picks":["C"],"ambiguous":false},
-{"id":"database-registry-015","picks":["B"],"ambiguous":false},
-{"id":"database-registry-016","picks":["B"],"ambiguous":false},
-{"id":"database-registry-017","picks":["A"],"ambiguous":false}
+ {
+  "id": "database-registry-009",
+  "picks": [
+   "A"
+  ],
+  "ambiguous": false,
+  "note": "DynamoDB auto scaling takes a minimum and maximum capacity and a target utilization (AutoScaling), so capacity follows the known curve between floor and ceiling. On-demand has no floor or ceiling; fixed capacity wastes quiet-hour spend."
+ },
+ {
+  "id": "database-registry-016",
+  "picks": [
+   "B"
+  ],
+  "ambiguous": false,
+  "note": "Convert the schema with AWS SCT, apply it, then use DMS to replicate ongoing changes (dms Welcome: convert, apply converted code, then migrate data). A stops before any data moves; D applies no schema, so views and triggers are missing; C is a file transfer service (DataSync)."
+ }
 ]

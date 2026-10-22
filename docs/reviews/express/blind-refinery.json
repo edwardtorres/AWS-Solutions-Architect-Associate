@@ -1,104 +1,27 @@
 [
  {
-  "id": "refinery-001",
-  "picks": [
-   "C"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-002",
-  "picks": [
-   "B"
-  ],
-  "ambiguous": false
- },
- {
   "id": "refinery-003",
   "picks": [
    "D",
    "E"
   ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-004",
-  "picks": [
-   "B"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-005",
-  "picks": [
-   "A"
-  ],
-  "ambiguous": false
+  "ambiguous": true,
+  "note": "Wording dispute on E: a crawler on a plain cron schedule cannot run after the job. It works only as an event (job-completion) trigger (about-triggers: a trigger fires on a schedule or a combination of events). D (scheduled Glue ETL job, monitor-data-warehouse-schedule) and E are the only viable pair."
  },
  {
   "id": "refinery-006",
   "picks": [
    "C"
   ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-007",
-  "picks": [
-   "D"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-008",
-  "picks": [
-   "B"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-009",
-  "picks": [
-   "D"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-010",
-  "picks": [
-   "B"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-011",
-  "picks": [
-   "B",
-   "E"
-  ],
   "ambiguous": false,
-  "note": "MSCK REPAIR needs Hive-style prefixes"
+  "note": "AWS Batch runs containerized jobs and queues them, provisioning compute for each (what-is-batch). Lambda cannot run a 45-minute job (15-minute cap)."
  },
  {
   "id": "refinery-012",
   "picks": [
    "A"
   ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-013",
-  "picks": [
-   "D"
-  ],
-  "ambiguous": false
- },
- {
-  "id": "refinery-014",
-  "picks": [
-   "A",
-   "B"
-  ],
-  "ambiguous": false
+  "ambiguous": false,
+  "note": "Glue is serverless Spark with no infrastructure to manage (what-is-glue), and its jobs can run on a time-based schedule. A 40-minute Lambda conversion exceeds the 15-minute cap; the EMR option needs a cluster."
  }
 ]

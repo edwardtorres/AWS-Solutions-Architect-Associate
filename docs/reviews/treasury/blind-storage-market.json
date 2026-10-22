@@ -1,14 +1,11 @@
 [
-{"id":"storage-market-001","picks":["B"],"ambiguous":false},
-{"id":"storage-market-002","picks":["C"],"ambiguous":false},
-{"id":"storage-market-003","picks":["C"],"ambiguous":false},
-{"id":"storage-market-004","picks":["D"],"ambiguous":false},
-{"id":"storage-market-005","picks":["C"],"ambiguous":false},
-{"id":"storage-market-006","picks":["A"],"ambiguous":false},
-{"id":"storage-market-007","picks":["C","E"],"ambiguous":false},
-{"id":"storage-market-008","picks":["D"],"ambiguous":false},
-{"id":"storage-market-009","picks":["A","E"],"ambiguous":false,"note":"Elastic throughput fits bursty low-average workloads; C is excluded because applications must not change."},
-{"id":"storage-market-010","picks":["A"],"ambiguous":false},
-{"id":"storage-market-011","picks":["A"],"ambiguous":false,"note":"Depends on knowing FSx for OpenZFS has an Intelligent-Tiering storage class (newer feature); other options need app/protocol change or are not OpenZFS."},
-{"id":"storage-market-012","picks":["B"],"ambiguous":false}
+ {
+  "id": "storage-market-009",
+  "picks": [
+   "A",
+   "E"
+  ],
+  "ambiguous": false,
+  "note": "Lifecycle management moves files not accessed for a period into cost-optimized IA (lifecycle-management-efs). Bursting throughput scales with stored data (performance) with no provisioned charge; provisioned throughput is billed extra (B), and keeping everything in Standard costs more than IA (D)."
+ }
 ]

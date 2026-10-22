@@ -47,7 +47,7 @@ const questions: Question[] = [
     stem: 'A company runs a nightly ETL job that cleans sales data and writes new files to Amazon S3. Analysts must be able to query the new data with Amazon Athena the next morning, and the company wants NO infrastructure to manage. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Create an AWS Glue ETL job and invoke it on a nightly schedule', 'Glue jobs can be invoked on a schedule and run without infrastructure to manage.'],
-      ['Schedule an AWS Glue crawler to run after the job so that the Data Catalog tables stay current', 'Crawlers can be scheduled, and they update the Data Catalog that Athena queries.'],
+      ['Start an AWS Glue crawler from a trigger so that the Data Catalog tables stay current', 'A trigger can start crawlers, and crawlers update the Data Catalog that Athena queries.'],
     ],
     wrong: [
       ['Run the transformation on a persistent Amazon EMR cluster that stays up around the clock', 'The cluster is infrastructure that the company must configure and operate, which it wants to avoid.'],
@@ -58,6 +58,7 @@ const questions: Question[] = [
     evidence: [
       'glue-what-is|Invoke AWS Glue jobs on a schedule, on demand, or based on an event.',
       'glue-components|Schedule when crawlers run.',
+      'glue-triggers|When fired, a trigger can start specified jobs and crawlers.',
       'glue-catalog|You can populate the Data Catalog using a crawler, which automatically scans your data sources and extracts metadata.',
       'lambda-quotas|Function timeout 900 seconds (15 minutes).',
     ],

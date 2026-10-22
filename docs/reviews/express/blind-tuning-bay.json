@@ -1,19 +1,27 @@
 [
-{"id":"tuning-bay-001","picks":["A"],"ambiguous":false},
-{"id":"tuning-bay-002","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-003","picks":["B"],"ambiguous":false},
-{"id":"tuning-bay-004","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-005","picks":["C"],"ambiguous":false,"note":"Eventually consistent 8 KB = 2 RCU per 2 reads => 600 RCU; 2 KB write = 1 WCU => 300."},
-{"id":"tuning-bay-006","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-007","picks":["B"],"ambiguous":false},
-{"id":"tuning-bay-008","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-009","picks":["B","C"],"ambiguous":false},
-{"id":"tuning-bay-010","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-011","picks":["D"],"ambiguous":false},
-{"id":"tuning-bay-012","picks":["A","C"],"ambiguous":false},
-{"id":"tuning-bay-013","picks":["A","B","D"],"ambiguous":false},
-{"id":"tuning-bay-014","picks":["C"],"ambiguous":false},
-{"id":"tuning-bay-015","picks":["B"],"ambiguous":false},
-{"id":"tuning-bay-016","picks":["B"],"ambiguous":false},
-{"id":"tuning-bay-017","picks":["D"],"ambiguous":false,"note":"Relies on DynamoDB warm throughput feature; B is the weaker alternative."}
+ {
+  "id": "tuning-bay-009",
+  "picks": [
+   "B",
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "Provisioned IOPS storage is designed for I/O-intensive database workloads with low, consistent latency (RDS storage types), and a larger class adds the saturated compute. The Multi-AZ standby serves no read traffic and read replicas are read-only (Concepts.MultiAZ, USER_ReadRepl), so A, D and E fail."
+ },
+ {
+  "id": "tuning-bay-010",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "RDS Proxy pools and reuses database connections (rds-proxy), so the functions only switch to the proxy endpoint and the database sees fewer connections. A and D do not reduce connections; B adds a read-only replica."
+ },
+ {
+  "id": "tuning-bay-014",
+  "picks": [
+   "C"
+  ],
+  "ambiguous": false,
+  "note": "DynamoDB is serverless with consistent single-digit-millisecond performance at scale (aws.amazon.com/dynamodb), keyed by player ID. The RDS options need database servers to manage; Redshift is a warehouse."
+ }
 ]

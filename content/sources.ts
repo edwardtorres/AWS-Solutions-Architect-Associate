@@ -369,6 +369,7 @@ const sources: Source[] = [
   aws('dtt', `${D}/datatransferterminal/latest/userguide/what-is-dtt.html`, 'What is Data Transfer Terminal?'),
   aws('glue-components', `${D}/glue/latest/dg/components-overview.html`, 'AWS Glue components'),
   aws('glue-catalog', `${D}/glue/latest/dg/catalog-and-crawler.html`, 'Data discovery and cataloging in AWS Glue'),
+  aws('glue-triggers', `${D}/glue/latest/dg/about-triggers.html`, 'AWS Glue triggers'),
   aws('glue-parquet', `${D}/glue/latest/dg/aws-glue-programming-etl-format-parquet-home.html`, 'Using the Parquet format in AWS Glue'),
   aws('athena-ctas', `${D}/athena/latest/ug/ctas-examples.html`, 'Examples of CTAS queries'),
   aws('emr-serverless', `${D}/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html`, 'What is Amazon EMR Serverless?'),
