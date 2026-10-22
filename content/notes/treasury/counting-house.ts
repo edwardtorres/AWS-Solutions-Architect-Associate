@@ -13,9 +13,11 @@ const notes: BuildingNotes = {
     {
       id: '4.2-K1',
       concepts: [
-        b('Cost allocation tags show which team or project is spending on compute. A tag is a label that you or AWS assigns to a resource, and you must activate a tag as a cost allocation tag before it appears in Cost Explorer or on a cost allocation report.',
+        b('Cost allocation tags track your AWS costs on a detailed level. If you tag resources with an application name, you can track the total cost of a single application that runs on those resources. A tag is a label that you or AWS assigns to an AWS resource, and you must activate both types of tags separately before they can appear in Cost Explorer or on a cost allocation report.',
           'cost-alloc-tags',
-          ['A tag is a label that you or AWS assigns to an AWS resource.',
+          ['You can use tags to organize your resources, and cost allocation tags to track your AWS costs on a detailed level.',
+           'For example, if you tag resources with an application name, you can track the total cost of a single application that runs on those resources.',
+           'A tag is a label that you or AWS assigns to an AWS resource.',
            'You must activate both types of tags separately before they can appear in Cost Explorer or on a cost allocation report.']),
         b('Consolidated billing matters for purchasing options: when accounts are in one organisation, the combined usage shares volume pricing discounts, Reserved Instance discounts and Savings Plans, so a commitment bought in one account can benefit others.',
           'consolidated-billing',

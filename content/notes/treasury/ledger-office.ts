@@ -37,7 +37,7 @@ const notes: BuildingNotes = {
     {
       id: '4.1-K2',
       concepts: [
-        b('A tag is a label, a key and a value, that you or AWS assigns to a resource. Cost allocation tags track costs at a detailed level: after you activate them, AWS uses them to organise resource costs on your cost allocation report. There are AWS-generated tags and user-defined tags, and you must activate both types separately before they appear in Cost Explorer or on a cost allocation report. Tags can take up to 24 hours to appear in the console, so activate them early.',
+        b('A tag is a label, a key and a value, that you or AWS assigns to a resource. Cost allocation tags track costs at a detailed level: after you activate them, AWS uses them to organise resource costs on your cost allocation report. There are AWS-generated tags and user-defined tags, and you must activate both types separately before they appear in Cost Explorer or on a cost allocation report. All tags can take up to 24 hours to appear in the Billing and Cost Management console.',
           'cost-alloc-tags',
           ['A tag is a label that you or AWS assigns to an AWS resource.',
            'After you activate cost allocation tags, AWS uses the cost allocation tags to organize your resource costs on your cost allocation report, to make it easier for you to categorize and track your AWS costs.',

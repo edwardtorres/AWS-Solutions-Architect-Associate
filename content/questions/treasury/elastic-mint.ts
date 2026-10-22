@@ -132,15 +132,18 @@ const questions: Question[] = [
     stem: 'A company runs a market-data service that uses a custom binary protocol over TCP. Millions of requests per second arrive from client programs, and the protocol is not HTTP. The company wants to spread the connections across its EC2 instances in several Availability Zones. Which load balancer should the company use?',
     correct: ['A Network Load Balancer with a TCP listener and the instances registered in a target group', 'A Network Load Balancer works at the fourth layer, handles millions of requests per second, and supports TCP target groups for non-HTTP protocols.'],
     wrong: [
-      ['An Application Load Balancer with a listener on the service port and the instances in a target group', 'An Application Load Balancer works at the application layer on HTTP traffic, so it does not fit a custom binary protocol over TCP.'],
-      ['A Gateway Load Balancer with the instances registered as its targets', 'A Gateway Load Balancer fronts virtual appliances such as firewalls, not a client-facing TCP service.'],
-      ['An Amazon CloudFront distribution that uses the instances as a custom origin', 'CloudFront delivers HTTP content through edge locations, so it does not carry a custom TCP protocol to the instances.'],
+      ['An Application Load Balancer with a listener on the service port and the instances in a target group', 'An Application Load Balancer functions at the application layer and forwards requests on HTTP fields such as the host header, so it does not fit a custom binary protocol over TCP.'],
+      ['A Gateway Load Balancer with the instances registered as its targets', 'A Gateway Load Balancer enables you to deploy, scale and manage virtual appliances such as firewalls, so it does not front a client-facing TCP service.'],
+      ['An Amazon CloudFront distribution that uses the instances as a custom origin', 'CloudFront delivers your content through a worldwide network of data centers called edge locations, so it is a content delivery service and does not carry a custom TCP protocol to the instances.'],
     ],
     slot: 1,
     evidence: [
       'nlb-intro|Network Load Balancer functions at the fourth layer of the Open Systems Interconnection (OSI) model.',
       'nlb-intro|It can handle millions of requests per second.',
       'alb-intro|An Application Load Balancer functions at the application layer, the seventh layer of the Open Systems Interconnection (OSI) model.',
+      'alb-intro|You can configure rules for your listener that forward requests based on the host field in the HTTP header.',
+      'gwlb-intro|Gateway Load Balancers enable you to deploy, scale, and manage virtual appliances, such as firewalls, intrusion detection and prevention systems, and deep packet inspection systems.',
+      'cloudfront-what-is|CloudFront delivers your content through a worldwide network of data centers called edge locations.',
     ],
   }),
   mc({

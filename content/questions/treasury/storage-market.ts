@@ -70,9 +70,9 @@ const questions: Question[] = [
     stem: 'A mobile app downloads 250 TB of photos through an HTTPS service that reads them from an Amazon EFS file system. No one mounts the file system apart from that service, and the developers can change the service to read the photos through the Amazon S3 API. Photos go cold for weeks and then become popular again, and nobody can predict which ones. The company wants storage cost to follow the access pattern without retrieval fees. Which solution meets these requirements MOST cost-effectively?',
     correct: ['Move the photos to Amazon S3 with the S3 Intelligent-Tiering storage class', 'AWS recommends Intelligent-Tiering for object data with changing access patterns, and it moves objects between tiers with no retrieval fees.'],
     wrong: [
-      ['Keep the photos on Amazon EFS and use lifecycle management to move them to Archive', 'Files move to Archive by default and stay there when read unless an extra on-first-access setting is configured, so this does not follow an unpredictable pattern automatically.'],
-      ['Copy the photos to a large General Purpose SSD (gp3) volume and resize it as the library grows', 'A volume has provisioned capacity and a single-instance attachment, and it does not tier cold data to cheaper storage.'],
-      ['Move the photos to Amazon S3 with the S3 Standard-IA storage class', 'It suits infrequently accessed data but does not adapt when photos become popular again, and Amazon S3 charges a retrieval fee for these objects.'],
+      ['Keep the photos on Amazon EFS and use lifecycle management to move them to Archive', 'By default, files that are not accessed for 90 days move to Archive and remain there when they are accessed, so the storage cost does not follow an unpredictable pattern automatically.'],
+      ['Copy the photos to a large General Purpose SSD (gp3) volume and resize it as the library grows', 'A gp3 volume is block storage attached to an instance, and it does not tier cold data to cheaper storage.'],
+      ['Move the photos to Amazon S3 with the S3 Standard-IA storage class', 'Standard-IA is designed for long-lived, infrequently accessed data, so it does not adapt automatically as photos become popular again, and Amazon S3 charges a retrieval fee for these objects.'],
     ],
     slot: 3,
     evidence: [
@@ -80,6 +80,11 @@ const questions: Question[] = [
       's3-storage-classes|There are no retrieval fees for S3 Intelligent-Tiering.',
       'efs-lifecycle|By default, files are not moved back to the Standard storage class, and they remain in the IA or Archive storage class when they are accessed.',
       's3-storage-classes|Amazon S3 charges a retrieval fee for these objects, so they are most suitable for infrequently accessed data.',
+      's3-storage-classes|The S3 Standard-IA and S3 One Zone-IA storage classes are designed for long-lived and infrequently accessed data.',
+      's3-storage-classes|S3 Intelligent-Tiering (INTELLIGENT_TIERING) is an Amazon S3 storage class that\'s designed to optimize storage costs by automatically moving data to the most cost-effective access tier',
+      'efs-lifecycle|By default, files that are not accessed in the Standard storage class for 90 days are transitioned in to the Archive storage class.',
+      'ebs-what-is|Amazon Elastic Block Store (Amazon EBS) provides scalable, high-performance block storage',
+      'ebs-what-is|After you attach a volume to an instance, you can use it in the same way you would use a local hard drive attached to a computer, for example to store files or to install applications.',
     ],
   }),
   mc({

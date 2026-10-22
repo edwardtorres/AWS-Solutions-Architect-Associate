@@ -12,12 +12,14 @@ const notes: BuildingNotes = {
        'dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.']),
   ],
   beyondProject: [
-    b('Your project uses DynamoDB. The SAA cost question is which capacity mode is cheaper for a workload. In on-demand mode there is pay-per-request pricing, so you do not worry about idle capacity, and if you drive no traffic to the table you are not charged for any throughput; provisioned mode asks you to specify throughput capacity and lets auto scaling adjust it in response to traffic changes. Unpredictable or spiky traffic points to on-demand; steady, forecastable traffic is where provisioned capacity is worth planning (Tuning Bay covers the capacity units).',
-      ['dynamodb-ondemand', 'dynamodb-provisioned'],
+    b('Your project uses DynamoDB. The SAA cost question is which capacity mode fits the traffic a table receives. In on-demand mode there is pay-per-request pricing, so you do not worry about idle capacity, and if you drive no traffic to the table you are not charged for any throughput; provisioned mode asks you to specify throughput capacity and lets auto scaling adjust it in response to traffic changes. When you choose on-demand mode, DynamoDB instantly accommodates your workloads as they ramp up or down to any previously reached traffic level. AWS says you can choose provisioned capacity if you have steady workloads with predictable growth, and if you can reliably forecast capacity requirements for your application (Tuning Bay covers the capacity units).',
+      ['dynamodb-ondemand', 'dynamodb-provisioned', 'dynamodb-capacity'],
       ['dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.',
        'dynamodb-ondemand|If you are driving zero traffic to your table, then with on-demand, you are not charged for any throughput.',
        'dynamodb-provisioned|When you create a new provisioned table in DynamoDB, you must specify its provisioned throughput capacity.',
-       'dynamodb-provisioned|You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes.'], { newer: ['dynamodb-price-cut-2024'] }),
+       'dynamodb-provisioned|You can use auto scaling to adjust your table’s provisioned capacity automatically in response to traffic changes.',
+       'dynamodb-ondemand|When you choose on-demand mode, DynamoDB instantly accommodates your workloads as they ramp up or down to any previously reached traffic level.',
+       'dynamodb-capacity|You can choose to use provisioned capacity if you have steady workloads with predictable growth, and if you can reliably forecast capacity requirements for your application.'], { newer: ['dynamodb-price-cut-2024'] }),
   ],
   bullets: [
     {
@@ -147,12 +149,13 @@ const notes: BuildingNotes = {
          'aurora-serverless|Aurora serverless is an on-demand, autoscaling configuration for Amazon Aurora.',
          'aurora-serverless-how|Scaling to Zero In recent Aurora MySQL and Aurora PostgreSQL versions, Aurora serverless writers and readers can scale all the way down to zero ACUs.'],
         { newer: ['aurora-serverless-v2-scale-to-zero'], allow: ['zero'] }),
-      breaks: b('Learn says these services use different scaling and billing models. On Aurora, whether it can pause is controlled by the minimum capacity you set (zero allows auto-pause), and capacity is adjusted automatically based on application demand.',
+      breaks: b('Learn says these services use different scaling and billing models. On Aurora, capacity is adjusted automatically based on application demand. The smallest Aurora serverless capacity that you can define is 0 ACUs, for Aurora serverless versions that support the auto-pause feature, and whether the database can pause is controlled by the minimum capacity you set.',
         ['learn-databases', 'aurora-serverless', 'aurora-serverless-how'],
         ['learn-databases|These services use different scaling and billing models.',
          'aurora-serverless|Capacity is adjusted automatically based on application demand.',
+         'aurora-serverless-how|The smallest Aurora serverless capacity that you can define is 0 ACUs, for Aurora serverless versions that support the auto-pause feature.',
          'aurora-serverless-how|You can choose whether to allow this behavior by specifying a zero or nonzero value for the minimum capacity.'],
-        { newer: ['aurora-serverless-v2-scale-to-zero'], allow: ['zero'] }),
+        { newer: ['aurora-serverless-v2-scale-to-zero'] }),
     },
     {
       concept: 'Azure Cosmos DB for NoSQL',

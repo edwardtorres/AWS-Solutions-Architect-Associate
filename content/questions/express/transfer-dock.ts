@@ -11,8 +11,8 @@ const questions: Question[] = [
     correct: ['Deploy an AWS DataSync agent on premises and create a recurring task from the SMB share to the FSx file system', 'DataSync supports SMB sources and FSx for Windows File Server destinations, and a recurring task copies only the data that has changed.'],
     wrong: [
       ['Create an AWS Transfer Family server with SFTP enabled and have the file server push its files to the FSx file system', 'Transfer Family stores files in Amazon S3 or Amazon EFS, so it cannot write into an FSx file system.'],
-      ['Deploy an Amazon S3 File Gateway on premises and copy the files to its SMB file share each night to reach FSx', 'S3 File Gateway stores the files as objects in Amazon S3, so nothing arrives in the FSx for Windows File Server file system.'],
-      ['Order an AWS Direct Connect connection with a private virtual interface and drag the files across the new link', 'Direct Connect supplies a network path only and has no transfer or sync function, so the copying would need custom tooling.'],
+      ['Deploy an Amazon S3 File Gateway on premises and copy the files to its SMB file share each night to reach FSx', 'S3 File Gateway stores the files as objects in Amazon S3, so copying them to its SMB file share does not put them into the FSx for Windows File Server file system.'],
+      ['Order an AWS Direct Connect connection with a private virtual interface and drag the files across the new link', 'Direct Connect only establishes a dedicated network connection, so the files would still need custom tooling to copy and keep in sync.'],
     ],
     slot: 1,
     evidence: [
@@ -20,6 +20,9 @@ const questions: Question[] = [
       'datasync-what-is|DataSync works with the following AWS storage services: Amazon S3 Amazon EFS Amazon FSx for Windows File Server Amazon FSx for Lustre Amazon FSx for OpenZFS Amazon FSx for NetApp ONTAP',
       'datasync-how|Transferring only the data that\'s changed since the previous task execution.',
       'transfer-what-is|Amazon Elastic File System (Amazon EFS) Network File System (NFS) file systems.',
+      'sgw-file-s3|Amazon S3 File Gateway supports a file interface into Amazon Simple Storage Service (Amazon S3)',
+      'sgw-file-s3|By using this combination, you can store and retrieve objects in Amazon S3 using industry-standard file protocols such as Network File System (NFS) and Server Message Block (SMB).',
+      'connectivity-dx|AWS Direct Connect makes it easy to establish a dedicated connection from an on-premises network to one or more VPCs.',
     ],
   }),
   mr({

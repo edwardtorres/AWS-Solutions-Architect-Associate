@@ -138,7 +138,7 @@ const notes: BuildingNotes = {
     {
       concept: 'Azure Data Box',
       aws: 'AWS Snowball Edge',
-      mapping: b('Learn pairs Snowball Edge with Azure Data Box, a data transport solution that uses enhanced-security storage devices to transfer large amounts of data to and from the cloud.',
+      mapping: b('Learn pairs Snowball Edge with Azure Data Box, a data transport solution that uses enhanced-security data storage devices to transfer large amounts of data to and from the cloud.',
         ['learn-storage', 'snowball-edge'],
         ['learn-storage|AWS Snowball Edge Azure Data Box Petabyte-scale to exabyte-scale data transport solution that uses enhanced-security data storage devices to transfer large amounts of data to and from the cloud.',
          'snowball-edge|Snowball Edge is a device with on-board storage and compute power for select AWS capabilities.']),

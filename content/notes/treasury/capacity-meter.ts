@@ -94,9 +94,10 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon RDS'],
       design: [
-        b('Cue: "Lambda functions exhaust database connections" → RDS Proxy rather than a larger instance.',
+        b('Cue: "too many connections" errors on a DB instance, or AWS Lambda functions as clients → RDS Proxy.',
           'rds-proxy-planning',
-          ['AWS Lambda functions can also be good candidates for using a proxy.']),
+          ['Any DB instance that encounters "too many connections" errors is a good candidate for associating with a proxy.',
+           'AWS Lambda functions can also be good candidates for using a proxy.']),
       ],
     },
     {
