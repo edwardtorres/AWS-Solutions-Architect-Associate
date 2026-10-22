@@ -99,6 +99,7 @@ const questions: Question[] = [
   mc({
     id: 'retention-records-006',
     building: 'retention-records',
+    postGuide: ['backup-hourly-frequency'],
     bullets: ['4.3-S1'],
     d: 2,
     stem: 'A company uses an AWS Backup rule that backs up an Amazon DynamoDB table every hour and keeps each backup for 30 days. The business has confirmed that it can lose at most 24 hours of data, and the 30-day retention is required. The company wants to cut backup storage cost. Which change meets the requirements MOST cost-effectively?',

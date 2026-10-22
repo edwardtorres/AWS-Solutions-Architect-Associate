@@ -279,13 +279,14 @@ const questions: Question[] = [
     wrong: [
       ['Amazon RDS for MySQL in a Multi-AZ deployment on a memory-optimized DB instance class', 'It is a database server the company would size and manage, and a single writer instance does not scale out to millions of simultaneous users.'],
       ['Amazon RDS for PostgreSQL with several read replicas and Provisioned IOPS storage', 'Read replicas allow only read-only connections, so the session writes still funnel into one primary DB instance.'],
-      ['An Amazon ElastiCache cluster used as the only store for the sessions', 'ElastiCache is an ephemeral cache for frequently accessed data, not the durable system of record the sessions need.'],
+      ['An Amazon Redshift data warehouse that stores each session and answers queries over it', 'Redshift is a petabyte-scale data warehouse for analytic queries over large data sets, not a store for single-digit millisecond reads and writes of each player session by player ID.'],
     ],
     slot: 2,
     evidence: [
       'database-decision|Amazon DynamoDB Key-value Use for workloads such as session stores or shopping carts.',
       'database-decision|Key-value databases can scale to large amounts of data and extremely high throughput of requests, while servicing millions of simultaneous users through distributed processing and storage.',
       'database-decision|Optimized to provide a serverless, NoSQL, fully managed database with single-digit millisecond performance at any scale.',
+      'redshift-what-is|Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud.',
     ],
   }),
   mc({

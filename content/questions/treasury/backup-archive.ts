@@ -5,6 +5,8 @@ const questions: Question[] = [
   mc({
     id: 'backup-archive-001',
     building: 'backup-archive',
+    postGuide: ['backup-hourly-frequency'],
+    postGuideKey: ['backup-hourly-frequency'],
     bullets: ['4.1-K5'],
     d: 1,
     stem: 'A company takes a nightly snapshot of the Amazon EBS volume that holds its order database. The business now says it can tolerate losing at most one hour of data after a failure. Which change meets this requirement at the LOWEST cost?',

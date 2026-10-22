@@ -310,6 +310,7 @@ const questions: Question[] = [
   mc({
     id: 'archive-annex-017',
     building: 'archive-annex',
+    postGuide: ['backup-hourly-frequency'],
     bullets: ['1.3-S5'],
     d: 2,
     stem: 'A company has a contract that requires new objects in an Amazon S3 bucket to reach a bucket in a second Region within a predictable time frame that is backed by a service-level agreement. Which solution meets this requirement?',

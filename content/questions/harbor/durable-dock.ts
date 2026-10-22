@@ -124,6 +124,8 @@ const questions: Question[] = [
   mc({
     id: 'durable-dock-007',
     building: 'durable-dock',
+    postGuide: ['backup-hourly-frequency'],
+    postGuideKey: ['backup-hourly-frequency'],
     bullets: ['2.2-S5'],
     d: 3,
     stem: 'A research company writes analysis output to an Amazon EFS Regional file system. A faulty job occasionally corrupts files, and the damage is noticed hours later. The company needs to restore files to an earlier point in time with a recovery point objective of one hour, with the LEAST operational overhead. Which solution meets these requirements?',

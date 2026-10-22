@@ -43,9 +43,9 @@ const scenarios: S[] = [
           quote: 'With Lambda, you can run code without provisioning or managing servers.',
         },
         cost: {
-          text: 'A Compute Savings Plan trades a commitment to a steady amount of compute for rates below On-Demand, and it also covers Lambda usage, so a constant load costs less than the same functions without it.',
+          text: 'A Compute Savings Plan gives savings beyond On-Demand rates in exchange for a steady commitment of compute usage, so a constant load costs less than On-Demand.',
           src: 'savings-plans',
-          quote: 'This also applies to AWS Fargate and AWS Lambda usage.',
+          quote: 'Savings Plans provide savings beyond On-Demand rates in exchange for a commitment of using a specified amount of compute power (measured per hour) for a one or three year period.',
         },
         secure: {
           text: 'A private API can be reached only from inside your VPC, so the API is never exposed to the public internet.',
@@ -117,7 +117,7 @@ const scenarios: S[] = [
           quote: 'On-demand simplifies the setup process, eliminates capacity management and monitoring, and provides fast, automatic scaling.',
         },
         cost: {
-          text: 'Time to Live is the documented cost-effective way to remove items that are no longer relevant, such as finished sessions, and it deletes them without consuming write throughput.',
+          text: 'Time to Live is a cost-effective method for deleting items that are no longer relevant, such as finished sessions.',
           src: 'dynamodb-ttl',
           quote: 'Time To Live (TTL) for DynamoDB is a cost-effective method for deleting items that are no longer relevant.',
         },
@@ -154,7 +154,7 @@ const scenarios: S[] = [
           quote: 'If you don\'t specify a customer managed key, Amazon S3 automatically creates an AWS managed key in your AWS account the first time that you add an object encrypted with SSE-KMS to a bucket.',
         },
         cost: {
-          text: 'Bucket Keys cut the traffic from S3 to KMS, which is where the cost of reading many SSE-KMS objects comes from.',
+          text: 'Bucket Keys reduce traffic from S3 to KMS, so reading SSE-KMS objects in S3 costs a fraction of the previous cost.',
           src: 's3-bucket-keys',
           quote: 'This reduces traffic from S3 to AWS KMS, allowing you to access AWS KMS-encrypted objects in Amazon S3 at a fraction of the previous cost.',
         },
@@ -192,9 +192,9 @@ const scenarios: S[] = [
           quote: 'provides serverless, fully elastic file storage so that you can share file data without provisioning or managing storage capacity and performance.',
         },
         cost: {
-          text: 'Lifecycle management moves files that are not being used to a lower-cost class, so storage cost follows use.',
+          text: 'EFS lifecycle management moves files to the Infrequent Access class, which is cost-optimized for data accessed only a few times each quarter.',
           src: 'efs-lifecycle',
-          quote: 'You can manage your file systems so that they have cost-effective storage throughout their lifecycle.',
+          quote: 'Instructs lifecycle management when to move files in to the Infrequent Access (IA) storage class, which is cost-optimized for data that is accessed only a few times each quarter.',
         },
         secure: {
           text: 'EFS can protect the data both while stored and while moving between servers and the file system.',
@@ -224,7 +224,7 @@ const scenarios: S[] = [
       answers: { overhead: 'a', cost: 'b', secure: 'c', available: 'd' },
       facts: {
         overhead: {
-          text: 'On-Demand Instances need no commitment, no reservation to create and no interruption to handle: you launch them when needed and keep full control.',
+          text: 'On-Demand Instances need no long-term commitment, and you pay by the second for the compute capacity you use.',
           src: 'ec2-on-demand',
           quote: 'With On-Demand Instances, you pay for compute capacity by the second with no long-term commitments.',
         },
@@ -239,9 +239,9 @@ const scenarios: S[] = [
           quote: 'This means that Dedicated Instances are physically isolated at the host hardware level from instances that belong to other AWS accounts, even if those accounts are linked to a single payer account.',
         },
         available: {
-          text: 'A Capacity Reservation holds capacity for a future date, so the instances are there at the scheduled start even on a busy night, which none of the other designs guarantee.',
+          text: 'A Capacity Reservation reserves compute capacity in one Availability Zone, so the job has that capacity when it starts.',
           src: 'ec2-capacity-reservations',
-          quote: 'You can request a Capacity Reservation for immediate use or you can request a Capacity Reservation for a future date.',
+          quote: 'Amazon EC2 Capacity Reservations allow you to reserve compute capacity for your Amazon EC2 instances in a specific Availability Zone for any duration.',
         },
       },
     },
@@ -276,7 +276,7 @@ const scenarios: S[] = [
           quote: 'In compliance mode, a protected object version can\'t be overwritten or deleted by any user, including the root user in your AWS account.',
         },
         available: {
-          text: 'Replication can place copies in a bucket in a different Region, so the logs survive the loss of the source Region.',
+          text: 'Replication can place copies of logs in a bucket in a different Region, so a copy exists outside the source Region.',
           src: 's3-replication',
           quote: 'The destination buckets can be in different AWS Regions or within the same Region as the source bucket.',
         },
@@ -308,12 +308,12 @@ const scenarios: S[] = [
           quote: 'Spot Instances are a cost-effective choice if you can be flexible about when your applications run and if your applications can be interrupted.',
         },
         secure: {
-          text: 'A separate role per task definition with only the permissions its tasks need limits what a compromised container can reach.',
+          text: 'A separate role per task definition, with the minimum required permissions, minimizes the access that each task is given.',
           src: 'ecs-task-role',
           quote: 'If you have multiple task definitions or services that require IAM permissions, you should consider creating a role for each specific task definition or service with the minimum required permissions for the tasks to operate so that you can minimize the access that you provide for each task.',
         },
         available: {
-          text: 'Zones do not share generators, cooling or power substations, so tasks spread over three zones keep serving when one zone has a failure that the one-subnet designs cannot survive.',
+          text: 'Generators and cooling equipment are not shared across zones, so tasks spread over three zones do not share those points of failure.',
           src: 'fault-isolation-az',
           quote: 'Common points of failure, like generators and cooling equipment, are not shared across Availability Zones and are designed to be supplied by different power substations.',
         },
@@ -426,9 +426,9 @@ const scenarios: S[] = [
           quote: 'you can use an Amazon Cognito user pool to control who can access your API in Amazon API Gateway.',
         },
         available: {
-          text: 'Route 53 health checking can run active-passive failover, sending users to the second Region if the first fails.',
+          text: 'Route 53 can detect that a resource is unhealthy and stop including it when responding to queries, which is how failover routing avoids a failed primary.',
           src: 'route53-failover-types',
-          quote: 'You can use Route 53 health checking to configure active-active and active-passive failover configurations.',
+          quote: 'When a resource becomes unavailable, Route 53 can detect that it\'s unhealthy and stop including it when responding to queries.',
         },
       },
     },

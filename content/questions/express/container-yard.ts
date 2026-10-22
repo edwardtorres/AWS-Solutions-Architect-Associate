@@ -153,10 +153,12 @@ const questions: Question[] = [
     bullets: ['3.2-K6'],
     d: 3,
     tags: ['placement-eligible'],
+    postGuide: ['ecs-min-capacity-0'],
+    postGuideKey: ['ecs-min-capacity-0'],
     stem: 'Worker tasks of an Amazon ECS service on AWS Fargate consume messages from an Amazon SQS queue. The company wants the number of tasks to follow the backlog of messages and to fall to zero when the queue is empty, with the LEAST operational overhead. Which solution meets these requirements?',
     correct: ['Scale the ECS service automatically on a backlog-per-task metric, with a minimum capacity of 0', 'The backlog per task reflects the queue, and a minimum capacity of 0 lets the task count scale to zero.'],
     wrong: [
-      ['Scale the service with a target tracking policy on average CPU utilization and a minimum capacity of 1', 'CPU utilization does not measure messages waiting in the queue, and a minimum of 1 keeps a task running when there is no work.'],
+      ['Scale the service with a target tracking policy on average CPU utilization', 'CPU utilization does not measure the messages waiting in the queue, so the task count would not follow the backlog.'],
       ['Use scheduled actions that change the number of tasks at the start of every hour', 'A schedule is not tied to the queue, so tasks run when the queue is empty and are missing when it is long.'],
       ['Use an Amazon EC2 Auto Scaling group policy that adds instances when the queue grows', 'EC2 Auto Scaling scales instances, and the ECS service itself is scaled through Application Auto Scaling.'],
     ],

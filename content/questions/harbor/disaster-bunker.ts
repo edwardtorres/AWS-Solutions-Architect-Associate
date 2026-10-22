@@ -27,12 +27,14 @@ const questions: Question[] = [
     bullets: ['2.2-K4'],
     d: 2,
     tags: ['trap:dr-strategies'],
+    postGuide: ['backup-hourly-frequency'],
+    postGuideKey: ['backup-hourly-frequency'],
     stem: 'A company runs an order system on Amazon EC2 and Amazon RDS in one Region. After a Regional disaster the system must be recoverable in a second AWS Region with an RPO of 1 hour and an RTO of 12 hours. The company wants the LOWEST ongoing cost. Which solution meets these requirements?',
     correct: ['Create an AWS Backup plan that backs up the database and instances hourly and copies the backups to the second Region', 'How often the backup runs sets the achievable recovery point, so hourly backups meet the RPO, and restoring from backups is the lowest-cost approach for a 12-hour RTO.'],
     wrong: [
-      ['Create an AWS Backup plan that runs once a day for the database and instances and copies each backup to the second Region', 'A daily backup can leave a recovery point nearly a day old, which misses the 1-hour RPO.'],
-      ['Keep a scaled-down but fully functional copy of the whole environment running in the second Region and replicate the data', 'Warm standby meets the objectives, but an always-on copy costs more than restoring from backups when 12 hours is acceptable.'],
+      ['Keep a scaled-down but fully functional copy of the whole environment running in the second Region and replicate the data', 'Warm standby keeps a copy running in another Region. The page calls it a more complex strategy than backups, and a 12-hour RTO does not require that cost.'],
       ['Run the workload in both Regions at the same time, serve users from both Regions and replicate the data between them', 'Multi-site active/active is the most complex and costly approach, far more than a 12-hour RTO requires.'],
+      ['Keep the database and instances in one Region and use a Multi-AZ deployment for recovery', 'A Multi-AZ deployment keeps its standby replica in a different Availability Zone of the same Region, so it does not protect against a Regional disaster.'],
     ],
     slot: 1,
     evidence: [
@@ -40,6 +42,8 @@ const questions: Question[] = [
       'dr-options|Or, you can use AWS Backup to copy backups across accounts and to other AWS Regions.',
       'aws-backup-plan-options|You can also create a cron expression that creates snapshot backups as frequently as hourly.',
       'dr-options|Disaster recovery strategies available to you within AWS can be broadly categorized into four approaches, ranging from the low cost and low complexity of making backups to more complex strategies using multiple active Regions.',
+      'dr-options|This approach extends the pilot light concept and decreases the time to recovery because your workload is always-on in another Region.',
+      'rds-multi-az-instance|In a Multi-AZ DB instance deployment, Amazon RDS automatically provisions and maintains a synchronous standby replica in a different Availability Zone.',
     ],
   }),
   mc({
