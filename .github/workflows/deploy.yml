@@ -55,6 +55,8 @@ jobs:
   deploy:
     name: Publish to S3 and invalidate CloudFront
     needs: check
+    # Skipped (not failed) until the owner has set the repository variables in DEPLOY.md, step 8.
+    if: ${{ vars.AWS_DEPLOY_ROLE_ARN != '' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
