@@ -898,7 +898,7 @@
    ]
   },
   "https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html": {
-   "hash": "a7d7d9b45bcc2be85271",
+   "hash": "32542d91b3547f70036f",
    "verifiedAt": "2026-10-22",
    "sources": [
     "backup-vault-lock"

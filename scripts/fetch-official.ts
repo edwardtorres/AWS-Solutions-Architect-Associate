@@ -120,7 +120,7 @@ async function main() {
   if (problems.length > 0) {
     console.error('STOP: the live exam guide differs from the structure this app was designed for:');
     for (const p of problems) console.error(`  - ${p}`);
-    process.exit(2);
+    process.exit(1);
   }
   const retrievedAt = new Date().toISOString().slice(0, 10);
   writeFileSync(out('official-outline.json'), `${JSON.stringify({ retrievedAt, ...outline }, null, 2)}\n`);

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Citers } from './citations';
-import { diffHashes, hashOf, mainText, type HashFile } from './freshness';
+import { diffHashes, hashOf, mainText, scopeHashFile, type HashFile } from './freshness';
 import { buildingDates, buildVerifiedSource } from './verifiedMeta';
 
 const page = (banner: string, body: string, footer = 'Privacy | Terms') =>
@@ -41,5 +41,34 @@ describe('building check dates', () => {
     const out = buildingDates(hashes, cites, ['one', 'two', 'three', 'four'], urls);
     expect(out).toEqual({ one: '2026-09-01', two: '2026-10-19' });
     expect(buildVerifiedSource(out, '2026-10-19')).toContain("'one': '2026-09-01'");
+  });
+});
+
+describe('a scoped run judges only the pages it asked about', () => {
+  const stored: HashFile = {
+    generated: '2026-10-01',
+    pages: {
+      'https://docs.aws.amazon.com/a.html': { hash: 'aaa', verifiedAt: '2026-10-01', sources: ['a'] },
+      'https://docs.aws.amazon.com/b.html': { hash: 'bbb', verifiedAt: '2026-10-01', sources: ['b'] },
+    },
+  };
+  const cited = new Set(['https://docs.aws.amazon.com/a.html']);
+
+  it('keeps only the stored pages in scope', () => {
+    const scoped = scopeHashFile(stored, (url) => url.endsWith('/a.html'));
+    expect(Object.keys(scoped.pages)).toEqual(['https://docs.aws.amazon.com/a.html']);
+    expect(scoped.generated).toBe(stored.generated);
+  });
+
+  it('does not report an out-of-scope page as removed', () => {
+    const fresh = new Map([['https://docs.aws.amazon.com/a.html', 'aaa']]);
+    const scoped = scopeHashFile(stored, (url) => url.endsWith('/a.html'));
+    expect(diffHashes(scoped, fresh, cited)).toEqual([]);
+  });
+
+  it('still reports an in-scope change', () => {
+    const fresh = new Map([['https://docs.aws.amazon.com/a.html', 'zzz']]);
+    const scoped = scopeHashFile(stored, (url) => url.endsWith('/a.html'));
+    expect(diffHashes(scoped, fresh, cited).map((c) => c.kind)).toEqual(['changed']);
   });
 });

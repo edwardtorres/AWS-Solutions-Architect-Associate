@@ -56,3 +56,11 @@ export function diffHashes(stored: HashFile, fresh: ReadonlyMap<string, string |
   for (const url of currentUrls) if (!(url in stored.pages)) out.push({ url, kind: 'added', detail: 'cited but not in the hash file' });
   return out;
 }
+
+/**
+ * The stored hashes a scoped run (`--only`) compares. Pages outside the scope are left out, so they are not reported as
+ * removed: a scoped run only judges the pages it asked about.
+ */
+export function scopeHashFile(stored: HashFile, inScope: (url: string) => boolean): HashFile {
+  return { ...stored, pages: Object.fromEntries(Object.entries(stored.pages).filter(([url]) => inScope(url))) };
+}

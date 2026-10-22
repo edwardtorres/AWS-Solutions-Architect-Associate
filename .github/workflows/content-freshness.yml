@@ -1,0 +1,38 @@
+# The weekly content watch: AWS pages cited by the notes, the live exam guide, and the Free Tier offers. It opens or updates one
+# issue when they change, and never blocks a deploy (deploy.yml does not depend on it).
+name: content-freshness
+
+on:
+  schedule:
+    # Mondays at 06:17 UTC: a non-round minute, so it does not queue behind other scheduled workflows.
+    - cron: '17 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: content-freshness
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    name: Watch AWS content
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Install Chromium for the Free Tier page
+        run: npx playwright install --with-deps chromium
+      - name: Run the three checks and report any change
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: npm run freshness:watch

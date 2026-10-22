@@ -11,6 +11,7 @@ import { buildCitations } from './lib/citations.ts';
 import { buildingDates, buildVerifiedSource } from './lib/verifiedMeta.ts';
 import type { HashFile } from './lib/freshness.ts';
 import { buildDocuments, fetchAll, structuralProblems } from './fetch-official.ts';
+import { EXIT_CHANGED, EXIT_NETWORK, isNetworkFailure } from './lib/network.ts';
 import { readdirSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
@@ -146,7 +147,7 @@ async function main() {
     if (stop.length > 0) {
       console.error('STOP: the live exam guide differs from the structure this app was designed for:');
       for (const s of stop) console.error(`  - ${s}`);
-      process.exit(2);
+      process.exit(EXIT_CHANGED);
     }
     problems.push(...diffOutline(outline, docs.outline as unknown as OutlineDoc).map((x) => `live: ${x}`));
     problems.push(...diffServices(services, docs.services as unknown as ServicesDoc).map((x) => `live: ${x}`));
@@ -177,6 +178,10 @@ async function main() {
 }
 
 main().catch((e: unknown) => {
+  if (isNetworkFailure(e)) {
+    console.error(`check:content: network warning, not a content problem: ${(e as Error).message.split('\n')[0]}`);
+    process.exit(EXIT_NETWORK);
+  }
   console.error(e);
-  process.exit(1);
+  process.exit(EXIT_CHANGED);
 });
