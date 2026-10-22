@@ -8,6 +8,7 @@ import { spawn } from 'node:child_process';
 import { existsSync, mkdirSync, statSync } from 'node:fs';
 import { BUILDINGS } from '../src/data/buildings.ts';
 import { FAMILIES } from '../src/data/families.ts';
+import { CURRENT_VERSION } from '../src/save/schema.ts';
 import { chromium, type Browser, type BrowserContext, type Page } from '@playwright/test';
 
 const PORT = 4173;
@@ -183,7 +184,7 @@ async function phone(browser: Browser): Promise<void> {
     });
   });
   const exported = JSON.parse(text) as { app: string; save: { version: number; buildings: Record<string, unknown> } };
-  check(exported.app === 'saa-region-builder' && exported.save.version === 5 && Object.keys(exported.save.buildings).length === 3, 'export downloads a valid v5 backup (a v1 save migrated on load)');
+  check(exported.app === 'saa-region-builder' && exported.save.version === CURRENT_VERSION && Object.keys(exported.save.buildings).length === 3, `export downloads a valid v${CURRENT_VERSION} backup (a v1 save migrated on load)`);
 
   check(errors.length === 0, 'no console errors, warnings or CSP violations on phone', errors.slice(0, 3).join(' | '));
   await ctx.close();

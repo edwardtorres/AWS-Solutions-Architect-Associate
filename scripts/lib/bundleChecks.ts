@@ -15,6 +15,12 @@ export const ALLOWED_URL_HOSTS = new Set([
   '169.254.169.254',
 ]);
 
+/**
+ * Exact URLs that appear as text inside generated service-worker runtime code. Workbox prints the first one in a console
+ * warning that only fires when a precache entry has no revision, which the build never produces. Nothing requests them.
+ */
+export const ALLOWED_TEXT_URLS = new Set(['https://bit.ly/wb-precache']);
+
 /** Strings that only exist in dev-only modules. Production bundles must not contain any of them. */
 export const DEV_MARKERS = ['SAA_DEV_HOOKS_SENTINEL', '__saaDev', '__SAA_SEED__', 'DEV ONLY', 'Developer toolbar', 'Developer controls', 'SAA_DEV_MOCK_SHORT'];
 
@@ -36,9 +42,10 @@ export function checkBundle(files: readonly BundleFile[]): string[] {
 
   // 2. No external origins.
   for (const f of text) {
-    for (const m of f.content.matchAll(/https?:\/\/([A-Za-z0-9.-]+)/g)) {
+    for (const m of f.content.matchAll(/https?:\/\/([A-Za-z0-9.-]+)[^\s"'`)<>]*/g)) {
       const host = m[1] as string;
-      if (!ALLOWED_URL_HOSTS.has(host)) problems.push(`${f.path} references external origin ${host}`);
+      if (ALLOWED_URL_HOSTS.has(host) || ALLOWED_TEXT_URLS.has(m[0])) continue;
+      problems.push(`${f.path} references external origin ${host}`);
     }
     if (/@import\s+(url\()?['"]?https?:/.test(f.content)) problems.push(`${f.path} imports a remote stylesheet`);
   }

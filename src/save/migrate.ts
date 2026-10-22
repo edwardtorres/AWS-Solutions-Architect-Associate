@@ -44,6 +44,8 @@ export const MIGRATIONS: Record<number, Migration> = {
   // Version 5 adds the review, bullet, maintenance and trap stores, the review session, the mock state and the lab acknowledgement.
   // Nothing is derived here: the per-bullet figures are backfilled once from `recent` when the Weak Spots page first loads.
   4: (old) => ({ ...old, version: 5 }),
+  // Version 6 adds ui.lastExportAt (the date of the last backup export) for the backup reminder. Nothing else changes.
+  5: (old) => ({ ...old, version: 6, ui: { ...(old.ui && typeof old.ui === 'object' ? old.ui : {}), lastExportAt: null } }),
 };
 
 /** Question ids are `<building>-NNN`; the exam domain follows from the building. Foundations and unknown ids have none. */
@@ -101,9 +103,10 @@ export function sanitize(raw: Record<string, unknown>, knownIds: ReadonlySet<str
     if (raw.ui.view === 'map' || raw.ui.view === 'atlas') ui.view = raw.ui.view;
     if (raw.ui.roads === 'selected' || raw.ui.roads === 'all') ui.roads = raw.ui.roads;
     if (typeof raw.ui.lastBuilding === 'string' && knownIds.has(raw.ui.lastBuilding)) ui.lastBuilding = raw.ui.lastBuilding;
+    if (typeof raw.ui.lastExportAt === 'string' && !Number.isNaN(Date.parse(raw.ui.lastExportAt))) ui.lastExportAt = raw.ui.lastExportAt;
   }
   return {
-    version: 5,
+    version: 6,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : base.updatedAt,
     buildings,
     ui,

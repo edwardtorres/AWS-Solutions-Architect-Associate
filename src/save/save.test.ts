@@ -46,7 +46,7 @@ describe('save schema', () => {
     const b = makeStore(storage);
     expect(b.getSnapshot().status).toBe('ok');
     expect(b.getSnapshot().save.buildings['identity-keep']?.state).toBe('commissioned');
-    expect(b.getSnapshot().save.ui).toEqual({ view: 'atlas', lastBuilding: 'gatehouse', roads: 'all' });
+    expect(b.getSnapshot().save.ui).toEqual({ view: 'atlas', lastBuilding: 'gatehouse', roads: 'all', lastExportAt: null });
   });
 
   it('notifies subscribers and ignores unknown buildings', () => {
@@ -90,7 +90,7 @@ describe('migrations', () => {
       clock,
     );
     expect(Object.keys(save.buildings)).toEqual(['gatehouse']);
-    expect(save.ui).toEqual({ view: 'map', lastBuilding: null, roads: 'all' });
+    expect(save.ui).toEqual({ view: 'map', lastBuilding: null, roads: 'all', lastExportAt: null });
   });
 
   it('rejects non-object saves and invalid versions', () => {
@@ -247,9 +247,9 @@ describe('v1 to current migration', () => {
     const r = migrate(v1, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(5);
+    expect(r.save.version).toBe(6);
     expect(r.save.buildings).toEqual({ 'identity-keep': v1.buildings['identity-keep'], gatehouse: v1.buildings.gatehouse });
-    expect(r.save.ui).toEqual(v1.ui);
+    expect(r.save.ui).toEqual({ ...v1.ui, lastExportAt: null });
     expect(r.save.game).toEqual(freshSave(clock).game);
   });
 
@@ -258,10 +258,10 @@ describe('v1 to current migration', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(v1));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(6);
     const other = makeStore(null);
     expect(other.importJson(JSON.stringify({ app: 'saa-region-builder', save: v1 })).ok).toBe(true);
-    expect(other.getSnapshot().save.version).toBe(5);
+    expect(other.getSnapshot().save.version).toBe(6);
     expect(Object.keys(other.getSnapshot().save.buildings)).toHaveLength(2);
   });
 
@@ -331,7 +331,7 @@ describe('v2 to v3 migration (answer history)', () => {
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
     const { game } = r.save;
-    expect(r.save.version).toBe(5);
+    expect(r.save.version).toBe(6);
     // Every field of the old game block survives.
     expect(game.xp).toBe(fixture.game.xp);
     expect(game.flags).toHaveLength(1);
@@ -410,14 +410,14 @@ describe('v3 to v4 migration on a real v3 save', () => {
     const r = migrate(fixture, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(5);
+    expect(r.save.version).toBe(6);
     expect(r.save.labs).toEqual({ accountCreated: null, progress: {} });
     expect(r.save.game.xp).toBe(fixture.game.xp);
     expect(r.save.game.history).toEqual(fixture.game.history);
     expect(r.save.game.recent).toEqual(fixture.game.recent);
     expect(r.save.game.log).toHaveLength(fixture.game.log.length);
     expect(r.save.buildings).toEqual(fixture.buildings);
-    expect(r.save.ui).toEqual(fixture.ui);
+    expect(r.save.ui).toEqual({ ...(fixture.ui as object), lastExportAt: null });
   });
 
   it('readiness is the same before and after', () => {
@@ -433,7 +433,7 @@ describe('v3 to v4 migration on a real v3 save', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(fixture));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(6);
     store.setLabStep('lab-01-safe-account', 's1', true);
     store.setLabNote('lab-01-safe-account', 's1', 'the page looked different');
     store.setLabAccountCreated('2026-09-01');
@@ -484,7 +484,7 @@ describe('v4 to v5 migration on a real v4 save', () => {
     const r = migrate(fixture, known, clock);
     expect(r.status).toBe('migrated');
     if (r.status !== 'migrated') return;
-    expect(r.save.version).toBe(5);
+    expect(r.save.version).toBe(6);
     const g = r.save.game;
     expect(g.byBullet).toEqual({});
     expect(g.maint).toEqual({});
@@ -506,7 +506,7 @@ describe('v4 to v5 migration on a real v4 save', () => {
     storage.setItem(STORAGE_KEY, JSON.stringify(fixture));
     const store = makeStore(storage);
     expect(store.getSnapshot().status).toBe('migrated');
-    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(5);
+    expect(JSON.parse(storage.getItem(STORAGE_KEY) as string).version).toBe(6);
     const a = store.getSnapshot().save;
     const full = {
       ...a,

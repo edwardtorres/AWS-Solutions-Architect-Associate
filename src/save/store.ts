@@ -28,6 +28,8 @@ export interface Snapshot {
   status: LoadStatus;
   /** True when writes are disabled so a newer app's save is never overwritten. */
   readOnly: boolean;
+  /** True when the latest write to browser storage failed (for example, storage is full); progress stays in memory. */
+  writeFailed?: boolean;
 }
 
 export interface StoreOptions {
@@ -102,20 +104,22 @@ export function createSaveStore(opts: StoreOptions) {
     return { save: freshSave(now), status: 'corrupt-recovered', readOnly: false };
   }
 
-  function persist(save: Save): void {
-    if (!storage) return;
+  function persist(save: Save): boolean {
+    if (!storage) return true;
     try {
       storage.setItem(STORAGE_KEY, JSON.stringify(save));
+      return true;
     } catch {
-      /* quota or blocked storage: progress stays in memory for this session */
+      /* quota or blocked storage: progress stays in memory for this session and the app says so */
+      return false;
     }
   }
 
   function commit(save: Save): void {
     if (snapshot.readOnly) return;
     const next: Save = { ...save, updatedAt: now() };
-    persist(next);
-    snapshot = { ...snapshot, save: next };
+    const written = persist(next);
+    snapshot = { ...snapshot, save: next, writeFailed: !written };
     for (const l of listeners) l();
   }
 

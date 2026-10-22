@@ -17,7 +17,7 @@ export default defineConfig({
   reporter: [['list']],
   use: { baseURL: 'http://localhost:4175', launchOptions: { executablePath }, hasTouch: true },
   webServer: [
-    { command: 'npx vite preview --port 4175 --strictPort --host localhost', url: 'http://localhost:4175', reuseExistingServer: false, timeout: 30_000 },
+    { command: 'npx tsx scripts/serve-prod.ts --port 4175', url: 'http://localhost:4175', reuseExistingServer: false, timeout: 30_000 },
     // The dev server serves the development-only short mock (?mock=short); only e2e/mock.spec.ts uses it. Production never has it (check:bundle).
     { command: 'npx vite --port 4176 --strictPort --host localhost', url: 'http://localhost:4176', reuseExistingServer: false, timeout: 60_000 },
   ],

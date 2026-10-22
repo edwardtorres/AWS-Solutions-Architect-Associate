@@ -1,4 +1,5 @@
 import { lazy, Suspense, useState } from 'react';
+import SaveProtection from './SaveProtection';
 import { exportFlags } from '../game/flags';
 import { loadQuestions } from '../questions/pool';
 import { useSaveStore, useSnapshot } from '../save/context';
@@ -38,6 +39,7 @@ export default function Settings() {
   return (
     <details className="mt-4 rounded-2xl border-2 border-[var(--line)] bg-[rgba(11,26,43,0.72)] p-3 sm:p-4">
       <summary className="flex min-h-11 cursor-pointer items-center font-display text-xl font-semibold">Settings</summary>
+      <SaveProtection />
       <section aria-labelledby="flags-heading" className="mt-2">
         <h3 id="flags-heading" className="text-lg font-semibold">
           Flagged questions ({save.game.flags.length})

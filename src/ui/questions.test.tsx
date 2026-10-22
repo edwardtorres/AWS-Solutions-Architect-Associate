@@ -32,7 +32,8 @@ const q = (id: string, tags: string[] = []): Question => ({
 describe('question access', () => {
   it('has no route to the answer key', () => {
     for (const hash of ['#/questions', '#/browse', '#/questions/gatehouse', '#/answers']) {
-      expect(parseHash(hash).view).toBe('map');
+      // An unknown page is a not-found page; no route resolves to the answer key.
+      expect(['map', 'not-found']).toContain(parseHash(hash).view);
     }
   });
 

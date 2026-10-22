@@ -1,7 +1,7 @@
 export const STORAGE_KEY = 'saa-region-builder:save';
 export const CORRUPT_KEY = 'saa-region-builder:save:corrupt';
 export const APP_ID = 'saa-region-builder';
-export const CURRENT_VERSION = 5;
+export const CURRENT_VERSION = 6;
 
 /** Only progress states are stored. planned/surveyed are derived from the roads. */
 export type StoredState = 'under_construction' | 'commissioned';
@@ -19,6 +19,8 @@ export interface UiPrefs {
   view: 'map' | 'atlas';
   lastBuilding: string | null;
   roads: 'selected' | 'all';
+  /** ISO time of the most recent backup export; drives the backup reminder. Added in version 6. */
+  lastExportAt: string | null;
 }
 
 /** The three attempt types a building can have; the others are reserved for later steps. */
@@ -252,12 +254,21 @@ export interface SaveV5 {
   version: 5;
   updatedAt: string;
   buildings: Record<string, BuildingProgress>;
+  ui: Omit<UiPrefs, 'lastExportAt'>;
+  game: GameState;
+  labs: LabsState;
+}
+
+export interface SaveV6 {
+  version: 6;
+  updatedAt: string;
+  buildings: Record<string, BuildingProgress>;
   ui: UiPrefs;
   game: GameState;
   labs: LabsState;
 }
 
-export type Save = SaveV5;
+export type Save = SaveV6;
 
 export const NOTE_CAP = 1000;
 
@@ -305,7 +316,7 @@ export function freshSave(now: () => string = () => new Date().toISOString()): S
     version: CURRENT_VERSION,
     updatedAt: now(),
     buildings: {},
-    ui: { view: 'map', lastBuilding: null, roads: 'selected' },
+    ui: { view: 'map', lastBuilding: null, roads: 'selected', lastExportAt: null },
     game: freshGame(),
     labs: freshLabs(),
   };

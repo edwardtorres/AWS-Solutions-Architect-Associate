@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 
-export type View = 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse' | 'startup' | 'inspect' | 'place' | 'progress' | 'workbench' | 'puzzle' | 'labs' | 'lab' | 'review' | 'maintenance' | 'weak' | 'mock';
+export type View = 'not-found' | 'map' | 'atlas' | 'notes' | 'glossary' | 'confuse' | 'startup' | 'inspect' | 'place' | 'progress' | 'workbench' | 'puzzle' | 'labs' | 'lab' | 'review' | 'maintenance' | 'weak' | 'mock';
 /** Views that can open a building's detail panel. */
 export type PanelView = 'map' | 'atlas';
 
@@ -23,12 +23,23 @@ const VIEWS: readonly View[] = ['map', 'atlas', 'notes', 'glossary', 'confuse', 
  * #/puzzle/<scenario>, #/mock, #/mock/run[/<n>], #/mock/review, #/mock/result/<id>, #/labs, #/lab/<lab-id>, #/review, #/maintenance/<building>, #/weak and #/progress.
  * No route shows an answer key outside a finished attempt.
  */
+/** Decodes one path segment; a malformed escape (such as a lone %) is kept as written instead of throwing during render. */
+function segment(raw: string | undefined): string | null {
+  if (!raw) return null;
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
 export function parseHash(hash: string): Route {
   const parts = hash.replace(/^#\/?/, '').split('/').filter(Boolean);
-  const view = VIEWS.find((v) => v === parts[0]) ?? 'map';
-  const param = parts[1] ? decodeURIComponent(parts[1]) : null;
+  // An empty address is the map; any other unknown first segment is a page that does not exist.
+  const view: View = parts.length === 0 ? 'map' : (VIEWS.find((v) => v === parts[0]) ?? 'not-found');
+  const param = segment(parts[1]);
   const building = view === 'map' || view === 'atlas' ? param : null;
-  const extra = parts[2] ? decodeURIComponent(parts[2]) : null;
+  const extra = segment(parts[2]);
   return { view, building, param, ...(extra ? { extra } : {}) };
 }
 

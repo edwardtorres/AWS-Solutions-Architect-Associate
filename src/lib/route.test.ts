@@ -5,7 +5,9 @@ describe('hash routes', () => {
   it('defaults to the map', () => {
     expect(parseHash('')).toEqual({ view: 'map', building: null, param: null });
     expect(parseHash('#/')).toEqual({ view: 'map', building: null, param: null });
-    expect(parseHash('#/nonsense')).toEqual({ view: 'map', building: null, param: null });
+    expect(parseHash('#/nonsense')).toEqual({ view: 'not-found', building: null, param: null });
+    expect(parseHash('#/map/%E0%A4%A')).toEqual({ view: 'map', building: '%E0%A4%A', param: '%E0%A4%A' });
+    expect(parseHash('#/lab/%E0%A4%A/%ZZ')).toEqual({ view: 'lab', building: null, param: '%E0%A4%A', extra: '%ZZ' });
   });
   it('parses views and building panels', () => {
     expect(parseHash('#/atlas')).toEqual({ view: 'atlas', building: null, param: null });

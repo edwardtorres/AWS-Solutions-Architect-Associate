@@ -1,19 +1,6 @@
 import { useRef, useState } from 'react';
+import { exportBackup } from '../save/download';
 import { useSaveStore, useSnapshot } from '../save/context';
-
-function download(filename: string, text: string): void {
-  const blob = new Blob([text], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => {
-    URL.revokeObjectURL(url);
-  }, 1000);
-}
 
 export default function SaveMenu() {
   const store = useSaveStore();
@@ -41,7 +28,7 @@ export default function SaveMenu() {
           type="button"
           className="btn"
           onClick={() => {
-            download('region-builder-save.json', store.exportJson());
+            exportBackup(store, new Date());
             setMessage('Backup downloaded.');
           }}
         >

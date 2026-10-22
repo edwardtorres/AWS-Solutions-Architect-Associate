@@ -3,6 +3,9 @@ import { CityMap } from './ui/CityMap';
 import { navigate, useRoute } from './lib/route';
 import { useSaveStore, useSnapshot } from './save/context';
 import { rankFor } from './game/ranks';
+import BackupBanner from './ui/BackupBanner';
+import NotFoundView from './ui/NotFoundView';
+import PwaUpdatePrompt from './ui/PwaUpdatePrompt';
 
 // Code-split by feature: only the map ships in the first load.
 const DetailPanel = lazy(() => import('./ui/DetailPanel'));
@@ -102,6 +105,13 @@ export default function App() {
             {notice}
           </p>
         )}
+        {snapshot.writeFailed && (
+          <p role="status" className="mb-4 rounded-xl border-2 border-[var(--accent)] bg-[rgba(245,185,66,0.12)] p-3 text-sm">
+            This browser could not save your latest change, probably because its storage is full. The change is kept for this session only. Export a backup now.
+          </p>
+        )}
+        <PwaUpdatePrompt />
+        <BackupBanner />
         {(route.view === 'map' || route.view === 'atlas') && (
           <h2 className="visually-hidden">{route.view === 'map' ? 'City map' : 'Service Atlas'}</h2>
         )}
@@ -124,6 +134,7 @@ export default function App() {
           {route.view === 'lab' && <LabPage key={route.param} labId={route.param ?? null} />}
           {route.view === 'puzzle' && <PuzzlePage key={route.param} scenarioId={route.param ?? null} />}
         </Suspense>
+        {route.view === 'not-found' && <NotFoundView />}
         {snapshot.save.game.mock.active && (
           <Suspense fallback={null}>
             <MockGuard />
