@@ -89,7 +89,7 @@ const questions: Question[] = [
     correct: ['Amazon EMR Serverless applications that run the Spark and Hive jobs', 'EMR Serverless provides a runtime for Spark and Hive and determines the resources each job needs, with no clusters to configure or operate.'],
     wrong: [
       ['An Amazon EMR cluster on Amazon EC2 instances sized for the largest job and kept running between runs', 'The cluster must be configured, sized and operated, and capacity sized for the largest job sits unused between runs.'],
-      ['AWS Lambda functions that each run a slice of the Spark job and are chained together', 'Lambda is not a Spark or Hive runtime, and a single invocation can run for only up to 15 minutes.'],
+      ['AWS Lambda functions that each run a slice of the Spark job and are chained together', 'Lambda is not a Spark or Hive runtime, and a single standard Lambda invocation can run for only up to 15 minutes.'],
       ['AWS Batch with a compute environment that runs the jobs as containers across Amazon EC2 instances', 'Batch runs containerized batch workloads, not the Spark and Hive frameworks themselves, and its compute environments are infrastructure to define and manage.'],
     ],
     slot: 3,
@@ -146,7 +146,7 @@ const questions: Question[] = [
     correct: ['Amazon EMR, running the Spark code on a managed cluster platform', 'EMR is a managed cluster platform for frameworks such as Apache Spark that can transform and move large amounts of data into and out of S3 and DynamoDB.'],
     wrong: [
       ['Amazon Athena, rewriting the Spark transformations as a set of SQL queries', 'Athena queries data in S3 with SQL, so the existing Spark code would be rewritten.'],
-      ['AWS Lambda, splitting the Spark transformations across many short functions', 'Lambda is not a Spark platform, and each invocation runs for up to 15 minutes.'],
+      ['AWS Lambda, splitting the Spark transformations across many short functions', 'Lambda is not a Spark platform, and each standard Lambda invocation runs for up to 15 minutes.'],
       ['AWS Batch, running the Spark code as a single container on a queue for each dataset', 'Batch runs containerized batch jobs, but it is not the managed Spark framework platform the engineers want.'],
     ],
     slot: 2,
@@ -265,7 +265,7 @@ const questions: Question[] = [
     ],
     wrong: [
       ['Run an Amazon EMR cluster on Amazon EC2 instances and submit the streaming job to it', 'The cluster is something the engineers would configure and operate.'],
-      ['Invoke an AWS Lambda function on a schedule that reads the topic and writes each batch to S3', 'A scheduled Lambda function is not a continuously running Spark Structured Streaming job, and each invocation can run for only up to 15 minutes.'],
+      ['Invoke an AWS Lambda function on a schedule that reads the topic and writes each batch to S3', 'A scheduled Lambda function is not a continuously running Spark Structured Streaming job, and each standard Lambda invocation can run for only up to 15 minutes.'],
       ['Schedule an AWS Batch job each hour that reads the topic and writes the results to S3', 'An hourly batch job is neither continuously running nor a Spark Structured Streaming job.'],
     ],
     slots: [3, 4],
