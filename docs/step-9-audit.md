@@ -2,15 +2,15 @@
 
 **Status.** Parts A to E are built and verified locally, and pushed. The AWS, Cloudflare and GitHub settings belong to the owner and
 are not done yet, so the live checks (headers and CSP on the live host, the service worker offline, three live Lighthouse runs,
-the first scheduled freshness run) are **pending**. They are listed below with the exact checks to run. Nothing in this audit
-claims a live result.
+the deploy itself) are **pending**. The first freshness run has completed and reported findings that need review (Part D). They
+are listed below with the exact checks to run. Nothing in this audit claims a live result.
 
 | Part | What it covers | State |
 | --- | --- | --- |
 | A | Final content fixes (storage-market-009, blueprint-hall-010, the S3 Infrequent Access contradiction) | Done, pushed (c3e30e7) |
 | B | Installable app, offline, save protection, error boundary, 404, route safety, Lighthouse | Done, pushed (e933c60) |
 | C | CloudFormation stacks, deploy workflow with OIDC, the runbook | Templates and workflows validated; deploy waits for the owner |
-| D | Weekly content watch, network exit codes, scope fix | Done; first scheduled run pending (see below) |
+| D | Weekly content watch, network exit codes, scope fix | Done; first run completed and opened issue #1 with two findings, not yet reviewed (see below) |
 | E | README, screenshots, privacy scan | Done |
 
 ## Part A: final content fixes
@@ -224,10 +224,24 @@ the page still says, so nothing needed rewording. The hash was refreshed for tha
 **Dry run** (`npm run freshness:watch -- --dry-run`, with the network): the exam guide check is OK; the Free Tier check reports
 the offers changed since the snapshot of 2026-10-19 (added: AWS Security Hub, AWS Application Migration Service, Amazon Personalize
 (paid plan exclusive), AWS Elemental MediaTailor (paid plan exclusive); removed: AWS IoT TwinMaker). No lab badge was named as
-affected. This is the change the owner agreed the first scheduled run would report.
+affected. The owner's plan expected the first scheduled run to report only these offer changes; it did not (see below).
 
-**First manual run:** pending. The workflow is triggered by hand after this push. The expected result is one issue labelled
-`content-freshness` with the offer changes above, and no others. The result will be recorded here.
+**First manual run** (run 39853991305, triggered by hand on `main` at 5a735b6; completed, conclusion success). It opened issue #1,
+labelled `content-freshness`, with no comments. It does not match the expectation in the dry run section: it reports two findings.
+
+- **Cited pages: `tgw-how`** (`vpc/latest/tgw/how-transit-gateways-work.html`). Its hash differs from the stored value. A local fetch
+  returns the same new hash on two requests, and the runner returns the same hash, so this is a real change on the page, not a
+  fetch variant. Three blocks in `grid-planning-office` and question `grid-planning-office-013` cite it. Every quote that cites the
+  page still verifies against the live page (`check:links --fresh`: 807 sources, 7,993 quotes, all pass). I did not identify the
+  sentence that changed, because the fresh runs overwrote the cached page text. **The hash has not been refreshed, so the watch will
+  keep reporting this page until a person reads the change and refreshes it.**
+- **Free Tier offers: the list is not stable across renders.** Three renders of the same page gave three different removed sets:
+  AWS IoT TwinMaker alone (the dry run); IoT TwinMaker and Amazon Neptune (a later local run); IoT TwinMaker and AWS re:Post (the
+  runner). The added offers (Security Hub, Application Migration Service, Personalize, MediaTailor) were the same in each. So the
+  "removed" items in issue #1 are not reliable.
+
+Not done: the review of `grid-planning-office` and the hash refresh for `tgw-how`, and any change to how the Free Tier offers are
+extracted. Both are for the owner to decide (deviations 20 and 21).
 
 ## Part E: README and screenshots
 
@@ -306,6 +320,12 @@ When the owner's steps are done, I will run and record:
     rerun, and did not fail in any run recorded here. It is still worth watching.
 19. **Browser build.** The installed Playwright expects a Chromium build this environment does not have. The project's
     `CHROMIUM_PATH` lookup falls back to the pre-installed browser here; CI installs Playwright's own build.
+20. **The Free Tier offer list is unstable.** Renders of the same page gave different removed offers (see First manual run). The
+    watch reports such a change as a finding. The check should confirm a change on two consecutive renders, or wait until the whole
+    list has loaded, before it opens or comments on an issue. Not changed here: it changes the watch's behaviour, so it is the
+    owner's call.
+21. **The Transit Gateway page changed and the change is not reviewed.** The quotes still verify, but no person has read the new text
+    against the notes and question that cite the page, and the hash is not refreshed.
 
 ## Test results
 
@@ -322,6 +342,9 @@ Every command was run on the tree at the commit before this audit, unless noted.
 | `npm run e2e:live` against a local deploy-header server | 68 passed, 0 failed |
 | `npm run lighthouse` (three runs, saved) | Median performance 94, accessibility 100, best practices 100, SEO 100 |
 | `npm run freshness:watch -- --dry-run` | Ran all three network checks; report as in Part D |
+| `npm run check:links -- --fresh` after the first run | Exit 0; 807 sources, 807 pages, 7,993 quotes verified (includes the changed Transit Gateway page) |
+| First manual run of content-freshness (GitHub, 5a735b6) | Completed, success; opened issue #1 with two findings (see Part D) |
+| Deploy workflow on push (GitHub, 5a735b6) | Completed, success; the deploy job is skipped until `AWS_DEPLOY_ROLE_ARN` is set |
 | actionlint (deploy.yml, content-freshness.yml) | Clean |
 | `npx eslint .` | Clean |
 | Privacy scan (12-digit numbers, `arn:aws`, session and private links) | Only deliberate fixtures (see Part E) |
