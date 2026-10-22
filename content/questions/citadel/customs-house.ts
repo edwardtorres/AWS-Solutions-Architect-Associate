@@ -12,13 +12,14 @@ const questions: Question[] = [
     correct: ['Create a gateway VPC endpoint for Amazon S3 and add it to the route tables of the private subnets', 'A gateway endpoint reaches Amazon S3 without an internet gateway or NAT device, and there is no additional charge for using it.'],
     wrong: [
       ['Create an interface VPC endpoint for Amazon S3 in each Availability Zone that has a private subnet', 'It keeps the traffic private, but interface endpoints are billed for hourly usage and data processing, so it is not the lowest cost.'],
-      ['Move the instances to public subnets and give each instance a public IP address', 'The traffic would then reach Amazon S3 through the internet gateway instead of staying on the AWS network.'],
+      ['Move the instances to public subnets and give each instance a public IP address', 'AWS charges for all public IPv4 addresses, including those associated with running instances, so this adds a charge that the gateway endpoint does not, and it is not the lowest cost.'],
       ['Replace the NAT gateway with a larger NAT instance that has more network bandwidth', 'A NAT device still sends the traffic out through the internet, and it adds instances to run.'],
     ],
     slot: 0,
     evidence: [
       'vpce-gateway-s3|With a gateway endpoint, you can access Amazon S3 from your VPC, without requiring an internet gateway or NAT device for your VPC, and with no additional cost.',
       'vpce-gateway-s3|After you create the gateway endpoint, you can add it as a target in your route table for traffic destined from your VPC to Amazon S3.',
+      'ec2-addressing|AWS charges for all public IPv4 addresses, including public IPv4 addresses associated with running instances and Elastic IP addresses.',
       'vpce-interface|You are billed for hourly usage and data processing charges.',
     ],
   }),

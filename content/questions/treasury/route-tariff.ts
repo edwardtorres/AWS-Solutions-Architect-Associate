@@ -219,12 +219,12 @@ const questions: Question[] = [
     bullets: ['4.4-S3', '4.4-S4'],
     d: 2,
     tags: ['mock-reserve', 'trap:cloudfront-vs-global-accelerator'],
-    stem: 'A company serves a catalog of mostly unchanging product pages and images from an Application Load Balancer to users in many countries through an AWS Global Accelerator accelerator. The clients do not need fixed IP addresses and nothing else depends on the accelerator. The company wants to cut the cost of the delivery path. Which change is the MOST cost-effective?',
+    stem: 'A company serves a catalog of mostly unchanging product pages and images from an Application Load Balancer to users in many countries through an AWS Global Accelerator accelerator. The clients do not need fixed IP addresses and nothing else depends on the accelerator. Most of the bill comes from requests that reach the load balancer and the application behind it, and most of those requests fetch the same pages. The company wants to cut the cost of the delivery path. Which change is the MOST cost-effective?',
     correct: ['Replace the accelerator with an Amazon CloudFront distribution that caches the catalog and uses the load balancer as its origin', 'Edge caching means fewer requests reach the origin, and the fixed hourly fee and transfer premium of the accelerator are no longer paid.'],
     wrong: [
       ['Keep the accelerator and add a second accelerator in front of the load balancer for the busiest countries', 'Every accelerator is charged a fixed hourly fee plus a premium over standard data transfer, so cost rises.'],
       ['Keep the accelerator and add a Network Load Balancer behind it to cache the pages for repeat requests', 'A load balancer does not cache content, and it adds an hourly charge and capacity-unit charges.'],
-      ['Replace the accelerator with an Amazon Route 53 latency record that points at the load balancer in one Region for all the countries', 'Latency routing does not cache anything, so every request still reaches the origin and the repeated content is not offloaded.'],
+      ['Replace the accelerator with an Amazon Route 53 latency record that points at the load balancer in one Region for all the countries', 'Latency routing only chooses which Region answers the request, so the repeated pages still reach the origin on every request and the origin charges that dominate the bill continue.'],
     ],
     slot: 1,
     evidence: [

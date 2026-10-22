@@ -52,7 +52,7 @@ const questions: Question[] = [
     wrong: [
       ['Run the transformation on a persistent Amazon EMR cluster that stays up around the clock', 'The cluster is infrastructure that the company must configure and operate, which it wants to avoid.'],
       ['Ask the analysts to re-create the Athena tables by hand each morning from the new files', 'Manual table creation each day is the operational effort the company is avoiding, and the analysts may miss changes.'],
-      ['Run the job as an AWS Lambda function with a 20-minute processing step for each large input file', 'A Lambda invocation can run for up to 15 minutes, so a 20-minute step would time out.'],
+      ['Run the job as a standard AWS Lambda function with a 20-minute processing step for each large input file', 'A standard Lambda function times out at 15 minutes at most, so a 20-minute step would time out.'],
     ],
     slots: [0, 3],
     evidence: [
@@ -107,7 +107,7 @@ const questions: Question[] = [
     stem: 'A company has a containerized Python program that converts large input files, and each run takes about 45 minutes. Hundreds of files arrive nightly and the program does not use Apache Spark. The company wants managed compute that queues the jobs and provisions resources for them, with the LEAST change to the program. Which solution meets these requirements?',
     correct: ['Submit each file as a job to AWS Batch, which runs the container on managed compute', 'Batch runs batch workloads on managed container orchestration and provisions resources in response to submitted jobs, with no change to the program.'],
     wrong: [
-      ['Invoke an AWS Lambda function for each file that runs the conversion program as the function code', 'A Lambda invocation can run for up to 15 minutes, which is shorter than the 45-minute runs.'],
+      ['Invoke a standard AWS Lambda function for each file that runs the conversion program as the function code', 'A standard Lambda function times out at 15 minutes at most, which is shorter than the 45-minute runs.'],
       ['Rewrite the program as a query and run it with Amazon Athena against the files in Amazon S3', 'Athena runs SQL queries over data in S3, so the Python program would have to be rewritten.'],
       ['Create an Amazon EMR cluster and port the program to Apache Hadoop MapReduce jobs on the cluster', 'EMR runs big data frameworks such as Hadoop and Spark, so the program would be rewritten and a cluster operated.'],
     ],
@@ -116,6 +116,7 @@ const questions: Question[] = [
       'batch-what-is|AWS Batch provides all of the necessary functionality to run high-scale, compute-intensive workloads on top of AWS managed container orchestration services, Amazon ECS and Amazon EKS.',
       'batch-what-is|This service can efficiently provision resources in response to jobs submitted in order to eliminate capacity constraints, reduce compute costs, and deliver results quickly.',
       'lambda-quotas|Code can run for up to 15 minutes in a single invocation',
+      'lambda-quotas|Function timeout 900 seconds (15 minutes).',
     ],
   }),
   mc({
@@ -221,7 +222,7 @@ const questions: Question[] = [
     correct: ['Schedule an AWS Glue ETL job that reads the CSV files and writes Parquet to the curated bucket', 'Glue jobs run Spark on a serverless ETL engine, can be invoked on a schedule, and can write Parquet files to Amazon S3.'],
     wrong: [
       ['Run an Amazon EMR cluster continuously with a Spark job that converts each new file to Parquet', 'The always-on cluster is infrastructure to configure and operate, which conflicts with the requirement for no clusters.'],
-      ['Invoke an AWS Lambda function for each CSV file to run the conversion', 'A Lambda invocation can run for at most 900 seconds (15 minutes), so a 40-minute conversion would time out.'],
+      ['Invoke a standard AWS Lambda function for each CSV file to run the conversion', 'A standard Lambda function can run for at most 900 seconds (15 minutes), so a 40-minute conversion would time out.'],
       ['Use Amazon Athena to read the CSV files in place and never convert them', 'The requirement is to write Parquet files to the curated bucket on a schedule, and querying the CSV files in place writes none.'],
     ],
     slot: 1,

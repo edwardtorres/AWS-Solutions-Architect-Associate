@@ -109,10 +109,10 @@ const questions: Question[] = [
     building: 'ingestion-gate',
     bullets: ['3.5-S6'],
     d: 2,
-    stem: 'An Amazon Data Firehose stream delivers JSON events that contain a customer_id field to Amazon S3. Analysts query one customer at a time with Amazon Athena, and the company wants the events grouped into separate S3 prefixes by customer_id as they are delivered, without writing consumer code. Which configuration meets these requirements?',
-    correct: ['Turn on dynamic partitioning on the delivery stream and use customer_id as the partitioning key', 'Dynamic partitioning groups the in-transit data by keys inside the data and delivers it to individual S3 prefixes by key.'],
+    stem: 'A company is creating an Amazon Data Firehose stream that will deliver JSON events that contain a customer_id field to Amazon S3. Analysts query one customer at a time with Amazon Athena, and the company wants the events grouped into separate S3 prefixes by customer_id as they are delivered, without writing consumer code. Which configuration meets these requirements?',
+    correct: ['Turn on dynamic partitioning when the delivery stream is created and use customer_id as the partitioning key', 'Dynamic partitioning groups the in-transit data by keys inside the data and delivers it to individual S3 prefixes by key.'],
     wrong: [
-      ['Increase the buffer size and buffer interval of the delivery stream', 'Larger buffers make bigger objects but do not group the events by customer_id into separate prefixes.'],
+      ['Increase the buffer size of the delivery stream', 'Larger buffers make bigger objects but do not group the events by customer_id into separate prefixes.'],
       ['Create a separate delivery stream for each customer and send each customer\'s events to its own stream', 'This multiplies the streams to create and manage, and the producers would have to route every event.'],
       ['Set a custom S3 bucket prefix on the delivery stream that is based on the delivery date', 'A date-based prefix groups the events by time and not by customer_id.'],
     ],
@@ -120,6 +120,7 @@ const questions: Question[] = [
     evidence: [
       'firehose-partition|Dynamic partitioning enables you to continuously partition streaming data in Firehose by using keys within data (for example, customer_id or transaction_id) and then deliver the data grouped by these keys into corresponding Amazon Simple Storage Service (Amazon S3) prefixes.',
       'firehose-partition|With dynamic partitioning, Firehose continuously groups in-transit data using dynamically or statically defined data keys, and delivers the data to individual Amazon S3 prefixes by key.',
+      'firehose-partition-enable|You can enable dynamic partitioning only when you create a new Firehose stream.',
     ],
   }),
   mc({

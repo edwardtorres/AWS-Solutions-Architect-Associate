@@ -148,13 +148,15 @@ const questions: Question[] = [
     stem: 'A company has a media-processing step packaged as a container image. Each upload starts one run that processes a single file in one process for about two hours, and the work cannot be split into smaller steps. Runs are infrequent, and the company does not want to manage servers or clusters of instances. Which solution is the MOST cost-effective?',
     correct: ['Run the image as an Amazon ECS task on AWS Fargate that is started for each upload', 'Fargate runs containers without servers to manage, a task performs its work and then stops, and the company pays only while the task runs.'],
     wrong: [
-      ['Create an AWS Lambda function from the container image and invoke it for each upload', 'A single Lambda invocation can run for up to 15 minutes, so a two-hour process cannot finish.'],
+      ['Create a standard AWS Lambda function from the container image and invoke it for each upload', 'A standard Lambda function times out at 15 minutes, and the longest Lambda timeout on the quotas page is shorter than two hours, so a two-hour process cannot finish.'],
       ['Run the image as an Amazon ECS service on AWS Fargate with one task that always runs', 'The task runs and bills all day although runs are infrequent, so it costs more than starting a task for each upload.'],
       ['Run the image on a self-managed Amazon EC2 instance that stays on and polls for new uploads', 'The company would manage and pay for an always-on instance, which conflicts with the requirement to avoid servers.'],
     ],
     slot: 3,
     evidence: [
       'lambda-quotas|Code can run for up to 15 minutes in a single invocation',
+      'lambda-quotas|Function timeout 900 seconds (15 minutes).',
+      'lambda-quotas|For functions using AWS Lambda Managed Instances, asynchronous invocations and event source mapping invocations (except Amazon MQ and Amazon DocumentDB) support a maximum allowed value of 5,400 seconds (90 minutes).',
       'fargate-ecs|With AWS Fargate, you no longer have to provision, configure, or scale clusters of virtual machines to run containers.',
       'ecs-what-is|Fargate is a serverless, pay-as-you-go compute engine.',
       'ecs-what-is|Task An application such as a batch job that performs work, and then stops.',

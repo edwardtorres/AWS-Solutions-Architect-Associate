@@ -161,7 +161,7 @@ const questions: Question[] = [
       ['Configure an Amazon Data Firehose stream to read from the data stream and deliver to S3', 'Firehose can read from an existing Kinesis data stream and load the data into S3 with no code.'],
     ],
     wrong: [
-      ['Send the records only to Amazon Data Firehose and run the fraud checks in the delivery stream', 'Firehose delivers data to destinations and is not the place for custom per-record fraud code that must act within seconds.'],
+      ['Send the records only to Amazon S3 and run the fraud checks in a nightly batch job over the stored files', 'A nightly batch job checks each record hours after it arrives, so the requirement to examine each record within seconds is not met.'],
       ['Write the records to Amazon SQS and have one worker both check for fraud and write files to S3', 'It puts custom code in charge of the archive too, which is more code than letting Firehose do the delivery.'],
       ['Ingest into an Amazon MSK cluster and run a consumer on Amazon EC2 that writes every record to S3', 'It needs a Kafka cluster and a consumer fleet to operate, and the archive is custom code instead of managed delivery.'],
     ],
