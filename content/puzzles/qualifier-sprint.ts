@@ -411,9 +411,9 @@ const scenarios: S[] = [
       answers: { overhead: 'd', cost: 'a', secure: 'c', available: 'b' },
       facts: {
         overhead: {
-          text: 'API Gateway is a managed service for creating, publishing and securing APIs at any scale, with no API servers to run.',
+          text: 'API Gateway is part of the AWS serverless infrastructure with Lambda, and the default-settings design adds no caching, second Region or authorizer to set up.',
           src: 'apigw-welcome',
-          quote: 'Amazon API Gateway is an AWS service for creating, publishing, maintaining, monitoring, and securing REST, HTTP, and WebSocket APIs at any scale.',
+          quote: 'Together with AWS Lambda, API Gateway forms the app-facing part of the AWS serverless infrastructure.',
         },
         cost: {
           text: 'Caching answers repeated requests without calling the backend again, which lowers the number of backend calls.',

@@ -23,7 +23,7 @@ const lab: Lab = {
       resource: 'Allocated storage of each DB instance (database, replica, restored copy)',
       basis: 'Charged per GB per month for the storage capacity provisioned to the DB instance (page wording).',
       src: 'rds-pricing',
-      quote: 'Storage capacity you have provisioned to your DB instance.',
+      quote: 'Storage (per GB per month) – Storage capacity you have provisioned to your DB instance.',
     },
     {
       id: 'rds-backups',

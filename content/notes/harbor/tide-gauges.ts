@@ -98,8 +98,9 @@ const notes: BuildingNotes = {
           ['Dimensions TargetGroup, LoadBalancer TargetGroup, AvailabilityZone, LoadBalancer HealthyHostCount The number of targets that are considered healthy.',
            'We recommend you monitor for non-zero UnHealthyHostCount in the Minimum statistic, and alarm on non-zero value for more than one data point.']),
         b('Alarms turn metrics into actions: define key metrics and set thresholds for invoking corresponding alarm events.',
-          'waf-monitor-components',
-          ['Define key metrics, describe how to extract them from logs (if necessary), and set thresholds for invoking corresponding alarm events.']),
+          ['waf-monitor-components', 'cw-alarms'],
+          ['waf-monitor-components|Define key metrics, describe how to extract them from logs (if necessary), and set thresholds for invoking corresponding alarm events.',
+           'cw-alarms|The alarm performs one or more actions based on the value of the metric or expression relative to a threshold over a number of time periods.']),
       ],
       services: ['Amazon CloudWatch', 'Elastic Load Balancing (ELB)'],
       design: [

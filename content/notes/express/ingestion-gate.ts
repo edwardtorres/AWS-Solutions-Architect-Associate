@@ -59,6 +59,7 @@ const notes: BuildingNotes = {
           ['kinesis-concepts|The data capacity of your stream is a function of the number of shards that you specify for the stream.',
            'kinesis-concepts|Currently, in Kinesis Data Streams, you can choose between an on-demand mode and a provisioned mode for your data streams.',
            'firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.',
+           'firehose|Buffer Size is in MBs and Buffer Interval is in seconds.',
            'firehose-faqs|It can capture, transform, and load streaming data into Amazon S3, Amazon Redshift, Amazon OpenSearch Service, Snowflake, Apache Iceberg tables and Splunk, enabling near real-time analytics with existing business intelligence tools and dashboards you’re already using today.'],
           { allow: ['two'] }),
         b('Retention is part of the configuration: a Kinesis stream\'s retention period defaults to 24 hours and can be increased up to 8760 hours (365 days), with additional charges for streams set above 24 hours, so replay needs are sized here.',

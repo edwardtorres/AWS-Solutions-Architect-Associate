@@ -71,7 +71,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon ECS', 'Amazon EKS', 'AWS Fargate', 'Amazon ECR'],
       design: [
-        b('The first decision AWS suggests is your operating model: a serverless operational model or a Kubernetes operational model. Choose EKS where you want Kubernetes and its portability of skills and tooling; otherwise Amazon ECS is the AWS-native orchestrator.',
+        b('One of the first considerations AWS names is your operating model: a serverless operational model or a Kubernetes operational model. Amazon EKS provides flexibility and control over deployment and orchestration provided by Kubernetes technology.',
           'container-decision',
           ['One of the first considerations is your preference for either a serverless operational model or a Kubernetes operation model.',
            'Amazon EKS provides flexibility and control over application deployment and orchestration provided by Kubernetes technology.']),

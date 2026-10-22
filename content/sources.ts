@@ -829,9 +829,13 @@ const sources: Source[] = [
   aws('cfn-cli-describe-stacks', `${D}/cli/latest/reference/cloudformation/describe-stacks.html`, 'AWS CLI reference: cloudformation describe-stacks'),
   aws('sqs-cli-receive-message', `${D}/cli/latest/reference/sqs/receive-message.html`, 'AWS CLI reference: sqs receive-message'),
   aws('sqs-api-receive-message', `${D}/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html`, 'Amazon SQS API reference: ReceiveMessage'),
-  aws('cli-filter-output', `${D}/cli/latest/userguide/cli-usage-filter.html`, 'Filtering output in the AWS CLI'),
   aws('s3-website-endpoints', `${D}/AmazonS3/latest/userguide/WebsiteEndpoints.html`, 'Amazon S3 website endpoints'),
   aws('ec2-ri-exchange', `${D}/AWSEC2/latest/UserGuide/ri-convertible-exchange.html`, 'Exchange Convertible Reserved Instances'),
+  aws('lab-cli-config-delete-channel', `${D}/cli/latest/reference/configservice/delete-delivery-channel.html`, 'AWS CLI: delete-delivery-channel'),
+  aws('lab-cli-backup-delete-plan', `${D}/cli/latest/reference/backup/delete-backup-plan.html`, 'AWS CLI: delete-backup-plan'),
+  aws('lab-cli-backup-delete-vault', `${D}/cli/latest/reference/backup/delete-backup-vault.html`, 'AWS CLI: delete-backup-vault'),
+  aws('lab-cli-backup-delete-recovery-point', `${D}/cli/latest/reference/backup/delete-recovery-point.html`, 'AWS CLI: delete-recovery-point'),
+  aws('lab-backup-default-role', `${D}/aws-backup/latest/devguide/iam-service-roles.html`, 'IAM service roles (AWS Backup)'),
 ];
 
 export default sources;
