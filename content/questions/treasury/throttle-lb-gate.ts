@@ -158,8 +158,8 @@ const questions: Question[] = [
     ],
     slot: 2,
     evidence: [
-      'lambda-reserved|Reserved concurrency – This sets both the maximum and minimum number of concurrent instances allocated to your function.',
-      'lambda-concurrency|There is no charge for configuring reserved concurrency for a function.',
+      'lambda-reserved|Reserved concurrency – This sets both the maximum and minimum number of concurrent instances allocated to your Event Function.',
+      'lambda-concurrency|There is no charge for configuring reserved concurrency for an Event Function.',
       'lambda-concurrency|Configuring provisioned concurrency incurs charges to your AWS account.',
     ],
   }),

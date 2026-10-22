@@ -115,8 +115,8 @@ const questions: Question[] = [
     slot: 1,
     evidence: [
       'lambda-reserved|Reserved concurrency is useful for ensuring that your most critical functions always have enough concurrency to handle incoming requests.',
-      'lambda-reserved|When a function has reserved concurrency, no other function can use that concurrency.',
-      'lambda-concurrency|By default, Lambda provides your account with a total concurrency limit of 1,000 concurrent executions across all functions in an AWS Region.',
+      'lambda-reserved|When an Event Function has reserved concurrency, no other Event Function can use that concurrency.',
+      'lambda-concurrency|By default, Lambda provides your account with a total concurrency limit of 1,000 concurrent executions across all Event Functions in an AWS Region.',
     ],
   }),
   mc({
@@ -133,7 +133,7 @@ const questions: Question[] = [
     ],
     slot: 2,
     evidence: [
-      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your function.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
       'lambda-provisioned|These execution environments are ready to respond immediately to incoming function requests.',
       'lambda-provisioned|Generally, interactive workloads benefit the most from the feature.',
       'lambda-reserved|Reserved concurrency acts as both a lower and upper bound - it reserves the specified capacity exclusively for your function while also preventing it from scaling beyond that limit.',
@@ -242,9 +242,9 @@ const questions: Question[] = [
     ],
     slots: [1, 4],
     evidence: [
-      'lambda-provisioned|You cannot use provisioned concurrency with the $LATEST version of any function.',
+      'lambda-provisioned|You cannot use provisioned concurrency with the $LATEST version of any Event Function.',
       'lambda-provisioned|With Application Auto Scaling, you can set your own scaling schedule according to predictable load changes.',
-      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your function.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
     ],
   }),
   mr({
@@ -264,10 +264,10 @@ const questions: Question[] = [
     ],
     slots: [2, 3],
     evidence: [
-      "lambda-exec-role|A Lambda function's execution role is an AWS Identity and Access Management (IAM) role that grants the function permission to access AWS services and resources.",
+      "lambda-exec-role|A Lambda Event Function's execution role is an AWS Identity and Access Management (IAM) role that grants the function permission to access AWS services and resources.",
       "lambda-exec-role|In order for Lambda to properly assume your execution role, the role's trust policy must specify the Lambda service principal (lambda.amazonaws.com) as a trusted service.",
       'lambda-exec-role|You should avoid manually calling sts:AssumeRole to assume the execution role in your function code.',
-      'lambda-resource-policy|With resource-based permissions policies, you can grant other AWS accounts, users, organizations, and AWS services access to your Lambda functions.',
+      'lambda-resource-policy|With resource-based permissions policies, you can grant other AWS accounts, users, organizations, and AWS services access to your Lambda Event Functions.',
     ],
   }),
   mc({
@@ -325,8 +325,8 @@ const questions: Question[] = [
     ],
     slot: 0,
     evidence: [
-      'lambda-reserved|To intentionally throttle a function, set its reserved concurrency to 0.',
-      'lambda-reserved|This stops your function from processing any events until you remove the limit.',
+      'lambda-reserved|To intentionally throttle an Event Function, set its reserved concurrency to 0.',
+      'lambda-reserved|This stops your Event Function from processing any events until you remove the limit.',
     ],
   }),
 ];

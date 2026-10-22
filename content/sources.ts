@@ -832,6 +832,7 @@ const sources: Source[] = [
   aws('lab-cli-backup-delete-recovery-point', `${D}/cli/latest/reference/backup/delete-recovery-point.html`, 'AWS CLI: delete-recovery-point'),
   aws('lab-backup-default-role', `${D}/aws-backup/latest/devguide/iam-service-roles.html`, 'IAM service roles (AWS Backup)'),
   aws('firehose-partition-enable', `${D}/firehose/latest/dev/dynamic-partitioning-enable.html`, 'Enable dynamic partitioning in Amazon Data Firehose'),
+  aws('redshift-what-is', `${D}/redshift/latest/mgmt/welcome.html`, 'What is Amazon Redshift?'),
 ];
 
 export default sources;

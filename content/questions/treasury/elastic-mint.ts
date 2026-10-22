@@ -240,7 +240,7 @@ const questions: Question[] = [
     ],
     slot: 1,
     evidence: [
-      'lambda-concurrency|There is no charge for configuring reserved concurrency for a function.',
+      'lambda-concurrency|There is no charge for configuring reserved concurrency for an Event Function.',
       'lambda-concurrency|Configuring provisioned concurrency incurs charges to your AWS account.',
     ],
   }),

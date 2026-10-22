@@ -153,8 +153,8 @@ const questions: Question[] = [
     ],
     slot: 1,
     evidence: [
-      'lambda-xray|With Active tracing, Lambda automatically creates trace segments for function invocations and sends them to X-Ray.',
-      'lambda-xray|When you activate tracing in the Lambda console, Lambda adds the required permissions to your function\'s execution role.',
+      'lambda-xray|With Active tracing, Lambda automatically creates trace segments for Event Function invocations and sends them to X-Ray.',
+      "lambda-xray|When you activate tracing in the Lambda console, Lambda adds the required permissions to your Event Function's execution role.",
       'lambda-xray|You can\'t configure the X-Ray sampling rate for your functions.',
     ],
   }),

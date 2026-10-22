@@ -171,8 +171,7 @@ const questions: Question[] = [
     evidence: [
       'graviton|AWS Graviton is a family of processors designed to deliver the best price performance for your cloud workloads running in Amazon Elastic Compute Cloud (Amazon EC2).',
       'ec2-resize-compat|Architecture AMIs are specific to the architecture of the processor, so you must select an instance type with the same processor architecture as the current instance type.',
-      'ec2-type-names|i – Intel processors',
-      'ec2-type-names|a – AMD processors',
+      'ec2-type-names|a – AMD processors b*00 | gb*00 – Accelerated by NVIDIA Blackwell GPUs g – AWS Graviton processors i – Intel processors',
     ],
   }),
 ];

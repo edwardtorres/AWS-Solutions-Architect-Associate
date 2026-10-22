@@ -19,7 +19,7 @@ const questions: Question[] = [
     evidence: [
       'lambda-reserved|Additionally, reserved concurrency can be used for limiting concurrency to prevent overwhelming downstream resources, like database connections.',
       'lambda-reserved|Reserved concurrency acts as both a lower and upper bound - it reserves the specified capacity exclusively for your function while also preventing it from scaling beyond that limit.',
-      'lambda-provisioned|After this, the function can continue to scale on standard, unreserved concurrency if you haven\'t reached your account concurrency limit.',
+      "lambda-provisioned|After this, the Event Function can continue to scale on standard, unreserved concurrency if you haven't reached your account concurrency limit.",
     ],
   }),
   mr({
@@ -40,9 +40,9 @@ const questions: Question[] = [
     ],
     slots: [0, 2],
     evidence: [
-      'lambda-concurrency|When you dedicate reserved concurrency to a function, no other function can use that concurrency.',
-      'lambda-concurrency|To support your specific account needs, you can request a quota increase and configure function-level concurrency controls so that your critical functions don\'t experience throttling.',
-      'lambda-reserved|To intentionally throttle a function, set its reserved concurrency to 0.',
+      'lambda-concurrency|When you dedicate reserved concurrency to an Event Function, no other Event Function can use that concurrency.',
+      "lambda-concurrency|To support your specific account needs, you can request a quota increase and configure function-level concurrency controls so that your critical Event Functions don't experience throttling.",
+      'lambda-reserved|To intentionally throttle an Event Function, set its reserved concurrency to 0.',
     ],
   }),
   mr({
@@ -83,8 +83,8 @@ const questions: Question[] = [
     ],
     slot: 0,
     evidence: [
-      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your function.',
-      'lambda-provisioned|Provisioned concurrency is useful for reducing cold start latencies for functions and designed to make functions available with double-digit millisecond response times.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
       'lambda-concurrency|In contrast, when using reserved concurrency, Lambda might completely terminate an environment after a period of inactivity.',
     ],
   }),
@@ -221,8 +221,8 @@ const questions: Question[] = [
     ],
     slot: 2,
     evidence: [
-      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your function.',
-      'lambda-provisioned|Provisioned concurrency is useful for reducing cold start latencies for functions and designed to make functions available with double-digit millisecond response times.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
+      'lambda-provisioned|Provisioned concurrency – This is the number of pre-initialized execution environments allocated to your Event Function.',
       'lambda-concurrency|In contrast, when using reserved concurrency, Lambda might completely terminate an environment after a period of inactivity.',
     ],
   }),

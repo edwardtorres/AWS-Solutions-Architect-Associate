@@ -195,7 +195,7 @@ const questions: Question[] = [
     slots: [1, 4],
     evidence: [
       'sns-sqs-fanout|It decouples sending and receiving components—without requiring each component to be available at the same time.',
-      'asg-sqs|The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain.',
+      'asg-sqs|To scale your Auto Scaling group in proportion to the work waiting in your queue, use a backlog per instance metric.',
       'asg-sqs|If you use a target tracking scaling policy based on a custom Amazon SQS queue metric, dynamic scaling can adjust to the demand curve of your application more effectively.',
     ],
   }),

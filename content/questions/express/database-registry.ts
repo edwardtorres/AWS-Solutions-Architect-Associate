@@ -170,7 +170,7 @@ const questions: Question[] = [
     wrong: [
       ['Provisioned mode at a fixed level sized for the daily peak with no auto scaling', 'The table is charged for the provisioned throughput through the quiet hours, so the company pays for unused capacity.'],
       ['Provisioned mode at the average daily level with no auto scaling', 'Traffic above the average would exceed the provisioned capacity at the daily peak, so requests would be throttled.'],
-      ['On-demand capacity mode, which accepts whatever traffic arrives', 'On-demand mode runs without capacity planning. The floor and ceiling in the stem are the auto scaling minimum and maximum levels that DynamoDB sets for provisioned capacity, and AWS says provisioned capacity suits steady workloads that can be reliably forecast.'],
+      ['On-demand capacity mode, which accepts whatever traffic arrives', 'On-demand mode runs without capacity planning. The floor and ceiling in the stem are the auto scaling minimum and maximum levels that DynamoDB sets for provisioned mode, which AWS points to for a workload whose capacity can be planned in advance.'],
     ],
     slot: 3,
     evidence: [
