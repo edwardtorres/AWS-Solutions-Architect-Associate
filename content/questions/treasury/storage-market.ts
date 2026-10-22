@@ -169,9 +169,9 @@ const questions: Question[] = [
     bullets: ['4.1-K9'],
     d: 3,
     tags: ['placement-eligible'],
-    stem: 'A content team shares a Linux file system over NFS. It is accessed in unpredictable bursts, its average throughput is a small fraction of its peak, and most files are not read for months. The company wants the LOWEST cost without changing the applications. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A content team shares a Linux file system over NFS. Its throughput needs grow with the amount of data stored, and most files are not read for months. The company wants the LOWEST cost without changing the applications. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
-      ['Use Bursting throughput on an Amazon EFS file system', 'Throughput scales with the amount of storage and bursts above the baseline, so a spiky workload with a low average does not pay for throughput it rarely uses.'],
+      ['Use Bursting throughput on an Amazon EFS file system', 'Bursting throughput is recommended for workloads that require throughput that scales with the amount of storage, and it avoids the charge for throughput enabled on a Provisioned file system.'],
       ['Turn on EFS lifecycle management to move unused files to the Infrequent Access (IA) storage class', 'Files that are not accessed move to the lower-cost IA class, which is cost-optimized for data that is accessed only a few times each quarter.'],
     ],
     wrong: [
