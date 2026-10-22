@@ -73,7 +73,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon RDS', 'Amazon DynamoDB', 'Amazon ElastiCache', 'Amazon Aurora'],
       design: [
-        b('Cue: structured data and business objects → relational; massive scale and very high request throughput → key-value (DynamoDB); complex networks of objects such as social networks or fraud detection → graph (Neptune); JSON-like documents → DocumentDB; analysing massive amounts of data → Redshift.',
+        b('Cue: structured data and business objects → relational; large amounts of data and very high request throughput → key-value (DynamoDB); complex networks of objects such as social networks or fraud detection → graph (Neptune); JSON-like documents → DocumentDB; analysing massive amounts of data → Redshift.',
           'database-decision',
           ['Key-value databases can scale to large amounts of data and extremely high throughput of requests, while servicing millions of simultaneous users through distributed processing and storage.',
            'Amazon Neptune Graph Use when you have to model complex networks of objects, such as social networks, fraud detection, and recommendation engine use cases.',

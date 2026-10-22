@@ -164,7 +164,7 @@ const notes: BuildingNotes = {
         ['learn-hub|AWS Billing and Cost Management Microsoft Cost Management Cost Management helps you understand your Azure invoice or bill.',
          'learn-hub|It also helps you manage your billing account and subscriptions, monitor and control Azure spending, and optimize resource use.',
          'savings-plans|To get started, use AWS Cost Explorer to view your recommended Savings Plans commitment, refresh Savings Plans recommendations, purchase Savings Plans, manage your Savings Plans, and view your historical AWS usage.']),
-      breaks: b('Learn pairs Microsoft Cost Management with the AWS billing tools. The EC2 purchasing options (On-Demand, Savings Plans, Reserved Instances, Spot, Dedicated Hosts, Capacity Reservations) have no Learn pairing; AWS lists them as options to optimize your costs for Amazon EC2.',
+      breaks: b('Learn pairs Microsoft Cost Management with the AWS billing tools. AWS lists the EC2 purchasing options (On-Demand, Savings Plans, Reserved Instances, Spot, Dedicated Hosts, Capacity Reservations) as options to optimize your costs for Amazon EC2.',
         ['ec2-purchasing', 'learn-hub'],
         ['ec2-purchasing|You can use the following options to optimize your costs for Amazon EC2',
          'learn-hub|AWS Billing and Cost Management Microsoft Cost Management Cost Management helps you understand your Azure invoice or bill.']),

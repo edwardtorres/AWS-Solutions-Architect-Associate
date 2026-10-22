@@ -35,10 +35,11 @@ const notes: BuildingNotes = {
           ['AWS Snowball Edge is no longer available to new customers.',
            'New customers should explore AWS DataSync for online transfers, AWS Data Transfer Terminal for secure physical transfers, or AWS Partner solutions.'],
           { status: 'closed' }),
-        b('AWS Data Transfer Terminal is a network-ready physical location where you bring your own storage devices for fast data transfer to and from your AWS Cloud services; you schedule a reservation from the console.',
+        b('AWS Data Transfer Terminal is a network-ready physical location where you bring your own storage devices for fast data transfer to and from your AWS Cloud services; you schedule a reservation from the console, and at this time it is available only to AWS Enterprise Support customers.',
           'dtt',
           ['AWS Data Transfer Terminal is a network-ready, physical location you can bring your data storage devices for fast data transfer to and from your AWS Cloud service.',
-           'Schedule a reservation at one of our physical Data Transfer Terminal facilities from the AWS Management Console']),
+           'Schedule a reservation at one of our physical Data Transfer Terminal facilities from the AWS Management Console',
+           'dtt|AWS Data Transfer Terminal is available only to AWS Enterprise Support customers at this time.']),
       ],
       services: ['AWS DataSync', 'AWS Storage Gateway', 'AWS Transfer Family', 'AWS Snow Family'],
       design: [

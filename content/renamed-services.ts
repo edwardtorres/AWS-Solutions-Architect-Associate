@@ -43,6 +43,14 @@ const renamed: RenamedService[] = [
       ['Posted on: Feb 9, 2024 AWS is renaming Amazon Kinesis Data Firehose to Amazon Data Firehose.',
        'There are no other changes, including service endpoints, APIs, the AWS Command Line Interface (AWS CLI), the AWS Identity and Access Management (IAM) access policies, and Amazon CloudWatch metrics.']),
   },
+  {
+    id: 'lambda-event-function',
+    examGuideName: 'AWS Lambda function',
+    otherName: 'Event Function',
+    relation: b('Lambda pages now use the term Event Function in places, for example "your Event Function\'s concurrency". This app keeps the exam guide\'s wording, Lambda function, in prose.',
+      'lambda-concurrency',
+      ['To summarize, your Event Function\'s concurrency is the number of concurrent requests that it\'s handling at the same time.']),
+  },
 ];
 
 export default renamed;

@@ -12,7 +12,7 @@ const notes: BuildingNotes = {
        'elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.']),
   ],
   beyondProject: [
-    b('Your visitor counter runs on Lambda. The SAA cost question is when Lambda is the cheaper choice than EC2 or Fargate. Lambda Event Functions are priced based on the number of requests served and the duration your code runs, so you pay for the work done rather than for an idle server. Code can run for up to 15 minutes in a single invocation, and the function timeout is 900 seconds, unless the function is a Lambda Managed Instances function, which has a longer limit for some invocation types. For long-running or steady high-volume work, compare the cost against EC2 or Fargate. These limits are documented and can change.',
+    b('Your visitor counter runs on Lambda. The SAA cost question is when Lambda is the cheaper choice than EC2 or Fargate. Lambda Lambda functions are priced based on the number of requests served and the duration your code runs, so you pay for the work done rather than for an idle server. Code can run for up to 15 minutes in a single invocation, and the function timeout is 900 seconds, unless the function is a Lambda Managed Instances function, which has a longer limit for some invocation types. For long-running or steady high-volume work, compare the cost against EC2 or Fargate. These limits are documented and can change.',
       ['lambda-pricing', 'lambda-quotas'],
       ['lambda-pricing|Lambda Event Functions are priced based on the number of requests served and the duration your code runs, measured in GB-seconds.',
        'lambda-quotas|Code can run for up to 15 minutes in a single invocation (up to 90 minutes for Lambda Managed Instances functions invoked asynchronously or through any event source mapping except Amazon MQ and Amazon DocumentDB) and a single function can use up to 10,240 MB of memory.',
@@ -157,7 +157,7 @@ const notes: BuildingNotes = {
     {
       id: '4.2-S3',
       concepts: [
-        b('Match the service to the workload shape. Lambda: code can run for up to 15 minutes in a single invocation, unless it is a Lambda Managed Instances function, and Lambda Event Functions are priced per request and execution duration. Fargate runs containers without managing servers or clusters of EC2 instances. EC2 offers purchasing options to optimize cost (Counting House).',
+        b('Match the service to the workload shape. Lambda: code can run for up to 15 minutes in a single invocation, unless it is a Lambda Managed Instances function, and Lambda Lambda functions are priced per request and execution duration. Fargate runs containers without managing servers or clusters of EC2 instances. EC2 offers purchasing options to optimize cost (Counting House).',
           ['lambda-quotas', 'lambda-pricing', 'fargate-ecs', 'ec2-purchasing'],
           ['lambda-quotas|Code can run for up to 15 minutes in a single invocation (up to 90 minutes for Lambda Managed Instances functions invoked asynchronously or through any event source mapping except Amazon MQ and Amazon DocumentDB) and a single function can use up to 10,240 MB of memory.',
            'lambda-pricing|Lambda Event Functions are priced per request and execution duration.',
@@ -182,7 +182,7 @@ const notes: BuildingNotes = {
   ],
   cues: [
     cue('priced per request and execution duration, no servers to manage', 'AWS Lambda',
-      b('Lambda Event Functions are priced per request and execution duration.', 'lambda-pricing',
+      b('Lambda Lambda functions are priced per request and execution duration.', 'lambda-pricing',
         ['Lambda Event Functions are priced per request and execution duration.'])),
     cue('run containers without managing servers or clusters', 'AWS Fargate',
       b('Fargate runs containers without having to manage servers or clusters of EC2 instances.', 'fargate-ecs',

@@ -40,7 +40,7 @@ const lab: Lab = {
     {
       id: 'athena',
       resource: 'Athena queries and CTAS',
-      basis: 'You pay based on data processed (page wording); standard S3 rates also apply to the data and results.',
+      basis: 'You pay based on data processed (page wording).',
       src: 'athena-pricing',
       quote: 'Pricing is simple: you pay based on data processed or compute used.',
     },

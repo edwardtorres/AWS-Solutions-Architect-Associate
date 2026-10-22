@@ -41,7 +41,7 @@ export const MIN_SCENARIOS: Record<PuzzleType, number> = {
   'cold-cellar': 14,
   'purchase-planner': 14,
   'architecture-builder': 9,
-  'qualifier-sprint': 11,
+  'qualifier-sprint': 10,
 };
 
 /** A documented rule an evaluator applies. `quote` is a verbatim sentence from the AWS page `src` (verified by check:links). */

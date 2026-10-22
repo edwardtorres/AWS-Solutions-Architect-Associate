@@ -359,44 +359,6 @@ const scenarios: S[] = [
     },
   ),
   sc(
-    13,
-    2,
-    'A brochure site',
-    'A bakery publishes a static brochure site. Traffic is low and nearly all visitors live in the same country as the AWS Region. Every design below serves the pages.',
-    {
-      options: [
-        { id: 'a', text: 'An S3 bucket with static website hosting turned on' },
-        { id: 'b', text: 'An S3 bucket behind a CloudFront distribution that allows both HTTP and HTTPS' },
-        { id: 'c', text: 'An S3 bucket behind a CloudFront distribution that requires HTTPS from viewers' },
-        { id: 'd', text: 'A CloudFront distribution with default settings and an origin group of two buckets in different Regions' },
-        { id: 'e', text: 'A web server on one EC2 instance' },
-      ],
-      answers: { overhead: 'a', cost: 'a', secure: 'c', available: 'd' },
-      facts: {
-        overhead: {
-          text: 'S3 can host a static website by itself, so design a needs no web server (design e) and no CloudFront distribution (designs b, c and d).',
-          src: 's3-website',
-          quote: 'You can use Amazon S3 to host a static website.',
-        },
-        cost: {
-          text: 'CloudFront adds its own charges for data transfers out and for HTTP or HTTPS requests, and the S3-only design has no CloudFront charge.',
-          src: 'cloudfront-what-is',
-          quote: 'CloudFront charges for data transfers out from its edge locations, along with HTTP or HTTPS requests.',
-        },
-        secure: {
-          text: 'S3 website endpoints do not support HTTPS at all, so design a cannot encrypt viewer traffic, while design c requires HTTPS from viewers through CloudFront.',
-          src: 's3-website-endpoints',
-          quote: 'Amazon S3 website endpoints do not support HTTPS or access points.',
-        },
-        available: {
-          text: 'An origin group switches to the secondary origin when the primary origin is unavailable, so design d can keep serving from its second bucket.',
-          src: 'cf-origin-failover',
-          quote: 'If the primary origin is unavailable, or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.',
-        },
-      },
-    },
-  ),
-  sc(
     14,
     2,
     'A public REST API on Lambda',

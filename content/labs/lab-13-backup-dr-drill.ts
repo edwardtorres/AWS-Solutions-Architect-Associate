@@ -174,7 +174,7 @@ const lab: Lab = {
     {
       id: 'c3',
       kind: 'cleanup',
-      text: 'Edit the first line (DST) to your second Region code, then delete both vaults. If the command says a vault is not empty, wait for the recovery point deletion to finish and run it again. The default service role stays in IAM; you may keep it.',
+      text: 'Edit the first line (DST) to your second Region code, then delete both vaults. If the command says a vault is not empty, wait for the recovery point deletion to finish and run it again. If AWS Backup created a default service role for you, you may keep it.',
       code: 'DST=change-me-to-your-second-region-code\naws backup delete-backup-vault --backup-vault-name lab13-vault\naws backup delete-backup-vault --backup-vault-name lab13-dr-vault --region $DST',
       src: 'backup-vaults',
       quote: 'To guard against accidental or malicious mass deletion, you can delete a backup vault in AWS Backup only after you delete (or your backup plan lifecycles) all the recovery points in your backup vault.',

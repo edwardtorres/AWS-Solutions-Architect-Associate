@@ -106,6 +106,7 @@ const lab: Lab = {
       text: 'Create a lifecycle rule for the whole bucket: move current versions to a cheaper infrequent-access class, expire noncurrent versions, and clean up incomplete multipart uploads. This step only creates the rule: your small test files are under the size limit, so nothing will transition. Use the day values the console accepts.',
       src: 's3-lifecycle-transitions',
       quote: 'Objects smaller than 128 KB will not transition by default to any storage class',
+      newer: ['s3-lifecycle-default-min-size'],
       checkpoint: 'The rule is listed on the Management tab with its actions and shows as enabled.',
     },
     {

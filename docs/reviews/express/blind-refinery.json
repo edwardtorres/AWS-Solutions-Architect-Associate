@@ -5,8 +5,8 @@
    "D",
    "E"
   ],
-  "ambiguous": true,
-  "note": "Wording dispute on E: a crawler on a plain cron schedule cannot run after the job. It works only as an event (job-completion) trigger (about-triggers: a trigger fires on a schedule or a combination of events). D (scheduled Glue ETL job, monitor-data-warehouse-schedule) and E are the only viable pair."
+  "ambiguous": false,
+  "note": "Re-review after reword of option E (fresh blind reviewer, 2026-10-22)."
  },
  {
   "id": "refinery-006",

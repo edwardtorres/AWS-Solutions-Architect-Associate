@@ -130,5 +130,29 @@
     "verdict": "still-contradictory",
     "verdictNote": "Re-fetched 2026-10-19. The Free Tier FAQ: \"Free Tier credits expire 6 months from the date you create your AWS account.\" (Free plan answer); \"Free Tier credits expire 12 months after you create your account.\" (answer about upgrading to the Paid plan); activity credits \"expire 12 months from the date you create your AWS account\"; another answer says 6 months after you activate advanced features. The Billing guide: \"Your free account plan ends after six months or when your credits are fully used - whichever occurs first.\" Shown both ways in the safe-harbor-account notes. The FAQ adds that accounts created before the new sign-up experience (October 2026) should read the Credits page in the Billing console.",
     "checked": "2026-10-19"
+  },
+  {
+    "id": "c-s3-ia-minimum-duration",
+    "building": "cold-cellar",
+    "topic": "Whether the 30-day minimum storage duration still applies to transitions into S3 Standard-IA and One Zone-IA",
+    "readings": [
+      {
+        "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
+        "says": "Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access."
+      },
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
+        "says": "Objects that are deleted, overwritten, or transitioned to a different storage class before 30 days will incur the normal storage usage charge plus a pro-rated charge for the remainder of the 30-day minimum."
+      },
+      {
+        "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html",
+        "says": "You can't create a single Lifecycle rule that transitions objects from one storage class to another before the minimum storage duration period has passed."
+      }
+    ],
+    "handling": "Both readings are shown in the disagreements block of the cold-cellar note. The 30-day minimum for transitions is not used as a fact in any question. The early-deletion charge, which all three pages state, is not disputed and stays in questions.",
+    "added": "2026-10-22",
+    "verdict": "still-contradictory",
+    "verdictNote": "Re-read on 2026-10-22: the decision guide says no 30-day minimum applies to transitions; the storage classes and lifecycle pages still describe a charge or a rule restriction for transitions before the minimum. Not reconciled here.",
+    "checked": "2026-10-22"
   }
 ]

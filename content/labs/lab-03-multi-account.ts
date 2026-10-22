@@ -103,7 +103,7 @@ const lab: Lab = {
     {
       id: 's8',
       kind: 'check',
-      text: 'Now note what an SCP cannot do: it grants nothing and it never limits the management account. That is why the deny is on an OU for member accounts and why an IAM policy cannot override it.',
+      text: 'Now note what an SCP cannot do: it does not affect users or roles in the management account. That is why the deny is on an OU for member accounts and why an IAM policy cannot override it.',
       src: 'orgs-scps',
       quote: 'SCPs don\'t affect users or roles in the management account.',
       checkpoint: 'You can say why a test in the management account would prove nothing about this SCP.',
@@ -190,7 +190,7 @@ const lab: Lab = {
     {
       pair: 'scp-boundary-identity',
       step: 's8',
-      text: 'An SCP only limits what the accounts under it can do and grants nothing; an IAM policy cannot lift an SCP deny.',
+      text: 'An SCP only limits what the accounts under it can do; an IAM policy cannot lift an SCP deny.',
       src: 'orgs-scps',
       quote: 'If a user or role has an IAM permission policy that grants access to an action that is either not allowed or explicitly denied by the applicable SCPs, the user or role can\'t perform that action.',
     },
