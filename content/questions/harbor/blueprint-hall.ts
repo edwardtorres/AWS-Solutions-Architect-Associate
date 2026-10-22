@@ -186,15 +186,17 @@ const questions: Question[] = [
       ['Serve the static assets from Amazon S3 through Amazon CloudFront', 'Static content leaves the web servers, so the presentation tier no longer has to scale with asset traffic.'],
     ],
     wrong: [
-      ['Move the web, application and database tiers onto one larger Amazon EC2 instance', 'One instance cannot scale each tier independently and is a single point of failure for all tiers.'],
-      ['Resize the single application instance to the largest available instance type', 'Scaling one instance up does not add capacity in a second Availability Zone and leaves the tier a single point of failure.'],
-      ['Run a database copy on each application server to avoid network calls to the data tier', 'Copies on each server break the separation of tiers, so the tiers no longer scale independently.'],
+      ['Move the web, application and database tiers onto one larger Amazon EC2 instance', 'One instance cannot scale each tier independently, and it is a single point of failure for all the tiers, which AWS design principles avoid.'],
+      ['Resize the single application instance to the largest available instance type', 'Scaling one instance up keeps the tier on one server in one place, and AWS design principles avoid single points of failure.'],
+      ['Run a database copy on each application server to avoid network calls to the data tier', 'Copies on each server mix the data into the application servers instead of separating it from the core application logic, so the tiers no longer scale independently.'],
     ],
     slots: [0, 3, 5],
     evidence: [
       'elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.',
       'msa-data-store|Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which, in turn, may allow resources to be used to support more writes.',
       'msa-ui|Static web content can be served using Amazon Simple Storage Service (Amazon S3) and Amazon CloudFront.',
+      'waf-multi-location|A fundamental principle for service design in AWS is to avoid single points of failure, including the underlying physical infrastructure.',
+      'waf-stateless|Decouple data by separating and managing user data from the core application logic.',
     ],
   }),
   mc({

@@ -246,8 +246,8 @@ const questions: Question[] = [
     stem: 'A company runs analytics with Amazon Athena and Amazon EMR on data in Amazon S3. It wants one central repository of table locations, schemas and metadata that both services can read, with the LEAST management. Which solution meets this requirement?',
     correct: ['Use the AWS Glue Data Catalog as the shared metadata repository', 'The Data Catalog stores metadata about data sources and integrates with Athena, EMR and other AWS analytics services.'],
     wrong: [
-      ['Keep the schemas in an Amazon DynamoDB table and read it from both services', 'Neither service reads table definitions from a DynamoDB table, so engineers would build the integration.'],
-      ['Keep the schemas as JSON files in an Amazon S3 bucket and read them from both services', 'The JSON files would not be read as table definitions by either service, so the integration would be custom work.'],
+      ['Keep the schemas in an Amazon DynamoDB table and read it from both services', 'Athena and EMR keep and read table metadata through the Data Catalog, so a DynamoDB table would leave engineers to build that integration themselves.'],
+      ['Keep the schemas as JSON files in an Amazon S3 bucket and read them from both services', 'Athena and EMR read table definitions from the Data Catalog, not from JSON files in Amazon S3, so the schemas would need custom integration work.'],
       ['Create a separate Hive metastore on an Amazon EC2 instance and maintain it for each service', 'The company would run and maintain the metastore, which conflicts with the LEAST management requirement.'],
     ],
     slot: 2,

@@ -269,15 +269,18 @@ const questions: Question[] = [
       ['Amazon Polly, to read the answers aloud to customers', 'Polly converts text into lifelike speech.'],
     ],
     wrong: [
-      ['Amazon Lex, to extract the fields from the scanned forms', 'Lex builds conversational interfaces and does not extract data from scanned documents.'],
-      ['Amazon Rekognition, to translate the ticket text into English', 'Rekognition analyses images and video and does not translate text.'],
-      ['Amazon Transcribe, to read the answers aloud to customers', 'Transcribe converts audio to text, so it cannot read answers aloud.'],
+      ['Amazon Lex, to extract the fields from the scanned forms', 'Lex is a service for building conversational interfaces for applications using voice and text, so it does not extract fields from scanned documents.'],
+      ['Amazon Rekognition, to translate the ticket text into English', 'Rekognition analyzes image and video files, so it does not translate ticket text.'],
+      ['Amazon Transcribe, to read the answers aloud to customers', 'Transcribe is an automatic speech recognition service that converts audio to text, so it does not read answers aloud.'],
     ],
     slots: [0, 2, 4],
     evidence: [
       'textract-what-is|Extract text, forms, and tables from documents with structured data, using the Amazon Textract Document Analysis API.',
       'translate-what-is|Amazon Translate is a text translation service that uses advanced machine learning technologies to provide high-quality translation on demand.',
       'polly-what-is|Amazon Polly is a cloud service that converts text into lifelike speech.',
+      'lex-what-is|Amazon Lex V2 is an AWS service for building conversational interfaces for applications using voice and text.',
+      'rekognition-what-is|Amazon Rekognition includes a simple, easy-to-use API that can quickly analyze any image or video file that’s stored in Amazon S3.',
+      'transcribe-what-is|Amazon Transcribe is an automatic speech recognition service that uses machine learning models to convert audio to text.',
     ],
   }),
   mc({
