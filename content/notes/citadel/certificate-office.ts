@@ -43,7 +43,7 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Certificate Manager (ACM)'],
       design: [
-        b('To protect a public website: request a public certificate in ACM, attach it to the load balancer or CloudFront distribution, and use an HTTPS listener or viewer protocol policy. For CloudFront the certificate must be in the US East (N. Virginia) Region.',
+        b('To protect a public website: request a public certificate in ACM and attach it to the load balancer or CloudFront distribution. For CloudFront the certificate must be in the US East (N. Virginia) Region.',
           ['acm-services', 'cf-https-requirements'],
           ['acm-services|ACM certificates are supported by the following services: Elastic Load Balancing',
            'cf-https-requirements|To use an ACM certificate with a CloudFront distribution, make sure you request (or import) the certificate in the US East (N']),
@@ -70,7 +70,7 @@ const notes: BuildingNotes = {
            'The properties of the KMS key do not change']),
         b('ACM renewal has limits too: a certificate you imported is not eligible for managed renewal.',
           'acm-renewal', ['NOT ELIGIBLE if imported.']),
-        b('Secrets Manager does the same for credentials, using a configured schedule; see Warden\'s Lodge.',
+        b('Secrets Manager can also rotate secrets automatically; see Warden\'s Lodge.',
           'secrets-rotation', ['In Secrets Manager, you can set up automatic rotation for your secrets.']),
       ],
       services: ['AWS Certificate Manager (ACM)', 'AWS KMS'],

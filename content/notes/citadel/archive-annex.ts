@@ -80,7 +80,7 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Backup', 'Amazon S3'],
       design: [
-        b('Recovery and geographic separation are different needs. Versioning and AWS Backup address recovering from deletions and overwrites, while S3 replication to a bucket in another Region, or an AWS Backup copy to another Region, keeps a copy away from the source. AWS says cross-Region backup is particularly valuable for business continuity or compliance requirements to store backups a minimum distance away from production data.',
+        b('Recovery and geographic separation are different needs. Versioning addresses recovering from deletions and overwrites, while S3 replication to a bucket in another Region, or an AWS Backup copy to another Region, keeps a copy away from the source. AWS says cross-Region backup is particularly valuable for business continuity or compliance requirements to store backups a minimum distance away from production data.',
           ['s3-versioning', 'backup-what-is', 's3-replication'],
           ['s3-versioning|Versioning-enabled buckets can help you recover objects from accidental deletion or overwrite.',
            'backup-what-is|Cross-Region backup is particularly valuable if you have business continuity or compliance requirements to store backups a minimum distance away from your production data.',

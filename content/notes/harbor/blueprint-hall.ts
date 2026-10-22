@@ -55,10 +55,11 @@ const notes: BuildingNotes = {
     {
       id: '2.1-K10',
       concepts: [
-        b('A typical {{term:three-tier|layered (multi-tier)}} application separates a presentation layer, an application layer and a data layer. The presentation tier is what users interact with, for example static web content served from Amazon S3 through Amazon CloudFront or a single-page application calling backend APIs.',
+        b('Typical monolithic applications consist of a presentation layer, an application layer and a data layer, a {{term:three-tier|layered (multi-tier)}} shape. Static web content can be served from Amazon S3 through Amazon CloudFront, and a single-page application can call backend APIs.',
           ['msa-simple', 'msa-ui'],
           ['msa-simple|Typical monolithic applications consist of different layers: a presentation layer, an application layer, and a data layer.',
-           'msa-ui|Static web content can be served using Amazon Simple Storage Service (Amazon S3) and Amazon CloudFront.']),
+           'msa-ui|Static web content can be served using Amazon Simple Storage Service (Amazon S3) and Amazon CloudFront.',
+           'msa-ui|Modern web applications often use JavaScript frameworks to develop single-page applications that communicate with backend APIs.']),
         b('The data tier persists data. In-memory caches such as ElastiCache sit between the application servers and the database, reducing the read load on the database, which may let it support more writes; caches can also improve latency.',
           'msa-data-store',
           ['Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which, in turn, may allow resources to be used to support more writes.',
@@ -72,9 +73,10 @@ const notes: BuildingNotes = {
       services: ['Amazon CloudFront', 'Amazon S3', 'Amazon ElastiCache', 'Amazon RDS', 'Amazon DynamoDB'],
       design: [
         b('Each layer can then scale independently: put a load balancer in front of a fleet at the application layer (see Scaling Floodgate) and a cache between it and the database. How the layers are placed in subnets is covered in Surveyor\'s Grid and Gatehouse.',
-          ['msa-data-store', 'elb-what-is'],
+          ['msa-data-store', 'elb-what-is', 'waf-stateless'],
           ['msa-data-store|Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database',
-           'elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.']),
+           'elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.',
+           'waf-stateless|This provides the flexibility to scale each component independently to meet varying workload demands and optimize resource utilization.']),
       ],
     },
     {

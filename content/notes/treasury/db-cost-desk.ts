@@ -4,11 +4,14 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'db-cost-desk',
   overview: [
-    b('The cost tools are the same for every service; what changes is what you look for. For databases that means tagging DB instances and snapshots so their spend can be attributed, using the consolidated bill of an organisation to share commitments, and using Cost Explorer, Budgets and the Cost and Usage Report to see database spend. Ledger Office introduced each tool and Counting House applied them to compute; this building applies them to databases.',
-      ['rds-tagging', 'cost-alloc-tags', 'ce-what-is'],
+    b('What changes for databases is what you look for. For databases that means tagging DB instances and snapshots so their spend can be attributed, using the consolidated bill of an organisation to share commitments, and using Cost Explorer, Budgets and the Cost and Usage Report to see database spend. Ledger Office introduced each tool and Counting House applied them to compute; this building applies them to databases.',
+      ['rds-tagging', 'cost-alloc-tags', 'ce-what-is', 'consolidated-billing', 'budgets-managing', 'cur-what-is'],
       ['rds-tagging|An Amazon RDS tag is a name-value pair that you define and associate with an Amazon RDS resource such as a DB instance or DB snapshot.',
        'cost-alloc-tags|You can use tags to organize your resources, and cost allocation tags to track your AWS costs on a detailed level.',
-       'ce-what-is|AWS Cost Explorer is a tool that enables you to view and analyze your costs and usage.']),
+       'ce-what-is|AWS Cost Explorer is a tool that enables you to view and analyze your costs and usage.',
+       'consolidated-billing|This shares the volume pricing discounts, Reserved Instance discounts, and Savings Plans.',
+       'budgets-managing|Set spending limits for services and receive alerts when costs approach or exceed your defined threshold.',
+       'cur-what-is|AWS Cost and Usage Reports (AWS CUR) contains the most comprehensive set of cost and usage data available.']),
   ],
   bullets: [
     {
@@ -34,10 +37,11 @@ const notes: BuildingNotes = {
     {
       id: '4.3-K2',
       concepts: [
-        b('Cost Explorer shows what databases cost over time: you can view and analyse costs and usage, forecast how much you are likely to spend, and get recommendations for which Reserved Instances to purchase. Filters and groupings let you narrow the report to database services or to a tag.',
+        b('Cost Explorer shows what databases cost over time: you can view and analyse costs and usage, forecast how much you are likely to spend, and get recommendations for which Reserved Instances to purchase. Its charts, tables and reports can be built with filters, groupings and dates.',
           'ce-what-is',
           ['AWS Cost Explorer is a tool that enables you to view and analyze your costs and usage.',
-           'You can view data for up to the last 13 months, forecast how much you\'re likely to spend for the next 18 months, and get recommendations for what Reserved Instances to purchase.'],
+           'You can view data for up to the last 13 months, forecast how much you\'re likely to spend for the next 18 months, and get recommendations for what Reserved Instances to purchase.',
+           'including filters, groupings, and dates to reflect the analysis.'],
           { allow: ['13', '18'] }),
         b('Budgets can alert when database spend crosses a limit, and can monitor the utilisation and coverage of Reserved Instances or Savings Plans, which shows whether a database commitment is being used.',
           'budgets-managing',
@@ -76,7 +80,7 @@ const notes: BuildingNotes = {
         ['Using reserved DB instances, you can reserve a DB instance for a one- or three-year term.',
          'Discounts for reserved DB instances are tied to instance type and AWS Region.'])),
     cue('commit to database usage but engine and size may change', 'Database Savings Plans',
-      b('Database Savings Plans apply regardless of engine, instance family, size, Availability Zone or Region.', 'savings-plans-types',
+      b('Database Savings Plans automatically apply to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone or Region, and also to serverless usage.', 'savings-plans-types',
         ['These plans automatically apply to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone (AZ), or Region, and also apply to serverless usage.'], { newer: ['database-savings-plans'] })),
     cue('alert when database spend approaches a limit', 'AWS Budgets',
       b('Budgets alerts when costs approach or exceed your threshold.', 'budgets-managing',
@@ -96,7 +100,7 @@ const notes: BuildingNotes = {
         ['learn-hub|It also helps you manage your billing account and subscriptions, monitor and control Azure spending, and optimize resource use.',
          'ce-what-is|You can view data for up to the last 13 months, forecast how much you\'re likely to spend for the next 18 months, and get recommendations for what Reserved Instances to purchase.'],
         { allow: ['13', '18'] }),
-      breaks: b('On AWS, the discount for a reserved DB instance is tied to instance type and Region, whereas a Database Savings Plan applies regardless of engine, instance family, size, Availability Zone or Region. Learn has no pairing for either.',
+      breaks: b('On AWS, the discount for a reserved DB instance is tied to instance type and Region, whereas a Database Savings Plan automatically applies to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone or Region, and also to serverless usage.',
         ['rds-reserved', 'savings-plans-types', 'learn-hub'],
         ['rds-reserved|Discounts for reserved DB instances are tied to instance type and AWS Region.',
          'savings-plans-types|These plans automatically apply to the latest provisioned instance generations regardless of engine, instance family, size, Availability Zone (AZ), or Region, and also apply to serverless usage.',

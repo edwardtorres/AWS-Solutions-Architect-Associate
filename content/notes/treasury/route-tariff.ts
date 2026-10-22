@@ -22,9 +22,11 @@ const notes: BuildingNotes = {
     {
       id: '4.4-K6',
       concepts: [
-        b('VPC peering connects VPCs, which can be in different Regions, so resources communicate using private IP addresses without a gateway, VPN connection or network appliance. There is no charge to create a peering connection. Transitive peering relationships are not supported, so a design with many VPCs becomes a mesh of connections.',
+        b('VPC peering connects VPCs, which can be in different Regions, so resources communicate using private IP addresses. A peering connection is neither a gateway nor a VPN connection, and does not rely on a separate piece of physical hardware. There is no charge to create a peering connection. Transitive peering relationships are not supported, so a design with many VPCs becomes a mesh of connections.',
           ['peering-what-is', 'peering-basics'],
           ['peering-what-is|The VPCs can be in different Regions (also known as an inter-Region VPC peering connection).',
+           'peering-what-is|resources in the VPCs (for example, EC2 instances and Lambda functions) in different AWS Regions can communicate with each other using private IP addresses',
+           'peering-what-is|it is neither a gateway nor a VPN connection, and does not rely on a separate piece of physical hardware.',
            'peering-what-is|There is no charge to create a VPC peering connection.',
            'peering-basics|You can create multiple VPC peering connections for each VPC that you own, but transitive peering relationships are not supported.']),
         b('Transit Gateway is a network transit hub used to interconnect VPCs and on-premises networks. You attach VPCs, VPN connections, Direct Connect gateways and peering connections to it, and inter-Region peering connects transit gateways across Regions. It is charged hourly for each attachment and for the amount of traffic processed, so the hub costs more per connection than direct peering but replaces a mesh of peering connections.',
@@ -129,7 +131,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon CloudFront'],
       design: [
-        b('Cue: "global users, mostly static content, reduce origin cost" → CloudFront with a long cache duration; check price class when the question limits where users are; "content changes often" → shorter duration or invalidation; "static IPs, non-HTTP traffic" → Global Accelerator, not a CDN.',
+        b('Cue: "global users, mostly static content, reduce origin cost" → CloudFront with a long cache duration; check price class when the question limits where users are; "content changes often" → shorter duration or invalidation; "static IP addresses for the endpoint" → Global Accelerator, whose static IP addresses are anycast from the AWS edge network.',
           ['cloudfront-what-is', 'cloudfront-expiration', 'ga-what-is'],
           ['cloudfront-what-is|If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately.',
            'cloudfront-expiration|A longer duration also reduces the load on your origin.',

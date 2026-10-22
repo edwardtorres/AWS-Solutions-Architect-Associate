@@ -4,9 +4,10 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'service-selection-bureau',
   overview: [
-    b('Database cost depends first on picking the right kind of database and then on how its capacity is billed. Express Quarter taught the data models and performance; this building asks which choice costs least for the same job. Serverless options bill for what the workload uses instead of for an always-on server, purpose-built databases avoid forcing one engine to do every job, and the storage format (row, key-value, time series, columnar) changes how much data must be read and stored.',
+    b('Database cost depends first on picking the right kind of database and then on how its capacity is billed. Express Quarter taught the data models and performance; this building asks which choice costs least for the same job. Serverless options bill for what the workload uses instead of for an always-on server, and AWS offers database options with diverse data models for a variety of workloads, so each workload can be matched to a database built for its data model.',
       ['database-decision', 'aurora-serverless', 'dynamodb-ondemand'],
       ['database-decision|AWS serverless offerings include Amazon Aurora DSQL, Amazon Aurora Serverless, Amazon DynamoDB, Amazon ElastiCache, Amazon Keyspaces (for Apache Cassandra), Amazon Timestream for LiveAnalytics, and Amazon Neptune Serverless.',
+       'database-decision|AWS offers a growing number of database options (15+) with diverse data models to support a variety of workloads.',
        'aurora-serverless|Thus, Aurora serverless can help you to stay within budget and avoid paying for computer resources that you don\'t use.',
        'dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.']),
   ],
@@ -44,10 +45,13 @@ const notes: BuildingNotes = {
     {
       id: '4.3-S3',
       concepts: [
-        b('DynamoDB and RDS bill differently. DynamoDB is serverless and its on-demand mode charges per request, so a lightly used table costs very little; with RDS you choose a DB instance class and pay for it while it runs, and for steady use you can reserve it for a term. The cost question is therefore how steady and how large the load is, not which product is cheaper in general.',
+        b('DynamoDB and RDS bill differently. DynamoDB is serverless and its on-demand mode charges per request: with zero traffic to a table, you are not charged for any throughput. For steady RDS use, a reserved DB instance is a billing discount on certain on-demand DB instances for a one- or three-year term, and a No Upfront reserved DB instance bills a discounted hourly rate for every hour within its term, regardless of usage. As study guidance, the cost question is therefore how steady and how large the load is, not which product is cheaper in general.',
           ['dynamodb-ondemand', 'rds-reserved'],
           ['dynamodb-ondemand|If you are driving zero traffic to your table, then with on-demand, you are not charged for any throughput.',
-           'rds-reserved|Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on-demand DB instances in your account.']),
+           'dynamodb-ondemand|With pay-per-request pricing, you don’t have to worry about idle capacity because you only pay for the throughput you actually use.',
+           'rds-reserved|Reserved DB instances are not physical instances, but rather a billing discount applied to the use of certain on-demand DB instances in your account.',
+           'rds-reserved|Using reserved DB instances, you can reserve a DB instance for a one- or three-year term.',
+           'rds-reserved|Your No Upfront reserved DB instance bills a discounted hourly rate for every hour within the term, regardless of usage']),
         b('Aurora serverless is an on-demand, autoscaling configuration for Aurora. It automates monitoring the workload and adjusting capacity, which can help you stay within budget and avoid paying for compute resources you do not use. AWS lists development and test systems and environments with highly variable and unpredictable workloads among the cases where it is especially valuable. Capacity is measured in Aurora capacity units (ACUs) and goes up to 256 ACUs on current versions; the capacity range that is supported depends on the engine and platform version.',
           ['aurora-serverless', 'aurora-serverless-how'],
           ['aurora-serverless|Aurora serverless is an on-demand, autoscaling configuration for Amazon Aurora.',

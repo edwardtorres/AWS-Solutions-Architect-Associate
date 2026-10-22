@@ -68,9 +68,11 @@ const notes: BuildingNotes = {
       ],
       services: ['IAM'],
       design: [
-        b('Role-based access control across accounts: give people one place to sign in (the identity account or IAM Identity Center), then let them assume purpose-specific roles in the workload accounts. Each role has a narrow permission policy and a trust policy that names exactly who can assume it.',
+        b('Role-based access across accounts: when you need cross-account access, for example to promote an update from development to production, let users in one account switch to a role in the other account. The role\'s trust policy names the accounts whose users may assume it.',
           ['iam-account-switch', 'iam-el-principal'],
           ['iam-account-switch|For example, you might need cross-account access when you are promoting an update from the development environment to the production environment.',
+           'iam-account-switch|A user in one account can switch to a role in the same or a different account.',
+           "iam-account-switch|you specify the accounts by ID whose users need access in the Principal element of the role's trust policy.",
            'iam-el-principal|In IAM roles, use the Principal element in the role trust policy to specify who can assume the role.']),
       ],
     },
@@ -102,7 +104,7 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Organizations', 'AWS Control Tower', 'IAM'],
       design: [
-        b('Use Control Tower when the question wants a governed multi-account environment set up quickly with best practices. Use SCPs when the question wants a ceiling on what accounts can do (for example, blocking a service or a Region). An SCP does not grant permissions on its own.',
+        b('Use Control Tower when the question wants a governed multi-account environment set up quickly with best practices. Use SCPs when the question wants a ceiling on what accounts can do. An SCP does not grant permissions on its own.',
           ['control-tower', 'orgs-scps'],
           ['control-tower|AWS Control Tower offers a straightforward way to set up and govern an AWS multi-account environment, following prescriptive best practices.',
            'orgs-scps|SCPs do not grant permissions to the IAM users and IAM roles in your organization.']),

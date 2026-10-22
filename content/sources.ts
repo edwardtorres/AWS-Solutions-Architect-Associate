@@ -711,7 +711,6 @@ const sources: Source[] = [
   aws('cloudshell-what', `${D}/cloudshell/latest/userguide/welcome.html`, 'What is AWS CloudShell?'),
   aws('s3-endpoint-types', `${D}/AmazonS3/latest/userguide/privatelink-interface-endpoints.html`, 'Types of VPC endpoints for Amazon S3'),
   aws('ddb-table-ops', `${D}/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html`, 'Basic operations on DynamoDB tables'),
-  aws('ddb-pitr', `${D}/amazondynamodb/latest/developerguide/Point-in-time-recovery.html`, 'Point-in-time backups for DynamoDB'),
   aws('ddb-scan', `${D}/amazondynamodb/latest/developerguide/Scan.html`, 'Scanning tables in DynamoDB'),
   aws('ddb-query', `${D}/amazondynamodb/latest/developerguide/Query.html`, 'Querying tables in DynamoDB'),
   aws('ddb-core-components', `${D}/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html`, 'DynamoDB core components'),
@@ -831,6 +830,8 @@ const sources: Source[] = [
   aws('sqs-cli-receive-message', `${D}/cli/latest/reference/sqs/receive-message.html`, 'AWS CLI reference: sqs receive-message'),
   aws('sqs-api-receive-message', `${D}/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html`, 'Amazon SQS API reference: ReceiveMessage'),
   aws('cli-filter-output', `${D}/cli/latest/userguide/cli-usage-filter.html`, 'Filtering output in the AWS CLI'),
+  aws('s3-website-endpoints', `${D}/AmazonS3/latest/userguide/WebsiteEndpoints.html`, 'Amazon S3 website endpoints'),
+  aws('ec2-ri-exchange', `${D}/AWSEC2/latest/UserGuide/ri-convertible-exchange.html`, 'Exchange Convertible Reserved Instances'),
 ];
 
 export default sources;

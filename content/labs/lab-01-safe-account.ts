@@ -104,7 +104,7 @@ const lab: Lab = {
     {
       id: 's12',
       kind: 'check',
-      text: 'Open CloudTrail Event history in the US East (N. Virginia) Region, where IAM events are recorded, whatever Region you chose for the lab. Look up the events you caused in this lab, such as creating the group or the user. Event history needs no trail and no setup.',
+      text: 'Open CloudTrail Event history in the US East (N. Virginia) Region, where IAM events are recorded, whatever Region you chose for the lab. Look up the events you caused in this lab, such as creating the group or the user.',
       src: 'cloudtrail-concepts',
       quote: 'events created by Amazon CloudFront, AWS Identity and Access Management, and AWS STS are recorded in the Region in which they were created, the US East (N. Virginia) Region, us-east-1.',
       checkpoint: 'Event history lists management events, including actions you took earlier in this lab.',

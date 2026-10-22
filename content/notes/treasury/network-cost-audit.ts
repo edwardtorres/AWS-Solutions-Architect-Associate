@@ -91,9 +91,10 @@ const notes: BuildingNotes = {
       ],
       services: ['AWS Trusted Advisor', 'AWS Cost Explorer'],
       design: [
-        b('Cue: "review an existing workload for wasted network spend" → Trusted Advisor cost checks (idle NAT gateways, idle load balancers, inactive interface endpoints, unassociated Elastic IP addresses) plus Cost Explorer by Region and Availability Zone; "unused Elastic IP addresses" → Trusted Advisor flags unassociated ones, but public IPv4 addresses in use on a resource are charged as in-use public IPv4 addresses too; "which flows use the NAT gateway" → VPC Flow Logs and NAT gateway CloudWatch metrics.',
+        b('Cue: "review an existing workload for wasted network spend" → Trusted Advisor cost checks (idle NAT gateways, idle load balancers, inactive interface endpoints, unassociated Elastic IP addresses) plus Cost Explorer by Region and Availability Zone; "unused Elastic IP addresses" → Trusted Advisor flags unassociated ones, but public IPv4 addresses in use on a resource are charged as in-use public IPv4 addresses too.',
           ['trusted-advisor-cost-checks', 'ce-filtering', 'trusted-advisor', 'vpc-pricing'],
-          ['trusted-advisor-cost-checks|Unassociated Elastic IP Addresses',
+          ['trusted-advisor-cost-checks|Idle NAT gateways',
+           'trusted-advisor-cost-checks|Unassociated Elastic IP Addresses',
            'trusted-advisor-cost-checks|Inactive VPC interface endpoints',
            'vpc-pricing|Any public IPv4 address associated with a resource launched in an Amazon VPC, and public IPv4 addresses assigned to AWS Global Accelerator and AWS Site-to-Site VPN tunnel endpoints are charged as in-use public IPv4 address.',
            'trusted-advisor-cost-checks|Idle Load Balancers',

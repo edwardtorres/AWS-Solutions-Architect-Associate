@@ -53,9 +53,9 @@ const scenarios: S[] = [
           quote: 'A private API endpoint is an API endpoint that can only be accessed from your Amazon Virtual Private Cloud (VPC) using an interface VPC endpoint, which is an endpoint network interface (ENI) that you create in your VPC.',
         },
         available: {
-          text: 'Active-passive failover keeps a second copy of the whole stack on standby and sends users there when every primary resource is unavailable, which survives the loss of a Region.',
-          src: 'route53-failover-types',
-          quote: 'Use an active-passive failover configuration when you want a primary resource or group of resources to be available the majority of the time and you want a secondary resource or group of resources to be on standby in case all the primary resources become unavailable.',
+          text: 'A hot standby active/passive strategy can run the workload in multiple Regions, which lets a standby Region take over if the primary Region fails.',
+          src: 'dr-options',
+          quote: 'You can run your workload simultaneously in multiple Regions as part of a multi-site active/active or hot standby active/passive strategy.',
         },
       },
     },
@@ -75,9 +75,9 @@ const scenarios: S[] = [
       answers: { overhead: 'b', cost: 'd', secure: 'c', available: 'a' },
       facts: {
         overhead: {
-          text: 'Batch provisions and scales the compute for submitted jobs, so the team runs no worker fleet, queue consumer or scaling rules.',
+          text: 'Batch automatically provisions compute resources for the submitted jobs, so the team has no worker fleet to provision.',
           src: 'batch-what-is',
-          quote: 'As a fully managed service, AWS Batch helps you to run batch computing workloads of any scale.',
+          quote: 'AWS Batch automatically provisions compute resources and optimizes the workload distribution based on the quantity and scale of the workloads.',
         },
         cost: {
           text: 'Spot Instances suit work that can be interrupted and retried, and a retryable job is exactly that.',
@@ -149,9 +149,9 @@ const scenarios: S[] = [
       answers: { overhead: 'c', cost: 'b', secure: 'a', available: 'd' },
       facts: {
         overhead: {
-          text: 'The AWS managed key is the default choice, so nobody has to create the key or write its policy.',
+          text: 'If no customer managed key is specified, S3 creates the AWS managed key itself, so nobody has to create the key.',
           src: 's3-sse-kms',
-          quote: 'you can use the default AWS managed key, or you can specify a customer managed key that you have already created.',
+          quote: 'If you don\'t specify a customer managed key, Amazon S3 automatically creates an AWS managed key in your AWS account the first time that you add an object encrypted with SSE-KMS to a bucket.',
         },
         cost: {
           text: 'Bucket Keys cut the traffic from S3 to KMS, which is where the cost of reading many SSE-KMS objects comes from.',
@@ -271,9 +271,9 @@ const scenarios: S[] = [
           quote: 'Each of these storage classes offer the same durability and resiliency as the S3 Standard storage class, but at lower storage costs.',
         },
         secure: {
-          text: 'Object Lock stores objects write-once-read-many, so nobody can change or delete a log during its retention period.',
+          text: 'In compliance mode, nobody, including the root user, can overwrite or delete a protected log version.',
           src: 's3-object-lock',
-          quote: 'Object Lock uses a write-once-read-many (WORM) model to store objects.',
+          quote: 'In compliance mode, a protected object version can\'t be overwritten or deleted by any user, including the root user in your AWS account.',
         },
         available: {
           text: 'Replication can place copies in a bucket in a different Region, so the logs survive the loss of the source Region.',
@@ -303,9 +303,9 @@ const scenarios: S[] = [
           quote: 'With AWS Fargate, you no longer have to provision, configure, or scale clusters of virtual machines to run containers.',
         },
         cost: {
-          text: 'Spot Instances offer unused EC2 capacity that can reduce EC2 costs, which suits tasks that may be replaced at any time.',
-          src: 'ec2-purchasing',
-          quote: 'Spot Instances – Request unused EC2 instances, which can reduce your Amazon EC2 costs significantly.',
+          text: 'Spot Instances are a cost-effective choice if the applications can be interrupted, and these tasks can be replaced at any time.',
+          src: 'ec2-spot',
+          quote: 'Spot Instances are a cost-effective choice if you can be flexible about when your applications run and if your applications can be interrupted.',
         },
         secure: {
           text: 'A separate role per task definition with only the permissions its tasks need limits what a compromised container can reach.',
@@ -346,9 +346,9 @@ const scenarios: S[] = [
           quote: 'HDD storage is designed for a broad spectrum of workloads, including home directories, user and departmental shares, and content management systems.',
         },
         secure: {
-          text: 'FSx integrates with Active Directory for user access control, KMS for the keys and CloudTrail for an audit record, which the other designs leave at defaults.',
+          text: 'FSx encrypts data at rest with keys that you manage in AWS KMS, and design c is the only one that names such a key and a CloudTrail record of API activity.',
           src: 'fsx-windows',
-          quote: 'It also provides rich integration with other AWS services like AWS IAM, AWS Directory Service for Microsoft Active Directory, Amazon WorkSpaces, AWS Key Management Service, and AWS CloudTrail.',
+          quote: 'It automatically encrypts data at rest (for both file systems and backups) using keys that you manage in AWS Key Management Service (AWS KMS).',
         },
         available: {
           text: 'A Multi-AZ file system keeps a standby file server in another zone and fails over to it.',
@@ -374,22 +374,22 @@ const scenarios: S[] = [
       answers: { overhead: 'a', cost: 'a', secure: 'c', available: 'd' },
       facts: {
         overhead: {
-          text: 'S3 hosts the site itself, so there is no web server to run or patch (design e) and no CDN distribution to configure (designs b, c and d).',
+          text: 'S3 can host a static website by itself, so design a needs no web server (design e) and no CloudFront distribution (designs b, c and d).',
           src: 's3-website',
           quote: 'You can use Amazon S3 to host a static website.',
         },
         cost: {
-          text: 'CloudFront adds its own charges for data out and requests; for a low-traffic site that is read from near the Region, the S3-only design avoids them.',
+          text: 'CloudFront adds its own charges for data transfers out and for HTTP or HTTPS requests, and the S3-only design has no CloudFront charge.',
           src: 'cloudfront-what-is',
           quote: 'CloudFront charges for data transfers out from its edge locations, along with HTTP or HTTPS requests.',
         },
         secure: {
-          text: 'CloudFront can be set to require HTTPS between viewers and the edge, so visitors\' traffic is encrypted; S3 website endpoints cannot do HTTPS at all, and the other CloudFront designs leave HTTP allowed.',
-          src: 'cf-viewer-https',
-          quote: 'You can configure one or more cache behaviors in your CloudFront distribution to require HTTPS for communication between viewers and CloudFront.',
+          text: 'S3 website endpoints do not support HTTPS at all, so design a cannot encrypt viewer traffic, while design c requires HTTPS from viewers through CloudFront.',
+          src: 's3-website-endpoints',
+          quote: 'Amazon S3 website endpoints do not support HTTPS or access points.',
         },
         available: {
-          text: 'An origin group switches to a second origin, in another Region, when the primary origin is unavailable.',
+          text: 'An origin group switches to the secondary origin when the primary origin is unavailable, so design d can keep serving from its second bucket.',
           src: 'cf-origin-failover',
           quote: 'If the primary origin is unavailable, or returns specific HTTP response status codes that indicate a failure, CloudFront automatically switches to the secondary origin.',
         },

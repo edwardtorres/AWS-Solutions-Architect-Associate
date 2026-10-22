@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'federation-bridge',
   overview: [
-    b('Most organisations already have a place where their people are defined: a corporate directory or identity provider. {{term:federation}} lets those people sign in to AWS with that existing identity instead of getting a separate IAM user each. A design question here is which AWS service connects the directory to AWS, and whether it should.',
+    b('Organisations that already have a place where their people are defined, such as a corporate directory or identity provider, can use {{term:federation}} to let those people sign in to AWS with that existing identity instead of getting a separate IAM user each. A design question here is which AWS service connects the directory to AWS, and whether it should.',
       ['iam-saml', 'sso-what-is'],
       ['iam-saml|so users can log into the AWS Management Console or call AWS API operations without you having to create an IAM user for everyone in your organization.',
        'sso-what-is|You can connect your existing identity provider and synchronize users and groups from your directory, or create and manage your users directly in IAM Identity Center.']),
@@ -28,12 +28,12 @@ const notes: BuildingNotes = {
           ['An organization instance is deployed in the AWS Organizations management account and gives you a single point from which to manage user access across AWS.',
            'You can also use IAM Identity Center permission sets to centrally create permissions for common job functions such as admin, provision them across AWS accounts, and assign them to users and groups.']),
         b('IAM roles are what federated users end up using: when you assume a role you get temporary security credentials for the role session.',
-          'iam-roles', ['Instead, when you assume a role, it provides you with temporary security credentials for your role session.']),
+          ['iam-roles', 'iam-saml'], ['Instead, when you assume a role, it provides you with temporary security credentials for your role session.', 'iam-saml|The client app calls the AWS STS AssumeRoleWithSAML API, passing the ARN of the SAML provider, the ARN of the role to assume, and the SAML assertion from IdP.']),
       ],
       services: ['AWS IAM Identity Center', 'IAM', 'AWS Directory Service'],
       design: [
         b('Workforce users who need access to several AWS accounts and applications: use IAM Identity Center with the corporate identity provider as the source. Single application with its own end users: a different tool (Amazon Cognito, see Warden\'s Lodge).',
-          ['sso-what-is'], ['AWS IAM Identity Center is the AWS solution for connecting your workforce users to AWS managed applications']),
+          ['sso-what-is', 'cognito-what-is'], ['AWS IAM Identity Center is the AWS solution for connecting your workforce users to AWS managed applications', 'cognito-what-is|With a user pool, your users can sign in to your web or mobile app through Amazon Cognito, or federate through a third-party IdP.']),
       ],
     },
     {
@@ -54,8 +54,11 @@ const notes: BuildingNotes = {
       services: ['AWS Directory Service', 'AWS IAM Identity Center', 'IAM'],
       design: [
         b('Decide to federate when the people already exist in a directory: the alternative, an IAM user per person, adds credentials to manage. Choose AWS Directory Service when applications on AWS need Active Directory itself (for example domain-joined Windows workloads), and IAM Identity Center or SAML federation when the goal is signing people in to AWS.',
-          ['iam-users', 'ds-what-is'],
-          ['iam-users|IAM best practices recommend that you require human users to use federation with an identity provider to access AWS using temporary credentials',
+          ['iam-users', 'ds-what-is', 'sso-what-is', 'iam-saml'],
+          ['iam-users|An IAM user consists of a name and credentials.',
+           'sso-what-is|AWS IAM Identity Center is the AWS solution for connecting your workforce users to AWS managed applications',
+           'iam-saml|so users can log into the AWS Management Console or call AWS API operations without you having to create an IAM user for everyone in your organization.',
+           'iam-users|IAM best practices recommend that you require human users to use federation with an identity provider to access AWS using temporary credentials',
            'ds-what-is|AWS Directory Service provides multiple directory choices for customers who want to use existing Microsoft AD or Lightweight Directory Access Protocol (LDAP)–aware applications in the cloud.']),
       ],
     },
