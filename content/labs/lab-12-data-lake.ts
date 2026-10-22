@@ -48,7 +48,7 @@ const lab: Lab = {
   steps: [
     {
       id: 's1',
-      text: 'This lab needs a Paid plan account: the AWS Free Tier page labels Amazon Athena as Paid plan exclusive (recorded in this app\'s Free Tier snapshot). Open AWS CloudShell in your chosen Region and stay in that Region for the whole lab. Glue, Athena and S3 must all be in the same Region.',
+      text: 'This lab needs a Paid plan account: the AWS Free Tier page labels Amazon Athena as Paid plan exclusive (recorded in this app\'s Free Tier snapshot). Open AWS CloudShell in your chosen Region and use that same Region for Glue, Athena and the bucket for the whole lab.',
       src: 'cloudshell-what',
       quote: 'AWS CloudShell is a browser-based, pre-authenticated shell that you can launch directly from the AWS Management Console.',
       checkpoint: 'A terminal prompt opens in the browser.',
@@ -195,7 +195,7 @@ const lab: Lab = {
     {
       id: 'v1',
       kind: 'verify',
-      text: 'Prove nothing from this lab remains. Athena still points at the deleted result location; that is harmless.',
+      text: 'Prove nothing from this lab remains.',
       code: 'aws glue get-databases --query "DatabaseList[?starts_with(Name,\'lab12\')].Name"\naws glue get-crawlers --query "Crawlers[?starts_with(Name,\'lab12\')].Name"\naws iam list-roles --query "Roles[?starts_with(RoleName,\'AWSGlueServiceRole\')].RoleName"\naws s3 ls | grep -E "lab12-|aws-athena-query-results"',
       src: 'glue-define-database',
       quote: 'When you delete a database from the AWS Glue Data Catalog, all the tables in the database are also deleted.',

@@ -5,11 +5,12 @@ const notes: BuildingNotes = {
   building: 'cache-edge-breakwater',
   overview: [
     b('A cache keeps a copy of data closer to the consumer or in faster storage, so repeated requests are answered without going back to the source. On AWS the same idea appears at several layers: at the edge (CloudFront), in front of an API (API Gateway cache), between the application and the database (ElastiCache) and in front of DynamoDB (DAX).',
-      ['cloudfront-what-is', 'apigw-caching', 'msa-data-store', 'dax'],
+      ['cloudfront-what-is', 'apigw-caching', 'msa-data-store', 'dax', 'dax-concepts'],
       ['cloudfront-what-is|copies of your files (also known as objects) are now held (or cached) in multiple edge locations around the world.',
        'apigw-caching|With caching, you can reduce the number of calls made to your endpoint and also improve the latency of requests to your API.',
        'msa-data-store|Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which, in turn, may allow resources to be used to support more writes.',
-       'dax|DAX is a DynamoDB-compatible caching service that enables you to benefit from fast in-memory performance for demanding applications.']),
+       'dax|DAX is a DynamoDB-compatible caching service that enables you to benefit from fast in-memory performance for demanding applications.',
+       'dax-concepts|At runtime, the DAX client directs all of your application\'s DynamoDB API requests to the DAX cluster.']),
   ],
   beyondProject: [
     b('You have already put CloudFront in front of a static site. The SAA question is which layer a cache belongs in: edge caching for static and dynamic web content close to users, an in-memory cache such as ElastiCache for repeated database reads, DAX for DynamoDB, and the API Gateway stage cache for API responses. It also asks you to tell CloudFront from AWS Global Accelerator, which improves performance over TCP or UDP by proxying packets at the edge to applications in AWS Regions.',

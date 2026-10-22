@@ -202,7 +202,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'tradeoff',
-    text: 'A strategy more stringent than it needs to be incurs unnecessary costs, so the pick is the least costly strategy whose RPO and RTO classes both meet the targets.',
+    text: 'A strategy more stringent than it needs to be incurs unnecessary costs, so the pick is the least stringent strategy whose RPO and RTO classes both meet the targets.',
     src: REL,
     quote: 'You should avoid implementing a strategy that is more stringent than it needs to be, as this incurs unnecessary costs.',
   },
@@ -330,7 +330,7 @@ function evaluate(s: BunkerData): Evaluation | null {
     { rule: 'cost-order', note: 'Cost and complexity rise in the order backup and restore, pilot light, warm standby, multi-site active/active.' },
     { rule: `class-${STRATEGY_ORDER[rpoRank]}`, note: `An RPO in ${s.rpo} is first met by ${STRATEGY_LABEL[STRATEGY_ORDER[rpoRank]!]}.` },
     { rule: `class-${STRATEGY_ORDER[rtoRank]}`, note: `An RTO of ${s.rto} is first met by ${STRATEGY_LABEL[STRATEGY_ORDER[rtoRank]!]}.` },
-    { rule: 'tradeoff', note: `The stricter target decides, and the least costly strategy meeting both is ${STRATEGY_LABEL[strategy]}.` },
+    { rule: 'tradeoff', note: `The stricter target decides, so the least stringent strategy meeting both is ${STRATEGY_LABEL[strategy]}; cost rises with stringency.` },
   ];
   if (strategy === 'warm-standby') trace.push({ rule: 'blocks-cumulative-warm', note: 'Warm standby also uses the blocks of the two cheaper strategies; only what it adds is selected.' });
   if (strategy === 'active-active') trace.push({ rule: 'blocks-cumulative-active', note: 'Active/active also uses the blocks of the three cheaper strategies; only what it adds is selected.' });

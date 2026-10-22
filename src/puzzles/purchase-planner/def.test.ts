@@ -11,8 +11,10 @@ describe('purchase-planner rules', () => {
   // Amazon EC2 User Guide, "Purchasing On-Demand Instances for Amazon EC2": no long-term commitment, short-term irregular workloads.
   it('On-Demand when nothing is committed and the work cannot be interrupted', () => {
     expect(model({ term: 'short', commit: 'none' })).toBe('on-demand');
-    expect(rulesOf({ term: 'unknown', commit: 'none' })).toEqual(['od-no-commitment', 'od-short-term']);
-    expect(rulesOf({ term: 'long', commit: 'none' })).toEqual(['od-no-commitment']);
+    expect(rulesOf({ term: 'short', commit: 'none' })).toEqual(['od-no-commitment', 'od-short-term']);
+    // The short-term rule is only cited for short work; for unknown or long work the cited reason is the interruption limit alone.
+    expect(rulesOf({ term: 'unknown', commit: 'none' })).toEqual(['od-no-commitment', 'spot-interruptible']);
+    expect(rulesOf({ term: 'long', commit: 'none' })).toEqual(['od-no-commitment', 'spot-interruptible']);
     expect(model({ term: 'long', commit: 'none' })).toBe('on-demand');
   });
 
@@ -34,6 +36,7 @@ describe('purchase-planner rules', () => {
     expect(model({ changes: ['fargate'] })).toBe('compute-sp');
     expect(rulesOf({ changes: ['lambda', 'size'] })).toContain('compute-sp-serverless');
     expect(model({ changes: ['region'], commit: 'either' })).toBe('compute-sp');
+    expect(rulesOf({ changes: ['region'], commit: 'either' })).toContain('ri-region-exchange');
     expect(rulesOf({ changes: ['region'] })).toContain('compute-sp-flex');
     expect(model({ changes: ['region', 'family'] })).toBe('compute-sp');
   });
@@ -52,7 +55,7 @@ describe('purchase-planner rules', () => {
     expect(model({ changes: ['size'], goal: 'largest-saving' })).toBe('ec2-sp');
     expect(model({ changes: ['size', 'tenancy'], goal: 'largest-saving' })).toBe('ec2-sp');
     expect(model({ changes: ['os', 'tenancy'], commit: 'either', exchanges: 'avoid', goal: 'largest-saving' })).toBe('ec2-sp');
-    expect(rulesOf({ changes: ['size'], goal: 'largest-saving' })).toEqual(['sp-term-usage', 'ec2-sp-family-region', 'ec2-sp-saving', 'ec2-sp-within-family']);
+    expect(rulesOf({ changes: ['size'], goal: 'largest-saving' })).toEqual(['sp-term-usage', 'ec2-sp-family-region', 'ec2-sp-saving', 'compute-sp-most-flexible', 'ec2-sp-within-family']);
   });
 
   it('Compute Savings Plans when family and Region are fixed and the goal is flexibility', () => {
@@ -62,7 +65,9 @@ describe('purchase-planner rules', () => {
 
   it('Standard Reserved Instances when nothing changes and the commitment is an instance configuration', () => {
     expect(model({ commit: 'instance-config' })).toBe('ri');
-    expect(rulesOf({ commit: 'instance-config', changes: ['size'] })).toContain('ri-standard-fixed');
+    expect(rulesOf({ commit: 'instance-config' })).toContain('ri-standard-fixed');
+    // A size change is not settled by any cited rule (size flexibility is not sourced), so the case is refused rather than answered.
+    expect(run({ commit: 'instance-config', changes: ['size'] })).toBeNull();
   });
 
   it('every rule is exercised by at least one scenario', () => {

@@ -26,7 +26,7 @@ const notes: BuildingNotes = {
           ['Resource pricing may be different in each Region.',
            'Each AWS Region operates within local market conditions, and resource pricing is different in each Region due to differences in the cost of land, fiber, electricity, and taxes, for example.',
            'Use Regions that provide lower prices for AWS services to deploy your workloads if you have no obligations in data privacy, security and business requirements.']),
-        b('Availability Zones are the groups of logical data centers inside a Region. Spreading a workload across Availability Zones is the usual way to raise availability, and it has a cost: more instances and cross-zone copies. EC2 Auto Scaling can balance instances evenly across the Availability Zones you choose as the group scales.',
+        b('Availability Zones are the groups of logical data centers inside a Region. EC2 Auto Scaling can balance instances evenly across the Availability Zones you choose as the group scales.',
           ['global-infra', 'asg-what-is'],
           ['global-infra|We call each group of logical data centers an Availability Zone.',
            'asg-what-is|You can specify multiple Availability Zones for your Auto Scaling group, and Amazon EC2 Auto Scaling balances your instances evenly across the Availability Zones as the group scales.']),

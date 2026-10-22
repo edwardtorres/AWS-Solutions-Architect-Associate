@@ -122,7 +122,7 @@ const notes: BuildingNotes = {
         ['learn-storage', 's3-what-is'],
         ['learn-storage|In Azure Storage, subscription-bound storage accounts allow you to create and manage the following storage services: Azure Blob Storage stores any type of text or binary data, such as a document, media file, or application installer.',
          's3-what-is|Amazon S3 is an object storage service that stores data as objects, hierarchical data, or tabular data within buckets.']),
-      breaks: b('Learn pairs Blob Storage with AWS S3 and says the Azure equivalent of EBS is managed disks, which are not part of a storage account. On AWS the two are different storage types: S3 is object storage accessed through an API, and EBS is block storage attached to an EC2 instance.',
+      breaks: b('Learn pairs Blob Storage with AWS S3 and says the Azure equivalent of EBS is managed disks, which are not part of a storage account. On AWS, S3 and EBS are different storage types: S3 is object storage accessed through an API, and EBS is block storage attached to an EC2 instance.',
         ['learn-storage', 'storage-decision'],
         ['learn-storage|Blob Storage is object storage, so it serves the same purpose as AWS S3.',
          'learn-storage|The Azure equivalent of EBS is managed disks, which aren\'t part of a storage account.',

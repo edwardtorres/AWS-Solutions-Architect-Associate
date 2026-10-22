@@ -94,9 +94,15 @@ const rules: Rule[] = [
   },
   {
     id: 'ri-convertible',
-    text: 'Convertible Reserved Instances can be exchanged; Standard Reserved Instances cannot.',
-    src: 'ec2-ri-classes',
-    quote: 'You can exchange Convertible Reserved Instances.',
+    text: 'A Convertible Reserved Instance can be exchanged for one with a different configuration, including instance family.',
+    src: 'ec2-ri-exchange',
+    quote: 'You can exchange one or more Convertible Reserved Instances for another Convertible Reserved Instance with a different configuration, including instance family, operating system, and tenancy.',
+  },
+  {
+    id: 'ri-region-exchange',
+    text: 'A Convertible Reserved Instance cannot be exchanged for one in a different Region, so a change of Region is not covered by it.',
+    src: 'ec2-ri-exchange',
+    quote: "You can't exchange a Convertible Reserved Instance for a Convertible Reserved Instance in a different Region.",
   },
   {
     id: 'ri-standard-fixed',
@@ -192,7 +198,9 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     }
     return out('on-demand', [
       { rule: 'od-no-commitment', note: 'No commitment is wanted and On-Demand needs none.' },
-      ...(s.term === 'long' ? [] : [{ rule: 'od-short-term', note: 'The work is short-term, irregular and cannot be interrupted, which rules out Spot.' }]),
+      ...(s.term === 'short'
+        ? [{ rule: 'od-short-term', note: 'The work is short-term, irregular and cannot be interrupted, which rules out Spot.' }]
+        : [{ rule: 'spot-interruptible', note: 'Spot Instances need work that can be interrupted, and this work cannot be.' }]),
     ]);
   }
 
@@ -215,7 +223,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     return out('compute-sp', [
       { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
       { rule, note: has(s, 'fargate', 'lambda') ? 'Compute Savings Plans also apply to AWS Fargate and AWS Lambda usage.' : 'Compute Savings Plans apply regardless of Region.' },
-      ...(has(s, 'fargate', 'lambda') ? [] : [{ rule: 'ri-term-config', note: 'A Reserved Instance commitment is to a configuration that includes the Region.' }]),
+      ...(has(s, 'fargate', 'lambda') || s.commit !== 'either' ? [] : [{ rule: 'ri-region-exchange', note: 'A Convertible Reserved Instance cannot be exchanged for one in another Region, so a change of Region is not covered.' }]),
     ]);
   }
 
@@ -231,7 +239,7 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     if (s.commit === 'instance-config' && s.exchanges === 'accept') {
       return out('ri', [
         { rule: 'ri-term-config', note: 'The commitment is to an instance configuration.' },
-        { rule: 'ri-convertible', note: 'Convertible Reserved Instances can be exchanged, so the commitment can follow changed needs.' },
+        { rule: 'ri-convertible', note: 'A Convertible Reserved Instance can be exchanged for one with a different instance family, so the commitment can follow the change.' },
       ]);
     }
     return null;
@@ -251,8 +259,8 @@ function evaluate(s: PurchaseScenario): Evaluation | null {
     return out('ec2-sp', [
       { rule: 'sp-term-usage', note: 'The commitment is an amount of usage in USD per hour for 1 or 3 years.' },
       { rule: 'ec2-sp-family-region', note: 'The family and Region are fixed, so a plan for that family in that Region is enough.' },
-      { rule: 'ec2-sp-saving', note: 'The stated goal is the largest saving for a commitment that stays in one family and Region: up to 72% off On-Demand for this plan.' },
-      { rule: 'compute-sp-most-flexible', note: 'Compute Savings Plans offer the most flexibility, at savings of up to 66% off On-Demand.' },
+      { rule: 'ec2-sp-saving', note: "The goal is the largest saving for a commitment that stays in one family and Region; this plan's stated maximum is up to 72% off On-Demand, above the up to 66% stated for Compute Savings Plans." },
+      { rule: 'compute-sp-most-flexible', note: 'Compute Savings Plans offer the most flexibility, with prices up to 66% off On-Demand.' },
       { rule: 'ec2-sp-within-family', note: 'It still applies across sizes, operating systems and tenancies within the family without exchanges.' },
     ]);
   }
