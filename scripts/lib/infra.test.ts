@@ -80,6 +80,14 @@ describe('the site stack keeps the bucket private and serves it only through OAC
   });
 });
 
+describe('the web ACL is attached, as a pricing plan requires', () => {
+  it('the distribution uses a CloudFront-scope web ACL that allows by default', () => {
+    expect(site).toMatch(/WebACLId: !GetAtt WebAcl\.Arn/);
+    expect(site).toMatch(/Scope: CLOUDFRONT/);
+    expect(site).toMatch(/DefaultAction:\n\s+Allow: \{\}/);
+  });
+});
+
 describe('the deploy role trusts only main, from the GitHub OIDC provider', () => {
   it('requires the audience and the exact main-branch subject', () => {
     expect(site).toMatch(/token\.actions\.githubusercontent\.com:aud: sts\.amazonaws\.com/);

@@ -55,6 +55,8 @@ Cloudflare holds the DNS: the certificate validation record and the `saa` record
 
 5. **Pricing plan (console).** CloudFormation has no property for it. Open **CloudFront → Distributions**, choose the new distribution, use **Update**, and under **Pricing plan** choose **Free**. The plan lists features it does not support, such as real-time access logs; this template enables none of them. Confirm the console shows the plan at $0 with no overage charges.
 
+   **Web ACL.** The template attaches a web ACL with no rules, and the CloudFront pricing-plan page says it is required: "You must have a AWS WAF Web ACL associated with your distribution if you're using a pricing plan." The same page says the plan covers it: "Your plan covers costs for: … The AWS WAF web ACL, custom rules, AWS Managed Rules, and request fees for the web ACL associated with your distribution." Keep the distribution on the Free plan. Changing it to pay-as-you-go would leave the web ACL's charges uncovered.
+
 6. **Cost allocation tag.** Open **Billing and Cost Management → Cost allocation tags**, and activate the user-defined tag **Project**. It can take up to 24 hours to appear in Budgets. The budget only counts resources with this tag.
 
 7. **DNS record.** In Cloudflare add a CNAME `saa` pointing at the `DistributionDomainName` output, **DNS only**. Confirm no `saa` record existed before.
@@ -106,4 +108,4 @@ Run the **deploy** workflow manually from **main** and set `sha` to an earlier c
 
 ## Teardown
 
-The site bucket has `DeletionPolicy: Retain`, so deleting the stack keeps the bucket. To remove the site: back up the bucket's contents, empty the bucket, delete stack `saa-site`, delete the bucket, then delete stack `saa-cert` and the Cloudflare records.
+The site bucket has `DeletionPolicy: Retain`, so deleting the stack keeps the bucket. The web ACL cannot be removed while the distribution is on a pricing plan (the pricing-plan page: "This resource cannot be removed or disassociated from your distribution unless you switch to pay-as-you-go pricing for that distribution."). So: switch the distribution to pay-as-you-go in the console, then back up the bucket's contents, empty the bucket, delete stack `saa-site`, delete the bucket, then delete stack `saa-cert` and the Cloudflare records.

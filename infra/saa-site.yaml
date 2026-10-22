@@ -102,7 +102,7 @@ Resources:
     Type: AWS::WAFv2::WebACL
     Properties:
       Name: !Sub '${AWS::StackName}-acl'
-      Description: Default allow, no rules. Attached because the Free pricing plan includes a web ACL.
+      Description: Default allow, no rules. A pricing plan requires a web ACL on the distribution, and the plan covers the charges for it.
       Scope: CLOUDFRONT
       DefaultAction:
         Allow: {}
