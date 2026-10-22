@@ -1,0 +1,5654 @@
+{
+ "generated": "2026-10-22",
+ "pages": {
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/security.html": {
+   "hash": "be08e6a3cd10ca9c7060",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-security"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/reliability.html": {
+   "hash": "813c2b95e6274d21ade2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-reliability"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/performance-efficiency.html": {
+   "hash": "94b596f073252e1baf40",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-performance"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/the-pillars-of-the-framework.html": {
+   "hash": "c37bfaa29cb5440a0865",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-pillars"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-optimization.html": {
+   "hash": "24a2f509121d1b437387",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-cost"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html": {
+   "hash": "60de2366db02f5691bdd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "exam-guide"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_root-user.html": {
+   "hash": "3e9de41b26509f4e6f77",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-root-user"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/welcome.html": {
+   "hash": "deecd43d2de4e222b030",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-welcome"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa.html": {
+   "hash": "15d5e7ea2545d2aeb59b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-mfa"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html": {
+   "hash": "7ae72db7db56f0c304d3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-best-practices"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-sizing.html": {
+   "hash": "9d6fa79001f7fd8b97c5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-subnet-sizing"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/operational-excellence.html": {
+   "hash": "2fd469913ab30c600a6a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-opex"
+   ]
+  },
+  "https://aws.amazon.com/well-architected-tool/": {
+   "hash": "fbc82eb4158281a41957",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-tool"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-cidr-blocks.html": {
+   "hash": "39ddfd42da915ee77db4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-cidr-blocks"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html": {
+   "hash": "5acd28f7c768bb139dac",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/security-group-rules.html": {
+   "hash": "8b871a2a97b40b153e43",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-sg-rules"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html": {
+   "hash": "e63ec693f9337efda8d7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "budgets-managing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html": {
+   "hash": "32b6c9bb7b5176b74817",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/WhatIsCloudWatchLogs.html": {
+   "hash": "fcc6bc4871adda58769c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cwl-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html": {
+   "hash": "56c6ec8bb1e6f08047a7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html": {
+   "hash": "2eab13b0dea5d83737b4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html": {
+   "hash": "9998b80e8c8c91f43789",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogsConcepts.html": {
+   "hash": "bf767caaac07e9b2ee8a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cwl-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html": {
+   "hash": "ed189da1894dc564d694",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html": {
+   "hash": "d6211a4f5c86edecc0e2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-rules"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users.html": {
+   "hash": "46d3309d4484289b7cb8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-users"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups.html": {
+   "hash": "ffaa785608646baf92d9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Alarms.html": {
+   "hash": "93d990b0fd780ba9d492",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-alarms"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html": {
+   "hash": "315e5c13d16095b3dfd6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-roles"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_managed-vs-inline.html": {
+   "hash": "62b0e9e67d1da3a68c03",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-managed-inline"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_effect.html": {
+   "hash": "d7f4b4483d5fa633bbe7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-effect"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html": {
+   "hash": "61e566e8317dd4e22d9c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html": {
+   "hash": "747757fec558c831a22b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-sid"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_version.html": {
+   "hash": "df65d6f629148097ea68",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-version"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html": {
+   "hash": "4b679dd9bb7059163e8c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-principal"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html": {
+   "hash": "97c274c47c92efcb284a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-condition"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html": {
+   "hash": "19aacd8e1f7bddaa7327",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-boundaries"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html": {
+   "hash": "a44a555810b35b92ff1b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-identity-vs-resource"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_resource.html": {
+   "hash": "d3ad2e2a1d99e1aae331",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-resource"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html": {
+   "hash": "657dfcd159efcfd7910c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-eval-logic"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_action.html": {
+   "hash": "a08124a51201957c2ee9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-el-action"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies-cross-account-resource-access.html": {
+   "hash": "d68ed75aa635cbb84013",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-cross-account"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user.html": {
+   "hash": "13e7ad8581ff107d315a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-cross-account-role"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-console.html": {
+   "hash": "801bb61664f0f877a262",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-switch-role"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/lambda-intro-execution-role.html": {
+   "hash": "a3edb948854ca8b2fd38",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-exec-role"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html": {
+   "hash": "139b585da871190aba00",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-account-switch"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html": {
+   "hash": "d70a0ffc9e1ab58829aa",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-temp-creds"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html": {
+   "hash": "83477e00c7465b00aa67",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-saml"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_introduction.html": {
+   "hash": "af9a6e02035ad41426e2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/controltower/latest/userguide/what-is-control-tower.html": {
+   "hash": "ae27d295047efcc8e017",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "control-tower"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html": {
+   "hash": "c6ce0a99657ee60c99d8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-scps"
+   ]
+  },
+  "https://docs.aws.amazon.com/ram/latest/userguide/what-is.html": {
+   "hash": "818e3febd71327c04fc5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ram-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/singlesignon/latest/userguide/manage-your-identity-source-ad.html": {
+   "hash": "dba5eed7f8a2fd1d21db",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sso-ad"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_evaluation.html": {
+   "hash": "035826ce5e121380bf8f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-scp-eval"
+   ]
+  },
+  "https://docs.aws.amazon.com/directoryservice/latest/admin-guide/what_is.html": {
+   "hash": "936e8cbe659da80cd1f4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ds-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html": {
+   "hash": "2e6db11b45689311f235",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-oac"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/aws-fault-isolation-boundaries/availability-zones.html": {
+   "hash": "ca2b22a9304c881038a9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fault-isolation-az"
+   ]
+  },
+  "https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html": {
+   "hash": "affcf1b6912d3a2f73d6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "regions-and-azs"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html": {
+   "hash": "21da0bffb9799d7e2000",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-scp-examples"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/": {
+   "hash": "0a642edf015b3ba85de5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "global-infra"
+   ]
+  },
+  "https://docs.aws.amazon.com/controltower/latest/controlreference/controls.html": {
+   "hash": "7fe33802f067599edb18",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "control-tower-controls"
+   ]
+  },
+  "https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html": {
+   "hash": "01ccbdb46fccdaeed22d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sso-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_attach.html": {
+   "hash": "61a2a11300318731eec5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-policies-attach"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/how-it-works.html": {
+   "hash": "004d5d77c0cee27afb5e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-how-it-works"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html": {
+   "hash": "2e66198d64f9cc84eea3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-security-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html": {
+   "hash": "fa2d2bae0e5ea9971d72",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nacls"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/default-network-acl.html": {
+   "hash": "2aad6e2740a0ee11e947",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-default-nacl"
+   ]
+  },
+  "https://aws.amazon.com/compliance/shared-responsibility-model/": {
+   "hash": "558ca1fbbd53827a2896",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shared-responsibility"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html": {
+   "hash": "37dad18cf807ecc418fc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-route-tables"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/route-tables-priority.html": {
+   "hash": "01d35143106243c090d6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-route-priority"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Internet_Gateway.html": {
+   "hash": "c9cd0ad8328b92db23f0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-igw"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/route-table-options.html": {
+   "hash": "bb2bfe08456021717442",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-route-options"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html": {
+   "hash": "782969ca6274cb5d8911",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-gateway"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html": {
+   "hash": "007648986f67d9dc0a0e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-what-is"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/global-infrastructure/": {
+   "hash": "2edec662c7708a519291",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "global-infra-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-basics.html": {
+   "hash": "7770ec314d41b6ce81a4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-basics"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/configure-subnets.html": {
+   "hash": "9f10414b5b9932d556f0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-subnets"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-sqli-match.html": {
+   "hash": "5b825bf0c7dd1749036d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-sqli"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/how-aws-waf-works.html": {
+   "hash": "7021803a2c6fec859380",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-how-works"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-overview.html": {
+   "hash": "f6e8725604fa1dab13d0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-standard-summary.html": {
+   "hash": "7565d73a3ac81ed4389c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-standard"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-summary.html": {
+   "hash": "b056b0bfab9f86394573",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-advanced"
+   ]
+  },
+  "https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html": {
+   "hash": "ea0a274f6c40d3f2d0d2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "inspector"
+   ]
+  },
+  "https://docs.aws.amazon.com/macie/latest/user/what-is-macie.html": {
+   "hash": "7812fb6446322a3c6a3a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "macie"
+   ]
+  },
+  "https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html": {
+   "hash": "be92af4b9e8e000581dc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "security-hub"
+   ]
+  },
+  "https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_data-sources.html": {
+   "hash": "1a1ec9189fe31ff6681c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "guardduty-data"
+   ]
+  },
+  "https://docs.aws.amazon.com/network-firewall/latest/developerguide/what-is-aws-network-firewall.html": {
+   "hash": "881fc5237640db04d8de",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "network-firewall"
+   ]
+  },
+  "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools.html": {
+   "hash": "e210651a18ea7607242e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cognito-user-pools"
+   ]
+  },
+  "https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html": {
+   "hash": "e02de509faed014fb919",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cognito-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html": {
+   "hash": "926e3c6c808b8d403052",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firewall-manager"
+   ]
+  },
+  "https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-identity.html": {
+   "hash": "a33daeea61d88c536c26",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cognito-identity-pools"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html": {
+   "hash": "5dc6fca9560b4cc9603d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html": {
+   "hash": "900a920182e7cbf462a2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-rotation"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html": {
+   "hash": "c6fdf2b11a8236d4a5f2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-parameter-store"
+   ]
+  },
+  "https://docs.aws.amazon.com/guardduty/latest/ug/what-is-guardduty.html": {
+   "hash": "f3fe0f3452b8bb7cf37f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "guardduty"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/concepts.html": {
+   "hash": "a4598f81b5e4f2c07af4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "privatelink-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/what-is-privatelink.html": {
+   "hash": "4eba223307fd061cdc2e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "privatelink-what-is"
+   ]
+  },
+  "https://aws.amazon.com/detective/": {
+   "hash": "dce864d4026bbea44a00",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "detective"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/create-interface-endpoint.html": {
+   "hash": "880de97e68c9ff32f61f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpce-interface"
+   ]
+  },
+  "https://docs.aws.amazon.com/general/latest/gr/rande.html": {
+   "hash": "c3f664a41eac12470ec1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "service-endpoints"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html": {
+   "hash": "2f331d6e1202087bbf7e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s2s-vpn"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html": {
+   "hash": "04791066962cf488a508",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpce-gateway-s3"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/gateway-endpoints.html": {
+   "hash": "e037efe8ad7b42eee328",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpce-gateway"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/how_it_works.html": {
+   "hash": "cbbf643071743c7dfa72",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s2s-vpn-how"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/Welcome.html": {
+   "hash": "d06423226a31bf794040",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-direct-connect.html": {
+   "hash": "158350618194fd24d06e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "connectivity-dx"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/what-is.html": {
+   "hash": "cd0b8e4122f3aa2c6755",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "client-vpn"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-site-to-site-vpn.html": {
+   "hash": "bba79564e0d1cd2ba2bf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "connectivity-vpn"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html": {
+   "hash": "8252232f4976df33be7d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html": {
+   "hash": "62cda85164570d430d8a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-key-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/key-store-overview.html": {
+   "hash": "1975043cab830e8f795c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-key-stores"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html": {
+   "hash": "e2ada1fb4b7ae9d5f011",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-rotation"
+   ]
+  },
+  "https://docs.aws.amazon.com/cloudhsm/latest/userguide/introduction.html": {
+   "hash": "cbe92d283b4d5cee1b03",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudhsm"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-default.html": {
+   "hash": "00d2483f472d36dac925",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-default-key-policy"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/overview.html": {
+   "hash": "a89ce7c766e6f4ceeaf3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingServerSideEncryption.html": {
+   "hash": "2d9035c660051f7a2a12",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-sse-s3"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/serv-side-encryption.html": {
+   "hash": "e023c87233e1e49f759d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-sse"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html": {
+   "hash": "fad7d5f1fd4b51edf099",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-sse-kms"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html": {
+   "hash": "70369f4e96c287e00819",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/specifying-s3-encryption.html": {
+   "hash": "0505a4b0eae243f6b406",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-sse-s3-specify"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html": {
+   "hash": "0b70425db2d7b0c02802",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-sse-c"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/managed-renewal.html": {
+   "hash": "556147df0550f501925b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-renewal"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/acm-services.html": {
+   "hash": "c1921fc38097382fce32",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-services"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html": {
+   "hash": "71a99da7e6ddb91c5d2c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-https-listener"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cnames-and-https-requirements.html": {
+   "hash": "17f831956e407d457f86",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-https-requirements"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/about-backup-plans.html": {
+   "hash": "df954d63600d61e2b3b6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-plans"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html": {
+   "hash": "c0842324db725186ceea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html": {
+   "hash": "7161929aff60cb548fce",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-versioning"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/vault-lock.html": {
+   "hash": "a7d7d9b45bcc2be85271",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-vault-lock"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication.html": {
+   "hash": "237dc5f0547b441a5829",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-replication"
+   ]
+  },
+  "https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html": {
+   "hash": "c5ca7ca7b3364dc8ad23",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "artifact"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html": {
+   "hash": "8bbbfe55482236492cd9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-block-public-access"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/conformance-packs.html": {
+   "hash": "e584957737dcc1ac8780",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-conformance-packs"
+   ]
+  },
+  "https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html": {
+   "hash": "9ed59468f8105a167a55",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lake-formation"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/microservices-on-aws.html": {
+   "hash": "42a057e8865ee6a111d4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msa-whitepaper"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html": {
+   "hash": "8ed3bfc449dfee21a781",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-object-lock"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html": {
+   "hash": "eb5e8b60fbf2a46f4c9e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-lifecycle"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_prevent_interaction_failure_loosely_coupled_system.html": {
+   "hash": "5db270d750a0179a50d4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-loose-coupling"
+   ]
+  },
+  "https://docs.aws.amazon.com/macie/latest/user/data-classification.html": {
+   "hash": "745876a308e4cfc8bb23",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "macie-discovery"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_prevent_interaction_failure_idempotent.html": {
+   "hash": "72d8ac650d4c64192684",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-idempotent"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_stateless.html": {
+   "hash": "7d80fab7d2d108c2c563",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-stateless"
+   ]
+  },
+  "https://docs.aws.amazon.com/sns/latest/dg/welcome.html": {
+   "hash": "1c9021f9670216449ef1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sns-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html": {
+   "hash": "62314881484793565fa7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eventbridge-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html": {
+   "hash": "f8ab0d3a836f643bb584",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/introduction.html": {
+   "hash": "0e5d042dc0976561c16a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-streams"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/building-consumers.html": {
+   "hash": "1701f3517da83f2b72d3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-consumers"
+   ]
+  },
+  "https://aws.amazon.com/event-driven-architecture/": {
+   "hash": "4ecaf6affbbf5c3fca23",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eda-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html": {
+   "hash": "7e4643f453bd11881883",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "stepfunctions"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/standard-queues.html": {
+   "hash": "9dae1cae10998c55f51f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-standard"
+   ]
+  },
+  "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html": {
+   "hash": "cf5387aec9b3affc99be",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eventbridge-rules"
+   ]
+  },
+  "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-event-patterns.html": {
+   "hash": "13920e71746656c626b1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eventbridge-patterns"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html": {
+   "hash": "9eb93665042e41fb4e41",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/simple-microservices-architecture-on-aws.html": {
+   "hash": "a851309ec65c4d835317",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msa-simple"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/distributed-data-management.html": {
+   "hash": "c1c562e1f07b115b013e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msa-distributed-data"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/user-interface.html": {
+   "hash": "e2a6d6f042fef4e9335f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msa-ui"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/welcome.html": {
+   "hash": "b3798965c77e75b8d635",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-welcome"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html": {
+   "hash": "72a010455c2660a2bf66",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-dlq"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-vs-rest.html": {
+   "hash": "7d33a5fb554624a194ea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-http-vs-rest"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/microservices-on-aws/data-store.html": {
+   "hash": "1c2ab1e6b2316bf39c37",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msa-data-store"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html": {
+   "hash": "2cabf0a080600cb148bb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-caching"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/lambda-concurrency.html": {
+   "hash": "652c76cb572e2a00d024",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-concurrency"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html": {
+   "hash": "63ab2718c2cb631cacad",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fargate-ecs"
+   ]
+  },
+  "https://docs.aws.amazon.com/eks/latest/userguide/what-is-eks.html": {
+   "hash": "a8ee4a2e059aef71fd5f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eks-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html": {
+   "hash": "6948eaf1992bf3eb9c2d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html": {
+   "hash": "e9677311bbf4b93720c4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-quotas"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html": {
+   "hash": "c03478d9350b4bf1376d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecr-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/app2container/latest/UserGuide/what-is-a2c.html": {
+   "hash": "6af89d399aefabcb2435",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "a2c"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/gettingstartedguide/scaling-ha.html": {
+   "hash": "28d9ff749027beb492d3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-scaling-ha"
+   ]
+  },
+  "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-container-service.html": {
+   "hash": "1a25c4aa3e075a73832d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "container-decision"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html": {
+   "hash": "005b1afe4f171d93d9f4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-read-replicas"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html": {
+   "hash": "ade902c34da2edc97632",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html": {
+   "hash": "67db797bf40cf51fe838",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-target-tracking"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html": {
+   "hash": "502c15116c32fc6d9ec4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-throttling"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-scheduled-scaling.html": {
+   "hash": "cde320f4a78c8653b5f6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-scheduled"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html": {
+   "hash": "b2bdcfe650d8ec0855a4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html": {
+   "hash": "f0f4dff38ac702e3cf25",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-predictive"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html": {
+   "hash": "ac732affd74af602e987",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html": {
+   "hash": "6c9c1a1e0df8332a0037",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-expiration"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/WhatIs.html": {
+   "hash": "39a7a66ef5d6709e2d74",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elasticache-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Strategies.html": {
+   "hash": "4132de590ca75125f141",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elasticache-strategies"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/what-is-load-balancing.html": {
+   "hash": "9f0f9b2fd46e9aa82b8d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elb-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html": {
+   "hash": "bcb61a66d05cee15eda1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/databases-on-aws-how-to-choose.html": {
+   "hash": "1235559a4214a5a55a7d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "database-decision"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html": {
+   "hash": "a641d104e58844d4590e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-resize"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html": {
+   "hash": "9669916ae10f04fc3486",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-compute-service.html": {
+   "hash": "e43cea71cf146f2f4442",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "compute-decision"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html": {
+   "hash": "bdfda78954f7e1f283f3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html": {
+   "hash": "a9fe452ab4c7ab5d155c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/transfer/latest/userguide/what-is-aws-transfer-family.html": {
+   "hash": "90b42437c4817c5c8bb1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "transfer-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html": {
+   "hash": "f9661f2cd0e10d7bc226",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "storage-decision"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.html": {
+   "hash": "f9915b6c0acbd6133e1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dax"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html": {
+   "hash": "2ddd7a61685863746f6e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Welcome.html": {
+   "hash": "d31100aa446378b7cb9a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_fault_isolation_multiaz_region_system.html": {
+   "hash": "3bd995b3a0b1b6cfe675",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-multi-location"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html": {
+   "hash": "6aab9344fb2556fcab73",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-routing"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover.html": {
+   "hash": "050fb6d0180857e3212e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-failover"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_limit_retries.html": {
+   "hash": "e7805a0b17b9730b1059",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-retries"
+   ]
+  },
+  "https://docs.aws.amazon.com/neptune/latest/userguide/intro.html": {
+   "hash": "3d6d50368f21b4d29d4d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "neptune-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-types.html": {
+   "hash": "5e0b146ae128545caa15",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-failover-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_throttle_requests.html": {
+   "hash": "1a75ab4abb7b695ea12e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-throttle"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_graceful_degradation.html": {
+   "hash": "bdbd43a1977ec924c17f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-graceful"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy-planning.html": {
+   "hash": "ff65667889fde771e40b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-proxy-planning"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-proxy.html": {
+   "hash": "11f1081a294f32c2822b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-proxy"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.html": {
+   "hash": "e4d76fabc7c045444f09",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-multi-az"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_mitigate_interaction_failure_fail_fast.html": {
+   "hash": "b0b99d0e04b4883d8a05",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-fail-fast"
+   ]
+  },
+  "https://docs.aws.amazon.com/servicequotas/latest/userguide/configure-cloudwatch.html": {
+   "hash": "df0d5bf516e12f695b9a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "servicequotas-cw"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_manage_service_limits_limits_considered.html": {
+   "hash": "db4daf0dc512e20b8d60",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-quotas-regions"
+   ]
+  },
+  "https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html": {
+   "hash": "c091ad46b24fb4804df1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "servicequotas"
+   ]
+  },
+  "https://docs.aws.amazon.com/xray/latest/devguide/aws-xray.html": {
+   "hash": "277b47d4a5e93cbdbf3f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "xray"
+   ]
+  },
+  "https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html": {
+   "hash": "044f58806cb879ff80bd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "trusted-advisor"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/availability.html": {
+   "hash": "88b93e0a45e343bccf9e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-availability"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-options-in-the-cloud.html": {
+   "hash": "c3dbb91f21d05b9db849",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dr-options"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_tracking_change_management_automated_changemgmt.html": {
+   "hash": "88dd78867a503df38b63",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-automate-changes"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/business-continuity-plan-bcp.html": {
+   "hash": "919f513a3e080acf2978",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dr-objectives"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_tracking_change_management_immutable_infrastructure.html": {
+   "hash": "d3d9ac27504bb416b9ec",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-immutable"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_monitor_aws_resources_monitor_resources.html": {
+   "hash": "b1ab72a6412c59825549",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-monitor-components"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-cloudwatch-metrics.html": {
+   "hash": "851492bd9ed5e6b5fdb8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-metrics"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html": {
+   "hash": "7a6e93300140598b4b79",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html": {
+   "hash": "a4a28eed36d86bfeb8d9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html": {
+   "hash": "255b70ddc7af637baa28",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-drift"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html": {
+   "hash": "a444057d306229778799",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-instance-refresh"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager.html": {
+   "hash": "369d793a263a42324306",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-patch"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/DataDurability.html": {
+   "hash": "798b7d0183465fae402a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-durability"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/features.html": {
+   "hash": "8e23640af5525a9c42fa",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-features"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/efs-replication.html": {
+   "hash": "c622862136090129a0b6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-replication"
+   ]
+  },
+  "https://docs.aws.amazon.com/comprehend/latest/dg/what-is.html": {
+   "hash": "c081d272674505362645",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "comprehend-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html": {
+   "hash": "41d296ef0f73505d8d5b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-storage-classes"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html": {
+   "hash": "e0ca60f88f471c46d984",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ami"
+   ]
+  },
+  "https://docs.aws.amazon.com/polly/latest/dg/what-is.html": {
+   "hash": "3817225071437eefdfff",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "polly-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes.html": {
+   "hash": "990d8bd1949e513fa100",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-volumes"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-recover.html": {
+   "hash": "83c914c1dc75eb92e97e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-recover"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/edit-target-group-attributes.html": {
+   "hash": "1af982282157fb33f68b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-target-attrs"
+   ]
+  },
+  "https://docs.aws.amazon.com/filegateway/latest/files3/what-is-file-s3.html": {
+   "hash": "b56f46beadeffa89c297",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sgw-file-s3"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volume-types.html": {
+   "hash": "0857c1a645d9cc629e1a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-volume-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZSingleStandby.html": {
+   "hash": "5a24507ae50aaa78723c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-multi-az-instance"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance.html": {
+   "hash": "fd85c09e187cd39fe1e2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-performance"
+   ]
+  },
+  "https://docs.aws.amazon.com/storagegateway/latest/vgw/WhatIsStorageGateway.html": {
+   "hash": "de1011b3af18158a73ce",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sgw-volume"
+   ]
+  },
+  "https://docs.aws.amazon.com/storagegateway/latest/tgw/WhatIsStorageGateway.html": {
+   "hash": "f198bff5c54724275094",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sgw-tape"
+   ]
+  },
+  "https://docs.aws.amazon.com/storagegateway/": {
+   "hash": "9a0b5950fb118cc8ebd2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "storage-gateway-docs"
+   ]
+  },
+  "https://docs.aws.amazon.com/filegateway/latest/filefsxw/what-is-file-fsxw.html": {
+   "hash": "95e5e69cfe0859c22457",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sgw-fsx-file"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/performance.html": {
+   "hash": "11a909f74600888bdbb9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-performance"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-type-names.html": {
+   "hash": "f0a850eb44e7944a67d7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-type-names"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-nitro-instances.html": {
+   "hash": "a27d82b1d1d72be127e3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-nitro"
+   ]
+  },
+  "https://docs.aws.amazon.com/compute-optimizer/latest/ug/what-is-compute-optimizer.html": {
+   "hash": "b045466dba9c96624185",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "compute-optimizer"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html": {
+   "hash": "f6ee5c376ab8a4ab1188",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-hibernate"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/hibernating-prerequisites.html": {
+   "hash": "314066978f959dd5eafa",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-hibernate-prereq"
+   ]
+  },
+  "https://docs.aws.amazon.com/local-zones/latest/ug/what-is-aws-local-zones.html": {
+   "hash": "e62e38be854751539664",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "local-zones"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/cost-optimization-pillar/manage-demand-and-supply-resources.html": {
+   "hash": "829e8c518b84137fb402",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-cost-demand"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithReservedDBInstances.html": {
+   "hash": "b94c3c1fbb0ace472d1f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-reserved"
+   ]
+  },
+  "https://docs.aws.amazon.com/timestream/latest/developerguide/what-is-timestream.html": {
+   "hash": "961e12a41b6c23f0fd54",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "timestream-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html": {
+   "hash": "b5a725ac6fa3089a29be",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-lifecycle"
+   ]
+  },
+  "https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html": {
+   "hash": "7eb06a85792e1a14677d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "redshift-columnar"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Oracle.Concepts.Licensing.html": {
+   "hash": "4f0fc0440c00841cc896",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-oracle-licensing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.BackupRetention.html": {
+   "hash": "b5c98163932b18183c1e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-backup-retention"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIT.html": {
+   "hash": "6b35f74515bff4f2c36d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-pitr"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateSnapshot.html": {
+   "hash": "e149c456f67aa8ec1a87",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-snapshot-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html": {
+   "hash": "b28a508d8fb054829064",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-tagging"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/creating-a-backup-plan.html": {
+   "hash": "860b4dbcc6c774ef321a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-create-plan"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-filtering.html": {
+   "hash": "d060e4d660c06b019701",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ce-filtering"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html": {
+   "hash": "e5afeb421a090e43dc1e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-usage-plans"
+   ]
+  },
+  "https://aws.amazon.com/lambda/pricing/": {
+   "hash": "96bee27648e6016083b9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/awssupport/latest/user/cost-optimization-checks.html": {
+   "hash": "1f66ec2a8d15ad562b3e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "trusted-advisor-cost-checks"
+   ]
+  },
+  "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.html": {
+   "hash": "dfd78c618a4092671aea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dms-serverless"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html": {
+   "hash": "04c5b2f5c7ef000d806c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-comparison"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-pricing.html": {
+   "hash": "6b831bb2229403a8f92f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateways-regional.html": {
+   "hash": "98df0fb564bfa1e0e73f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-regional"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-scenarios.html": {
+   "hash": "d1d033179e6daf9a9246",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-scenarios"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/WorkingWithConnections.html": {
+   "hash": "3d1ef3f8d8c572a351e2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-connection-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/resiliency_toolkit.html": {
+   "hash": "cd540d8413e883304ec2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-resiliency"
+   ]
+  },
+  "https://aws.amazon.com/elasticloadbalancing/pricing/": {
+   "hash": "83a6d398b3c5ce3fe4f8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elb-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html": {
+   "hash": "cc90ea1f366298a7b07b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpn-tunnels"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/vpn-limits.html": {
+   "hash": "0b1e06bbbc52edf5c620",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpn-quotas"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/dedicated_connection.html": {
+   "hash": "b42fa6649e659bfbfcc8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-dedicated"
+   ]
+  },
+  "https://aws.amazon.com/cloudfront/pricing/": {
+   "hash": "f3f44cb90a12ecc7fadb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-choosing-alias-non-alias.html": {
+   "hash": "48344ade32f48f0b6828",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-alias"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/instance-types.html": {
+   "hash": "39716fde5508c7d27bdd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-instance-types"
+   ]
+  },
+  "https://aws.amazon.com/vpn/pricing/": {
+   "hash": "b86641ddece98c4519da",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpn-pricing"
+   ]
+  },
+  "https://aws.amazon.com/global-accelerator/pricing/": {
+   "hash": "f4573845db41cde61a93",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-pricing"
+   ]
+  },
+  "https://aws.amazon.com/route53/pricing/": {
+   "hash": "31becd87319786b66aa6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/gp.html": {
+   "hash": "7fa5382c9295ee940353",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-gp"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/so.html": {
+   "hash": "70834bb5835930b2e0c4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-so"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/configuration-memory.html": {
+   "hash": "db9353617a5cb18ade58",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-memory"
+   ]
+  },
+  "https://docs.aws.amazon.com/batch/latest/userguide/what-is-batch.html": {
+   "hash": "ae046934e3d1e289fa46",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "batch-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/ac.html": {
+   "hash": "3d28efe36c3b53126be4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-ac"
+   ]
+  },
+  "https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html": {
+   "hash": "631dcb8b146ad48500e5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "emr-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/application/userguide/what-is-application-auto-scaling.html": {
+   "hash": "3e11020566dda2798b73",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "appas-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/co.html": {
+   "hash": "9cb1a670470ade186a87",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-co"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html": {
+   "hash": "5adcd32fbd5f9cc70d34",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-edge-functions"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html": {
+   "hash": "3c1cce3bb02ef2ff3b0f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-step"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/plans/userguide/migrate-scaling-plan.html": {
+   "hash": "e37ce3f17764f8935bbd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "scaling-plan-migrate"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html": {
+   "hash": "77e8d2639d2d741ced70",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-polling"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-fifo-queues.html": {
+   "hash": "29a5cc7fc3e4af7f1ae4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-fifo"
+   ]
+  },
+  "https://docs.aws.amazon.com/sns/latest/dg/sns-sqs-as-subscriber.html": {
+   "hash": "9561c5e655767cd9b66c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sns-sqs-fanout"
+   ]
+  },
+  "https://docs.aws.amazon.com/ec2/latest/instancetypes/mo.html": {
+   "hash": "2596c87080269e458a0f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-mo"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html": {
+   "hash": "573474011e695021caed",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-reserved"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html": {
+   "hash": "bf48d2fc227b5dce3e0f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-autoscaling"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html": {
+   "hash": "ac741f91b56f74562443",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-visibility"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-using-sqs-queue.html": {
+   "hash": "c7dce7cdc1c4cbac05d7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-sqs"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/provisioned-concurrency.html": {
+   "hash": "63a7af87d2429c41fe86",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-provisioned"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Welcome.html": {
+   "hash": "edbf5813f733d802b4bb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html": {
+   "hash": "0ed419185b50e7e0533e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-serverless"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html": {
+   "hash": "3fed2d45f70ae034a67b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-storage"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html": {
+   "hash": "24f19ea0f3cf5a2e53f8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/capacity-mode.html": {
+   "hash": "7a840d98ab0bc32a012b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-capacity"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html": {
+   "hash": "1657e862ac80746613dd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-storage"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database.html": {
+   "hash": "5cf87d3489895d0fee28",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-global"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/SelectEngine.html": {
+   "hash": "25e461b02ffcb1b375ee",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elasticache-engines"
+   ]
+  },
+  "https://docs.aws.amazon.com/memorydb/latest/devguide/what-is-memorydb.html": {
+   "hash": "e84a4dde92cabb085c3d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "memorydb"
+   ]
+  },
+  "https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html": {
+   "hash": "8e6a7533dd8cb9bed527",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dms-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/provisioned-capacity-mode.html": {
+   "hash": "d537ca0da56faa2bed5a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-provisioned"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/on-demand-capacity-mode.html": {
+   "hash": "3a1e01349f4b3a988533",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-ondemand"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-design.html": {
+   "hash": "b65c811898b7b5dfa2b1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-partition-keys"
+   ]
+  },
+  "https://docs.aws.amazon.com/eks/latest/userguide/autoscaling.html": {
+   "hash": "45daf426099ae8d3012a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eks-autoscaling"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html": {
+   "hash": "db598e3cdb585c6f056a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-instance-class"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html": {
+   "hash": "27a91b1d4dc90bf3edd2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "peering-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html": {
+   "hash": "4aa8fcecc86b68579ce1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "peering-basics"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/tgw/what-is-transit-gateway.html": {
+   "hash": "ee9835dda13711485fe4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "tgw-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/tgw/tgw-peering.html": {
+   "hash": "c72473833b8aab6c9bda",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "tgw-peering"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.Types.html": {
+   "hash": "f632320dcbe8b97c3743",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-instance-class-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/tgw/how-transit-gateways-work.html": {
+   "hash": "4cd7bcdf8b211ca6c6cf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "tgw-how"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/introduction.html": {
+   "hash": "0475a5bcf0debb47890e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "gwlb-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Replication.html": {
+   "hash": "4b2e1f0d4de5f045367d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-replication"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/network/introduction.html": {
+   "hash": "fb49ccdb7b25d8b132d1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "nlb-intro"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html": {
+   "hash": "8f380636add5233eff3d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-listeners"
+   ]
+  },
+  "https://docs.aws.amazon.com/global-accelerator/latest/dg/introduction-how-it-works.html": {
+   "hash": "f6ed3c3855bf07b5b94d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-how"
+   ]
+  },
+  "https://docs.aws.amazon.com/outposts/latest/userguide/what-is-outposts.html": {
+   "hash": "6579f8353a188d8619c4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "outposts-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/what-is.html": {
+   "hash": "c5dbd17a6accfc9dcff1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/wavelength/latest/developerguide/what-is-wavelength.html": {
+   "hash": "5dbcf672ec55160722ec",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "wavelength-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/columnar-storage.html": {
+   "hash": "c390f9ea122c6487a085",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-columnar"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html": {
+   "hash": "b62ea2eb330bb5b2da1d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/key-concepts.html": {
+   "hash": "0938ffd6b80f5398008d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-concepts"
+   ]
+  },
+  "https://aws.amazon.com/what-is/data-lake/": {
+   "hash": "90a0b4641bff1ca0cfec",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "what-is-data-lake"
+   ]
+  },
+  "https://docs.aws.amazon.com/msk/latest/developerguide/what-is-msk.html": {
+   "hash": "c6eabbbc34024fd36b44",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msk-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/enhanced-consumers.html": {
+   "hash": "e66c7e9ece21fcd6184c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-efo"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/partitions.html": {
+   "hash": "83276bcd497fea338adf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-partitions"
+   ]
+  },
+  "https://docs.aws.amazon.com/msk/latest/developerguide/msk-provisioned.html": {
+   "hash": "0851ca8a58a567be0ad6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msk-provisioned"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/02/amazon-data-firehose-formerly-kinesis-data-firehose/": {
+   "hash": "e2cd9a88eceacb602929",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-rename"
+   ]
+  },
+  "https://aws.amazon.com/global-accelerator/": {
+   "hash": "5ffc13f40da1ad1911d9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-product"
+   ]
+  },
+  "https://docs.aws.amazon.com/snowball/latest/developer-guide/whatisedge.html": {
+   "hash": "2b9894981b62e4d69f09",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "snowball-edge"
+   ]
+  },
+  "https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html": {
+   "hash": "aefd3646516d18489d68",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "datasync-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-transfer-works.html": {
+   "hash": "d7a35ca3fb3450057525",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "datasync-how"
+   ]
+  },
+  "https://docs.aws.amazon.com/datatransferterminal/latest/userguide/what-is-dtt.html": {
+   "hash": "8b7d2bb8ee86d0a61c46",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dtt"
+   ]
+  },
+  "https://aws.amazon.com/what-is/streaming-data/": {
+   "hash": "157207831355eedd7205",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "what-is-streaming-data"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/about-triggers.html": {
+   "hash": "27d41c2f285027c9e0fb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-triggers"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-parquet-home.html": {
+   "hash": "053225eb9d523db39bb5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-parquet"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/ctas-examples.html": {
+   "hash": "21b30114bb44cbba42ae",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-ctas"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html": {
+   "hash": "344ffe4b55450ec06329",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-catalog"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/components-overview.html": {
+   "hash": "a0debb232cee94e0af8b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-components"
+   ]
+  },
+  "https://docs.aws.amazon.com/emr/latest/EMR-Serverless-UserGuide/emr-serverless.html": {
+   "hash": "c8934e8ab66eabdeba2c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "emr-serverless"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/server-side-encryption.html": {
+   "hash": "8ab91d525e6a50100852",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-sse"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/vpc.html": {
+   "hash": "8192d81d4a7539578216",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-vpc"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/controlling-access.html": {
+   "hash": "56825c4099ff898bdcb6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-iam"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/vpc.html": {
+   "hash": "1d93d1c4aee078bcfe23",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-vpc"
+   ]
+  },
+  "https://docs.aws.amazon.com/msk/latest/developerguide/msk-encryption.html": {
+   "hash": "ef8a0381dff61121d935",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msk-encryption"
+   ]
+  },
+  "https://docs.aws.amazon.com/msk/latest/developerguide/kafka_apis_iam.html": {
+   "hash": "2d79b356e67f1228803f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msk-clientauth"
+   ]
+  },
+  "https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html": {
+   "hash": "1fb8f7380b2044dae1b1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "transfer-vpc"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html": {
+   "hash": "36e12556eba0146fc312",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ce-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html": {
+   "hash": "a655ed7bb82c05c1f125",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "savings-plans"
+   ]
+  },
+  "https://docs.aws.amazon.com/savingsplans/latest/userguide/plan-types.html": {
+   "hash": "0315c21f1db953039a47",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "savings-plans-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/msk/latest/developerguide/msk-authentication.html": {
+   "hash": "36e1c64fe3baa1faafbf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "msk-mtls"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-reserved-instances.html": {
+   "hash": "47de5d419ddf9c936d18",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-reserved-instances"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-scope.html": {
+   "hash": "a4511f24f8d6840c1540",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-ri-scope"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html": {
+   "hash": "59e8fd1189da9b859654",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-purchasing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-interruptions.html": {
+   "hash": "1ecd46f8868b81d6407d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-spot-interruptions"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances.html": {
+   "hash": "fa5ca0c1b7dc4aafc0b2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-spot"
+   ]
+  },
+  "https://docs.aws.amazon.com/cur/latest/userguide/what-is-cur.html": {
+   "hash": "62f0ee07377b0c3a485e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cur-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html": {
+   "hash": "030d5e93a953b9303a69",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cost-alloc-tags"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/consolidated-billing.html": {
+   "hash": "900a30a08883aabb20e9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "consolidated-billing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html": {
+   "hash": "8197a682daf20246fbea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "instance-store"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/RequesterPaysBuckets.html": {
+   "hash": "54a55f02cb8b6b4c1317",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "requester-pays"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-lifetime.html": {
+   "hash": "f70beb0bc73886f7e6fa",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "instance-store-lifetime"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.Autoscaling.html": {
+   "hash": "d5fb2674e95097eb7de3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-storage-autoscaling"
+   ]
+  },
+  "https://docs.aws.amazon.com/fsx/latest/WindowsGuide/what-is.html": {
+   "hash": "4aef371acb426f6f60e1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fsx-windows"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-modify-volume.html": {
+   "hash": "7c5dd12e607587871e76",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-modify"
+   ]
+  },
+  "https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html": {
+   "hash": "a83f41bacf1484b3f2e6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fsx-lustre"
+   ]
+  },
+  "https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html": {
+   "hash": "00834d04a2d4673db2f7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fsx-ontap"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html": {
+   "hash": "6c21fcb3e98075c2da2c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-lifecycle"
+   ]
+  },
+  "https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/what-is-fsx.html": {
+   "hash": "dda4327a40c109fcf8af",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fsx-openzfs"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html": {
+   "hash": "c801b453bda01595ed6e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-transfer-acceleration"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html": {
+   "hash": "8945dbc604d9f783cbbc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-lifecycle-transitions"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html": {
+   "hash": "eb110dfbae37fb2cea78",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-multipart"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-expire-general-considerations.html": {
+   "hash": "9558ec3ef80901a9e325",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-lifecycle-expire"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-snapshots.html": {
+   "hash": "c301ee2ca7c20f95931e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-snapshots"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html": {
+   "hash": "0b5a86526ef004f2d5a2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-snapshot-archive"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/glacier-storage-classes.html": {
+   "hash": "0992f1854a94ede63d7e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-glacier-classes"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html": {
+   "hash": "3bca65c338ed15d3a202",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-lifecycle-rules"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html": {
+   "hash": "61b1173edf410c029074",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-automated-backups"
+   ]
+  },
+  "https://docs.aws.amazon.com/quick/latest/userguide/what-is.html": {
+   "hash": "f306fc5edb5c03154c8e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "quick-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html": {
+   "hash": "849ae12c5829727b0cc6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sagemaker-what-is"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/compute": {
+   "hash": "676d4ba238fad1050fe7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-compute"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/": {
+   "hash": "c2da9c52f278a7f63598",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-hub"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/storage": {
+   "hash": "7c33d8bf94919daaec7e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-storage"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/databases": {
+   "hash": "313bc88b5fbc9b7528bb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-databases"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/images-create.html": {
+   "hash": "b514b37e0e2b01da223b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-images"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/security/fundamentals/shared-responsibility": {
+   "hash": "6a6e5461b9d75fa5f45b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-shared-responsibility"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/networking": {
+   "hash": "ecd91317b560f41cc611",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-networking"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/analytics": {
+   "hash": "4931eb9f76cc717e659b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-analytics"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-rate-based.html": {
+   "hash": "d20c8b7222617e6a639c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-rate-based"
+   ]
+  },
+  "https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html": {
+   "hash": "6248c3d1c0e709931d1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "data-exports-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html": {
+   "hash": "7a814fcf909eff43c223",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cur-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/apprunner/latest/dg/what-is-apprunner.html": {
+   "hash": "eee9a830b19180cf7185",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apprunner-what-is"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview": {
+   "hash": "f143a1c34aa57ead347a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-zones"
+   ]
+  },
+  "https://docs.aws.amazon.com/transfer/latest/userguide/create-server-ftp.html": {
+   "hash": "cf3632923da86150bb70",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "transfer-ftp"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-load-balancer-asg.html": {
+   "hash": "407690f4b50bbc3458f5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-attach-lb"
+   ]
+  },
+  "https://docs.aws.amazon.com/global-accelerator/latest/dg/about-listeners.html": {
+   "hash": "e82a91148c04c1985d25",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-listeners"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html": {
+   "hash": "1f4d00a1ebc33c1a4283",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-delivery"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-pricing-billing.html": {
+   "hash": "43a0ee3881723508c853",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-capacity-reservation-billing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/reserved-instances-types.html": {
+   "hash": "9135b9afce7dfd677194",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-ri-classes"
+   ]
+  },
+  "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-ris.html": {
+   "hash": "a52f2110035a266ca76d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "savings-plans-vs-ri"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/storage/common/storage-redundancy": {
+   "hash": "69df3806e323988bfa65",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-storage-redundancy"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-on-demand-instances.html": {
+   "hash": "7e220e58e37c5fbab64a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-on-demand"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-privatelink.html": {
+   "hash": "9cc73f57df4fe5629f34",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "connectivity-privatelink"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-instance-termination-notices.html": {
+   "hash": "6e3d11c0eebc04f00c9c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-spot-notices"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.concepts.html": {
+   "hash": "16328eaffa8713c360b6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dax-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html": {
+   "hash": "802598eae9a78bca65f1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "privatelink-service"
+   ]
+  },
+  "https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/aws-transit-gateway.html": {
+   "hash": "8829086d6dba213e424e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "connectivity-tgw"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-capacity-reservations.html": {
+   "hash": "88c923e7e22459b0129e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-capacity-reservations"
+   ]
+  },
+  "https://docs.aws.amazon.com/textract/latest/dg/what-is.html": {
+   "hash": "1165f270972b490bba6b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "textract-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/transcribe/latest/dg/what-is.html": {
+   "hash": "d6934e538bf80f43f0f5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "transcribe-what-is"
+   ]
+  },
+  "https://aws.amazon.com/firehose/faqs/": {
+   "hash": "050bdce6d97b2ff5ef30",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-faqs"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.Promote.html": {
+   "hash": "a10dc8c7c656adac526f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-promote"
+   ]
+  },
+  "https://docs.aws.amazon.com/translate/latest/dg/what-is.html": {
+   "hash": "374a748c13dfd7857e7c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "translate-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/lexv2/latest/dg/what-is.html": {
+   "hash": "1e3bf0e542f8ad359fd1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lex-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html": {
+   "hash": "f4c8f545dbcd45e3534f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rekognition-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html": {
+   "hash": "28211e321175e0ff3514",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-parameter-tiers"
+   ]
+  },
+  "https://aws.amazon.com/secrets-manager/pricing/": {
+   "hash": "24681648a987d7cf81d2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/timestream/latest/developerguide/AmazonTimestreamForLiveAnalytics-availability-change.html": {
+   "hash": "39b7cac5c81a77e8b201",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "timestream-availability"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Integrating.AutoScaling.html": {
+   "hash": "045077939871c05e7da7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-autoscaling"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.tableclasses.html": {
+   "hash": "50c37a1e5a68fe59634d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-table-classes"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.how-it-works.html": {
+   "hash": "e4ead05bb64bfa92e3c4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-serverless-how"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html": {
+   "hash": "54426de4358d8158aca8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-ttl"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-volumes-multi.html": {
+   "hash": "757ddbf0f6f437a21c8b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-multi-attach"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/create-network-acl.html": {
+   "hash": "63a4e3a52162c4229626",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-create-nacl"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/egress-only-internet-gateway.html": {
+   "hash": "3e90a3c73a9c1d16502f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-egress-only-igw"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/load-balancer/gateway-overview": {
+   "hash": "81dbba3c9dd8e6d731c1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-azure-gwlb"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/custom-network-acl.html": {
+   "hash": "664d79a30819602cb109",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-custom-nacl"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/root-user-best-practices.html": {
+   "hash": "803ce8164ed3a2f9555a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-root-best-practices"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic-cross-account.html": {
+   "hash": "7209426bd1756744caaf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-cross-account-eval"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-basics.html": {
+   "hash": "1379c8840ab5dba99169",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-policy-eval-basics"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/security-pillar/aws-account-management-and-separation.html": {
+   "hash": "7e4fb966b2f9a3e4a002",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sec-account-separation"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-summary-capabilities.html": {
+   "hash": "a3e049eaa4065fdea6a2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-capabilities"
+   ]
+  },
+  "https://aws.amazon.com/global-accelerator/faqs/": {
+   "hash": "71a9a1e07db061ead59f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ga-faq"
+   ]
+  },
+  "https://aws.amazon.com/dynamodb/pricing/": {
+   "hash": "d023fa4d84013857ad87",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/ddos-advanced-summary-protected-resources.html": {
+   "hash": "65a26e339cd536f4baec",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-protected-resources"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-requirements.html": {
+   "hash": "e7535184804dda5e9d08",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-replication-requirements"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/change-instance-type-of-ebs-backed-instance.html": {
+   "hash": "9773b36412cedff9d6ea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-resize-ebs"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html": {
+   "hash": "9bae0b295a6bfb7cb867",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-target-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/resize-limitations.html": {
+   "hash": "d69f745a66ca2a5c524e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-resize-compat"
+   ]
+  },
+  "https://docs.aws.amazon.com/drs/latest/userguide/what-is-drs.html": {
+   "hash": "860610ff665117ad8d05",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "drs-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geo.html": {
+   "hash": "a8349dd8d7c94b825168",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-geo"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html": {
+   "hash": "2c93d1df3b98bc903c85",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-warm-pools"
+   ]
+  },
+  "https://aws.amazon.com/ec2/graviton/": {
+   "hash": "bdfcf1a9c9dffc8409f8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "graviton"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.Endpoints.html": {
+   "hash": "dbd8eb3fe776e46b64ed",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-endpoints"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html": {
+   "hash": "8b0e3fdc98469d958938",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elb-how-it-works"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/site-recovery/site-recovery-overview": {
+   "hash": "beb8c34bed2c9b7b8f9b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-azure-asr"
+   ]
+  },
+  "https://aws.amazon.com/elasticloadbalancing/faqs/": {
+   "hash": "f06e93cdcc8d53112168",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elb-faqs"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/service-bus-messaging/service-bus-messaging-overview": {
+   "hash": "448c5cb281e823655201",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-azure-servicebus"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html": {
+   "hash": "b4f8180bdc5ccc6779ec",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-snapstart"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/general-purpose.html": {
+   "hash": "56c7f7704efdc6021b9b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-gp"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/welcome.html": {
+   "hash": "4816c790755d6155982f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "mq-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/encryption-in-transit.html": {
+   "hash": "30bd61350950fe7257c3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-encryption"
+   ]
+  },
+  "https://aws.amazon.com/elasticloadbalancing/features/": {
+   "hash": "c5a17e3d073cde04ccbc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elb-features"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive-considerations.html": {
+   "hash": "fde3a79cfbd54eacb886",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-archive-considerations"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpu-abort-incomplete-mpu-lifecycle-config.html": {
+   "hash": "9295cd2992c79764782f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-mpu-abort"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive-pricing.html": {
+   "hash": "f2aec1d501ee6835386c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-archive-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html": {
+   "hash": "c8d05d9905db93ef270a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-read-consistency"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html": {
+   "hash": "ec92b9f24c0a694bb2fb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aurora-backups"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html": {
+   "hash": "e2bd34f8c3f61212dc32",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-flow-logs"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/cosmos-db/consistency-levels": {
+   "hash": "e0ae01141cb78f175857",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-cosmos-consistency"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/manage-ad.html": {
+   "hash": "bcd96c399f0c0d97e93a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cost-anomaly"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/metrics-dimensions-nat-gateway.html": {
+   "hash": "1a0732c94a591b007803",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-metrics"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/hosted_connection.html": {
+   "hash": "09b21040d3ed868b821d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-hosted"
+   ]
+  },
+  "https://aws.amazon.com/privatelink/pricing/": {
+   "hash": "2f17439f1454e6bfd680",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "privatelink-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html": {
+   "hash": "e88a75c8d44181d953cc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-access"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost_pricing_model_region_cost.html": {
+   "hash": "b184376ebe2507a6ef09",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-region-cost"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html": {
+   "hash": "dbc2a744b367b9cb1563",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-stop"
+   ]
+  },
+  "https://aws.amazon.com/vpc/pricing/": {
+   "hash": "53ac2d302dd63b6d22b6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-unlimited-mode.html": {
+   "hash": "cb0a5e739ed0b08f647e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-t-unlimited"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/analytics-storage-class.html": {
+   "hash": "b0177ccc955764b9e8a8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-analytics"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistValuesGeneral.html": {
+   "hash": "c751a3dc4f84ab9eb0b8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-settings"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/UpdatingExistingObjects.html": {
+   "hash": "7b26dcaa46a2aa436fe6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-versioning"
+   ]
+  },
+  "https://aws.amazon.com/datasync/pricing/": {
+   "hash": "6008b7af045075ce6c43",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "datasync-pricing"
+   ]
+  },
+  "https://aws.amazon.com/aws-transfer-family/pricing/": {
+   "hash": "e6a2756d8a032004b486",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "transfer-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/work-with-nat-instances.html": {
+   "hash": "9242b4822fb5b23f5c43",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-instances"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-allocation-backfill.html": {
+   "hash": "10887e3dc5d611f8bbbe",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "tags-backfill"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/toolkit-classic.html": {
+   "hash": "9abbe3036bbd11fd6ab7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-classic-connection"
+   ]
+  },
+  "https://aws.amazon.com/savingsplans/database-pricing/": {
+   "hash": "af4e7697c084ca878898",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "savings-plans-database"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-specify-certificate-for-custom-domain-name.html": {
+   "hash": "7b6c6e26934e4732abb7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-edge-cert"
+   ]
+  },
+  "https://aws.amazon.com/shield/features/": {
+   "hash": "7c493e30aa27117e7af1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "shield-features"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/general-design-principles.html": {
+   "hash": "811913815c010be76fe2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-general-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.MultiAZ.Failover.html": {
+   "hash": "75e65c9f234ae817495e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-failover"
+   ]
+  },
+  "https://aws.amazon.com/s3/pricing/": {
+   "hash": "594fb6e0a568585f2d5c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/sec-design.html": {
+   "hash": "8a660b09934b2dbc5580",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-sec-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/perf-dp.html": {
+   "hash": "86c5eac84c007b70e4d2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-perf-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/rel-dp.html": {
+   "hash": "4ad675754244ae843177",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-rel-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/cost-dp.html": {
+   "hash": "81a47b706ac2f7d56ad2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-cost-dp"
+   ]
+  },
+  "https://aws.amazon.com/security-hub/faqs/": {
+   "hash": "d72cea156737e89101bf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "securityhub-faq"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/sustainability.html": {
+   "hash": "1e2ab6d0ed46015564f0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-sustainability"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/sus-design-principles.html": {
+   "hash": "824b8bffdb4389f9d28c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-sus-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/framework/oe-design-principles.html": {
+   "hash": "bcfcb4487574e170f70f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-oe-dp"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/saa-03-in-scope-services.html": {
+   "hash": "556cdb3693e4216627e9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "exam-in-scope"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html": {
+   "hash": "c8a7f3850f344dd3aafe",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-iam-roles"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/infrastructure-security.html": {
+   "hash": "01e4881dc5be01dfb168",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-infra-security"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/security-group-rules-reference.html": {
+   "hash": "aff3cbc07f9fab8f0347",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-sg-use-cases"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers.html": {
+   "hash": "26fa6d10bb4fe20ec942",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-idp-federation"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html": {
+   "hash": "b275ec2710da729c88db",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-benefits"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html": {
+   "hash": "c8b78b04540e8e0f6b46",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-global-condition-keys"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-policies.html": {
+   "hash": "07f11b74b559f14d9e3c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-bucket-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_third-party.html": {
+   "hash": "070886741a7513151ca7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-third-party"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-trail-organization.html": {
+   "hash": "073e4e5d230e18ec9df5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-org-trail"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html": {
+   "hash": "eb5bf3c447b8315d0bc8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-resource-policy"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/waf-rule-statement-type-ipset-match.html": {
+   "hash": "3bfcec5af62d8465901f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-ipset"
+   ]
+  },
+  "https://aws.amazon.com/blogs/aws/aws-security-hub-now-generally-available-with-near-real-time-analytics-and-risk-prioritization/": {
+   "hash": "f8461df815baf61b1413",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "securityhub-ga"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/cloudfront-features.html": {
+   "hash": "6b02208d712e2205ee74",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-cloudfront"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html": {
+   "hash": "70f90fd64779753da8e8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-cognito-authorizer"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-control-access-aws-waf.html": {
+   "hash": "098f53d341f0d267a598",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-waf"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-use-lambda-authorizer.html": {
+   "hash": "37e1f6c6128c1123e70d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-lambda-authorizer"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/listener-authenticate-users.html": {
+   "hash": "a6c83b147fd9bd3398dd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-authenticate"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/replicate-secrets.html": {
+   "hash": "08fc403c69c6e0463de5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-replicate"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html": {
+   "hash": "e53861885c94f306615f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-vpc-endpoint"
+   ]
+  },
+  "https://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_examples_cross.html": {
+   "hash": "135f57d82896a25642f1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "secrets-cross-account"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html": {
+   "hash": "2bd828c803098d560f71",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-sensitive-data"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html": {
+   "hash": "a35e9751bb255611debc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-envvars"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-access.html": {
+   "hash": "35cc19dc6136be0bbb76",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpce-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html": {
+   "hash": "7cd10191009be2ebc9ce",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-delete-key"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html": {
+   "hash": "76e0132f3abff47e4e1f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-parameter-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html": {
+   "hash": "2dbd81b92f8cee7d6334",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-cross-account"
+   ]
+  },
+  "https://docs.aws.amazon.com/cloudhsm/latest/userguide/clusters.html": {
+   "hash": "563c17f4f2aeef7fc620",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudhsm-clusters"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/vpn-redundant-connection.html": {
+   "hash": "b6eaae0764c52a842765",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpn-redundant"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html": {
+   "hash": "91291dd33eed17356752",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-encryption"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html": {
+   "hash": "ba2a8e7f5ef01f14dc24",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-bucket-keys"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html": {
+   "hash": "36731041131b23e74f1d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-dns-validation"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html": {
+   "hash": "16f2853d2cfc6b2501a3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-import"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/acm-public-certificates.html": {
+   "hash": "5767179303eba215f73e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-public-request"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/check-certificate-renewal-status.html": {
+   "hash": "92c2d6c2f1af206c3842",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-renewal-status"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html": {
+   "hash": "deb6e01bd8b31326e935",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-email-validation"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html": {
+   "hash": "a1d7facb57bbe1e4b30a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-best-practices"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-viewers-to-cloudfront.html": {
+   "hash": "12d24e37b5b5aa8f78e7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-viewer-https"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-custom-origin.html": {
+   "hash": "2645321b0a5d24cd12cf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-origin-https"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-https-cloudfront-to-s3-origin.html": {
+   "hash": "c10c0720c41e6ab3c53c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-s3-https"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definitions.html": {
+   "hash": "8f37b89aa683403c66de",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-task-definitions"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html": {
+   "hash": "beada9ff3be7b317bc3e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-service-lb"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html": {
+   "hash": "fa0c466c4905a7b82ad9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-task-role"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/waf-managed-rule-groups.html": {
+   "hash": "97aada3766401fea9e7a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-managed-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-endpoint-types.html": {
+   "hash": "c1a7ad44c4e4d0253561",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-endpoint-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/eks/latest/userguide/fargate.html": {
+   "hash": "2d08370d3f947d6b5185",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eks-fargate"
+   ]
+  },
+  "https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-baseline.html": {
+   "hash": "46de912c7277ac5cb6b4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-crs"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/MACsec.html": {
+   "hash": "a5afd81aa817587c68db",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-macsec"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-ddb.html": {
+   "hash": "015d3e2e734a7d995842",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpce-gateway-ddb"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html": {
+   "hash": "5279298f8afcc80808bf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-event-notifications"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-latency.html": {
+   "hash": "9670ab4c0b82471d2fda",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-latency"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html": {
+   "hash": "19c98b2c792ed69ca420",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-geoproximity"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-weighted.html": {
+   "hash": "6f2332babfad0f187e5f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-weighted"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-multivalue.html": {
+   "hash": "52823eac99efabb47491",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-multivalue"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-simple.html": {
+   "hash": "f0f6e935064482b970b3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-simple"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html": {
+   "hash": "a7109a744e5693e3067a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-failover-routing"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-types.html": {
+   "hash": "1df563509b073b827b26",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-hc-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/services-xray.html": {
+   "hash": "5fe3f9458127eb9b67b3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-xray"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html": {
+   "hash": "5c65b0a986342d0bdcb8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-run-command"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.rolling-version-deploy.html": {
+   "hash": "5e1042fc032c10cc08e8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eb-deploy-policies"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html": {
+   "hash": "19cd00eb892a57da5193",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-changesets"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-health-checks.html": {
+   "hash": "ac74e21bb19b5d411cd6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-health-checks"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html": {
+   "hash": "5c34563d2b012f9a4c90",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-stacksets"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/optimizing-performance-guidelines.html": {
+   "hash": "000764dc839ebcfcf0de",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-perf-guidelines"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html": {
+   "hash": "7e31edf6db69c9909b69",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "route53-failover-private"
+   ]
+  },
+  "https://docs.aws.amazon.com/ebs/latest/userguide/recognize-expanded-volume-linux.html": {
+   "hash": "8dd814a16fc95c9af520",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-extend-fs"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/configuration-ephemeral-storage.html": {
+   "hash": "3a9c43a7d4ec1df06bb6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-ephemeral"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html": {
+   "hash": "9412ae687a942630d99d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-arch"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html": {
+   "hash": "94dff34db3f0371af923",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-atomic-counters"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-sharding.html": {
+   "hash": "26355fa1295475b99ded",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-write-sharding"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/read-write-operations.html": {
+   "hash": "743ad855228838b848a0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-rw-ops"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/plan-options-and-configuration.html": {
+   "hash": "f8678132956b4e2c9aa9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aws-backup-plan-options"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-partition-key-uniform-load.html": {
+   "hash": "b3cd510df33ba5b6dff3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-pk-uniform"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-what-is-isnot-replicated.html": {
+   "hash": "31c99cbc6004a2572afe",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-replication-what-is-isnot-replicated"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/session-manager.html": {
+   "hash": "68d744ae2f66941446c4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-session-manager"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Usage-Metrics.html": {
+   "hash": "ccafebca3b32213562be",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-usage-metrics"
+   ]
+  },
+  "https://docs.aws.amazon.com/awssupport/latest/user/service-limits.html": {
+   "hash": "4066999660c3f5d49f36",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "trusted-advisor-service-limits"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/high_availability_origin_failover.html": {
+   "hash": "236a8f9f83d654ce0ea3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-origin-failover"
+   ]
+  },
+  "https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html": {
+   "hash": "451819d857ed95f38e38",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aws-service-quotas-general"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/rule-condition-types.html": {
+   "hash": "6a3098261c8fcab4eea1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-rule-conditions"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-time-series.html": {
+   "hash": "4deb86b88c31e780bc9c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-time-series"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-gateways-intro.html": {
+   "hash": "5c9ea8358118a24b471c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-gateway"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.cluster-management.html": {
+   "hash": "4b890b34077487fcb564",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dax-cluster-mgmt"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpn/latest/s2svpn/accelerated-vpn.html": {
+   "hash": "fc8b46f09bccfd2d4582",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpn-accelerated"
+   ]
+  },
+  "https://aws.amazon.com/microservices/": {
+   "hash": "30e05c3d079abe5c7074",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "microservices"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/views.html": {
+   "hash": "c29fbfa81afecca394c6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-views"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/reusing-query-results.html": {
+   "hash": "793d3fb976f2d5ac88eb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-reuse"
+   ]
+  },
+  "https://docs.aws.amazon.com/redshift/latest/dg/concurrency-scaling.html": {
+   "hash": "e624bf333678939bb7b4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "redshift-concurrency"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html": {
+   "hash": "0b2a9522c1ddc0290568",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dynamodb-gsi"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/ctas.html": {
+   "hash": "14073c51d72b0c2b7a85",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-ctas-what"
+   ]
+  },
+  "https://docs.aws.amazon.com/datasync/latest/userguide/choosing-task-mode.html": {
+   "hash": "61c089c546d299f107d6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "datasync-modes"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/kinesis-producer-adv-retries-rate-limiting.html": {
+   "hash": "01c13bca053cec23f609",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-retries"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/add-job-streaming.html": {
+   "hash": "3c1ef4aeefe3bac83d0c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-streaming"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html": {
+   "hash": "cfd2ce09cb7fd71891eb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-format"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html": {
+   "hash": "a1feeab1df58f36eb486",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ecs-data-volumes"
+   ]
+  },
+  "https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-concepts.html": {
+   "hash": "b85360088c21257b7e15",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kinesis-kpl"
+   ]
+  },
+  "https://aws.amazon.com/fargate/pricing/": {
+   "hash": "479e418ff2183a930ea5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fargate-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html": {
+   "hash": "fd79f743d2aac7bbc11e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-partition"
+   ]
+  },
+  "https://docs.aws.amazon.com/fsx/latest/LustreGuide/overview-dra-data-repo.html": {
+   "hash": "08500a7806f249ffec28",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "fsx-lustre-dra"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances-standard-mode.html": {
+   "hash": "270ec4edf821e1edb380",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-t-standard"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-scaling.html": {
+   "hash": "fa65e913c5b95f955b2f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-sqs-scaling"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tags.html": {
+   "hash": "03064124348ca7ef8d0a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "aws-generated-tags"
+   ]
+  },
+  "https://docs.aws.amazon.com/directconnect/latest/UserGuide/lags.html": {
+   "hash": "4d84d7632bc883b728c3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-lags"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html": {
+   "hash": "028df4867cd6a9022563",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudfront-origin-shield"
+   ]
+  },
+  "https://aws.amazon.com/directconnect/faqs/": {
+   "hash": "38e782a1f74ab1b1bfcd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dx-faqs"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/aws-dms-schema-conversion-feature/": {
+   "hash": "69ffaccb2cbd1a3d8e28",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-dms-schema-conversion"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-elasticache-serverless/": {
+   "hash": "3f2d1fdc47c7419fafeb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-elasticache-serverless"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/11/amazon-dynamodb-warm-throughput-ondemand-provisioned-tables/": {
+   "hash": "851de28a2078120bb6cb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-ddb-warm-throughput"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/10/amazon-elasticache-valkey/": {
+   "hash": "d34ee49bfe14fe42ea1f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-elasticache-valkey"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/05/dynamodb-configurable-maximum-throughput-on-demand-tables/": {
+   "hash": "604ead352f7dd8747c22",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-ddb-max-throughput"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/06/general-availability-aws-database-migration-service-serverless/": {
+   "hash": "f3b6d3aebf35f1a6f8ab",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-dms-serverless"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/05/amazon-aurora-i-o-optimized/": {
+   "hash": "d7edc8d1b2152db17169",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-aurora-io-optimized"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/11/amazon-aurora-serverless-v2-scaling-zero-capacity/": {
+   "hash": "8b70051b9ba64b7a6bf8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-aurora-sv2-zero"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/12/amazon-eventbridge-pipes-generally-available/": {
+   "hash": "91fe0e01f1e03e7557ef",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-eventbridge-pipes"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/amazon-rds-general-purpose-gp3-storage-volumes/": {
+   "hash": "fdeb7455509d956c2f8e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-rds-gp3"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/amazon-eventbridge-launches-new-scheduler/": {
+   "hash": "ab5ea82eaec23302f8f4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-eventbridge-scheduler"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/11/aws-nat-gateway-regional-availability/": {
+   "hash": "6be26df4d1757a3dee81",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-nat-regional"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/11/aws-site-to-site-vpn-5-gbps-bandwidth-tunnels/": {
+   "hash": "ff0d386912ca80fbb2c5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-vpn-5gbps"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/12/database-savings-plans-savings/": {
+   "hash": "75f5ba9d01721e871c3a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-database-savings-plans"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/08/amazon-cloudfront-origin-access-control/": {
+   "hash": "9bd307af769d52c486b5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-cloudfront-oac"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/amazon-athena-query-result-reuse-accelerate-queries/": {
+   "hash": "23f098cae862bbb316fd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-athena-result-reuse"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/12/amazon-ec2-auto-scaling-supports-metric-math-target-tracking-policies/": {
+   "hash": "060c34b8983227131592",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-asg-metric-math"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/03/aws-cost-allocation-tags-retroactive-application/": {
+   "hash": "971d8514f589ea797512",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-cost-tag-backfill"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/08/amazon-aurora-global-database-failover/": {
+   "hash": "c93f15d251b0e3cb0412",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-aurora-global-switchover"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/12/amazon-kinesis-data-firehose-zero-buffering/": {
+   "hash": "56d83ec95e97e6349e3c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-firehose-zero-buffering"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/11/predictive-scaling-for-amazon-ecs-services/": {
+   "hash": "66f051029231adf1d2a7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-ecs-predictive-scaling"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/02/amazon-nat-gateways-capacity-concurrent-connections-unique-destination/": {
+   "hash": "722eee436d899ac9fbd6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-nat-secondary-ips"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/05/amazon-aurora-dsql-generally-available/": {
+   "hash": "4c8b6a9d5cb37d564a2c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-aurora-dsql-ga"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/12/security-hub-near-real-time-risk-analytics/": {
+   "hash": "e838e437c0488ce1cfce",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-security-hub-ga"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/11/amazon-dynamo-db-reduces-prices-on-demand-throughput-global-tables/": {
+   "hash": "8b0c13de82990f6f5064",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-ddb-price-cut"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/02/amazon-s3-batch-replication-synchronizes-existing-data-between-buckets": {
+   "hash": "f00e29794c1212a7e7f1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-batch-replication"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/amazon-elastic-file-system-elastic-throughput": {
+   "hash": "a693c3a4fcb890f3b422",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-efs-elastic"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-fsx-intelligent-tiering-storage-class-fsx": {
+   "hash": "b6bf6dbf8abf55244a74",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-fsx-tiering"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/10/aws-datasync-performance-scalability-data-transfers": {
+   "hash": "29c21a519bac02d0adb0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-datasync-enhanced"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/12/aws-transfer-family-web-apps": {
+   "hash": "ca202c0dc97394c458de",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-transfer-web-apps"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/03/aws-datasync-copying-data-azure-blob-storage-preview": {
+   "hash": "c600790e197d7eb75010",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-datasync-azure-preview"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-efs-archive-storage-class": {
+   "hash": "2b4d51559532a014abb7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-efs-archive"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/01/amazon-s3-automatically-encrypts-new-objects": {
+   "hash": "2c047ef8d8116d12b191",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-default-sse"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/06/amazon-s3-dual-layer-encryption-compliance-workloads": {
+   "hash": "72e633d860e144a0e773",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-dsse"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/aws-kms-external-key-store": {
+   "hash": "4ba31440edd6d7534c91",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-kms-xks"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/aws-identity-access-management-multi-factor-authentication-devices": {
+   "hash": "84790d90ebf4b88b0f9f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-iam-multi-mfa"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/06/aws-identity-access-management-passkey-authentication-factor": {
+   "hash": "1820cee7032593b790e6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-iam-passkey"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/11/manage-root-access-aws-identity-access-management": {
+   "hash": "55a4400d614d7d845a7f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-iam-root-central"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/11/amazon-s3-block-public-access-organization-level-enforcement": {
+   "hash": "710852a29cb375a84df8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-bpa-org"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/09/aws-lake-formation-hybrid-access-mode-glue-catalog": {
+   "hash": "bcb953e26d24e1c3ba05",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-lf-hybrid"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/12/amazon-eks-auto-mode": {
+   "hash": "76c90310c8f71a8d5d52",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-eks-auto"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/01/aws-lambda-maximum-concurrency-amazon-sqs-event-source": {
+   "hash": "aabaa2110ae56e8678cb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-lambda-sqs-maxconc"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2022/11/aws-lambda-snapstart-java-functions": {
+   "hash": "e54c50b0db373c760ed3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-snapstart"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/11/amazon-s3-express-one-zone-storage-class": {
+   "hash": "56bd854b2b211d624fc3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-express"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/02/amazon-ec2-auto-scaling-instance-refresh-rollback": {
+   "hash": "b5ae663c3394bb2fceeb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-asg-refresh-rollback"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/11/aws-secrets-manager-managed-external-secrets": {
+   "hash": "ec19c6c1de7d877c7cfc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-secrets-external"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/09/amazon-s3-default-minimum-object-size-lifecycle-transition-rules": {
+   "hash": "6f6f538704bf3edfde74",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-lifecycle-128"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/doc-history.html": {
+   "hash": "be4a22b362d9fc855844",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-alb-dochistory"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/07/aws-direct-connect-native-400-gbps-dedicated-connections-select-locations": {
+   "hash": "9c710dcb14b8ec8b9a6e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-dx-400g"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/default-s3-c-encryption-setting-faq.html": {
+   "hash": "1e48854a2102255cc200",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-ssec-faq"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/document-history.html": {
+   "hash": "e916aaef66dba9aa6db4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-orgs-dochistory"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/example-bucket-policies.html": {
+   "hash": "2ceeff6dcbc5e7bc2a5f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-bucket-policy-examples"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DownloadDistS3AndCustomOrigins.html": {
+   "hash": "35b7ba38c3211eaefe3d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-s3-origins"
+   ]
+  },
+  "https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.html": {
+   "hash": "51556dfc96cfca4fd402",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dms-replication-instance"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_configure-api-require.html": {
+   "hash": "8ea4fc989060a6109b1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-mfa-require-api"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2023/11/aws-backup-elastic-block-store-snapshots-archive": {
+   "hash": "c138332a410db9beb93f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-backup-ebs-archive"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2024/04/aws-kms-automatic-key-rotation": {
+   "hash": "dce381a60f8b1432a5cf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-kms-rotation"
+   ]
+  },
+  "https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state.html": {
+   "hash": "8136962f98f81e0c9419",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ssm-state-manager"
+   ]
+  },
+  "https://docs.aws.amazon.com/datasync/latest/userguide/datasync-limits.html": {
+   "hash": "07ccfb0075051dbaadbb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "datasync-limits"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/AutoFailover.html": {
+   "hash": "9ad9491899078048b882",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "elasticache-autofailover"
+   ]
+  },
+  "https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/rel_planning_for_recovery_disaster_recovery.html": {
+   "hash": "e3ae5e6c70bf9310242d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "dr-reliability-strategies"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic_policy-eval-denyallow.html": {
+   "hash": "b04af07ba61a42507876",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-eval-denyallow"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html": {
+   "hash": "d32234f9607435367817",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "orgs-scp-syntax"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html": {
+   "hash": "e88e0e757d0026ff2156",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-working-vpc"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition_operators.html": {
+   "hash": "6bdad101d3a6923b1e00",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "iam-cond-operators"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html": {
+   "hash": "fe45a9a48d6aff3e9a8b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-global-tables"
+   ]
+  },
+  "https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html": {
+   "hash": "6bdeb7d23c6518f29c71",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "eks-managed-node-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html": {
+   "hash": "f90a0a690b3839691b6f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-multi-region"
+   ]
+  },
+  "https://docs.aws.amazon.com/efs/latest/ug/encryption.html": {
+   "hash": "0cf71ff02f711a94a62a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "efs-encryption"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/subnet-route-tables.html": {
+   "hash": "c6519af9169af7d11777",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-subnet-route-tables"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-example-private-subnets-nat.html": {
+   "hash": "0c806a25f55bda30837e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-example-private-nat"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html": {
+   "hash": "24726045310a28084b20",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-dedicated-instances"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/nat-gateway-working-with.html": {
+   "hash": "23799db6c52e2a529bf7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-nat-working"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/free-tier-plans.html": {
+   "hash": "03028ce36a86bc623201",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "free-tier-plans"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-delete-stack.html": {
+   "hash": "de0b902615eba40ea574",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-delete-stack"
+   ]
+  },
+  "https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html": {
+   "hash": "0c730cb65755585cdc36",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "vpc-ip-addressing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-create-stack.html": {
+   "hash": "0f65233739083eadd93a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-create-stack"
+   ]
+  },
+  "https://docs.aws.amazon.com/cloudshell/latest/userguide/welcome.html": {
+   "hash": "37906b8a59bfafc8878a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudshell-what"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html": {
+   "hash": "fce0e8e563878b7952dd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-endpoint-types"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html": {
+   "hash": "f4a53b3401bcfa9d36fb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-query"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html": {
+   "hash": "0af6281484355ab85cf7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-scan"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.Basics.html": {
+   "hash": "a47c75a7e17ae6d9e928",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-table-ops"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/services-sqs-configure.html": {
+   "hash": "c6caa232d9ba7a990329",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-sqs-configure"
+   ]
+  },
+  "https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html": {
+   "hash": "107c521f0cc8139937e4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lambda-with-sqs"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events.html": {
+   "hash": "34d552bd5251e8f5f85b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-event-history"
+   ]
+  },
+  "https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html": {
+   "hash": "8fbb08111322004345f1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "apigw-http-lambda"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delete-trails-console.html": {
+   "hash": "48819cfc08d8cef3847a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-delete-trail"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_delete-rules.html": {
+   "hash": "da838719bcf33a1d80ef",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-delete-rules"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.CoreComponents.html": {
+   "hash": "e1c8052f763e69c76b5e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-core-components"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html": {
+   "hash": "2cd772b1b68e6aac2899",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-s3-public-rule"
+   ]
+  },
+  "https://docs.aws.amazon.com/sns/latest/dg/sns-create-topic.html": {
+   "hash": "0ceb996f0ebeda18d03b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sns-create-topic"
+   ]
+  },
+  "https://docs.aws.amazon.com/sns/latest/dg/sns-email-notifications.html": {
+   "hash": "ddd0d4f986003ae8b41b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sns-email"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html": {
+   "hash": "5b92e99dc1204d3574c7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-delete-instance"
+   ]
+  },
+  "https://aws.amazon.com/config/pricing/": {
+   "hash": "51de216155831e6d15d9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html": {
+   "hash": "22f9ac1881644909f37d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudtrail-create-trail"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-attribute-deletionpolicy.html": {
+   "hash": "94293d21d99dd2901e9e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-deletion-policy"
+   ]
+  },
+  "https://docs.aws.amazon.com/sns/latest/dg/sns-delete-subscription-topic.html": {
+   "hash": "9ca66bf7582c43b3d564",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sns-delete-topic"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Encryption.html": {
+   "hash": "0bf44fd2c1ab37997d1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-encryption"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html": {
+   "hash": "d3ee42d05a7cfb7cb935",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-iam-capabilities"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CreateMetricFilterProcedure.html": {
+   "hash": "49690802ddd33edacfd9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-metric-filter-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.Retaining.html": {
+   "hash": "57aead58499a7d6d067b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-retained-backups"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.Settings.html": {
+   "hash": "46a18cc294d0e61f4640",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-create-settings"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/MonitoringLogData.html": {
+   "hash": "9187ffaa0f7e07fb16d3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-metric-filters"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Notify_Users_Alarm_Changes.html": {
+   "hash": "dd31af71618a6963e14e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cw-notify-alarm-changes"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html": {
+   "hash": "86b22363b0f8034e2736",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-restore-snapshot"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html": {
+   "hash": "f7a3880e7aa91766f997",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cwl-log-groups"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html": {
+   "hash": "99b5a0b68f17b4975f39",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-copy-snapshot"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteSnapshot.html": {
+   "hash": "2f7e60495a003d0ff788",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-delete-snapshot"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/delete-bucket.html": {
+   "hash": "9dae29d108d6ac237be2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-delete-bucket"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/empty-bucket.html": {
+   "hash": "37b9173de0b282dd3a76",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-empty-bucket"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-capacity-limits.html": {
+   "hash": "4b15d3a48fcc149598af",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-capacity-limits"
+   ]
+  },
+  "https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html": {
+   "hash": "197b64c469c7da757253",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "alb-target-health"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/security-best-practices.html": {
+   "hash": "32175092369a99763b0a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-security-best-practices"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/getting-started-step-2.html": {
+   "hash": "f04f8bf67a6cd4f4aa35",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-put-item"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountSummary.html": {
+   "hash": "81b60d837094ed9e1881",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-getaccountsummary"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html": {
+   "hash": "6098b1e2904b814ec72b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-addressing"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_create.html": {
+   "hash": "8c2597275094f3a8a880",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-group-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_job-functions.html": {
+   "hash": "06675d727e52e647d136",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-job-functions"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html": {
+   "hash": "76b22ae9ad75b47b4ec0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-user-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_mfa_enable_virtual.html": {
+   "hash": "e61b928d5c9497c79ff8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-mfa-virtual"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/getting-started-account-iam.html": {
+   "hash": "b74106f1d87a2a79d40b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-account-setup"
+   ]
+  },
+  "https://aws.amazon.com/rds/pricing/": {
+   "hash": "e6b303905333202faed2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "rds-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/budget-templates.html": {
+   "hash": "9236169696a0e5c17ee6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-budgets-templates"
+   ]
+  },
+  "https://docs.aws.amazon.com/signin/latest/userguide/introduction-to-iam-user-sign-in-tutorial.html": {
+   "hash": "bb72c63fba5da46b67a2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-signin-iam-user"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-sns-policy.html": {
+   "hash": "c7b7d93bed752791a107",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-budgets-sns"
+   ]
+  },
+  "https://docs.aws.amazon.com/singlesignon/latest/userguide/enable-identity-center.html": {
+   "hash": "12679825cb2eea67799f",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-idc-enable"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/enable-mfa-for-root.html": {
+   "hash": "cca9a30a5815718321af",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-root-mfa"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_remove.html": {
+   "hash": "1d8e44c8ce25d8013ee3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-user-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html": {
+   "hash": "da9edd4dedf8be905d2d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-role-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-delete.html": {
+   "hash": "fd20aa9793aed7713bf7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-policy-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-simulator-how-to.html": {
+   "hash": "60eac39183b11a0a89fb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-simulator-howto"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html": {
+   "hash": "ec30d80f28c563ac7c5c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-boundary-set"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html": {
+   "hash": "61f15e44b952526c0fdd",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-policy-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html": {
+   "hash": "d5192fa18a1f73802591",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-s3-add-bucket-policy"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_create.html": {
+   "hash": "42b5cafb446f97a0d115",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html": {
+   "hash": "744d5c64fd0010caf731",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-s3-create-bucket"
+   ]
+  },
+  "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html": {
+   "hash": "315e5c13d16095b3dfd6",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-iam-roles-concepts"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/enable-policy-type.html": {
+   "hash": "d9716ee00cb8e46d8972",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-enable-policy-type"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_delete.html": {
+   "hash": "6038061ab3173c7f0ac2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-policy-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_detach.html": {
+   "hash": "1934d097f9f8489ebedf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-policy-detach"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_create.html": {
+   "hash": "975709e2d9faee3d574e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-account-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html": {
+   "hash": "25fd6a4b190cacf36502",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-ou"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html": {
+   "hash": "83070f2f994239d26491",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-get-started"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html": {
+   "hash": "176fea2554c8d88e80ae",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-delete-distribution"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_delete.html": {
+   "hash": "dc8ea87a8dbdea926795",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/CNAMEs.html": {
+   "hash": "d5162dc874e0e42300ed",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-alt-domain"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/define-crawler.html": {
+   "hash": "d9094c5797c6804e4fb9",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-define-crawler"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/crawler-prereqs.html": {
+   "hash": "4437620cb580eb97337b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-crawler-prereqs"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_policies_create.html": {
+   "hash": "17712b73e90487a3b364",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-policy-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/define-database.html": {
+   "hash": "875c7b58f37f0b81b0c0",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-define-database"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/query-results-specify-location.html": {
+   "hash": "c075ba3efec1e0029854",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-result-location"
+   ]
+  },
+  "https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html": {
+   "hash": "2d131ab4f54e676647d2",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-crawlers-catalog"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/create-a-vault.html": {
+   "hash": "9e4a8a8a5b0cc78eafff",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-vaults"
+   ]
+  },
+  "https://docs.aws.amazon.com/athena/latest/ug/query-metrics-viewing.html": {
+   "hash": "92402efecfc6ad859b1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-query-metrics"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/cross-region-backup.html": {
+   "hash": "7844bbcef518303d018b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-cross-region"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/restoring-dynamodb.html": {
+   "hash": "3597256cd7ab4115d5a4",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-restore-ddb"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/recov-point-create-on-demand-backup.html": {
+   "hash": "af77ff5f7e5ccd024119",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-on-demand"
+   ]
+  },
+  "https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/activating-tags.html": {
+   "hash": "ad7fe21cae65476eade3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "tags-activating"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html": {
+   "hash": "050feb6daf6328112d1c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-adv-ddb"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-delete.html": {
+   "hash": "efec9430a13717035629",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "budgets-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html": {
+   "hash": "4afb9e344d4e99cd9bbf",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-cost-alloc-tags"
+   ]
+  },
+  "https://docs.aws.amazon.com/cost-management/latest/userguide/ce-enable.html": {
+   "hash": "ab05e9643352c5ebd4ea",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ce-enable"
+   ]
+  },
+  "https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html": {
+   "hash": "dfd2279dd6a7de2767bb",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "co-requirements"
+   ]
+  },
+  "https://docs.aws.amazon.com/savingsplans/latest/userguide/sp-recommendations.html": {
+   "hash": "d5853971b7da9e6f8b5c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sp-recommendations"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html": {
+   "hash": "1438060d8d233df2dd68",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "s3-upload-objects"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html": {
+   "hash": "9a06b16c7e51a7a4813e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-spot-history"
+   ]
+  },
+  "https://docs.aws.amazon.com/compute-optimizer/latest/ug/account-opt-out.html": {
+   "hash": "6d1190c5f66f626c8ba8",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "co-opt-out"
+   ]
+  },
+  "https://aws.amazon.com/athena/pricing/": {
+   "hash": "e38de720fdf2dacfdb69",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "athena-pricing"
+   ]
+  },
+  "https://aws.amazon.com/glue/pricing/": {
+   "hash": "188bb1461549ded216b1",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "glue-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html": {
+   "hash": "a91a341e12fb38b8a35a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-default-root"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/move_account_to_ou.html": {
+   "hash": "e51f79c81ad81384d92c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-move-account"
+   ]
+  },
+  "https://aws.amazon.com/backup/pricing/": {
+   "hash": "92e732f52d2758132437",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "backup-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/delete-ou.html": {
+   "hash": "466395c27884273e1f6b",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-ou-delete"
+   ]
+  },
+  "https://aws.amazon.com/waf/pricing/": {
+   "hash": "977b428ca2fc29d8d4a3",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "waf-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html": {
+   "hash": "1ac3f10d6270e46fd3c7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ddb-ondemand-backup"
+   ]
+  },
+  "https://aws.amazon.com/kms/pricing/": {
+   "hash": "17ab5fdc62806d08ccef",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "kms-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-delete.html": {
+   "hash": "70863cbccb347798e2ad",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "acm-delete"
+   ]
+  },
+  "https://docs.aws.amazon.com/config/latest/developerguide/config-concepts.html": {
+   "hash": "365a94e7162ac2af5226",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "config-concepts"
+   ]
+  },
+  "https://aws.amazon.com/cloudwatch/pricing/": {
+   "hash": "9dca97bfa65738a1437a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cloudwatch-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html": {
+   "hash": "dd0fd67bfab3e42a6250",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "r53-delete-zone"
+   ]
+  },
+  "https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_close.html": {
+   "hash": "5d8f2dc66d67312ee758",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-orgs-account-close"
+   ]
+  },
+  "https://aws.amazon.com/ebs/pricing/": {
+   "hash": "3ff1ba7e5fbe9bd66548",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ebs-pricing"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/scaling-overview.html": {
+   "hash": "076142f2bc453291eff7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-scaling-overview"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/cloudformation/wait/stack-create-complete.html": {
+   "hash": "8e7531e47b5e5f975362",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-cli-wait-create"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/iam/list-roles.html": {
+   "hash": "7f76c70766f62969ff8a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-cli-iam-list-roles"
+   ]
+  },
+  "https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/flat-rate-pricing-plan.html": {
+   "hash": "65de5421e24b60e89292",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cf-pricing-plans"
+   ]
+  },
+  "https://aws.amazon.com/free/free-tier-faqs/": {
+   "hash": "334807b4f1aadf1ccd00",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "free-tier-faq"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/sqs/receive-message.html": {
+   "hash": "d42f9ef7439867906ce5",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-cli-receive-message"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stacks.html": {
+   "hash": "f09a56e4807d7bb7566d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "cfn-cli-describe-stacks"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-convertible-exchange.html": {
+   "hash": "39203b6b6a06e724b93d",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "ec2-ri-exchange"
+   ]
+  },
+  "https://docs.aws.amazon.com/AWSSimpleQueueService/latest/APIReference/API_ReceiveMessage.html": {
+   "hash": "ef3846f45c567982e35c",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "sqs-api-receive-message"
+   ]
+  },
+  "https://learn.microsoft.com/en-us/azure/architecture/aws-professional/messaging": {
+   "hash": "6884b60d27e54ddb8632",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "learn-messaging"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/configservice/delete-delivery-channel.html": {
+   "hash": "b2afb8ed11de34641093",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-cli-config-delete-channel"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/backup/delete-backup-plan.html": {
+   "hash": "6ec0b175d70c202726f7",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-cli-backup-delete-plan"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/backup/delete-backup-vault.html": {
+   "hash": "42b27d4e2679df47b770",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-cli-backup-delete-vault"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2025/11/aws-lambda-managed-instances/": {
+   "hash": "56a50adfb3cc159a610a",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-lambda-managed-instances"
+   ]
+  },
+  "https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning-enable.html": {
+   "hash": "4fb4a49311f2817c0e63",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "firehose-partition-enable"
+   ]
+  },
+  "https://docs.aws.amazon.com/redshift/latest/mgmt/welcome.html": {
+   "hash": "5ce569747c46e8257c16",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "redshift-what-is"
+   ]
+  },
+  "https://docs.aws.amazon.com/cli/latest/reference/backup/delete-recovery-point.html": {
+   "hash": "173d262bcd3e8644d3fc",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-cli-backup-delete-recovery-point"
+   ]
+  },
+  "https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-groups.html": {
+   "hash": "0a576c8e6dfda9d26d98",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "asg-groups"
+   ]
+  },
+  "https://aws.amazon.com/blogs/compute/announcing-90-minute-function-timeout-on-aws-lambda-managed-instances/": {
+   "hash": "d1f1a786e30453e72add",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-lambda-mi-90min"
+   ]
+  },
+  "https://docs.aws.amazon.com/aws-backup/latest/devguide/iam-service-roles.html": {
+   "hash": "7c05510ec5db5afa2f30",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "lab-backup-default-role"
+   ]
+  }
+ }
+}

@@ -1,7 +1,14 @@
 // Seeded spot-check sample for Step 8: 86 key-dependent (G1/G2) and 86 other confirmed verdicts, about 5% of all confirmed.
-const fs = require('fs');
-const path = require('path');
-const root = path.join(__dirname, '..', '..');
+import * as fs from 'node:fs';
+import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+// Refuse to overwrite the original sample: it was drawn once (seed 20261022) and its verdicts are recorded.
+if (fs.existsSync(path.join(root, '.cache/audit/spot/sample.json'))) {
+  console.error('spot sample already drawn; delete .cache/audit/spot/sample.json to redraw (this changes the sample).');
+  process.exit(1);
+}
 const SEED = 20261022;
 function rng(seed) { let s = seed >>> 0; return () => { s = (s + 0x6d2b79f5) >>> 0; let t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const rand = rng(SEED);

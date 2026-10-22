@@ -832,6 +832,7 @@ const sources: Source[] = [
   aws('lab-backup-default-role', `${D}/aws-backup/latest/devguide/iam-service-roles.html`, 'IAM service roles (AWS Backup)'),
   aws('firehose-partition-enable', `${D}/firehose/latest/dev/dynamic-partitioning-enable.html`, 'Enable dynamic partitioning in Amazon Data Firehose'),
   aws('redshift-what-is', `${D}/redshift/latest/mgmt/welcome.html`, 'What is Amazon Redshift?'),
+  aws('asg-groups', `${D}/autoscaling/ec2/userguide/auto-scaling-groups.html`, 'Auto Scaling groups for Amazon EC2 Auto Scaling'),
 ];
 
 export default sources;

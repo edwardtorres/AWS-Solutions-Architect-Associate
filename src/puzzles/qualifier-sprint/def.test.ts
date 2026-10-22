@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import scenarios from '../../../content/puzzles/qualifier-sprint';
 import { QUALIFIERS, def } from './def';
+import { MIN_SCENARIOS } from '../types';
 
 describe('qualifier-sprint scenarios', () => {
-  it('has enough sets with ascending unique ids (003, 005 and 007 were dropped in Step 6; ids are never reused)', () => {
-    expect(scenarios.length).toBeGreaterThanOrEqual(11);
+  it('has enough sets with ascending unique ids (003, 005, 007 and 013 were dropped; ids are never reused)', () => {
+    expect(scenarios.length).toBeGreaterThanOrEqual(MIN_SCENARIOS['qualifier-sprint']);
     const nums = scenarios.map((s) => Number(s.id.slice(-3)));
     expect(nums).toEqual([...new Set(nums)].sort((a, b) => a - b));
     expect(nums).not.toContain(3);

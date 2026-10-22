@@ -8,9 +8,10 @@ import * as cheerio from 'cheerio';
  */
 export function mainText(html: string): string {
   const $ = cheerio.load(html);
-  $('script,style,noscript,nav,header,footer,aside,form,button,svg,iframe,[role=navigation],[role=banner],[role=contentinfo],[aria-hidden=true],.feedback,#feedback,[class*=breadcrumb],[class*=feedback],[class*=cookie],[id*=cookie],[class*=toc],[id*=toc]').remove();
   const region = ['main', '#main-content', '[role=main]', 'article', '#content'].map((s) => $(s).first()).find((el) => el.length > 0 && el.text().trim().length > 200);
-  const text = (region ?? $('body')).text();
+  const scope = region ?? $('body');
+  scope.find('script,style,noscript,nav,header,footer,aside,form,button,svg,iframe,[role=navigation],[role=banner],[role=contentinfo],[aria-hidden=true],.feedback,#feedback,[class*=breadcrumb],[class*=feedback]').remove();
+  const text = scope.text();
   return text
     .replace(/[‘’]/g, "'")
     .replace(/[“”]/g, '"')
