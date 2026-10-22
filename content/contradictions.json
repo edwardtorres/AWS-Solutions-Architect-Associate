@@ -132,9 +132,9 @@
     "checked": "2026-10-19"
   },
   {
-    "id": "c-s3-ia-minimum-duration",
+    "id": "c-s3-ia-transition-direction",
     "building": "cold-cellar",
-    "topic": "Whether the 30-day minimum storage duration still applies to transitions into S3 Standard-IA and One Zone-IA",
+    "topic": "Whether a 30-day minimum storage duration applies when objects enter S3 Standard-IA or One Zone-IA, and when they leave early",
     "readings": [
       {
         "source": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
@@ -146,13 +146,13 @@
       },
       {
         "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html",
-        "says": "You can't create a single Lifecycle rule that transitions objects from one storage class to another before the minimum storage duration period has passed."
+        "says": "If you transition objects out of these storage classes before the minimum duration, you are charged for the remainder of that duration."
       }
     ],
-    "handling": "Both readings are shown in the disagreements block of the cold-cellar note. The 30-day minimum for transitions is not used as a fact in any question. The early-deletion charge, which all three pages state, is not disputed and stays in questions.",
+    "handling": "Read by direction the pages agree. The decision guide covers entering the classes. The storage classes page and the lifecycle transition page cover leaving the classes early, or deleting early. No page states an entry minimum, so no question relies on one. The billing minimum (30 days, a pro-rated charge for early deletion, overwrite or move out, and the 128 KB minimum billable size) is undisputed and stated plainly in the note. The lifecycle sentence about a single rule that cannot cross an unexpired minimum concerns chained transitions, not billing.",
     "added": "2026-10-22",
-    "verdict": "still-contradictory",
-    "verdictNote": "Re-read on 2026-10-22: the decision guide says no 30-day minimum applies to transitions; the storage classes and lifecycle pages still describe a charge or a rule restriction for transitions before the minimum. Not reconciled here.",
+    "verdict": "resolved",
+    "verdictNote": "Re-read on 2026-10-22: the three pages do not conflict on the billing minimum. The earlier entry paired a lifecycle rule constraint with the billing reading, which was a misreading. The only difference is direction: the decision guide is the only page that speaks to entering the classes, and it says no 30-day minimum applies there. Resolved by stating each reading with its direction.",
     "checked": "2026-10-22"
   }
 ]

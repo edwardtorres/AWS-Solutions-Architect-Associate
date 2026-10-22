@@ -181,7 +181,7 @@ const questions: Question[] = [
     d: 3,
     stem: 'A company runs a three-tier web application. The web servers also serve large static assets, the application tier is one large Amazon EC2 instance that is saturated at peak, and the Amazon RDS database is overloaded by repeated reads. The company wants each tier to scale independently and to be MOST resilient to the loss of an Availability Zone. Which THREE changes meet these requirements? (Choose three.)',
     correct: [
-      ['Run the application tier in an Auto Scaling group across Availability Zones behind an Application Load Balancer', 'The load balancer distributes traffic across targets in more than one Availability Zone, and an Auto Scaling group spreads its instances across the Availability Zones you specify, so the tier scales out and survives the loss of one zone.'],
+      ['Run the application tier in an Auto Scaling group across Availability Zones behind an Application Load Balancer', 'With scaling policies, the Auto Scaling group can launch instances as demand increases, and it distributes the desired capacity across the Availability Zones you specify. If one zone becomes unavailable, the load balancer can route traffic to healthy targets in another zone.'],
       ['Place an Amazon ElastiCache cache between the application tier and the database', 'Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which relieves the repeated reads that overload it.'],
       ['Serve the static assets from Amazon S3 through Amazon CloudFront', 'Static content leaves the web servers, so the presentation tier no longer has to scale with asset traffic.'],
     ],
@@ -192,7 +192,9 @@ const questions: Question[] = [
     ],
     slots: [0, 3, 5],
     evidence: [
-      'asg-groups|If a scaling action occurs, Amazon EC2 Auto Scaling automatically maintains balance across all of the Availability Zones that you specify.',
+      'asg-what-is|If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.',
+      'asg-groups|When instances are launched, if you specified multiple Availability Zones, the desired capacity is distributed across these Availability Zones.',
+      'elb-how-it-works|If one Availability Zone becomes unavailable or has no healthy targets, the load balancer can route traffic to the healthy targets in another Availability Zone.',
       'elb-what-is|Elastic Load Balancing automatically distributes your incoming traffic across multiple targets, such as EC2 instances, containers, and IP addresses, in one or more Availability Zones.',
       'msa-data-store|Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which, in turn, may allow resources to be used to support more writes.',
       'msa-ui|Static web content can be served using Amazon Simple Storage Service (Amazon S3) and Amazon CloudFront.',

@@ -1,11 +1,11 @@
 [
- {
-  "id": "storage-market-009",
-  "picks": [
-   "A",
-   "E"
-  ],
-  "ambiguous": false,
-  "note": "Lifecycle management moves files not accessed for a period into cost-optimized IA (lifecycle-management-efs). Bursting throughput scales with stored data (performance) with no provisioned charge; provisioned throughput is billed extra (B), and keeping everything in Standard costs more than IA (D)."
- }
+  {
+    "id": "storage-market-009",
+    "picks": [
+      "A",
+      "E"
+    ],
+    "ambiguous": false,
+    "note": "Fresh blind reviewer: lifecycle to IA and Elastic throughput. Bursting-style and Max I/O options are not the answer."
+  }
 ]

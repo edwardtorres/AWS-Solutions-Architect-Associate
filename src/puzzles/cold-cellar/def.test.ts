@@ -131,8 +131,9 @@ describe('refusals', () => {
     expect(def.evaluate(sc([ph({ from: 0, access: 'unknown' })], [], 64))).toBeNull();
     expect(def.evaluate(sc([ph({ from: 0, access: 'quarterly' })], [], 64))).toBeNull();
   });
-  it('refuses a move into an infrequent-access class before day 30', () => {
-    expect(def.evaluate(sc([ph({ from: 0, access: 'frequent' }), ph({ from: 14, access: 'monthly' })], [[14, 30]]))).toBeNull();
+  it('an early move into an infrequent-access class is not refused: no AWS page states an entry minimum', () => {
+    const r = def.evaluate(sc([ph({ from: 0, access: 'frequent' }), ph({ from: 14, access: 'monthly' })], [[14, 30]]));
+    expect(r?.answer['day-1']).toEqual(['d14']);
   });
   it('refuses when the computed day is not among the options', () => {
     const s = sc(

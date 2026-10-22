@@ -140,7 +140,7 @@ export const rules: Rule[] = [
   },
   {
     id: 'min-duration-ia',
-    text: 'S3 Standard-IA and S3 One Zone-IA have a 30-day minimum storage duration; deleting or moving an object earlier still charges for 30 days.',
+    text: 'S3 Standard-IA and S3 One Zone-IA have a 30-day minimum storage duration; deleting an object earlier still charges for 30 days.',
     src: 's3-storage-classes',
     quote: 'If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days.',
   },
@@ -351,8 +351,6 @@ function evaluate(s: ColdCellarScenario): Evaluation | null {
     if (!from || !to || !p) return null;
     if (from === to) return null;
     if (!WATERFALL[from].includes(to)) return null; // lifecycle cannot move objects back up or sideways
-    // Older guidance on moving into the infrequent-access classes is not encoded: refuse early moves into them.
-    if ((to === 'standard-ia' || to === 'onezone-ia') && p.from < 30) return null;
     trace.push({ rule: WATERFALL_RULE[from], note: `Stage ${i} to ${i + 1}: ${CLASS_LABEL[from]} to ${CLASS_LABEL[to]} is a supported move.` });
     const min = MIN_DAYS[from] ?? 0;
     const earliest = moved + min;
