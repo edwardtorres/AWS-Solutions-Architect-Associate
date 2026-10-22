@@ -38,7 +38,7 @@ const scenarios: S[] = [
       answers: { overhead: 'a', cost: 'b', secure: 'c', available: 'd' },
       facts: {
         overhead: {
-          text: 'Lambda runs your code with no servers to provision or manage, so nothing needs patching or capacity planning.',
+          text: 'Lambda runs your code without the team provisioning or managing servers.',
           src: 'lambda-welcome',
           quote: 'With Lambda, you can run code without provisioning or managing servers.',
         },

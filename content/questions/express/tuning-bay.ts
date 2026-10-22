@@ -173,13 +173,15 @@ const questions: Question[] = [
     wrong: [
       ['Add more read replicas and send the ingestion writes to them', 'A read replica allows only read-only connections, so it cannot take the writes.'],
       ['Enable a Multi-AZ DB instance deployment so that the standby shares the write load', 'The standby provides failover support and does not serve traffic, so the primary still takes every write.'],
-      ['Place an Amazon ElastiCache cluster in front of the database to absorb the ingestion writes', 'ElastiCache is an ephemeral cache for frequently accessed data, not a durable store that replaces the database for writes.'],
+      ['Place an Amazon ElastiCache cluster in front of the database to absorb the ingestion writes', 'ElastiCache sits between the application and the database, and writes still reach the database, so its saturated write path is not relieved.'],
     ],
     slots: [0, 3],
     evidence: [
       'rds-instance-class|The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance.',
       'rds-storage|Provisioned IOPS storage is optimized for online transaction processing (OLTP) workloads that require consistent performance.',
       'rds-read-replicas|The read replica operates as a DB instance that allows only read-only connections.',
+      'elasticache-strategies|Amazon ElastiCache is an in-memory key-value store that sits between your application and the data store (database) that it accesses.',
+      'elasticache-strategies|The write-through strategy adds data or updates data in the cache whenever data is written to the database.',
     ],
   }),
   mc({
@@ -187,12 +189,12 @@ const questions: Question[] = [
     building: 'tuning-bay',
     bullets: ['3.3-K5'],
     d: 1,
-    stem: 'A company\'s AWS Lambda functions connect to an Amazon RDS for MySQL database. During traffic spikes the database reports "too many connections" errors because every invocation opens its own connection. The company wants to fix this with the LEAST change to the function code. Which solution meets this requirement?',
+    stem: 'A company\'s AWS Lambda functions connect to an Amazon RDS for MySQL database. During traffic spikes the database reports "too many connections" errors because every invocation opens its own connection. The company wants to reduce the number of connections the functions open, with the LEAST change to the function code. Which solution meets this requirement?',
     correct: ['Create an Amazon RDS Proxy for the database and point the functions at the proxy endpoint', 'Lambda functions make frequent short database connections that benefit from the connection pooling RDS Proxy provides.'],
     wrong: [
       ['Add a read replica and point the functions at the replica endpoint', 'A read replica allows only read-only connections, and each invocation would still open its own connection.'],
       ['Convert the DB instance to a Multi-AZ DB instance deployment with a standby', 'The standby provides failover support but does not serve traffic, so it adds no capacity for connections.'],
-      ['Scale the DB instance up to a larger DB instance class and keep the direct connections', 'Every invocation would still open a new connection, spending database memory and CPU on connection overhead instead of reusing a pool.'],
+      ['Scale the DB instance up to a larger DB instance class and keep the direct connections', 'Every invocation would still open its own connection, spending database memory and CPU on connection overhead, so the number of connections the functions open does not fall.'],
     ],
     slot: 0,
     evidence: [
