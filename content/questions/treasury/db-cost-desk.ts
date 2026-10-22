@@ -120,14 +120,14 @@ const questions: Question[] = [
     ],
   }),
   mr({
-    id: 'db-cost-desk-007', postGuide: ['database-savings-plans'],
+    id: 'db-cost-desk-007',
     building: 'db-cost-desk',
     bullets: ['4.3-K2'],
     d: 2,
-    stem: 'A company wants two automatic protections for its database spending. First, an email when the forecast spend on Amazon RDS for the month is going to pass a set limit. Second, a daily check of how much of its database usage its Database Savings Plans cover, with an alert when coverage drops below a target. Which TWO actions meet these requirements? (Choose two.)',
+    stem: 'A company wants two automatic protections for its database spending. First, an email when the forecast spend on Amazon RDS for the month is going to pass a set limit. Second, a daily check of how much of its usage its Savings Plans cover, with an alert when coverage drops below a target. Which TWO actions meet these requirements? (Choose two.)',
     correct: [
       ['Create an AWS Budgets cost budget filtered to Amazon RDS with an alert on forecasted spend', 'AWS Budgets can alert on forecasted spend before it accrues, so the team hears about a likely overrun in advance.'],
-      ['Create an AWS Budgets Savings Plans coverage budget with a daily period and an alert threshold', 'AWS Budgets can track the utilization and coverage of Savings Plans with a daily budget and alert when it drops.'],
+      ['Create an AWS Budgets Savings Plans coverage budget with a daily period and an alert threshold', 'AWS Budgets can monitor the coverage of Savings Plans with a daily coverage budget that sends an alert when coverage drops below the target.'],
     ],
     wrong: [
       ['Review an AWS Cost Explorer report every morning to look for changes', 'This is a manual daily review, not an automatic alert.'],
@@ -139,6 +139,7 @@ const questions: Question[] = [
       'budgets-managing|You can choose to be alerted for both actual (after accruing) and forecasted (before accruing) spends.',
       'budgets-managing|You can use AWS Budgets to monitor your aggregate utilization and coverage metrics for your Reserved Instances (RIs) or Savings Plans.',
       'budgets-managing|Setting a daily utilization or coverage budget to track your RI or Savings Plans.',
+      'budgets-managing|Savings Plans coverage budgets: Define a coverage threshold and get alerted when the percentage of your eligible usage covered by Savings Plans falls below this level',
     ],
   }),
   mc({

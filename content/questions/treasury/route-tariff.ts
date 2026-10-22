@@ -230,6 +230,7 @@ const questions: Question[] = [
     evidence: [
       'ga-pricing|For every accelerator that is provisioned (both enabled and disabled), you are charged a fixed hourly fee and an incremental charge over your standard Data Transfer rates, also called a Data Transfer-Premium fee (DT-Premium).',
       'cloudfront-pricing|you\'ll see fewer requests hitting your origin servers, databases, and other AWS services that charge based on usage—reducing your costs.',
+      'route53-latency|If your application is hosted in multiple AWS Regions, you can improve performance for your users by serving their requests from the AWS Region with the lowest latency.',
     ],
   }),
 ];
