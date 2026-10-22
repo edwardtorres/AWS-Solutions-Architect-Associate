@@ -190,9 +190,9 @@ const questions: Question[] = [
     ],
     slot: 0,
     evidence: [
-      'asg-sqs|The solution is to use a backlog per instance metric with the target value being the acceptable backlog per instance to maintain.',
-      'asg-sqs|That\'s because the number of messages in your SQS queue does not solely define the number of instances needed.',
-      'asg-target-tracking|The number of messages in a queue might not change proportionally to the size of the Auto Scaling group that processes messages from the queue.',
+      'asg-sqs|To scale your Auto Scaling group in proportion to the work waiting in your queue, use a backlog per instance metric.',
+      'asg-sqs|A policy that targets only the number of messages in the queue does not account for the number of instances available.',
+      'asg-target-tracking|The metric value must increase or decrease proportionally to the number of instances in the Auto Scaling group.',
     ],
   }),
   mc({

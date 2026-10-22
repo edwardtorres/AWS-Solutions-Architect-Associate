@@ -673,7 +673,7 @@ const questions: Question[] = [
     ],
     slots: [2, 4],
     evidence: [
-      'lambda-resource-policy|With resource-based permissions policies, you can grant other AWS accounts, users, organizations, and AWS services access to your Lambda functions.',
+      'lambda-resource-policy|With resource-based permissions policies, you can grant other AWS accounts, users, organizations, and AWS services access to your Lambda Event Functions.',
       'iam-cross-account|In cross account access, a principal needs an Allow in the identity policy and the resource-based policy.',
       "iam-global-condition-keys|When you add and remove accounts, policies that include the aws:PrincipalOrgID key automatically include the correct accounts and don't require manual updating.",
     ],

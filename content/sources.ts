@@ -721,7 +721,6 @@ const sources: Source[] = [
   aws('cloudtrail-event-history', `${D}/awscloudtrail/latest/userguide/view-cloudtrail-events.html`, 'Working with CloudTrail event history'),
   aws('cloudtrail-create-trail', `${D}/awscloudtrail/latest/userguide/cloudtrail-create-and-update-a-trail.html`, 'Creating a trail for your AWS account'),
   aws('cloudtrail-delete-trail', `${D}/awscloudtrail/latest/userguide/cloudtrail-delete-trails-console.html`, 'Deleting a trail with the CloudTrail console'),
-  aws('cloudtrail-pricing', 'https://aws.amazon.com/cloudtrail/pricing/', 'AWS CloudTrail pricing'),
   aws('config-delete-rules', `${D}/config/latest/developerguide/evaluate-config_delete-rules.html`, 'Deleting AWS Config Rules'),
   aws('config-pricing', 'https://aws.amazon.com/config/pricing/', 'AWS Config pricing'),
   aws('config-s3-public-rule', `${D}/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html`, 's3-bucket-level-public-access-prohibited'),
