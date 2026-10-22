@@ -33,7 +33,7 @@ describe('the decision to write', () => {
 
   it('comments on an open issue only when the findings differ from the held report', () => {
     expect(decideIssueAction(h, held('open', h))).toBe('none');
-    expect(decideIssueAction('999999999999', held('open', h))).toBe('comment');
+    expect(decideIssueAction('ffffffffffff', held('open', h))).toBe('comment');
     expect(decideIssueAction(CLEAN, held('open', h))).toBe('comment');
     expect(decideIssueAction(h, held('open', null))).toBe('comment');
   });
@@ -44,7 +44,7 @@ describe('the decision to write', () => {
   });
 
   it('opens a new issue after a closed one only when the findings change', () => {
-    expect(decideIssueAction('999999999999', held('closed', h))).toBe('create');
+    expect(decideIssueAction('ffffffffffff', held('closed', h))).toBe('create');
     expect(decideIssueAction(CLEAN, held('closed', CLEAN))).toBe('none');
   });
 });

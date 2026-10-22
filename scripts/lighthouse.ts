@@ -5,14 +5,13 @@
  * the scores and a few metrics only: no local addresses, paths or hosts beyond the target named.
  */
 import { spawn, type ChildProcess } from 'node:child_process';
-import { existsSync, statSync } from 'node:fs';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createServer } from 'node:net';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { chromium } from '@playwright/test';
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { browserPath } from './lib/browser.ts';
 
 const ROOT = resolve(fileURLToPath(new URL('../', import.meta.url)));
 const CATEGORIES = ['performance', 'accessibility', 'best-practices', 'seo'] as const;
@@ -29,14 +28,6 @@ interface RunResult {
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
   return i >= 0 ? process.argv[i + 1] : undefined;
-}
-
-/** The same lookup as playwright.config.ts: CHROMIUM_PATH, then the pre-installed browser, then Playwright's own. */
-function browserPath(): string {
-  const fallback = '/opt/pw-browsers/chromium';
-  if (process.env.CHROMIUM_PATH) return process.env.CHROMIUM_PATH;
-  if (existsSync(fallback) && statSync(fallback).isFile()) return fallback;
-  return chromium.executablePath();
 }
 
 async function freePort(): Promise<number> {
