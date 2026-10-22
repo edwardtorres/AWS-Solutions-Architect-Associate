@@ -179,11 +179,11 @@ const lab: Lab = {
     {
       id: 'v1',
       kind: 'verify',
-      text: 'Prove the lab left nothing behind. Also open the Savings Plans and Reserved Instances pages in the console and confirm you made no purchase.',
+      text: 'Prove the lab left nothing behind. You made no purchase in s11 or s12: both pages were look-only, so confirm that you bought nothing there.',
       code: 'aws budgets describe-budgets --account-id "$(aws sts get-caller-identity --query Account --output text)" --query "Budgets[?starts_with(BudgetName,\'lab14\')].BudgetName"\naws s3 ls | grep lab14-\naws compute-optimizer get-enrollment-status --query status',
       src: 'budgets-delete',
       quote: "You can delete your budgets and the associated email and Amazon SNS notifications at any time.",
-      checkpoint: 'The budget and bucket lists are empty, the Compute Optimizer status is Inactive (or you never opted in), the Cost allocation tags page shows no active lab14 tag, and the Savings Plans and Reserved Instances pages list no purchase.',
+      checkpoint: 'The budget and bucket lists are empty, the Compute Optimizer status is Inactive (or you never opted in), the Cost allocation tags page shows no active lab14 tag, and you bought nothing in s11 or s12.',
       sensitive: true,
     },
   ],
