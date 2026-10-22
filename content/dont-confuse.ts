@@ -281,11 +281,13 @@ const pairs: ConfusePair[] = [
     choose: [
       b('Need a dedicated, consistent, high-bandwidth path over a physical connection to a Direct Connect location? Direct Connect.', 'connectivity-dx',
         ['Direct Connect can reduce network costs, increase bandwidth throughput, and provide a more consistent network experience than internet-based connections.']),
-      b('Need an encrypted IPsec connection over the internet? Site-to-Site VPN.', 'connectivity-vpn',
-        ['Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet']),
+      b('Need an encrypted IPsec connection over the internet? Site-to-Site VPN.', ['connectivity-vpn', 's2s-vpn'],
+        ['connectivity-vpn|Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet',
+         's2s-vpn|VPN tunnel: An encrypted link where data can pass from the customer network to or from AWS.']),
     ],
-    trap: b('Direct Connect bypasses internet service providers, while Site-to-Site VPN runs over the internet; "must not traverse the public internet" points to Direct Connect. But a private line is not an encrypted one: Direct Connect is not encrypted by default, so a requirement for encryption in transit adds MACsec or a VPN on top of it, and Site-to-Site VPN is IPsec encrypted.', ['dx-what-is', 'connectivity-vpn', 'connectivity-dx'],
-      ['dx-what-is|bypassing internet service providers in your network path.', 'connectivity-vpn|over the internet', 'connectivity-dx|AWS Direct Connect is not encrypted by default.']),
+    trap: b('Direct Connect bypasses internet service providers, while Site-to-Site VPN runs over the internet; "must not traverse the public internet" points to Direct Connect. But a private line is not an encrypted one: Direct Connect is not encrypted by default, so a requirement for encryption in transit adds MACsec or a VPN on top of it, and Site-to-Site VPN supports IPsec VPN connections, whose VPN tunnels are encrypted links.', ['dx-what-is', 'connectivity-vpn', 'connectivity-dx', 's2s-vpn'],
+      ['dx-what-is|bypassing internet service providers in your network path.', 'connectivity-vpn|over the internet', 'connectivity-dx|AWS Direct Connect is not encrypted by default.',
+       's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.', 's2s-vpn|VPN tunnel: An encrypted link where data can pass from the customer network to or from AWS.']),
   },
   {
     id: 'shield-vs-waf',

@@ -190,7 +190,7 @@ const notes: BuildingNotes = {
       mapping: b('Both protect cloud services from distributed denial of service attacks: Learn says the Azure services help protect cloud services from them, and AWS says Shield Standard and Shield Advanced provide protections against DDoS attacks for AWS resources.',
         ['learn-hub', 'shield-overview'],
         ['learn-hub|These services help you protect your cloud services from distributed denial of service attacks.',
-         'shield-overview|AWS Shield Standard and AWS Shield Advanced provide protections against Distributed Denial of Service (DDoS) attacks for AWS resources']),
+         'shield-overview|AWS Shield Standard and AWS Shield Advanced provide protections against Distributed Denial of Service (DDoS) attacks for AWS resources at the network and transport layers (layer 3 and 4) and the application layer (layer 7).']),
       breaks: b('AWS has two named tiers. Shield Standard protects every AWS customer automatically at no additional charge, and Shield Advanced is a subscription for expanded protection. The Learn comparison describes Azure DDoS Protection only as helping protect cloud services from distributed denial of service attacks; it does not describe tiers.',
         ['shield-standard', 'shield-advanced', 'learn-hub'],
         ['shield-standard|All AWS customers benefit from the automatic protection of Shield Standard, at no additional charge.',

@@ -107,8 +107,8 @@ const questions: Question[] = [
       ['Return unfinished tasks to the work queue when the two-minute Spot interruption notice arrives', 'The notice warns two minutes before EC2 stops or terminates the instance, so an interrupted task can be run again elsewhere.'],
     ],
     wrong: [
-      ['Buy three-year Standard Reserved Instances for the worker fleet', 'A three-year commitment to an instance configuration is wasteful for a job that runs only part of each night.'],
-      ['Run the workers on Dedicated Hosts', 'Dedicated Hosts are for dedicated physical servers and per-socket or per-core licenses, which the job does not need.'],
+      ['Buy three-year Standard Reserved Instances for the worker fleet', 'A Reserved Instance is a commitment to a consistent instance configuration for a term of 1 or 3 years, which does not suit a job that runs only part of each night.'],
+      ['Run the workers on Dedicated Hosts', 'Dedicated Hosts pay for a physical host that is fully dedicated to your instances and bring per-socket or per-core licenses, which the job does not need.'],
       ['Reserve the worker capacity with an On-Demand Capacity Reservation in one Availability Zone', 'Capacity Reservations are charged at the On-Demand rate whether or not instances run in them, which does not lower the cost.'],
     ],
     slots: [0, 3],
@@ -116,6 +116,8 @@ const questions: Question[] = [
       'ec2-spot|Spot Instances are a cost-effective choice if you can be flexible about when your applications run and if your applications can be interrupted.',
       'ec2-spot-notices|A Spot Instance interruption notice is a warning that is issued two minutes before Amazon EC2 stops or terminates your Spot Instance.',
       'ec2-capacity-reservation-billing|Capacity Reservations are charged at the equivalent On-Demand rate whether you run instances in reserved capacity or not, including any applicable regional surcharge for Dedicated Instances.',
+      'ec2-purchasing|making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years.',
+      'ec2-purchasing|Pay for a physical host that is fully dedicated to running your instances, and bring your existing per-socket, per-core, or per-VM software licenses to reduce costs.',
     ],
   }),
   mc({
@@ -151,14 +153,17 @@ const questions: Question[] = [
       ['Create an AWS Budgets coverage budget for Savings Plans', 'AWS Budgets monitors aggregate utilization and coverage metrics for Savings Plans.'],
     ],
     wrong: [
-      ['Activate cost allocation tags on the instances and review the tag report', 'Tags group costs by label and do not recommend a commitment or measure coverage.'],
-      ['Use consolidated billing in AWS Organizations as the way to measure coverage', 'Consolidated billing shares discounts across accounts and is not a coverage report or a recommendation.'],
-      ['Query the Cost and Usage Report in Amazon S3 by hand to decide and to track coverage', 'The report has the detail, but doing both jobs by hand is more operational work than the two managed tools.'],
+      ['Activate cost allocation tags on the instances and review the tag report', 'Cost allocation tags only organize costs by label on the cost allocation report, so they do not recommend a commitment or measure coverage.'],
+      ['Use consolidated billing in AWS Organizations as the way to measure coverage', 'Under consolidated billing the management account might reallocate discounts such as Savings Plans discounts, and it is not a coverage report or a recommendation.'],
+      ['Query the Cost and Usage Report in Amazon S3 by hand to decide and to track coverage', 'The report contains the most comprehensive set of cost and usage data, but doing both jobs by hand is more operational work than the two managed tools.'],
     ],
     slots: [1, 4],
     evidence: [
       'savings-plans|To get started, use AWS Cost Explorer to view your recommended Savings Plans commitment, refresh Savings Plans recommendations, purchase Savings Plans, manage your Savings Plans, and view your historical AWS usage.',
       'budgets-managing|You can use AWS Budgets to monitor your aggregate utilization and coverage metrics for your Reserved Instances (RIs) or Savings Plans.',
+      'cost-alloc-tags|After you activate cost allocation tags, AWS uses the cost allocation tags to organize your resource costs on your cost allocation report, to make it easier for you to categorize and track your AWS costs.',
+      'consolidated-billing|The management account might reallocate the additional volume discounts, Reserved Instance, or Savings Plans discounts that your account receives.',
+      'cur-what-is|AWS Cost and Usage Reports (AWS CUR) contains the most comprehensive set of cost and usage data available.',
     ],
   }),
   mc({

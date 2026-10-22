@@ -1090,15 +1090,6 @@
       "note": "GA before the cutoff. Later additions (250 entity types 2023-06; entity-level actions 2023-11) are post-guide, but refinery-004 would only depend on them if it names entity-level actions or the 250 types."
     },
     {
-      "id": "rds-multi-az-db-cluster",
-      "name": "RDS Multi-AZ DB cluster (two readable standbys)",
-      "introduced": "2022-03",
-      "certainty": "confirmed",
-      "source_url": "https://aws.amazon.com/about-aws/whats-new/2022/03/amazon-rds-multi-az-transaction-commit-latency/",
-      "quote": "This configuration supports up to 2x faster transaction commits than a Multi-AZ DB instance deployment with one standby, without compromising data durability.",
-      "note": "Pre-guide. Only later add-ons are post-guide: up to 15 read replicas (2023-04 MySQL, 2023-05 PostgreSQL), gp3 support (2024-02), IAM database authentication (2024-10)."
-    },
-    {
       "id": "cloud-wan",
       "name": "AWS Cloud WAN",
       "introduced": "2022-07-12",

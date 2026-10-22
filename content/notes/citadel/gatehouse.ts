@@ -4,7 +4,7 @@ import { b, cue, example } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'gatehouse',
   overview: [
-    b('A {{term:vpc|VPC}} is your own logically isolated virtual network in AWS. Security inside it is built from four pieces: {{term:subnet|subnets}} that split the address space, {{term:route-table|route tables}} that decide where traffic goes, {{term:security-group|security groups}} on resources, and {{term:network-acl|network ACLs}} on subnets. A NAT gateway lets private resources reach out without letting the internet reach in.',
+    b('A {{term:vpc|VPC}} is your own logically isolated virtual network in AWS. Security inside it is built from four pieces: {{term:subnet|subnets}} that split the address space, {{term:route-table|route tables}} that decide where traffic goes, {{term:security-group|security groups}} on resources, and {{term:network-acl|network ACLs}} on subnets. A NAT gateway lets instances in a private subnet connect to services outside your VPC, while external services cannot initiate a connection to those instances.',
       ['vpc-how-it-works', 'vpc-route-tables', 'vpc-security-groups', 'vpc-nacls', 'vpc-nat-gateway'],
       ['vpc-how-it-works|you can launch AWS resources in a logically isolated virtual network',
        'vpc-route-tables|Each route table contains a set of rules, called routes, that determine where network traffic from your subnet or gateway is directed.',
@@ -194,9 +194,11 @@ Inbound rules
   *        All traffic All       All    0.0.0.0/0         DENY
 `,
       [
-        b('Rules are evaluated starting with the lowest number, and once a rule matches no further rules are evaluated. The `DENY` at rule `100` is checked before the broader `ALLOW` at rule `200`, so that range is blocked while everyone else is allowed.', 'vpc-nacls',
-          ['We evaluate the rules in order, starting with the lowest numbered rule, when deciding whether allow or deny traffic.',
-           'If the traffic matches a rule, the rule is applied and we do not evaluate any additional rules.']),
+        b('Rules are evaluated starting with the lowest number, and once a rule matches no further rules are evaluated. The `DENY` at rule `100` is checked before the broader `ALLOW` at rule `200`, so that range is blocked. Rule `200` allows HTTPS from other addresses, and the `*` rule at the bottom denies all other inbound IPv4 traffic that no numbered rule has already handled.', ['vpc-nacls', 'vpc-custom-nacl'],
+          ['vpc-nacls|We evaluate the rules in order, starting with the lowest numbered rule, when deciding whether allow or deny traffic.',
+           'vpc-nacls|If the traffic matches a rule, the rule is applied and we do not evaluate any additional rules.',
+           'vpc-custom-nacl|Denies all inbound IPv4 traffic not already handled by a preceding rule (not modifiable).',
+           'vpc-custom-nacl|so the * rule for IPv4 traffic ultimately denies the packet']),
         b('Rule numbers can range from 1 to 32766.', 'vpc-nacls', ['Each rule has a number from 1 to 32766.']),
         b('Because network ACLs are stateless, this table only covers inbound traffic. Responses to allowed inbound traffic are not automatically allowed, so a real subnet also needs outbound rules that allow the response traffic, on the ephemeral ports the clients use.', ['vpc-nacls', 'vpc-custom-nacl'],
           ['vpc-nacls|If, for example, you create a NACL rule to allow specific inbound traffic to a subnet, responses to that traffic are not automatically allowed.',

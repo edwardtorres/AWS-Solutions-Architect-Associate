@@ -4,9 +4,10 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'wardens-lodge',
   overview: [
-    b('Applications need two kinds of protection that are easy to confuse: keeping their own secrets (database passwords, API keys) out of source code, and letting their end users sign in. AWS Secrets Manager addresses the first (Systems Manager Parameter Store holds configuration data, and AWS recommends Secrets Manager for secrets); Amazon Cognito addresses sign-in for the end users of an application, and IAM Identity Center connects workforce users to AWS.',
+    b('Applications need two kinds of protection that are easy to confuse: keeping their own secrets (database passwords, API keys) out of source code, and letting their users sign in. AWS Secrets Manager addresses the first (Systems Manager Parameter Store is a centralized configuration data store, and AWS recommends Secrets Manager for secrets). Amazon Cognito authenticates and authorizes users, and IAM Identity Center is the AWS solution for connecting your workforce users to AWS managed applications.',
       ['secrets-intro', 'cognito-what-is', 'ssm-parameter-store', 'sso-what-is'],
       ['secrets-intro|Secrets Manager helps you improve your security posture, because you no longer need hard-coded credentials in application source code.',
+       'cognito-what-is|Users can sign in directly, through social providers like Google and Apple, or through enterprise SAML and OIDC providers.',
        'cognito-what-is|With Amazon Cognito, you can authenticate and authorize users from the built-in user directory, from your enterprise directory, and from consumer identity providers like Google and Facebook.',
        'ssm-parameter-store|Parameter Store is a centralized configuration data store for named values called parameters.',
        'ssm-parameter-store|For secrets such as database credentials, API keys, or tokens, we recommend AWS Secrets Manager, which provides purpose built security controls including automatic rotation and cross-region replication.',

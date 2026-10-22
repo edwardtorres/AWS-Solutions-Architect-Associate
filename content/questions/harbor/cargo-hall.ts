@@ -234,13 +234,14 @@ const questions: Question[] = [
     wrong: [
       ['AWS Elastic Beanstalk with a worker environment that wraps the simulations', 'Elastic Beanstalk is designed for running web applications and does not plan and schedule batch jobs across Spot capacity.'],
       ['Amazon ECR with a repository that holds the simulation images', 'ECR is a container image registry, which stores images but does not schedule or run jobs.'],
-      ['An Amazon EC2 Auto Scaling group with a custom scheduler that the company writes', 'Auto Scaling adds and removes instances by scaling policies, and the company would write the job scheduling itself.'],
+      ['An Amazon EC2 Auto Scaling group with a custom scheduler that the company writes', 'Auto Scaling launches and terminates instances when scaling policies respond to demand, and the company would write the job scheduling itself.'],
     ],
     slot: 1,
     evidence: [
       'compute-decision|AWS Batch is a fully managed batch computing service that plans, schedules, and runs your containerized batch machine learning, simulation, and analytics workloads across the full range of AWS compute offerings, such as Amazon ECS, Amazon EKS, Fargate, and Spot or On-Demand Instances.',
       'compute-decision|Amazon ECR is an AWS managed container image registry service that is secure, scalable, and reliable.',
       'compute-decision|Elastic Beanstalk is specifically designed for running web applications.',
+      'asg-what-is|If you specify scaling policies, then Amazon EC2 Auto Scaling can launch or terminate instances as demand on your application increases or decreases.',
     ],
   }),
 ];

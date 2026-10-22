@@ -91,7 +91,7 @@ const questions: Question[] = [
     ],
     wrong: [
       ['Enable a Multi-AZ DB instance deployment so that the standby replica answers the catalogue queries', 'The standby replica in a Multi-AZ DB instance deployment cannot serve read traffic, so it does not relieve the read load.'],
-      ['Replace the web tier with a single instance of the largest available instance type', 'This is vertical scaling of one server, which has a ceiling and leaves a single point of failure for the whole web tier.'],
+      ['Replace the web tier with a single instance of the largest available instance type', 'This is vertical scaling of one server, which adds power to a single instance instead of adding instances to the web tier.'],
       ['Move the web tier to AWS Lambda functions and keep the single database unchanged', 'The catalogue read queries would still all run on the one saturated DB instance, so the database tier does not scale, and the web tier is redesigned.'],
     ],
     slots: [1, 3],
@@ -100,6 +100,7 @@ const questions: Question[] = [
       'rds-scaling-ha|Amazon RDS provides horizontal scaling by using read replicas to offload read-intensive workloads and improve database performance.',
       "rds-read-replicas|Unlike a read replica, a standby replica can't serve read traffic.",
       "rds-read-replicas|RDS doesn't support autoscaling of read replicas, which is the automatic add or removing of read replicas as read demand changes.",
+      'compute-decision|The scalability of a service can be vertical, allowing you to scale up by adding more power to your existing infrastructure (like increasing the CPU or memory of an instance), or horizontal, helping you to scale out by adding more instances to handle the load.',
     ],
   }),
   mc({

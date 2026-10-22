@@ -13,10 +13,11 @@ const notes: BuildingNotes = {
     {
       id: '3.2-K2',
       concepts: [
-        b('AWS global infrastructure puts content and compute near users. CloudFront delivers content through a worldwide network of edge locations and routes each request to the edge location with the lowest latency; content already cached there is delivered immediately.',
+        b('CloudFront delivers content through a worldwide network of edge locations and routes each request to the edge location with the lowest latency. If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately.',
           'cloudfront-what-is',
           ['CloudFront delivers your content through a worldwide network of data centers called edge locations.',
-           'When a user requests content that you\'re serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.']),
+           'When a user requests content that you\'re serving with CloudFront, the request is routed to the edge location that provides the lowest latency (time delay), so that content is delivered with the best possible performance.',
+           'If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately']),
         b('Code can run at the edge too. CloudFront Functions are lightweight JavaScript functions for high-scale, latency-sensitive CDN customisations with submillisecond startup. Lambda@Edge is an extension of AWS Lambda for complex functions and full application logic closer to your viewers.',
           'cf-edge-functions',
           ['You can write lightweight functions in JavaScript for high-scale, latency-sensitive CDN customizations.',
@@ -127,6 +128,7 @@ const notes: BuildingNotes = {
         ['learn-compute', 'asg-what-is', 'appas-what-is'],
         ['learn-compute|AWS service Azure service Description AWS Auto Scaling Azure Virtual Machine Scale Sets, Azure App Service autoscaling In Azure, you can use virtual machine scale sets to deploy and manage identical sets of VMs.',
          'asg-what-is|You create collections of EC2 instances, called Auto Scaling groups.',
+         'asg-what-is|Amazon EC2 Auto Scaling helps you ensure that you have the correct number of Amazon EC2 instances available to handle the load for your application.',
          'appas-what-is|With Application Auto Scaling, you can configure automatic scaling for the following resources: WorkSpaces Applications fleets Aurora replicas Amazon Comprehend document classification and entity recognizer endpoints DynamoDB tables and global secondary indexes Amazon ECS services']),
     },
     {

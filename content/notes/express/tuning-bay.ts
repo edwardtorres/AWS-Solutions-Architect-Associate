@@ -4,7 +4,7 @@ import { b, cue } from '../../helpers.ts';
 const notes: BuildingNotes = {
   building: 'tuning-bay',
   overview: [
-    b('Tuning a database starts from how it is used (read-intensive or write-intensive, which keys, how many connections) and ends in a capacity decision: capacity units for DynamoDB, instance class and storage type for RDS. A good design also keeps connection counts under control, which is where RDS Proxy comes in.',
+    b('Tuning a database starts from the access patterns your application requires and ends in a capacity decision: read and write units for DynamoDB, or the DB instance class for RDS. Connection counts matter as well, and RDS Proxy pools and shares database connections.',
       ['dynamodb-partition-keys', 'rds-instance-class', 'rds-proxy'],
       ['dynamodb-partition-keys|You can determine the access patterns that your application requires, and read and write units that each table and secondary index requires.',
        'rds-instance-class|The DB instance class determines the computation and memory capacity of an Amazon RDS DB instance.',

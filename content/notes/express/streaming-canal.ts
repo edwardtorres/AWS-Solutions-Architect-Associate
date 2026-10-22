@@ -17,10 +17,11 @@ const notes: BuildingNotes = {
     {
       id: '3.5-K2',
       concepts: [
-        b('Ingestion frequency is a design input: batch data arrives in periodic loads, while streaming data arrives continuously and incrementally and often needs low-latency processing. Choose the ingestion service by how often and how fast data must be processed.',
+        b('Streaming data is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing. Traditional data processing systems capture data in a central data warehouse and process it in groups or batches; batch processing periodically completes high-volume, repetitive data jobs.',
           'what-is-streaming-data',
           ['Streaming data is data that is emitted at high volume in a continuous, incremental manner, often requiring low-latency processing.',
-           'Streaming data can include location, event, and sensor data that companies use for real-time analytics and visibility into many aspects of their business.']),
+           'Traditional data processing systems capture data in a central data warehouse and process it in groups or batches.',
+           'Batch processing is the method computers use to periodically complete high-volume, repetitive data jobs.']),
         b('Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations; buffer size is in MBs and buffer interval is in seconds. AWS describes Firehose as enabling near real-time analytics; because delivery waits for the buffer, think of it as delivery in batches rather than record-by-record processing, and note that for S3 the buffer interval can be set from 0 to 900 seconds.',
           ['firehose', 'firehose-faqs'],
           ['firehose|Amazon Data Firehose buffers incoming streaming data to a certain size or for a certain period of time before delivering it to destinations.',
