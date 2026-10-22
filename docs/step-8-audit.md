@@ -163,7 +163,7 @@ Keys (the correct-option sets) changed: **none.** Option text, stems and reasons
 | `npm run check:freshness` | pass: 807 pages unchanged |
 | `npm run check:freeplan` | changes reported (section 8) |
 | `npm run test:layout` | pass: 74 checks at 390 px (touch) and 1,280 px (keyboard) |
-| `npm run e2e` | pass: 60 of 60 (desktop, phone, mock-desktop, mock-phone), 5.7 min, from a fresh build and fresh dev server |
+| `npm run e2e` | pass: 60 of 60 (desktop, phone, mock-desktop, mock-phone), 5.7 min, against a build made after the last content edit, with a fresh dev server for the mock tests |
 | `npx tsx scripts/check-labs.ts lab-01-safe-account` | pass |
 
 ## 10. Fixes made in the final pass
