@@ -170,13 +170,15 @@ const questions: Question[] = [
     wrong: [
       ['Provisioned mode at a fixed level sized for the daily peak with no auto scaling', 'The table is charged for the provisioned throughput through the quiet hours, so the company pays for unused capacity.'],
       ['Provisioned mode at the average daily level with no auto scaling', 'Traffic above the average would exceed the provisioned capacity at the daily peak, so requests would be throttled.'],
-      ['On-demand capacity mode, which accepts whatever traffic arrives', 'The team knows the curve, so on-demand pays per request at a rate that is not tuned to the known pattern, and the team gets no minimum and maximum capacity to set.'],
+      ['On-demand capacity mode, which accepts whatever traffic arrives', 'On-demand mode runs without capacity planning. The floor and ceiling in the stem are the auto scaling minimum and maximum levels that DynamoDB sets for provisioned capacity, and AWS says provisioned capacity suits steady workloads that can be reliably forecast.'],
     ],
     slot: 3,
     evidence: [
       'dynamodb-provisioned|To configure auto scaling in DynamoDB, you set the minimum and maximum levels of read and write capacity in addition to the target utilization percentage.',
       'dynamodb-capacity|This helps you govern your DynamoDB use to stay at or below a defined request rate in order to obtain cost predictability.',
       'dynamodb-provisioned|When the workload decreases, DynamoDB auto scaling can decrease the throughput so that you don\'t pay for unused provisioned capacity.',
+      'dynamodb-ondemand|automatically scales to accommodate the most demanding workloads without capacity planning.',
+      'dynamodb-capacity|You can choose to use provisioned capacity if you have steady workloads with predictable growth, and if you can reliably forecast capacity requirements for your application.',
     ],
   }),
   mc({
