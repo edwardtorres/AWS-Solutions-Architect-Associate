@@ -17,7 +17,7 @@ Status: **stopped at the spot-check gate.** The spot-check overturned well over 
 | `check:links` | pass: 808 sources, 808 pages, 7,891 quotes verified |
 | `check:cfn` | pass: 5 templates |
 | `build` + `check:bundle` | pass: 85 files, dev hooks absent, no external origins, strict CSP |
-| `check:hygiene` | pass: 704 files, 179 commits |
+| `check:hygiene` | pass: 704 files, 181 commits |
 | `test:layout` | pass: 74 checks at 390 px and 1280 px |
 | `e2e` | pass: 60 passed, 0 failed |
 | `check:freeplan` | not run (network; not part of this fix phase) |
@@ -71,7 +71,7 @@ Plan: a fresh agent re-judges a seeded 5% sample of confirmed verdicts, at least
   - batch 01: 10 of 25 overturned (minor: uncited distractor reasons, and one "by tag" targeting claim)
   - batch 02: 3 of 25
   - batch 03: 3 of 25
-  - batch 04: 11 of 25 (includes two q: items on blind-reviewed questions: throttle-lb-gate-012, refinery-008, refinery-013, legacy-wharf-014, blueprint-hall-010, service-selection-bureau-008)
+  - batch 04: 11 of 25 (seven question items, none in the blind-review set of 20: throttle-lb-gate-012, ingestion-gate-008, refinery-008, refinery-013, legacy-wharf-014, blueprint-hall-010, service-selection-bureau-008)
   - batch 05: 3 of 25
   - batch 06: 6 of 25
   - batch 07: 6 of 22
