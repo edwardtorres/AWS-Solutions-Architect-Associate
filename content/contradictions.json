@@ -147,12 +147,16 @@
       {
         "source": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html",
         "says": "If you transition objects out of these storage classes before the minimum duration, you are charged for the remainder of that duration."
+      },
+      {
+        "source": "https://aws.amazon.com/about-aws/whats-new/2026/07/s3-removes-30-day-transitions-standard-ia-one-zone-ia/",
+        "says": "You can now transition objects to S3 Standard-Infrequent Access (S3 Standard-IA) and S3 One Zone-Infrequent Access (S3 One Zone-IA) as soon as the day they are created, without the previous 30-day minimum retention in S3 Standard."
       }
     ],
-    "handling": "Read by direction the pages agree. The decision guide covers entering the classes. The storage classes page and the lifecycle transition page cover leaving the classes early, or deleting early. No page states an entry minimum, so no question relies on one. The billing minimum (30 days, a pro-rated charge for early deletion, overwrite or move out, and the 128 KB minimum billable size) is undisputed and stated plainly in the note. The lifecycle sentence about a single rule that cannot cross an unexpired minimum concerns chained transitions, not billing.",
+    "handling": "Read by direction and by date. The decision guide and the What's New post describe the current rule: no 30-day minimum applies to a transition into Standard-IA or One Zone-IA (the What's New post dates the change to 16 July 2026, after the exam guide). The storage classes page and the lifecycle transition page cover leaving the classes early, or deleting early, and the billing minimum (30 days, a pro-rated charge, the 128 KB minimum billable size) is undisputed and stated plainly in the note. The lifecycle sentence about a single rule that cannot cross an unexpired minimum concerns chained transitions, not billing. The exam may expect the earlier rule that objects stay in S3 Standard for 30 days before a transition, so the Cold Cellar note says so as a hedge, labelled newer, and the Cold Cellar evaluator still refuses early moves into those classes.",
     "added": "2026-10-22",
     "verdict": "resolved",
-    "verdictNote": "Re-read on 2026-10-22: the three pages do not conflict on the billing minimum. The earlier entry paired a lifecycle rule constraint with the billing reading, which was a misreading. The only difference is direction: the decision guide is the only page that speaks to entering the classes, and it says no 30-day minimum applies there. Resolved by stating each reading with its direction.",
+    "verdictNote": "Re-read after the What's New post was found: the entry rule changed on 16 July 2026 (post-guide, s3-ia-day-zero). The pages do not conflict on the billing minimum. The difference is the date of the entry rule and the direction of the charge. Resolved by stating each reading with its date and its direction.",
     "checked": "2026-10-22"
   }
 ]

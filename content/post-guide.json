@@ -2,6 +2,23 @@
   "cutoff": "2022-08-01",
   "features": [
     {
+      "id": "s3-ia-day-zero",
+      "name": "Amazon S3 transitions to Standard-IA and One Zone-IA without a 30-day minimum in S3 Standard",
+      "introduced": "2026-07-16",
+      "certainty": "confirmed",
+      "source": "pg-s3-ia-day-zero",
+      "quote": "Jul 16, 2026",
+      "patterns": [
+        "30-day minimum (storage duration|retention)[^\\n]{0,60}transitions?",
+        "as soon as the day they are created",
+        "without the previous 30-day minimum retention"
+      ],
+      "predecessor": "A 30-day minimum retention in S3 Standard before a lifecycle transition into Standard-IA or One Zone-IA",
+      "predecessorPatterns": [
+        "30-day minimum retention in S3 Standard"
+      ]
+    },
+    {
       "id": "efs-elastic-throughput",
       "name": "Amazon EFS Elastic throughput mode",
       "introduced": "2022-11-27",

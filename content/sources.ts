@@ -833,6 +833,7 @@ const sources: Source[] = [
   aws('firehose-partition-enable', `${D}/firehose/latest/dev/dynamic-partitioning-enable.html`, 'Enable dynamic partitioning in Amazon Data Firehose'),
   aws('redshift-what-is', `${D}/redshift/latest/mgmt/welcome.html`, 'What is Amazon Redshift?'),
   aws('asg-groups', `${D}/autoscaling/ec2/userguide/auto-scaling-groups.html`, 'Auto Scaling groups for Amazon EC2 Auto Scaling'),
+  aws('pg-s3-ia-day-zero', 'https://aws.amazon.com/about-aws/whats-new/2026/07/s3-removes-30-day-transitions-standard-ia-one-zone-ia/', 'Amazon S3 removes 30-day minimum for transitions to S3 Standard-IA and S3 One Zone-IA'),
 ];
 
 export default sources;

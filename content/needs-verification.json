@@ -88,7 +88,7 @@
     "status": "resolved",
     "added": "2026-10-09",
     "verdict": "confirmed",
-    "resolution": "The comparison table on the S3 storage classes page lists a 30-day minimum storage duration and a 128 KB minimum billable object size for S3 Standard-IA and S3 One Zone-IA, 90 days for S3 Glacier Instant Retrieval and Flexible Retrieval (128 KB minimum size for Instant Retrieval), and 180 days for Deep Archive. The storage decision guide sentence \"Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access\" is about transitions into those classes, not the charge for leaving them early. Read by direction the statements do not conflict. The entry reading is recorded as c-s3-ia-transition-direction (resolved).",
+    "resolution": "The comparison table on the S3 storage classes page lists a 30-day minimum storage duration and a 128 KB minimum billable object size for S3 Standard-IA and S3 One Zone-IA, 90 days for S3 Glacier Instant Retrieval and Flexible Retrieval (128 KB minimum size for Instant Retrieval), and 180 days for Deep Archive. The storage decision guide sentence \"Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access\" is about transitions into those classes, not the charge for leaving them early. Read by direction the statements do not conflict. The entry reading is recorded as c-s3-ia-transition-direction (resolved). Entry into Standard-IA or One Zone-IA no longer carries a 30-day minimum from 16 July 2026 (What's New, pg-s3-ia-day-zero); the billing minimum on leaving or deleting early is unchanged.",
     "resolutionSource": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html",
     "resolved": "2026-10-09"
   },
@@ -232,7 +232,7 @@
     "status": "resolved",
     "added": "2026-10-09",
     "verdict": "dropped",
-    "resolution": "No allowed page states a minimum time in S3 Standard before a lifecycle rule can transition objects into Standard-IA or One Zone-IA, and the storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to those classes. The claim is not used.",
+    "resolution": "No allowed page states a minimum time in S3 Standard before a lifecycle rule can transition objects into Standard-IA or One Zone-IA on the current pages. The What's New post dated 16 July 2026 (pg-s3-ia-day-zero) says the previous 30-day minimum retention in S3 Standard no longer applies, and the storage decision guide says the same. This is a post-guide change (s3-ia-day-zero); the Cold Cellar note states the earlier rule as a hedge, labelled newer.",
     "resolutionSource": "https://docs.aws.amazon.com/decision-guides/latest/decision-guides/choosing-aws-storage-service.html",
     "resolved": "2026-10-09"
   },

@@ -249,7 +249,7 @@ const questions: Question[] = [
     bullets: ['3.4-S2', '3.4-S1'],
     d: 3,
     stem: 'A company attached a VPC that spans three Availability Zones to an AWS Transit Gateway, enabling subnets in only two of the zones. Instances in the third zone cannot reach the other attached networks. What is the SIMPLEST fix?',
-    correct: ['Modify the attachment to enable the third Availability Zone by specifying a subnet in it', 'Resources in a zone can reach the transit gateway only if a subnet is enabled in that zone for the attachment.'],
+    correct: ['Enable the third Availability Zone for the attachment by specifying one subnet in it', 'Resources in a zone can reach the transit gateway only if a subnet is enabled in that zone for the attachment.'],
     wrong: [
       ['Associate the attachment with an additional transit gateway route table', 'Route table association controls which routes the attachment uses; it does not make the zone reach the transit gateway.'],
       ['Create a VPC peering connection between the third zone\'s subnets and the transit gateway', 'Peering connects two VPCs and is not a way to extend a transit gateway attachment to another zone.'],
@@ -259,6 +259,7 @@ const questions: Question[] = [
     evidence: [
       'tgw-how|During attachment creation, resources within a particular Availability Zone can reach a transit gateway only if a subnet is enabled within the same zone.',
       'tgw-how|However, only resources that reside in Availability Zones where there is a transit gateway attachment can reach the transit gateway.',
+      'tgw-how|To enable each Availability Zone, you specify exactly one subnet.',
     ],
   }),
   mc({

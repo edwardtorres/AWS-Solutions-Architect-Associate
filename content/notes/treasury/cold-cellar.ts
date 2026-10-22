@@ -167,7 +167,12 @@ const notes: BuildingNotes = {
        's3-storage-classes|If you delete an object before the end of the 30-day minimum storage duration period, you are charged for 30 days.',
        's3-lifecycle-transitions|You can\'t create a single Lifecycle rule that transitions objects from one storage class to another before the minimum storage duration period has passed.',
        's3-lifecycle-transitions|If you transition objects out of these storage classes before the minimum duration, you are charged for the remainder of that duration.'],
-      { disputed: 'c-s3-ia-transition-direction', allow: ['30'] }),
+      { disputed: 'c-s3-ia-transition-direction', allow: ['30'], newer: ['s3-ia-day-zero'] }),
+    b('Newer than the exam guide: the exam may expect objects to stay 30 days in S3 Standard before a lifecycle transition to Standard-IA or One Zone-IA. The storage decision guide says S3 no longer applies a 30-day minimum storage duration for transitions to these classes, and the What\'s New post describes the previous 30-day minimum retention in S3 Standard. The practice questions and puzzles in this app do not depend on either reading.',
+      ['storage-decision', 'pg-s3-ia-day-zero'],
+      ['storage-decision|Amazon S3 no longer applies a 30-day minimum storage duration for transitions to Amazon S3 Standard-Infrequent Access and Amazon S3 One Zone-Infrequent Access.',
+       'pg-s3-ia-day-zero|without the previous 30-day minimum retention in S3 Standard'],
+      { newer: ['s3-ia-day-zero'] }),
   ],
   cues: [
     cue('unknown or changing access pattern, no retrieval fees', 'S3 Intelligent-Tiering',

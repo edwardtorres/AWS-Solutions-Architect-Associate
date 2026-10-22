@@ -30,7 +30,7 @@ const notes: BuildingNotes = {
           ['eventbridge-what-is', 'eventbridge-rules'],
           ['eventbridge-rules|A single rule can send an event to multiple targets, which then run in parallel.You can create two types of rules: rules that match on event data as events are delivered, and rules that run on a defined schedule.',
            'eventbridge-rules|Scheduled rules are a legacy feature of EventBridge.EventBridge offers a more flexible and powerful way to create, run, and manage scheduled tasks centrally, at scale: EventBridge Scheduler.',
-           'eventbridge-what-is|The Custom Event Bus routes events to subscribers that consumers create themselves, retains events for a period that you set, and supports ordered delivery, replay, and non-JSON payloads.',
+           'eventbridge-what-is|The Custom Event Bus routes events to subscribers that you create, retains events for a period that you set, and supports ordered delivery, replay, and non-JSON payloads.',
            'eventbridge-what-is|For new applications, start with the Custom Event Bus.',
            'eventbridge-what-is|Custom Event Bus - Classic remains available, and this guide describes both.'], { newer: ['eventbridge-scheduler'] }),
       ],

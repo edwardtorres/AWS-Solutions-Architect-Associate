@@ -6,6 +6,6 @@
       "E"
     ],
     "ambiguous": false,
-    "note": "Fresh blind reviewer: lifecycle to IA and Elastic throughput. Bursting-style and Max I/O options are not the answer."
+    "note": "Fresh blind reviewer (Step 9 review, Step 8 question state): EFS lifecycle management moves files not accessed for a set period to the Infrequent Access class, and Bursting throughput scales with the amount of data stored; Provisioned throughput adds a charge for throughput the team may not need, the S3 API breaks the no-application-change rule, and keeping all data in Standard costs more than tiering cold files."
   }
 ]
