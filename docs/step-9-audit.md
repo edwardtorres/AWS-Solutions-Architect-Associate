@@ -1,32 +1,30 @@
 # Step 9 audit: final fixes, production hardening, deploy and staying current
 
-**Status.** Parts A to E are built and verified locally, and pushed. The AWS, Cloudflare and GitHub settings belong to the owner and
-are not done yet, so the live checks (headers and CSP on the live host, the service worker offline, three live Lighthouse runs,
-the deploy itself) are **pending**. The first freshness run has completed and reported findings that need review (Part D). They
-are listed below with the exact checks to run. Nothing in this audit claims a live result.
+**Status.** Parts A to E are built and verified locally. The AWS, Cloudflare and GitHub settings belong to the owner and are not
+done yet, so the live checks (headers and CSP on the live host, the service worker offline, three live Lighthouse runs, the deploy
+itself) are **pending**. Nothing in this audit claims a live result. The owner reviewed the Step 9 audit and asked for six
+corrections before the account steps; they are recorded in **Review corrections** below, with before and after for each.
 
 | Part | What it covers | State |
 | --- | --- | --- |
-| A | Final content fixes (storage-market-009, blueprint-hall-010, the S3 Infrequent Access contradiction) | Done, pushed (c3e30e7) |
+| A | Final content fixes (storage-market-009, blueprint-hall-010, the S3 Infrequent Access change) | Done; storage-market-009 reverted to its Step 8 key and the S3 change added to the registry (see Review corrections) |
 | B | Installable app, offline, save protection, error boundary, 404, route safety, Lighthouse | Done, pushed (e933c60) |
-| C | CloudFormation stacks, deploy workflow with OIDC, the runbook | Templates and workflows validated; deploy waits for the owner |
-| D | Weekly content watch, network exit codes, scope fix | Done; first run completed and opened issue #1 with two findings, not yet reviewed (see below) |
+| C | CloudFormation stacks, deploy workflow with OIDC, the runbook | Templates and workflows validated; the web ACL stays, for the pricing plan; deploy waits for the owner |
+| D | Weekly content watch, network exit codes, paragraph history, Free Tier and Transit Gateway checks | Done. Transit Gateway reviewed and refreshed. The Free Tier list is confirmed for now but has varied between runs (see Part D and deviation 20) |
 | E | README, screenshots, privacy scan | Done |
 
 ## Part A: final content fixes
 
-**A1. storage-market-009 (MR, Treasury).** The owner's instruction assumed the key was Elastic throughput. The file's key was
-Bursting throughput, so this was a key change, and it is reported as one.
+**A1. storage-market-009 (MR, Treasury).** Part A changed the key from Bursting throughput to Elastic throughput, a key change that was
+tagged post-guide. The owner's review reverted it: the question is back in its Step 8 state, with the Bursting key that the stem
+describes. The before and after are in Review corrections, item 1.
 
-- Before: key Bursting throughput. After: key "Use Elastic throughput on an Amazon EFS file system", tagged `post-guide`
-  (`efs-elastic-throughput`, launched 27 Nov 2022, after the exam guide's August 2022 date).
-- The post-guide registry names Provisioned and Bursting throughput as Elastic's predecessors, so neither can be a wrong option.
-  The distractor was replaced with "Use Max I/O performance mode on the file system", explained with the EFS performance page
-  (Max I/O is not supported with Elastic throughput).
-- Evidence: the efs-performance quote "Elastic throughput is the best throughput mode for spiky or unpredictable workloads with
-  performance requirements that are difficult to forecast" (verified with `check:links`).
-- Blind re-review: a fresh reviewer answered from the keyless export; `score-blind` reports 009 agrees with the new key. Source
-  pass: a fresh checker verified the quotes and the explanation against the page.
+- Key: "Use Bursting throughput on an Amazon EFS file system", with lifecycle management to the Infrequent Access class as the second
+  key. Stem, distractors and answer slots as in Step 8. No post-guide tag.
+- Evidence: two efs-performance quotes state that Bursting throughput is for throughput that scales with the amount of storage. The
+  stem's "throughput needs grow with the amount of data stored" describes that property.
+- Blind re-review: a fresh reviewer answered the keyless export (`docs/reviews/treasury/blind-storage-market.json`) with A and E, and
+  `score-blind` agrees for 009.
 
 **A2. service-selection-bureau-010.** No change. The stem already states "low and steady" traffic and forecastable capacity,
 which is the condition AWS gives for Provisioned capacity. An optional rewording ("reliably forecast") was not made; it would
@@ -47,14 +45,13 @@ recorded the verdict in `docs/reviews/step-8/ledger/G1-keys.jsonl`. The key set 
 
 Changes:
 
-- `content/contradictions.json`: `c-s3-ia-minimum-duration` renamed `c-s3-ia-transition-direction`, with the three readings and
-  verdict "resolved" (the difference is direction only).
+- `content/contradictions.json`: `c-s3-ia-minimum-duration` renamed `c-s3-ia-transition-direction`, with the readings and verdict
+  "resolved". The review added the What's New reading and its date (Review corrections, item 2).
 - `content/needs-verification.json`: both related items point at the new id.
 - `content/notes/treasury/cold-cellar.ts`: the billing minimum is stated plainly; the disagreements block cites the new id.
-- **Puzzle evaluator (reported before and after):** `src/puzzles/cold-cellar/def.ts` refused any move into Standard-IA or
-  One Zone-IA before day 30, which encoded the entry reading. The refusal is removed; the early-leaving charge rule stays.
-  The unit test now asserts that the move is computed. No content scenario changed answer: `check:content` rejects any scenario
-  that hits a refusal, so no scenario relied on it.
+- **Puzzle evaluator:** `src/puzzles/cold-cellar/def.ts` refuses a move into Standard-IA or One Zone-IA before day 30 again, so no
+  scenario is computed under either reading. The early-leaving charge rule is unchanged. The test "refuses a move into an
+  infrequent-access class before day 30" is restored. Before and after: Review corrections, item 2.
 - No question states an entry minimum (grep confirmed).
 
 ## Part B: production polish (pushed in e933c60; deploy gating in d725ca9)
@@ -118,7 +115,7 @@ and the numbers above are measured with that. The local figure is not the live f
 | saa-site (us-east-1) | `AWS::S3::Bucket` | All four Block Public Access settings, BucketOwnerEnforced, SSE-S3, `DeletionPolicy: Retain` |
 | | `AWS::S3::BucketPolicy` | `s3:GetObject` for `cloudfront.amazonaws.com` only when `AWS:SourceArn` is this distribution; denies plain HTTP |
 | | `AWS::CloudFront::OriginAccessControl` | SigningBehavior always, sigv4, s3 origin. A comment notes the exam may present OAI, and AWS recommends OAC |
-| | `AWS::WAFv2::WebACL` | Scope CLOUDFRONT, default allow, no rules |
+| | `AWS::WAFv2::WebACL` | Scope CLOUDFRONT, default allow, no rules. Kept, because a pricing plan requires it (Review corrections, item 3) |
 | | `AWS::CloudFront::ResponseHeadersPolicy` | The headers in the table below |
 | | `AWS::CloudFront::Distribution` | Aliases the site host; ACM certificate; TLS 1.2 2021 minimum; SNI only; HTTP/2 and HTTP/3; IPv6; PriceClass_100; DefaultRootObject `index.html`; `redirect-to-https`; Compress; managed CachingOptimized by default and CachingDisabled for `/index.html`, `/404.html`, `/sw.js` and `/manifest.webmanifest`; 403 and 404 mapped to `/404.html` with status 404; no logging |
 | | `AWS::IAM::OIDCProvider` | Only when `CreateGitHubOidcProvider` is true (one per URL per account); audience `sts.amazonaws.com`; no thumbprint (optional in the CloudFormation reference; AWS verifies GitHub's certificate through its trusted CA library) |
@@ -184,8 +181,7 @@ console: CloudFront, Distributions, the new distribution, Update, Pricing plan, 
 (`flat-rate-pricing-plan.html`): subscribing an existing distribution is done from the console; features the page lists as
 unsupported must be turned off first (its examples include real-time access logs, Anycast IP list configuration and continuous
 deployment). This template enables none of them. Correction to my own earlier note: the page does **not** list Origin Access
-Identity as unsupported; the template uses OAC because AWS recommends it. The page's feature table includes OAC and AWS WAF for
-the plans; the template attaches a default-allow web ACL.
+Identity as unsupported; the template uses OAC because AWS recommends it. The page's feature table includes OAC and AWS WAF for the plans. The page also says a pricing plan requires a web ACL on the distribution, so the template keeps its default-allow web ACL. DEPLOY.md, step 5, quotes the sentences.
 
 **Runbook.** `DEPLOY.md` gives the setup order with placeholders only, the console and Cloudflare steps, the verification
 commands, the rollback (rerun the deploy workflow from main with `sha` set to an earlier commit: the checks run on that commit,
@@ -194,7 +190,7 @@ then it is published), the 403-to-404 behaviour, and teardown.
 ## Part D: staying current
 
 **Exit codes** (`scripts/lib/network.ts`): 0 unchanged; 1 a real change or a failure the content must answer; 2 a network-class
-failure (no connection, timeout, rate limit, 5xx). `check:freshness`, `check:freeplan` and `check:content --live` use them. The
+failure (no connection, timeout, rate limit, 5xx). 3 an unstable read: the source was still changing, or two renders disagree. It is a warning ("unstable read"), never a finding or an issue. `check:freshness`, `check:freeplan` and `check:content --live` use them. The
 structural STOP in `check:content` and `fetch-official` now exits 1 (it was 2). `isNetworkFailure` is unit-tested: a plain 404,
 a page with no main content, a layout change and a bug in our own code are not network failures.
 
@@ -214,34 +210,28 @@ UTC and on demand, permissions `contents: read` and `issues: write`, not a depen
   This closed-issue rule goes beyond the plan: it stops the bot reopening findings the owner has already closed.
 - It uses only `GITHUB_TOKEN`. `--dry-run` prints the report and makes no GitHub call.
 
-**Reviewed change in the cited pages.** The dry run of the watch (below) found one changed page: `aws-backup/latest/devguide/vault-lock.html`,
-whose main text gained a sentence about a third-party assessment for regulated environments. I re-verified every quote on every
-cited page with `check:links --fresh` (807 sources, 807 pages, 7,993 quotes; all pass). The affected notes and questions
-(archive-annex, compliance-registry, retention-records, two questions) state lock modes, grace time and deletion, all of which
-the page still says, so nothing needed rewording. The hash was refreshed for that page only (`--update --only`), and
-`check:freshness` now reports all 807 pages unchanged.
+**Reviewed change in the cited pages.** The first dry run found one changed page, `aws-backup/latest/devguide/vault-lock.html`, which
+gained a sentence about a third-party assessment for regulated environments. Every quote on every cited page was re-verified with
+`check:links --fresh`. The affected notes and questions (archive-annex, compliance-registry, retention-records and two questions)
+state lock modes, grace time and deletion, all still on the page, so nothing needed rewording. That page's hash was refreshed alone.
 
-**Dry run** (`npm run freshness:watch -- --dry-run`, with the network): the exam guide check is OK; the Free Tier check reports
-the offers changed since the snapshot of 2026-10-19 (added: AWS Security Hub, AWS Application Migration Service, Amazon Personalize
-(paid plan exclusive), AWS Elemental MediaTailor (paid plan exclusive); removed: AWS IoT TwinMaker). No lab badge was named as
-affected. The owner's plan expected the first scheduled run to report only these offer changes; it did not (see below).
+**Other pages changed in this review.** Two more hashes moved: `how-transit-gateways-work` (Review corrections, item 5) and
+`eb-what-is`, the EventBridge overview, whose wording changed for four quotes (item 5). The new What's New page for the S3 change
+(`s3-removes-30-day`, item 2) has its hash stored. `check:freshness` reports 808 pages unchanged after these refreshes.
 
-**First manual run** (run 39853991305, triggered by hand on `main` at 5a735b6; completed, conclusion success). It opened issue #1,
-labelled `content-freshness`, with no comments. It does not match the expectation in the dry run section: it reports two findings.
+**Paragraph history.** `check:freshness --update` stores, for each cited quote, the paragraph around it (the smallest text block on the
+page that contains the quote) in `content/page-paragraphs.json`. The store is 1,042,372 bytes for 808 pages, about 1.0 MB, under the
+2 MB limit. A changed page's report prints the old and new text of each changed cited paragraph, and says when a quote is no longer on
+the page; the report stops at 50,000 characters. `check:bundle` checks that 40 sampled cited paragraphs are absent from `dist/`.
+History starts with this update, so the Transit Gateway change cannot be compared paragraph by paragraph.
 
-- **Cited pages: `tgw-how`** (`vpc/latest/tgw/how-transit-gateways-work.html`). Its hash differs from the stored value. A local fetch
-  returns the same new hash on two requests, and the runner returns the same hash, so this is a real change on the page, not a
-  fetch variant. Three blocks in `grid-planning-office` and question `grid-planning-office-013` cite it. Every quote that cites the
-  page still verifies against the live page (`check:links --fresh`: 807 sources, 7,993 quotes, all pass). I did not identify the
-  sentence that changed, because the fresh runs overwrote the cached page text. **The hash has not been refreshed, so the watch will
-  keep reporting this page until a person reads the change and refreshes it.**
-- **Free Tier offers: the list is not stable across renders.** Three renders of the same page gave three different removed sets:
-  AWS IoT TwinMaker alone (the dry run); IoT TwinMaker and Amazon Neptune (a later local run); IoT TwinMaker and AWS re:Post (the
-  runner). The added offers (Security Hub, Application Migration Service, Personalize, MediaTailor) were the same in each. So the
-  "removed" items in issue #1 are not reliable.
+**The first manual run** (run 39853991305 on 5a735b6, which opened issue #1) reported two findings. The Transit Gateway page is reviewed
+and refreshed (Review corrections, item 5). The Free Tier list varied between renders; the check now counts only offers that two renders
+agree on (item 4).
 
-Not done: the review of `grid-planning-office` and the hash refresh for `tgw-how`, and any change to how the Free Tier offers are
-extracted. Both are for the owner to decide (deviations 20 and 21).
+**Dry run** (`npm run freshness:watch -- --dry-run`, before this review): the exam guide check was OK. The Free Tier check listed four
+added offers (AWS Security Hub, AWS Application Migration Service, Amazon Personalize, AWS Elemental MediaTailor) and one removal (AWS
+IoT TwinMaker) against the 2026-10-19 snapshot. The removal did not hold in the later runs of this review (item 4). No lab badge changed.
 
 ## Part E: README and screenshots
 
@@ -254,6 +244,103 @@ extracted. Both are for the owner to decide (deviations 20 and 21).
   remain are deliberate fixtures (hygiene tests that construct a fake account number, placeholder names such as `ACCT_MAIN` in an
   older audit, and localhost test ports in Playwright config). No session link and no private link.
 
+## Review corrections
+
+The owner reviewed this audit before the account steps and asked for six corrections. Each item gives the state before and after.
+
+**1. storage-market-009 back to its Step 8 state.**
+
+- Before: key "Use Elastic throughput on an Amazon EFS file system", tagged `post-guide` (`efs-elastic-throughput`); distractor
+  "Use Max I/O performance mode on the file system"; evidence the Elastic quote.
+- After: key "Use Bursting throughput on an Amazon EFS file system", the Step 8 key; Step 8 stem ("Its throughput needs grow with the
+  amount of data stored"); Step 8 distractors (Provisioned throughput, the Standard class, the S3 API); no `postGuide` tag; slots
+  `[2, 4]`. Evidence: the two efs-performance Bursting quotes, verified with `check:links`.
+- Blind re-review: a fresh reviewer answered the keyless export of this Step 8 question with A and E. `score-blind storage-market`
+  agrees for 009.
+
+**2. S3 Infrequent Access change: registry entry, refusal and note.**
+
+- Before: no registry entry; the Cold Cellar evaluator computed a move into Standard-IA or One Zone-IA before day 30; the Cold Cellar
+  note had no "newer" label or block for the change; the contradiction `c-s3-ia-transition-direction` said the difference was
+  direction only.
+- After:
+  - Registry: `s3-ia-day-zero` in `content/post-guide.json`, introduced 2026-07-16. The date quote is "Jul 16, 2026" from the
+    What's New post (`pg-s3-ia-day-zero`). Its patterns match the change wording ("as soon as the day they are created", "without the
+    previous 30-day minimum retention"), not billing text.
+  - Evaluator: the refusal `if ((to === 'standard-ia' || to === 'onezone-ia') && p.from < 30) return null;` is restored, with its test.
+    The early-leaving charge rule is unchanged. `check:content` rejects a scenario that hits a refusal, and none does.
+  - Cold Cellar note: the disagreements block is labelled "newer". A new block, labelled "Newer than the exam guide", says the exam may
+    expect objects to stay 30 days in S3 Standard before a lifecycle transition to Standard-IA or One Zone-IA, and cites the storage
+    decision guide and the What's New post. The billing minimum (30 days, the pro-rated charge, the 128 KB minimum) is stated as before.
+  - Other citers: the S3 decision-guide block in `content/dont-confuse.ts` carries `s3-ia-day-zero`.
+  - Contradictions: `c-s3-ia-transition-direction` records the What's New reading and its date (before and after 16 July 2026); the
+    verdict stays "resolved". `nv-s3-ia-minimum-duration` and `nv-s3-ia-min-time-in-standard` have updated resolutions.
+
+**3. WAF web ACL: kept, with the sentences relied on.**
+
+- Before: the web ACL's description said the Free pricing plan "includes" one. DEPLOY.md did not explain the web ACL or its teardown.
+- After: kept. The description says a pricing plan requires the web ACL and covers its charges. DEPLOY.md, step 5, quotes the
+  sentences below. Teardown switches the distribution to pay-as-you-go first. `scripts/lib/infra.test.ts` asserts that the
+  distribution is attached to the web ACL, which is CLOUDFRONT scope with default allow.
+- Sentences relied on, from the CloudFront flat-rate pricing plan page (cached copy):
+  - "You must have a AWS WAF Web ACL associated with your distribution if you're using a pricing plan."
+  - "Your plan covers costs for: … The AWS WAF web ACL, custom rules, AWS Managed Rules, and request fees for the web ACL associated with your distribution."
+  - "This resource cannot be removed or disassociated from your distribution unless you switch to pay-as-you-go pricing for that distribution."
+- Reading: these sentences say "a pricing plan" and do not name the Free plan on the web ACL line. The page covers the flat-rate plans,
+  and the Free plan is one of them, so the requirement applies to it. The console has not been checked, so if it says the Free plan
+  does not need a web ACL, the template drops it.
+
+**4. Free Tier watch: two renders must agree.**
+
+- Before: one read of the page, taken once the "Show N more" buttons were gone, counted every difference. The first dry run counted
+  TwinMaker as removed; the later runs did not.
+- After: `renderOffers` waits until the offer count is the same on two reads three seconds apart. `check:freeplan` renders twice and
+  counts only changes that both renders report the same way (`confirmDiffs`). A change only one render shows is named as unstable and
+  is not counted. Two renders that disagree exit 3, an unstable read, which is a warning. Unit tests cover agreement, disagreement and
+  duplicate cards. CLAUDE.md records the render variance.
+- Runs (`npm run check:freeplan`, each run makes two renders):
+  - Runs 1 and 2, against the working snapshot of 2026-10-22 before the update: both exit 1 with the same confirmed change, "+ AWS
+    re:Post" and "+ AWS IoT TwinMaker", both "Available on both plans". The runs match.
+  - The snapshot update (`scripts/free-plan-snapshot.ts`, two renders): saved 186 offers dated 2026-10-22, with no unstable name.
+  - Runs 3 and 4, after the update: both exit 0, "186 offers, no change since the snapshot of 2026-10-22". The runs match.
+- Against the committed snapshot (2026-10-19, 185 entries): four offers were added (AWS Application Migration Service and AWS Security
+  Hub, both plans; Amazon Personalize and AWS Elemental MediaTailor, paid plan exclusive). Three names that had two identical copies
+  now have one each (AWS Budgets, AWS Global Accelerator, Amazon Application Recovery Controller), which matches the page's total of
+  186. AWS IoT TwinMaker and AWS re:Post are in both snapshots, so the removal in the dry run did not hold.
+- Lab badges: `npm run gen:meta` after the update changed no line of `src/labs/meta.ts`, so no lab badge changed. AWS Budgets is in
+  labs 1 and 14, and its label did not change.
+- Issue #1 is closed after the outcome comment, because the last two runs agree with the snapshot. The list changed between runs
+  earlier in this review, so the weekly watch may report it again (deviation 20).
+
+**5. Transit Gateway page and the grid-planning-office claims.**
+
+- Read against the current page: the three `grid-planning-office` blocks that cite `tgw-how` (lines 55, 78 and 90 of
+  `content/notes/express/grid-planning-office.ts`) rest on the sentence "A transit gateway scales elastically based on the volume of
+  network traffic." Line 78 shortens it to "scales elastically based on traffic", which still holds. Each cited quote verifies verbatim
+  on the current page (`check:links --fresh`). No note wording changed.
+- Question `grid-planning-office-013`. Before: the key read "Modify the attachment to enable the third Availability Zone by specifying a
+  subnet in it", and the page does not say "modify". After: the key reads "Enable the third Availability Zone for the attachment by
+  specifying one subnet in it", with the added evidence "To enable each Availability Zone, you specify exactly one subnet." Deviation 22
+  covers what the source pass could not settle.
+- Hash: `how-transit-gateways-work` is refreshed (`5b408ed35ea870903b4a`). `eb-what-is` (EventBridge) was refreshed too. The request
+  was for the Transit Gateway hash only; the EventBridge change broke four verbatim quotes in `content/notes/harbor/message-quay.ts`
+  and `content/dont-confuse.ts`, and their claims now use the page's wording ("subscribers that you create", "rules and targets that you
+  write"). That is beyond the request and is reported as deviation 23.
+- The page's document history has a "1:1 NAT for transit gateways" entry dated 22 October 2026. That is the likely source of the change.
+  It is not confirmed, because no earlier text was stored.
+- Issue #1 received an outcome comment (below), and it is closed after item 4.
+
+**6. Paragraph history for the weekly report.**
+
+- Before: a changed page was reported by its hash alone.
+- After: `content/page-paragraphs.json` holds the paragraphs for 808 pages (1,042,372 bytes). `check:freshness` prints the old and new
+  text of each changed cited paragraph and says when a quote is gone. The report stops at 50,000 characters. `check:bundle` proves that
+  40 sampled paragraphs are absent from `dist/`.
+- Tested: `paragraphsFor` on fixtures (a quote in a list item; a quote split across two elements is reported as not found), the
+  changed-paragraph report, the store round trip, and `--only`. A temporary run with a forced hash and an altered stored paragraph
+  showed the report, and both data files were restored from backups afterwards.
+- Limit: no earlier text is stored for the Transit Gateway page, so its change cannot be shown paragraph by paragraph.
+
 ## Owner checklist (AWS, Cloudflare and GitHub: not done by me)
 
 Follow `DEPLOY.md`. In order:
@@ -265,7 +352,9 @@ Follow `DEPLOY.md`. In order:
    record with **DNS only** (grey cloud).
 4. When `saa-cert` completes, read `CertificateArn` from its outputs and deploy `saa-site` with `BudgetEmail`, `BudgetLimitUsd` and
    `CertificateArn` (and the OIDC parameters from step 1).
-5. **CloudFront console.** Open the new distribution, Update, Pricing plan, Free. Confirm the console shows $0 with no overage.
+5. **CloudFront console.** Open the new distribution, Update, Pricing plan, Free. The web ACL stays attached: the pricing plan requires it
+   and covers its charges (DEPLOY.md, step 5). Confirm the console shows $0 with no overage. If the console says the Free plan does not
+   need a web ACL, tell me and the template drops it.
 6. **Billing and Cost Management.** Activate the cost allocation tag `Project` (it can take up to 24 hours to appear).
 7. **Cloudflare.** Add a CNAME `saa` pointing at the `DistributionDomainName` output, **DNS only**. Confirm no `saa` record existed.
 8. **GitHub repository, Settings, Secrets and variables, Actions, Variables.** Set `AWS_DEPLOY_ROLE_ARN` (output `DeployRoleArn`),
@@ -320,12 +409,23 @@ When the owner's steps are done, I will run and record:
     rerun, and did not fail in any run recorded here. It is still worth watching.
 19. **Browser build.** The installed Playwright expects a Chromium build this environment does not have. The project's
     `CHROMIUM_PATH` lookup falls back to the pre-installed browser here; CI installs Playwright's own build.
-20. **The Free Tier offer list is unstable.** Renders of the same page gave different removed offers (see First manual run). The
-    watch reports such a change as a finding. The check should confirm a change on two consecutive renders, or wait until the whole
-    list has loaded, before it opens or comments on an issue. Not changed here: it changes the watch's behaviour, so it is the
-    owner's call.
-21. **The Transit Gateway page changed and the change is not reviewed.** The quotes still verify, but no person has read the new text
-    against the notes and question that cite the page, and the hash is not refreshed.
+20. **The Free Tier offer list varies between runs.** Within a run the two renders agree, and the watch counts only what they agree on.
+    Across runs it has changed: the first dry run removed TwinMaker, a later run removed TwinMaker and Neptune, another removed
+    TwinMaker and re:Post, and before the update in this review the snapshot differed from two renders that agreed with each
+    other. I did not find the cause without browser diagnostics. The last two runs agree with the snapshot, so issue #1 is closed.
+    Decision for the owner: stabilise the extraction (for example, a fixed set of expected cards), agree a multi-day rule, or review
+    each change before the snapshot moves.
+21. **The Transit Gateway page changed.** Its hash is refreshed. The change is not identified: the page's "1:1 NAT for transit gateways"
+    entry (22 October 2026) is the likely source, not confirmed. Every claim that cites the page holds against its current text
+    (Review corrections, item 5). Paragraph history starts with this update, so this change cannot be diffed (item 6).
+22. **Question grid-planning-office-013 is supported by inference.** The page says "To enable each Availability Zone, you specify exactly
+    one subnet." A source pass judged the key supported by that sentence, but not stated directly. The stem does not mention route
+    tables, and a reviewer may ask whether the subnet's route table also matters for the zone to reach the transit gateway. The owner
+    decides whether the stem should name it.
+23. **The EventBridge overview changed.** Four quotes no longer matched and their claims were reworded to the page's wording (Review
+    corrections, item 5). This was beyond the request, so it is listed here.
+24. **One background freshness run printed 807 pages, not 808.** A direct rerun printed 808 pages and exit 0. The hash file and the
+    paragraph store both list 808 URLs. I did not find the cause. The weekly watch will show whether it recurs.
 
 ## Test results
 
@@ -333,21 +433,22 @@ Every command was run on the tree at the commit before this audit, unless noted.
 
 | Command | Result |
 | --- | --- |
-| `npm run check` (typecheck, lint, unit tests, content, cfn-lint, build, bundle, hygiene) | Exit 0. Unit tests 562 of 562 in 42 files; check:content OK (4 domains, 14 tasks, 189 bullets, 69 buildings, 97 roads, 1,013 questions); check:cfn 7 templates; check:bundle 94 files; check:hygiene 746 files, 199 commits |
-| `npm run check:content -- --live` | Exit 0; live guide matches |
-| `npm run check:links -- --fresh` | Exit 0; 807 sources, 807 pages, 7,993 quotes verified, 27 redirect notes |
-| `npm run check:freshness` (after the vault-lock refresh) | Exit 0; 807 pages unchanged |
+| `npm run check` (typecheck, lint, unit tests, content, cfn-lint, build, bundle, hygiene) | Exit 0. Unit tests 580 of 580 in 42 files; check:content OK (4 domains, 14 tasks, 189 bullets, 69 buildings, 97 roads, 1,013 questions); check:cfn 7 templates; check:bundle 94 files, 40 cited paragraphs absent; check:hygiene 749 files, 205 commits |
+| `npm run check:content -- --live` | Exit 0; live guide matches; content checks pass against the Free Tier snapshot after the update |
+| `npm run check:links -- --fresh` | Exit 0; 808 sources, 808 pages, 7,995 quotes verified, 27 redirect notes |
+| `npm run check:freshness` | Exit 0; 808 pages unchanged (one background run printed 807, deviation 24) |
+| `npm run check:freeplan`, two runs before the snapshot update | Both exit 1 with the same confirmed change (+ AWS re:Post, + AWS IoT TwinMaker) |
+| `npm run check:freeplan`, two runs after the update | Both exit 0; 186 offers, no change since 2026-10-22 |
+| `npm run gen:meta` after the update | `src/labs/meta.ts` unchanged; no lab badge changed |
 | `npm run test:layout` | Exit 0; 74 checks at 390 px (touch) and 1280 px (keyboard) |
 | `npm run e2e` (production build, both widths, axe) | 78 passed, 0 failed |
-| `npm run e2e:live` against a local deploy-header server | 68 passed, 0 failed |
-| `npm run lighthouse` (three runs, saved) | Median performance 94, accessibility 100, best practices 100, SEO 100 |
-| `npm run freshness:watch -- --dry-run` | Ran all three network checks; report as in Part D |
-| `npm run check:links -- --fresh` after the first run | Exit 0; 807 sources, 807 pages, 7,993 quotes verified (includes the changed Transit Gateway page) |
-| First manual run of content-freshness (GitHub, 5a735b6) | Completed, success; opened issue #1 with two findings (see Part D) |
+| `npx tsx scripts/score-blind.ts storage-market` | 009 agrees. The other 11 storage-market questions have no entry in the blind file, as before this review, so the command exits 1 |
+| First manual run of content-freshness (GitHub, 5a735b6) | Completed, success; opened issue #1 with two findings (Part D) |
 | Deploy workflow on push (GitHub, 5a735b6) | Completed, success; the deploy job is skipped until `AWS_DEPLOY_ROLE_ARN` is set |
-| actionlint (deploy.yml, content-freshness.yml) | Clean |
-| `npx eslint .` | Clean |
-| Privacy scan (12-digit numbers, `arn:aws`, session and private links) | Only deliberate fixtures (see Part E) |
+| actionlint (workflows) | Last run clean; the workflows did not change in this review, so it was not re-run |
+| Privacy scan (12-digit numbers, `arn:aws`, session and private links) | Covered by `npm run check:hygiene`; only deliberate fixtures (Part E) |
+
+Every command above was run on the working tree for this review, before the commit, unless noted.
 
 ## Push confirmation
 
