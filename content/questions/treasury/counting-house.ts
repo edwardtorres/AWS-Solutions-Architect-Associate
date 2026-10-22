@@ -107,7 +107,7 @@ const questions: Question[] = [
       ['Return unfinished tasks to the work queue when the two-minute Spot interruption notice arrives', 'The notice warns two minutes before EC2 stops or terminates the instance, so an interrupted task can be run again elsewhere.'],
     ],
     wrong: [
-      ['Buy three-year Standard Reserved Instances for the worker fleet', 'A Reserved Instance is a commitment to a consistent instance configuration for a term of 1 or 3 years, which does not suit a job that runs only part of each night.'],
+      ['Buy three-year Standard Reserved Instances for the worker fleet', 'Reserved Instances involve making a commitment to a consistent instance configuration, including instance type and Region, for a term of 1 or 3 years, and the stem describes a nightly batch of restartable tasks, not a steady workload.'],
       ['Run the workers on Dedicated Hosts', 'Dedicated Hosts pay for a physical host that is fully dedicated to your instances and bring per-socket or per-core licenses, which the job does not need.'],
       ['Reserve the worker capacity with an On-Demand Capacity Reservation in one Availability Zone', 'Capacity Reservations are charged at the On-Demand rate whether or not instances run in them, which does not lower the cost.'],
     ],
@@ -149,7 +149,7 @@ const questions: Question[] = [
     tags: ['trap:savings-plans-ri-spot'],
     stem: 'A company wants to cover its steady Amazon EC2 usage with Savings Plans. It wants to size the first purchase from its own usage history, and after the purchase it wants to track what share of its usage the plans cover. Which TWO actions meet these requirements with the LEAST operational overhead? (Choose two.)',
     correct: [
-      ['Use AWS Cost Explorer to view the recommended Savings Plans commitment before purchasing', 'Cost Explorer shows the recommended commitment based on historical usage and is where plans are purchased.'],
+      ['Use AWS Cost Explorer to view the recommended Savings Plans commitment before purchasing', 'Cost Explorer shows your recommended Savings Plans commitment, which you can customize before you purchase your Savings Plan, and lets you view your historical AWS usage.'],
       ['Create an AWS Budgets coverage budget for Savings Plans', 'AWS Budgets monitors aggregate utilization and coverage metrics for Savings Plans.'],
     ],
     wrong: [
@@ -160,6 +160,7 @@ const questions: Question[] = [
     slots: [1, 4],
     evidence: [
       'savings-plans|To get started, use AWS Cost Explorer to view your recommended Savings Plans commitment, refresh Savings Plans recommendations, purchase Savings Plans, manage your Savings Plans, and view your historical AWS usage.',
+      'savings-plans|You can customize the recommendation to meet your needs and then purchase your Savings Plan.',
       'budgets-managing|You can use AWS Budgets to monitor your aggregate utilization and coverage metrics for your Reserved Instances (RIs) or Savings Plans.',
       'cost-alloc-tags|After you activate cost allocation tags, AWS uses the cost allocation tags to organize your resource costs on your cost allocation report, to make it easier for you to categorize and track your AWS costs.',
       'consolidated-billing|The management account might reallocate the additional volume discounts, Reserved Instance, or Savings Plans discounts that your account receives.',

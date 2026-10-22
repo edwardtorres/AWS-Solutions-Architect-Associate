@@ -134,7 +134,7 @@ const questions: Question[] = [
     wrong: [
       ['An Application Load Balancer with a listener on the service port and the instances in a target group', 'An Application Load Balancer functions at the application layer and forwards requests on HTTP fields such as the host header, so it does not fit a custom binary protocol over TCP.'],
       ['A Gateway Load Balancer with the instances registered as its targets', 'A Gateway Load Balancer enables you to deploy, scale and manage virtual appliances such as firewalls, so it does not front a client-facing TCP service.'],
-      ['An Amazon CloudFront distribution that uses the instances as a custom origin', 'CloudFront delivers your content through a worldwide network of data centers called edge locations, so it is a content delivery service and does not carry a custom TCP protocol to the instances.'],
+      ['An Amazon CloudFront distribution that uses the instances as a custom origin', 'CloudFront gets your files from origin servers, such as an Amazon S3 bucket or your own HTTP server, so it is a content delivery service and does not carry a custom TCP protocol to the instances.'],
     ],
     slot: 1,
     evidence: [
@@ -144,6 +144,7 @@ const questions: Question[] = [
       'alb-intro|You can configure rules for your listener that forward requests based on the host field in the HTTP header.',
       'gwlb-intro|Gateway Load Balancers enable you to deploy, scale, and manage virtual appliances, such as firewalls, intrusion detection and prevention systems, and deep packet inspection systems.',
       'cloudfront-what-is|CloudFront delivers your content through a worldwide network of data centers called edge locations.',
+      'cloudfront-what-is|You specify origin servers, like an Amazon S3 bucket or your own HTTP server, from which CloudFront gets your files',
     ],
   }),
   mc({

@@ -285,8 +285,9 @@ const pairs: ConfusePair[] = [
         ['connectivity-vpn|Amazon VPC provides the option of creating an IPsec VPN connection between your remote networks and Amazon VPC over the internet',
          's2s-vpn|VPN tunnel: An encrypted link where data can pass from the customer network to or from AWS.']),
     ],
-    trap: b('Direct Connect bypasses internet service providers, while Site-to-Site VPN runs over the internet; "must not traverse the public internet" points to Direct Connect. But a private line is not an encrypted one: Direct Connect is not encrypted by default, so a requirement for encryption in transit adds MACsec or a VPN on top of it, and Site-to-Site VPN supports IPsec VPN connections, whose VPN tunnels are encrypted links.', ['dx-what-is', 'connectivity-vpn', 'connectivity-dx', 's2s-vpn'],
+    trap: b('Direct Connect bypasses internet service providers, while Site-to-Site VPN runs over the internet; "must not traverse the public internet" points to Direct Connect. But a private line is not an encrypted one: Direct Connect is not encrypted by default, so a requirement for encryption in transit points to an encryption option: MACsec on a dedicated connection of 10 or 100 Gbps, or VPN tunnels on top of a connection of 1 Gbps or less, and Site-to-Site VPN supports IPsec VPN connections, whose VPN tunnels are encrypted links.', ['dx-what-is', 'connectivity-vpn', 'connectivity-dx', 's2s-vpn'],
       ['dx-what-is|bypassing internet service providers in your network path.', 'connectivity-vpn|over the internet', 'connectivity-dx|AWS Direct Connect is not encrypted by default.',
+       'connectivity-dx|For dedicated connections of 10 or 100 Gbps, you can use MAC security (MACsec) as an encryption option.', 'connectivity-dx|For connections of 1 Gbps or less, you can create VPN tunnels on top of the connection',
        's2s-vpn|Site-to-Site VPN supports Internet Protocol security (IPsec) VPN connections.', 's2s-vpn|VPN tunnel: An encrypted link where data can pass from the customer network to or from AWS.']),
   },
   {

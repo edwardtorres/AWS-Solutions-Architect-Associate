@@ -182,7 +182,7 @@ const questions: Question[] = [
     stem: 'A company runs a three-tier web application. The web servers also serve large static assets, the application tier is one large Amazon EC2 instance that is saturated at peak, and the Amazon RDS database is overloaded by repeated reads. The company wants each tier to scale independently and to be MOST resilient to the loss of an Availability Zone. Which THREE changes meet these requirements? (Choose three.)',
     correct: [
       ['Run the application tier in an Auto Scaling group across Availability Zones behind an Application Load Balancer', 'The load balancer distributes traffic across targets in more than one Availability Zone, so the tier scales out and survives the loss of one zone.'],
-      ['Place an Amazon ElastiCache cache between the application tier and the database', 'A cache reduces the read load on the database, so the data tier is no longer overloaded by repeated reads.'],
+      ['Place an Amazon ElastiCache cache between the application tier and the database', 'Putting a cache between application servers and a database is a common mechanism for reducing the read load on the database, which relieves the repeated reads that overload it.'],
       ['Serve the static assets from Amazon S3 through Amazon CloudFront', 'Static content leaves the web servers, so the presentation tier no longer has to scale with asset traffic.'],
     ],
     wrong: [

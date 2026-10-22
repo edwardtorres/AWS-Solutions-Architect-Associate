@@ -228,7 +228,7 @@ const questions: Question[] = [
     bullets: ['2.2-S1'],
     d: 3,
     tags: ['mock-reserve'],
-    stem: 'A company runs hundreds of Amazon EC2 instances that must always run an approved monitoring agent with a defined configuration. Administrators sometimes remove or change the agent, and the company wants the defined state reapplied automatically on a schedule, including on new instances, without inbound SSH access and with the LEAST custom code. Which solution meets these requirements?',
+    stem: 'A company runs hundreds of Amazon EC2 instances that must always run an approved monitoring agent with a defined configuration. Administrators sometimes remove or change the agent, and the company wants the defined state reapplied automatically on a schedule, without inbound SSH access and with the LEAST custom code. Which solution meets these requirements?',
     correct: ['Create an AWS Systems Manager State Manager association that targets the instances by tag and runs on a schedule', 'State Manager keeps managed nodes in a state that you define, reapplies it on a schedule and reduces configuration drift.'],
     wrong: [
       ['Run an AWS Systems Manager Run Command command by hand whenever an audit finds a missing agent', 'Run Command is for one-time configuration changes, so it does not reapply the state on a schedule.'],
