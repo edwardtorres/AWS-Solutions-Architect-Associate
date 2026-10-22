@@ -1,7 +1,8 @@
 /**
  * npm run check:cfn
- * Validates every CloudFormation template in content/labs/templates with cfn-lint. cfn-lint is a Python tool: it is used
- * from PATH, or from .cache/venv (created here on first run with `python3 -m venv` and `pip install cfn-lint`).
+ * Validates every CloudFormation template in content/labs/templates (the lab stacks) and in infra/ (the study site stacks)
+ * with cfn-lint. cfn-lint is a Python tool: it is used from PATH, or from .cache/venv (created here on first run with
+ * `python3 -m venv` and `pip install cfn-lint`).
  */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, readdirSync } from 'node:fs';
@@ -23,13 +24,16 @@ function findLint(): string {
   return local;
 }
 
-const files = existsSync(TEMPLATE_DIR) ? readdirSync(TEMPLATE_DIR).filter((f) => /\.(ya?ml|json)$/.test(f)).sort() : [];
+const INFRA_DIR = join(root, 'infra');
+const templatesIn = (dir: string): string[] =>
+  existsSync(dir) ? readdirSync(dir).filter((f) => /\.(ya?ml|json)$/.test(f)).sort().map((f) => join(dir, f)) : [];
+const files = [...templatesIn(TEMPLATE_DIR), ...templatesIn(INFRA_DIR)];
 if (files.length === 0) {
   console.log('check:cfn OK: no templates yet');
   process.exit(0);
 }
 const lint = findLint();
-const r = spawnSync(lint, files.map((f) => join(TEMPLATE_DIR, f)), { encoding: 'utf8' });
+const r = spawnSync(lint, files, { encoding: 'utf8' });
 if (r.status !== 0) {
   console.error(`check:cfn FAILED:\n${r.stdout}${r.stderr}`);
   process.exit(1);

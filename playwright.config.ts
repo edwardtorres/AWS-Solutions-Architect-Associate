@@ -5,8 +5,8 @@ const fallback = '/opt/pw-browsers/chromium';
 const executablePath = process.env.CHROMIUM_PATH ?? (existsSync(fallback) && statSync(fallback).isFile() ? fallback : undefined);
 
 /**
- * npm run e2e: run `npm run build` first. Serves dist/ with `vite preview` (strict CSP, no dev hooks) and drives it
- * with Chromium at 1440 px (desktop) and 390 px (phone, touch). Specs use tap() only.
+ * npm run e2e: run `npm run build` first. Serves dist/ with scripts/serve-prod.ts (the deploy's security headers, cache rules
+ * and 404 page; no dev hooks) and drives it with Chromium at 1440 px (desktop) and 390 px (phone, touch). Specs use tap() only.
  */
 export default defineConfig({
   testDir: './e2e',

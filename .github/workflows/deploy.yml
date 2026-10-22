@@ -1,0 +1,147 @@
+# Checks a commit, then publishes the exact bytes that passed to the private S3 bucket behind CloudFront.
+#
+# Rollback: run this workflow from main with `sha` set to an earlier commit. It runs the same checks on that commit and
+# redeploys its build. Deploys are serialised by the concurrency group below.
+name: deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      sha:
+        description: Commit to build and deploy, for a rollback. Leave empty to deploy the head of main.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-deploy
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check, build and end-to-end tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.sha || github.sha }}
+          fetch-depth: 0 # check:hygiene reads the commit history
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Typecheck, lint, unit tests, content, templates, build, bundle and hygiene checks
+        run: npm run check
+      - name: Install Chromium with its system libraries
+        run: npx playwright install --with-deps chromium
+      - name: Layout test at 390 px (touch) and 1280 px (keyboard)
+        run: npm run test:layout
+      - name: End-to-end tests on the production build, served with the deploy headers, at 1440 px and 390 px
+        run: npm run e2e
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: site-dist
+          path: dist
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy:
+    name: Publish to S3 and invalidate CloudFront
+    needs: check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: site-dist
+          path: dist
+      - name: Mask deployment values before any step can print them
+        env:
+          ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+          DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          for value in "$ROLE_ARN" "$SITE_BUCKET" "$DISTRIBUTION_ID"; do
+            echo "::add-mask::$value"
+          done
+      - uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION }}
+          role-session-name: region-builder-deploy
+      - name: Upload hashed assets (cached for a year, never changed in place)
+        env:
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+        run: |
+          aws s3 sync dist/ "s3://${SITE_BUCKET}/" --only-show-errors \
+            --exclude "*" --include "assets/*" \
+            --cache-control "public, max-age=31536000, immutable"
+      - name: Upload font files with their font type (the CLI guesses types from extensions)
+        env:
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+        run: |
+          aws s3 cp dist/assets/ "s3://${SITE_BUCKET}/assets/" --recursive --only-show-errors \
+            --exclude "*" --include "*.woff2" \
+            --content-type "font/woff2" \
+            --cache-control "public, max-age=31536000, immutable"
+      - name: Upload everything else (revalidated on every visit)
+        env:
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+        run: |
+          aws s3 sync dist/ "s3://${SITE_BUCKET}/" --only-show-errors \
+            --exclude "assets/*" \
+            --cache-control "no-cache"
+      - name: Upload the web app manifest with its manifest type
+        env:
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+        run: |
+          aws s3 cp dist/manifest.webmanifest "s3://${SITE_BUCKET}/manifest.webmanifest" --only-show-errors \
+            --content-type "application/manifest+json" \
+            --cache-control "no-cache"
+      - name: Remove hashed assets that no build references any more (after the new index.html is live)
+        env:
+          SITE_BUCKET: ${{ vars.SITE_BUCKET }}
+        run: |
+          aws s3 sync dist/ "s3://${SITE_BUCKET}/" --only-show-errors --delete \
+            --exclude "*" --include "assets/*"
+      - name: Invalidate the paths that are not content-hashed
+        env:
+          DISTRIBUTION_ID: ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" \
+            --paths "/" "/index.html" "/404.html" "/sw.js" "/manifest.webmanifest" > /dev/null
+
+  smoke:
+    name: Live smoke test (reports only)
+    needs: deploy
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    # The site is already live when this runs, so a failure is shown on the run but cannot undo or block the deploy.
+    continue-on-error: true
+    permissions:
+      contents: read
+    env:
+      SITE_URL: ${{ vars.SITE_URL }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: End-to-end tests against the live site at 1440 px and 390 px
+        run: npm run e2e:live

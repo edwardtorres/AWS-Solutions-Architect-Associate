@@ -14,10 +14,12 @@
     "test:watch": "vitest",
     "test:layout": "tsx scripts/test-layout.ts",
     "e2e": "playwright test",
+    "e2e:live": "playwright test --config playwright.live.config.ts",
     "fetch:official": "tsx scripts/fetch-official.ts",
     "check:content": "tsx scripts/check-content.ts",
     "check:bundle": "tsx scripts/check-bundle.ts",
     "lighthouse": "tsx scripts/lighthouse.ts",
+    "screenshots": "tsx scripts/screenshots.ts",
     "check:hygiene": "tsx scripts/check-hygiene.ts",
     "check": "npm run typecheck && npm run lint && npm test && npm run check:content && npm run check:cfn && npm run build && npm run check:bundle && npm run check:hygiene",
     "check:all": "npm run check && npm run check:links && npm run test:layout && npm run e2e",
@@ -27,7 +29,8 @@
     "gen:meta": "tsx scripts/gen-question-meta.ts",
     "check:cfn": "tsx scripts/check-cfn.ts",
     "check:freeplan": "tsx scripts/check-freeplan.ts",
-    "check:freshness": "tsx scripts/check-freshness.ts"
+    "check:freshness": "tsx scripts/check-freshness.ts",
+    "freshness:watch": "tsx scripts/freshness-watch.ts"
   },
   "dependencies": {
     "@fontsource-variable/fraunces": "^5.3.0",
