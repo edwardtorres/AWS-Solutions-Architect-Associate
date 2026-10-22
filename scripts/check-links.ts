@@ -4,10 +4,8 @@
  * every #anchor exists, and every verbatim quote appears on the page it cites.
  * Page text is cached in .cache/ (git-ignored); --fresh refetches.
  */
-import { loadNotesBundle, loadQuestionsBundle } from './lib/loadNotes.ts';
-import { loadPuzzles } from './lib/loadPuzzles.ts';
-import { loadLabs } from './lib/loadLabs.ts';
-import { everyBlock } from './lib/notesChecks.ts';
+import { loadNotesBundle } from './lib/loadNotes.ts';
+import { citedQuotes } from './lib/citedQuotes.ts';
 import { fetchPage, hasText, stripFragment, type PageInfo } from './lib/pageCache.ts';
 
 const fresh = process.argv.includes('--fresh');
@@ -77,56 +75,7 @@ async function main() {
   let quoteCount = 0;
   if (quotesOn) {
     const byId = new Map(bundle.sources.map((s) => [s.id, s]));
-    for (const { where, block } of everyBlock(bundle)) {
-      for (const q of block.quotes ?? []) {
-        quoteCount += 1;
-        const src = byId.get(q.src);
-        if (!src) continue;
-        const page = pages.get(stripFragment(src.url));
-        if (!page || page instanceof Error) continue;
-        if (!hasText(page, q.text)) problems.push(`${where}: quote not found on ${src.id}: "${q.text.slice(0, 90)}"${closest(page, q.text)}`);
-      }
-    }
-  }
-
-  if (quotesOn) {
-    const byId = new Map(bundle.sources.map((s) => [s.id, s]));
-    const qb = await loadQuestionsBundle();
-    for (const q of qb.questions) {
-      for (const e of q.evidence) {
-        quoteCount += 1;
-        const src = byId.get(e.src);
-        if (!src) continue;
-        const page = pages.get(stripFragment(src.url));
-        if (!page || page instanceof Error) continue;
-        if (!hasText(page, e.text)) problems.push(`question ${q.id}: evidence not found on ${src.id}: "${e.text.slice(0, 90)}"${closest(page, e.text)}`);
-      }
-    }
-    // Puzzle rules (and per-scenario facts) each carry a verbatim AWS quote.
-    for (const [type, mod] of await loadPuzzles()) {
-      const rules = [...mod.def.rules.map((r) => ({ where: `puzzles ${type}`, r })), ...mod.scenarios.flatMap((sc) => (mod.def.scenarioRules?.(sc.data) ?? []).map((r) => ({ where: sc.id, r })))];
-      for (const { where, r } of rules) {
-        quoteCount += 1;
-        const src = byId.get(r.src);
-        if (!src) {
-          problems.push(`${where} rule ${r.id}: unknown source ${r.src}`);
-          continue;
-        }
-        const page = pages.get(stripFragment(src.url));
-        if (!page || page instanceof Error) continue;
-        if (!hasText(page, r.quote)) problems.push(`${where} rule ${r.id}: quote not found on ${src.id}: "${r.quote.slice(0, 90)}"${closest(page, r.quote)}`);
-      }
-    }
-    // Lab steps, cost badges, traps and the Free plan service table each carry a verbatim AWS quote.
-    const labCites: { where: string; src: string; quote: string }[] = [];
-    for (const lab of (await loadLabs()).labs) {
-      for (const s of lab.steps) labCites.push({ where: `${lab.id} step ${s.id}`, src: s.src, quote: s.quote });
-      for (const c of lab.costs) labCites.push({ where: `${lab.id} cost ${c.id}`, src: c.src, quote: c.quote });
-      for (const s of lab.steps) if (s.callout) labCites.push({ where: `${lab.id} step ${s.id} callout`, src: s.callout.src, quote: s.callout.quote });
-      for (const [i, c] of (lab.gate?.cites ?? []).entries()) labCites.push({ where: `${lab.id} gate cite ${i + 1}`, src: c.src, quote: c.quote });
-      for (const t of lab.traps) labCites.push({ where: `${lab.id} trap ${t.pair}`, src: t.src, quote: t.quote });
-    }
-    for (const c of labCites) {
+    for (const c of await citedQuotes()) {
       quoteCount += 1;
       const src = byId.get(c.src);
       if (!src) {
@@ -135,20 +84,7 @@ async function main() {
       }
       const page = pages.get(stripFragment(src.url));
       if (!page || page instanceof Error) continue;
-      if (!hasText(page, c.quote)) problems.push(`${c.where}: quote not found on ${src.id}: "${c.quote.slice(0, 90)}"${closest(page, c.quote)}`);
-    }
-    // The post-guide registry dates each feature with a quote from an AWS page.
-    for (const f of [...qb.postGuide.features, ...(qb.postGuide.preGuide ?? [])]) {
-      if (!f.source || !f.quote) continue;
-      quoteCount += 1;
-      const src = byId.get(f.source);
-      if (!src) {
-        problems.push(`post-guide ${f.id}: unknown source ${f.source}`);
-        continue;
-      }
-      const page = pages.get(stripFragment(src.url));
-      if (!page || page instanceof Error) continue;
-      if (!hasText(page, f.quote)) problems.push(`post-guide ${f.id}: date quote not found on ${src.id}: "${f.quote.slice(0, 90)}"${closest(page, f.quote)}`);
+      if (!hasText(page, c.text)) problems.push(`${c.where}: quote not found on ${src.id}: "${c.text.slice(0, 90)}"${closest(page, c.text)}`);
     }
   }
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Citers } from './citations';
-import { diffHashes, hashOf, mainText, scopeHashFile, type HashFile } from './freshness';
+import { diffHashes, hashOf, mainText, paragraphChanges, paragraphsFor, quoteKey, scopeHashFile, type HashFile } from './freshness';
 import { buildingDates, buildVerifiedSource } from './verifiedMeta';
 
 const page = (banner: string, body: string, footer = 'Privacy | Terms') =>
@@ -70,5 +70,62 @@ describe('a scoped run judges only the pages it asked about', () => {
     const fresh = new Map([['https://docs.aws.amazon.com/a.html', 'zzz']]);
     const scoped = scopeHashFile(stored, (url) => url.endsWith('/a.html'));
     expect(diffHashes(scoped, fresh, cited).map((c) => c.kind)).toEqual(['changed']);
+  });
+});
+
+describe('the paragraph around each cited quote', () => {
+  const pad = 'Filler about the service so that the main region is long enough to count as the page. '.repeat(4);
+  const html = `<html><body><main><h1>Title</h1><p>${pad}</p><ul><li>A transit gateway scales elastically based on the volume of network traffic.</li><li>Other item.</li></ul><p>Ends one sentence. Starts the next.</p></main></body></html>`;
+
+  it('stores the smallest block that holds each quote, each paragraph once', () => {
+    const quote = 'A transit gateway scales elastically based on the volume of network traffic.';
+    const p = paragraphsFor(html, [quote, quote.toUpperCase().slice(0, 30)]);
+    expect(p.t).toEqual([quote]);
+    expect(p.q[quoteKey(quote)]).toBe(0);
+  });
+
+  it('leaves out a quote that no single block contains', () => {
+    const p = paragraphsFor(html, ['Other item. Ends one sentence.']);
+    expect(p.q).toEqual({});
+    expect(p.t).toEqual([]);
+  });
+
+  it('keys a quote the same whatever its case and spacing', () => {
+    expect(quoteKey('Scales   Elastically.')).toBe(quoteKey('scales elastically.'));
+    expect(quoteKey('scales elastically.')).not.toBe(quoteKey('scales elastically'));
+  });
+});
+
+describe('the report shows the cited paragraphs that changed', () => {
+  const quotes = [
+    { where: 'building a, note 1', text: 'Scales elastically with traffic.' },
+    { where: 'building b, question b-1', text: 'Scales elastically with traffic.' },
+    { where: 'building c, note 2', text: 'Retains events for a period that you set.' },
+  ];
+  const before = { t: ['Old paragraph. Scales elastically with traffic.', 'Retains events for a period that you set.'], q: { [quoteKey('Scales elastically with traffic.')]: 0, [quoteKey('Retains events for a period that you set.')]: 1 } };
+  const after = { t: ['New paragraph. Scales elastically with traffic.', 'Retains events for a period that you set.'], q: { [quoteKey('Scales elastically with traffic.')]: 0, [quoteKey('Retains events for a period that you set.')]: 1 } };
+
+  it('shows the old and new paragraph once for every quote that shares it, and nothing for unchanged ones', () => {
+    const lines = paragraphChanges(quotes, before, after);
+    expect(lines).toEqual([
+      '    paragraph cited by building a, note 1, building b, question b-1',
+      '      was: Old paragraph. Scales elastically with traffic.',
+      '      now: New paragraph. Scales elastically with traffic.',
+    ]);
+  });
+
+  it('says so when a quote is no longer on the page', () => {
+    const gone = { t: before.t, q: { [quoteKey('Retains events for a period that you set.')]: 1 } };
+    const lines = paragraphChanges(quotes.slice(2), before, gone);
+    expect(lines).toEqual([]);
+    const removed = { t: [], q: {} };
+    const out = paragraphChanges(quotes.slice(2), before, removed);
+    expect(out[2]).toContain('not located on the page now');
+  });
+
+  it('says there is nothing stored yet, rather than listing every quote as changed', () => {
+    expect(paragraphChanges(quotes, undefined, after)).toEqual([
+      '    (no stored paragraphs for this page yet: run `npm run check:freshness -- --paragraphs` once the change is reviewed)',
+    ]);
   });
 });

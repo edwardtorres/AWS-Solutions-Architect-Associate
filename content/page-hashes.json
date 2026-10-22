@@ -996,7 +996,7 @@
    ]
   },
   "https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html": {
-   "hash": "62314881484793565fa7",
+   "hash": "f74ee55abd97ced0d347",
    "verifiedAt": "2026-10-22",
    "sources": [
     "eventbridge-what-is"
@@ -2235,7 +2235,7 @@
    ]
   },
   "https://docs.aws.amazon.com/vpc/latest/tgw/how-transit-gateways-work.html": {
-   "hash": "4cd7bcdf8b211ca6c6cf",
+   "hash": "5b408ed35ea870903b4a",
    "verifiedAt": "2026-10-22",
    "sources": [
     "tgw-how"
@@ -5648,6 +5648,13 @@
    "verifiedAt": "2026-10-22",
    "sources": [
     "lab-backup-default-role"
+   ]
+  },
+  "https://aws.amazon.com/about-aws/whats-new/2026/07/s3-removes-30-day-transitions-standard-ia-one-zone-ia/": {
+   "hash": "7aa3b0a01f61a4319f6e",
+   "verifiedAt": "2026-10-22",
+   "sources": [
+    "pg-s3-ia-day-zero"
    ]
   }
  }
