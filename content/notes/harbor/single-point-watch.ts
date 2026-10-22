@@ -99,7 +99,7 @@ const notes: BuildingNotes = {
       ],
       services: ['Amazon RDS', 'AWS Lambda', 'AWS Secrets Manager'],
       design: [
-        b('Cue pattern: unpredictable surges in database traffic that oversubscribe connections, or failovers breaking application connections → RDS Proxy, which connects to a standby DB instance while preserving application connections.',
+        b('Cue pattern: unpredictable surges in database traffic that can oversubscribe connections, or failovers breaking application connections → RDS Proxy, which connects to a standby DB instance while preserving application connections.',
           ['rds-proxy'],
           ['rds-proxy|Using RDS Proxy, you can handle unpredictable surges in database traffic.',
            'rds-proxy|Otherwise, these surges might cause issues due to oversubscribing connections or new connections being created at a fast rate.',

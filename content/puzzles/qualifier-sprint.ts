@@ -53,7 +53,7 @@ const scenarios: S[] = [
           quote: 'A private API endpoint is an API endpoint that can only be accessed from your Amazon Virtual Private Cloud (VPC) using an interface VPC endpoint, which is an endpoint network interface (ENI) that you create in your VPC.',
         },
         available: {
-          text: 'A hot standby active/passive strategy can run the workload in multiple Regions, which lets a standby Region take over if the primary Region fails.',
+          text: 'A hot standby active/passive strategy can run the workload in multiple Regions, so design d spreads the stack across two Regions.',
           src: 'dr-options',
           quote: 'You can run your workload simultaneously in multiple Regions as part of a multi-site active/active or hot standby active/passive strategy.',
         },

@@ -723,7 +723,6 @@ const sources: Source[] = [
   aws('cloudtrail-delete-trail', `${D}/awscloudtrail/latest/userguide/cloudtrail-delete-trails-console.html`, 'Deleting a trail with the CloudTrail console'),
   aws('cloudtrail-pricing', 'https://aws.amazon.com/cloudtrail/pricing/', 'AWS CloudTrail pricing'),
   aws('config-delete-rules', `${D}/config/latest/developerguide/evaluate-config_delete-rules.html`, 'Deleting AWS Config Rules'),
-  aws('config-delete-recorder', `${D}/config/latest/developerguide/managing-recorder_console-delete.html`, 'Deleting your configuration recorders'),
   aws('config-pricing', 'https://aws.amazon.com/config/pricing/', 'AWS Config pricing'),
   aws('config-s3-public-rule', `${D}/config/latest/developerguide/s3-bucket-level-public-access-prohibited.html`, 's3-bucket-level-public-access-prohibited'),
   aws('sns-create-topic', `${D}/sns/latest/dg/sns-create-topic.html`, 'Creating an Amazon SNS topic'),
@@ -736,7 +735,6 @@ const sources: Source[] = [
   aws('cw-metric-filter-create', `${D}/AmazonCloudWatch/latest/logs/CreateMetricFilterProcedure.html`, 'Create a metric filter for a log group'),
   aws('rds-create-settings', `${D}/AmazonRDS/latest/UserGuide/USER_CreateDBInstance.Settings.html`, 'Settings for DB instances'),
   aws('cw-metric-filters', `${D}/AmazonCloudWatch/latest/logs/MonitoringLogData.html`, 'Creating metrics from log events using filters'),
-  aws('rds-replica-create', `${D}/AmazonRDS/latest/UserGuide/USER_ReadRepl.Create.html`, 'Creating a read replica'),
   aws('cw-notify-alarm-changes', `${D}/AmazonCloudWatch/latest/monitoring/Notify_Users_Alarm_Changes.html`, 'Notifying users on alarm changes'),
   aws('rds-restore-snapshot', `${D}/AmazonRDS/latest/UserGuide/USER_RestoreFromSnapshot.html`, 'Restoring to a DB instance'),
   aws('rds-copy-snapshot', `${D}/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html`, 'Copying a DB snapshot'),
@@ -788,13 +786,11 @@ const sources: Source[] = [
   aws('athena-result-location', `${D}/athena/latest/ug/query-results-specify-location.html`, 'Specify a query result location'),
   aws('athena-query-metrics', `${D}/athena/latest/ug/query-metrics-viewing.html`, 'View Athena query metrics'),
   aws('backup-vaults', `${D}/aws-backup/latest/devguide/create-a-vault.html`, 'Backup vault creation and deletion'),
-  aws('backup-deleting', `${D}/aws-backup/latest/devguide/deleting-backups.html`, 'Backup deletion'),
   aws('backup-cross-region', `${D}/aws-backup/latest/devguide/cross-region-backup.html`, 'Creating backup copies across AWS Regions'),
   aws('backup-on-demand', `${D}/aws-backup/latest/devguide/recov-point-create-on-demand-backup.html`, 'Creating an on-demand backup using AWS Backup'),
   aws('backup-restore-ddb', `${D}/aws-backup/latest/devguide/restoring-dynamodb.html`, 'Restore a Amazon DynamoDB table'),
   aws('backup-adv-ddb', `${D}/aws-backup/latest/devguide/advanced-ddb-backup.html`, 'Advanced DynamoDB backup'),
   aws('backup-pricing', 'https://aws.amazon.com/backup/pricing/', 'AWS Backup pricing'),
-  aws('assigning-resources', `${D}/aws-backup/latest/devguide/assigning-resources.html`, 'Select AWS services to backup'),
   aws('tags-activating', `${D}/awsaccountbilling/latest/aboutv2/activating-tags.html`, 'Activating user-defined cost allocation tags'),
   aws('s3-cost-alloc-tags', `${D}/AmazonS3/latest/userguide/CostAllocTagging.html`, 'Using cost allocation S3 bucket tags'),
   aws('ce-enable', `${D}/cost-management/latest/userguide/ce-enable.html`, 'Enabling Cost Explorer'),
@@ -836,6 +832,8 @@ const sources: Source[] = [
   aws('lab-cli-backup-delete-vault', `${D}/cli/latest/reference/backup/delete-backup-vault.html`, 'AWS CLI: delete-backup-vault'),
   aws('lab-cli-backup-delete-recovery-point', `${D}/cli/latest/reference/backup/delete-recovery-point.html`, 'AWS CLI: delete-recovery-point'),
   aws('lab-backup-default-role', `${D}/aws-backup/latest/devguide/iam-service-roles.html`, 'IAM service roles (AWS Backup)'),
+  aws('firehose-partition-enable', `${D}/firehose/latest/dev/dynamic-partitioning-enable.html`, 'Enable dynamic partitioning in Amazon Data Firehose'),
+  aws('redshift-what-is', `${D}/redshift/latest/mgmt/welcome.html`, 'What is Amazon Redshift?'),
 ];
 
 export default sources;

@@ -35,7 +35,7 @@ const notes: BuildingNotes = {
     {
       id: '4.3-S2',
       concepts: [
-        b('Choose the engine the application needs before comparing cost: MySQL or PostgreSQL applications can run on RDS or on Aurora, which is compatible with both, and Microsoft SQL Server, Oracle and Db2 applications run on RDS with their own engine. The code, tools and applications already written for an engine fix the choice; AWS gives no rule that one open-source engine is cheaper than the other, so a question that asks "MySQL compared with PostgreSQL" is decided by what the application already uses or needs.',
+        b('Choose the engine the application needs before comparing cost: MySQL or PostgreSQL applications can run on RDS or on Aurora, which is compatible with both, and Microsoft SQL Server, Oracle and Db2 applications run on RDS with their own engine. The code, tools and applications already written for an engine fix the choice.',
           ['rds-what-is', 'aurora-overview'],
           ['rds-what-is|You can use database engines that you are already familiar with: IBM Db2, MariaDB, Microsoft SQL Server, MySQL, Oracle Database, and PostgreSQL.',
            'aurora-overview|The code, tools, and applications you use today with your existing MySQL and PostgreSQL databases can be used with Aurora.']),
@@ -52,7 +52,7 @@ const notes: BuildingNotes = {
            'You pay only for the usage and storage of your DB clusters, with no additional charges for read and write I/O operations.',
            'Aurora Standard – Cost-effective pricing for many applications with moderate I/O usage.',
            'In addition to the usage and storage of your DB clusters, you also pay a standard rate per 1 million requests for I/O operations.'], { newer: ['aurora-io-optimized'] }),
-        b('Moving a workload from a commercial engine to MySQL or PostgreSQL can remove the licence cost. Aurora builds on the idea AWS states: MySQL and PostgreSQL combine the speed and reliability of high-end commercial databases with the simplicity and cost-effectiveness of open-source databases. The price of that change is a heterogeneous migration with schema conversion.',
+        b('Aurora builds on the idea AWS states: MySQL and PostgreSQL combine the speed and reliability of high-end commercial databases with the simplicity and cost-effectiveness of open-source databases. When the target is a different engine, AWS DMS assesses and converts your source schemas to the new target engine.',
           ['aurora-overview', 'dms-what-is'],
           ['aurora-overview|You already know how MySQL and PostgreSQL combine the speed and reliability of high-end commercial databases with the simplicity and cost-effectiveness of open-source databases.',
            'dms-what-is|This service automatically assesses and converts your source schemas to a new target engine.']),
@@ -73,7 +73,7 @@ const notes: BuildingNotes = {
           ['AWS Database Migration Service (AWS DMS) is a cloud service that makes it possible to migrate relational databases, data warehouses, NoSQL databases, and other types of data stores.',
            'This service automatically assesses and converts your source schemas to a new target engine.',
            'Alternatively, you can download the AWS Schema Conversion Tool (AWS SCT) to your local PC to convert your source schemas.After you convert your source schemas and apply the converted code to your target database, you can use AWS DMS to migrate your data.'], { newer: ['dms-schema-conversion'] }),
-        b('You can perform one-time migrations or replicate ongoing changes to keep sources and targets in sync, which lets you cut over with little downtime when the source stays live.',
+        b('You can perform one-time migrations or replicate ongoing changes to keep sources and targets in sync.',
           'dms-what-is',
           ['You can perform one-time migrations or replicate ongoing changes to keep sources and targets in sync.']),
         b('For cost, AWS DMS Serverless provides automatic provisioning, scaling, built-in high availability and a pay-for-use billing model. It removes replication instance management tasks like capacity estimation, provisioning and cost optimisation, so you do not size and pay for a replication instance yourself.',

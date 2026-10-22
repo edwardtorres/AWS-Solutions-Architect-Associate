@@ -34,7 +34,7 @@ const notes: BuildingNotes = {
         b('Throttling is a service protecting itself by rejecting requests over a rate. API Gateway throttles with a token bucket and answers 429 Too Many Requests when the rate and burst limits are exceeded; Lambda has an account concurrency limit across functions in a Region with reserved and provisioned concurrency controls. Both are covered in Serverless Mill.',
           ['apigw-throttling', 'lambda-concurrency'],
           ['apigw-throttling|Clients may receive 429 Too Many Requests error responses at this point.',
-           'lambda-concurrency|By default, your account has a concurrency limit of 1,000 concurrent executions across all functions in a Region.']),
+           'lambda-concurrency|By default, Lambda provides your account with a total concurrency limit of 1,000 concurrent executions across all Event Functions in an AWS Region.']),
         b('AWS Trusted Advisor inspects your AWS environment and recommends where to save money, improve availability and performance, or close security gaps. With the Basic Support plan you can use the console to access all checks in the Service Limits category and selected checks in the Security and Fault tolerance categories.',
           'trusted-advisor',
           ['Trusted Advisor inspects your AWS environment, and then makes recommendations when opportunities exist to save money, improve system availability and performance, or help close security gaps.',
