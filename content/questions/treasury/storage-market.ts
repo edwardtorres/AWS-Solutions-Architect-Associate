@@ -29,16 +29,19 @@ const questions: Question[] = [
     d: 2,
     tags: ['placement-eligible'],
     stem: 'A company serves a read-heavy marketing website of HTML, images, and video from three Amazon EC2 web servers that each use a large Amazon EBS volume. Traffic varies a lot, and the company wants to stop paying for idle servers and provisioned volumes while keeping the site available. Which storage choice is MOST cost-effective?',
-    correct: ['Store the site content in Amazon S3 and serve it with S3 static website hosting', 'Object storage is well suited to read-heavy workloads such as websites, and S3 needs no servers or volume capacity to provision.'],
+    correct: ['Store the site content in Amazon S3 and serve it with S3 static website hosting', 'Object storage is well suited to read-heavy workloads such as web hosting, and serverless storage can act as a static website, which removes the need for web servers.'],
     wrong: [
       ['Move the content to an Amazon EFS file system that all three servers mount', 'The servers and the provisioned compute would keep running, so the company would still pay for idle web servers.'],
       ['Enlarge each Amazon EBS volume and add a fourth server for peak traffic', 'This adds more provisioned volumes and servers, which is the opposite of removing idle capacity.'],
-      ['Create an Amazon FSx for Lustre file system and serve the site from it', 'It is built for speed-critical workloads such as HPC, and it still needs servers to deliver the content.'],
+      ['Create an Amazon FSx for Lustre file system and serve the site from it', 'Lustre is built for workloads where speed matters, such as HPC, not for serving a website, so the web servers would still deliver the content.'],
     ],
     slot: 1,
     evidence: [
       'storage-decision|Object storage provides easy access to data through an application programming interface (API) over the internet and is well-suited to read-heavy workloads (such as streaming applications and services).',
       's3-what-is|Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a range of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.',
+      'storage-decision|Read-heavy workloads such as content distribution, web hosting, big data analytics, and ML workflows.',
+      'waf-perf-dp|For example, serverless storage services can act as static websites (removing the need for web servers) and event services can host code.',
+      'fsx-lustre|You use Lustre for workloads where speed matters, such as machine learning, high performance computing (HPC), video processing, and financial modeling.',
     ],
   }),
   mc({

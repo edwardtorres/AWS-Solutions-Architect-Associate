@@ -236,12 +236,14 @@ const questions: Question[] = [
     wrong: [
       ['Lower the account-level throttle so that every API in the account receives fewer requests per second', 'The account-level limit applies to all APIs in the account per Region and would also slow the read-heavy method.'],
       ['Create a second REST API for the report method and give the new API a lower throttle than the first one for the callers of the report', 'A second API adds management work, and the requirement was to avoid creating a second API.'],
-      ['Enable provisioned concurrency on the report function so that the long database query is served sooner', 'Provisioned concurrency incurs charges and does not limit how many report requests can arrive.'],
+      ['Enable provisioned concurrency on the report function so that the long database query is served sooner', 'Provisioned concurrency incurs additional charges and pre-initializes execution environments, so it does not limit how many report requests can arrive.'],
     ],
     slot: 3,
     evidence: [
       'apigw-throttling|As an API developer, you can set the target limits for individual API stages or methods to improve overall performance across all APIs in your account.',
       'apigw-throttling|Specifically, API Gateway examines the rate and a burst of request submissions against all APIs in your account, per Region.',
+      'lambda-provisioned|Configuring provisioned concurrency incurs additional charges to your AWS account.',
+      'lambda-concurrency|Provisioned concurrency is the number of pre-initialized execution environments that you want to allocate to your Event Function.',
     ],
   }),
 ];

@@ -87,7 +87,7 @@ const notes: BuildingNotes = {
           ['rds-proxy|By using Amazon RDS Proxy, you can allow your applications to pool and share database connections to improve their ability to scale.',
            'rds-proxy-planning|The proxy enables applications to open many client connections, while the proxy manages a smaller number of long-lived connections to the DB instance .',
            'rds-proxy-planning|It can also help reduce the CPU overhead for establishing connections.']),
-        b('A DB instance that encounters "too many connections" errors is a good candidate for a proxy, and so are AWS Lambda functions, which can open many short-lived connections.',
+        b('A DB instance that encounters "too many connections" errors is a good candidate for a proxy, and so are AWS Lambda functions.',
           'rds-proxy-planning',
           ['Any DB instance that encounters "too many connections" errors is a good candidate for associating with a proxy.',
            'AWS Lambda functions can also be good candidates for using a proxy.']),

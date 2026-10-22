@@ -146,14 +146,18 @@ const questions: Question[] = [
     stem: 'A company needs to move and transform data between Amazon S3 and Amazon DynamoDB using Apache Spark code that its engineers already wrote. The jobs process vast amounts of data and the engineers want a managed platform for the Spark framework. Which service BEST meets these requirements?',
     correct: ['Amazon EMR, running the Spark code on a managed cluster platform', 'EMR is a managed cluster platform for frameworks such as Apache Spark that can transform and move large amounts of data into and out of S3 and DynamoDB.'],
     wrong: [
-      ['Amazon Athena, rewriting the Spark transformations as a set of SQL queries', 'Athena queries data in S3 with SQL, so the existing Spark code would be rewritten.'],
-      ['AWS Lambda, splitting the Spark transformations across many short functions', 'Lambda is not a Spark platform, and each standard Lambda invocation runs for up to 15 minutes.'],
+      ['Amazon Athena, rewriting the Spark transformations as a set of SQL queries', 'Athena runs the Spark code that is submitted to it, so the code does not need rewriting, but Athena is built to analyze data directly in Amazon S3 rather than to be the managed cluster platform for moving data between S3 and DynamoDB.'],
+      ['AWS Lambda, splitting the Spark transformations across many short functions', 'Lambda is not a Spark platform, and a standard Lambda function can run for up to 15 minutes in a single invocation.'],
       ['AWS Batch, running the Spark code as a single container on a queue for each dataset', 'Batch runs containerized batch jobs, but it is not the managed Spark framework platform the engineers want.'],
     ],
     slot: 2,
     evidence: [
       'emr-what-is|Amazon EMR, which was previously called Amazon Elastic MapReduce, is a managed cluster platform that simplifies running big data frameworks, such as Apache Hadoop and Apache Spark, on AWS to process and analyze vast amounts of data.',
       'emr-what-is|Amazon EMR also lets you transform and move large amounts of data into and out of other AWS data stores and databases, such as Amazon Simple Storage Service (Amazon S3) and Amazon DynamoDB.',
+      'athena-what-is|When you run Apache Spark applications on Athena, you submit Spark code for processing and receive the results directly.',
+      'athena-what-is|Amazon Athena is an interactive query service that makes it easy to analyze data directly in Amazon Simple Storage Service (Amazon S3) using standard SQL.',
+      'lambda-quotas|Code can run for up to 15 minutes in a single invocation',
+      'lambda-quotas|Function timeout 900 seconds (15 minutes).',
     ],
   }),
   mc({

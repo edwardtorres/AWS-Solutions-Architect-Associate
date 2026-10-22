@@ -149,8 +149,8 @@ const questions: Question[] = [
     stem: 'Thousands of sensors each send a tiny reading as its own record to a provisioned Amazon Kinesis data stream. The bytes written are far below what the shards accept, but the shards are throttled because of the number of records per second. The company wants to stop the throttling without adding shards or changing the sensors. Which configuration meets these requirements?',
     correct: ['Have the producer application use the Kinesis Producer Library aggregation to store many readings in each stream record', 'Aggregation stores multiple records in a single Kinesis Data Streams record, which raises the number of records sent per API call and producer throughput.'],
     wrong: [
-      ['Register the consumers as enhanced fan-out consumers to get dedicated read throughput', 'Enhanced fan-out adds read throughput for consumers and does not change the number of records written per second.'],
-      ['Increase the retention period of the stream to seven days so that throttled records are kept', 'Retention controls how long stored records remain and does not reduce the number of records written per second.'],
+      ['Register the consumers as enhanced fan-out consumers to get dedicated read throughput', 'Enhanced fan-out gives each consumer its own read throughput allotment, so it changes read capacity for consumers and does not change the number of records written per second.'],
+      ['Increase the retention period of the stream to seven days so that throttled records are kept', 'The retention period is the length of time that data records are accessible after they are added to the stream, so it does not reduce the number of records written per second.'],
       ['Compress each reading with gzip before the producer sends it as its own record', 'Compression shrinks the bytes of each record, but the number of records per second stays the same, and bytes are not the limit.'],
     ],
     slot: 1,
@@ -158,6 +158,8 @@ const questions: Question[] = [
       'kinesis-kpl|The KPL supports two types of batching: Aggregation – Storing multiple records within a single Kinesis Data Streams record.',
       'kinesis-kpl|Aggregation allows customers to increase the number of records sent per API call, which effectively increases producer throughput.',
       'kinesis-concepts|Each shard can support up to 5 transactions per second for reads, up to a maximum total data read rate of 2 MB per second and up to 1,000 records per second for writes, up to a maximum total data write rate of 1 MB per second (including partition keys).',
+      'kinesis-consumers|When a consumer uses enhanced fan-out, it gets its own 2 MB/sec allotment of read throughput, allowing multiple consumers to read data from the same stream in parallel, without contending for read throughput with other consumers.',
+      'kinesis-concepts|The retention period is the length of time that data records are accessible after they are added to the stream.',
     ],
   }),
   mc({

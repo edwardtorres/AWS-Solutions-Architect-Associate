@@ -190,8 +190,8 @@ const questions: Question[] = [
     stem: 'A company is building an invoicing system. Finance staff run ad hoc SQL queries that join customers, invoices and payments, and the data is highly structured. Developers propose Amazon DynamoDB for the system. Which database BEST fits the invoicing system?',
     correct: ['Amazon Aurora PostgreSQL-Compatible Edition', 'The invoicing data is structured business objects that finance joins with SQL, which is the case for a relational database such as Aurora.'],
     wrong: [
-      ['Amazon DynamoDB with on-demand capacity', 'NoSQL databases have different access patterns than relational databases, so the ad hoc SQL joins would have to be redesigned.'],
-      ['Amazon ElastiCache for Valkey as the primary data store', 'It is an in-memory cache that sits in front of a database and is not a system of record for invoices.'],
+      ['Amazon DynamoDB with on-demand capacity', 'NoSQL databases have different access patterns than relational databases, and it is not possible to join tables, so the ad hoc SQL joins would have to be redesigned.'],
+      ['Amazon ElastiCache for Valkey as the primary data store', 'ElastiCache is an in-memory key-value store that sits between the application and the database it accesses, so it caches data for a database rather than serving as the store for the invoices.'],
       ['Amazon Redshift as the primary transactional database', 'Redshift is a data warehouse for large-scale analytics, and the invoicing system needs a transactional database.'],
     ],
     slot: 0,
@@ -199,6 +199,9 @@ const questions: Question[] = [
       'msa-data-store|Relational databases are still very popular to store structured data and business objects.',
       'msa-data-store|It is important to understand that NoSQL databases have different access patterns than relational databases.',
       'database-decision|Amazon Redshift is a fully managed, cloud-based data warehousing service that is designed to handle large-scale analytics workloads.',
+      'msa-data-store|For example, it\'s not possible to join tables.',
+      'elasticache-strategies|Amazon ElastiCache is an in-memory key-value store that sits between your application and the data store (database) that it accesses.',
+      'database-decision|Relational databases support complex queries through joins.',
     ],
   }),
   mc({
