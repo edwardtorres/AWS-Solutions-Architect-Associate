@@ -159,3 +159,4 @@
 {"id":"note:counting-house:4.2-K4.concepts[4]","group":"G3-numbers","verdict":"confirmed","reason":"Term of 1 or 3 years, instance type and Region; recommend Savings Plans; no capacity reservations.","by":"G3-numbers-001","at":"2026-10-21"}
 {"id":"note:counting-house:4.2-K4.concepts[7]","group":"G3-numbers","verdict":"confirmed","reason":"Two minutes before; hibernation gives no two-minute warning.","by":"G3-numbers-001","at":"2026-10-21"}
 {"id":"note:db-cost-desk:4.3-K2.concepts[3]","group":"G3-numbers","verdict":"confirmed","reason":"1- or 3-year term, tied to instance type and Region; Database Savings Plans flexibility and serverless.","by":"G3-numbers-001","at":"2026-10-21"}
+
