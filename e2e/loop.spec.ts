@@ -100,6 +100,9 @@ test('a failed placement uses the day: a second try is refused', async ({ page }
   await answerAll(page, 5, [true, true, true, true, false]);
   await expect(page.getByRole('heading', { level: 2 })).toContainText('not passed');
   await page.goto('/#/map');
+  // Wait for React to unmount the result before revisiting the same hash route.
+  // Fast CI navigation can otherwise coalesce both hash changes and keep the result mounted.
+  await expect(page.getByRole('heading', { name: 'City map', exact: true })).toBeAttached();
   await page.goto(`/#/place/${id}`);
   await expect(page.getByTestId('unavailable')).toContainText('already used today');
 });

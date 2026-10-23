@@ -16,6 +16,8 @@ stays in this repository; the built files live in `apps/region-builder/` in `edw
 6. Commit and push the portfolio's `main` branch. Cloudflare Pages builds from the repository root with no build command.
 7. Verify the Work card, `/projects/aws-region-builder`, app assets, manifest and worker, plus an offline reload after the
    worker has installed. Test another study app and the portfolio home page to confirm their workers remain separate.
+   Run `SITE_URL=https://edwardtorres.dev/apps/region-builder/ npm run test:site` for automated desktop and phone checks
+   against the live portfolio (the root-hosted `e2e:live` suite is for the optional standalone AWS deployment).
 
 Rollback by reverting the portfolio release commit and pushing `main`. No DNS, AWS account, or new hosting resources are
 needed for this deployment. The AWS infrastructure below remains an optional standalone deployment.

@@ -8,6 +8,8 @@ import { browserPath } from './lib/browser';
 import { SECURITY_HEADERS } from './lib/securityHeaders';
 
 const base = '/apps/region-builder/';
+const liveUrl = process.env.SITE_URL;
+if (liveUrl && new URL(liveUrl).pathname !== base) throw new Error(`SITE_URL must end in ${base}`);
 const root = resolve('dist');
 const types: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png', '.woff2': 'font/woff2', '.webmanifest': 'application/manifest+json' };
 assert.equal(JSON.parse(await readFile(resolve(root, 'manifest.webmanifest'), 'utf8')).scope, base, 'Run npm run build:site first');
@@ -37,10 +39,10 @@ const server = createServer((req, res) => {
     }
   })().catch((err: unknown) => { console.error(err); res.end(); });
 });
-await new Promise<void>((done) => server.listen(0, '127.0.0.1', done));
+if (!liveUrl) await new Promise<void>((done) => server.listen(0, '127.0.0.1', done));
 const address = server.address();
-assert(address && typeof address === 'object');
-const origin = `http://127.0.0.1:${address.port}`;
+if (!liveUrl) assert(address && typeof address === 'object');
+const origin = liveUrl ? new URL(liveUrl).origin : `http://127.0.0.1:${(address as { port: number }).port}`;
 const browser = await chromium.launch({ executablePath: browserPath() });
 try {
   for (const width of [1440, 390]) {
@@ -71,7 +73,7 @@ try {
     assert.equal(missing.status(), 404);
     assert((await missing.text()).includes(`href="${base}#/map"`));
     await page.goto(origin + '/');
-    await page.getByRole('heading', { name: 'Portfolio', exact: true }).waitFor();
+    await page.getByRole('heading', { level: 1 }).waitFor();
     assert.equal(await page.evaluate(() => navigator.serviceWorker.controller), null);
     assert.deepEqual(errors, []);
     await context.close();
@@ -79,5 +81,5 @@ try {
   }
 } finally {
   await browser.close();
-  await new Promise<void>((done, fail) => server.close((e) => e ? fail(e) : done()));
+  if (server.listening) await new Promise<void>((done, fail) => server.close((e) => e ? fail(e) : done()));
 }

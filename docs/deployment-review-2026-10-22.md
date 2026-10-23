@@ -47,6 +47,28 @@ audit of every AWS teaching claim.
   no horizontal overflow at 1440 px and 390 px. Real production screenshots use a
   clearly identified demonstration save.
 
+## Live release verification
+
+Cloudflare Pages deployed the portfolio release successfully. The live Work card
+opens the extensionless project page, which opens the app. Desktop and phone
+smoke checks pass against the public domain, including offline map/notes/mock
+navigation, app-scoped worker control, and return to the portfolio home page.
+The public app response carries the scoped CSP and no-cache entry policy.
+The source repository's full GitHub Actions check/build/browser job also passes;
+standalone AWS deployment jobs are skipped because that hosting option is unused.
+
+One live Lighthouse mobile run scored **97 performance, 100 accessibility,
+100 best practices, and 100 SEO**. This is a single release measurement, not a
+cross-device benchmark; details are in `docs/lighthouse/live-mobile.json`.
+
+A prior CI failure also exposed a timing-sensitive placement test: two immediate
+hash navigations could be coalesced before React unmounted the result view. The
+test now waits for the map to render before returning to placement. The targeted
+flow passed six repeated checks (three desktop and three phone).
+
+`test:site` accepts `SITE_URL` to repeat the same scoped checks against the live
+portfolio instead of the local Pages-style fixture.
+
 ## Remaining tradeoffs
 
 The app precaches approximately 4 MB of uncompressed study assets for complete
