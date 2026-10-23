@@ -8,7 +8,7 @@ real AWS account, solve practice puzzles, and sit mock exams.
 It is an unofficial study aid. It is not affiliated with, endorsed by, or sponsored by Amazon Web Services, Inc. See
 [Attribution](#attribution-and-disclaimer).
 
-- Live site: `https://saa.edwardtorres.dev/` (live once the steps in [DEPLOY.md](DEPLOY.md) are complete)
+- Live site: `https://edwardtorres.dev/apps/region-builder/`
 - Deployment and operations: [DEPLOY.md](DEPLOY.md)
 - Step audits, decisions and reviews: [docs/](docs/)
 
@@ -130,6 +130,12 @@ npm run check               # everything that runs offline
 Node 22 is used in CI. The end-to-end tests use a local Chromium; set `CHROMIUM_PATH` to point at a browser binary if needed.
 
 ## Deployment and upkeep
+
+The public portfolio uses Cloudflare Pages at `/apps/region-builder/`. Build with `npm run build:site`, then run
+`npm run copy:site -- <portfolio checkout>`. Commit the scoped app files together with the portfolio's `_headers` rules and
+push its `main` branch. The manifest, worker, icons, assets and 404 links all use the app path; the worker cannot control the
+portfolio or the other study apps. The copy step retains previous hashed assets for tabs open during an update.
+See [DEPLOY.md](DEPLOY.md) for the public deployment and the optional separate AWS hosting setup.
 
 - **Deploy.** Every push to `main` runs the check job (the same checks, plus the end-to-end suite on the production build). If it
   passes, the deploy job publishes the exact bytes it tested to S3 and invalidates CloudFront. A smoke run then tests the live

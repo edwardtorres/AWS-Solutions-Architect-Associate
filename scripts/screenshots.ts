@@ -76,7 +76,7 @@ async function main(): Promise<void> {
     stdio: 'ignore',
     shell: process.platform === 'win32',
   });
-  const baseUrl = `http://127.0.0.1:${port}/`;
+  const baseUrl = `http://localhost:${port}/`;
   const browser = await chromium.launch({ executablePath: browserPath() });
   try {
     await waitFor(baseUrl);

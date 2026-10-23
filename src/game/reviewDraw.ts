@@ -53,7 +53,8 @@ export function planReview(save: Save, bank: readonly Question[], today: DayKey,
       if (taken.has(q.id) || answeredToday.has(q.id)) continue;
       for (const b of q.bullets) (pool.get(b) ?? pool.set(b, []).get(b)!).push(q);
     }
-    for (const list of pool.values()) list.sort((a, b) => (save.game.seen[a.id] ?? 0) - (save.game.seen[b.id] ?? 0) || random() - 0.5);
+    // Shuffle once, then use stable sorting for ties. Randomness inside a comparator is not transitive.
+    for (const [bullet, list] of pool) pool.set(bullet, shuffled(list, random).sort((a, b) => (save.game.seen[a.id] ?? 0) - (save.game.seen[b.id] ?? 0)));
     const have = new Set(chosen.map((q) => q.id));
     for (let pass = 0; chosen.length < remaining && pass < 50; pass += 1) {
       let added = false;
@@ -81,9 +82,10 @@ export function planMaintenance(save: Save, building: string, bank: readonly Que
     if (h.lastOk === 0) return 0;
     return h.ok / h.n < 1 ? 1 : 2;
   };
-  const key = (q: Question) => {
+  const priority = (q: Question) => {
     const h = save.game.history[q.id];
-    return rank(q) * 1_000_000 + (rank(q) === 0 ? -Date.parse(h?.last ?? '0') / 1000 : rank(q) === 1 ? (h ? (h.ok / h.n) * 1000 : 0) : (save.game.seen[q.id] ?? 0) * 1000) + random();
+    return rank(q) === 0 ? -Date.parse(h!.last) : rank(q) === 1 ? h!.ok / h!.n : (save.game.seen[q.id] ?? 0);
   };
-  return [...pool].sort((a, b) => key(a) - key(b)).slice(0, MAINT_SET);
+  // Compare categories separately so large seen counts can never override a recent miss or accuracy.
+  return shuffled(pool, random).sort((a, b) => rank(a) - rank(b) || priority(a) - priority(b)).slice(0, MAINT_SET);
 }

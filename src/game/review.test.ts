@@ -178,6 +178,15 @@ describe('a review session', () => {
 
 describe('maintenance', () => {
   const save = (bits: string): Save => ({ ...freshSave(), game: { ...freshSave().game, maint: { gatehouse: bits } } });
+  it('keeps accuracy priority ahead of large seen counts and only randomizes ties before sorting', () => {
+    const s = freshSave();
+    s.game.history['gatehouse-001'] = hist({ n: 5, ok: 5, lastOk: 1 });
+    s.game.seen['gatehouse-001'] = 5000;
+    let calls = 0;
+    const plan = planMaintenance(s, 'gatehouse', bank, () => { calls += 1; return 0.5; });
+    expect(plan[0]?.id).toBe('gatehouse-001');
+    expect(calls).toBe(29); // 30 live questions: Fisher-Yates makes n - 1 draws.
+  });
   it('needs at least 5 answers in the last 8 and under 60% right, and only on a commissioned building', () => {
     expect(maintenanceStatus(save('0000'), 'gatehouse', 'commissioned').needed).toBe(false); // 4 answers: not enough
     expect(maintenanceStatus(save('00011'), 'gatehouse', 'commissioned')).toMatchObject({ needed: true, n: 5, correct: 2 }); // 40%

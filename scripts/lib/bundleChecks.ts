@@ -85,7 +85,8 @@ export function checkBundle(files: readonly BundleFile[]): string[] {
   if (index) {
     const entries = [...index.content.matchAll(/<script[^>]+src="([^"]+)"/g)].map((m) => (m[1] as string).replace(/^\//, ''));
     for (const e of entries) {
-      const file = files.find((f) => f.path === e);
+      const file = files.find((f) => e === f.path || e.endsWith(`/${f.path}`));
+      if (!file) problems.push(`entry chunk ${e} is missing from the build`);
       if (file && QUESTION_MARKERS.some((m) => file.content.includes(m))) problems.push(`entry chunk ${e} contains question data or the mock-reserve tag; it must stay in a lazy chunk`);
     }
   }

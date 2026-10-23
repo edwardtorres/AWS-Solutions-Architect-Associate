@@ -7,6 +7,8 @@ import { cspMeta } from './scripts/lib/securityHeaders.ts';
 
 /** Strict CSP, injected for production builds only. Dev needs inline HMR scripts. */
 export const CSP = cspMeta();
+const base = process.env.SITE_BASE ?? '/';
+if (!/^\/(?:[a-z0-9-]+\/)*$/.test(base)) throw new Error('SITE_BASE must be an absolute directory path ending in /.');
 
 function cspPlugin(): Plugin {
   return {
@@ -26,7 +28,7 @@ function notFoundPage(): Plugin {
     generateBundle(_options, bundle) {
       const stylesheets = Object.keys(bundle)
         .filter((file) => file.endsWith('.css'))
-        .map((file) => `<link rel="stylesheet" href="/${file}" />`)
+        .map((file) => `<link rel="stylesheet" href="${base}${file}" />`)
         .join('\n    ');
       const html = `<!doctype html>
 <html lang="en">
@@ -42,7 +44,7 @@ function notFoundPage(): Plugin {
     <main id="main" class="mx-auto max-w-prose p-6">
       <h1 class="text-3xl font-semibold">Page not found</h1>
       <p class="mt-3">There is no page at this address.</p>
-      <p class="mt-4"><a href="/#/map">Go to the city map</a></p>
+      <p class="mt-4"><a href="${base}#/map">Go to the city map</a></p>
     </main>
   </body>
 </html>
@@ -53,6 +55,7 @@ function notFoundPage(): Plugin {
 }
 
 export default defineConfig({
+  base,
   plugins: [
     react(),
     tailwindcss(),
@@ -63,6 +66,7 @@ export default defineConfig({
       registerType: 'prompt',
       // Registration happens through the virtual module the update prompt uses, not an injected script.
       injectRegister: null,
+      scope: base,
       devOptions: { enabled: false },
       includeAssets: ['icons/apple-touch-icon.png'],
       manifest: {
@@ -72,19 +76,21 @@ export default defineConfig({
         theme_color: '#0b1a2b',
         background_color: '#0b1a2b',
         display: 'standalone',
-        start_url: '/',
-        scope: '/',
+        id: base,
+        start_url: base,
+        scope: base,
         icons: [
-          { src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: '/icons/icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: '/icons/maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: `${base}icons/icon-192.png`, sizes: '192x192', type: 'image/png' },
+          { src: `${base}icons/icon-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: `${base}icons/maskable-512.png`, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       workbox: {
+        cacheId: 'saa-region-builder',
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,webmanifest}'],
         globIgnores: ['**/404.html'],
-        navigateFallback: 'index.html',
-        navigateFallbackDenylist: [/^\/404\.html$/],
+        navigateFallback: `${base}index.html`,
+        navigateFallbackDenylist: [/\/404\.html$/],
         cleanupOutdatedCaches: true,
       },
     }),

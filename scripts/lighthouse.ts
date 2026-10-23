@@ -106,7 +106,7 @@ async function main(): Promise<void> {
   } else {
     const port = await freePort();
     server = startServer(port);
-    url = `http://127.0.0.1:${port}/`;
+    url = `http://localhost:${port}/`;
     await waitFor(url);
   }
   const results: RunResult[] = [];

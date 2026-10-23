@@ -51,6 +51,11 @@ jobs:
           path: dist
           retention-days: 7
           if-no-files-found: error
+      - name: Verify the portfolio subpath build and offline isolation
+        run: |
+          npm run build:site
+          npm run check:bundle
+          npm run test:site
 
   deploy:
     name: Publish to S3 and invalidate CloudFront

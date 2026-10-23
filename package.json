@@ -7,6 +7,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -p tsconfig.app.json --noEmit && vite build",
+    "build:site": "tsc -p tsconfig.app.json --noEmit && SITE_BASE=/apps/region-builder/ vite build",
+    "copy:site": "node scripts/copy-to-site.mjs",
+    "test:site": "node --import tsx scripts/test-site.ts",
     "preview": "vite preview",
     "typecheck": "tsc -p tsconfig.app.json --noEmit && tsc -p tsconfig.node.json --noEmit",
     "lint": "eslint .",

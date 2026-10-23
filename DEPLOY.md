@@ -1,5 +1,27 @@
 # Deploying the study site
 
+## Public portfolio deployment (Cloudflare Pages)
+
+The public app lives at `https://edwardtorres.dev/apps/region-builder/`, alongside the other portfolio study apps. Its source
+stays in this repository; the built files live in `apps/region-builder/` in `edwardtorres/edwardtorres.dev`.
+
+1. Run `npm ci`, `npm run typecheck`, `npm run lint`, `npm test`, `npm run check:content` and `npm run build`.
+2. Run `npm run check:bundle`, `npm run e2e` and `npm run test:layout` on the root build.
+3. Run `npm run build:site`, then `npm run check:bundle` and `npm run test:site` on the scoped build.
+4. Run `npm run copy:site -- <portfolio checkout>`. This copies only the production build and keeps older hashed chunks
+   for existing tabs. Never copy source files or dependencies into the portfolio.
+5. The portfolio `_headers` must remove its script-blocking CSP for `/apps/region-builder/*` and replace it with
+   `cspHeader()` from `scripts/lib/securityHeaders.ts`. Entry HTML, the manifest and worker revalidate; hashed assets are
+   immutable. Keep the service worker scoped to `/apps/region-builder/`.
+6. Commit and push the portfolio's `main` branch. Cloudflare Pages builds from the repository root with no build command.
+7. Verify the Work card, `/projects/aws-region-builder`, app assets, manifest and worker, plus an offline reload after the
+   worker has installed. Test another study app and the portfolio home page to confirm their workers remain separate.
+
+Rollback by reverting the portfolio release commit and pushing `main`. No DNS, AWS account, or new hosting resources are
+needed for this deployment. The AWS infrastructure below remains an optional standalone deployment.
+
+## Optional standalone AWS hosting
+
 The site is a static build served from a private S3 bucket through CloudFront at `saa.edwardtorres.dev`. Two CloudFormation
 stacks in `infra/` create the AWS side; GitHub Actions publishes each `main` build with a short-lived OIDC role. Nothing
 is stored as a long-lived key.
